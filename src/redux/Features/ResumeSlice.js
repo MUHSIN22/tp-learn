@@ -582,6 +582,7 @@ export const resumeSlice = createSlice({
 
 
 export const selectResumeDetails = (state) => state.resume.recordDetails;
+export const selectUserFirstName = (state)=> state.resume.recordDetails.fname
 export const selectResumeInfo = (state) => state.resume.recordDetails.resume_info;
 export const selectResumeStatus = (state) => state.resume.status;
 export const selectResumeMessage = (state) => state.resume.message;
@@ -590,6 +591,10 @@ export const selectResumeLoading = (state) => state.resume.loading;
 export const selectFormId = (state) => state.resume.form;
 export const SelectCompanyJobRecordId = (state) => state.resume.company_job_record_id
 export const SelectCompanyDetails = (state) => state.resume.recordDetails.resume_info.company
+export const selectLastCompany = (state)=>{
+   let company = state.resume.recordDetails.resume_info.company
+   return company[company.length-1]
+}
 export const selectEducation = (state) => state.resume.recordDetails.resume_info.education;
 export const selectCertificate = (state) => state.resume.recordDetails.resume_info.certificate;
 export const selectAdditionalSkills = (state) => state.resume.recordDetails.resume_info.additional_skill;

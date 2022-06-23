@@ -13,7 +13,6 @@ export default function OverviewCard() {
  const loading = useSelector(selectResumeLoading)
  const overview = useSelector(selectOverview)
  const skills = useSelector(selectKeySkills)
- console.log(formatData(overview))
   return (
     <>
     {!loading?<div className="overview responsive-grid">

@@ -13,7 +13,7 @@ export default function Education() {
                 <span className="divider"></span>
                 <div className="flex-row-between">
                     <div className="col-100 g-1">
-                        {education.length>0?education.map((edu,i)=><EducationCard  skills={['HTML', 'CSS', 'JAVA']} {...edu} />):<EducationLoader/>}
+                        {education&&education.length>0?education.map((edu,i)=><EducationCard  skills={['HTML', 'CSS', 'JAVA']} {...edu} />):<EducationLoader/>}
                        
                     </div>
 

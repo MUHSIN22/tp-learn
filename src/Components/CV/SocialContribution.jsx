@@ -11,7 +11,7 @@ export default function SocialContribution() {
                 <h3 className='text-left'>Social contribution </h3>
                 <span className="divider"></span>
             </div>
-            {socialContribution.length>0?<div className="col-90 g-1">
+            {socialContribution&&socialContribution.length>0?<div className="col-90 g-1">
             {
                 socialContribution.map((x,i)=><SocialContributionCard image={dummy} {...x}  />)
             }

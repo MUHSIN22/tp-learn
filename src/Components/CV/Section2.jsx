@@ -6,7 +6,6 @@ import ProgressBar from '../OverviewCard/ProgressBar'
 import { useSelector } from 'react-redux'
 export default function Section2() {
   const salaryGraph = useSelector(selectSalaryGraph)
-  console.log(salaryGraph)
   return (
     <div className="section_2 col-100 align-center">
       <div className="col-90 align-start">
@@ -74,7 +73,7 @@ export default function Section2() {
 
 
         </div>
-        {false&&<LineGraph salary={salaryGraph.salary } management={salaryGraph.managementLevelValue} />}
+        {salaryGraph&&<LineGraph salary={salaryGraph.salary } management={salaryGraph.managementLevelValue} />}
 
       </div>
     </div>

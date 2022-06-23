@@ -297,6 +297,9 @@
     color: #1C1B2C;
     font-size: 0.8rem;
 }
+.cvcontainer .role>ul{
+    font-size: 0.8rem!important;
+}
 .outer-circle-wrapper{
     width: 45%;
     height: 45%;

@@ -10,7 +10,7 @@ export default function Videos() {
             <div className="col-90">
                 <h3>Video files </h3>
                 <span className="divider"></span>
-               {video.length>0?<div className="flex-wrap g-1  ">
+               {video&&video.length>0?<div className="flex-wrap g-1  ">
                     <FileCard url={video} filename={'Talent Place - CV Builder.Mp4'} icon={VideoIcon} />
                     
                 </div>:<FileLoaderHorizontal/>}

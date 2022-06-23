@@ -10,7 +10,7 @@ export default function Docs() {
             <div className="col-90">
                 <h3>Docs files </h3>
                 <span className="divider"></span>
-                {documents.length>0?<div className="flex-wrap g-1  ">
+                {documents&&documents.length>0?<div className="flex-wrap g-1  ">
                     {
                         documents.map((doc,i)=><FileCard {...doc} icon={PDFIcon} />)
                     }

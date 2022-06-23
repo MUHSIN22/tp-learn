@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import CardRadioGroup from '../CardRadioGroup/CardRadioGroup'
 import IconSelect from '../IconInput/IconSelect'
-
 import { useDispatch, useSelector } from 'react-redux';
 import { getBuisnessScaleList, getCompanyBasedList, getIndustryList, selectBuisnessScaleList, selectCompanyBasedList, selectIndustryList } from '../../redux/Features/MasterSlice';
-import { resetError, selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
-import Alert from '../Alert/Alert';
-import { addIndustryInfo, nextForm, SelectCompanyDetails, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
+import { addIndustryInfo, SelectCompanyDetails, selectLastCompany, selectResumeError, selectResumeLoading, selectResumeMessage, selectUserFirstName } from '../../redux/Features/ResumeSlice';
 import Control from './Control';
-const options = [{ name: 'Service based', id: 'Service based' }, { name: 'Product based', id: 'Product based' }, { name: 'Both', id: 'both' }]
-export default function Experience2({ setProgress }) {
+import Alert from '../Alert/Alert';
+export default function Experience2({ }) {
     const dispatch = useDispatch();
     const [form, setForm] = useState({
         industry_id:'',
@@ -21,13 +19,15 @@ export default function Experience2({ setProgress }) {
     const [showAlert,setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
+    const firstName = useSelector(selectUserFirstName)
     const industryList = useSelector(selectIndustryList)
     const buisnessScaleList = useSelector(selectBuisnessScaleList)
-    const companyDetails = useSelector(SelectCompanyDetails)
+    const companyDetails = useSelector(selectLastCompany)
     const companyBasedList = useSelector(selectCompanyBasedList)
     const error = useSelector(selectResumeError);
     const message = useSelector(selectResumeMessage);
     const loading = useSelector(selectResumeLoading);
+
     function handleChange(evt) {
         const value = evt.target.value;
         setForm({
@@ -36,7 +36,8 @@ export default function Experience2({ setProgress }) {
         });
     }
     function handleSubmit() {
-        const body = {...form, user_id}
+        let company_record_id = companyDetails.company_record_id
+        const body = {...form, user_id,company_record_id}
         console.log(form)
         try {
             dispatch(addIndustryInfo({auth:token,body})).unwrap()
@@ -57,12 +58,6 @@ export default function Experience2({ setProgress }) {
         }
     }, [industryList.length,buisnessScaleList.length,dispatch,token])
     useEffect(() => {
-        if(companyDetails.length>0) setForm({...form,company_record_id:companyDetails.slice(-1)[0].company_record_id})
-      return () => {
-        
-      }
-    }, [companyDetails.length,companyDetails])
-    useEffect(() => {
       if(companyBasedList.length&&form.type_of_company==='') setForm({...form,type_of_company: companyBasedList[0].id})
     
       return () => {
@@ -73,7 +68,7 @@ export default function Experience2({ setProgress }) {
     return (
         <>  
              {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Industry details': 'Industry details added'}/>}
-            <h1 className='text-left'>Great going, <span> Pratiksha</span></h1>
+            <h1 className='text-left'>Great going, <span> {firstName}</span></h1>
             <div className="form-row">
                 <IconSelect name={'industry_id'} label={'Select the industry'} field={'industry_size'} state={form} handleChange={handleChange}  options={industryList} name_field={'industry_name'} defaultValue={'Information Technology'} />
             </div>
@@ -86,4 +81,7 @@ export default function Experience2({ setProgress }) {
             <Control handleSubmit={handleSubmit}/>
         </>
     )
+}
+function lastElement(arr){
+    return arr[arr.length - 1]
 }

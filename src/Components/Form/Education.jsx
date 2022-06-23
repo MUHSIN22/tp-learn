@@ -40,7 +40,7 @@ export default function Education() {
   const collageList = useSelector(selectCollageList);
   function handleChange(evt) {
     const value = evt.target.value;
-    console.log(value)
+
     setForm({
       ...form,
       [evt.target.name]: value
@@ -68,12 +68,10 @@ export default function Education() {
     let body = form
     body.user_id = user_id
     body.upload_degree = file
-    console.log(body)
     body = JsonToFormData(body)
 
     try {
       dispatch(addEducation({ auth: token, body })).unwrap()
-      console.log(form)
     } catch (error) {
       showAlert(true)
     } finally {
