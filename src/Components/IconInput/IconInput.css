@@ -1,0 +1,439 @@
+/* Autofill stylling removed */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid rgb(255, 255, 255);
+  -webkit-text-fill-color: rgb(122, 122, 122);
+  -webkit-box-shadow: 0 0 0px 10px rgb(255, 255, 255) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.iconInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  gap: 0.5rem;
+  align-items: flex-start;
+  position: relative;
+}
+
+.iconInput label {
+  font-size: 0.9rem;
+  color: #565B6B;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.iconInput .input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 2.5rem;
+  border: solid 1px #c1c1c1;
+  padding: 0 0.5em;
+  border-radius: 0.5rem;
+  background-color: #ffff;
+}
+
+.iconInput .input-container svg {
+  margin: auto 0.3rem;
+}
+
+.iconInput .input-container input {
+  width: inherit;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 600;
+}
+
+#inputId:-webkit-autofill {
+  background-color: white !important;
+}
+
+.iconInput .input-container select {
+  width: inherit;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 600;
+}
+
+.iconInput .textArea-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: fit-content;
+  border: solid 1px #c1c1c1;
+  padding: 0 0.5em;
+  border-radius: 0.5rem;
+}
+
+.iconInput .textArea-container textarea {
+  width: inherit;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 600;
+}
+
+.otp {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
+}
+
+.otp input {
+  width: clamp(20px, 12%, 35px);
+  aspect-ratio: 1/1;
+  border-radius: 0.3rem;
+  outline: none;
+  border: solid 1px #DCD9E2;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.iconInput .show-pass {
+  background-color: rgba(0, 0, 0, 0);
+  width: fit-content;
+  height: fit-content;
+  border: none;
+  align-self: center;
+}
+
+.iconInput .show-pass svg {
+  align-self: center;
+  cursor: pointer;
+}
+
+.has-tooltip {
+  position: relative;
+}
+
+.tooltip {
+  width: fit-content;
+  max-width: 270px;
+  padding: 0.5rem 0.8rem;
+  box-shadow: 0px 0px 2px 2px rgba(177, 182, 190, 0.199);
+  position: absolute;
+  top: 100%;
+  left: 102%;
+  background-color: #ffffff;
+  border: solid 1px #dfdfdf;
+  border-radius: 0 1rem 1rem 1rem;
+  z-index: 20;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 2s, visibility 1s ease-in-out;
+
+}
+
+.tooltip svg {
+  margin-top: 0.1rem;
+  height: 1.2rem;
+  color: #ecd60e;
+  min-height: 1.2rem;
+  min-width: 1rem;
+  width: fit-content;
+  word-wrap: break-word;
+}
+
+.tooltip p {
+  margin: 0;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.has-tooltip:where(:hover, :focus-within)>.tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.socialInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.socialInput .input-container {
+  width: inherit;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  border-bottom: solid 1px #dcdcdc;
+
+
+}
+
+.socialInput input {
+  border-radius: 0.5rem;
+  border: solid 1px #dcdcdc;
+  height: 1.8rem;
+  outline: none;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.socialInput .align {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.socialInput .align label {
+  color: #9DA2B2;
+  font-weight: 500;
+  font-size: 1rem;
+  width: clamp();
+}
+
+.socialInput .btn-show {
+  width: fit-content;
+  padding: 0.4rem 0.8rem;
+  background-color: #219FFF;
+  color: #fff;
+  border-radius: 1rem;
+  border: none;
+}
+
+.socialInput .btn-link {
+  color: #EF6239;
+}
+
+.validation-message {
+  color: #FF4E3E;
+  font-size: 0.8rem;
+}
+
+.suggestion-list{
+  width: 102%;
+  max-height: 60vh;
+  overflow-y: scroll; 
+  position: absolute;
+  top: 100%;
+  left: auto;
+  right: auto;
+  background-color: #f1f1f1;
+  border-radius:0 0 0.5rem 0.5rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.suggestion-list::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: #F1F0F5;
+  border-radius: 10px;
+}
+
+.suggestion-list::-webkit-scrollbar-thumb {
+  background-color: #DCDAE1;
+  border-radius: 10px;
+}
+
+.suggestion-list .option{
+  width: 100%;
+  padding: 0.8rem 0;
+  border-bottom: solid 1px #dcdcdc;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.suggestion-list .option span{
+  width: max-content;
+  text-align: left;
+  margin-left: 1rem;
+}
+.suggestion-list .option:hover{
+  background-color:#e0dfdf ;
+}
+
+.slide-in-right {
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-6-2 14:4:50
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-in-right
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(10px);
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+
+.slide-in-left {
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-6-2 14:5:25
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-in-left
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-10px);
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-10px);
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+.shake-horizontal {
+  -webkit-animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+/* ----------------------------------------------
+ * Generated by Animista on 2022-6-9 12:24:4
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation shake-horizontal
+ * ----------------------------------------
+ */
+ @-webkit-keyframes shake-horizontal {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+  }
+  80% {
+    -webkit-transform: translateX(8px);
+            transform: translateX(8px);
+  }
+  90% {
+    -webkit-transform: translateX(-8px);
+            transform: translateX(-8px);
+  }
+}
+@keyframes shake-horizontal {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70% {
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60% {
+    -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+  }
+  80% {
+    -webkit-transform: translateX(8px);
+            transform: translateX(8px);
+  }
+  90% {
+    -webkit-transform: translateX(-8px);
+            transform: translateX(-8px);
+  }
+}

@@ -1,0 +1,128 @@
+.overview{
+    margin-top: 2rem;
+    width: 95%;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 40px rgba(3, 21, 15, 0.05);
+    border-radius: 12px;
+    padding: 0.5rem;
+    font-size: 0.6rem;
+    margin: 2rem 0 0 0.2rem ;
+
+}
+
+
+.overview .col-100 h3{
+    font-weight: 500;
+    font-size: 0.8rem;
+    margin: 0;
+    color: #565B6B;
+}
+
+._1{
+    background-color: rgba(239, 98, 57, 1);
+    box-shadow: 0px 6.6501px 5.32008px rgba(239, 98, 57, 0.0554), 0px 2.76726px 2.21381px rgba(239, 98, 57, 0.1112);
+    
+}
+._2{
+    background-color: rgba(255, 161, 20, 1);
+    box-shadow: 0px 6.6501px 5.32008px rgba(255, 161, 20, 0.0554), 0px 2.76726px 2.21381px rgba(255, 161, 20, 0.1112);
+}
+._3{
+    background-color: rgba(33, 159, 255, 1);
+    box-shadow: 0px 6.6501px 5.32008px rgba(33, 159, 255, 0.0554), 0px 2.76726px 2.21381px rgba(33, 159, 255, 0.1112);
+    
+}
+._4{
+    background-color: rgba(33, 206, 147, 1);
+    box-shadow: 0px 6.6501px 5.32008px rgba(33, 206, 147, 0.0554), 0px 2.76726px 2.21381px rgba(33, 206, 147, 0.1112);
+}
+/*Custom progressbar*/
+.progress-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.progress-container label{
+    font-size: 0.6rem;
+}
+.progress{
+    align-items: flex-start;
+    gap: 1rem;
+}
+.progressbar{
+    width: 100%;
+    height: 0.4rem;
+    position: relative;
+    background-color: #DCDAE1;
+    border-radius: 1rem;
+}
+.progress-fill{
+    height: inherit;
+    position: absolute;
+    left: 0;
+    border-radius: 1rem;
+    transition: all 1s ease;
+   
+}
+
+/*Guage Component*/
+.guage-container{
+ gap: 1rem; 
+ text-align: left;
+}
+.guage-container .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(2.8rem,1fr));
+    grid-row-gap: 0.3rem;
+    grid-column-gap:0.3rem ;
+}
+.guage{
+    width: 2.5rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.guage .inner{
+    width: 2rem;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+.guage-label{
+    font-size: 0.6rem!important;
+    margin: 0;
+}
+.donut .legend{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+}
+.donut .legend span{
+    width: 100%;
+    font-size: 0.6rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.donut .legend span p{
+    font-size: 0.6rem;
+    width: 70%;
+    margin: 0;
+
+}
+.donut .legend span .dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}

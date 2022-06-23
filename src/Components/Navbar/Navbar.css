@@ -1,0 +1,15 @@
+nav{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem 0;
+    z-index: 999;
+}
+nav .logo{
+    width: fit-content;
+    margin-left: 5rem;
+}

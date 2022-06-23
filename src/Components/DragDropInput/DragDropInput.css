@@ -1,0 +1,26 @@
+.dragDropInput{
+    width: 92%;
+    height: fit-content;
+    padding: 2rem;
+    border: 2px dashed ;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: #F9F8FC;
+}
+
+.dragDropInput .sub-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.input-inactive{
+    border-color: #9DA2B2;
+}
+.input-hover{
+    border-color: #8dd0ff;
+}
+.input-drop{
+    border-color: #21CE93;
+}

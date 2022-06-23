@@ -1,0 +1,55 @@
+.jobTimeline{
+    position: relative;
+    align-self: flex-end;
+    width: 90%;
+    display: grid;
+    grid-column-gap: 0px;
+    grid-row-gap: 15px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.jobTimeline .years{
+    width: max-content;
+    height: max-content;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: solid 5px #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background-color: #21CE93;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.8rem;
+    box-shadow:0px 7.35294px 7.35294px rgba(0, 0, 0, 0.051);
+    position: relative;
+    left: -50%;
+}
+.jobTimeline .years::after{
+    content: " ";
+    width: 300%;
+    left: 50%;
+    position: absolute;
+    background-color: aliceblue;
+    height: 10px;
+    z-index: -1;
+}
+
+.jobTimeline .company{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border-radius: 1rem;
+}
+.jobTimeline .company h5{
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+.jobTimeline .company span{
+    font-size: 0.8rem;
+    font-weight: 400;
+}

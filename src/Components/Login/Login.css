@@ -1,0 +1,93 @@
+.login{
+    width: 100%;
+    display: flex;
+    padding-top: 6rem;
+}
+.login form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1rem;
+    z-index: 1;
+}
+
+.login h1{
+    font-size: 2rem;
+    text-align: left;
+}
+.login .line{
+    height: 1px;
+    width: clamp(15%,35%,45%);
+    background-color: #d8d8d8;
+}
+.login p{
+    font-size: 1rem;
+    font-weight: 400;
+    width:max-content;
+    margin: 0 0.5rem;
+}
+.login .w-100{
+    width: 100%;
+}
+.login img{
+    width: 70%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 0;
+    object-fit: cover;
+}
+.noGap{
+    gap: 0 !important;
+}
+.login .control{
+    font-size: 1rem;
+    color: #9DA2B2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@media only screen and (max-width:1024px) {
+    .login .form-container {
+        width: 50%;
+    }
+
+    .login .image {
+        width: 50%;
+    }
+
+    .login .image img {
+        width: 50%;
+    }
+
+}
+
+@media only screen and (max-width:768px) {
+    .login .image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        opacity: 0.4;
+    }
+
+    .login .image img {
+        width: 100%;
+    }
+
+    .login .form-container {
+        width: 80%;
+    }
+
+    .login .control {
+        color: rgb(64 51 51);
+    }
+
+    .btn-link {
+        color: rgb(64 51 51);
+        font-size: 0.8rem;
+    }
+}
