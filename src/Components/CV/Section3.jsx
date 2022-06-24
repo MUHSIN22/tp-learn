@@ -45,7 +45,7 @@ export default function Section3() {
                 <span className="divider"></span>
                 {console.log(companyInfo)}
                 {companyInfo && companyInfo.length > 0 ? <CompanyOverview company={companyInfo[index]} /> : <ExperienceLoader />}
-                {companyInfo &&companyInfo[index].job_role ? <DesignationOverview job_role={companyInfo[index].job_role} /> : <JobOverviewLoader />}
+                {companyInfo &&companyInfo[index]?.job_role ? <DesignationOverview job_role={companyInfo[index].job_role} /> : <JobOverviewLoader />}
             </div>
 
 
