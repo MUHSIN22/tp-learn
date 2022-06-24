@@ -582,6 +582,15 @@ export const resumeSlice = createSlice({
 
 
 export const selectResumeDetails = (state) => state.resume.recordDetails;
+export const selectJobStartDate = (state) => {
+    let data = state.resume.recordDetails.resumeInfo ||{}
+    let resume = data.resumeInfo||{}
+    if(resume.is_fresher===1){
+        return false
+    }else{
+        return resume.job_start_date
+    }
+}
 export const selectUserFirstName = (state)=> state.resume.recordDetails.fname
 export const selectResumeInfo = (state) => state.resume.recordDetails.resume_info;
 export const selectResumeStatus = (state) => state.resume.status;

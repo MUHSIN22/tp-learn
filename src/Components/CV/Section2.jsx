@@ -3,15 +3,17 @@ import { selectJObSalaryTimeline, selectSalaryGraph } from '../../redux/Features
 import JobTimeline from '../Graphs/JobTimeline/JobTimeline'
 import LineGraph from '../Graphs/LineGraph'
 import { useSelector } from 'react-redux'
+import { resumeInfo, selectJobStartDate, selectResumeInfo } from '../../redux/Features/ResumeSlice'
 export default function Section2() {
   const salaryGraph = useSelector(selectSalaryGraph)
   const timelineGraph = useSelector(selectJObSalaryTimeline)
+  const resumeInfo = useSelector(selectResumeInfo)
   return (
     <div className="section_2 col-100 align-center">
       <div className="col-90 align-start">
         <h3>Career Timeline</h3>
         <span className="divider"></span>
-      {timelineGraph&&<JobTimeline start_year={'2019'} jobs={timelineGraph.company_info}
+      {timelineGraph&&resumeInfo&&resumeInfo.job_start_date&&<JobTimeline start_year={resumeInfo.job_start_date} jobs={timelineGraph.company_info}
 
           skills={timelineGraph.skill_info} />}
       </div>
