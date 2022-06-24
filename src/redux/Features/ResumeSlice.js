@@ -15,7 +15,7 @@ const initialState = {
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
     try {
-        const response = await API.post(`/user-info`, encoded, {
+        const response = await API.post(`/simple-user-info`, encoded, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Cache-Control': 'no-cache',

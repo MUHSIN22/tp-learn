@@ -1,27 +1,32 @@
 import React, { useEffect } from 'react'
+import { useState } from 'react'
 import './JobTimeline.css'
 const colors = ['#EF6239', '#219FFF', '#FFA114','#EF6239', '#219FFF', '#FFA114','#EF6239', '#219FFF', '#FFA114']
-export default function JobTimeline({ start_year, jobs = [], skills=[]}) {
-
-
+export default function JobTimeline({ jobs = [], skills=[]}) {
   let current_year = new Date().getFullYear()
-  let year_list = []
-  let rows = jobs.length+skills.length + 1;
+  
+  let start_year = jobs[0].timeline[0].job_start_date.split('-')[2]
+  let year_list = [start_year]
   while (start_year <= current_year) {
     year_list.push(parseInt(start_year))
     start_year++
   }
+  let rows = jobs.length+skills.length + 1;
   let cols = year_list.length * 12 + 12
   //console.log(year_list,jobs,skills)
   useEffect(() => {
+    if(start_year) {
+    
+    
+    
     let timeline = document.getElementById('jobTimeline')
     timeline.style.gridTemplateColumns = `repeat(${cols},${100 / cols}%)`
     timeline.style.gridTemplateRows = `repeat(${rows},3rem)`
-
+}
     return () => {
 
     }
-  }, [])
+  }, [start_year])
 
   return (
     <div id='jobTimeline' className="jobTimeline">
@@ -32,7 +37,7 @@ export default function JobTimeline({ start_year, jobs = [], skills=[]}) {
       )}
       {year_list.map((year, i) => <YearsLabel key={i} no_jobs={jobs.length} year={year} rows={rows} i={i} />)}
       {skills.map((skill, i) =>{ 
-      return<><span style={{gridArea:`${rows-i}/${1}/${rows-i+1}/${2}`, alignSelf:'center',fontWeight:'500', fontSize:'0.8rem' }}>{skill.skill_name}</span>{skill.timeline.map((time, j)=> <Skill key={j} i={i} j={j} skill_start_date={time.start} skill_end_date={time.end} year_list={year_list} rows={rows  } />)}</>
+      return<><span style={{gridArea:`${rows-i}/${1}/${rows-i+1}/${2}`, alignSelf:'center',fontWeight:'500', fontSize:'0.8rem' }}>{skill.skill_name}</span>{skill.timeline.map((time, j)=> <Skill key={j} i={i} j={j} start_date={time.start_date} end_date={time.end_date} year_list={year_list} rows={rows  } />)}</>
       })}
     </div>
   )
@@ -69,15 +74,16 @@ function YearsLabel({ no_jobs, i, year }) {
 
   return <div id={`year${i}`} className="years" >{year}</div>
 }
-function Skill({ rows, skill_start_date='', skill_end_date='', i,j, year_list }) {
-  let position_x = findPositionX(skill_start_date, year_list)
+function Skill({ rows, start_date='', end_date='', i,j, year_list }) {
+  let position_x = findPositionX(start_date, year_list)
  
-  let start_year = parseInt(skill_start_date.split('-')[2])
-  let start_month = parseInt(skill_start_date.split('-')[1])
-  let end_year = parseInt(skill_end_date.split('-')[2])
-  let end_month = parseInt(skill_end_date.split('-')[1])
+  let start_year = parseInt(start_date.split('-')[2])
+  let start_month = parseInt(start_date.split('-')[1])
+  let end_year = parseInt(end_date.split('-')[2])
+  let end_month = parseInt(end_date.split('-')[1])
   let width = 12 * (end_year - start_year) + (end_month - start_month)
   let pos_y =rows-i
+  console.log(start_date,end_date)
   useEffect(() => {
     document.getElementById(`skill${i}${j}`).style.gridArea = `${pos_y}/${position_x+12}/${pos_y + 1}/ ${(position_x) + width+24}`
     //console.log(`${position_y} / ${i+1} / ${(position_y)+1} / ${i+2}`)
