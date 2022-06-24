@@ -5,7 +5,7 @@ import { getJobNatureList, searchCompany, selectCompanyList, selectJobNatureList
 import { resetError, selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import SuggestiveInput from '../IconInput/SuggestiveInput'
 import useDebounce from '../../DebouncedSearch'
-import { addCompany, nextForm, selectResumeError, selectResumeMessage } from '../../redux/Features/ResumeSlice'
+import { addCompany, nextForm, selectLastCompany, selectResumeError, selectResumeMessage } from '../../redux/Features/ResumeSlice'
 import Alert from '../Alert/Alert'
 import Control from './Control'
 
@@ -29,7 +29,7 @@ export default function Experience1({ setProgress }) {
     const error = useSelector(selectResumeError);
     const [showAlert, setShowAlert] = useState(false);
     const jobNatureList = useSelector(selectJobNatureList)
-
+    const lastCompany = useSelector(selectLastCompany)
     const searchCompanyList = useCallback(
         (keywords) => {
             try {
@@ -90,7 +90,7 @@ export default function Experience1({ setProgress }) {
     }, [message, dispatch])
     return (
         <>   {showAlert && <Alert error={error} message={error ? 'Failed to add Company details' : 'Company details added'} />}
-            <h1 className='text-left'>Let us start with your most recent stint.</h1>
+            {!lastCompany&&<h1 className='text-left'>Let us start with your most recent stint.</h1>}
             <div className="form-row">
                 <SuggestiveInput icon={<></>} name={'company_name'} placeholder={'Company / Organization Name'} label='Company Name' width={98} suggestions={companyList} name_field='name' searchHandler={searchHandler} selected={selectHandler} />
             </div>

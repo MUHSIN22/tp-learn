@@ -5,7 +5,7 @@ import { ReactComponent as ChevronRight } from '../../Assests/icons/chvron-right
 import IconInput from '../IconInput/IconInput';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExperience, selectResumeDetails, selectResumeMessage, selectResumeStatus } from '../../redux/Features/ResumeSlice';
+import { addExperience, selectResumeDetails, selectResumeInfo, selectResumeMessage, selectResumeStatus } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 export default function Onboarding() {
     const navigate = useNavigate();
