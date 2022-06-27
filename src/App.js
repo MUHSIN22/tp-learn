@@ -58,7 +58,7 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-      <Sidebar/>
+      {/* <Sidebar/> */}
       <Routes>
        <Route path='/' element={<PreventedRoute><Login/></PreventedRoute> }/>
        <Route path='/OTP-login' element={<PreventedRoute><OTPLogin/></PreventedRoute>}/>
@@ -68,7 +68,7 @@ function App() {
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path="/dashboard" element={<Dashboard/>}/>
-       <Route path='/get-membership' element={<Membership/>}/>
+       <Route path='/membership' element={<Membership/>}/>
       </Routes>
     </div>
   );
