@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Sidebar from './Components/Sidebar/Sidebar';
+import Membership from './Components/Memberships/Memberships';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -67,6 +68,7 @@ function App() {
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path="/dashboard" element={<Dashboard/>}/>
+       <Route path='/get-membership' element={<Membership/>}/>
       </Routes>
     </div>
   );
