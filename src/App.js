@@ -15,8 +15,9 @@ import { resumeInfo, selectFormId, selectReload } from './redux/Features/ResumeS
 import { resetError, selectAuthentication } from './redux/Features/AuthenticationSlice';
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
+import Dashboard from './Components/Dashboard/Dashboard';
+import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
-
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -57,6 +58,7 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
+      <Sidebar/>
       <Routes>
        <Route path='/' element={<PreventedRoute><Login/></PreventedRoute> }/>
        <Route path='/OTP-login' element={<PreventedRoute><OTPLogin/></PreventedRoute>}/>
@@ -65,6 +67,7 @@ function App() {
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
+       <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/get-membership' element={<Membership/>}/>
       </Routes>
     </div>
