@@ -422,9 +422,9 @@ div.dot{
 }
 
 .Sidebar{
-  margin-top:5rem;
+  /* margin-top:5rem; */
   height: 100%;
-  width: 350px;
+  width: 20rem;
   background-color: #f0967c;
 }
 
