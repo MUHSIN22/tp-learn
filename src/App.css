@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100vh;
 
 }
 h1,h2,h3,h4,h5{
@@ -390,4 +391,60 @@ div.dot{
 }
 .control-checkbox input:checked + .control_indicator::before {
   animation-name: s-ripple-dup;
+}
+
+.Sidebar{
+  margin-top:5rem;
+  height: 100%;
+  width: 350px;
+  background-color: #f0967c;
+}
+
+.SidebarList {
+  height: auto;
+  width: 100%;
+  padding: 0;
+}
+
+.SidebarList .SidebarRow {
+  width: 100%;
+  height: 50px;
+  list-style-type:none;
+  margin: 0%;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  /* justify-content: center; */
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.SidebarList .SidebarRow:hover{
+  cursor: pointer;
+  background-size: 220px;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to left, #f08e71, #f08768, #f0805e, #f07855, #ef714b);
+  background-position: center;
+  border-radius: 10px !important;
+}
+
+.SidebarRow #icon{
+  flex: 30%;
+  display: grid;
+  place-items: self-end;
+}
+
+.SidebarRow #title{
+  flex: 70%;
+  display: grid;
+  place-items: self-start;
+  font-weight:200;
+} 
+
+.SidebarList #active {
+  background-size: 220px;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to left, #f08e71, #f08768, #f0805e, #f07855, #ef714b);
+  background-position: center;
+  border-radius: 10px !important;
 }
