@@ -17,9 +17,44 @@ import SelfDeclaration from "../CV/SelfDeclaration";
 import SocialContribution from "../CV/SocialContribution";
 import SocialMedia from "../CV/SocialMedia";
 import Videos from "../CV/Videos";
-
+import { FaEdit, FaShareAlt } from "react-icons/fa";
+import { FiDownload } from "react-icons/fi";
+import EditFormContainer from "../Form/EditFromContainer";
 export default function CVBuilder({ page }) {
-  page =page || "/personal-information";
+  page = page || "/Experience";
+  const [isShow, setIsshow] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const handleEdit = (e) => {
+    switch(page) {
+      case "/SocialMedia":
+        setProgress(17);
+        break;
+      case "/Experience":
+        setProgress(1);
+        break;        
+    }
+    setIsshow(true);
+    console.log(isShow);
+  };
+
+  const floatingButton = (
+    <div>
+      <div
+        className="floating-btn orange"
+        style={{ "box-shadow": "5px 10px 20px 0 #ec957c" }}
+      >
+        <div className="" onClick={handleEdit}>
+          <FaEdit />
+        </div>
+        <div className="">
+          <FiDownload />
+        </div>
+        <div className="">
+          <FaShareAlt />
+        </div>
+      </div>
+    </div>
+  );
   return (
     // <div className="cvEditor">
     <div className="flex-row-center cvEditContainer">
@@ -28,16 +63,20 @@ export default function CVBuilder({ page }) {
       </div>
       <div className="col-100">
         <div className="CVReview">
-        {page === '/personal-information' && <Section1 />}
-          {page === '/Experience' && <Section3 />}
-          {page === '/Education' && <Education />}
-          {page === '/Docs' && <Docs />}
-          {page === '/hobbies' && <Languages />}
-          {page === '/hobbies' && <Hobby />}
-          {page === '/Videos' && <Videos />}
-          {page === '/Timeline' && <Section2 />}
-          {page === '/SocialMedia' && <SocialMedia />}
-          {page === '/Videos' && <Videos />}
+          <div className="flex-row-center justify-end m-0 px-1">
+          {isShow ? <EditFormContainer progress={progress} /> :floatingButton }
+          </div>
+          {page === "/personal-information" && <Section1 />}
+          {page === "/Experience" && <Section3 />}
+          {page === "/Education" && <Education />}
+          {page === "/Docs" && <Docs />}
+          {page === "/hobbies" && <Languages />}
+          {page === "/hobbies" && <Hobby />}
+          {page === "/Videos" && <Videos />}
+          {page === "/Timeline" && <Section2 />}
+          {page === "/SocialMedia" && <SocialMedia />}
+          {page === "/Videos" && <Videos />}
+          {page === "/Cerification" && <Cerification />}
         </div>
       </div>
     </div>

@@ -593,7 +593,7 @@ export const SelectCompanyJobRecordId = (state) => state.resume.company_job_reco
 export const SelectCompanyDetails = (state) => state.resume.recordDetails.resume_info.company
 export const selectLastCompany = (state)=>{
    let company = state.resume.recordDetails.resume_info.company
-   return company[company.length-1]
+   return company?.[company.length-1]
 }
 export const selectEducation = (state) => state.resume.recordDetails.resume_info.education;
 export const selectCertificate = (state) => state.resume.recordDetails.resume_info.certificate;

@@ -536,3 +536,16 @@ div.dot{
 .mb-5{
   margin-bottom: 5rem;
 }
+
+.floating-btn{
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
+  align-content: center!important;
+  border: 1px solidred;
+  border-radius: 1.5rem;
+  font-size: 1.1rem;
+  text-decoration: none;
+}

@@ -3,7 +3,7 @@
     flex-direction: column;
     background-color: #fff;
     border-radius: 5px;
-    padding: 5rem 1rem;
+    padding: 0rem 1rem;
 }
 
 .cvEditContainer {
@@ -149,7 +149,7 @@
 .CVReview .section_2 {
     box-shadow: 0px 10px 40px rgba(3, 21, 15, 0.05);
     border-radius: 0.5rem;
-    padding: 2rem 0;
+    /* padding: 1rem 0; */
     margin: 1rem 0;
 }
 
