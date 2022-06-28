@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
-import { addHobbies, nextForm, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
+import { addHobbies, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
 import Alert from '../Alert/Alert'
 import IconInput from '../IconInput/IconInput'
 import Control from './Control'
@@ -61,7 +61,7 @@ export default function AdditionalSkills2() {
     return (
         <>
             <h1 className='text-left'>We are eager to know you more. Please tell us about your hobbies, interests & passions in life.</h1>
-            {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Hobbies': 'Hobbies added'}/>}
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <div className="form-row">
                 <IconInput name='entertainment' handleChange={handleChange} label='Entertainment' placeholder='e.g. Period dramas, Nat Geo, BBC History, etc. ' width={100} />
             </div>

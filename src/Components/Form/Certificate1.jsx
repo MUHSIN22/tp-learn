@@ -3,7 +3,7 @@ import DragDropInput from '../DragDropInput/DragDropInput'
 import IconInput from '../IconInput/IconInput'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux'
-import { addCertification, reload, selectResumeError, selectResumeLoading } from '../../redux/Features/ResumeSlice'
+import { addCertification, reload, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
 import Control from './Control';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
@@ -30,6 +30,7 @@ export default function Certificate1() {
     const error = useSelector(selectResumeError);
     const loading = useSelector(selectResumeLoading);
     const [showAlert, setShowAlert] = useState(false);
+    const message = useSelector(selectResumeMessage);
     const user_id = useSelector(selectUser_id)
     const token = useSelector(selectAuthToken)
 
@@ -101,7 +102,7 @@ export default function Certificate1() {
     return (
         <>
             <h1>Add any certification courses/trainings you have done</h1>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Education Details' : 'Job Education Details'} />}
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <div className="form-row">
                 <IconInput name='project_name' handleChange={handleChange} label='Name of the program' placeholder='e.g. Digital Marketing Associate' width={100} />
             </div>

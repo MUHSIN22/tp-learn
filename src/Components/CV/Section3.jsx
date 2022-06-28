@@ -43,7 +43,6 @@ export default function Section3() {
 
 
                 <span className="divider"></span>
-                {console.log(companyInfo)}
                 {companyInfo && companyInfo.length > 0 ? <CompanyOverview company={companyInfo[index]} /> : <ExperienceLoader />}
                 {companyInfo &&companyInfo[index].job_role ? <DesignationOverview job_role={companyInfo[index].job_role} /> : <JobOverviewLoader />}
             </div>
@@ -99,9 +98,7 @@ function CompanyOverview({ company }) {
 
             </div>
             <div className="col-100 justify-end">
-                <h5 className='text-right'>{company.company_name}</h5>{
-                    console.log(companyWise)
-                }
+                <h5 className='text-right'>{company.company_name}</h5>
                 {companyWise&&<LineGraph salary={companyWise.salary } management={companyWise.managementLevelValue} />}
             </div>
         </div>)

@@ -6,7 +6,7 @@ import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg'
 import IconSelect from '../IconInput/IconSelect';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCollageList, getDegreeList, getUniversityList, selectCollageList, selectDegreeList, selectUniversityList } from '../../redux/Features/MasterSlice';
-import { addEducation, selectResumeError, selectResumeLoading, reload } from '../../redux/Features/ResumeSlice';
+import { addEducation, selectResumeError, selectResumeLoading, reload, selectResumeMessage } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import Control from './Control';
@@ -33,6 +33,7 @@ export default function Education() {
   const error = useSelector(selectResumeError);
   const loading = useSelector(selectResumeLoading);
   const [showAlert, setShowAlert] = useState(false);
+  const message  =useSelector(selectResumeMessage)
   const user_id = useSelector(selectUser_id)
   const token = useSelector(selectAuthToken)
   const degreeList = useSelector(selectDegreeList)
@@ -90,7 +91,7 @@ export default function Education() {
   return (
     <>
       <h1>Now, let’s move on to your learning journey so far. </h1>
-      {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Education Details' : 'Job Education Details'} />}
+      {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
       <div className="form-row">
         <IconSelect name={'degree_id'} handleChange={handleChange} label='Degree/Qualification' placeholder={'e.g. MCA (Masters in Computer Applications)'} width={50} options={degreeList} name_field={'degree_name'} />
         <SuggestiveInput name={'university_id'} selected={UniversitySelectHandler} label='University/Institution' placeholder={'e.g. University of Delhi'} width={50} searchHandler={addUniversityHandler} suggestions={universityList} name_field={'education_name'} />

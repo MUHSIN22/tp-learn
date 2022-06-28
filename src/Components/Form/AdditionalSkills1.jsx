@@ -4,7 +4,7 @@ import IconSelect from '../IconInput/IconSelect'
 import IconTextArea from '../IconInput/IconTextArea'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux'
-import { additionalSkills, reload, selectResumeError, selectResumeLoading } from '../../redux/Features/ResumeSlice'
+import { additionalSkills, reload, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
 import Control from './Control';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
@@ -22,6 +22,7 @@ export default function AdditionalSkills1() {
     const error = useSelector(selectResumeError);
     const loading = useSelector(selectResumeLoading);
     const [showAlert, setShowAlert] = useState(false);
+    const message = useSelector(selectResumeMessage);
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
 
@@ -49,7 +50,7 @@ export default function AdditionalSkills1() {
     return (
         <>
             <h1>Have you ever volunteered for/contributed to any social cause. If yes, please let us know about it.</h1>
-            {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Information': 'Information added'}/>}
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <div className="form-row">
                 <IconInput name='role' handleChange={handleChange} label='Your role' placeholder='i.e. Volunteer' width={100} />
             </div>

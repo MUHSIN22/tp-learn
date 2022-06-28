@@ -4,7 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import DragDropInput from '../DragDropInput/DragDropInput'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBio, nextForm, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { addBio, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import { getRoleSuggestionList, selectRoleSuggestionList } from '../../redux/Features/MasterSlice';
@@ -66,7 +66,7 @@ export default function AdditionalSkills3() {
     return (
         <>
             <h1 className='text-left'>Tell us about yourself.</h1>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Bio' : 'Bio added'} />}
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <div className="form-col">
                 <div className="flex-row-between align-stretch g-1">
                     <div className="editor col-50 g-0-5">

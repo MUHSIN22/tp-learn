@@ -3,7 +3,7 @@ import IconInput from '../IconInput/IconInput'
 import MarkedSlider from '../MarkedSlider/MarkedSlider'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProject,reload, selectResumeError, selectResumeInfo, selectResumeLoading } from '../../redux/Features/ResumeSlice';
+import { addProject,reload, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { searchSkills, selectSkillList } from '../../redux/Features/MasterSlice';
 import Control from './Control';
@@ -25,6 +25,7 @@ export default function Experience6() {
     const error = useSelector(selectResumeError);
     const loading = useSelector(selectResumeLoading);
     const [showAlert, setShowAlert] = useState(false);
+    const message  =useSelector(selectResumeMessage)
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     const resumeInfo = useSelector(selectResumeInfo)
@@ -122,7 +123,7 @@ export default function Experience6() {
     },[showAlert,error])
     return (
         <>  
-        {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Project': 'Project added'}/>}
+        {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <h1>Now the most amazing part! If you have worked on any projects in this job role, please mention the skills you specifically used, how you applied them and its complexity level.</h1>
             <div className="card g-1">
                 <div className="form-row">

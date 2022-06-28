@@ -1,9 +1,8 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { nextForm, setForm } from '../../redux/Features/ResumeSlice'
+
 
 export default function Experience8({setProgress}) {
-  const dispatch = useDispatch()
+
   return (
     <>
         <h1>Do you want to add another experience?</h1>

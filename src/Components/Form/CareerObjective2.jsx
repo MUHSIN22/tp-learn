@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
-import { nextForm, selectResumeError, selectResumeLoading, selectResumeMessage, uploadCVvideos } from '../../redux/Features/ResumeSlice'
+import { selectResumeError, selectResumeLoading, selectResumeMessage, uploadCVvideos } from '../../redux/Features/ResumeSlice'
 import Alert from '../Alert/Alert'
 
 import IconInput from '../IconInput/IconInput'
@@ -55,7 +55,7 @@ export default function CareerObjective2() {
                 sharing platform of your choice and
                 share the link with us.
             </h1>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Video' : 'Video added'} />}
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <div className="form-row">
                 <IconInput name='video_from_url' handleChange={handleChange} label='Upload from a URL' placeholder='Paste the link to your video CV' width={100} />
             </div>

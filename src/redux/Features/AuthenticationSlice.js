@@ -10,7 +10,7 @@ const initialState = {
     otp_verified:false,
     status:'idle',
     error:false,
-    message:{},
+    message:null,
 }
 const headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -112,7 +112,7 @@ export const authenticationSlice = createSlice({
         },
         resetError: (state)=>{
             state.error = false;
-            state.message = {}
+            state.message = null
         }
 
     },
@@ -121,13 +121,14 @@ export const authenticationSlice = createSlice({
             state.loading=true;
             state.status = 'loading'
             state.error = false
+            state.message = null
         }).addCase(emailLogin.fulfilled,(state,action)=>{
             console.log('fullfilled')
             state.loading=false
             state.status = 'succeeded' 
             state.authToken = action.payload.data.token;
             state.user_id = action.payload.data.user_id
-
+            state.message = action.payload.data.message
             
            
         }).addCase(emailLogin.rejected,(state,action)=>{

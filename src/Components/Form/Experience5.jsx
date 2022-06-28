@@ -8,7 +8,7 @@ import useDebounce from '../../DebouncedSearch';
 import { getRoleSuggestionList, searchSkills, selectRoleSuggestionList, selectSkillList } from '../../redux/Features/MasterSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
-import { addJobSkills, nextForm, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { addJobSkills, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
 import Control from './Control';
 import Alert from '../Alert/Alert';
 import MultiSelectedOptions from './MultiSelectedOptions';
@@ -145,7 +145,7 @@ export default function Experience5() {
     }, [resumeInfo,form.user_company_job_record_id,form.user_company_record_id])
     return (
         <>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Job skills' : 'Job skills added'} />}
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <h1>So far so good! Now it’s time to flaunt your amazing skills.</h1>
             <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity'  deleteHandler={handleDeleteSkill} />
             <div className="form-row">

@@ -4,17 +4,16 @@ import IconSelect from '../IconInput/IconSelect'
 import { useDispatch, useSelector } from 'react-redux';
 import { getBuisnessScaleList, getCompanyBasedList, getIndustryList, selectBuisnessScaleList, selectCompanyBasedList, selectIndustryList } from '../../redux/Features/MasterSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
-import { addIndustryInfo, SelectCompanyDetails, selectLastCompany, selectResumeError, selectResumeLoading, selectResumeMessage, selectUserFirstName } from '../../redux/Features/ResumeSlice';
+import { addIndustryInfo, selectLastCompany, selectResumeError, selectResumeLoading, selectResumeMessage, selectUserFirstName } from '../../redux/Features/ResumeSlice';
 import Control from './Control';
 import Alert from '../Alert/Alert';
-export default function Experience2({ }) {
+export default function Experience2() {
     const dispatch = useDispatch();
     const [form, setForm] = useState({
         industry_id:'',
         scale_id:'',
         type_of_company:1,
         company_record_id:'',
-        type_of_company:''
     })
     const [showAlert,setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)
@@ -67,7 +66,7 @@ export default function Experience2({ }) {
     
     return (
         <>  
-             {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Industry details': 'Industry details added'}/>}
+             {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <h1 className='text-left'>Great going, <span> {firstName}</span></h1>
             <div className="form-row">
                 <IconSelect name={'industry_id'} label={'Select the industry'} field={'industry_size'} state={form} handleChange={handleChange}  options={industryList} name_field={'industry_name'} defaultValue={'Information Technology'} />
@@ -81,7 +80,4 @@ export default function Experience2({ }) {
             <Control handleSubmit={handleSubmit}/>
         </>
     )
-}
-function lastElement(arr){
-    return arr[arr.length - 1]
 }

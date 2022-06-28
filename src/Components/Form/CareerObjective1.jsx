@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import DragDropInput from '../DragDropInput/DragDropInput'
 import IconInput from '../IconInput/IconInput'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { nextForm, reload, selectResumeError, selectResumeLoading, selectResumeMessage, uploadPhotomedia } from '../../redux/Features/ResumeSlice';
+import { reload, selectResumeError, selectResumeLoading, selectResumeMessage, uploadPhotomedia } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import Control from './Control';
@@ -54,7 +54,7 @@ export default function CareerObjective1() {
             <h1 className='text-left'>
                 The world has to know how talented you are. Upload docs, PDFs, Image files, video links, etc. to showcase your portfolio.
             </h1>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Media' : 'Media added'} />}
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <div className="form-row">
                 <IconInput name='title' handleChange={handleChange} label='Title' placeholder='eg Resume' width={100} />
             </div>

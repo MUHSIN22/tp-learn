@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import useDebounce from '../../DebouncedSearch'
-import { resetError, selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
+import {  selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import { getCurrencyList, getFunctionalAreaList, getLevelList, searchDesignation, selectCurrencylist, selectDesignationList, selectFunctionalAreaList, selectManagementLevelList } from '../../redux/Features/MasterSlice'
-import { addJobDesignation, addJobSalary, nextForm, SelectCompanyDetails, SelectCompanyJobRecordId, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
+import { addJobDesignation, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
 import Alert from '../Alert/Alert'
 import IconInput from '../IconInput/IconInput'
 import IconSelect from '../IconInput/IconSelect'
@@ -43,7 +43,6 @@ export default function Experience3() {
     const functionalAreaList = useSelector(selectFunctionalAreaList);
     const currencyList = useSelector(selectCurrencylist);
     const resumeInfo = useSelector(selectResumeInfo)
-    const job_Record_id = useSelector(SelectCompanyJobRecordId);
     const [search, setSearch] = useState('')
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
 
@@ -124,7 +123,7 @@ export default function Experience3() {
     },[currencyList])
     return (
         <>  
-            {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Industry details': 'Industry details added'}/>}
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <h1>Now tell us about all the job roles at which you have worked, starting with the latest one.</h1>
             <div className="form-row">
                 <SuggestiveInput icon={<></>} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' width={45} suggestions={designationlist} name_field={'job_title_name'} searchHandler={searchHandler} selected={selectHandler} />

@@ -13,7 +13,7 @@ export default function Section2() {
       <div className="col-90 align-start">
         <h3>Career Timeline</h3>
         <span className="divider"></span>
-      {timelineGraph&&<JobTimeline jobs={timelineGraph.company_info}  skills={timelineGraph.skill_info} />}
+      {timelineGraph&&timelineGraph.company_info&&timelineGraph.skill_info&&<JobTimeline jobs={timelineGraph.company_info}  skills={timelineGraph.skill_info} />}
       </div>
 
       <div className="col-90 g-1 my-2">
@@ -27,7 +27,7 @@ export default function Section2() {
             </div>
             <div className='flex-row-fit g-0-5 align-center'>
               <div className='dot _4'></div>
-              salary
+              Management
             </div>
 
           </div>

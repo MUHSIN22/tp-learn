@@ -50,7 +50,7 @@ export default function CareerObjective3() {
             <h1 className='text-left'>
             <span>Voila!</span> Take a moment to clap for yourself a little since you made it this far. Here, share your social media links and move on to the last step.
             </h1>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Social Links' : 'Social Links added'} />}
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <div className="form-row">
                 <SocialInput name='link_facebook'  handleChange={handleChange} label={'Facebook'} icon={<Facebook></Facebook>}/>
             </div>

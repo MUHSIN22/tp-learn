@@ -15,7 +15,8 @@ export default function OverviewCard() {
  const skills = useSelector(selectKeySkills)
   return (
     <>
-    {!loading?<div className="overview responsive-grid">
+
+    {overview&&overview.length>0?<div className="overview responsive-grid">
         <div className="col-100 multiDonut">
           <h3>Industry overview</h3>
           <MultiDonut width={'150%'} data={formatData(overview)}/>
