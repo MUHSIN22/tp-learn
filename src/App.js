@@ -18,6 +18,7 @@ import { graphDetails } from './redux/Features/GraphSlice';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
+import CVReview from './Components/CVEditor/CVReview'
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -69,6 +70,7 @@ function App() {
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>
+       <Route path='/MyProfile' element={<CVReview/>}/>
       </Routes>
     </div>
   );
