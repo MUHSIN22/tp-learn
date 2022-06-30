@@ -25,10 +25,19 @@ import RoleLoader from '../Loaders/RoleLoader';
 import { companyWiseGraph, selectCompanyWise } from '../../redux/Features/GraphSlice';
 import { useEffect } from 'react';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
+import { FaPencilAlt } from "react-icons/fa";
+import { selectToEdit, changeToEdit,changeEditPageNo } from '../../redux/Features/ResumeSlice';
+import EditFormContainer from "../EditForms/EditFromContainer";
+
 export default function Section3() {
     const loading = useSelector(selectResumeLoading)
     const companyInfo = useSelector(SelectCompanyDetails)
     const [index, setIndex] = useState(0)
+    const toEdit = useSelector(selectToEdit)
+    const handleEditForms = (data) => { 
+       {toEdit && <EditFormContainer data={data}/>}
+      };
+    
     return (
         <div className="section_2 col-100 align-center">
             <Scale first={30} second={60} />
@@ -36,6 +45,7 @@ export default function Section3() {
                 <div className="flex-row-between align-center">
                     <h3 className='text-left'>Experience</h3>
                     <div className='flex-row-fit g-1 align-center'>
+                        {toEdit && <div><FaPencilAlt/></div>}
                         <button className='btn-fit transparent' onClick={() => { index > 0 && setIndex(index - 1) }}><Left /></button>
                         <button className='btn-fit transparent' onClick={() => { index < companyInfo.length - 1 && setIndex(index + 1) }}><Right /></button>
                     </div>
@@ -45,7 +55,7 @@ export default function Section3() {
                 <span className="divider"></span>
                 {console.log(companyInfo)}
                 {companyInfo && companyInfo.length > 0 ? <CompanyOverview company={companyInfo[index]} /> : <ExperienceLoader />}
-                {companyInfo &&companyInfo[index]?.job_role ? <DesignationOverview job_role={companyInfo[index].job_role} /> : <JobOverviewLoader />}
+                {companyInfo &&companyInfo[index]?.job_role ? <DesignationOverview job_role={{job_role:companyInfo[index].job_role || [],company_record_id:companyInfo[index].company_record_id}} /> : <JobOverviewLoader />}
             </div>
 
 
@@ -106,15 +116,17 @@ function CompanyOverview({ company }) {
             </div>
         </div>)
 }
-function DesignationOverview({ job_role = [] }) {
+function DesignationOverview(props ) {
+    const {job_role,company_record_id} = props.job_role;
+    console.log("ppppppppppp",job_role)
     const [index, setIndex] = useState(0)
-
-
+    const toEdit = useSelector(selectToEdit)
     return (
         <>
             <div className="flex-row-between align-center">
                 <h3 className='text-left m-0'>{job_role[index].designation_name}</h3>
                 <div className='flex-row-fit g-1 align-center'>
+                    {toEdit && <div><FaPencilAlt/></div>}
                     <button className='btn-fit transparent' onClick={() => { index > 0 && setIndex(index - 1) }}><Left /></button>
                     <button className='btn-fit transparent' onClick={() => { index < job_role.length - 1 && setIndex(index + 1) }}><Right /></button>
                 </div>
@@ -154,22 +166,31 @@ function DesignationOverview({ job_role = [] }) {
 
                 </div>}
             </div>
-            <ResponsibiltiensOverview data={job_role[index].role_responsibilties || false} />
+            <ResponsibiltiensOverview data={{role_responsibilties:job_role[index].role_responsibilties || false,company_job_record_id:job_role[index].company_job_record_id,company_record_id:company_record_id}} />
             {job_role[index].project&&<ProjectOverview projects= {job_role && job_role[index]?.project} />}
 
         </>
     )
 }
 function ResponsibiltiensOverview({ data }) {
-
+    const toEdit = useSelector(selectToEdit)
+    const dispatch = useDispatch()
+    const handleEditForms = (data) => { 
+        dispatch(changeEditPageNo(data.progress)).unwrap()
+      };
     return (
         <>
+            <div className="flex-row-between align-center"> 
             <h3 className="text-left">
                 Roles and Responsibilities
             </h3>
+            {toEdit && (<div className='flex-row-fit g-1 align-center'>
+                <div onClick={()=>handleEditForms({...data,progress:4})}><FaPencilAlt/></div>
+            </div>)}
+            </div>
             <span className="divider"></span>
-            {data ? <div className="role col-100 g-0-5 text-left">
-                {parser(parser(data))}
+            {data && data.role_responsibilties ? <div className="role col-100 g-0-5 text-left">
+                {parser(parser(data.role_responsibilties))}
             </div>:<RoleLoader/> }
         </>
     )
@@ -177,12 +198,14 @@ function ResponsibiltiensOverview({ data }) {
 function ProjectOverview({projects=[]}) {
    const [index,setIndex] = useState(0)
    let {project_name, client_name, project_skill} = projects[index]
+   const toEdit = useSelector(selectToEdit)
     return (
         <>
            
             <div className="flex-row-between align-center">
                 <h3 className='text-left m-0'>Projects worked on</h3>
                 <div className='flex-row-fit g-1 align-center'>
+                    {toEdit && <div><FaPencilAlt/></div>}
                     <button className='btn-fit transparent' onClick={() => { index > 0 && setIndex(index - 1) }}><Left /></button>
                     <button className='btn-fit transparent' onClick={() => { index < projects.length - 1 && setIndex(index + 1) }}><Right /></button>
                 </div>
@@ -201,7 +224,7 @@ function ProjectOverview({projects=[]}) {
                 <h5 className='text-left'>Complexity</h5>
             </div>
                 {
-                    project_skill.map((skill, i) => <SkillGrid key={i} color={`_${i+1}`} {...skill} />)
+                    project_skill?.map((skill, i) => <SkillGrid key={i} color={`_${i+1}`} {...skill} />)
                 }
 
 
