@@ -19,9 +19,9 @@ import SocialMedia from "../CV/SocialMedia";
 import Videos from "../CV/Videos";
 import { FaEdit, FaShareAlt } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
-import EditFormContainer from "../Form/EditFromContainer";
+import EditFormContainer from "../EditForms/EditFromContainer";
 export default function CVBuilder({ page }) {
-  page = page || "/Experience";
+  page = page || "/Education";
   const [isShow, setIsshow] = useState(false);
   const [progress, setProgress] = useState(0);
   const handleEdit = (e) => {
@@ -31,7 +31,10 @@ export default function CVBuilder({ page }) {
         break;
       case "/Experience":
         setProgress(1);
-        break;        
+        break;   
+      case "/Education":
+        setProgress(9);
+        break;   
     }
     setIsshow(true);
     console.log(isShow);

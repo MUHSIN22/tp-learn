@@ -138,7 +138,8 @@ function DesignationOverview({ job_role = [] }) {
                     </div>
 
                 </div>
-                {job_role[index].skills && <div className="col-100 skill-card">
+                {console.log("----------",job_role[index].skills)}
+                {job_role && job_role[index]?.skills && <div className="col-100 skill-card">
                     <h5 className='text-left'>Key Skills Used</h5>
                     {
                         job_role[index].skills.map((skill, i) => <div key={i} className="flex-row-between align-start">
@@ -154,7 +155,7 @@ function DesignationOverview({ job_role = [] }) {
                 </div>}
             </div>
             <ResponsibiltiensOverview data={job_role[index].role_responsibilties || false} />
-            {job_role[index].project&&<ProjectOverview projects= {job_role[index].project} />}
+            {job_role[index].project&&<ProjectOverview projects= {job_role && job_role[index]?.project} />}
 
         </>
     )

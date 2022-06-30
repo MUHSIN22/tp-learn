@@ -170,6 +170,7 @@ export const addCertification = createAsyncThunk('authentication/addCertificatio
         })
         return response.data
     } catch (error) {
+        console.log("==================",error);
         return rejectWithValue(error.response.data);
     }
 })
