@@ -19,7 +19,9 @@ import CareerObjective3 from './CareerObjective3';
 import CareerObjective2 from './CareerObjective2';
 
 
-export default function EditFormContainer({progress}) {
+export default function EditFormContainer({data}) {
+  console.log("[[[[[[[[[[[[[[",data)
+  const progress = data.progress;
   return (
     <div className="formContainer col-100 px-0 py-0" style={{"width":"100%"}}>
       {progress === 1 && <Experience1  />}

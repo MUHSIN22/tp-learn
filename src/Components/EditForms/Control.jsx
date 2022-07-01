@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch,useSelector } from 'react-redux'
-import { changeFormId, prevForm, selectFormId} from '../../redux/Features/ResumeSlice'
+import { changeFormId, prevForm, selectFormId,changeEditPageNo } from '../../redux/Features/ResumeSlice'
 import { ReactComponent as ChevronLeft } from '../../Assests/icons/chvron-left.svg';
 import { ReactComponent as ChevronRight } from '../../Assests/icons/chvron-right.svg';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
@@ -15,6 +15,7 @@ export default function Control({handleSubmit}) {
           user_id: user_id
         }
         try {
+            dispatch(changeEditPageNo(0)).unwrap()
             dispatch(changeFormId({auth:token,body})).unwrap()
         } catch (error) {
           
@@ -23,7 +24,7 @@ export default function Control({handleSubmit}) {
     return (
         <div className="form-row">
             <div className="col-30">
-                <button className='btn tertiary' onClick={() =>backHandler()}><ChevronLeft /> Back</button>
+                <button className='btn tertiary' onClick={backHandler}><ChevronLeft /> Back</button>
             </div>
 
             <div className="col-30">
