@@ -2,6 +2,63 @@ import React from "react";
 import "./Membership.css";
 import Sidebar from '../Sidebar/Sidebar';
 export default function Memberships() {
+
+  const displayRazorpay =async (amount) => {
+    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+
+    if(!res){
+      alert("Aww Snap! you are offline, failed to load razorpay")
+      return
+    }
+
+    const option = {
+      key:"rzp_test_2Ox0LKQowZvZPD",
+      currency:'INR',
+      amount: amount * 100,
+      name: "Talent Place",
+      description: "Thanks for Being a valuable member with us!",
+      image:"https://images.unsplash.com/photo-1616077167555-51f6bc516dfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
+      handler: function(response){
+        alert(response.razorpay_payment_id)
+        alert("Payment Successfull")
+      },
+      "prefill": {
+        "name": "Talent Price",
+        "email": "talentplace@tp.com",
+        "contact": "9999999999"
+      },
+      "notes": {
+          "address": "Talent Place Corporate Office"
+      },
+      "theme": {
+          "color": "#ff7752"
+      }
+    }
+
+    const paymentObject = new window.Razorpay(option)
+    paymentObject.open()
+  }
+
+
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script')
+      script.src = src
+
+      script.onload = () => {
+        resolve(true)
+      }
+
+      script.onerror = () => {
+        resolve(false)
+      }
+
+      document.body.appendChild(script)
+    })
+  }
+
+
+
   return (
     <div className="container membershp">
       <div className="flex-row-center">
@@ -11,12 +68,12 @@ export default function Memberships() {
         <div className="col">
           <div className="flex-row-center g-2">
             <div className="col-20">
-              <button type="button" class="btn-square orange">
+              <button type="button" className="btn-square orange" onClick={()=>console.log("clicked")}>
                 Monthly
               </button>
             </div>
             <div className="col-20">
-              <button type="button" class="btn-square add-border secondary">
+              <button type="button" className="btn-square add-border secondary">
                 Yearly
               </button>
             </div>
@@ -37,16 +94,16 @@ export default function Memberships() {
 
           <div className="flex-row-center membershipCardRow g-3 mt-3">
             <div className="col-20 membershipCard">
-              <span className="mb-1" style={{ "font-size": "1.5rem" }}>
+              <span className="mb-1" style={{ "fontSize": "1.5rem" }}>
                 Sederhana
               </span>
-              <span className="mb-1" style={{ "font-size": "1.5rem" }}>
+              <span className="mb-1" style={{ "fontSize": "1.5rem" }}>
                 $49{" "}
-                <span className="" style={{ "font-size": "1rem" }}>
+                <span className="" style={{ "fontSize": "1rem" }}>
                   / month
                 </span>
               </span>
-              <span className="mb-1" style={{ "font-size": "1.1rem" }}>
+              <span className="mb-1" style={{ "fontSize": "1.1rem" }}>
                 Lorem Ipsum is simply dummy text of the printing
               </span>
               <div className="flex-row-start">
@@ -87,23 +144,24 @@ export default function Memberships() {
               </div>
               <button
                 type="button"
-                class="btn-square orange mt-3"
-                style={{ "box-shadow": "0px 7px 12px 0 #ec957c" }}
+                className="btn-square orange mt-3"
+                style={{ "boxShadow": "0px 7px 12px 0 #ec957c" }}
+                onClick={()=> displayRazorpay(200)}
               >
                 Monthly
               </button>
             </div>
             <div className="col-20 membershipCard-2">
-              <span className="mb-1" style={{ "font-size": "1.5rem" }}>
+              <span className="mb-1" style={{ "fontSize": "1.5rem" }}>
                 Manangah
               </span>
-              <span className="mb-1" style={{ "font-size": "1.5rem" }}>
+              <span className="mb-1" style={{ "fontSize": "1.5rem" }}>
                 $79{" "}
-                <span className="" style={{ "font-size": "1rem" }}>
+                <span className="" style={{ "fontSize": "1rem" }}>
                   / month
                 </span>
               </span>
-              <span className="mb-1" style={{ "font-size": "1.1rem" }}>
+              <span className="mb-1" style={{ "fontSize": "1.1rem" }}>
                 Lorem Ipsum is simply dummy text of the printing
               </span>
               <div className="flex-row-start">
@@ -144,26 +202,26 @@ export default function Memberships() {
               </div>
               <button
                 type="button"
-                class="btn-square orange mt-3"
+                className="btn-square orange mt-3"
                 style={{
                   border: "1px solid white",
-                  "box-shadow": "1px 0px 4px 0 white",
+                  "boxShadow": "1px 0px 4px 0 white",
                 }}
               >
                 Monthly
               </button>
             </div>
             <div className="col-20 membershipCard">
-              <span className="mb-1" style={{ "font-size": "1.5rem" }}>
+              <span className="mb-1" style={{ "fontSize": "1.5rem" }}>
                 Mewah
               </span>
-              <span className="mb-1" style={{ "font-size": "1.5rem" }}>
+              <span className="mb-1" style={{ "fontSize": "1.5rem" }}>
                 $99{" "}
-                <span className="" style={{ "font-size": "1rem" }}>
+                <span className="" style={{ "fontSize": "1rem" }}>
                   / month
                 </span>
               </span>
-              <span className="mb-1" style={{ "font-size": "1.1rem" }}>
+              <span className="mb-1" style={{ "fontSize": "1.1rem" }}>
                 iLorem Ipsum is simply dummy text of the printing
               </span>
               <div className="flex-row-start">
@@ -204,8 +262,8 @@ export default function Memberships() {
               </div>
               <button
                 type="button"
-                class="btn-square orange mt-3"
-                style={{ "box-shadow": "0px 7px 12px 0 #ec957c" }}
+                className="btn-square orange mt-3"
+                style={{ "boxShadow": "0px 7px 12px 0 #ec957c" }}
               >
                 Monthly
               </button>
