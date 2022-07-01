@@ -20,6 +20,14 @@
     font-size: 1.1rem;
     text-decoration: none;
   }
+
+  .btn-square:hover{
+      border: solid 1px #ff7752;
+      background-color: #f8714c;
+      color: white;
+      cursor: pointer;
+    }
+
   .btn-square-shadow{
     box-shadow:1px 0 4px 0 #fafafa;
   }
