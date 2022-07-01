@@ -20,7 +20,7 @@ import CareerObjective2 from './CareerObjective2';
 
 
 export default function EditFormContainer({data}) {
-  console.log(data,"[[[[[[[[[[[[[[")
+  console.log("[[[[[[[[[[[[[[",data)
   const progress = data.progress;
   return (
     <div className="formContainer col-100 px-0 py-0" style={{"width":"100%"}}>

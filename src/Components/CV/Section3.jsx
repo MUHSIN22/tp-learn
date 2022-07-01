@@ -34,10 +34,6 @@ export default function Section3() {
     const companyInfo = useSelector(SelectCompanyDetails)
     const [index, setIndex] = useState(0)
     const toEdit = useSelector(selectToEdit)
-    const handleEditForms = (data) => { 
-       {toEdit && <EditFormContainer data={data}/>}
-      };
-    
     return (
         <div className="section_2 col-100 align-center">
             <Scale first={30} second={60} />
