@@ -1,14 +1,27 @@
-import React, {  useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import './CardRadioGroup.css'
-export default function CardRadioGroup({ name , state, setState, option,name_field,label }) {
-    const [current,setCurrent] = useState('');
+export default function CardRadioGroup({ name , state, setState, option,name_field,label, default_value=null, disabled}) {
+    const [current,setCurrent] = useState(default_value||'');
     const clickHandler = (index)=>{
-        let temp = state;
-        temp[name] =option[index].id;
-        console.log({temp})
-        setState(temp)
-        setCurrent(index)
+        if(!disabled){
+            let temp = state;
+            temp[name] =option[index].id;
+            console.log({temp})
+            setState(temp)
+            setCurrent(index)
+        }
+
     }
+    useEffect(() => {
+    if(disabled){
+        let i = option.findIndex((element) => element.id==state[name] )
+        setCurrent(i)
+    }
+    
+      return () => {
+        
+      }
+    }, [default_value,state])
     
     return (
         <div className='col-100 g-1 align-start'>
