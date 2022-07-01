@@ -103,7 +103,6 @@ export default function Signup() {
         <div className="login">
             <div className="form-container col-30">
                 <form>
-                {console.log(message)}
                 {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: Object.values(message)[0]} />}
                     <h1>Create Account</h1>
                     <div className="form-row">
