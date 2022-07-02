@@ -21,17 +21,17 @@ import { FaEdit, FaShareAlt } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from 'react-redux';
-import { selectToEdit, changeToEdit } from '../../redux/Features/ResumeSlice';
-import { selectEditPageNo, changeEditPageNo } from '../../redux/Features/ResumeSlice';
+import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails } from '../../redux/Features/ResumeSlice';
 export default function CVBuilder({ page }) {
   page = page || "/Experience";
   const [isShow, setIsshow] = useState(false);
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch()
   let toEdit = useSelector(selectToEdit);
-  let editPageNo = useSelector(selectEditPageNo);
+  let editPageDetails = useSelector(selectEditPageDetails);
   const handleEdit = (e) => { 
     dispatch(changeToEdit(!toEdit)).unwrap()
+    dispatch(changeEditPageDetails({}))
     setIsshow(true);
     console.log(isShow);
   };
@@ -66,7 +66,7 @@ export default function CVBuilder({ page }) {
           {floatingButton }
         </div>
           <div className="flex-row-center justify-end m-0 px-1">
-          {editPageNo && <EditFormContainer data={{progress:editPageNo}} />}
+          {editPageDetails && editPageDetails.progress && <EditFormContainer data={editPageDetails} />}
           </div>
           {page === "/personal-information" && <Section1 />}
           {page === "/Experience" && <Section3 />}
