@@ -26,7 +26,7 @@ import { companyWiseGraph, selectCompanyWise } from '../../redux/Features/GraphS
 import { useEffect } from 'react';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { FaPencilAlt } from "react-icons/fa";
-import { selectToEdit, changeToEdit,changeEditPageNo } from '../../redux/Features/ResumeSlice';
+import { selectToEdit, changeToEdit, changeEditPageDetails  } from '../../redux/Features/ResumeSlice';
 import EditFormContainer from "../EditForms/EditFromContainer";
 
 export default function Section3() {
@@ -162,7 +162,7 @@ function DesignationOverview(props ) {
 
                 </div>}
             </div>
-            <ResponsibiltiensOverview data={{role_responsibilties:job_role[index].role_responsibilties || false,company_job_record_id:job_role[index].company_job_record_id,company_record_id:company_record_id}} />
+            <ResponsibiltiensOverview data={{role_responsibilties:job_role[index].role_responsibilties || false,company_job_record_id:job_role[index].company_job_record_id,company_record_id:company_record_id,external_client_desc:job_role[index].external_client_desc,skills:job_role[index].skills}} />
             {job_role[index].project&&<ProjectOverview projects= {job_role && job_role[index]?.project} />}
 
         </>
@@ -172,7 +172,7 @@ function ResponsibiltiensOverview({ data }) {
     const toEdit = useSelector(selectToEdit)
     const dispatch = useDispatch()
     const handleEditForms = (data) => { 
-        dispatch(changeEditPageNo(data.progress)).unwrap()
+        dispatch(changeEditPageDetails(data)).unwrap()
       };
     return (
         <>
