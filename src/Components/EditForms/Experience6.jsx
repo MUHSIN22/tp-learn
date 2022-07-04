@@ -12,14 +12,15 @@ import SuggestiveInput from '../IconInput/SuggestiveInput';
 import Alert from '../Alert/Alert';
 import MultiSelectedOptions from './MultiSelectedOptions';
 const DEBOUNCE_DELAY = 600;
-export default function Experience6() {
+export default function Experience6({data}) {
     const dispatch = useDispatch()
     const [form, setForm] = useState({
-        project_name: '',
-        client_name:'',
-        project_skills: [],
-        user_company_record_id: '',
-        user_company_job_record_id: '',
+        project_name: data.project_name || '',
+        client_name:data.client_name || '',
+        project_skills: data.project_skill || [],
+        user_company_record_id: data.company_record_id || '',
+        user_company_job_record_id: data.company_job_record_id ||  '',
+        user_company_job_project_record_id  : data.job_project_record_id || ''
     })
     const [selected_options,set_Selected_options] = useState([]) 
     const error = useSelector(selectResumeError);
@@ -36,7 +37,7 @@ export default function Experience6() {
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        body.project_skills = selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity, skill_desc:x.skill_desc} })
+        body.project_skills = selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity, skill_name:x.skill_name,skill_desc:x.skill_desc} })
         body.project_skills = JSON.stringify(body.project_skills)
         try {
           dispatch(addProject({auth:token,body:{...form,user_id}})).unwrap()
@@ -73,6 +74,9 @@ export default function Experience6() {
     }
     const handleAddSkill = () => {
         console.log(temp)
+        if(temp.skill_id==''){
+            temp.skill_name=search;
+        }
         set_Selected_options([...selected_options,temp])
         document.getElementById('iconinput-Skills').value='';
         document.getElementById('iconinput-skill_complexity').value=0;
@@ -80,7 +84,10 @@ export default function Experience6() {
         
     }
     const handleDeleteSkill = (i)=>{
+        console.log("---------------",i)
         const newList =selected_options.filter((x,index)=> index!==i)
+        console.log('================',selected_options)
+        console.log('================',newList)
         set_Selected_options(newList) 
       }
     const searchSkillList = useCallback(
@@ -95,6 +102,7 @@ export default function Experience6() {
     )
     useEffect(() => {
         console.log(debouncedSearchState)
+        set_Selected_options([...form.project_skills])
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {
@@ -122,12 +130,12 @@ export default function Experience6() {
     },[showAlert,error])
     return (
         <>  
-        {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Project': 'Project added'}/>}
+        {showAlert&&!loading&&<Alert error={error} message={error?'Failed to update Project': 'Project updated'}/>}
             <h1>Now the most amazing part! If you have worked on any projects in this job role, please mention the skills you specifically used, how you applied them and its complexity level.</h1>
             <div className="card g-1">
                 <div className="form-row">
-                    <IconInput name='project_name' handleChange={handleChange} label='Project Name' placeholder='Name of the project.' width={45} />
-                    <IconInput name='client_name' handleChange={handleChange} label='Client Name' placeholder='e.g. ICICI Bank' width={45} />
+                    <IconInput name='project_name' handleChange={handleChange} label='Project Name' placeholder='Name of the project.' width={45} defaultValue={form.project_name} />
+                    <IconInput name='client_name' handleChange={handleChange} label='Client Name' placeholder='e.g. ICICI Bank' width={45} defaultValue={form.client_name}/>
                 </div>
                 <div className="form-row">
                     <IconInput name='role_Responsibilities'  label='Project Description' placeholder='Brief description of the project' width={98} />
@@ -137,11 +145,14 @@ export default function Experience6() {
                 <SuggestiveInput name='Skills' searchHandler={searchHandler} label={`Skill ${form.project_skills.length+1}`} placeholder='Select Skills' width={45} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
                     <MarkedSlider handleChange={handleComplexity} name={'skill_complexity'} state={form} setState={setForm} min={1} max={10} width={'48%'} label={'Complexity Level'} />
                 </div>
+                <div className="flex-row-end">
+                <button className='btn-fit small' onClick={handleAddSkill}>+ Add Skill</button>
+                    
+                </div>
                 <div className="form-row">
                     <IconInput handleChange={handleSkill_desc} name='skill_desc' label='Application of skills + Outcome' placeholder='Mention how you used the skills in the project' width={98} />
-
+                    
                 </div>
-                <button className='btn-fit small' onClick={handleAddSkill}>+ Add Skill</button>
             </div>
             <div className="flex-row-end">
                 <button className="btn-fit transparent g-0-5" onClick={handleAddProject}><AddCircle width={30} /> Add another Project</button>
