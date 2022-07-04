@@ -459,6 +459,21 @@
     border: solid 1px #DCDAE1;
     padding: 0.6rem;
 }
+.eduImage{
+    width: 60%;
+    background-color: #f1f1f1;
+    border-radius: 1rem;
+    border: 1px solid #DCDAE1;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}
+.edu-skill{
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.3rem;
+    background-color: #FAEDE9;
+    color: #1C1B2C;
+    font-size: 0.8rem;
+}
 .cvcontainer .docs a{
     width: fit-content;
     text-decoration: none;
@@ -491,6 +506,15 @@
     width: fit-content  ;
 }
 
+.downloadBoxes{
+    width: 100%;
+    height: 80%;
+    border: 1px solid #f1f0f5;
+    position:absolute;
+    /* top:2.5em;
+    left: 0;
+    bottom: 2.5em; */
+}
 @media only screen and (max-width:1024px) {
     .cvcontainer {
         width: 60%;

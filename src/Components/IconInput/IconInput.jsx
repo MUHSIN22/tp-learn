@@ -1,7 +1,6 @@
 import React from 'react'
 import './IconInput.css'
 export default function IconInput({type='text', label, name, handleChange=()=>{},icon, placeholder, width=100,validation,defaultValue}) {
-console.log('===============',defaultValue)
     return (
         <div className="iconInput" style={{width: width+'%'}}>
             <label htmlFor={name}>{label}</label>
