@@ -132,13 +132,13 @@ function CompanyOverview({ company }) {
           <Headphone /> <p>{company.type_of_company_name}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
-          <Location /> <p>{company.type_of_company_name}</p>
+          <Location /> <p>{company.job_role && company.job_role.length>0 ? company.job_role[0].job_location : ''}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
           <Calendar /> <p>{StartEndDate(company.job_role)}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
-          <Clock /> <p>Full Time</p>
+          <Clock /> <p>{company.nature_of_job_name}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
           <BarGraph /> <p>{company.job_level_name}</p>

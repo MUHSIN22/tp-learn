@@ -66,6 +66,7 @@ export const addCompany = createAsyncThunk('authentication/addCompany', async (d
     }
 })
 export const addIndustryInfo = createAsyncThunk('authentication/addIndustryInfo', async (data, { rejectWithValue }) => {
+    console.log('===============================================dafds',data)
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     console.log(encoded)
     try {
