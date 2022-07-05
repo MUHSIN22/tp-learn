@@ -15,6 +15,7 @@ import { resumeInfo, selectFormId, selectReload } from './redux/Features/ResumeS
 import { resetError, selectAuthentication } from './redux/Features/AuthenticationSlice';
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
+import Landing from './Components/LandingPage/Landing';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -63,6 +64,7 @@ function App() {
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
+       <Route path='/landing' element={<Landing/>}/>
       </Routes>
     </div>
   );
