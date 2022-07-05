@@ -212,35 +212,22 @@ function DesignationOverview(props) {
             <Location /> <p>{job_role[index].job_location || ""}</p>
           </div>
         </div>
-        {console.log("----------", job_role[index].skills)}
-        {job_role && job_role[index]?.skills && (
-          <div className="col-100 skill-card">
-            <h5 className="text-left">Key Skills Used</h5>
-            {job_role[index].skills.map((skill, i) => (
-              <div key={i} className="flex-row-between align-start">
-                <p>{skill.skill_name}</p>
-                <div className="col-70 justify-center">
-                  <ProgressBar
-                    value={skill.skill_complexity}
-                    color={`_${i + 1}`}
-                    hide_percent
-                  />
-                </div>
-                {console.log("----------",job_role[index].skills)}
-                {job_role && job_role[index]?.skills && <div className="col-100 skill-card">
-                    <h5 className='text-left'>Key Skills Used</h5>
-                    {
-                        job_role[index].skills.map((skill, i) => <div key={i} className="flex-row-between align-start">
-                            <p>{skill.skill_name}</p>
-                            <div className="col-70 justify-center">
-                                <ProgressBar value={skill.skill_complexity} color={`_${i+1}`} hide_percent />
-                            </div>
 
-                        </div>)
-                    }
+            {console.log("----------",job_role[index].skills)}
+            {job_role && job_role[index]?.skills && <div className="col-100 skill-card">
+                <h5 className='text-left'>Key Skills Used</h5>
+                {
+                    job_role[index].skills.map((skill, i) => <div key={i} className="flex-row-between align-start">
+                        <p>{skill.skill_name}</p>
+                        <div className="col-70 justify-center">
+                            <ProgressBar value={skill.skill_complexity} color={`_${i+1}`} hide_percent />
+                        </div>
+
+                    </div>)
+                }
 
 
-                </div>}
+            </div>}
             </div>
             <ResponsibiltiensOverview data={{role_responsibilties:job_role[index].role_responsibilties || false,company_job_record_id:job_role[index].company_job_record_id,company_record_id:company_record_id,external_client_desc:job_role[index].external_client_desc,skills:job_role[index].skills}} />
             {job_role[index].project&&<ProjectOverview projects= {job_role && job_role[index]?.project} />}
@@ -264,9 +251,6 @@ function ResponsibiltiensOverview({ data }) {
                 <div onClick={()=>handleEditForms({...data,progress:4})}><FaPencilAlt/></div>
             </div>)}
             </div>
-          </div>
-        )}
-      </div>
       <span className="divider"></span>
       {data && data.role_responsibilties ? (
         <div className="role col-100 g-0-5 text-left">
@@ -276,7 +260,7 @@ function ResponsibiltiensOverview({ data }) {
         <RoleLoader />
       )}
     </>
-  );
+  )
 }
 function ProjectOverview({ projects = [] }) {
   const [index, setIndex] = useState(0);
