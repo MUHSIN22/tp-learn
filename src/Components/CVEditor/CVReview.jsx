@@ -22,8 +22,8 @@ import { FiDownload } from "react-icons/fi";
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails } from '../../redux/Features/ResumeSlice';
-export default function CVBuilder({ page }) {
-  page = page || "/Experience";
+export default function CVBuilder() {
+  const [page, setPage] = useState("/Experience")
   const [isShow, setIsshow] = useState(false);
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch()
@@ -36,11 +36,24 @@ export default function CVBuilder({ page }) {
     console.log(isShow);
   };
 
+  // useEffect(() => {
+
+
+  //   return (()=>{
+
+  //   })
+  // },[])
+
+  const pull_data = (data) => {
+    console.log(data,"data")
+    setPage(data)
+  }
+
   const floatingButton = (
     <div>
       <div
         className="floating-btn orange"
-        style={{ "box-shadow": "5px 10px 20px 0 #ec957c" }}
+        style={{ "boxShadow": "5px 10px 20px 0 #ec957c" }}
       >
         <div className="" onClick={handleEdit}>
           <FaEdit />
@@ -58,11 +71,11 @@ export default function CVBuilder({ page }) {
     // <div className="cvEditor">
     <div className="flex-row-center cvEditContainer">
       <div className="col-fit">
-        <Sidebar />
+        <Sidebar currentPage={pull_data}/>
       </div>
       <div className="col-100">
         <div className="CVReview">
-        <div className="flex-row-center justify-end m-0 px-1">
+        <div className="flex-row-center justify-end px-1 mt-4">
           {floatingButton }
         </div>
           <div className="flex-row-center justify-end m-0 px-1">
@@ -72,13 +85,13 @@ export default function CVBuilder({ page }) {
           {page === "/Experience" && <Section3 />}
           {page === "/Education" && <Education />}
           {page === "/Docs" && <Docs />}
-          {page === "/hobbies" && <Languages />}
+          {page === "/languages" && <Languages />}
           {page === "/hobbies" && <Hobby />}
           {page === "/Videos" && <Videos />}
           {page === "/Timeline" && <Section2 />}
           {page === "/SocialMedia" && <SocialMedia />}
           {page === "/Videos" && <Videos />}
-          {page === "/Cerification" && <Cerification />}
+          {page === "/Certification" && <Cerification />}
         </div>
       </div>
     </div>

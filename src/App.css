@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  height: 100vh;
+  /* height: 100vh; */
 
 }
 h1,h2,h3,h4,h5{
@@ -422,16 +422,18 @@ div.dot{
 }
 
 .Sidebar{
-  /* margin-top:5rem; */
   height: 100%;
   width: 20rem;
   background-color: #f0967c;
+  top:0;
+  left:0;
 }
 
 .SidebarList {
   height: auto;
   width: 100%;
   padding: 0;
+  margin-top: 2rem;
 }
 
 .SidebarList .SidebarRow {
@@ -457,13 +459,13 @@ div.dot{
 }
 
 .SidebarRow #icon{
-  flex: 30%;
+  flex: 25%;
   display: grid;
   place-items: self-end;
 }
 
 .SidebarRow #title{
-  flex: 70%;
+  flex: 75%;
   display: grid;
   place-items: self-start;
   font-weight:200;

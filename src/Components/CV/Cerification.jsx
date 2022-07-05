@@ -15,7 +15,7 @@ export default function Cerification() {
                 {!loading && Array.isArray(Cerification) ? <div className="col-100 g-1">
                     {
 
-                        Cerification.map((c, i) => <CerificationCard logo={UdemyLogo} {...c} certificate={dummyCertificate} />)
+                        Cerification.map((c, i) => <CerificationCard key={i} logo={UdemyLogo} {...c} certificate={dummyCertificate} />)
                     }
                 </div>:<CertificateCardLoader/>}
 
