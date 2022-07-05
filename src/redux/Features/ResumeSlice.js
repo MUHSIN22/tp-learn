@@ -11,6 +11,8 @@ const initialState = {
     error: '',
     message: '',
     form: null,
+    toEdit: false,
+    editPageDetails : {}
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
@@ -170,6 +172,7 @@ export const addCertification = createAsyncThunk('authentication/addCertificatio
         })
         return response.data
     } catch (error) {
+        console.log("==================",error);
         return rejectWithValue(error.response.data);
     }
 })
@@ -283,7 +286,21 @@ export const changeFormId = createAsyncThunk('authentication/changeFormId', asyn
         return rejectWithValue(error.response.data);
     }
 })
+export const changeToEdit = createAsyncThunk('authentication/changeToEdit', async (data, { rejectWithValue }) => {
+    if(data){
+        return data;
+    }else{
+        return rejectWithValue(data);
+    }
+})
 
+export const changeEditPageDetails = createAsyncThunk('authentication/changeEditPageDetails', async (data, { rejectWithValue }) => {
+    if(data){
+        return data;
+    }else{
+        return rejectWithValue(data);
+    }
+})
 export const resumeSlice = createSlice({
     name: 'resume',
     initialState,
@@ -573,8 +590,19 @@ export const resumeSlice = createSlice({
             state.status = 'Rejected'
             state.error = action.payload.error
             state.message = action.payload.message
-
-
+        }).addCase(changeToEdit.fulfilled, (state, action) => {
+            state.loading = false
+            state.toEdit = action.payload
+        }).addCase(changeToEdit.rejected, (state, action) => {
+            state.loading = false
+            state.toEdit = action.payload
+        }).addCase(changeEditPageDetails.fulfilled, (state, action) => {
+            state.loading = false
+            state.editPageDetails = action.payload
+        })
+        .addCase(changeEditPageDetails.rejected, (state, action) => {
+            state.loading = false
+            state.editPageDetails = action.payload
         })
     }
 
@@ -593,7 +621,7 @@ export const SelectCompanyJobRecordId = (state) => state.resume.company_job_reco
 export const SelectCompanyDetails = (state) => state.resume.recordDetails.resume_info.company
 export const selectLastCompany = (state)=>{
    let company = state.resume.recordDetails.resume_info.company
-   return company[company.length-1]
+   return company?.[company.length-1]
 }
 export const selectEducation = (state) => state.resume.recordDetails.resume_info.education;
 export const selectCertificate = (state) => state.resume.recordDetails.resume_info.certificate;
@@ -616,6 +644,8 @@ export const selectHobbies = (state)=> {
 export const selectSocialContribution = (state) => state.resume.recordDetails.resume_info.additional_skill;   
 export const SelectDocuments = (state) => state.resume.recordDetails.resume_info.upload_photo_media;  
 export const selectVideo = (state)=>   state.resume.recordDetails.resume_info.video_from_url;
+export const selectToEdit = (state)=> state.resume.toEdit;
+export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
 export const selectSocilaLinks = (state)=>  { 
     let record =  state.resume.recordDetails.resume_info
    return {

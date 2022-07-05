@@ -1,0 +1,497 @@
+.CVReview {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0rem 1rem;
+}
+
+.cvEditContainer {
+    width: 100% !important;
+    margin-top: 6rem;
+}
+.CVReview h3 {
+    font-size: 1rem;
+    margin: 1rem 0 0 0;
+}
+
+.CVReview::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: #F1F0F5;
+    border-radius: 10px;
+}
+
+.CVReview::-webkit-scrollbar-thumb {
+    background-color: #DCDAE1;
+    border-radius: 10px;
+}
+
+.CVReview p {
+    color: #565B6B;
+    margin: 0;
+    text-align: left;
+    font-family: 'Mulish', sans-serif;
+}
+
+.CVReview .section_1 {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% 70%;
+    grid-column-gap: 2.5rem;
+}
+
+.CVReview .section_1 .personal_info {
+    width: inherit;
+    background-color: #F9F8FC;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 6rem 1rem 1rem 1rem;
+    gap: 1rem;
+    position: relative;
+
+}
+
+.CVReview .section_1 .personal_info .row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.CVReview .section_1 .personal_info .row p {
+    font-weight: 500;
+    font-size: 0.8em;
+    width: 100%;
+    text-align: left;
+
+}
+
+.CVReview .section_1 .personal_info .profile {
+    width: 45%;
+    position: absolute;
+    top: -10%;
+}
+
+.CVReview .section_1 .personal_info .profile img {
+    width: 100%;
+    border-radius: 50%;
+
+}
+
+.CVReview .section_1 .personal_info .divider {
+    margin: 0;
+}
+
+.CVReview .section_1 .personal_info .col-100 {
+    gap: 1rem
+}
+
+.CVReview .section_1 .personal_info .background {
+    width: inherit;
+    height: 6rem;
+    background: url('../../Assests/profile_info_vector.svg');
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 10zrem;
+}
+
+.CVReview .section_1 h1 {
+    text-align: left;
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+
+.CVReview .section_1 p {
+    font-size: 0.8rem;
+}
+
+.CVReview .section_1 .mphasis {
+    width: 96%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem;
+    border-radius: 1rem;
+    box-shadow: 0px 10px 40px rgba(3, 21, 15, 0.05);
+
+}
+
+.CVReview .section_1 .mphasis .image {
+    width: 3rem;
+    aspect-ratio: 1/1;
+    border: solid 1px #9DA2B2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+}
+
+.CVReview .section_1 .mphasis .image img {
+    width: 60%;
+}
+
+.CVReview .section_1 .mphasis h1 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.CVReview .section_1 .mphasis p {
+    font-size: 0.65rem;
+    font-weight: 500;
+}
+
+.CVReview .section_2 {
+    box-shadow: 0px 10px 40px rgba(3, 21, 15, 0.05);
+    border-radius: 0.5rem;
+    /* padding: 1rem 0; */
+    margin: 1rem 0;
+}
+
+.CVReview .grid-35-65 {
+    display: grid;
+    grid-column-gap: 0rem;
+    grid-template-columns: 30% 70%;
+}
+
+.CVReview .skill-card {
+    background-color: #F9F8FC;
+    border-radius: 1rem;
+    padding: 0.8rem;
+    gap: 0.5rem;
+    align-self: flex-start;
+    width: 95%;
+
+}
+
+.CVReview .skill-card h5 {
+    margin: 0;
+    font-weight: 500;
+    color: #565B6B;
+}
+
+.CVReview .section_2 p {
+    font-size: 0.8rem;
+}
+
+.CVReview .project_tile {
+    width: clamp(80px, 40%, 200px);
+}
+
+.CVReview .project_tile p {
+    width: fit-content;
+}
+
+.CVReview .project_tile h5 {
+    margin: 0;
+    color: #565B6B;
+}
+
+.CVReview .gradientDivider-h {
+    width: clamp(20px, 70%, 80px);
+    height: 2px;
+    background: rgb(28, 27, 44);
+    background: linear-gradient(90deg, rgba(28, 27, 44, 0) 0%, rgba(28, 27, 44, 1) 50%, rgba(28, 27, 44, 0) 100%);
+}
+
+.CVReview .gradientDivider-v {
+    margin: 0 0.5rem;
+    width: 2px;
+    background: rgb(28, 27, 44);
+    background: linear-gradient(0deg, rgba(28, 27, 44, 0) 0%, rgba(28, 27, 44, 1) 50%, rgba(28, 27, 44, 0) 100%);
+}
+
+.CVReview .gradientDivider-v:last-child {
+    display: none;
+}
+
+.CVReview .skill-grid {
+    display: grid;
+    -ms-grid-row-align: center;
+    grid-template-columns: 25% 33% 42%;
+    grid-column-gap: 1rem;
+    align-items: center;
+}
+
+.CVReview .skill-grid .skillName {
+    width: max-content;
+    align-self: center;
+    box-shadow: 0px 7px 20px 0px rgb(22 8 49 / 6%);
+    border-radius: 31px;
+    padding: 0.5rem 1rem;
+    color: #EF6239;
+    font-style: 0.9rem;
+}
+
+.CVReview .certificate-grid {
+    display: grid;
+    -ms-grid-row-align: center;
+    grid-template-columns: 20% 55% 20%;
+    grid-column-gap: 1rem;
+}
+
+.CVReview .certificate-grid img {
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 1rem;
+    border: 1px solid #DCDAE1;
+    object-fit: cover;
+    align-self: stretch;
+}
+
+.CVReview .certificate-grid img:first-child {
+    aspect-ratio: 1/1;
+}
+
+.CVReview .certificate-grid img:last-child {
+    height: 100%;
+}
+
+.CVReview h5 {
+    margin: 0;
+}
+
+.CVReview .certificate-grid p {
+    color: #565B6B;
+    font-size: 0.9em;
+}
+
+.CVReview .certificate-grid .skill {
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.3rem;
+    background-color: #FAEDE9;
+    color: #1C1B2C;
+    font-size: 0.8rem;
+}
+
+.CVReview .education-grid {
+    display: grid;
+    -ms-grid-row-align: center;
+    grid-template-columns: 20% 80%;
+    grid-column-gap: 1rem;
+}
+
+.CVReview .education-grid img {
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 1rem;
+    border: 1px solid #DCDAE1;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}
+
+.CVReview .education-grid p {
+    color: #565B6B;
+    font-size: 0.9em;
+}
+
+.CVReview .education-grid .skill {
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.3rem;
+    background-color: #FAEDE9;
+    color: #1C1B2C;
+    font-size: 0.8rem;
+}
+.CVReview .role>ul{
+    font-size: 0.8rem!important;
+}
+
+
+.CVReview .portfolio{
+    width: 100%;
+    gap: 1rem;
+}
+
+.CVReview .portfolio h1{
+    margin: 0;
+    text-align: left;
+    font-size: 1.6rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+.CVReview .portfolio img{
+    width: 80%;
+}
+.CVReview .portfolio .btn{
+    padding: 0.6rem 1rem;
+    width: fit-content;
+    align-items: center;
+}
+.CVReview .recommendation{
+    text-align: left;
+}
+.CVReview .recommendation img{
+    width: 60%;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    background-color: #f1f1f1;
+    padding: 1rem;
+
+}
+.CVReview .hobby-card img{
+    width:clamp(1.5rem, 3%, 2.5rem);
+    background: linear-gradient(0deg, #FFBEF9 0%, #FFF1FF 100%);
+    padding: 0.4rem;
+    border-radius: 50%;
+}
+.CVReview .hobby-card h4{
+    font-weight: 600;
+    margin: 0;
+
+}
+.CVReview .hobby-card p{
+    margin: 0;
+    font-weight: 500;
+}
+.CVReview .hobby-card .dot{
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color:#565B6B;
+}
+
+.CVReview .socialContribution .card *{
+    margin: 0;
+}
+
+.CVReview .socialContribution .card img{
+    width: 60%;
+    aspect-ratio: 1/1;
+    border-radius:1rem;
+    border: solid 1px #DCDAE1;
+    padding: 0.5rem;
+}
+.CVReview .docs{
+    text-align: left;
+}
+.CVReview .docs .card img{
+    width:clamp(1.5rem,5%,10%) ;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    border-radius:0.6rem;
+    border: solid 1px #DCDAE1;
+    padding: 0.6rem;
+}
+.CVReview .docs a{
+    width: fit-content;
+    text-decoration: none;
+    text-align: left;
+    color:#1C1B2C;
+}
+.CVReview .docs a h4{
+    margin: 0;
+}
+.CVReview .docs p{
+    font-size: 0.7rem;
+}
+.CVReview .socialMedia a{
+    width: fit-content;
+    text-decoration: none;
+}
+.CVReview label{ 
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #565B6B;
+}
+.hobby.grid-auto{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px,1fr));
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+}
+.CVReview .hobby-card{
+    width: fit-content  ;
+}
+
+/* @media only screen and (max-width:1024px) {
+    .CVReview {
+        width: 60%;
+    }
+
+    .CVReview .skill-card {
+        width: 90%;
+    }
+
+    .languagecard-container {
+        text-align: left;
+    }
+
+    .languagecard-container .col-70 {
+        width: 60%;
+    }
+
+    .cvbuilder .builder-row {
+        width: 100%;
+    }
+
+    .col-language-type {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .recommendation-card {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+}
+
+@media only screen and (max-width:900px) {
+    .cvbuilder .builder-row {
+        width: 100%;
+    }
+
+    .inherit-container {
+        width: fit-content;
+    }
+
+    .jobTimeline {
+        width: 100%;
+    }
+
+    .CVReview .skill-grid {
+        display: grid;
+        grid-template-columns: 27% 20% 50%;
+    }
+} */
+
+/* @media only screen and (max-width:768px) {
+    .CVReview {
+        display: none;
+    }
+
+    .formContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .formContainer .button {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        width: 100%;
+    }
+   
+} */
+/* 
+@media only screen and (max-width:650px) {
+    .formContainer {
+        width: 100%;
+        align-items: center;
+    }
+}
+@media only screen and (max-width:425px) {
+    .formContainer .button .col-30{
+        width: 40%;
+    }
+} */

@@ -8,20 +8,24 @@ import useDebounce from '../../DebouncedSearch';
 import { getRoleSuggestionList, searchSkills, selectRoleSuggestionList, selectSkillList } from '../../redux/Features/MasterSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
-import { addJobSkills, nextForm, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { addJobSkills, nextForm, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage,changeEditPageDetails } from '../../redux/Features/ResumeSlice';
 import Control from './Control';
 import Alert from '../Alert/Alert';
 import MultiSelectedOptions from './MultiSelectedOptions';
+import parser from 'html-react-parser';
+import { textContent } from 'domutils';
 
 const DEBOUNCE_DELAY = 600;
-export default function Experience5() {
+export default function Experience5({data}) {
+    let role_responsibilties = parser(data.role_responsibilties)
+    role_responsibilties = role_responsibilties.replace( /(<([^>]+)>)/ig, '');
     const dispatch = useDispatch()
     const [form, setForm] = useState({
-        job_skills: [],
-        role_responsibilities: '',
-        external_client_desc: '',
-        user_company_record_id: '',
-        user_company_job_record_id: '',
+        job_skills: data.skills || [],
+        role_responsibilities: role_responsibilties || '',
+        external_client_desc: data.external_client_desc || '',
+        user_company_record_id: data.company_record_id || '',
+        user_company_job_record_id: data.company_job_record_id || '',
 
     })
     const [selected_options,set_Selected_options] = useState([]) 
@@ -38,7 +42,6 @@ export default function Experience5() {
     const job_title_id = resumeInfo.company && resumeInfo.company[0].job_role[0].designation_id
     const roleSuggestions = useSelector(selectRoleSuggestionList)
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
-
 
     const searchSkillList = useCallback(
         (keywords) => {
@@ -68,7 +71,10 @@ export default function Experience5() {
         temp.skill_complexity = e.target.value
     }
     const handleAddSkill = () => {
-        temp.skill_name = temp.skill_id == '' ? search :  temp.skill_name;
+        if(temp.skill_id==''){
+            temp.skill_name=search;
+        }
+        console.log("tems",temp)
         set_Selected_options([...selected_options , temp])
         document.getElementById('iconinput-Skills').value = '';
         document.getElementById('iconinput-complexity').value = '';
@@ -86,13 +92,17 @@ export default function Experience5() {
     const handleSubmit = (e) => {
         e.preventDefault();
         let body = form
+        console.log("submit",selected_options)
         body.job_skills = JSON.stringify(body.job_skills)
         body.user_id = user_id
-        body.job_skills =JSON.stringify( selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity} }))
+        body.job_skills =JSON.stringify( selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity,skill_name:x.skill_name} }))
 
         try {
             dispatch(addJobSkills({ auth: token, body })).unwrap()
             console.log(form)
+            if(showAlert && !loading){
+                dispatch(changeEditPageDetails({})).unwrap()
+                }
         } catch (error) {
             showAlert(true)
         } finally {
@@ -109,6 +119,7 @@ export default function Experience5() {
     }
     useEffect(() => {
         console.log(debouncedSearchState)
+        set_Selected_options([...form.job_skills])
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {
@@ -144,9 +155,16 @@ export default function Experience5() {
         }
 
     }, [resumeInfo,form.user_company_job_record_id,form.user_company_record_id])
+
+    useEffect(() => {
+        if (showAlert && !loading ) {
+            dispatch(changeEditPageDetails({})).unwrap()
+        }
+
+    }, [])
     return (
         <>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Job skills' : 'Job skills added'} />}
+            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to update Job skills' : 'Job skills updated'} />}
             <h1>So far so good! Now it’s time to flaunt your amazing skills.</h1>
             <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity'  deleteHandler={handleDeleteSkill} />
             <div className="form-row">
@@ -175,7 +193,7 @@ export default function Experience5() {
                 </div>
             </div>
             <div className="form-row">
-                <IconInput name='external_client_desc' handleChange={handleChange} label='Have you worked for any external clients? If yes, please mention below:' placeholder='Which clients did you work for' width={100} />
+                <IconInput name='external_client_desc' defaultValue={form.external_client_desc} handleChange={handleChange} label='Have you worked for any external clients? If yes, please mention below:' placeholder='Which clients did you work for' width={100} />
             </div>
             <Control handleSubmit={handleSubmit} />
         </>

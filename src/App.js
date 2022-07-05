@@ -16,6 +16,11 @@ import { resetError, selectAuthentication } from './redux/Features/Authenticatio
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
 import Landing from './Components/LandingPage/Landing';
+import Dashboard from './Components/Dashboard/Dashboard';
+import Sidebar from './Components/Sidebar/Sidebar';
+import Membership from './Components/Memberships/Memberships';
+import CVReview from './Components/CVEditor/CVReview'
+import DummyForm from './Components/Form/Experience5'
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -56,6 +61,7 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
+      {/* <Sidebar/> */}
       <Routes>
        <Route path='/' element={<PreventedRoute><Login/></PreventedRoute> }/>
        <Route path='/OTP-login' element={<PreventedRoute><OTPLogin/></PreventedRoute>}/>
@@ -65,6 +71,11 @@ function App() {
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path='/landing' element={<Landing/>}/>
+
+       <Route path="/dashboard" element={<Dashboard/>}/>
+       <Route path='/membership' element={<Membership/>}/>
+       <Route path='/MyProfile' element={<CVReview/>}/>
+       <Route path='/dummy' element={<DummyForm/>}/>
       </Routes>
     </div>
   );
