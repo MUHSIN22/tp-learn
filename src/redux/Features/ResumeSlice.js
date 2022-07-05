@@ -12,7 +12,7 @@ const initialState = {
     message: '',
     form: null,
     toEdit: false,
-    editPageNo : 0
+    editPageDetails : {}
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
@@ -294,7 +294,7 @@ export const changeToEdit = createAsyncThunk('authentication/changeToEdit', asyn
     }
 })
 
-export const changeEditPageNo = createAsyncThunk('authentication/changeEditPageNo', async (data, { rejectWithValue }) => {
+export const changeEditPageDetails = createAsyncThunk('authentication/changeEditPageDetails', async (data, { rejectWithValue }) => {
     if(data){
         return data;
     }else{
@@ -596,13 +596,13 @@ export const resumeSlice = createSlice({
         }).addCase(changeToEdit.rejected, (state, action) => {
             state.loading = false
             state.toEdit = action.payload
-        }).addCase(changeEditPageNo.fulfilled, (state, action) => {
+        }).addCase(changeEditPageDetails.fulfilled, (state, action) => {
             state.loading = false
-            state.editPageNo = action.payload
+            state.editPageDetails = action.payload
         })
-        .addCase(changeEditPageNo.rejected, (state, action) => {
+        .addCase(changeEditPageDetails.rejected, (state, action) => {
             state.loading = false
-            state.editPageNo = action.payload
+            state.editPageDetails = action.payload
         })
     }
 
@@ -645,7 +645,7 @@ export const selectSocialContribution = (state) => state.resume.recordDetails.re
 export const SelectDocuments = (state) => state.resume.recordDetails.resume_info.upload_photo_media;  
 export const selectVideo = (state)=>   state.resume.recordDetails.resume_info.video_from_url;
 export const selectToEdit = (state)=> state.resume.toEdit;
-export const selectEditPageNo = (state)=> state.resume.editPageNo;
+export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
 export const selectSocilaLinks = (state)=>  { 
     let record =  state.resume.recordDetails.resume_info
    return {

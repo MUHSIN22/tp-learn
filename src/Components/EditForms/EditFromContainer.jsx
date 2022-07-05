@@ -20,27 +20,26 @@ import CareerObjective2 from './CareerObjective2';
 
 
 export default function EditFormContainer({data}) {
-  console.log("[[[[[[[[[[[[[[",data)
   const progress = data.progress;
   return (
     <div className="formContainer col-100 px-0 py-0" style={{"width":"100%"}}>
-      {progress === 1 && <Experience1  />}
-      {progress === 2 && <Experience2  />}
-      {progress === 3 && <Experience3  />}
-      {progress === 4 && <Experience5  />}
-      {progress === 5 && <Experience6  />}
-      {progress === 6 && <Experience7/>}
-      {progress === 7 && <Experience8 />}
-      {progress === 8 && <Experience9/>}
-      {progress === 9 && <Education />}
-      {progress === 10 && <Certificate1  />}
-      {progress === 11 && <Certificate2 />}
-      {progress === 12 && <AdditionalSkills1  />}
-      {progress === 13 && <AdditionalSkills2  />}
-      {progress === 14 && <AdditionalSkills3  />}
-      {progress === 15 && <CareerObjective1  />}
-      {progress === 16 && <CareerObjective2  />}
-      {progress === 17 && <CareerObjective3  />}
+      {progress === 1 && <Experience1 data = {data} />}
+      {progress === 2 && <Experience2 data = {data} />}
+      {progress === 3 && <Experience3 data = {data} />}
+      {progress === 4 && <Experience5 data = {data} />}
+      {progress === 5 && <Experience6 data = {data} />}
+      {progress === 6 && <Experience7 data = {data}/>}
+      {progress === 7 && <Experience8 data = {data} />}
+      {progress === 8 && <Experience9 data = {data}/>}
+      {progress === 9 && <Education data = {data} />}
+      {progress === 10 && <Certificate1  data = {data} />}
+      {progress === 11 && <Certificate2 data = {data} />}
+      {progress === 12 && <AdditionalSkills1  data = {data} />}
+      {progress === 13 && <AdditionalSkills2  data = {data}/>}
+      {progress === 14 && <AdditionalSkills3 data = {data} />}
+      {progress === 15 && <CareerObjective1  data = {data}/>}
+      {progress === 16 && <CareerObjective2  data = {data}/>}
+      {progress === 17 && <CareerObjective3  data = {data}/>}
 
 
 

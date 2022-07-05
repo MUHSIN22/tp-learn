@@ -35,11 +35,7 @@ import {
   selectUser_id,
 } from "../../redux/Features/AuthenticationSlice";
 import { FaPencilAlt } from "react-icons/fa";
-import {
-  selectToEdit,
-  changeToEdit,
-  changeEditPageNo,
-} from "../../redux/Features/ResumeSlice";
+import { selectToEdit, changeToEdit, changeEditPageDetails  } from '../../redux/Features/ResumeSlice';
 import EditFormContainer from "../EditForms/EditFromContainer";
 
 export default function Section3() {
@@ -230,38 +226,43 @@ function DesignationOverview(props) {
                     hide_percent
                   />
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <ResponsibiltiensOverview
-        data={{
-          role_responsibilties: job_role[index].role_responsibilties || false,
-          company_job_record_id: job_role[index].company_job_record_id,
-          company_record_id: company_record_id,
-        }}
-      />
-      {job_role[index].project && (
-        <ProjectOverview projects={job_role && job_role[index]?.project} />
-      )}
-    </>
-  );
+                {console.log("----------",job_role[index].skills)}
+                {job_role && job_role[index]?.skills && <div className="col-100 skill-card">
+                    <h5 className='text-left'>Key Skills Used</h5>
+                    {
+                        job_role[index].skills.map((skill, i) => <div key={i} className="flex-row-between align-start">
+                            <p>{skill.skill_name}</p>
+                            <div className="col-70 justify-center">
+                                <ProgressBar value={skill.skill_complexity} color={`_${i+1}`} hide_percent />
+                            </div>
+
+                        </div>)
+                    }
+
+
+                </div>}
+            </div>
+            <ResponsibiltiensOverview data={{role_responsibilties:job_role[index].role_responsibilties || false,company_job_record_id:job_role[index].company_job_record_id,company_record_id:company_record_id,external_client_desc:job_role[index].external_client_desc,skills:job_role[index].skills}} />
+            {job_role[index].project&&<ProjectOverview projects= {job_role && job_role[index]?.project} />}
+
+        </>
+    )
 }
 function ResponsibiltiensOverview({ data }) {
-  const toEdit = useSelector(selectToEdit);
-  const dispatch = useDispatch();
-  const handleEditForms = (data) => {
-    dispatch(changeEditPageNo(data.progress)).unwrap();
-  };
-  return (
-    <>
-      <div className="flex-row-between align-center">
-        <h3 className="text-left">Roles and Responsibilities</h3>
-        {toEdit && (
-          <div className="flex-row-fit g-1 align-center">
-            <div onClick={() => handleEditForms({ ...data, progress: 4 })}>
-              <FaPencilAlt />
+    const toEdit = useSelector(selectToEdit)
+    const dispatch = useDispatch()
+    const handleEditForms = (data) => { 
+        dispatch(changeEditPageDetails(data)).unwrap()
+      };
+    return (
+        <>
+            <div className="flex-row-between align-center"> 
+            <h3 className="text-left">
+                Roles and Responsibilities
+            </h3>
+            {toEdit && (<div className='flex-row-fit g-1 align-center'>
+                <div onClick={()=>handleEditForms({...data,progress:4})}><FaPencilAlt/></div>
+            </div>)}
             </div>
           </div>
         )}
