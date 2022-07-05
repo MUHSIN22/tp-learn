@@ -275,6 +275,22 @@
     grid-template-columns: 20% 80%;
     grid-column-gap: 1rem;
 }
+.education-review-grid {
+    display: grid;
+    -ms-grid-row-align: center;
+    grid-template-columns: 20% 80%;
+    grid-column-gap: 1rem;
+}
+
+.education-review-grid img{
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 1rem;
+    border: 1px solid #DCDAE1;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}
+
 
 .cvcontainer .education-grid img {
     width: 100%;
@@ -459,6 +475,21 @@
     border: solid 1px #DCDAE1;
     padding: 0.6rem;
 }
+.eduImage{
+    width:100%;
+    background-color: #f1f1f1;
+    border-radius: 1rem;
+    border: 1px solid #DCDAE1;
+    object-fit: fill;
+    aspect-ratio: 1/1;
+}
+.edu-skill{
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.3rem;
+    background-color: #FAEDE9;
+    color: #1C1B2C;
+    font-size: 0.8rem;
+}
 .cvcontainer .docs a{
     width: fit-content;
     text-decoration: none;
@@ -491,6 +522,11 @@
     width: fit-content  ;
 }
 
+.downloadBoxes{
+    width: 100%;
+    height: 80%;
+    border: 1px solid #f1f0f5;
+}
 @media only screen and (max-width:1024px) {
     .cvcontainer {
         width: 60%;
@@ -523,7 +559,6 @@
         display: flex;
         justify-content: space-between;
     }
-
 }
 
 @media only screen and (max-width:900px) {
@@ -543,6 +578,19 @@
         display: grid;
         grid-template-columns: 27% 20% 50%;
     }
+    .education-review-grid{
+        display: grid;
+        grid-template-columns:70% !important
+    }
+    .education-review-grid div{
+        padding: 0rem !important;
+    }
+    .downloadBoxes{
+        height: 4rem !important;
+        margin-top: 2px;
+        margin-bottom: px;
+    }
+    
 }
 
 @media only screen and (max-width:768px) {
@@ -562,7 +610,6 @@
         text-align: center;
         width: 100%;
     }
-   
 }
 
 @media only screen and (max-width:650px) {
@@ -574,5 +621,10 @@
 @media only screen and (max-width:425px) {
     .formContainer .button .col-30{
         width: 40%;
+    }
+    .education-review-grid{
+        display: grid;
+        grid-template-columns:70% !important;
+        grid-column-gap: 0rem
     }
 }

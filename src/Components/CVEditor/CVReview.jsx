@@ -3,9 +3,9 @@ import "../CVBuilder/CVBuilder.css";
 import FormContainer from "../Form/FormContainer";
 import "./CVReview.css";
 import Sidebar from "../Sidebar/Sidebar";
-import Cerification from "../CV/Cerification";
+import Cerification from "../CV/CerificationReview";
 import Docs from "../CV/Docs";
-import Education from "../CV/Education";
+import EducationReview from "../CV/EducationReview.jsx";
 import Hobby from "../CV/Hobby";
 import Languages from "../CV/Languages";
 import Portfolio from "../CV/Portfolio";
@@ -83,7 +83,7 @@ export default function CVBuilder() {
           </div>
           {page === "/personal-information" && <Section1 />}
           {page === "/Experience" && <Section3 />}
-          {page === "/Education" && <Education />}
+          {page === "/EducationReview" && <EducationReview />}
           {page === "/Docs" && <Docs />}
           {page === "/languages" && <Languages />}
           {page === "/hobbies" && <Hobby />}

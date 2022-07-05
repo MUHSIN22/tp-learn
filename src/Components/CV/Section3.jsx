@@ -35,14 +35,17 @@ import {
   selectUser_id,
 } from "../../redux/Features/AuthenticationSlice";
 import { FaPencilAlt } from "react-icons/fa";
-import { selectToEdit, changeToEdit, changeEditPageDetails  } from '../../redux/Features/ResumeSlice';
+import {
+  selectToEdit,
+  changeToEdit,
+  changeEditPageDetails,
+} from "../../redux/Features/ResumeSlice";
 import EditFormContainer from "../EditForms/EditFromContainer";
 
 export default function Section3() {
   const loading = useSelector(selectResumeLoading);
   const companyInfo = useSelector(SelectCompanyDetails);
   const [index, setIndex] = useState(0);
-  const toEdit = useSelector(selectToEdit);
   return (
     <div className="section_2 col-100 align-center">
       <Scale first={30} second={60} />
@@ -50,11 +53,6 @@ export default function Section3() {
         <div className="flex-row-between align-center">
           <h3 className="text-left">Experience</h3>
           <div className="flex-row-fit g-1 align-center">
-            {toEdit && (
-              <div>
-                <FaPencilAlt />
-              </div>
-            )}
             <button
               className="btn-fit transparent"
               onClick={() => {
@@ -100,6 +98,11 @@ function CompanyOverview({ company }) {
   const token = useSelector(selectAuthToken);
   const companyWise = useSelector(selectCompanyWise);
   const dispatch = useDispatch();
+  const toEdit = useSelector(selectToEdit);
+  const handleEditForms = (data) => {
+    dispatch(changeEditPageDetails(data)).unwrap();
+  };
+
   useEffect(() => {
     try {
       dispatch(
@@ -120,6 +123,7 @@ function CompanyOverview({ company }) {
       <div className="col-100 g-1">
         <div className="flex-row-fit align-center g-1">
           <Device /> <p>{company.industry_name}</p>
+
         </div>
         <div className="flex-row-fit align-center g-1">
           <Chart /> <p>{company.scale_name}</p>
@@ -128,13 +132,13 @@ function CompanyOverview({ company }) {
           <Headphone /> <p>{company.type_of_company_name}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
-          <Location /> <p>{company.type_of_company_name}</p>
+          <Location /> <p>{company.job_role && company.job_role.length>0 ? company.job_role[0].job_location : ''}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
           <Calendar /> <p>{StartEndDate(company.job_role)}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
-          <Clock /> <p>Full Time</p>
+          <Clock /> <p>{company.nature_of_job_name}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
           <BarGraph /> <p>{company.job_level_name}</p>
@@ -144,7 +148,26 @@ function CompanyOverview({ company }) {
         </div>
       </div>
       <div className="col-100 justify-end">
-        <h5 className="text-right">{company.company_name}</h5>
+        <h5 className="text-right">{toEdit && (
+              <span className="px-1" onClick={() =>
+                handleEditForms({
+                  progress: 1,
+                  company_record_id: company.company_record_id,
+                  company_id: company.company_id,
+                  company_name: company.company_name,
+                  nature_of_job_id: company.nature_of_job_id,
+                  nature_of_job_name: company.nature_of_job_name,
+                  industry_id: company.industry_id,
+                  industry_name: company.industry_name,
+                  scale_id: company.scale_id,
+                  scale_name: company.scale_name,
+                  type_of_company_id: company.type_of_company_id,
+                  type_of_company_name : company.type_of_company_name
+                })
+              }>
+                <FaPencilAlt />
+              </span>
+            )} {company.company_name}</h5>
         {console.log(companyWise)}
         {companyWise && (
           <LineGraph
@@ -161,13 +184,40 @@ function DesignationOverview(props) {
   console.log("ppppppppppp", job_role);
   const [index, setIndex] = useState(0);
   const toEdit = useSelector(selectToEdit);
+  const dispatch = useDispatch();
+  const handleEditForms = (data) => {
+    dispatch(changeEditPageDetails(data)).unwrap();
+  };
   return (
     <>
       <div className="flex-row-between align-center">
         <h3 className="text-left m-0">{job_role[index].designation_name}</h3>
         <div className="flex-row-fit g-1 align-center">
           {toEdit && (
-            <div>
+            <div
+              onClick={() =>
+                handleEditForms({
+                    
+                  designation_id:job_role[index].designation_id,
+                  level_id:job_role[index].job_level,
+                  location:job_role[index].job_location,
+                  remote_work:job_role[index].job_remote_work,
+                  functional_area_id:job_role[index].function_area_id,
+                  start_salary: job_role[index].job_start_salary,
+                  end_date: job_role[index].job_end_date,
+                  start_date: job_role[index].job_start_date,
+                  user_company_record_id: company_record_id,
+                  user_company_job_record_id:job_role[index].company_job_record_id,
+                  start_salary_currency:job_role[index].start_salary_currency,
+                  end_salary_currency:job_role[index].end_salary_currency,
+                  current_working:job_role[index].current_working,
+                  hide_salary:job_role[index].hide_salary,
+                  end_salary:job_role[index].job_end_salary,
+                  designation_name: job_role[index].designation_name,
+                  progress: 3,
+                })
+              }
+            >
               <FaPencilAlt />
             </div>
           )}
@@ -212,45 +262,58 @@ function DesignationOverview(props) {
             <Location /> <p>{job_role[index].job_location || ""}</p>
           </div>
         </div>
-
-            {console.log("----------",job_role[index].skills)}
-            {job_role && job_role[index]?.skills && <div className="col-100 skill-card">
-                <h5 className='text-left'>Key Skills Used</h5>
-                {
-                    job_role[index].skills.map((skill, i) => <div key={i} className="flex-row-between align-start">
-                        <p>{skill.skill_name}</p>
-                        <div className="col-70 justify-center">
-                            <ProgressBar value={skill.skill_complexity} color={`_${i+1}`} hide_percent />
-                        </div>
-
-                    </div>)
-                }
-
-
-            </div>}
-            </div>
-            <ResponsibiltiensOverview data={{role_responsibilties:job_role[index].role_responsibilties || false,company_job_record_id:job_role[index].company_job_record_id,company_record_id:company_record_id,external_client_desc:job_role[index].external_client_desc,skills:job_role[index].skills}} />
-            {job_role[index].project&&<ProjectOverview projects= {job_role && job_role[index]?.project} />}
-
-        </>
-    )
+        {console.log("----------", job_role[index].skills)}
+        {job_role && job_role[index]?.skills && (
+          <div className="col-100 skill-card">
+            <h5 className="text-left">Key Skills Used</h5>
+            {job_role[index].skills.map((skill, i) => (
+              <div key={i} className="flex-row-between align-start">
+                <p>{skill.skill_name}</p>
+                <div className="col-70 justify-center">
+                  <ProgressBar
+                    value={skill.skill_complexity}
+                    color={`_${i + 1}`}
+                    hide_percent
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <ResponsibiltiensOverview
+        data={{
+          role_responsibilties: job_role[index].role_responsibilties || false,
+          company_job_record_id: job_role[index].company_job_record_id,
+          company_record_id: company_record_id,
+          external_client_desc: job_role[index].external_client_desc,
+          skills: job_role[index].skills,
+        }}
+      />
+      {job_role[index].project && (
+        <ProjectOverview projects={{projects:job_role && job_role[index]?.project,company_job_record_id: job_role[index].company_job_record_id,company_record_id: company_record_id}} />
+      )}
+    </>
+  );
 }
 function ResponsibiltiensOverview({ data }) {
-    const toEdit = useSelector(selectToEdit)
-    const dispatch = useDispatch()
-    const handleEditForms = (data) => { 
-        dispatch(changeEditPageDetails(data)).unwrap()
-      };
-    return (
-        <>
-            <div className="flex-row-between align-center"> 
-            <h3 className="text-left">
-                Roles and Responsibilities
-            </h3>
-            {toEdit && (<div className='flex-row-fit g-1 align-center'>
-                <div onClick={()=>handleEditForms({...data,progress:4})}><FaPencilAlt/></div>
-            </div>)}
+  const toEdit = useSelector(selectToEdit);
+  const dispatch = useDispatch();
+  const handleEditForms = (data) => {
+    dispatch(changeEditPageDetails(data)).unwrap();
+  };
+  return (
+    <>
+      <div className="flex-row-between align-center">
+        <h3 className="text-left">Roles and Responsibilities</h3>
+        {toEdit && (
+          <div className="flex-row-fit g-1 align-center">
+            <div onClick={() => handleEditForms({ ...data, progress: 4 })}>
+              <FaPencilAlt />
             </div>
+          </div>
+        )}
+      </div>
       <span className="divider"></span>
       {data && data.role_responsibilties ? (
         <div className="role col-100 g-0-5 text-left">
@@ -260,19 +323,24 @@ function ResponsibiltiensOverview({ data }) {
         <RoleLoader />
       )}
     </>
-  )
+  );
 }
-function ProjectOverview({ projects = [] }) {
+function ProjectOverview({ projects:{projects,company_job_record_id,company_record_id} }) {
+  console.log("prof",projects)
   const [index, setIndex] = useState(0);
-  let { project_name, client_name, project_skill } = projects[index];
+  let { project_name, client_name, project_skill ,job_project_record_id} = projects[index];
   const toEdit = useSelector(selectToEdit);
+  const dispatch = useDispatch();
+  const handleEditForms = (data) => {
+    dispatch(changeEditPageDetails(data)).unwrap();
+  };
   return (
     <>
       <div className="flex-row-between align-center">
         <h3 className="text-left m-0">Projects worked on</h3>
         <div className="flex-row-fit g-1 align-center">
           {toEdit && (
-            <div>
+            <div onClick={() => handleEditForms({ job_project_record_id,project_skill: project_skill ? project_skill : [],client_name,project_name,company_job_record_id,company_record_id,progress: 5 })}>
               <FaPencilAlt />
             </div>
           )}

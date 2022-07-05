@@ -9,7 +9,7 @@ export default function ProfilePicture() {
                     <DragDropInput/>
             </div>
             <div className="flex-row-end g-1">
-            <div className="col-30">
+            <div className="col-30 mt-2">
                 <button className='btn'>Review</button>
             </div>
             </div>
