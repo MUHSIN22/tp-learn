@@ -11,19 +11,29 @@ import MultiSelectedOptions from './MultiSelectedOptions';
 import { searchSkills, selectSkillList } from '../../redux/Features/MasterSlice';
 import useDebounce from '../../DebouncedSearch';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
+import moment  from 'moment'
 const DEBOUNCE_DELAY = 600;
-export default function Certificate1() {
+export default function Certificate1({data}) {
     const dispatch = useDispatch()
+    const {project_name,
+        institute_name,
+        skills_ids,
+        certificate_start_date,
+        certificate_end_date,
+        certificate_project_info,
+        certificate_file,
+        is_online,
+        certification_record_id} = data;
     const [form, setForm] = useState({
-        project_name: 1,
-        institute_name: '',
-        skills_ids:[],
-        certificate_start_date: '',
-        certificate_end_date: '',
-        certificate_project_info: '',
+        project_name: project_name || 1,
+        institute_name: institute_name || '',
+        skills_ids:skills_ids || [],
+        certificate_start_date: moment(certificate_start_date,'DD-MM-YYYY').format('YYYY-MM-DD'),
+        certificate_end_date: moment(certificate_end_date,'DD-MM-YYYY').format('YYYY-MM-DD'),
+        certificate_project_info: certificate_project_info,
         certificate_file: null,
-        is_online: 'no',
-        certification_record_id: '',
+        is_online: is_online ? 'yes' : 'no',
+        certification_record_id: certification_record_id,
 
     })
     const [file, setFile] = useState(null);
@@ -97,6 +107,7 @@ export default function Certificate1() {
     )
     useEffect(() => {
         console.log(debouncedSearchState)
+        
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {
@@ -108,14 +119,14 @@ export default function Certificate1() {
             <h1>Add any certification courses/trainings you have done</h1>
             {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Education Details' : 'Job Education Details'} />}
             <div className="form-row">
-                <IconInput name='project_name' handleChange={handleChange} label='Name of the program' placeholder='e.g. Digital Marketing Associate' width={100} />
+                <IconInput name='project_name' handleChange={handleChange} label='Name of the program' placeholder='e.g. Digital Marketing Associate' width={100} defaultValue={form.project_name}/>
             </div>
             <div className="form-row">
-                <IconInput name='institute_name' handleChange={handleChange} label='Institution' placeholder='Udemy' width={100} />
+                <IconInput name='institute_name' handleChange={handleChange} label='Institution' placeholder='Udemy' width={100} defaultValue={form.institute_name}/>
             </div>
             <div className="form-row">
-                <IconInput name='certificate_start_date' handleChange={handleChange} type={'date'} label='Duration (From)' placeholder='i.e. Duration date' width={50} />
-                <IconInput name='certificate_end_date' handleChange={handleChange} type={'date'} label='Duration (to)' placeholder='i.e. Duration date' width={50} />
+                <IconInput name='certificate_start_date' handleChange={handleChange} type={'date'} label='Duration (From)' placeholder='i.e. Duration date' width={50} defaultValue={form.certificate_start_date}/>
+                <IconInput name='certificate_end_date' handleChange={handleChange} type={'date'} label='Duration (to)' placeholder='i.e. Duration date' width={50} defaultValue={form.certificate_end_date}/>
             </div>
             <MultiSelectedOptions options={selected_options} value_field={'skill_name'} deleteHandler={handleDeleteSkill} />
             <div className="form-row">

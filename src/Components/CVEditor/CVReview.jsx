@@ -3,7 +3,7 @@ import "../CVBuilder/CVBuilder.css";
 import FormContainer from "../Form/FormContainer";
 import "./CVReview.css";
 import Sidebar from "../Sidebar/Sidebar";
-import Cerification from "../CV/Cerification";
+import Cerification from "../CV/CerificationReview";
 import Docs from "../CV/Docs";
 import EducationReview from "../CV/EducationReview.jsx";
 import Hobby from "../CV/Hobby";
@@ -23,7 +23,7 @@ import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails } from '../../redux/Features/ResumeSlice';
 export default function CVBuilder({ page }) {
-  page = page || "/EducationReview";
+  page = page || "/Cerification";
   const [isShow, setIsshow] = useState(false);
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch()
