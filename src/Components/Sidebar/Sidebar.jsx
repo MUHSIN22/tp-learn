@@ -18,7 +18,7 @@ function Sidebar(props) {
   return (
     <div className='Sidebar close'>
       <div className='logo-details'>
-        <span className='logo_img'> <img src={logo} alt='LOGO_IMG' style={{"width":"12rem","paddingTop":"3.5rem"}}></img> </span>
+        <span className='sidebar-logo_img'> <img src={logo} alt='LOGO_IMG' style={{"width":"12rem","paddingTop":"3.5rem"}}></img> </span>
         <span className="menu-icon mt-4" > <FiMenu style={{"width":"2rem","height":"2rem","color":"white","marginLeft":"2rem"}}/> </span>
       </div>
 
