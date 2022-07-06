@@ -166,6 +166,9 @@ font-family: 'Poppins', sans-serif;;
 .g-3{
   gap:3rem;
 }
+.g-5{
+  gap:5rem;
+}
 .align-start{
   align-items: flex-start;
 }
@@ -422,7 +425,7 @@ div.dot{
 }
 
 .Sidebar{
-  height: 100%;
+  height: 100vh;
   width: 20rem;
   background-color: #f0967c;
   top:0;

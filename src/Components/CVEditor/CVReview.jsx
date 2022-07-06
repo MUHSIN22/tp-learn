@@ -4,7 +4,7 @@ import FormContainer from "../Form/FormContainer";
 import "./CVReview.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Cerification from "../CV/CerificationReview";
-import Docs from "../CV/Docs";
+import DocsReview from "../CV/DocsReview";
 import EducationReview from "../CV/EducationReview.jsx";
 import Hobby from "../CV/Hobby";
 import Languages from "../CV/Languages";
@@ -16,7 +16,7 @@ import Section3 from "../CV/Section3";
 import SelfDeclaration from "../CV/SelfDeclaration";
 import SocialContribution from "../CV/SocialContribution";
 import SocialMedia from "../CV/SocialMedia";
-import Videos from "../CV/Videos";
+import VideosReview from "../CV/VideosReview";
 import { FaEdit, FaShareAlt } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 import EditFormContainer from "../EditForms/EditFromContainer";
@@ -85,15 +85,15 @@ export default function CVBuilder() {
           {page === "/personal-information" && <Section1 />}
           {page === "/Experience" && <Section3 />}
           {page === "/Education" && <EducationReview />}
-          {page === "/Docs" && <Docs />}
           {page === "/languages" && <Languages />}
           {page === "/hobbies" && <Hobby />}
-          {page === "/Videos" && <Videos />}
+          {page === "/Videos" && <VideosReview />}
           {page === "/Timeline" && <Section2 />}
           {page === "/SocialMedia" && <SocialMedia />}
-          {page === "/Videos" && <Videos />}
           {page === "/Certification" && <Cerification />}
           {page==="/SocialContribution" && <SocialContribution />}
+          {page==="/Recommendation"  && <Recommendation />}
+          {page==='/Docs' && <DocsReview />}
         </div>
       </div>
     </div>

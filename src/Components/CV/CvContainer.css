@@ -590,6 +590,11 @@
         margin-top: 2px;
         margin-bottom: px;
     }
+
+    .docFilesDiv {
+        flex-direction: column-reverse !important;
+        gap:3rem !important
+    }
     
 }
 

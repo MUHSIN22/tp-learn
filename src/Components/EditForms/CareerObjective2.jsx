@@ -7,10 +7,10 @@ import Alert from '../Alert/Alert'
 import IconInput from '../IconInput/IconInput'
 import Control from './Control'
 
-export default function CareerObjective2() {
+export default function CareerObjective2({data}) {
     const dispatch = useDispatch()
     const [form, setForm] = useState({
-       file_url:'',
+       file_url:data.url || '',
     })
     const error = useSelector(selectResumeError);
     const message = useSelector(selectResumeMessage);
@@ -57,7 +57,7 @@ export default function CareerObjective2() {
             </h1>
             {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Video' : 'Video added'} />}
             <div className="form-row">
-                <IconInput name='video_from_url' handleChange={handleChange} label='Upload from a URL' placeholder='Paste the link to your video CV' width={100} />
+                <IconInput name='video_from_url' handleChange={handleChange} label='Upload from a URL' placeholder='Paste the link to your video CV' width={100} defaultValue={form.file_url}/>
             </div>
             <Control handleSubmit={handleSubmit}/>
         </>

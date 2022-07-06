@@ -45,7 +45,7 @@ function Sidebar(props) {
                          <h4 onClick={()=>{sendProp("/Certification")}}>Certification Courses</h4>
                          <h4 onClick={()=>{sendProp("/Education")}}>Education</h4>
                          <h4 onClick={()=>{sendProp("/personal-information")}}>Portfolio</h4>
-                         <h4 onClick={()=>{sendProp("/personal-information")}}>Recommendation</h4>
+                         <h4 onClick={()=>{sendProp("/Recommendation")}}>Recommendation</h4>
                          <h4 onClick={()=>{sendProp("/languages")}}>Languages</h4>
                          <h4 onClick={()=>{sendProp("/hobbies")}}>Hobbies</h4>
                          <h4 onClick={()=>{sendProp("/SocialContribution")}}>Social Contribution</h4>
