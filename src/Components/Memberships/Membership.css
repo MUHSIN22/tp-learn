@@ -67,6 +67,9 @@
     border-radius: 50px;
   }
 
+.membershp{
+  z-index:999
+}
 @media only screen and (max-width:700px) {
     .membershipCardRow {
         flex-direction: column !important;

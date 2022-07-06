@@ -12,7 +12,8 @@ const initialState = {
     message: '',
     form: null,
     toEdit: false,
-    editPageDetails : {}
+    editPageDetails : {},
+    pageOn:'/personal-information'
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
@@ -301,6 +302,15 @@ export const changeEditPageDetails = createAsyncThunk('authentication/changeEdit
         return rejectWithValue(data);
     }
 })
+
+export const changePageOn = createAsyncThunk('authentication/changePageOn', async (data, { rejectWithValue }) => {
+    if(data){
+        return data;
+    }else{
+        return rejectWithValue(data);
+    }
+})
+
 export const resumeSlice = createSlice({
     name: 'resume',
     initialState,
@@ -604,6 +614,14 @@ export const resumeSlice = createSlice({
             state.loading = false
             state.editPageDetails = action.payload
         })
+        .addCase(changePageOn.fulfilled, (state, action) => {
+            state.loading = false
+            state.pageOn = action.payload
+        })
+        .addCase(changePageOn.rejected, (state, action) => {
+            state.loading = false
+            state.pageOn = '/personal-information'
+        })
     }
 
 })
@@ -655,7 +673,8 @@ export const selectSocilaLinks = (state)=>  {
     linkedin: record.link_linkedin,
     other: record.link_other
    }
-}      
+}
+export const getPageOn = (state) => state.resume.pageOn;     
 export const { nextForm, prevForm, setForm,reload } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

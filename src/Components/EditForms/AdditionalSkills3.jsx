@@ -10,11 +10,11 @@ import Alert from '../Alert/Alert';
 import { getRoleSuggestionList, selectRoleSuggestionList } from '../../redux/Features/MasterSlice';
 import Control from './Control';
 
-export default function AdditionalSkills3() {
+export default function AdditionalSkills3({data}) {
     const [file, setFile] = useState(null)
     const dispatch = useDispatch()
     const [form, setForm] = useState({
-        your_bio: '',
+        your_bio: data.bio || "",
         profile_pic: '',
 
     })
@@ -36,6 +36,9 @@ export default function AdditionalSkills3() {
         let body = form
         body.user_id = user_id
         body.profile_pic = file
+        if(body.profile_pic=='' || !body.profile_pic){
+            delete body.profile_pic
+        }
         let form_Data = JsonToFormData(body)
         try {
             dispatch(addBio({ auth: token, body:form_Data })).unwrap()
@@ -66,7 +69,7 @@ export default function AdditionalSkills3() {
     return (
         <>
             <h1 className='text-left'>Tell us about yourself.</h1>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Bio' : 'Bio added'} />}
+            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to update Bio' : 'Bio updated'} />}
             <div className="form-col">
                 <div className="flex-row-between align-stretch g-1">
                     <div className="editor col-50 g-0-5">
