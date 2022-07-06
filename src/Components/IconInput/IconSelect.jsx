@@ -7,7 +7,7 @@ export default function IconSelect({type, label, name,handleChange,icon, default
 
             <div className="input-container">
                 {icon}
-                <select type={type} onChange={handleChange} name={name} defaultValue={defaultValue} >
+                <select type={type} onChange={handleChange} defaultValue={defaultValue} name={name}>
                     {
                        options&&options.map((option, index)=><option key={option.id} value={name_value?option[name_field]:option.id}>{option[name_field]}</option>)
                         

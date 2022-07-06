@@ -1,10 +1,11 @@
 import React from 'react'
 import UdemyLogo from '../../Assests/udemy.jpg'
 import dummyCertificate from '../../Assests/dummyCertificate.jpg'
-import { useSelector } from 'react-redux'
-import { selectCertificate, selectResumeLoading } from '../../redux/Features/ResumeSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectCertificate, selectResumeLoading,selectToEdit, changeToEdit, changeEditPageDetails} from '../../redux/Features/ResumeSlice'
 import CertificateCardLoader from '../Loaders/CerificateCardLoader'
-export default function Cerification() {
+import { FaPencilAlt } from "react-icons/fa";
+export default function CerificationReview() {
     const loading = useSelector(selectResumeLoading)
     const Cerification = useSelector(selectCertificate) || []
     return (
@@ -15,7 +16,7 @@ export default function Cerification() {
                 {!loading && Array.isArray(Cerification) ? <div className="col-100 g-1">
                     {
 
-                        Cerification.map((c, i) => <CerificationCard key={i} logo={UdemyLogo} {...c} certificate={dummyCertificate} />)
+                        Cerification.map((c, i) => <CerificationCard logo={UdemyLogo} {...c} certificate={dummyCertificate} />)
                     }
                 </div>:<CertificateCardLoader/>}
 
@@ -24,14 +25,33 @@ export default function Cerification() {
         </div>
     )
 }
-function CerificationCard({ project_name, logo, certificate_start_date, certificate_end_date, skills_names ='', certificate }) {
+function CerificationCard({ project_name, logo, certificate_start_date, certificate_end_date, certificate_project_info,certificate,skills_ids,certificate_record_id,certificate_file,is_online,institute_name,skills_names ='' }) {
     let skills = skills_names.split(',') 
+    let skill_ids = skills_ids ? skills_ids.split(","): [];
+    const dispatch = useDispatch();
+    const toEdit = useSelector(selectToEdit);
+const handleEditForms = (data) => {
+    dispatch(changeEditPageDetails(data)).unwrap();
+  };
     return (
         <div className="certificate-grid">
             <img src={logo} alt="" />
             <div className="col-100 align-start justify-between g-1">
                 <div>
-                    <h5>{project_name}</h5>
+                    <h5>{project_name} {toEdit && (
+                     <span onClick={() => handleEditForms({ 
+                        progress: 10,
+                        project_name,
+                        institute_name,
+                        skills_ids:skill_ids,
+                        certificate_start_date,
+                        certificate_end_date,
+                        certificate_project_info,
+                        certificate_file,
+                        is_online,
+                        certification_record_id: certificate_record_id, 
+                    })} style={{"marginLeft":"1rem"}}><FaPencilAlt /></span>
+                    )}</h5>
                     <p>{TimeDiff(certificate_end_date, certificate_start_date,)}</p>
                 </div>
 
@@ -42,7 +62,7 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
                 </div>
 
             </div>
-            <img src={certificate} alt="" />
+            <img src={certificate_file} alt="" />
         </div>
     )
 }

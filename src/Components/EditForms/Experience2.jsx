@@ -14,7 +14,6 @@ export default function Experience2({ }) {
         scale_id:'',
         type_of_company:1,
         company_record_id:'',
-        type_of_company:''
     })
     const [showAlert,setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)

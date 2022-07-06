@@ -20,7 +20,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
 import CVReview from './Components/CVEditor/CVReview'
-import DummyForm from './Components/Form/Experience5'
+import DummyForm from './Components/EditForms/ProfilePicture'
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
