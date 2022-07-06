@@ -59,7 +59,7 @@ const handleEditForms = (data) => {
             </div>
             <div className="col-inherit">
                 <h1>{contactInfo.name} {toEdit && (
-                     <span onClick={() => handleEditForms({ progress: 4 })}><FaPencilAlt /></span>
+                     <span onClick={() => handleEditForms({ progress: 14,bio:bio ? bio: '' })}><FaPencilAlt /></span>
                     )}</h1>
                 
                 <p>Content Creator</p>

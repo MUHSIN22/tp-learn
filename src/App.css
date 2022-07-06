@@ -427,6 +427,7 @@ div.dot{
   background-color: #f0967c;
   top:0;
   left:0;
+  z-index: 999
 }
 
 .SidebarList {

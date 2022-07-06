@@ -1,8 +1,10 @@
 import React from 'react'
 import dummy from '../../Assests/dummySocialContribution.png'
-import { useSelector } from 'react-redux';
-import { selectSocialContribution } from '../../redux/Features/ResumeSlice';
+import { useSelector,useDispatch } from 'react-redux';
+import { selectSocialContribution,selectToEdit,changeEditPageDetails } from '../../redux/Features/ResumeSlice';
 import SocialContributionLoader from '../Loaders/SocialContributionLoader';
+import { FaPencilAlt } from "react-icons/fa";
+
 export default function SocialContribution() {
     const socialContribution = useSelector(selectSocialContribution)
     return (
@@ -22,14 +24,21 @@ export default function SocialContribution() {
         </div>
     )
 }
-function SocialContributionCard({ image, organization_name, description }) {
+function SocialContributionCard({ image, organization_name, description,additional_skill_record_id,role,from_duration,to_duration,currently_working }) {
+    const dispatch = useDispatch();
+    const toEdit = useSelector(selectToEdit);
+    const handleEditForms = (data) => {
+    dispatch(changeEditPageDetails(data)).unwrap();
+  };
     return (
         <div className="card flex-row-start g-1">
             <div className="col-20">
                 <img src={image} alt="" />
             </div>
-            <div className="col-70 justify-start text-left g-0-5">
-                <h4>{organization_name}</h4>
+            <div className="col-70 justify-start text-left g-2">
+                <h4>{organization_name} {toEdit && (
+                     <span onClick={() => handleEditForms({ progress: 12,organization_name,description,additional_skill_record_id,role,from_duration,to_duration,currently_working})} className="px-1"><FaPencilAlt /></span>
+                    )}</h4>
                 <p>{description}</p>
             </div>
         </div>

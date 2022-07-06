@@ -21,9 +21,9 @@ import { FaEdit, FaShareAlt } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from 'react-redux';
-import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails } from '../../redux/Features/ResumeSlice';
+import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails,changePageOn,getPageOn } from '../../redux/Features/ResumeSlice';
 export default function CVBuilder() {
-  const [page, setPage] = useState("/Experience")
+  const page = useSelector(getPageOn)
   const [isShow, setIsshow] = useState(false);
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch()
@@ -46,7 +46,8 @@ export default function CVBuilder() {
 
   const pull_data = (data) => {
     console.log(data,"data")
-    setPage(data)
+    dispatch(changePageOn(data));
+    
   }
 
   const floatingButton = (
@@ -83,7 +84,7 @@ export default function CVBuilder() {
           </div>
           {page === "/personal-information" && <Section1 />}
           {page === "/Experience" && <Section3 />}
-          {page === "/EducationReview" && <EducationReview />}
+          {page === "/Education" && <EducationReview />}
           {page === "/Docs" && <Docs />}
           {page === "/languages" && <Languages />}
           {page === "/hobbies" && <Hobby />}
@@ -92,6 +93,7 @@ export default function CVBuilder() {
           {page === "/SocialMedia" && <SocialMedia />}
           {page === "/Videos" && <Videos />}
           {page === "/Certification" && <Cerification />}
+          {page==="/SocialContribution" && <SocialContribution />}
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@ function Sidebar(props) {
                  &nbsp; &nbsp; &nbsp;
                 {val.title != 'My Profile' ?  <div id="title">{val.title}</div> : (
                    <Tippy content={
-                     <div className='text-left' style={{"margin":"2rem 2rem 2rem 2rem"}}>
+                     <div className='text-left' style={{"margin":"2rem 2rem 2rem 2rem","z-index":"1000"}}>
                          <h4 onClick={()=>{sendProp("/personal-information")}}>Personal Information</h4>
                          <h4 onClick={()=>{sendProp("/personal-information")}}>Career Timeline</h4>
                          <h4 onClick={()=>{sendProp("/Experience")}}>Experience</h4>
@@ -48,7 +48,7 @@ function Sidebar(props) {
                          <h4 onClick={()=>{sendProp("/personal-information")}}>Recommendation</h4>
                          <h4 onClick={()=>{sendProp("/languages")}}>Languages</h4>
                          <h4 onClick={()=>{sendProp("/hobbies")}}>Hobbies</h4>
-                         <h4 onClick={()=>{sendProp("/personal-information")}}>Social Contribution</h4>
+                         <h4 onClick={()=>{sendProp("/SocialContribution")}}>Social Contribution</h4>
                          <h4 onClick={()=>{sendProp("/Docs")}}>Docs files</h4>
                          <h4 onClick={()=>{sendProp("/Videos")}}>Video files</h4>
                          <h4 onClick={()=>{sendProp("/SocialMedia")}}>Social Media</h4>

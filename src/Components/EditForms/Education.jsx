@@ -85,6 +85,9 @@ export default function Education({data}) {
     let body = form
     body.user_id = user_id
     body.upload_degree = file
+    if(body.upload_degree=="" || !body.upload_degree){
+      delete body.upload_degree;
+  }
     body = JsonToFormData(body)
 
     try {

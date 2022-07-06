@@ -49,7 +49,8 @@ const handleEditForms = (data) => {
                         certificate_project_info,
                         certificate_file,
                         is_online,
-                        certification_record_id: certificate_record_id, 
+                        certification_record_id: certificate_record_id,
+                        skills 
                     })} style={{"marginLeft":"1rem"}}><FaPencilAlt /></span>
                     )}</h5>
                     <p>{TimeDiff(certificate_end_date, certificate_start_date,)}</p>
