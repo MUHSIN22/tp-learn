@@ -18,6 +18,79 @@ font-family: 'Poppins', sans-serif;;
   grid-column-gap:1rem ;
   grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
 }
+.resume_div_seprator{
+  display: flex;
+}
+.d-flex {
+  display: flex;
+}
+.justify-around{
+  justify-content: space-around;
+}
+.justify-between{
+  justify-content: space-between;
+}
+.Profile_resume_img{
+  height: 10rem;
+  width: 15rem;
+
+}
+.bg-dark{
+  background-color: #000000;
+}
+.flex-column{
+  flex-direction: column;
+}
+.horizone_line{
+  width: 20rem;
+  margin-left: 3rem;
+}
+.info{
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
+.work_exp_text{
+  margin-top: 0.8rem;
+  /* margin-bottom: 0.75rem; */
+}
+.hight-auto{
+  height: auto;
+}
+.float-left{
+  display: block;
+  width: 30%;
+  margin-left: 0;
+  float: left;
+}
+.skills{
+  font-size: 0.75rem;
+}
+.main_head_skills{
+  font-size: 1rem;
+  font-weight: 500;
+}
+.minor_head_skills{
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+.nameClient_skill{
+  margin-left: 2rem;
+  font-size: 1rem;
+}
+.box{
+  width: 50%;
+  height: 30%;
+  background-color: #e6e6e6;
+}
+.roles_resp{
+  font-size: 0.75rem;
+}
+.text-light{
+  color: #fff;
+}
+.text-dark{
+  color: #000000;
+}
 .col{
   display: flex;
   flex-direction: column;
@@ -34,6 +107,11 @@ font-family: 'Poppins', sans-serif;;
 }
 .col-20{
   width: 20%;
+  display: flex;
+  flex-direction: column;
+}
+.col-25{
+  width: 25%;
   display: flex;
   flex-direction: column;
 }
@@ -122,6 +200,12 @@ font-family: 'Poppins', sans-serif;;
 }
 .mt-2{
   margin-top: 2rem !important;
+}
+.mr-2{
+  margin-right: 2rem !important;
+}
+.mr-3{
+  margin-right: 3rem !important;
 }
 .mt-3{
   margin-top: 3rem !important;
@@ -245,7 +329,6 @@ font-family: 'Poppins', sans-serif;;
   background-color: #21CE93;
   color: #fff;
   align-items: center;
-
 }
 .secondary{
   border: solid 2px #F0967D;
@@ -554,4 +637,9 @@ div.dot{
   border-radius: 1.5rem;
   font-size: 1.1rem;
   text-decoration: none;
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 580px) {
+  .nameClient_skill {
+    
+  }
 }
