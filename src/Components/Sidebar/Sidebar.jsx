@@ -37,11 +37,11 @@ function Sidebar(props) {
                    <Tippy content={
                      <div className='text-left' style={{"margin":"2rem 2rem 2rem 2rem","z-index":"1000"}}>
                          <h4 onClick={()=>{sendProp("/personal-information")}}>Personal Information</h4>
-                         <h4 onClick={()=>{sendProp("/personal-information")}}>Career Timeline</h4>
+                         <h4 onClick={()=>{sendProp("/career-timeline")}}>Career Timeline</h4>
                          <h4 onClick={()=>{sendProp("/Experience")}}>Experience</h4>
                          <h4 onClick={()=>{sendProp("/personal-information")}}>Full-stack Developer</h4>
                          <h4 onClick={()=>{sendProp("/personal-information")}}>Roles and Responsibilities</h4>
-                         <h4 onClick={()=>{sendProp("/personal-information")}}>Projects worked on</h4>
+                         <h4 onClick={()=>{sendProp("/Experience")}}>Projects worked on</h4>
                          <h4 onClick={()=>{sendProp("/Certification")}}>Certification Courses</h4>
                          <h4 onClick={()=>{sendProp("/Education")}}>Education</h4>
                          <h4 onClick={()=>{sendProp("/personal-information")}}>Portfolio</h4>
@@ -52,7 +52,7 @@ function Sidebar(props) {
                          <h4 onClick={()=>{sendProp("/Docs")}}>Docs files</h4>
                          <h4 onClick={()=>{sendProp("/Videos")}}>Video files</h4>
                          <h4 onClick={()=>{sendProp("/SocialMedia")}}>Social Media</h4>
-                         <h4 onClick={()=>{sendProp("/personal-information")}}>Self-Declaration</h4>
+                         <h4 onClick={()=>{sendProp("/self-declaration")}}>Self-Declaration</h4>
                      </div>
                     
                    } placement="right-start" interactive={true}>

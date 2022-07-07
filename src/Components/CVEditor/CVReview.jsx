@@ -11,7 +11,7 @@ import Languages from "../CV/Languages";
 import Portfolio from "../CV/Portfolio";
 import Recommendation from "../CV/Recommendation";
 import Section1 from "../CV/Section1";
-import Section2 from "../CV/Section2";
+import Section2Review from "../CV/Section2Review";
 import Section3 from "../CV/Section3";
 import SelfDeclaration from "../CV/SelfDeclaration";
 import SocialContribution from "../CV/SocialContribution";
@@ -88,12 +88,13 @@ export default function CVBuilder() {
           {page === "/languages" && <Languages />}
           {page === "/hobbies" && <Hobby />}
           {page === "/Videos" && <VideosReview />}
-          {page === "/Timeline" && <Section2 />}
+          {page === "/career-timeline" && <Section2Review />}
           {page === "/SocialMedia" && <SocialMedia />}
           {page === "/Certification" && <Cerification />}
           {page==="/SocialContribution" && <SocialContribution />}
           {page==="/Recommendation"  && <Recommendation />}
           {page==='/Docs' && <DocsReview />}
+          {page==='/self-declaration' && <SelfDeclaration />}
         </div>
       </div>
     </div>

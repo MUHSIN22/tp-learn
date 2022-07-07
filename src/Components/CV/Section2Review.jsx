@@ -1,11 +1,16 @@
 import React from 'react'
-import { selectSalaryGraph } from '../../redux/Features/GraphSlice'
+import { selectSalaryGraph,selectKeySkills,selectCompanyWise } from '../../redux/Features/GraphSlice'
 import JobTimeline from '../Graphs/JobTimeline/JobTimeline'
 import LineGraph from '../Graphs/LineGraph'
 import ProgressBar from '../OverviewCard/ProgressBar'
 import { useSelector } from 'react-redux'
-export default function Section2() {
+export default function Section2Review() {
   const salaryGraph = useSelector(selectSalaryGraph)
+  const keyskills = useSelector(selectKeySkills)
+  const company_wise_data = useSelector(selectCompanyWise)
+  const companyInfo = company_wise_data?.company_info || [];
+  const skillsInfo = company_wise_data?.skill_info; 
+
   return (
     <div className="section_2 col-100 align-center">
       <div className="col-90 align-start">
@@ -54,7 +59,21 @@ export default function Section2() {
             ]
           }]} />
       </div>
-
+      <div className="col-100 keySkill-card">
+            <h5 className="text-left">Key Skills Used</h5>
+            {keyskills?.map((skill, i) => (
+              <div key={i} className="flex-row-between align-start">
+                <p>{skill.name}</p>
+                <div className="col-70 justify-center">
+                  <ProgressBar
+                    value={skill.value}
+                    color={`_${i + 1}`}
+                    hide_percent
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
       <div className="col-90 g-1 my-2">
 
         <div className="flex-row-between">

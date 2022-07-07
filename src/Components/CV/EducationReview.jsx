@@ -104,14 +104,13 @@ function EducationCard({
             </span>
           )}
           </h5>
-          <div className="flex-row-start mt-0-5">
+        </div>
+        <div className="flex-row-start mt-0-5">
             <p>{university_name}</p>
 
             <span className="gradientDivider-v"></span>
             <p>{TimeDiff(course_end_date, course_start_date)}</p>
           </div>
-        </div>
-
         <div className="flex-row-start g-0-5">
           {skills.map((skill, i) => (
             <div key={i} className="skill">
