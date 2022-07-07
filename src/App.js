@@ -20,6 +20,7 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
 import CVReview from './Components/CVEditor/CVReview'
 import DummyForm from './Components/EditForms/ProfilePicture'
+import Resume from './Components/ResumeTemplate/Resume';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -73,6 +74,7 @@ function App() {
        <Route path='/membership' element={<Membership/>}/>
        <Route path='/MyProfile' element={<CVReview/>}/>
        <Route path='/dummy' element={<DummyForm/>}/>
+       <Route path='/resume' element={<Resume/>}/>
       </Routes>
     </div>
   );
