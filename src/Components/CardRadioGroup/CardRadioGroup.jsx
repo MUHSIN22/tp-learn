@@ -1,6 +1,6 @@
 import React, {  useEffect, useState } from 'react'
 import './CardRadioGroup.css'
-export default function CardRadioGroup({ name , state, setState, option,name_field,label, default_value=null, disabled}) {
+export default function CardRadioGroup({ name , state, setState, option,name_field,label, default_value=null, disabled, autofill}) {
     const [current,setCurrent] = useState(default_value||'');
     const clickHandler = (index)=>{
         if(!disabled){
@@ -13,7 +13,7 @@ export default function CardRadioGroup({ name , state, setState, option,name_fie
 
     }
     useEffect(() => {
-    if(disabled){
+    if(autofill){
         let i = option.findIndex((element) => element.id==state[name] )
         setCurrent(i)
     }

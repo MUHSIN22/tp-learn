@@ -4,7 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import DragDropInput from '../DragDropInput/DragDropInput'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBio, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { addBio, selectBio, selectFirstJob, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import { getRoleSuggestionList, selectRoleSuggestionList } from '../../redux/Features/MasterSlice';
@@ -15,7 +15,6 @@ export default function AdditionalSkills3() {
     const dispatch = useDispatch()
     const [form, setForm] = useState({
         your_bio: '',
-        profile_pic: '',
 
     })
     const error = useSelector(selectResumeError);
@@ -25,8 +24,10 @@ export default function AdditionalSkills3() {
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     const resumeInfo = useSelector(selectResumeInfo)
-    const job_title_id = resumeInfo.company && resumeInfo.company[0].job_role[0].designation_id
+    const firstjob = useSelector(selectFirstJob)
+    const job_title_id = firstjob.designation_id
     const roleSuggestions = useSelector(selectRoleSuggestionList)
+    const bio = useSelector(selectBio)
     const handleSuggestion = (value) => {
         setForm({ ...form, your_bio: form.your_bio + value })
     }
@@ -35,7 +36,8 @@ export default function AdditionalSkills3() {
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        body.profile_pic = file
+        if(file) body.profile_pic = file
+        
         let form_Data = JsonToFormData(body)
         try {
             dispatch(addBio({ auth: token, body:form_Data })).unwrap()
@@ -62,11 +64,17 @@ export default function AdditionalSkills3() {
 
         }
     }, [dispatch, job_title_id, token])
-
+    useEffect(() => {
+      setForm({...form, your_bio: bio})
+      return () => {
+        
+      }
+    }, [])
+    
     return (
         <>
             <h1 className='text-left'>Tell us about yourself.</h1>
-            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
+            {showAlert &&!loading&&<Alert error={error} message={error&&message ? Object.values(message): message} />}
             <div className="form-col">
                 <div className="flex-row-between align-stretch g-1">
                     <div className="editor col-50 g-0-5">

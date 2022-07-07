@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './IconInput.css'
-export default function SuggestiveInput({ type, label, name, selected=()=>{alert('add select handler')}, icon, placeholder, width, validation, suggestions=[], searchHandler, name_field }) {
+export default function SuggestiveInput({ type, label, name, selected=()=>{alert('add select handler')}, icon, placeholder, width, validation, suggestions=[], searchHandler, name_field,value }) {
     const [showSuggestion,setShowSuggestion] = useState(false);
     function handleSuggestion(index,suggestion_name) {
         document.getElementById(`iconinput-${name}`).value = suggestion_name;
@@ -23,7 +23,7 @@ export default function SuggestiveInput({ type, label, name, selected=()=>{alert
             <label htmlFor={name}>{label}</label>
             <div className="input-container">
                 {icon}
-                <input id={`iconinput-${name}`} onChange={searchHandler} onFocus={()=>setShowSuggestion(true)} autoComplete='off' type={type} name={name} placeholder={placeholder} />
+                <input id={`iconinput-${name}`} value={value} onChange={searchHandler} onFocus={()=>setShowSuggestion(true)} autoComplete='off' type={type} name={name} placeholder={placeholder} />
             </div>
             {validation && <span className='validation-message .shake-horizontal'>{validation}</span>}
             {showSuggestion && suggestions.length>0 && <div className="suggestion-list">

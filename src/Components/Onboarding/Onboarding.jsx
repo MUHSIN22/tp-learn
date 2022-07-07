@@ -5,11 +5,14 @@ import { ReactComponent as ChevronRight } from '../../Assests/icons/chvron-right
 import IconInput from '../IconInput/IconInput';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExperience, selectFormId, selectReload, selectResumeDetails, selectResumeInfo, selectResumeMessage, selectResumeStatus } from '../../redux/Features/ResumeSlice';
+import { addExperience, selectFormId, selectReload, selectResumeDetails, selectResumeError, selectResumeInfo, selectResumeMessage, selectResumeStatus } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
+import Alert from '../Alert/Alert';
 export default function Onboarding() {
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
+    const message = useSelector(selectResumeMessage)
+    const error = useSelector(selectResumeError)
     const buttonText = [
         'Create',
         'Yes. Tell me more…',
@@ -35,7 +38,7 @@ export default function Onboarding() {
     return (
         <div className="onboarding" >
             <div className={step%2===0?"content slide-in-top1 ":"content slide-in-top2 "}>
-
+                {error&&message&&<Alert error={error} message={error&&message ? Object.values(message) : message}/>}
                 {step === 1 && <Step1 name={resumeDetails.fname} />}
                 {step === 2 && <Step2 />}
                 {step === 3 && <Step3 />}

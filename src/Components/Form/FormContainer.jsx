@@ -57,7 +57,7 @@ const setProgress = (id)=>{
       {progress === 14 && <AdditionalSkills3  />}
       {progress === 15 && <CareerObjective1  />}
       {progress === 16 && <CareerObjective2  />}
-      {progress === 17 && <CareerObjective3  />}
+      {progress> 16 && <CareerObjective3  />}
 
 
 

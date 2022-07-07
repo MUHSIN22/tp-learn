@@ -60,12 +60,12 @@ export default function Experience2() {
     useEffect(() => {
       if(companyBasedList.length&&form.type_of_company==='') setForm({...form,type_of_company:companyDetails.type_of_company_id!==""?companyDetails.type_of_company_id: companyBasedList[0].id})
       if(industryList.length&&form.industry_id==='') setForm({...form,industry_id:companyDetails.industry_id!==""?companyDetails.industry_id: industryList[0].id})
-      if(companyDetails.scale_id!=='') setForm({...form, scale_id: companyDetails.scale_id})
-      console.log(companyDetails)
+      if(buisnessScaleList.length&&form.scale_id==='') setForm({...form, scale_id: companyDetails.scale_id!==""?companyDetails.scale_id:buisnessScaleList[0].id})
+      console.log(buisnessScaleList.length,form.scale_id==='')
       return () => {
         
       }
-    }, [companyBasedList,form.type_of_company,industryList,form.industry_id,companyDetails])
+    }, [companyBasedList,form,companyDetails,buisnessScaleList,industryList])
     
     return (
         <>  
@@ -75,7 +75,7 @@ export default function Experience2() {
                 <IconSelect value={form.industry_id} disabled={companyDetails.industry_id!==""} name={'industry_id'} label={'Select the industry'} field={'industry_size'} state={form} handleChange={handleChange}  options={industryList} name_field={'industry_name'} defaultValue={'Information Technology'} />
             </div>
             <div className="form-row">
-                <CardRadioGroup label='Define the scale of buisness?' name={'scale_id'} state={form} setState={setForm}  option={buisnessScaleList} name_field={'scale_of_business_name'} disabled={companyDetails.scale_id!==""} />
+                <CardRadioGroup autofill={companyDetails.scale_id!==""} label='Define the scale of buisness?' name={'scale_id'} state={form} setState={setForm}  option={buisnessScaleList} name_field={'scale_of_business_name'} disabled={companyDetails.scale_id!==""} />
             </div>
             <div className="form-row">
                 <IconSelect value={form.type_of_company} disabled={companyDetails.type_of_company_id!==""} placeholder={'Slsls'} name={'type_of_company'} label={'Product / Service based'} field={'industry_size'} handleChange={handleChange}  options={companyBasedList} name_field={'company_based_name'} defaultValue={'Information Technology'} />

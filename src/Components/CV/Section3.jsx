@@ -197,7 +197,7 @@ function ProjectOverview({projects=[]}) {
                 <h5 className='text-left'>Complexity</h5>
             </div>
                 {
-                    project_skill.map((skill, i) => <SkillGrid key={i} color={`_${i+1}`} {...skill} />)
+                    project_skill&& project_skill.map((skill, i) => <SkillGrid key={i} color={`_${i+1}`} {...skill} />)
                 }
 
 

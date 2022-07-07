@@ -8,12 +8,13 @@ import useDebounce from '../../DebouncedSearch';
 import { getRoleSuggestionList, searchSkills, selectRoleSuggestionList, selectSkillList } from '../../redux/Features/MasterSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
-import { addJobSkills, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { addJobSkills, selectLastCompany, selectLastJob, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
 import Control from './Control';
 import Alert from '../Alert/Alert';
 import MultiSelectedOptions from './MultiSelectedOptions';
-
+import parse from 'html-react-parser';
 const DEBOUNCE_DELAY = 600;
+
 export default function Experience5() {
     const dispatch = useDispatch()
     const [form, setForm] = useState({
@@ -24,21 +25,21 @@ export default function Experience5() {
         user_company_job_record_id: '',
 
     })
-    const [selected_options,set_Selected_options] = useState([]) 
+    const [selected_options, set_Selected_options] = useState([])
     const error = useSelector(selectResumeError);
     const message = useSelector(selectResumeMessage);
     const loading = useSelector(selectResumeLoading);
     const [showAlert, setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
-    const resumeInfo = useSelector(selectResumeInfo)
     const skillList = useSelector(selectSkillList)
     const [search, setSearch] = useState('')
 
-    const job_title_id = resumeInfo.company && resumeInfo.company[0].job_role[0].designation_id
     const roleSuggestions = useSelector(selectRoleSuggestionList)
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
-
+    const lastJob = useSelector(selectLastJob)
+    const lastCompany = useSelector(selectLastCompany)
+    const job_title_id = lastJob.designation_id
 
     const searchSkillList = useCallback(
         (keywords) => {
@@ -55,7 +56,7 @@ export default function Experience5() {
     }
     const temp = {
         skill_id: '',
-        skill_name:'',
+        skill_name: '',
         skill_complexity: ''
     }
     const selectSkillHandler = (i) => {
@@ -68,15 +69,15 @@ export default function Experience5() {
         temp.skill_complexity = e.target.value
     }
     const handleAddSkill = () => {
-        set_Selected_options([...selected_options , temp])
+        set_Selected_options([...selected_options, temp])
         document.getElementById('iconinput-Skills').value = '';
         document.getElementById('iconinput-complexity').value = '';
 
 
     }
-    const handleDeleteSkill = (i)=>{
-      const newList =selected_options.filter((x,index)=> index!==i)
-      set_Selected_options(newList) 
+    const handleDeleteSkill = (i) => {
+        const newList = selected_options.filter((x, index) => index !== i)
+        set_Selected_options(newList)
     }
     const handleSuggestion = (value) => {
         console.log(value)
@@ -87,8 +88,9 @@ export default function Experience5() {
         let body = form
         body.job_skills = JSON.stringify(body.job_skills)
         body.user_id = user_id
-        body.job_skills =JSON.stringify( selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity} }))
-
+        body.job_skills = JSON.stringify(selected_options.map((x) => { return { skill_id: x.skill_id, skill_complexity: x.skill_complexity } }))
+        body.user_company_job_record_id = lastJob.company_job_record_id
+        body.user_company_record_id = lastCompany.company_record_id
         try {
             dispatch(addJobSkills({ auth: token, body })).unwrap()
             console.log(form)
@@ -130,26 +132,34 @@ export default function Experience5() {
 
         }
     }, [dispatch, job_title_id, token])
+
     useEffect(() => {
-        if (resumeInfo && (!form.user_company_job_record_id || !form.user_company_record_id)) {
-            let last_Company = lastElement(resumeInfo.company)
-            let user_company_record_id = last_Company.company_record_id
-            let user_company_job_record_id = last_Company.job_role? lastElement(last_Company.job_role).company_job_record_id :''
+        if ((lastJob||lastCompany)&&form.user_company_record_id==='') {
             setForm({
                 ...form,
-                user_company_record_id,
-                user_company_job_record_id
+                role_responsibilities:lastJob.role_responsibilties?parse(lastJob.role_responsibilties):"" ,
+                external_client_desc:lastJob.external_client_desc ,
+                user_company_record_id: lastCompany.company_record_id,
+                user_company_job_record_id:lastJob.company_job_record_id,
+                job_title_id
             })
+            set_Selected_options(lastJob.skills||[])
         }
 
-    }, [resumeInfo,form.user_company_job_record_id,form.user_company_record_id])
+        return () => {
+
+        }
+    }, [lastJob,lastCompany,form])
+
+
     return (
         <>
-            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
+        {console.log(form)}
+            {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
             <h1>So far so good! Now it’s time to flaunt your amazing skills.</h1>
-            <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity'  deleteHandler={handleDeleteSkill} />
+            <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />
             <div className="form-row">
-            
+
                 <SuggestiveInput name='Skills' searchHandler={searchHandler} label='Please enter all the skills you applied' placeholder='Select Skills' width={70} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
 
                 <IconInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' width={20} />
@@ -174,7 +184,7 @@ export default function Experience5() {
                 </div>
             </div>
             <div className="form-row">
-                <IconInput name='external_client_desc' handleChange={handleChange} label='Have you worked for any external clients? If yes, please mention below:' placeholder='Which clients did you work for' width={100} />
+                <IconInput value={lastJob.external_client_desc} name='external_client_desc' handleChange={handleChange} label='Have you worked for any external clients? If yes, please mention below:' placeholder='Which clients did you work for' width={100} />
             </div>
             <Control handleSubmit={handleSubmit} />
         </>
@@ -199,7 +209,4 @@ function SuggestionBox({ handleSelect = () => { }, suggestions = [], name_field 
 
         </div>
     )
-}
-function lastElement(arr){
-    return arr[arr.length - 1]
 }

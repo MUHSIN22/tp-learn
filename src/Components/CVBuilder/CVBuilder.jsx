@@ -4,91 +4,141 @@ import './CVBuilder.css'
 import FormContainer from '../Form/FormContainer'
 import CVcontainer from '../CV/CVcontainer'
 import { useSelector } from 'react-redux';
-import { selectFormId } from '../../redux/Features/ResumeSlice';
+import { selectBio, selectCertificate, selectEducation, selectFirstJob, selectFormId, selectSocilaLinks } from '../../redux/Features/ResumeSlice';
 export default function CVBuilder() {
-    const [progress, setProgress] = useState({
-        'Contact Info' : 'complete',
-        'Experience' : 'active',
-        'Education':'inactive',
-        'Certifications':'inactive',
-        'Additional Skills':'inactive',
-        'Career Objective':'inactive' 
-    })
-    const form_id = useSelector(selectFormId)
-    useEffect(() => {
-      if(form_id<8){
-        console.log('1st');
+  const first_job = useSelector(selectFirstJob)
+  const Education = useSelector(selectEducation)
+  const Certifications = useSelector(selectCertificate)
+  const bio = useSelector(selectBio)
+  const socialLinks = useSelector(selectSocilaLinks)
+  const [progress, setProgress] = useState({
+    'Contact Info': { id:1, state: 'complete' },
+    'Experience': { id:1, state: 'active' },
+    'Education': { id: 9, state: 'inactive' },
+    'Certifications': { id: 10, state: 'inactive' },
+    'Additional Skills': { id: 11, state: 'inactive' },
+    'Career Objective': { id: 15, state: 'inactive' }
+  })
+  const form_id = useSelector(selectFormId)
+  useEffect(() => {
+    if (first_job[0]) {
+      setProgress({
+        ...progress,
+        'Experience': { id:1, state: 'complete' },
+      })
+    }
+    console.log()
+    if (Education) {
+      
+      setProgress({
+        ...progress,
+        Experience: { id:1, state: 'complete' },
+        Education: { id: 9, state: 'complete' },
+      })
+    }
+    if (Certifications) {
+ 
+      setProgress({
+        ...progress,
+        Experience: { id:1, state: 'complete' },
+        Education: { id: 9, state: 'complete' },
+        Certifications: { id: 10, state: 'complete' },
+      })
+    }
+    if (bio.length>0) {
+      setProgress({
+        ...progress,
+        Experience: { id:1, state: 'complete' },
+        Education: { id: 9, state: 'complete' },
+        Certifications: { id: 10, state: 'complete' },
+        'Additional Skills': { id: 11, state: 'complete' },
+      })
+    }
+    if (Object.values(socialLinks).join('').length>0) {
+      setProgress({
+        ...progress,
+        Experience: { id:1, state: 'complete' },
+        Education: { id: 9, state: 'complete' },
+        Certifications: { id: 10, state: 'complete' },
+        'Additional Skills': { id: 11, state: 'complete' },
+        'Career Objective': { id: 15, state: 'complete' }
+      })
+    }
+
+    return () => {
+
+    }
+  }, [ Education, Certifications, bio, socialLinks])
+  useEffect(() => {
+    let x = setTimeout(() => {
+      if (form_id < 8) {
+
         setProgress({
-            ...progress,
-            Experience: 'active'
+          ...progress,
+          Experience: { id:1, state: 'active' }
         })
-      }else if(form_id<9){
-        console.log('2nd',form_id);
+      } else if (form_id < 9) {
+
         setProgress({
-            ...progress,
-            Experience:'complete',
-            Education: 'active'
+          ...progress,
+          Education: { id: 9, state: 'active' }
         })
-      }else if(form_id <10 ){
-        console.log('3rd');
+      } else if (form_id < 10) {
+
         setProgress({
-            ...progress,
-            Experience:'complete',
-            Education:'complete',
-            Certifications: 'active'
+          ...progress,
+          Certifications: { id: 10, state: 'active' },
         })
       }
-      else if(form_id <=13){
-        console.log('4th');
+      else if (form_id <= 13) {
+
         setProgress({
-            ...progress,
-            Experience:'complete',
-            Education:'complete',
-            Certifications:'complete',
-            "Additional Skills": 'active'
+          ...progress,
+          'Additional Skills': { id: 11, state: 'active' },
         })
-      } else if(form_id <16){
-        console.log('5th');
+      } else if (form_id < 16) {
+ 
         setProgress({
-            ...progress,
-            Experience:'complete',
-            Education:'complete',
-            Certifications:'complete',
-            "Additional Skills":'complete',
-            'Career Objective': 'active'
+          ...progress,
+          'Career Objective': { id: 15, state: 'active' }
         })
-      }else if(form_id==16){
-        console.log('6th');
+      } else if (form_id == 16) {
+
         setProgress({
-            ...progress,
-            Experience:'complete',
-            Education:'complete',
-            Certifications:'complete',
-            "Additional Skills":'complete',
-            'Career Objective': 'complete'
+          ...progress,
+          Experience: { id:1, state: 'complete' },
+          Education: { id: 9  , state: 'complete' },
+          Certifications: { id: 10, state: 'complete' },
+          'Additional Skills': { id: 11, state: 'complete' },
+          'Career Objective': { id: 15, state: 'complete' }
         })
       }
-       
-      return () => {
-        
-      }
-    }, [form_id])
+      
+    }, 500);
     
 
-    
+
+    return () => {
+      clearTimeout(x)
+    }
+  }, [form_id])
+
+
+
+
   return (
     <div className="cvbuilder">
-        <div className="step-row">
-            <span></span>
-            {
-                Object.keys(progress).map((step,index)=><Steps name={step} state={progress[step]} index={index+1}/>)
-            }
-        </div>
-        <div className="builder-row">
-        <FormContainer/>
-        <CVcontainer/>
-        </div>
-       
+      <div className="step-row">
+        <span></span>
+        {
+          Object.keys(progress).map((step, index) => <Steps name={step} {...progress[step]} index={index + 1} />)
+        }
+      </div>
+      <div className="builder-row">
+        <FormContainer />
+        <CVcontainer />
+      </div>
+
     </div>
   )
 }
