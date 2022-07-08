@@ -1,3 +1,4 @@
+
 import React from "react";
 import LineGraph from "../Graphs/LineGraph";
 import Scale from "../Graphs/Scale";
@@ -41,7 +42,6 @@ import {
   changeEditPageDetails,
 } from "../../redux/Features/ResumeSlice";
 import EditFormContainer from "../EditForms/EditFromContainer";
-
 export default function Section3() {
   const loading = useSelector(selectResumeLoading);
   const companyInfo = useSelector(SelectCompanyDetails);
@@ -71,7 +71,6 @@ export default function Section3() {
             </button>
           </div>
         </div>
-
         <span className="divider"></span>
         {console.log(companyInfo)}
         {companyInfo && companyInfo.length > 0 ? (
@@ -365,7 +364,6 @@ function ProjectOverview({ projects:{projects,company_job_record_id,company_reco
       <span className="divider"></span>
       <div className="flex-wrap align-stretch g-1">
         <ProjectTile project_name={project_name} client_name={client_name} />
-
         <p>{}</p>
       </div>
       <span className="divider"></span>

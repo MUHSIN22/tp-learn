@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './IconInput.css'
-export default function SuggestiveInput({ type, label, name, selected=()=>{alert('add select handler')}, icon, placeholder, width, validation, suggestions=[], searchHandler, name_field ,defaultValue}) {
+export default function SuggestiveInput({ type, label, name, selected=()=>{alert('add select handler')}, icon, placeholder, width, validation, suggestions=[], searchHandler, name_field,value, defaultValue }) {
     const [showSuggestion,setShowSuggestion] = useState(false);
     function handleSuggestion(index,suggestion_name) {
         document.getElementById(`iconinput-${name}`).value = suggestion_name;

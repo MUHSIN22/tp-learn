@@ -8,7 +8,7 @@ import { ReactComponent as Note } from '../../Assests/icons/note.svg';
 import { ReactComponent as Sms } from '../../Assests/icons/sms.svg';
 import OverviewCard from '../OverviewCard/OverviewCard';
 import { useSelector,useDispatch } from 'react-redux';
-import { selectBio, selectProfilePic, selectResumeDetails, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails } from '../../redux/Features/ResumeSlice';
+import { selectBio, selectProfilePic, selectFirstCompany ,selectResumeDetails, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails } from '../../redux/Features/ResumeSlice';
 import BioLoader from '../Loaders/BioLoader';
 import parser from 'html-react-parser';
 import { FaPencilAlt } from "react-icons/fa";
@@ -22,6 +22,7 @@ export default function Section1() {
 const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
+    const firstCompany = useSelector(selectFirstCompany)
     return (
         <div className="section_1">
             <div className="personal_info">
@@ -34,14 +35,10 @@ const handleEditForms = (data) => {
 
                 </div>
                 <span className='divider'></span>
-                <p>
-                    “Pushing pixels and experiences in digital products for Sebostudio"
-                </p>
-                <span className='divider'></span>
                 <div className="col-100">
-                    <div className="row">
-                        <Note /> <p>Contractual</p>
-                    </div>
+                   {firstCompany&&<div className="row">
+                        <Note /> <p>{firstCompany.nature_of_job_name}</p>
+                    </div>}
                     <div className="row">
                         <Sms /> <p>{contactInfo.email}</p>
                     </div>
@@ -63,6 +60,8 @@ const handleEditForms = (data) => {
                     )}</h1>
                 
                 <p>Content Creator</p>
+                <h1>{contactInfo.name}</h1>
+                {firstCompany&&firstCompany.job_role&&<p>{firstCompany.job_role[0].designation_name}</p>}
                 <span className="divider"></span>
                 {!loading&&bio?<p>{parser(bio)}</p>:<BioLoader/>}
                 <OverviewCard/>

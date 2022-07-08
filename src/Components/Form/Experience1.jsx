@@ -5,13 +5,13 @@ import { getJobNatureList, searchCompany, selectCompanyList, selectJobNatureList
 import { resetError, selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import SuggestiveInput from '../IconInput/SuggestiveInput'
 import useDebounce from '../../DebouncedSearch'
-import { addCompany, nextForm, selectLastCompany, selectResumeError, selectResumeMessage } from '../../redux/Features/ResumeSlice'
+import { addCompany, selectLastCompany, selectNewJob, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
 import Alert from '../Alert/Alert'
 import Control from './Control'
 
 
 const DEBOUNCE_DELAY = 600;
-export default function Experience1({ setProgress }) {
+export default function Experience1() {
     const dispatch = useDispatch();
     const [form, setForm] = useState({
         user_id: '',
@@ -27,9 +27,11 @@ export default function Experience1({ setProgress }) {
     const user_id = useSelector(selectUser_id)
     const message = useSelector(selectResumeMessage);
     const error = useSelector(selectResumeError);
+    const loading = useSelector(selectResumeLoading)
     const [showAlert, setShowAlert] = useState(false);
     const jobNatureList = useSelector(selectJobNatureList)
     const lastCompany = useSelector(selectLastCompany)
+    const newJob = useSelector(selectNewJob)
     const searchCompanyList = useCallback(
         (keywords) => {
             try {
@@ -46,6 +48,7 @@ export default function Experience1({ setProgress }) {
     }
     const selectHandler = (i) => {
         setForm({ ...form, company_id: companyList[i].id })
+        setSearch(companyList[i].name )
     }
     function handleSubmit() {
         let body = form
@@ -82,20 +85,39 @@ export default function Experience1({ setProgress }) {
     useEffect(() => {
         if (message === 'Company Added') {
 
-           // dispatch(nextForm())
+            // dispatch(nextForm())
         }
         return () => {
             dispatch(resetError())
         }
     }, [message, dispatch])
+    useEffect(() => {
+        console.log(lastCompany, form);
+        if (!newJob&&lastCompany) {
+            setForm({
+                ...form,
+                nature_of_job_id: lastCompany.nature_of_job_id,
+                company_id: lastCompany.company_id,
+                user_company_record_id: lastCompany.company_record_id,
+
+            })
+            setSearch(lastCompany.company_name)
+        }
+
+        return () => {
+
+        }
+    }, [newJob,lastCompany])
+
     return (
-        <>   {showAlert && <Alert error={error} message={error ? 'Failed to add Company details' : 'Company details added'} />}
-            {!lastCompany&&<h1 className='text-left'>Let us start with your most recent stint.</h1>}
+        <>
+            {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
+            {!lastCompany && <h1 className='text-left'>Let us start with your most recent stint.</h1>}
             <div className="form-row">
-                <SuggestiveInput icon={<></>} name={'company_name'} placeholder={'Company / Organization Name'} label='Company Name' width={98} suggestions={companyList} name_field='name' searchHandler={searchHandler} selected={selectHandler} />
+                <SuggestiveInput value={search} icon={<></>} name={'company_name'} placeholder={'Company / Organization Name'} label='Company Name' width={98} suggestions={companyList} name_field='name' searchHandler={searchHandler} selected={selectHandler} />
             </div>
             <div className="form-row">
-                <CardRadioGroup label={'Define the nature of your job?'} name={'nature_of_job_id'} state={form} setState={setForm} option={jobNatureList} name_field={'job_name'} />
+                <CardRadioGroup autofill  label={'Define the nature of your job?'} name={'nature_of_job_id'} state={form} setState={setForm} option={jobNatureList} name_field={'job_name'} />
             </div>
 
             <span className='divider'></span>

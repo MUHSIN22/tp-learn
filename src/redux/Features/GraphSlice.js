@@ -92,4 +92,5 @@ export const selectKeySkills = (state) => state.graphs.graph?.key_skills;
 export const selectSalaryGraph = (state) => state.graphs.graph?.salary_management_graph;
 export const selectCompanyWise = (state) => state.graphs?.companyGraph;
 export const selectCompanyWise_graph_data = (state) => state.graphs.graph?.company_wise_chart_data
+export const selectJObSalaryTimeline = (state) => state.graphs.graph.company_wise_chart_data;
 export default graphSlice.reducer;

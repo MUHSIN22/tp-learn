@@ -30,7 +30,7 @@ function App() {
   const reload = useSelector(selectReload)
   useEffect(() => {
     if(auth.authToken&&reload){
-      console.log('app.js resume info called')
+      console.log('Reload Resume Update')
       try {
         dispatch(resumeInfo({user_id:auth.user_id,auth:auth.authToken})).unwrap()
       } catch (error) {
@@ -38,7 +38,7 @@ function App() {
       }
     }
     if(auth.authToken&&reload){
-      console.log('app.js resume info called')
+      console.log('Reload Graph Update')
       try {
         dispatch(graphDetails({user_id:auth.user_id,auth:auth.authToken})).unwrap()
       } catch (error) {
@@ -50,6 +50,30 @@ function App() {
       
     }
   }, [auth,form_id,reload,dispatch])
+  
+  useEffect(() => {
+
+    if(auth.authToken&&!form_id){
+      console.log('Auth Resume Reload')
+      try {
+        dispatch(resumeInfo({user_id:auth.user_id,auth:auth.authToken})).unwrap()
+      } catch (error) {
+          console.log(error)
+      }
+    }
+    if(auth.authToken&&!form_id){
+      console.log('Auth Graph Reload')
+      try {
+        dispatch(graphDetails({user_id:auth.user_id,auth:auth.authToken})).unwrap()
+      } catch (error) {
+          console.log(error)
+      }
+    }
+  
+  
+    return () => {
+    }
+  }, [auth,form_id])
   
   useEffect(() => {
       dispatch(resetError())

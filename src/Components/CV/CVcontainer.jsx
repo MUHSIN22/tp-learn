@@ -26,7 +26,7 @@ export default function CVcontainer({ progress }) {
       <Section3 />
       <Cerification />
       <Education />
-      <Portfolio />
+      {false&&<Portfolio />}
       <Recommendation />
       <div className="flex-row-between">
         <Hobby />

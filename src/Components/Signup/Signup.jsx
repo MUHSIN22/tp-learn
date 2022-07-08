@@ -12,7 +12,7 @@ import IconSelect from '../IconInput/IconSelect';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser, selectAutheError, selectAuthenticationStatus, selectAuthMessage, selectReg_id, setError } from '../../redux/Features/AuthenticationSlice';
+import { registerUser, selectAutheError, selectAuthenticationStatus, selectAuthLoading, selectAuthMessage, selectReg_id, setError } from '../../redux/Features/AuthenticationSlice';
 import { getCountryCodeList, getGenderList, selectCountryCodes, selectGenderList } from '../../redux/Features/MasterSlice';
 
 import isEmail from 'validator/lib/isEmail';
@@ -24,6 +24,7 @@ export default function Signup() {
     const genderList = useSelector(selectGenderList)
     const countryCodeList = useSelector(selectCountryCodes)
     const authStatus = useSelector(selectAuthenticationStatus)
+    const loading = useSelector(selectAuthLoading);
     const message = useSelector(selectAuthMessage);
     const reg_id = useSelector(selectReg_id);
     const error = useSelector(selectAutheError)
@@ -101,29 +102,28 @@ export default function Signup() {
     return (
         <div className="login">
             <div className="form-container col-30">
-                {console.log(form)}
                 <form>
-                    {error && <Alert error={error} message={'Failed to Create Account'} />}
+                {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: Object.values(message)[0]} />}
                     <h1>Create Account</h1>
                     <div className="form-row">
-                        <IconInput icon={<User />} handleChange={handleChange} name="fname" type='text' label="First Name" placeholder="John" width={50} validation={message.fname} />
-                        <IconInput icon={<User />} handleChange={handleChange} name="lname" type='text' label="Last Name" placeholder="Doe" width={50} validation={message.lname} />
+                        <IconInput icon={<User />} handleChange={handleChange} name="fname" type='text' label="First Name" placeholder="John" width={50} validation={message&&message.fname} />
+                        <IconInput icon={<User />} handleChange={handleChange} name="lname" type='text' label="Last Name" placeholder="Doe" width={50} validation={message&&message.lname} />
                     </div>
                     <div className="form-row">
-                        <IconInput icon={<Mail />} handleChange={handleChange} name="email" type='email' label="E-Mail Address" placeholder="John123@abc.com" width={100} validation={message.email} />
+                        <IconInput icon={<Mail />} handleChange={handleChange} name="email" type='email' label="E-Mail Address" placeholder="John123@abc.com" width={100} validation={message&&message.email} />
                     </div>
                     <div className="flex-row-start align-end g-3">
-                        <IconSelect name='country_code' icon={<USFlag />} label={' '} handleChange={handleChange} width={20} options={countryCodeList} name_field='country_code' validation={message.country_code} />
-                        <IconInput name='mobile_no' icon={<Phone />} handleChange={handleChange} label='Phone Number' placeholder={'8955-656-989'} width={70} validation={message.mobile_no} />
+                        <IconSelect name='country_code' icon={<USFlag />} label={' '} handleChange={handleChange} width={20} options={countryCodeList} name_field='country_code' validation={message&&message.country_code} />
+                        <IconInput name='mobile_no' icon={<Phone />} handleChange={handleChange} label='Phone Number' placeholder={'8955-656-989'} width={70} validation={message&&message.mobile_no} />
                     </div>
                     <div className="form-row">
-                        <IconInput icon={<Calendar />} handleChange={handleChange} name="dob" type='date' label="Date of Birth" placeholder="" width={100} validation={message.dob} />
+                        <IconInput icon={<Calendar />} handleChange={handleChange} name="dob" type='date' label="Date of Birth" placeholder="" width={100} validation={message&&message.dob} />
                     </div>
                     <div className="form-row">
                         <IconSelect icon={<User />} handleChange={handleChange} name="gender" label="Gender" width={100} options={genderList} name_field='gender_name' />
                     </div>
                     <div className="form-row">
-                        <IconAutoComplete icon={<Location />} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={100} validation={message.address} />
+                        <IconAutoComplete icon={<Location />} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={100} validation={message&&message.address} />
                     </div>
                     <div className="form-row">
                         <button onClick={handleSubmit} className='btn primary'>Continue <ChevronRight /></button>
