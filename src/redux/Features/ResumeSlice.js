@@ -797,23 +797,9 @@ export const selectSocilaLinks = (state) => {
             books:record.books,
             any_other:record.any_other
         }}
-export const selectSocialContribution = (state) => state.resume.recordDetails.resume_info.additional_skill;   
-export const SelectDocuments = (state) => state.resume.recordDetails.resume_info.upload_photo_media;  
-export const selectVideo = (state)=>   state.resume.recordDetails.resume_info.video_from_url;
 export const selectToEdit = (state)=> state.resume.toEdit;
 export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
-export const selectSocilaLinks = (state)=>  { 
-    let record =  state.resume.recordDetails.resume_info
-   return {
-    facebook: record.link_facebook,
-    twitter: record.link_twitter,
-    instagram: record.link_instagram,
-    linkedin: record.link_linkedin,
-    other: record.link_other
-   }
-}
 export const getPageOn = (state) => state.resume.pageOn;     
-export const { nextForm, prevForm, setForm,reload } = resumeSlice.actions;
 
 export const selectNewJob = (state)=> state.resume.newJob
 export const selectNewEducation = (state)=> state.resume.newEducation
