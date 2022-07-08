@@ -23,7 +23,9 @@ export default function Certificate1({data}) {
         certificate_project_info,
         certificate_file,
         is_online,
-        certification_record_id} = data;
+        certification_record_id,
+        skills
+    } = data;
     const [form, setForm] = useState({
         project_name: project_name || 1,
         institute_name: institute_name || '',
@@ -33,8 +35,7 @@ export default function Certificate1({data}) {
         certificate_project_info: certificate_project_info,
         certificate_file: null,
         is_online: is_online ? 'yes' : 'no',
-        certification_record_id: certification_record_id,
-
+        certificate_record_id: certification_record_id
     })
     const [file, setFile] = useState(null);
     const error = useSelector(selectResumeError);
@@ -84,6 +85,9 @@ export default function Certificate1({data}) {
             obj.skill_name = skill.skill_name
             return obj
         })
+        if(body.certificate_file=="" || !body.certificate_file){
+            delete body.certificate_file;
+        }
         let form_data = JsonToFormData(body)
           try {
               dispatch(addCertification({ auth: token, body:form_data })).unwrap()
@@ -107,13 +111,30 @@ export default function Certificate1({data}) {
     )
     useEffect(() => {
         console.log(debouncedSearchState)
-        
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {
 
         }
     }, [debouncedSearchState, searchSkillList, dispatch])
+
+    useEffect(() => {
+        console.log(debouncedSearchState)
+        if(skills_ids?.length>0 && skills?.length>0){
+            let defaultSkills = skills_ids.map((skill_id,i)=>{
+                let obj = {}
+                obj.skill_id = 3;
+                obj.skill_name = skills[i];
+                return obj
+            })
+            set_Selected_options([...selected_options,...defaultSkills]);
+        }
+        if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
+
+        return () => {
+
+        }
+    }, [])
     return (
         <>
             <h1>Add any certification courses/trainings you have done</h1>
@@ -133,7 +154,7 @@ export default function Certificate1({data}) {
                 <SuggestiveInput name='Skills' searchHandler={searchHandler} label={`Key skills learned`} placeholder='Skills mastered in this course' width={100} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
             </div>
             <div className="form-row">
-                <IconInput name='certificate_project_info' handleChange={handleChange} label='Projects, if any' placeholder='Tell us how you applied those skills?' width={100} />
+                <IconInput name='certificate_project_info' handleChange={handleChange} label='Projects, if any' placeholder='Tell us how you applied those skills?' width={100} defaultValue={form.certificate_project_info}/>
             </div>
             <div className="form-row">
                 <div className="col-100 align-start g-0-5">
@@ -145,7 +166,7 @@ export default function Certificate1({data}) {
             <div className="flex-row-end">
                 <button onClick={handleSubmit} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more certifications</button>
             </div>
-            <Control handleSubmit={() => dispatch(reload())} />
+            <Control handleSubmit={() => dispatch(reload())}/>
         </>
     )
 }

@@ -42,7 +42,7 @@ import {
 } from "../../redux/Features/ResumeSlice";
 import EditFormContainer from "../EditForms/EditFromContainer";
 
-export default function Section3() {
+export default function Section3Review() {
   const loading = useSelector(selectResumeLoading);
   const companyInfo = useSelector(SelectCompanyDetails);
   const [index, setIndex] = useState(0);

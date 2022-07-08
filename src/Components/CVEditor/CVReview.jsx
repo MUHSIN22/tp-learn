@@ -4,27 +4,27 @@ import FormContainer from "../Form/FormContainer";
 import "./CVReview.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Cerification from "../CV/CerificationReview";
-import Docs from "../CV/Docs";
+import DocsReview from "../CV/DocsReview";
 import EducationReview from "../CV/EducationReview.jsx";
 import Hobby from "../CV/Hobby";
 import Languages from "../CV/Languages";
 import Portfolio from "../CV/Portfolio";
 import Recommendation from "../CV/Recommendation";
 import Section1 from "../CV/Section1";
-import Section2 from "../CV/Section2";
+import Section2Review from "../CV/Section2Review";
 import Section3 from "../CV/Section3";
 import SelfDeclaration from "../CV/SelfDeclaration";
 import SocialContribution from "../CV/SocialContribution";
 import SocialMedia from "../CV/SocialMedia";
-import Videos from "../CV/Videos";
+import VideosReview from "../CV/VideosReview";
 import { FaEdit, FaShareAlt } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from 'react-redux';
-import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails } from '../../redux/Features/ResumeSlice';
 import jsPDF from  "jspdf";
+import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails,changePageOn,getPageOn } from '../../redux/Features/ResumeSlice';
 export default function CVBuilder() {
-  const [page, setPage] = useState("/Experience")
+  const page = useSelector(getPageOn)
   const [isShow, setIsshow] = useState(false);
   const [progress, setProgress] = useState(0);
   const dispatch = useDispatch()
@@ -48,7 +48,8 @@ export default function CVBuilder() {
 
   const pull_data = (data) => {
     console.log(data,"data")
-    setPage(data)
+    dispatch(changePageOn(data));
+    
   }
 
   const floatingButton = (
@@ -85,15 +86,17 @@ export default function CVBuilder() {
           </div>
           {page === "/personal-information" && <Section1 />}
           {page === "/Experience" && <Section3 />}
-          {page === "/EducationReview" && <EducationReview />}
-          {page === "/Docs" && <Docs />}
+          {page === "/Education" && <EducationReview />}
           {page === "/languages" && <Languages />}
           {page === "/hobbies" && <Hobby />}
-          {page === "/Videos" && <Videos />}
-          {page === "/Timeline" && <Section2 />}
+          {page === "/Videos" && <VideosReview />}
+          {page === "/career-timeline" && <Section2Review />}
           {page === "/SocialMedia" && <SocialMedia />}
-          {page === "/Videos" && <Videos />}
           {page === "/Certification" && <Cerification />}
+          {page==="/SocialContribution" && <SocialContribution />}
+          {page==="/Recommendation"  && <Recommendation />}
+          {page==='/Docs' && <DocsReview />}
+          {page==='/self-declaration' && <SelfDeclaration />}
         </div>
       </div>
     </div>

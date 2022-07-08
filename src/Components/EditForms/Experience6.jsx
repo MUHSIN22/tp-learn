@@ -131,7 +131,7 @@ export default function Experience6({data}) {
     return (
         <>  
         {showAlert&&!loading&&<Alert error={error} message={error?'Failed to update Project': 'Project updated'}/>}
-            <h1>Now the most amazing part! If you have worked on any projects in this job role, please mention the skills you specifically used, how you applied them and its complexity level.</h1>
+            {/* <h1>Now the most amazing part! If you have worked on any projects in this job role, please mention the skills you specifically used, how you applied them and its complexity level.</h1> */}
             <div className="card g-1">
                 <div className="form-row">
                     <IconInput name='project_name' handleChange={handleChange} label='Project Name' placeholder='Name of the project.' width={45} defaultValue={form.project_name} />

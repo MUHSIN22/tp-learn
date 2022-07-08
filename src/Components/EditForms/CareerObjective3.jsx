@@ -9,13 +9,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSocialLinks, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
-export default function CareerObjective3() {
+export default function CareerObjective3({data}) {
+    console.log("=============================================nnkjkff",data)
     const dispatch = useDispatch()
     const [form, setForm] = useState({
-        link_facebook:'',
-        link_twitter:'',
-        link_instagram:'',
-        link_linkedin:'',
+        link_facebook:data.facebook || '',
+        link_twitter:data.twitter || '',
+        link_instagram:data.instagram || '',
+        link_linkedin:data.linkedin || '',
         link_other:'',
     })
     const error = useSelector(selectResumeError);
@@ -47,15 +48,12 @@ export default function CareerObjective3() {
     }
     return (
         <>
-            <h1 className='text-left'>
-            <span>Voila!</span> Take a moment to clap for yourself a little since you made it this far. Here, share your social media links and move on to the last step.
-            </h1>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Social Links' : 'Social Links added'} />}
+            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to update Social Links' : 'Social Links updated'} />}
             <div className="form-row">
-                <SocialInput name='link_facebook'  handleChange={handleChange} label={'Facebook'} icon={<Facebook></Facebook>}/>
+                <SocialInput name='link_facebook'  handleChange={handleChange} label={form.link_facebook!=='' ? form.link_facebook : 'Facebook'} icon={<Facebook></Facebook>}/>
             </div>
             <div className="form-row">
-                <SocialInput name='link_twitter'  handleChange={handleChange} label={'Twitter'} icon={<Twitter></Twitter>}/>
+                <SocialInput name='link_twitter'  handleChange={handleChange} label={form.link_twitter!=='' ? form.link_twitter : 'Twitter'} icon={<Twitter></Twitter>}/>
             </div>
             <div className="form-row">
                 <SocialInput name='link_instagram' handleChange={handleChange} label={'Instagram'} icon={<Instagram></Instagram>}/>
