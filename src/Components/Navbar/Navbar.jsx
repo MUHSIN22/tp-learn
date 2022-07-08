@@ -6,27 +6,37 @@ import { ReactComponent as User } from '../../Assests/icons/user.svg';
 import './Navbar.css'
 import { useSelector } from 'react-redux';
 import { selectUserFirstName } from '../../redux/Features/ResumeSlice';
-export default function Navbar() {
+import { useEffect } from 'react';
+import { useState } from 'react';
+export default function Navbar(props) {
   const user = useSelector(selectUserFirstName)
   // const history =useHistory()
+
   let navigate = useNavigate();
   
   const rendertomyprofile=()=>{
     navigate('/MyProfile')
   }
+ 
+
+  
   return (
-    <nav>
-        <div className="logo">
-            <img src={Logo} alt="" />
-        </div>
-       {user&& <div className="controls">
-        <span className='flex-row-start align-center g-0-5' onClick={()=>rendertomyprofile()}><button className='profile'>
-          
-          <User/>
-          </button>{user}</span>
-          
-          <button className='btn tirtiary'>Save As Draft</button>
-        </div>}
-    </nav>
+    <>
+     {
+      window.location.pathname !== '/' ?  <nav>
+      <div className="logo">
+          <img src={Logo} alt="" />
+      </div>
+     {user&& <div className="controls">
+      <span className='flex-row-start align-center g-0-5' onClick={()=>rendertomyprofile()}><button className='profile'>
+        
+        <User/>
+        </button>{user}</span>
+        
+        <button className='btn tirtiary'>Save As Draft</button>
+      </div>}
+  </nav>:""
+    }
+    </>
   )
 }

@@ -90,14 +90,14 @@ function App() {
       <Navbar/>
       {/* <Sidebar/> */}
       <Routes>
-       <Route path='/' element={<PreventedRoute><Login/></PreventedRoute> }/>
+       <Route path='/login' element={<PreventedRoute><Login/></PreventedRoute> }/>
        <Route path='/OTP-login' element={<PreventedRoute><OTPLogin/></PreventedRoute>}/>
        <Route path='/signup' element={<PreventedRoute><Signup/></PreventedRoute>}/>
        <Route path='/OTP-signup' element={<PreventedRoute><OTPSignup/></PreventedRoute>}/>
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
-       <Route path='/landing' element={<Landing/>}/>
+       <Route path='/' element={<Landing/>}/>
 
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>
@@ -105,7 +105,7 @@ function App() {
        <Route path='/dummy' element={<DummyForm/>}/>
        <Route path='/cs' element={<CognitiveSkills/>}/>
        <Route path='/resume' element={<Resume/>}/>
-       <Route path='*' element={<NotFound/>}/>
+       <Route element={<NotFound/>}/>
       </Routes>
     </div>
   );

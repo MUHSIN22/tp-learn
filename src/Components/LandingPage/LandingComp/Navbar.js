@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Logo from "../../../Assests/logo.svg";
 import bannerMain from "../../../Assests/Svgs/FinalSVGFile.svg";
 
@@ -18,16 +19,16 @@ const Navbar = () => {
             >
               <ul className="navbar-nav d-flex justify-between ">
                 <li className="nav-item ">
-                  <button className="button_slide nav-link slide_right login_nav_btn">
+                  <Link to="/login" className="button_slide nav-link slide_right login_nav_btn">
                     Login{" "}
-                  </button>
+                  </Link>
                   <br /> <br />
                   <br />
                 </li>
                 <li className="nav-item ">
-                  <button className="button_slide nav-link slide_right create_new_btn">
+                  <Link to='/signup' className="button_slide nav-link slide_right create_new_btn">
                     Create a new Account
-                  </button>
+                  </Link>
                 </li>
               </ul>
             </div>
