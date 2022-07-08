@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useRef} from "react";
 import { FaFileContract } from "react-icons/fa";
 import { BiMessageMinus } from "react-icons/bi";
 import { BsGenderMale,BsFacebook,BsTwitter ,BsLinkedin} from "react-icons/bs";
@@ -40,7 +40,9 @@ import {
 } from "../../redux/Features/ResumeSlice";
 import { selectKeySkills } from '../../redux/Features/GraphSlice'
 import { useSelector } from "react-redux";
-function Resume() {
+import html2canvas from "html2canvas";
+import jsPDF from  "jspdf";
+const  Resume =({newRef})=>{
   const companyInfo = useSelector(SelectCompanyDetails);
   const profile = useSelector(selectProfilePic);
   const bio = useSelector(selectBio);
@@ -54,14 +56,44 @@ function Resume() {
   const socialLink = useSelector(selectSocilaLinks)
   const socialContribution = useSelector(selectSocialContribution);
 
-  useEffect(() => {
-    console.log("kkkkkkkkkkkkkkkk",resumeDetails)
-  }, [])
-  
-  
+React.useEffect(() => {
+  //  template = document.getElementById('tpcv');
+ newRef.current = exec
+}, [])
+
+// React.useEffect(() => {
+//   exec()
+// }, [])
+ 
+const exec = () => {
+  const template = document.getElementById('tpcv');
+  html2canvas(template,{
+    useCORS: true, 
+    logging: true,
+    letterRendering: 1,
+    allowTaint: false})
+  .then((canvas) => {
+    const componentWidth = template.offsetWidth
+    const componentHeight = template.offsetHeight
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF(
+      "p", "mm", "a4"
+    );
+    pdf.internal.pageSize.width = componentWidth
+    pdf.internal.pageSize.height = componentHeight
+    pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight);
+    // pdf.output('dataurlnewwindow');
+    pdf.save("download.pdf");
+    // window.close()
+  })
+  // window.close()
+
+}
+
+
 
   return (
-    <div className="mt-5" id="tpcv">
+    <div className="mt-5" id="tpcv" >
       <div className="d-flex">
         <div className="col-30">
           <img className="Profile_resume_img" src={profile} />

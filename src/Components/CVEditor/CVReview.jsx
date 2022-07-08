@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import "../CVBuilder/CVBuilder.css";
 import FormContainer from "../Form/FormContainer";
 import "./CVReview.css";
@@ -24,9 +24,9 @@ import { FiDownload } from "react-icons/fi";
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from 'react-redux';
 import jsPDF from  "jspdf";
+import html2canvas from 'html2canvas';
 import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails,changePageOn,getPageOn } from '../../redux/Features/ResumeSlice';
-import { render } from 'react-dom';
-import { renderToString } from 'react-dom/server';
+import { useNavigate } from "react-router-dom";
 export default function CVBuilder() {
   const page = useSelector(getPageOn)
   const [isShow, setIsshow] = useState(false);
@@ -40,20 +40,15 @@ export default function CVBuilder() {
     setIsshow(true);
     console.log(isShow);
   };
+const newRef= React.useRef();
+const histor = useNavigate()
 
-  const generatePdf = () => {
 
-    const string = renderToString(<ResumeDownload />);
-    const pdf = new jsPDF();
-    pdf.fromHTML(string);
-    pdf.save('pdf')
+const generatePdf = () => {
+  // histor('/resume');
+  // window.open('http://localhost:3000/resume', '_blank', 'toolbar=0,location=0,menubar=0');
 
-    // let doc = new jsPDF("p","pt","a4")
-    // doc.html(document.querySelector("#hello"),{
-    //   callback: (pdf) => {
-    //     pdf.save("talentplace.pdf");
-    //   }
-    // });
+  return newRef.current();
   };
 
   const pull_data = (data) => {
@@ -72,7 +67,7 @@ export default function CVBuilder() {
         <div className="" onClick={handleEdit}>
           <FaEdit />
         </div>
-        <div className="" onClick={()=>generatePdf()}>
+        <div className="" onClick={()=>newRef.current()()}>
           <FiDownload />
         </div>
         <div className="">
@@ -108,11 +103,11 @@ export default function CVBuilder() {
           {page==="/Recommendation"  && <Recommendation />}
           {page==='/Docs' && <DocsReview />}
           {page==='/self-declaration' && <SelfDeclaration />}
-          <div id="hello" style={{visibility:"hidden"}}>
-            <ResumeDownload />
+          <div id="hello" style={{position: "fixed",padding: 0,clip: "rect(0 0 0 0)","overflow": "hidden"}}>
+          <ResumeDownload newRef={newRef}/>
           </div>
           
-        </div>
+        </div> 
       </div>
     </div>
   );
