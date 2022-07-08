@@ -20,11 +20,8 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
 import CVReview from './Components/CVEditor/CVReview'
 import DummyForm from './Components/EditForms/ProfilePicture'
-<<<<<<< HEAD
 import CognitiveSkills from './Components/Form/CognitiveSkills';
-=======
 import Resume from './Components/ResumeTemplate/Resume';
->>>>>>> 8fc106b2b4bebe27f16077757d41803a9dc93b0c
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
