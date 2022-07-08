@@ -207,6 +207,7 @@ export default function Memberships() {
                   border: "1px solid white",
                   "boxShadow": "1px 0px 4px 0 white",
                 }}
+                onClick={()=> displayRazorpay(500)}
               >
                 Monthly
               </button>
@@ -264,6 +265,7 @@ export default function Memberships() {
                 type="button"
                 className="btn-square orange mt-3"
                 style={{ "boxShadow": "0px 7px 12px 0 #ec957c" }}
+                onClick={()=> displayRazorpay(900)}
               >
                 Monthly
               </button>
