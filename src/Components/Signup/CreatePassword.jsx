@@ -3,7 +3,7 @@ import loginVector from '../../Assests/CreatePass-vector.png'
 import { ReactComponent as Password } from '../../Assests/icons/lock.svg';
 import IconPasswordInput from '../IconInput/IconPasswordInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPassword, selectAutheError, selectAuthMessage, selectReg_id, setError } from '../../redux/Features/AuthenticationSlice';
+import { createPassword, selectAutheError, selectAuthLoading, selectAuthMessage, selectReg_id, setError } from '../../redux/Features/AuthenticationSlice';
 import isStrongPassword from 'validator/lib/isStrongPassword'
 import Alert from '../Alert/Alert';
 const tooltip = 'Must be a minimum of eight characters long and contain at least one uppercase and one lowercase letter (A, z), one numeric character (0-9), and one special character (such as !, %, @, or #).'
@@ -13,10 +13,11 @@ export default function CreatePassword() {
         confirm_password: ''
     })
     const message = useSelector(selectAuthMessage);
+    const loading = useSelector(selectAuthLoading)
     const dispatch = useDispatch()
     const reg_id = useSelector(selectReg_id)
     const error = useSelector(selectAutheError)
-
+    
     function handleChange(evt) {
         const value = evt.target.value;
         setForm({
@@ -40,16 +41,16 @@ export default function CreatePassword() {
         <div className="login">
             <div className="col-30 justify-center">
                 <form>
-                {error&&<Alert error={error} message={'Failed to create password'}/>}
+                {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: Object.values(message)[0]} />}
                     <h1>Set your password here</h1>
                     <div className="form-row">
-                        <IconPasswordInput name={'password'} handleChange={handleChange} placeholder='Password' label='Create a strong password' icon={<Password />} tooltip={tooltip} width='95' validation={message.password} />
+                        <IconPasswordInput name={'password'} handleChange={handleChange} placeholder='Password' label='Create a strong password' icon={<Password />} tooltip={tooltip} width='95' validation={message&&message.password} />
                     </div>
                     <div className="form-row">
-                        <IconPasswordInput name={'confirm_password'} handleChange={handleChange} placeholder='Confirm Password' label='Type your password again' icon={<Password />} width='95' validation={message.confirm_password} />
+                        <IconPasswordInput name={'confirm_password'} handleChange={handleChange} placeholder='Confirm Password' label='Type your password again' icon={<Password />} width='95' validation={message&&message.confirm_password} />
                     </div>
                     <div className="form-row my-2">
-                        <button onClick={handleSubmit} className="btn primary">Register</button>
+                        <button onClick={handleSubmit} className="btn primary">{loading?'Loading...':"Register"}</button>
                     </div>
 
 

@@ -21,7 +21,7 @@ export default function Countdown({minutes=0,seconds=0,trigger=()=>{}}) {
             let seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
             // Display the result in the element with id="demo"
-           let countdown =  minutes + ":" + seconds;
+           let countdown = addZero( minutes) + ":" + addZero(seconds);
 
             // If the count down is finished, write some text
             if (distance < 0) {
@@ -43,4 +43,11 @@ export default function Countdown({minutes=0,seconds=0,trigger=()=>{}}) {
   return (
     <>{timer}</>
   )
+}
+function addZero(num){
+  if(String(num).length<2){ 
+    return '0'+String(num)
+  }else{
+    return String(num)
+  }
 }

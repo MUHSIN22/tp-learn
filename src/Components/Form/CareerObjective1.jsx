@@ -3,7 +3,7 @@ import DragDropInput from '../DragDropInput/DragDropInput'
 import IconInput from '../IconInput/IconInput'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { nextForm, reload, selectResumeError, selectResumeLoading, selectResumeMessage, uploadPhotomedia } from '../../redux/Features/ResumeSlice';
+import { reload, SelectDocuments, selectNewPhotoMedia, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewPhotoMedia, uploadPhotomedia } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import Control from './Control';
@@ -14,7 +14,6 @@ export default function CareerObjective1() {
        title:'',
        description:'',
        file_url:'',
-       file_path:null,
        user_resume_photo_media_id:''
 
     })
@@ -24,13 +23,18 @@ export default function CareerObjective1() {
     const [showAlert, setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
+    const photoMedia = useSelector(SelectDocuments)
+    const newPhotomedia = useSelector(selectNewPhotoMedia)
+    const [reloadFlag, setReloadFlag] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        body.file_path = file
+        if(file) body.file_path = file
+        
         let form_Data = JsonToFormData(body)
         try {
+            dispatch(toggleNewPhotoMedia(true))
             dispatch(uploadPhotomedia({ auth: token, body:form_Data })).unwrap()
             console.log(form)
         } catch (error) {
@@ -47,31 +51,71 @@ export default function CareerObjective1() {
             [evt.target.name]: value
         });
     }
+    useEffect(() => {
+        console.log(photoMedia,newPhotomedia)
+      if(!newPhotomedia &&photoMedia&&photoMedia.length>0&&form.user_resume_photo_media_id===""){
+        let lastMedia = photoMedia[photoMedia.length-1]
+        console.log(lastMedia)
+        setForm({
+            ...form,
+            title:lastMedia.title,
+            description: lastMedia.description,
+            file_url:lastMedia.file_url||'  ',
+            
+            user_resume_photo_media_id:lastMedia.user_resume_photo_media_id,
 
+        })
+      }else{
+        setForm({
+            title:'',
+            description:'',
+            file_url:'',
+           
+            user_resume_photo_media_id:''
+     
+        })
+      }
+      
+      return () => {
+        
+      }
+    }, [newPhotomedia,photoMedia,loading])
+    useEffect(()=>{
+
+        if(reloadFlag&&!loading){
+            setReloadFlag(false)
+          dispatch(reload())
+        }
+      },[reloadFlag,loading])
    
     return (
         <>
             <h1 className='text-left'>
                 The world has to know how talented you are. Upload docs, PDFs, Image files, video links, etc. to showcase your portfolio.
             </h1>
-            {showAlert && !loading && <Alert error={error} message={error ? 'Failed to add Media' : 'Media added'} />}
+            {showAlert &&!loading&&<Alert error={error} message={error&&message ? Object.values(message): message} />}
             <div className="form-row">
-                <IconInput name='title' handleChange={handleChange} label='Title' placeholder='eg Resume' width={100} />
+                <IconInput value={form.title} name='title' handleChange={handleChange} label='Title' placeholder='eg Resume' width={100} />
             </div>
             <div className="form-col align-start g-0-5">
                 <label htmlFor="">Upload file</label>
                 <DragDropInput file={file} setFile={setFile} />
             </div>
             <div className="form-row">
-                <IconInput name='file_url' handleChange={handleChange} label='Or upload  from a URL' placeholder='Add your video url' width={100} />
+                <IconInput value={form.file_url} name='file_url' handleChange={handleChange} label='Or upload  from a URL' placeholder='Add your video url' width={100} />
             </div>
             <div className="form-row">
-                <IconInput name='description' handleChange={handleChange} label='Description' placeholder='' width={100} />
+                <IconInput value={form.description} name='description' handleChange={handleChange} label='Description' placeholder='' width={100} />
             </div>
             <div className="flex-row-end">
                 <button onClick={handleSubmit}  className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more</button>
             </div>
-            <Control handleSubmit={()=>dispatch(reload())} />
+            <Control handleSubmit={(e)=>{
+                
+                handleSubmit(e)
+                setReloadFlag(true)
+                dispatch(toggleNewPhotoMedia(false))
+                }} />
         </>
     )
 }

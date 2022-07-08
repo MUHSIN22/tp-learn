@@ -5,7 +5,7 @@ const colors = ['#EF6239', '#219FFF', '#FFA114','#EF6239', '#219FFF', '#FFA114',
 export default function JobTimeline({ jobs = [], skills=[]}) {
   let current_year = new Date().getFullYear()
   
-  let start_year = jobs[0].timeline[0].job_start_date.split('-')[2]
+  let start_year =jobs[0]&&jobs[0].timeline[0].job_start_date.split('-')[2]
   let year_list = [start_year]
   while (start_year <= current_year) {
     year_list.push(parseInt(start_year))
@@ -83,7 +83,7 @@ function Skill({ rows, start_date='', end_date='', i,j, year_list }) {
   let end_month = parseInt(end_date.split('-')[1])
   let width = 12 * (end_year - start_year) + (end_month - start_month)
   let pos_y =rows-i
-  console.log(start_date,end_date)
+  //console.log(start_date,end_date)
   useEffect(() => {
     document.getElementById(`skill${i}${j}`).style.gridArea = `${pos_y}/${position_x+12}/${pos_y + 1}/ ${(position_x) + width+24}`
     //console.log(`${position_y} / ${i+1} / ${(position_y)+1} / ${i+2}`)

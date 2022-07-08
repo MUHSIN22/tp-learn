@@ -5,8 +5,8 @@ const ExperienceLoader = (props) => (
     <ContentLoader
         speed={2}
         width={"100%"}
-        height={"100%"}
-        viewBox="0 0 700 425"
+        height={325}
+        viewBox="0 0 700 325"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
         {...props}

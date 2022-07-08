@@ -181,6 +181,18 @@ font-family: 'Poppins', sans-serif;;
   border-radius: 4rem;
   font-size: 1.1rem;
   text-decoration: none;
+  transition: 0.3s;
+}
+.btn.disabled{
+  opacity: 0.8;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.btn:hover{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition: 0.1s;
+}
+.btn:active{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .btn-fit{
   width: fit-content;
@@ -218,6 +230,7 @@ font-family: 'Poppins', sans-serif;;
   background-color: #21CE93;
   color: #fff;
   align-items: center;
+  cursor: pointer;
 
 }
 .secondary{

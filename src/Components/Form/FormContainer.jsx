@@ -57,26 +57,10 @@ const setProgress = (id)=>{
       {progress === 14 && <AdditionalSkills3  />}
       {progress === 15 && <CareerObjective1  />}
       {progress === 16 && <CareerObjective2  />}
-      {progress === 17 && <CareerObjective3  />}
+      {progress> 16 && <CareerObjective3  />}
 
 
 
-
-      { /*
-      (progress!==6&&progress!==7&&progress!==17)&& <>
-          <span className='divider'></span>
-          <div className="form-row">
-            <div className="col-30">
-              <button className='btn tertiary' onClick={handleBack}><ChevronLeft /> Back</button>
-            </div>
-
-            <div className="col-30">
-              <button className='btn primary' onClick={handleNext}>Next <ChevronRight /></button>
-            </div>
-
-          </div>
-        </>*/
-      }
     </div>
   )
 }

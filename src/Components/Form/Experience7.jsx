@@ -1,18 +1,23 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { nextForm, setForm } from '../../redux/Features/ResumeSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectResumeLoading, toggleNewJob } from '../../redux/Features/ResumeSlice'
+
 
 export default function Experience7({setProgress}) {
+  const loading = useSelector(selectResumeLoading)
   const dispatch = useDispatch()
   return (
     <>
         <h1>Do you want to add another job roles in this company?</h1>
         <div className="flex-row-start g-1">
             <div className="col-20">
-                <button className='btn secondary' onClick={()=>setProgress(0)}>Yes</button>
+                <button className='btn secondary' onClick={()=>{
+                  setProgress(0)
+                  dispatch(toggleNewJob())
+                  }} disabled={loading}>Yes</button>
             </div>
             <div className="col-20">
-                <button className='btn primary' onClick={()=>setProgress(6)}>No</button>
+                <button className='btn primary' onClick={()=>setProgress(6)} disabled={loading}>{loading?"Loading...":"No"}</button>
             </div>
         </div>
     </>

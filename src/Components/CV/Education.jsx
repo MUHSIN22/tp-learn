@@ -1,11 +1,10 @@
 import React from 'react'
-import UdemyLogo from '../../Assests/udemy.jpg'
 import { useSelector } from 'react-redux'
-import { selectEducation, selectResumeLoading } from '../../redux/Features/ResumeSlice'
+import { selectEducation } from '../../redux/Features/ResumeSlice'
 import EducationLoader from '../Loaders/EducationLoader'
 export default function Education() {
     const education = useSelector(selectEducation)
-    const loading = useSelector(selectResumeLoading)
+
     return (
         <div className='section_2 my-2 col-100 align-center'>
             <div className="col-90">
@@ -26,7 +25,6 @@ export default function Education() {
     )
 }
 function EducationCard({ degree_name, upload_degree, course_start_date,course_end_date, university_name, skills, certificate }) {
-    console.log(course_start_date)
     return (
         <div className="education-grid">
             <img src={upload_degree} alt="" />

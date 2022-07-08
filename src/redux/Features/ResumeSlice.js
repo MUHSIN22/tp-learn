@@ -5,17 +5,23 @@ const initialState = {
     loading: false,
     recordDetails: {},
     company_job_record_id: '',
-    graph:{},
     status: '',
     reload: true,
     error: '',
     message: '',
     form: null,
+    newJob: false,
+    newDesignation:false,
+    newEducation:false,
+    newCertificate:false,
+    newAdditionalSkill:false,
+    newPhotoMedia:false,
+    newProject:false
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
     try {
-        const response = await API.post(`/simple-user-info`, encoded, {
+        const response = await API.post(`/user-info`, encoded, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Cache-Control': 'no-cache',
@@ -144,7 +150,7 @@ export const addProject = createAsyncThunk('authentication/addProject', async (d
     }
 })
 export const addEducation = createAsyncThunk('authentication/addEducation', async (data, { rejectWithValue }) => {
-   
+
     try {
         const response = await API.post(`/add-education-info`, data.body, {
             headers: {
@@ -159,7 +165,7 @@ export const addEducation = createAsyncThunk('authentication/addEducation', asyn
     }
 })
 export const addCertification = createAsyncThunk('authentication/addCertification', async (data, { rejectWithValue }) => {
-    
+
     try {
         const response = await API.post(`/add-certificate-info`, data.body, {
             headers: {
@@ -173,7 +179,7 @@ export const addCertification = createAsyncThunk('authentication/addCertificatio
         return rejectWithValue(error.response.data);
     }
 })
-export const additionalSkills = createAsyncThunk('authentication/additionalSkills', async (data, { rejectWithValue }) => {
+export const addAdditionalSkills = createAsyncThunk('authentication/addAdditionalSkills', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     console.log(encoded)
     try {
@@ -288,6 +294,27 @@ export const resumeSlice = createSlice({
     name: 'resume',
     initialState,
     reducers: {
+        toggleNewJob: (state)=>{
+            state.newJob = !state.newJob
+        },
+        toggleNewDesignation: (state)=>{
+            state.newDesignation = !state.newDesignation
+        },
+        toggleNewEducation: (state,action)=>{
+            state.newEducation = action.payload
+        },
+        toggleNewCertificate: (state,action)=>{
+            state.newCertificate = action.payload
+        },
+        toggleNewAdditionalSkills: (state,action)=>{
+            state.newAdditionalSkill = action.payload
+        },
+        toggleNewPhotoMedia: (state,action)=>{
+            state.newPhotoMedia = action.payload
+        },
+        toggleNewProject:(state,action)=>{
+            state.newProject = action.payload
+        },
         nextForm: (state) => {
             if (state.form < 17) state.form += 1;
         },
@@ -305,22 +332,18 @@ export const resumeSlice = createSlice({
     },
     extraReducers(builder) {
         builder.addCase(resumeInfo.pending, (state, action) => {
-            state.loading = true
             state.status = 'loading'
-            state.error = false
         }).addCase(resumeInfo.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = ''
             state.recordDetails = action.payload.data.recordDetails
             state.form = action.payload.data.recordDetails.form
-            state.reload= false
+            state.reload = false
         }).addCase(resumeInfo.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.data
-
+            state.message = action.payload.data.error_message
 
         }).addCase(addExperience.pending, (state, action) => {
             state.loading = true
@@ -330,13 +353,13 @@ export const resumeSlice = createSlice({
         }).addCase(addExperience.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'reload'
+            state.message = action.payload.data.message
             state.reload = true
         }).addCase(addExperience.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.data
+            state.message = action.payload.data.error_message
 
 
         }).addCase(addCompany.pending, (state, action) => {
@@ -347,14 +370,14 @@ export const resumeSlice = createSlice({
         }).addCase(addCompany.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Company Added'
+            state.message = action.payload.data.message
             state.reload = true
+            state.newJob= false
         }).addCase(addCompany.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.data
-
+            state.message = action.payload.data.error_message
 
         }).addCase(addIndustryInfo.pending, (state, action) => {
             state.loading = true
@@ -364,14 +387,13 @@ export const resumeSlice = createSlice({
         }).addCase(addIndustryInfo.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Industry Added'
+            state.message = action.payload.data.message
             state.reload = true
         }).addCase(addIndustryInfo.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.data
-            
+            state.message = action.payload.data.error_message
 
         }).addCase(addJobDesignation.pending, (state, action) => {
             state.loading = true
@@ -380,14 +402,14 @@ export const resumeSlice = createSlice({
         }).addCase(addJobDesignation.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Designation'
+            state.message = action.payload.data.message
             state.reload = true
+            state.newDesignation= false
         }).addCase(addJobDesignation.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.data
-
+            state.message = action.payload.data.error_message
 
         }).addCase(addJobSalary.pending, (state, action) => {
             state.loading = true
@@ -396,13 +418,13 @@ export const resumeSlice = createSlice({
         }).addCase(addJobSalary.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Salary'
+            state.message = action.payload.data.message
             state.reload = true
         }).addCase(addJobSalary.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
-          //  state.error = action.payload.error
-           // state.message = action.payload.data
+            //  state.error = action.payload.error
+            // state.message = action.payload.data
 
 
         }).addCase(addJobSkills.pending, (state, action) => {
@@ -412,14 +434,13 @@ export const resumeSlice = createSlice({
         }).addCase(addJobSkills.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Job skills'
+            state.message = action.payload.data.message
             state.reload = true
         }).addCase(addJobSkills.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.data
-
+            state.message = action.payload.data.error_message
 
         }).addCase(addProject.pending, (state, action) => {
             state.loading = true
@@ -428,28 +449,27 @@ export const resumeSlice = createSlice({
         }).addCase(addProject.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Project Info'
+            state.message = action.payload.data.message
         }).addCase(addProject.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.data
-
+            state.message = action.payload.data.error_message
 
         }).addCase(addEducation.pending, (state, action) => {
             state.loading = true
             state.status = 'loading'
             state.error = false
+
         }).addCase(addEducation.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Education added'
+            state.message = action.payload.data.message
         }).addCase(addEducation.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.data
-
+            state.message = action.payload.data.error_message
 
         }).addCase(addCertification.pending, (state, action) => {
             state.loading = true
@@ -458,7 +478,7 @@ export const resumeSlice = createSlice({
         }).addCase(addCertification.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Certification Added'
+            state.message = action.payload.data.message
         }).addCase(addCertification.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
@@ -466,15 +486,15 @@ export const resumeSlice = createSlice({
             state.message = action.payload.message
 
 
-        }).addCase(additionalSkills.pending, (state, action) => {
+        }).addCase(addAdditionalSkills.pending, (state, action) => {
             state.loading = true
             state.status = 'loading'
             state.error = false
-        }).addCase(additionalSkills.fulfilled, (state, action) => {
+        }).addCase(addAdditionalSkills.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Additional Info Added'
-        }).addCase(additionalSkills.rejected, (state, action) => {
+            state.message = action.payload.data.message
+        }).addCase(addAdditionalSkills.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
@@ -488,7 +508,7 @@ export const resumeSlice = createSlice({
         }).addCase(addHobbies.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Hobbies Added'
+            state.message =action.payload.data.message
             state.reload = true
         }).addCase(addHobbies.rejected, (state, action) => {
             state.loading = false
@@ -504,7 +524,7 @@ export const resumeSlice = createSlice({
         }).addCase(addBio.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Bio Added'
+            state.message = action.payload.data.message
             state.reload = true
         }).addCase(addBio.rejected, (state, action) => {
             state.loading = false
@@ -520,7 +540,7 @@ export const resumeSlice = createSlice({
         }).addCase(uploadPhotomedia.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Media Added'
+            state.message = action.payload.data.message
         }).addCase(uploadPhotomedia.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
@@ -535,7 +555,7 @@ export const resumeSlice = createSlice({
         }).addCase(uploadCVvideos.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Video Added'
+            state.message = action.payload.data.message
             state.reload = true
         }).addCase(uploadCVvideos.rejected, (state, action) => {
             state.loading = false
@@ -551,7 +571,8 @@ export const resumeSlice = createSlice({
         }).addCase(addSocialLinks.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'Social Links Added'
+            state.message = action.payload.data.message
+            state.reload = true
         }).addCase(addSocialLinks.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
@@ -566,7 +587,7 @@ export const resumeSlice = createSlice({
         }).addCase(changeFormId.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
-            state.message = 'form_id_changed'
+            state.message = action.payload.data.message
             state.reload = true
         }).addCase(changeFormId.rejected, (state, action) => {
             state.loading = false
@@ -583,15 +604,15 @@ export const resumeSlice = createSlice({
 
 export const selectResumeDetails = (state) => state.resume.recordDetails;
 export const selectJobStartDate = (state) => {
-    let data = state.resume.recordDetails.resumeInfo ||{}
-    let resume = data.resumeInfo||{}
-    if(resume.is_fresher===1){
+    let data = state.resume.recordDetails.resumeInfo || {}
+    let resume = data.resumeInfo || {}
+    if (resume.is_fresher === 1) {
         return false
-    }else{
+    } else {
         return resume.job_start_date
     }
 }
-export const selectUserFirstName = (state)=> state.resume.recordDetails.fname
+export const selectUserFirstName = (state) => state.resume.recordDetails.fname
 export const selectResumeInfo = (state) => state.resume.recordDetails.resume_info;
 export const selectResumeStatus = (state) => state.resume.status;
 export const selectResumeMessage = (state) => state.resume.message;
@@ -599,43 +620,114 @@ export const selectResumeError = (state) => state.resume.error;
 export const selectResumeLoading = (state) => state.resume.loading;
 export const selectFormId = (state) => state.resume.form;
 export const SelectCompanyJobRecordId = (state) => state.resume.company_job_record_id
-export const SelectCompanyDetails = (state) => state.resume.recordDetails.resume_info.company
-export const selectLastCompany = (state)=>{
-   let company = state.resume.recordDetails.resume_info.company
-   return company[company.length-1]
+export const SelectCompanyDetails = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    return resumeInfo.company
 }
-export const selectEducation = (state) => state.resume.recordDetails.resume_info.education;
-export const selectCertificate = (state) => state.resume.recordDetails.resume_info.certificate;
-export const selectAdditionalSkills = (state) => state.resume.recordDetails.resume_info.additional_skill;
-export const selectBio = (state) => state.resume.recordDetails.resume_info.your_bio;
-export const selectProfilePic = (state) => state.resume.recordDetails.resume_info.profile_pic;
+export const selectFirstCompany = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    let company = resumeInfo.company || {}
+    return (company && company[0]) || {}
+}
+export const selectFirstJob = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    let companys = resumeInfo.company || []
+    let firstCompany = companys[0]||{}
+    let jobs = firstCompany.job_role || []
+    
+    return (jobs && jobs[0]) || false
+}
+export const selectLastJob = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    let companys = resumeInfo.company || []
+    let lastCompany =(companys&&companys[companys.length-1])||{}
+    let jobs = lastCompany.job_role || []
+    
+    return (jobs && jobs[jobs.length-1]) || false
+}
+export const selectLastCompany = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    let company = resumeInfo.company || {}
+    return (company && company[company.length - 1]) || false
+}
+export const selectEducation = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    return resumeInfo.education || false;
+}
+export const selectCertificate = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    return resumeInfo.certificate || false;
+}
+export const selectAdditionalSkills = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    return resumeInfo.additional_skill ||false;
+}
+export const selectBio = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    return resumeInfo.your_bio
+}
+export const selectProfilePic = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    return resumeInfo.profile_pic || null;
+}
 export const selectReload = (state) => state.resume.reload
-export const selectHobbies = (state)=> {
-    let record = state.resume.recordDetails.resume_info
+export const selectHobbies = (state) => {
+    let record = state.resume.recordDetails || {}
+    let resumeInfo = record.resume_info || {}
     return {
-            entertainment:record.entertainment,
-            music:record.music,
-            sports:record.sports,
-            leisure:record.leisure,
-            adventure:record.adventure,
-            travel:record.travel,
-            books:record.books,
-            any_other:record.any_other
-        }}
-export const selectSocialContribution = (state) => state.resume.recordDetails.resume_info.additional_skill;   
-export const SelectDocuments = (state) => state.resume.recordDetails.resume_info.upload_photo_media;  
-export const selectVideo = (state)=>   state.resume.recordDetails.resume_info.video_from_url;
-export const selectSocilaLinks = (state)=>  { 
-    let record =  state.resume.recordDetails.resume_info
-   return {
-    facebook: record.link_facebook,
-    twitter: record.link_twitter,
-    instagram: record.link_instagram,
-    linkedin: record.link_linkedin,
-    other: record.link_other
-   }
-}      
-export const { nextForm, prevForm, setForm,reload } = resumeSlice.actions;
+        entertainment: resumeInfo.entertainment||'',
+        music: resumeInfo.music||'',
+        sports: resumeInfo.sports||'',
+        leisure: resumeInfo.leisure||'',
+        adventure: resumeInfo.adventure||'',
+        travel: resumeInfo.travel||'',
+        books: resumeInfo.books||'',
+        any_other: resumeInfo.any_other||''
+    }
+}
+export const selectSocialContribution = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    return resumeInfo.additional_skill||[];
+}
+export const SelectDocuments = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    return resumeInfo.upload_photo_media||[];
+}
+export const selectVideo = (state) => {
+    let recordDetails = state.resume.recordDetails || {}
+    let resumeInfo = recordDetails.resume_info || {}
+    return resumeInfo.video_from_url;
+}
+export const selectSocilaLinks = (state) => {
+    let record = state.resume.recordDetails.resume_info || {}
+    return {
+        facebook: record.link_facebook,
+        twitter: record.link_twitter,
+        instagram: record.link_instagram,
+        linkedin: record.link_linkedin,
+        other: record.link_other
+    }
+}
+export const selectNewJob = (state)=> state.resume.newJob
+export const selectNewEducation = (state)=> state.resume.newEducation
+export const selectNewCertificate = (state)=> state.resume.newCertificate
+export const selectNewAdditionalSkill =  (state)=> state.resume.newAdditionalSkill
+export const selectNewDesignation = (state)=> state.resume.newDesignation
+export const selectNewPhotoMedia = (state)=> state.resume.newPhotoMedia
+export const selectNewProject = (state)=> state.resume.newProject
+export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
 
