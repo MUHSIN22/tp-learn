@@ -301,12 +301,29 @@ export const changeEditPageDetails = createAsyncThunk('authentication/changeEdit
         return rejectWithValue(data);
     }
 })
+
+export const addCognitiveSkills = createAsyncThunk('authentication/addCognitiveSkills', async (data, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/manage-cognitive-info`, encoded, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
 export const resumeSlice = createSlice({
     name: 'resume',
     initialState,
     reducers: {
         nextForm: (state) => {
-            if (state.form < 17) state.form += 1;
+            if (state.form < 18) state.form += 1;
         },
         prevForm: (state) => {
             if (state.form > 1) state.form -= 1;
@@ -603,6 +620,19 @@ export const resumeSlice = createSlice({
         .addCase(changeEditPageDetails.rejected, (state, action) => {
             state.loading = false
             state.editPageDetails = action.payload
+        }).addCase(addCognitiveSkills.pending, (state, action) => {
+            state.loading = true
+            state.status = 'loading'
+            state.error = false
+        }).addCase(addCognitiveSkills.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.message = 'Cognitive Skills'
+        }).addCase(addCognitiveSkills.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'Rejected'
+            state.error = action.payload.error
+            state.message = action.payload.data
         })
     }
 

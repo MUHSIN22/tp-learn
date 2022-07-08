@@ -14,7 +14,7 @@ export default function CVBuilder() {
         'Additional Skills':'inactive',
         'Career Objective':'inactive' 
     })
-    const form_id = useSelector(selectFormId)
+    const form_id = 18
     useEffect(() => {
       if(form_id<8){
         console.log('1st');
@@ -47,7 +47,7 @@ export default function CVBuilder() {
             Certifications:'complete',
             "Additional Skills": 'active'
         })
-      } else if(form_id <16){
+      } else if(form_id <18){
         console.log('5th');
         setProgress({
             ...progress,
@@ -57,7 +57,7 @@ export default function CVBuilder() {
             "Additional Skills":'complete',
             'Career Objective': 'active'
         })
-      }else if(form_id==16){
+      }else if(form_id==18){
         console.log('6th');
         setProgress({
             ...progress,
@@ -65,7 +65,7 @@ export default function CVBuilder() {
             Education:'complete',
             Certifications:'complete',
             "Additional Skills":'complete',
-            'Career Objective': 'complete'
+            'Career Objective': 'active'
         })
       }
        

@@ -22,6 +22,7 @@ import { FiDownload } from "react-icons/fi";
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails } from '../../redux/Features/ResumeSlice';
+import jsPDF from  "jspdf";
 export default function CVBuilder() {
   const [page, setPage] = useState("/Experience")
   const [isShow, setIsshow] = useState(false);
@@ -36,13 +37,14 @@ export default function CVBuilder() {
     console.log(isShow);
   };
 
-  // useEffect(() => {
-
-
-  //   return (()=>{
-
-  //   })
-  // },[])
+  const generatePdf = () => {
+    let doc = new jsPDF("p","pt","a4")
+    doc.html(document.querySelector("#tpcv"),{
+      callback: (pdf) => {
+        pdf.save("talentplace.pdf");
+      }
+    });
+  };
 
   const pull_data = (data) => {
     console.log(data,"data")
@@ -58,7 +60,7 @@ export default function CVBuilder() {
         <div className="" onClick={handleEdit}>
           <FaEdit />
         </div>
-        <div className="">
+        <div className="" onClick={generatePdf}>
           <FiDownload />
         </div>
         <div className="">
@@ -69,13 +71,13 @@ export default function CVBuilder() {
   );
   return (
     // <div className="cvEditor">
-    <div className="flex-row-center cvEditContainer">
+    <div className="flex-row-center cvEditContainer" id="cv-pdf-content">
       <div className="col-fit">
         <Sidebar currentPage={pull_data}/>
       </div>
       <div className="col-100">
         <div className="CVReview">
-        <div className="flex-row-center justify-end px-1 mt-4">
+        <div className="flex-row-center justify-end px-1 mt-4" style={{"cursor":"pointer"}}>
           {floatingButton }
         </div>
           <div className="flex-row-center justify-end m-0 px-1">

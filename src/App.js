@@ -1,7 +1,7 @@
 
 import './App.css';
 import Login from './Components/Login/Login';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Router, Routes, useLocation } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import Onboarding from './Components/Onboarding/Onboarding';
 import Signup from './Components/Signup/Signup';
@@ -20,6 +20,7 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
 import CVReview from './Components/CVEditor/CVReview'
 import DummyForm from './Components/EditForms/ProfilePicture'
+import CognitiveSkills from './Components/Form/CognitiveSkills';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -73,6 +74,7 @@ function App() {
        <Route path='/membership' element={<Membership/>}/>
        <Route path='/MyProfile' element={<CVReview/>}/>
        <Route path='/dummy' element={<DummyForm/>}/>
+       <Route path='/cs' element={<CognitiveSkills/>}/>
       </Routes>
     </div>
   );

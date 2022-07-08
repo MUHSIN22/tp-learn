@@ -1,4 +1,5 @@
 import React from 'react'
+import CognitiveSkills from '../Form/CognitiveSkills'
 import Cerification from './Cerification'
 import './CvContainer.css'
 import Docs from './Docs'
@@ -36,6 +37,7 @@ export default function CVcontainer({ progress }) {
       <Videos/>
       <SocialMedia/>
       <SelfDeclaration/>
+      <CognitiveSkills/> 
     </div>
   )
 }

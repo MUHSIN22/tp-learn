@@ -20,6 +20,7 @@ import CareerObjective2 from './CareerObjective2';
 import { useSelector,useDispatch } from 'react-redux';
 import { changeFormId, selectFormId } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
+import CognitiveSkills from './CognitiveSkills';
 
 
 
@@ -27,7 +28,7 @@ export default function FormContainer() {
 const dispatch = useDispatch()
 const token = useSelector(selectAuthToken)
 const user_id = useSelector(selectUser_id)
-const progress = parseInt(useSelector(selectFormId)) +1 || 1
+const progress = 18
 const setProgress = (id)=>{
   let body = {
     form_id: id,
@@ -58,6 +59,7 @@ const setProgress = (id)=>{
       {progress === 15 && <CareerObjective1  />}
       {progress === 16 && <CareerObjective2  />}
       {progress === 17 && <CareerObjective3  />}
+      {progress === 18 && <CognitiveSkills />}
 
 
 
