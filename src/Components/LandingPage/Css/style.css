@@ -1,0 +1,23 @@
+.card-body {
+  min-height: 25rem;
+  min-width: 25rem;
+  margin-right: 5px;
+}
+.card-body:hover{
+  margin: 0 3rem;
+  transform: scale(1.2);
+}
+.cards{
+  display: block;
+  margin: 0 auto;
+  padding: 5rem;
+  width: 75%;
+  /* overflow-x: scroll; */
+  overflow-x: hidden;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.cards::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}

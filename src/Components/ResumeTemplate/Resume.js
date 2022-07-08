@@ -5,7 +5,7 @@ import { BiMessageMinus } from "react-icons/bi";
 import { BsGenderMale,BsFacebook,BsTwitter ,BsLinkedin} from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { FiPhoneCall } from "react-icons/fi";
-import { RiComputerLine,RiInstagramFill } from "react-icons/ri";
+import { RiComputerLine,RiInstagramFill }  from "react-icons/ri";
 // RiComputerLine
 
 function Resume() {
@@ -22,7 +22,7 @@ function Resume() {
       </div>
 
       <div className="d-flex justify-content-between text-light">
-        <div className="col-30 bg-dark mx-1">
+        <div className="col-30 bg-dark mx-1 ">
           <div className="personal_detail_sec text-light d-flex ">
             <div className="icons col-30">
               <span className="mt-2">
@@ -99,7 +99,10 @@ function Resume() {
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column text-left ml-3">
-              <span className="my-2">Adobe PhotoshopAdobe</span>
+              <div className="my-2">
+                <span>Adobe</span>
+                <div className="box_1"></div>
+              </div>
               <span className="my-2">IllustratorAdobe</span>
               <span className="my-2">In DesignMicroshop</span>
               <span className="my-2">office</span>

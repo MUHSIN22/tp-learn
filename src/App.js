@@ -15,6 +15,7 @@ import { resumeInfo, selectFormId, selectReload } from './redux/Features/ResumeS
 import { resetError, selectAuthentication } from './redux/Features/AuthenticationSlice';
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
+import Landing from './Components/LandingPage/Landing';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
@@ -70,6 +71,8 @@ function App() {
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
+       <Route path='/landing' element={<Landing/>}/>
+
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>
        <Route path='/MyProfile' element={<CVReview/>}/>
