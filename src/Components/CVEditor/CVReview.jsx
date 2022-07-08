@@ -43,9 +43,9 @@ export default function CVBuilder() {
 
   const generatePdf = () => {
 
-    const string = renderToString(<Prints />);
-    const pdf = new jsPDF({unit: 'mm', format: 'a4', orientation: 'portrait' });
-    pdf.html(string);
+    const string = renderToString(<ResumeDownload />);
+    const pdf = new jsPDF();
+    pdf.fromHTML(string);
     pdf.save('pdf')
 
     // let doc = new jsPDF("p","pt","a4")
@@ -55,16 +55,6 @@ export default function CVBuilder() {
     //   }
     // });
   };
-
-  const Prints = () => (
-    <div>
-      <ul>
-        <li>line 1</li>
-        <li>line 2</li>
-        <li>line 3</li>
-      </ul>
-    </div>
-  )
 
   const pull_data = (data) => {
     console.log(data,"data")
