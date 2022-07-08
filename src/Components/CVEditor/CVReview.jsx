@@ -25,6 +25,8 @@ import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from 'react-redux';
 import jsPDF from  "jspdf";
 import { selectToEdit, changeToEdit, selectEditPageDetails, changeEditPageDetails,changePageOn,getPageOn } from '../../redux/Features/ResumeSlice';
+import { render } from 'react-dom';
+import { renderToString } from 'react-dom/server';
 export default function CVBuilder() {
   const page = useSelector(getPageOn)
   const [isShow, setIsshow] = useState(false);
@@ -40,13 +42,29 @@ export default function CVBuilder() {
   };
 
   const generatePdf = () => {
-    let doc = new jsPDF("p","pt","a4")
-    doc.html(document.querySelector("#hello"),{
-      callback: (pdf) => {
-        pdf.save("talentplace.pdf");
-      }
-    });
+
+    const string = renderToString(<Prints />);
+    const pdf = new jsPDF({unit: 'mm', format: 'a4', orientation: 'portrait' });
+    pdf.html(string);
+    pdf.save('pdf')
+
+    // let doc = new jsPDF("p","pt","a4")
+    // doc.html(document.querySelector("#hello"),{
+    //   callback: (pdf) => {
+    //     pdf.save("talentplace.pdf");
+    //   }
+    // });
   };
+
+  const Prints = () => (
+    <div>
+      <ul>
+        <li>line 1</li>
+        <li>line 2</li>
+        <li>line 3</li>
+      </ul>
+    </div>
+  )
 
   const pull_data = (data) => {
     console.log(data,"data")
@@ -100,7 +118,7 @@ export default function CVBuilder() {
           {page==="/Recommendation"  && <Recommendation />}
           {page==='/Docs' && <DocsReview />}
           {page==='/self-declaration' && <SelfDeclaration />}
-          <div id="hello" >
+          <div id="hello" style={{visibility:"hidden"}}>
             <ResumeDownload />
           </div>
           
