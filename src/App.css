@@ -1338,7 +1338,6 @@ video{
   width: 58%;
 }
 
-} 
 .slider-container{
   width: 158% !important;
     height: 40rem;
@@ -1351,6 +1350,7 @@ video{
   font-size: 2rem;
   line-height: 25px;
   color: #09051c;
+}
 }
 /* .section_6{
   display: flex;
