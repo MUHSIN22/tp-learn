@@ -58,9 +58,6 @@ const handleEditForms = (data) => {
                 <h1>{contactInfo.name} {toEdit && (
                      <span onClick={() => handleEditForms({ progress: 14,bio:bio ? bio: '' })}><FaPencilAlt /></span>
                     )}</h1>
-                
-                <p>Content Creator</p>
-                <h1>{contactInfo.name}</h1>
                 {firstCompany&&firstCompany.job_role&&<p>{firstCompany.job_role[0].designation_name}</p>}
                 <span className="divider"></span>
                 {!loading&&bio?<p>{parser(bio)}</p>:<BioLoader/>}

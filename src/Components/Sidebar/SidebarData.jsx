@@ -9,7 +9,7 @@ export const SidebarData = [
     {
         title : "Dashboard",
         icon : <MdOutlineDashboard/>,
-        link : "/dash"
+        link : "/dashboard"
     },
     {
         title : "My Profile",

@@ -22,6 +22,7 @@ import CVReview from './Components/CVEditor/CVReview'
 import DummyForm from './Components/EditForms/ProfilePicture'
 import CognitiveSkills from './Components/Form/CognitiveSkills';
 import Resume from './Components/ResumeTemplate/Resume';
+import NotFound from './Components/Not_Found/Notfound';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -101,6 +102,7 @@ function App() {
        <Route path='/dummy' element={<DummyForm/>}/>
        <Route path='/cs' element={<CognitiveSkills/>}/>
        <Route path='/resume' element={<Resume/>}/>
+       <Route path='*' element={<NotFound/>}/>
       </Routes>
     </div>
   );

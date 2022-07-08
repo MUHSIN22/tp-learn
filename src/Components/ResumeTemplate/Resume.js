@@ -96,7 +96,7 @@ const exec = () => {
     <div className="mt-5" id="tpcv" >
       <div className="d-flex">
         <div className="col-30">
-          <img className="Profile_resume_img" src={profile} />
+          <img className="Profile_resume_img" src={profile} crossOrigin="true" rossOrigin="anonymous"/>
         </div>
         <div className="col-70 Profile_resume_name_sec text-left">
           <h1>{resumeDetails.name}</h1>
