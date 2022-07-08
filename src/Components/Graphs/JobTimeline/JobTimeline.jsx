@@ -72,7 +72,7 @@ function YearsLabel({ no_jobs, i, year }) {
     }
   }, [])
 
-  return <div id={`year${i}`} className="years" >{year}</div>
+  return <div id={`year${i}`} className="yearsReview">{year}</div>
 }
 function Skill({ rows, start_date='', end_date='', i,j, year_list }) {
   let position_x = findPositionX(start_date, year_list)

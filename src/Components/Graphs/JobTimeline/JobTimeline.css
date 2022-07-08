@@ -9,7 +9,7 @@
     z-index: 2;
 }
 
-.jobTimeline .years{
+.jobTimeline .years, .yearsReview{
     width: max-content;
     height: max-content;
     aspect-ratio: 1/1;
@@ -34,6 +34,16 @@
     position: absolute;
     background-color: aliceblue;
     height: 10px;
+    z-index: -1;
+}
+
+.yearsReview::after {
+    content: " ";
+    width: 350%;
+    left: 50%;
+    position: absolute;
+    background-color: #21CE93;
+    height: 20px;
     z-index: -1;
 }
 

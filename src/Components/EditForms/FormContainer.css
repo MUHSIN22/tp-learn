@@ -1,0 +1,166 @@
+.formContainer{
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+    background-color: #fff;
+    border-radius: 5px;
+
+    gap: 1rem;
+}
+.formContainer h1{
+    font-weight: 700;
+    color: #1C1B2C;
+    font-size: 1.6rem;
+}
+.formContainer label{
+    font-family: poppins;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: black;
+}
+.formContainer .card{
+    display: flex;
+    flex-direction: column;
+    background-color: #F9F8FC;
+    border-radius: 0.5rem;
+    padding: 0.8rem;
+}
+.card .form-row{
+    justify-content: flex-start;
+    gap: 3rem;
+}
+.crumbs-red{
+    width: fit-content;
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    background-color: #FAEDE9;
+    color: #EF6239;
+}
+
+.crumbs-green{
+    width: fit-content;
+    padding: 0.3rem 1rem;
+    border-radius: 1rem;
+    background-color: #E9F8F3;
+    color: #14B47D;
+}
+
+.editor{
+    width: 50%;
+    height: 100%
+}
+.editor .ck-editor__editable_inline {
+    min-height: 50vh;
+}
+
+.suggestions{
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: #c1c1c1 solid 1px;
+    padding: 2rem 0 0.5rem 0;
+    max-height: 50vh ;
+    position: relative;
+    margin-top: 1.6rem;
+}
+.suggestions .head{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    background-color: #fff;
+    border-bottom: solid 1px #c1c1c1;
+    padding: 0.5rem 0 0.5rem 2rem;
+}
+.suggestions p{
+    font-size: 0.8rem;
+    text-align: left;
+}
+.suggestions>.col-100{
+    overflow-y: scroll;
+}
+
+.suggestions .suggestion-card{
+    padding: 0.5rem;
+    border-bottom:  solid 1px #c1c1c1;
+}
+.suggestions .suggestion-card:hover{
+    background-color: #f8f6f6;
+}
+.suggestions button{
+    margin-top: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+.suggestions button:hover{
+    cursor: pointer;
+}
+.suggestions button svg{
+    height: 100%;
+    width: 100%;
+}
+.suggestions>.col-100::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: #Fff;
+    border-radius: 10px;
+}
+
+.suggestions>.col-100::-webkit-scrollbar-thumb {
+    background-color: #DCDAE1;
+    border-radius: 10px;
+}
+.option-card{
+    width: fit-content;
+    padding: 0.0rem 0.8rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 3rem;
+    border: solid 2px  #14B47D;
+
+}
+.option-card p{
+    font-family: poppins;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0;
+}
+.option-card span{
+    font-family: poppins;
+    font-size: 0.8rem;
+    color: #1C1B2C;
+}
+
+@media only screen and (max-width:1024px) {
+    .formContainer{
+        width: 40%;
+    }
+   
+}
+@media only screen and (max-width:768px) {
+    .suggestion-card{
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media only screen and (max-width:600px) {
+    .control{
+        width: 100%;
+    } 
+    .control-group{
+        width: 100%;
+    }
+    .experience7-button .col-20{
+        width: 40%;
+    }
+    .experience5 .flex-row-between{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}

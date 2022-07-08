@@ -1,7 +1,7 @@
 
 import './App.css';
 import Login from './Components/Login/Login';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Router, Routes, useLocation } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import Onboarding from './Components/Onboarding/Onboarding';
 import Signup from './Components/Signup/Signup';
@@ -15,6 +15,13 @@ import { resumeInfo, selectFormId, selectReload } from './redux/Features/ResumeS
 import { resetError, selectAuthentication } from './redux/Features/AuthenticationSlice';
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
+import Dashboard from './Components/Dashboard/Dashboard';
+import Sidebar from './Components/Sidebar/Sidebar';
+import Membership from './Components/Memberships/Memberships';
+import CVReview from './Components/CVEditor/CVReview'
+import DummyForm from './Components/EditForms/ProfilePicture'
+import CognitiveSkills from './Components/Form/CognitiveSkills';
+import Resume from './Components/ResumeTemplate/Resume';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -79,6 +86,7 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
+      {/* <Sidebar/> */}
       <Routes>
        <Route path='/' element={<PreventedRoute><Login/></PreventedRoute> }/>
        <Route path='/OTP-login' element={<PreventedRoute><OTPLogin/></PreventedRoute>}/>
@@ -87,6 +95,12 @@ function App() {
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
+       <Route path="/dashboard" element={<Dashboard/>}/>
+       <Route path='/membership' element={<Membership/>}/>
+       <Route path='/MyProfile' element={<CVReview/>}/>
+       <Route path='/dummy' element={<DummyForm/>}/>
+       <Route path='/cs' element={<CognitiveSkills/>}/>
+       <Route path='/resume' element={<Resume/>}/>
       </Routes>
     </div>
   );
