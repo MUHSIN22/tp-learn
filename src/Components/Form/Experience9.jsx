@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { nextForm } from '../../redux/Features/ResumeSlice'
 import Control from './Control'
 
 export default function Experience9({setProgress}) {

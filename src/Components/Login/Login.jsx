@@ -102,17 +102,16 @@ export default function Login() {
     return (
 
         <div className="login">
-            {console.log(codes)}
            
             <div className="form-container col-30">
                 <form autocomplete="off">
-               {error&&<Alert error={error} message={'Failed to login'}/>}
+               {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: message} />}
                     <h1>Login</h1>
                     <div className="form-row">
-                        <IconInput icon={<Mail />} handleChange={handleChange} name="email" type='email' label="E-Mail Address" placeholder="Enter your primary email address" width={95} validation={!loading&&message.email} />
+                        <IconInput icon={<Mail />} handleChange={handleChange} name="email" type='email' label="E-Mail Address" placeholder="Enter your primary email address" width={95} validation={message&&message.email} />
                     </div>
                     <div className="form-row">
-                        <IconPasswordInput icon={<Password />} handleChange={handleChange} name="password" label="Password" placeholder="Enter your password" width={95} validation={!loading&&message.password}/>
+                        <IconPasswordInput icon={<Password />} handleChange={handleChange} name="password" label="Password" placeholder="Enter your password" width={95} validation={message&&message.password}/>
                     </div>
                     <div className="form-row">
                         <label className="control control-checkbox">
@@ -131,8 +130,8 @@ export default function Login() {
                         <span className='line'></span>
                     </div>
                     <div className="flex-row-start align-end g-3">
-                        <IconSelect name='country_code' icon={<USFlag />} label={' '} handleChange={handleChange} width={20} options={codes} name_field={'country_code'} validation={!loading&&message.country_code} name_value={true} />
-                        <IconInput name='mobile_no' icon={<Phone />} label='Phone Number' placeholder={'8955-656-989'} handleChange={handleChange} width={65} validation={!loading&&message.mobile_no} />
+                        <IconSelect name='country_code' icon={<USFlag />} label={' '} handleChange={handleChange} width={20} options={codes} name_field={'country_code'} validation={message&&message.country_code} name_value={true} />
+                        <IconInput name='mobile_no' icon={<Phone />} label='Phone Number' placeholder={'8955-656-989'} handleChange={handleChange} width={65} validation={message&&message.mobile_no} />
                     </div>
                     <div className="form-row my-2">
                         <button onClick={handleMobileLogin} className='btn secondary'>Login with Phone Number</button>

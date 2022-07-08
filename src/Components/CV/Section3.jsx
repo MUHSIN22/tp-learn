@@ -1,3 +1,4 @@
+
 import React from "react";
 import LineGraph from "../Graphs/LineGraph";
 import Scale from "../Graphs/Scale";
@@ -41,7 +42,6 @@ import {
   changeEditPageDetails,
 } from "../../redux/Features/ResumeSlice";
 import EditFormContainer from "../EditForms/EditFromContainer";
-
 export default function Section3() {
   const loading = useSelector(selectResumeLoading);
   const companyInfo = useSelector(SelectCompanyDetails);
@@ -71,7 +71,6 @@ export default function Section3() {
             </button>
           </div>
         </div>
-
         <span className="divider"></span>
         {console.log(companyInfo)}
         {companyInfo && companyInfo.length > 0 ? (
@@ -365,7 +364,6 @@ function ProjectOverview({ projects:{projects,company_job_record_id,company_reco
       <span className="divider"></span>
       <div className="flex-wrap align-stretch g-1">
         <ProjectTile project_name={project_name} client_name={client_name} />
-
         <p>{}</p>
       </div>
       <span className="divider"></span>
@@ -373,7 +371,7 @@ function ProjectOverview({ projects:{projects,company_job_record_id,company_reco
         <div className="skill-grid">
           <h5 className="text-left">Skill Used</h5>
           <h5 className="text-left">Complexity</h5>
-          <h5 className="text-left">Complexity</h5>
+          <h5 className="text-left">Applicaion</h5>
         </div>
         {project_skill?.map((skill, i) => (
           <SkillGrid key={i} color={`_${i + 1}`} {...skill} />
@@ -405,10 +403,10 @@ function SkillGrid({ color, skill_complexity, skill_desc, skill_name }) {
       <div className="skillName">{skill_name}</div>
       <div className="complexity flex-row-start g-0-5 align-center">
         <ProgressBar value={skill_complexity * 10} color={color} hide_percent />
-        <p>{skill_complexity + "/10"}</p>
+        <p>{skill_complexity >0 && skill_complexity <10 ? "0"+skill_complexity + "/10" : skill_complexity + "/10"}</p>
       </div>
       <div className="application">
-        <p>{skill_desc}</p>
+        <p>{skill_desc || "000000000"}</p>
       </div>
     </div>
   );

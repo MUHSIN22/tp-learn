@@ -5,6 +5,7 @@ nav{
     height: fit-content;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: #fff;
     padding: 1rem 0;
     z-index: 999;
@@ -12,4 +13,23 @@ nav{
 nav .logo{
     width: fit-content;
     margin-left: 5rem;
+}
+nav .controls{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    margin-right: 4rem;
+    
+}
+nav .profile{
+    aspect-ratio: 1/1;
+    height: fit-content;
+    border-radius: 50%;
+    border: solid 0.5px #c1c1c1;
+    cursor: pointer;
+}
+nav button{
+    font-size: 1rem!important;
 }

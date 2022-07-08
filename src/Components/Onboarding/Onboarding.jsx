@@ -5,11 +5,14 @@ import { ReactComponent as ChevronRight } from '../../Assests/icons/chvron-right
 import IconInput from '../IconInput/IconInput';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExperience, selectResumeDetails, selectResumeInfo, selectResumeMessage, selectResumeStatus } from '../../redux/Features/ResumeSlice';
+import { addExperience, selectFormId, selectReload, selectResumeDetails, selectResumeError, selectResumeInfo, selectResumeMessage, selectResumeStatus } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
+import Alert from '../Alert/Alert';
 export default function Onboarding() {
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
+    const message = useSelector(selectResumeMessage)
+    const error = useSelector(selectResumeError)
     const buttonText = [
         'Create',
         'Yes. Tell me more…',
@@ -23,10 +26,19 @@ export default function Onboarding() {
         if(step===6)navigate('/cv-builder')
     }
    const resumeDetails =  useSelector(selectResumeDetails)
+   const form_id = useSelector(selectFormId)
+   useEffect(() => {
+     if(form_id!==""&&form_id!==null) navigate('/cv-builder')
+   
+     return () => {
+       
+     }
+   }, [form_id])
+   
     return (
         <div className="onboarding" >
             <div className={step%2===0?"content slide-in-top1 ":"content slide-in-top2 "}>
-
+                {error&&message&&<Alert error={error} message={error&&message ? Object.values(message) : message}/>}
                 {step === 1 && <Step1 name={resumeDetails.fname} />}
                 {step === 2 && <Step2 />}
                 {step === 3 && <Step3 />}
@@ -85,9 +97,6 @@ function Step5({name}) {
     )
 }
 function Step6() {
-    const navigate =  useNavigate();
-    const message = useSelector(selectResumeMessage);
-    const status = useSelector(selectResumeStatus);
     const [form, setForm] = useState({
         job_start_date:'-',
         is_fresher:'no',
@@ -117,15 +126,6 @@ function Step6() {
             [evt.target.name]: value
         });
     }
-    useEffect(() => {
-      if(message==='reload'){
-        navigate('/cv-builder')
-      }
-    
-      return () => {
-        
-      }
-    }, [message,navigate])
     
     return (
         <>

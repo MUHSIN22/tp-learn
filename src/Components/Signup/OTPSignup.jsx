@@ -4,7 +4,7 @@ import { ReactComponent as ChevronRight } from '../../Assests/icons/chvron-right
 import loginVector from '../../Assests/OTP-vector.png'
 import OTP from '../IconInput/OTP'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAutheError, selectOtp_verified, selectReg_id, signupOtp } from '../../redux/Features/AuthenticationSlice';
+import { selectAutheError, selectAuthLoading, selectAuthMessage, selectOtp_verified, selectReg_id, signupOtp } from '../../redux/Features/AuthenticationSlice';
 import Countdown from '../../Countdown';
 import Alert from '../Alert/Alert';
 export default function OTPSignup() {
@@ -12,6 +12,8 @@ export default function OTPSignup() {
   const navigate = useNavigate();
   const reg_id = useSelector(selectReg_id)
   const error = useSelector(selectAutheError)
+  const loading = useSelector(selectAuthLoading)
+  const message = useSelector(selectAuthMessage)
   const otp_verified = useSelector(selectOtp_verified)
   const [otp,setOtp] = useState('')
   const dispatch = useDispatch();
@@ -38,7 +40,7 @@ export default function OTPSignup() {
     <div className="login">
       <div className="col-30">
         <form>
-        {error&&<Alert error={error} message={'OTP did not match'}/>}
+        {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: Object.values(message)[0]} />}
           <h1>Enter the OTP here to set your password</h1>
           <p>Enter OTP sent to {location.state.mobile_no}</p>
           {expired? <p>Please resend code</p> :<p> This code will expire in <Countdown minutes={1} seconds={30} trigger={handleExpire}/></p>}

@@ -5,7 +5,7 @@ const JobOverviewLoader = (props) => (
   <ContentLoader 
     speed={2}
     width={'100%'}
-    height={208}
+    height={219}
     viewBox="0 0 100% 219"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"

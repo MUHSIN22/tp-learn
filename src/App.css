@@ -607,7 +607,7 @@ body {
 .Profile_resume_img{
   height: 10rem;
   width: 15rem;
-
+object-fit: contain;
 }
 .bg-dark{
   background-color: #000000;
@@ -869,6 +869,18 @@ border-radius: 5px;
   border-radius: 4rem;
   font-size: 1.1rem;
   text-decoration: none;
+  transition: 0.3s;
+}
+.btn.disabled{
+  opacity: 0.8;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.btn:hover{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition: 0.1s;
+}
+.btn:active{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .btn-fit {
   width: fit-content;
@@ -905,6 +917,7 @@ border-radius: 5px;
   background-color: #21ce93;
   color: #fff;
   align-items: center;
+  cursor: pointer;
 }
 .secondary {
   border: solid 2px #f0967d;
@@ -1469,6 +1482,9 @@ video{
   padding-left: 4rem;
   padding-right: 4rem;
 }
+.pl-3{
+  padding-left: 3rem !important;
+}
 .px-5{
   padding-left: 5rem;
   padding-right: 5rem;
@@ -1476,8 +1492,14 @@ video{
 .pl-3{
   padding-left: 3rem;
 }
+.pl-1{
+  padding-left: 1rem;
+}
 .p-0{
   padding: 0!important;
+}
+.mb-0{
+  margin-bottom: 0rem;
 }
 .mb-1{
   margin-bottom: 1rem;
@@ -1494,7 +1516,16 @@ video{
 .mb-5{
   margin-bottom: 5rem;
 }
-
+.box_1{
+  height: 1.4rem;
+  width: 20rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  color: #000000;
+  font-weight: 700;
+  font-size: 1.4em;
+  background-color: #e6e6e6;
+}
 .floating-btn{
   padding: 0.8rem 1rem;
   display: flex;

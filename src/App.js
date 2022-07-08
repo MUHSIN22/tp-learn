@@ -1,7 +1,7 @@
 
 import './App.css';
 import Login from './Components/Login/Login';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Router, Routes, useLocation } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import Onboarding from './Components/Onboarding/Onboarding';
 import Signup from './Components/Signup/Signup';
@@ -21,7 +21,9 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
 import CVReview from './Components/CVEditor/CVReview'
 import DummyForm from './Components/EditForms/ProfilePicture'
+import CognitiveSkills from './Components/Form/CognitiveSkills';
 import Resume from './Components/ResumeTemplate/Resume';
+import NotFound from './Components/Not_Found/Notfound';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -30,7 +32,7 @@ function App() {
   const reload = useSelector(selectReload)
   useEffect(() => {
     if(auth.authToken&&reload){
-      console.log('app.js resume info called')
+      console.log('Reload Resume Update')
       try {
         dispatch(resumeInfo({user_id:auth.user_id,auth:auth.authToken})).unwrap()
       } catch (error) {
@@ -38,7 +40,7 @@ function App() {
       }
     }
     if(auth.authToken&&reload){
-      console.log('app.js resume info called')
+      console.log('Reload Graph Update')
       try {
         dispatch(graphDetails({user_id:auth.user_id,auth:auth.authToken})).unwrap()
       } catch (error) {
@@ -50,6 +52,30 @@ function App() {
       
     }
   }, [auth,form_id,reload,dispatch])
+  
+  useEffect(() => {
+
+    if(auth.authToken&&!form_id){
+      console.log('Auth Resume Reload')
+      try {
+        dispatch(resumeInfo({user_id:auth.user_id,auth:auth.authToken})).unwrap()
+      } catch (error) {
+          console.log(error)
+      }
+    }
+    if(auth.authToken&&!form_id){
+      console.log('Auth Graph Reload')
+      try {
+        dispatch(graphDetails({user_id:auth.user_id,auth:auth.authToken})).unwrap()
+      } catch (error) {
+          console.log(error)
+      }
+    }
+  
+  
+    return () => {
+    }
+  }, [auth,form_id])
   
   useEffect(() => {
       dispatch(resetError())
@@ -77,7 +103,9 @@ function App() {
        <Route path='/membership' element={<Membership/>}/>
        <Route path='/MyProfile' element={<CVReview/>}/>
        <Route path='/dummy' element={<DummyForm/>}/>
+       <Route path='/cs' element={<CognitiveSkills/>}/>
        <Route path='/resume' element={<Resume/>}/>
+       <Route path='*' element={<NotFound/>}/>
       </Routes>
     </div>
   );
