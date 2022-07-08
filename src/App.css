@@ -1176,8 +1176,6 @@ div.dot {
 
 }
 @media (min-width: 375px) and (max-width: 550px) {
- 
-
   .logo_img {
     width: 10rem;
     padding: 0;
@@ -1342,8 +1340,8 @@ video{
 /* .Section_5_left {
   position: relative;
   top: 20rem;
-  /* width: 20rem !important; */
-  /* text-align: left; */
+  width: 20rem !important;
+  text-align: left;
 } */
 .slider-container{
   width: 158% !important;
