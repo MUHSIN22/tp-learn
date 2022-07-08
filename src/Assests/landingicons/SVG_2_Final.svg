@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ef967d;
+        stroke: #ef6137;
+        filter: url(#filter);
+      }
+
+      .cls-1, .cls-2 {
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        fill: #feeae4;
+        stroke: #f09b83;
+        filter: url(#filter-2);
+      }
+
+      .cls-3 {
+        font-size: 14.583px;
+        font-family: Poppins;
+        font-weight: 300;
+      }
+
+      .cls-3, .cls-5 {
+        fill: #171717;
+      }
+
+      .cls-4, .cls-6 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        stroke: #106281;
+        stroke-width: 0;
+        filter: url(#filter-3);
+      }
+
+      .cls-5 {
+        font-size: 41.667px;
+      }
+
+      .cls-5, .cls-6 {
+        font-family: Aleo;
+        font-weight: 700;
+      }
+
+      .cls-6 {
+        font-size: 33.333px;
+      }
+
+      .cls-7 {
+        fill: #ca7357;
+        stroke: #818181;
+        stroke-width: 2.083px;
+        stroke-dasharray: 8.333 4.167;
+        fill-rule: evenodd;
+      }
+    </style>
+    <filter id="filter" x="538" y="41" width="607" height="164" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="23" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="6.782"/>
+      <feFlood result="flood" flood-color="#ef967d" flood-opacity="0.43"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+    <filter id="filter-2" x="483" y="172" width="716" height="682" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="33" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="6.557"/>
+      <feFlood result="flood" flood-color="#ef967d" flood-opacity="0.19"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+    <filter id="filter-3" x="786" y="398" width="738" height="704" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="33" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="7.348"/>
+      <feFlood result="flood" flood-color="#7d7d7d" flood-opacity="0.19"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+    <image id="image" width="49" height="49" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADEAAAAxCAYAAABznEEcAAAFm0lEQVRogc2aaWwVVRTHf4xV6oJoRbGJqIhLrCAuLEFF1AqNoH5Q0cQEtyi4FLfEmGhwCZKq8YMoatQoX0RQUVP3lUXjEheQiiJESqoYBRTXV0oRMEfOJaf3vpn35i3t+yVN78ycu/zf3OXcc6fXoKUPUwIi4HjgFGAIcCgwANgP2A34F/gN+AloA74BPgCWApuLrb4quJMOafQk4CxtdBL7Aod7z9cBbwPPAO8m5E0kSnqYwET9JT8EJuchII7+wCXAO8BnwOUxdomkfRMjgSbg9OAJ/AksBFqA1cAvwAZgE9Ab6AfUAgO1y40BDjD5h+vflcA0YEFQQwxpRMwAbgvuwjxgLrBYheTL7sCpwIXApcAumu8k4H3gEaAxn7LyGdh9gfnAmd79JwDJvDzIkR55O1OBm7ycXwDnAT8mlZhrTNTqDGIFfA6cDEwpkQBhDXCzdrNF5v4w4CugLshhSBJxoBYw0NybCYwAPg6sS8NyHW93mdJqgCXA0XE1xInYA/jUG3gy4G4MLMvD3dqNHDIxfKI/bECcCJm7DzHXFwBPBVbl5WUd+I6+OnkEZBNxjy5ijiuAFwOr7kHWoQmmpiOBp3OJkH53u7mW2Wd2DwlwvOFN7bIgjrYGvog5Jr0CuD4osmdoUg8hWzu7iBivTpxjYoUIcFxk0gPU3fkfK+Jek56jnmYlIW7MfaY9O6dhJ2KoLjSOWytMgGM6sEXTteo97xRh5/+X1O/vbsQhfCjGuXRkgMfM9Q2o79QL+F3nYWFcMb59gTQAb5ms+yQ4k8cCyzS9Hdgz0m7kBGR0bu5OzvAEtANbE+pv0d2hIC9gjIioNwbyBjqCbOWjXt1ux2Z1+v7JUeObJl0fedPqksC8fEi3fc+U3q6brhV51Pi1SddVeVvL1sC8PIxV/8wKGJFiWl9t0gdFnoifA/Nkdk18mp0G3VM7pAsNT7kutZl0TaT+uuPXwDwecUl+8F2AHGQbxNKFvk3OFiB79069uVeVxoUcaQb1TP1/sU6JEwKLrvjT6CYNDKQVgLazQ9teFZkVEN185Mv9xk78rtcT8vkC2nUWKkSAa6f78bdGutA5agLzeMQ1meUJeTWLtS8go4O4UAFo+KfalSci1pqHtYF5MlM16uE4G3jNXPtjYIuOgWKdy4NNemOkg9NxWGCemyneG5Gx8ThwrreQZbQLlcI7HmTSayNv4RgamOeHvJFHjaX4+s3m2s1CLSUQIBxj0qsiL1w4rogg83UatfNJu5DlQ4OxWRCpq5HRGzJVjiqi8EZPSCELWS6O0oCBY2GkHqOdVa7KUUg+QmTz8myR02gcl5n7su/+y8ViR3lRvX56KFJpSFf/Q/YQ2i6JA8x3OzuJrn1vGjy9AgUItxgBGzXQ3SVQMM2kr/EigJVAH+BO044ml7Ai5nm+fE9F/eKYa9yi9cADzs4Pnk0y6RO96HRPMtlzMO3gDkR86UUT5PWd08MCRqoH4Gj2tqeBCOFab1p8xYtOdyd1XvhynR6PdSGbCOE0z7tdrL5QdzJae4ZzubdpbKrTb0OciA26dtiD8uaYg8dycLW+gWpTtvSGldnqihOBZjhBFxfHDA21HxFYlwY5CXrBG5fbVMBHcTUkiUDHxnF6dueQ+Od3Kqh/kKMw+uhbXqmnUo41+kMmBvTy+aKgTWNTdvMTaaUSOnlQT1MLYZj+GK36f29TxvPqci/LVW7aD1TG6xHAkODJDrdlke4ZWlX8evNFwf66I5ON12DtIoODUmAVcAfwXPAkhkK/smlU1yTxfFknhk6NT1UHT7siwp/UM4jtwdMECv1AZZa+6vN1Hfk7sNhBb+3vcQI6NJAmnoJsOeUtpxIgFPupkJxlyJ9ESWT3JuuLbFqk24g7LwKkDtmzSJBY3HsJTMgAlsEq3rMsYIUD/AcgexvIgBgJ2QAAAABJRU5ErkJggg=="/>
+    <image id="image-2" width="52" height="52" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAYAAADFeBvrAAAFdklEQVRogdWaeWxVRRSHP55VkIKmqRtGEaMIiFikLrhUi6IxNUpViIkSV8A/XGNUEKO4RIxbVHAX1ApGE8Td+EfdgqJYWyUIVQjigtigxiLuVIs56bnkOHPfe/e9N6/t+5KbzJ39d+/cmTNnbp/2h24gIPsBhwMHAgcBQ4DdgIHaxO/AD8A3QCuwCvgY+CJUF8q8mNwZCZwBTACqs5QWYXsABwOnmngR9iqwCPjEK9VNgsYDVwKneCm5M1KvGcA7wBzgpe4SJA3fCdR5KV38osNpObAG+B74GdgKVACDgP2BKq1rF6f8OL3eBa7VIVk0QdcBs71Y+BFYDLwOLAE2ezni6Q/UACcBk4C9Ta5aoAm4Q99cIpJOCrsDzwAnOPGrgfuABfrBF8J2wGTgsphvsQU4C/gyW/0pL8ZnFLAyRszVwHDgkQBihH+BBuBQYCrwh0mr1j4c55VyyCaoSl+7HecypEYA93i5wzFPH9ZrpsZ++l2Nz9RKJkGylnykFUXM0acUbN3IwHqd2m90sjQCR6Yrlk7QzsAyoK+Jkw/zCi9n8bkVuNBp5X1g37iW0wl6w6zuwnSdbXqKJ4EpTr8b4/oSJ2iG80of1HWnp5kPXG/6IGbWA9kEDQZuN/fNwKWBhMQ9vFyZrWtdxCXAIZkaWeDcnxagE2IVrFWDNJutl4SJQIfJ12DLWEFjgWPN/VVAW4AOXKPDYy9glpeaO38BF5hSo9Q49gTZ70SmzHsDNO628Y+Xmh9itXxqSm77TKLGhqhNFXFToIaFv014i5eaP9NNyQOAI6wg+wp/A54K2HCxkGn7W1P3FCtokklYCHSWgCDURIo4HRU0WG2ziMVesd6L7WulDDsRdIyJlOH2XgkJko3kBnM/NqVGaMRnzkdcCiwzfaxO6RYhYnkRBGxNEw5Fs6lnRMqxWluL0OAmE/7VSy0cO+Qqy5zN24aE1cve/3JgRy/Fx1oftXEGZQwdaoyu9JM82k3EQBFUbiKSODd2UN+Z661JwlC9knCxeomyfdN/mnDffC3gCi8mPEnevkeZKhygCQO8HD5ivoxR47Wfl+ozxrwVWdk/9HL4dOiimWTGtX3YIoJ+AnbViD297PGsAM6PTfG5DZipsY3OzjMEdrRsliH3tYkYHrgxYScTLvdSC2eQqWFTShfTiNFFaLBPmnAobJ9Xp5y1p0o9mKXEUaavzSnHdhP31dElJGao7uUimkTQOr0i6r1ivRfbV1lDl0br0Asm4dwSEnSRCcuBWWck6HGTUKme/t6OfDvDTB8fw+xY1zgHS7cEFLN9mnChWE/uej1E+J9HZqYJi9PhvCII6u+l5kedszHd5tC3gt7Ug6WIeYFstrnAd8BG4C4vNXekz8+aUmutU8c1Ts8x4bJA/gXxn+2jvou3vdTcedqxPqzHyhMkR4x3m/txMecz+dAZyCc31Xnoz+nRSlpBqOvWWg83u0+hh6iPZjJloyMurSBijv2eAKZ5uboPEfOi09qJcf7DdILanK2z8KgzE3YX02LETHCM6qyCUBvPfVOyt3k+z+13rshWY74+SMvZwCvp6sokSHhLjVV7HnOmLsShN2qWiXow7Z6t1jtTtkcSn8IHuudYYeIq1FxaEvmUA3GyntAt0vOkiK/0dOHlbM0kdZK06l7pfie+Rg3bz3V6P8wrmZ0qnVlb9LDa/YeoQf8JakpSWT7/y9WqrVfjpXSxTt9mi/r52o2Dsdz8wDRar2FeDV1I+VnOmWpRBEVMVmdjPm8lE6vUXHIng0QUcjK9UP9ePB542HG25Eqb2mN1+idkXmKEEH80yg97cgkyI4ofTo7axYMk07ts6yOnoRz4ys5SXGfyZ5U42uWAYGkQ0wj4DxFB/omhvscSAAAAAElFTkSuQmCC"/>
+  </defs>
+  <g style="fill: #ef967d; filter: url(#filter)">
+    <rect id="rect-2" class="cls-1" x="585" y="65" width="512" height="69" rx="34.5" ry="34.5" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#rect-2" style="stroke: #ef6137; filter: none; fill: none"/>
+  <g style="fill: #feeae4; filter: url(#filter-2)">
+    <rect id="rect" class="cls-2" x="527" y="183" width="627" height="593" rx="35" ry="35" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#rect" style="stroke: #f09b83; filter: none; fill: none"/>
+  <text id="Collaborated_with_fellow_engineers_to_evaluate_software_and_har_copy" data-name="Collaborated with fellow engineers to evaluate software and har copy" class="cls-3" x="648.755" y="466.169">Collaborated with fellow engineers to<tspan x="648.755" dy="17.5">evaluate software and hardware interfaces.</tspan></text>
+  <text id="Promoted_experience_with_the" data-name="Promoted experience with the" class="cls-3" x="648.755" y="571.169">Promoted experience with the</text>
+  <text id="Conducted_regression_with_ngineers_to_to_conduct_team." data-name="Conducted regression with ngineers to to conduct team." class="cls-3" x="648.755" y="656.169">Conducted regression with ngineers to<tspan x="648.755" dy="17.5">to conduct team.</tspan></text>
+  <g style="fill: #fff; filter: url(#filter-3)">
+    <rect id="Rectangle_1_copy" data-name="Rectangle 1 copy" class="cls-4" x="841" y="420" width="627" height="593" rx="35" ry="35" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#Rectangle_1_copy" style="stroke: #106281; filter: none; fill: none"/>
+  <text id="Roles_Responsibilities" data-name="Roles Responsibilities" class="cls-5" x="901.517" y="511.349">Roles Responsibilities</text>
+  <text id="Software_Developer" data-name="Software Developer" class="cls-6" x="635.518" y="111.349">Software Developer</text>
+  <image id="search-interface-symbol" x="1011" y="79" width="39" height="39" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAnCAYAAACMo1E1AAADK0lEQVRYhc2YW4hPURjFf0bDKOU2ud/HlExqHsi45BZKHsiDEFNIeUJCSl4leZLygnggygOlqEmU8OCay5gx8mRojGuECS1tfVN7ztnn/K+nZtXqv//nfN/61tnn7LP3Pn0kUQAagMXALKAWqAaqgB9AJ9AK3AVuAA8LEQ7CmcvBSknbJTWrMDyQtCmHdipz9dx64CAwIXL8AdAGvAd+A/2BEcBUYHok9hmwF7gaUy+h505G+umxpD2SJue44mmSDkh6Gck/HIhNZehkP0m3PdEPkhoDcfnQPQ5dntblUs3d88SuSaoOxBTCmojmlWLNnfdEzoYSSmCTp32kUHMbvOTroeAy8LlXY36+o7US+Gaj7quNvK7Y6Ckdo4E3QB+gAxiZplhhv7vMmMPmjIw5vLXXCtYBjbEID67nnMGPwGB7w0+NRZUfn61eM1CXpO6MzbVAh2OxiGxwwlSnAZOSKjhzK6ztHr4LsYhscNpTXZVUocImcWyi7oxFZIPnNiCwxUQQFV63vggFZIhXJj0xqYQzN8TaX2Jns8UnUx+YVMWZ62vtv7Gz2eJPLnVn7nuuK8gIg0z2V5K8M9du7bGxs9lijKl3JFVx5p5Yu8GbMbLGMGCK1UhczjszTdZ23bwsFpENVnnPevIKWdLQYheDJfCR1fuUptHduOgZnBAKLCNne7UOpel2N2q9hJuhwDKyxas1NE3X/3PGS9odCi4Dj3o19hWyEnYbm3de8ppQQgnc4Wk/LGYPUaee2BpKKoL7PdXWfPNjByQtiRg8JWlwIC4fjpd0KaLXJmlUseYc50jq9ATf20Z5TCA2xBobiT8jGt34Iak+kNeDaZ8jhtmK1V8Musn6JnDLZpZ2228MAMYB9cACYF5Ey+nsBNZ6q2CnNRu4H6vsvYRzcaV9lCkGbou5MKLvD4zfkmYk1Y8dSKErckzS08gnBh/f7ELcd5GZKVrbvZy/khoCMam3NQ3DgRr7rbI9r1tdvLadVT7YBhz34txG606htzVLbon0/Pxib2tW3BQxuKg3mXPcGDG4tJRnLgusA855ust7kzmHNf7GvreZc1j9fxRDyz/BCZ9MqkMt1AAAAABJRU5ErkJggg=="/>
+  <use id="check" x="902" y="579" xlink:href="#image"/>
+  <use id="check_copy" data-name="check copy" x="902" y="752" xlink:href="#image"/>
+  <use id="check_copy_2" data-name="check copy 2" x="902" y="862" xlink:href="#image"/>
+  <text id="Worked_with_software_development_and_testing_team_members_to_de" data-name="Worked with software development and testing team members to de" class="cls-3" x="971.754" y="591.169">Worked with software development and testing team<tspan x="971.754" dy="17.5">members to design and develop robust solutions to meet</tspan><tspan x="971.754" dy="17.5">client requirements for functionality, scalability and</tspan><tspan x="971.754" dy="17.5">performance.</tspan></text>
+  <text id="Worked_with_software_development_and_testing_team_members_to_de-2" data-name="Worked with software development and testing team members to de" class="cls-3" x="648.755" y="237.169">Worked with software development and testing team<tspan x="648.755" dy="17.5">members to design and develop robust solutions to meet</tspan><tspan x="648.755" dy="17.5">client requirements for functionality, scalability and</tspan><tspan x="648.755" dy="17.5">performance.</tspan></text>
+  <text id="Reviewed_project_specifications_and_designed_technology_solutio" data-name="Reviewed project specifications and designed technology solutio" class="cls-3" x="971.754" y="770.17">Reviewed project specifications and designed technology<tspan x="971.754" dy="17.5">solutions that met or exceeded performance expectations.</tspan></text>
+  <text id="Reviewed_project_specifications_and_designed_technology_solutio_copy" data-name="Reviewed project specifications and designed technology solutio copy" class="cls-3" x="646.754" y="374.169">Reviewed project specifications and designed technology<tspan x="646.754" dy="17.5">solutions that met or exceeded performance expectations.</tspan></text>
+  <path class="cls-7" d="M927,638V852"/>
+  <text id="Collaborated_with_fellow_engineers_to_evaluate_software_and_har" data-name="Collaborated with fellow engineers to evaluate software and har" class="cls-3" x="971.754" y="879.17">Collaborated with fellow engineers to<tspan x="971.754" dy="17.5">evaluate software and hardware interfaces.</tspan></text>
+  <use id="plus" x="571" y="237" xlink:href="#image-2"/>
+  <use id="plus_copy" data-name="plus copy" x="572" y="356" xlink:href="#image-2"/>
+  <use id="plus_copy_2" data-name="plus copy 2" x="572" y="447" xlink:href="#image-2"/>
+  <use id="plus_copy_3" data-name="plus copy 3" x="572" y="539" xlink:href="#image-2"/>
+  <use id="plus_copy_4" data-name="plus copy 4" x="572" y="638" xlink:href="#image-2"/>
+</svg>

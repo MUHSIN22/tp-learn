@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-1 {
+        stroke: #106281;
+        stroke-width: 0;
+        filter: url(#filter);
+      }
+
+      .cls-2 {
+        fill: #f1967e;
+      }
+
+      .cls-2, .cls-6 {
+        stroke: #ed714f;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+
+      .cls-3, .cls-4 {
+        font-size: 41.667px;
+      }
+
+      .cls-3, .cls-4, .cls-7 {
+        font-family: Aleo;
+        font-weight: 700;
+      }
+
+      .cls-4, .cls-5, .cls-7 {
+        fill: #525060;
+      }
+
+      .cls-5 {
+        font-size: 25px;
+        font-family: Poppins;
+      }
+
+      .cls-6 {
+        fill: #ffe4dc;
+      }
+
+      .cls-7 {
+        font-size: 70.833px;
+      }
+    </style>
+    <filter id="filter" x="466" y="60" width="989" height="989" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="14" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="10.05"/>
+      <feFlood result="flood" flood-color="#8b8b8b" flood-opacity="0.39"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g style="fill: #fff; filter: url(#filter)">
+    <rect id="rect" class="cls-1" x="568" y="148" width="784" height="784" rx="50" ry="50" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#rect" style="stroke: #106281; filter: none; fill: none"/>
+  <rect class="cls-2" x="746" y="733" width="428" height="101" rx="50.5" ry="50.5"/>
+  <text id="Take_More_Test" data-name="Take More Test" class="cls-3" x="812.673" y="799.347">Take More Test</text>
+  <text id="Congratulations" class="cls-4" x="816.672" y="235.347">Congratulations</text>
+  <text id="You_have_earned_expert_badges_in_JAVA8" data-name="You have earned expert badges in JAVA8" class="cls-5" x="713.672" y="275.347">You have earned expert badges in JAVA8</text>
+  <circle class="cls-6" cx="960" cy="502" r="155"/>
+  <text id="_28_30" data-name="28/30" class="cls-7" x="863.476" y="524.668">28/30</text>
+  <image x="1277" y="113" width="216" height="136" xlink:href="data:img/png;base64,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"/>
+</svg>
