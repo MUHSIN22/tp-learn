@@ -33,7 +33,7 @@ font-family: 'Poppins', sans-serif;;
 .Profile_resume_img{
   height: 10rem;
   width: 15rem;
-
+object-fit: contain;
 }
 .bg-dark{
   background-color: #000000;
@@ -600,6 +600,9 @@ div.dot{
   padding-left: 4rem;
   padding-right: 4rem;
 }
+.pl-3{
+  padding-left: 3rem !important;
+}
 .px-5{
   padding-left: 5rem;
   padding-right: 5rem;
@@ -607,8 +610,14 @@ div.dot{
 .pl-3{
   padding-left: 3rem;
 }
+.pl-1{
+  padding-left: 1rem;
+}
 .p-0{
   padding: 0!important;
+}
+.mb-0{
+  margin-bottom: 0rem;
 }
 .mb-1{
   margin-bottom: 1rem;
@@ -625,7 +634,16 @@ div.dot{
 .mb-5{
   margin-bottom: 5rem;
 }
-
+.box_1{
+  height: 1.4rem;
+  width: 20rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+  color: #000000;
+  font-weight: 700;
+  font-size: 1.4em;
+  background-color: #e6e6e6;
+}
 .floating-btn{
   padding: 0.8rem 1rem;
   display: flex;
