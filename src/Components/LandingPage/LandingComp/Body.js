@@ -6,11 +6,13 @@ import footerimg from "../../../Assests/new_imgs/Screenshot from 2022-06-28 02-5
 import point from "../../../Assests/Svgs/point.svg";
 import img_sec3_1 from "../../../Assests/new_imgs/section_3_img_1.svg";
 import img_sec4 from "../../../Assests/Svgs/section_4.svg";
-import { Slideshow } from "./Slideshow";
+import Slideshow  from "./Slideshow";
 import bannerMain from "../../../Assests/Svgs/FinalSVGFile.svg";
-import section_2_img from "../../../Assests/landingicons/SVG_2_Final.svg"
-import section_4_img from "../../../Assests/landingicons/SVG_4_Final.svg"
-import section_5_img from "../../../Assests/landingicons/SVG_5_Final.svg"
+import section_2_img from "../../../Assests/landingicons/SVG_2_Final.svg";
+import section_4_img from "../../../Assests/landingicons/SVG_4_Final.svg";
+import section_5_img from "../../../Assests/landingicons/SVG_5_Final.svg";
+import section_3_img from "../../../Assests/landingicons/SVG_3_Final.svg";
+import video from "../../../Assests/landingicons/video.mp4";
 
 const Body = () => {
   return (
@@ -34,8 +36,8 @@ const Body = () => {
             </div>
 
             <div>
-              <div class="">
-                <ul class="custom-2">
+              <div className="">
+                <ul className="custom-2">
                   <li>
                     Visually appealing resume with graphical representation of
                     your career progression
@@ -58,10 +60,10 @@ const Body = () => {
                 </ul>
               </div>
             </div>
-            <button class="Build_resume">Build My Resume</button>
+            <button className="Build_resume">Build My Resume</button>
           </div>
         </div>
-        <div className=" section_2 d-flex justify-between">
+        <div className="section_2">
           <div className=" common_in_section section_2_left">
             <h1>
               Skill And Industry <br />
@@ -75,15 +77,10 @@ const Body = () => {
               and increase your chances of getting an interview.
             </span>
           </div>
-          <div className="col-sm-6">
-            {/* <div className="Section_2_left circle">
-              <img className="section_img_2" src={img_sec} />
-            </div> */}
-            {/* <div id="circle_container">
-              <div id="circle">
-              <img className="section_img_2" src={img_sec} />
-              </div>
-            </div> */}
+          <div className="Section_2_img">
+            <div className="Section_2_left circle">
+              <img className="section_img_2" src={section_3_img} />
+            </div>
           </div>
         </div>
 
@@ -127,39 +124,27 @@ const Body = () => {
 
           <div className="col-sm-6 ">
             <div className="img_sec_5">
-              <img className="img_sction_5" style={{width:"35rem"}} src={section_5_img} />
+              <img
+                className="img_sction_5"
+                style={{ width: "35rem" }}
+                src={section_5_img}
+              />
             </div>
           </div>
         </div>
 
         <div className="row py-5 section_5 d-flex">
-          <div className="section_5_video col-40">
+          <div className="section_5_video ">
             <div className="secction_5_right">
-              <Video
-                autoPlay
-                loop
-                muted
-                controls={["PlayPause", "Seek", "Time", "Volume", "Fullscreen"]}
-                poster="http://sourceposter.jpg"
-                onCanPlayThrough={() => {
-                  // Do stuff
-                }}
-              >
-                <source src="" type="video/webm" />
-                <track
-                  label="English"
-                  kind="subtitles"
-                  srcLang="en"
-                  src=""
-                  default
-                />
-              </Video>
+              <video width="500" height="300" controls>
+                <source src={video} type="video/mp4" />
+              </video>
             </div>
           </div>
 
-          <div className=" Section_5_left col-50">
+          <div className=" Section_5_left ">
             <h1>What Top HR LeadersHave To Say</h1>
-            <span className="mb-4">
+            <span className="HR_Text mb-4">
               Let's hear it from the experts who know it the best. Top hiring
               experts share their views on the best resumes they have seen, tips
               to craft a hireable resume, what makes them tick a candidate,
@@ -168,8 +153,8 @@ const Body = () => {
             </span>
             <hr className="line_break" />
 
-            <div className="row d-flex flex-column">
-              <div className="col-12 d-flex justify-content-between">
+            <div className="companies row d-flex flex-column">
+              <div className=" d-flex justify-between">
                 <div className="dot_text">
                   <span className="dot"></span>
                   <span>Amazon</span>
@@ -193,8 +178,8 @@ const Body = () => {
           </div>
         </div>
 
-        <div className="row py-5 section_6 d-flex">
-          <div className="col-50 section_6_right">
+        <div className="row section_6 d-flex justify-between">
+          <div className="section_6_right">
             <span className="text-left">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
               iusto sunt quam consequatur iure adipisci quis earum tempore
@@ -209,8 +194,8 @@ const Body = () => {
             <div></div>
           </div>
 
-          <div className="">
-            
+          <div className="slideShow">
+            <Slideshow/>
           </div>
         </div>
 
@@ -228,16 +213,14 @@ const Body = () => {
                 </span>
               </div>
             </div>
-            <div className="sec_7_Head">
-              {/* <Slideshow /> */}
-            </div>
+            <div className="sec_7_Head">{/* <Slideshow /> */}</div>
           </div>
         </div>
 
         <div className="row py-5 section_3 d-flex justify-around">
           <div className="">
-            <div className="section_3_imgsec">
-              <img className="section_img_3" src={bannerMain} />
+            <div className="section_last_imgsec">
+              <img className="section_img_last" src={bannerMain} />
             </div>
           </div>
           <div className="col-50 d-flex flex-column section_3_right ">

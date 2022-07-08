@@ -6,35 +6,38 @@ const Navbar = () => {
   return (
     <>
       <div>
-        <div className="nav">
-          <input type="checkbox" id="nav-check" />
-          <div className="nav-header">
-            <div className="nav-title">
-              <img src={Logo}/>
-            </div>
-          </div>
-          <div className="nav-btn">
-            <label for="nav-check">
-              <span></span>
-              <span></span>
-              <span></span>
-            </label>
-          </div>
+        <div className="container">
+          <nav className="navbar d-flex justify-between">
+            <a className="navbar-brand mb-3" href="#">
+              <img className="logo_img" src={Logo} />
+            </a>
 
-          <div className="nav-links">
-            <a href="//github.io/jo_geek" target="_blank">
-              LOGIN
-            </a>
-            <a href="http://stackoverflow.com/users/4084003/" target="_blank">
-              SigNUP
-            </a>
-          </div>
+            <div
+              className="collapse navbar-collapse navbtn"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav d-flex justify-between ">
+                <li className="nav-item ">
+                  <button className="button_slide nav-link slide_right login_nav_btn">
+                    Login{" "}
+                  </button>
+                  <br /> <br />
+                  <br />
+                </li>
+                <li className="nav-item ">
+                  <button className="button_slide nav-link slide_right create_new_btn">
+                    Create a new Account
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </nav>
         </div>
       </div>
 
       <section className="banner ">
-        <div className="">
-          <div className="row banner_txt d-flex justify-around px-5">
+        <div className="container ">
+          <div className="row banner_txt d-flex justify-between">
             <div className="banner_sec_1">
               <span className="banner_text ">Build a Data-Driven</span>
               <span className="banner_text intligent">Intelligent Resume,</span>
