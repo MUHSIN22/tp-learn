@@ -15,6 +15,8 @@ import Section2Review from "../CV/Section2Review";
 import Section3 from "../CV/Section3";
 import SelfDeclaration from "../CV/SelfDeclaration";
 import SocialContribution from "../CV/SocialContribution";
+import ResumeDownload from "../ResumeTemplate/Resume";
+
 import SocialMedia from "../CV/SocialMedia";
 import VideosReview from "../CV/VideosReview";
 import { FaEdit, FaShareAlt } from "react-icons/fa";
@@ -39,7 +41,7 @@ export default function CVBuilder() {
 
   const generatePdf = () => {
     let doc = new jsPDF("p","pt","a4")
-    doc.html(document.querySelector("#tpcv"),{
+    doc.html(document.querySelector("#hello"),{
       callback: (pdf) => {
         pdf.save("talentplace.pdf");
       }
@@ -54,6 +56,7 @@ export default function CVBuilder() {
 
   const floatingButton = (
     <div>
+      
       <div
         className="floating-btn orange"
         style={{ "boxShadow": "5px 10px 20px 0 #ec957c" }}
@@ -61,7 +64,7 @@ export default function CVBuilder() {
         <div className="" onClick={handleEdit}>
           <FaEdit />
         </div>
-        <div className="" onClick={generatePdf}>
+        <div className="" onClick={()=>generatePdf()}>
           <FiDownload />
         </div>
         <div className="">
@@ -97,6 +100,10 @@ export default function CVBuilder() {
           {page==="/Recommendation"  && <Recommendation />}
           {page==='/Docs' && <DocsReview />}
           {page==='/self-declaration' && <SelfDeclaration />}
+          <div id="hello" >
+            <ResumeDownload />
+          </div>
+          
         </div>
       </div>
     </div>

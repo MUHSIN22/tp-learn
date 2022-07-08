@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { FaFileContract } from "react-icons/fa";
 import { BiMessageMinus } from "react-icons/bi";
 import { BsGenderMale,BsFacebook,BsTwitter ,BsLinkedin} from "react-icons/bs";
@@ -53,9 +53,15 @@ function Resume() {
   const hobbies = useSelector(selectHobbies);
   const socialLink = useSelector(selectSocilaLinks)
   const socialContribution = useSelector(selectSocialContribution);
-  console.log("kkkkkkkkkkkkkkkk",socialLink)
+
+  useEffect(() => {
+    console.log("kkkkkkkkkkkkkkkk",resumeDetails)
+  }, [])
+  
+  
+
   return (
-    <div className="mt-5">
+    <div className="mt-5" id="tpcv">
       <div className="d-flex">
         <div className="col-30">
           <img className="Profile_resume_img" src={profile} />
