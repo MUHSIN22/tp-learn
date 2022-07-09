@@ -61,7 +61,7 @@ export default function Memberships() {
 
   return (
     <div className="container membershp">
-      <div className="flex-row-center">
+      <div className="flex-row-start">
         <div className="col-fit">
           <Sidebar/>
         </div>

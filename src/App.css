@@ -246,6 +246,14 @@ body {
     height: calc(100vh - 50px);
     overflow-y: auto;
   }
+  .Sidebar{
+    height: 100vh;
+    width: 15rem;
+    background-color: #f0967c;
+    top:0;
+    left:0;
+    z-index: 999
+  }
 }
 
 /* navbar */
@@ -1174,6 +1182,16 @@ div.dot {
   top: 0rem;
 }
 
+.Sidebar{
+  height: 100%;
+  width: 10rem;
+  background-color: #f0967c;
+  top:0;
+  left:0;
+  z-index: 999;
+  min-height:100vh
+}
+
 }
 @media (min-width: 375px) and (max-width: 550px) {
   .logo_img {
@@ -1378,12 +1396,13 @@ video{
 
 
 .Sidebar{
-  height: 100vh;
+  height: 100%;
   width: 20rem;
   background-color: #f0967c;
   top:0;
   left:0;
-  z-index: 999
+  z-index: 999;
+  min-height: 100vh;
 }
 
 .SidebarList {

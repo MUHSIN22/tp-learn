@@ -33,7 +33,7 @@ function Sidebar(props) {
                  <li key={key} id={window.location.pathname == val.link ? "active" : ""} onClick={()=>{navigate(`${val.link}`);}} className="SidebarRow">{" "}
                  <div id="icon"> {val.icon}</div>{" "}
                  &nbsp; &nbsp; &nbsp;
-                {val.title != 'My Profile' ?  <div id="title">{val.title}</div> : (
+                {val.title == 'My Profile' ? (
                    <Tippy content={
                      <div className='text-left' style={{"margin":"2rem 2rem 2rem 2rem","z-index":"1000"}}>
                          <h4 onClick={()=>{sendProp("/personal-information")}}>Personal Information</h4>
@@ -58,7 +58,7 @@ function Sidebar(props) {
                    } placement="right-start" interactive={true}>
                       <div id="title">{val.title}</div>
                    </Tippy>
-                )}
+                ) :(val.title == 'Dashboard' ?  <div id="title" onClick={()=>{sendProp("/dashboard")}}>{val.title}</div> : <div id="title">{val.title}</div> )}
 
                  </li>
              )

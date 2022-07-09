@@ -56,6 +56,7 @@ const generatePdf = () => {
     dispatch(changePageOn(data));
     
   }
+  editPageDetails && editPageDetails.progress && window.scrollTo(0,0)
 
   const floatingButton = (
     <div>
@@ -90,19 +91,19 @@ const generatePdf = () => {
           <div className="flex-row-center justify-end m-0 px-1">
           {editPageDetails && editPageDetails.progress && <EditFormContainer data={editPageDetails} />}
           </div>
-          {page === "/personal-information" && <Section1 />}
-          {page === "/Experience" && <Section3 />}
-          {page === "/Education" && <EducationReview />}
-          {page === "/languages" && <Languages />}
-          {page === "/hobbies" && <Hobby />}
-          {page === "/Videos" && <VideosReview />}
-          {page === "/career-timeline" && <Section2Review />}
-          {page === "/SocialMedia" && <SocialMedia />}
-          {page === "/Certification" && <Cerification />}
-          {page==="/SocialContribution" && <SocialContribution />}
-          {page==="/Recommendation"  && <Recommendation />}
-          {page==='/Docs' && <DocsReview />}
-          {page==='/self-declaration' && <SelfDeclaration />}
+          {(page === "/personal-information" || page === "/dashboard") && <Section1 />}
+          {(page === "/Experience" || page === "/dashboard") && <Section3 />}
+          {(page === "/Education" || page === "/dashboard") && <EducationReview />}
+          {(page === "/languages" || page === "/dashboard") && <Languages />}
+          {(page === "/hobbies" || page === "/dashboard")&& <Hobby />}
+          {(page === "/Videos" || page === "/dashboard") && <VideosReview />}
+          {(page === "/career-timeline" || page === "/dashboard") && <Section2Review />}
+          {(page === "/SocialMedia" || page === "/dashboard") && <SocialMedia />}
+          {(page === "/Certification" || page === "/dashboard") && <Cerification />}
+          {(page==="/SocialContribution" || page === "/dashboard") && <SocialContribution />}
+          {(page==="/Recommendation"  || page === "/dashboard") && <Recommendation />}
+          {(page==='/Docs' || page === "/dashboard") && <DocsReview />}
+          {(page==='/self-declaration' || page === "/dashboard")&& <SelfDeclaration />}
           <div id="hello" style={{position: "fixed",padding: 0,clip: "rect(0 0 0 0)","overflow": "hidden"}}>
           <ResumeDownload newRef={newRef}/>
           </div>

@@ -1,8 +1,8 @@
 import React from 'react'
-
+import CVReview from '../CVEditor/CVReview';
 function Dashboard() {
   return (
-    <div style={{"marginTop":"5rem"}}></div>
+    <CVReview />
   )
 }
 
