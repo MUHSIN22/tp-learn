@@ -48,10 +48,11 @@ const  Resume =({newRef})=>{
   const bio = useSelector(selectBio);
   const resumeDetails = useSelector(selectResumeDetails);
   let lastCompany = useSelector(selectLastCompany);
-  let lastJob = lastCompany.job_role[lastCompany.job_role.length -1].designation_name
+  console.log("=======",lastCompany)
+  let lastJob = lastCompany ? lastCompany.job_role[lastCompany.job_role.length -1].designation_name : ""
   let keySkills = useSelector(selectKeySkills);
-  const educations = useSelector(selectEducation);
-  const certificates = useSelector(selectCertificate);
+  const educations = useSelector(selectEducation) || [];
+  const certificates = useSelector(selectCertificate) || [];
   const hobbies = useSelector(selectHobbies);
   const socialLink = useSelector(selectSocilaLinks)
   const socialContribution = useSelector(selectSocialContribution);
