@@ -105,7 +105,7 @@ function App() {
        <Route path='/dummy' element={<DummyForm/>}/>
        <Route path='/cs' element={<CognitiveSkills/>}/>
        <Route path='/resume' element={<Resume/>}/>
-       <Route element={<NotFound/>}/>
+       <Route path="*" element={<NotFound/>}/>
       </Routes>
     </div>
   );

@@ -10,8 +10,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 export default function Navbar(props) {
   const user = useSelector(selectUserFirstName)
-  // const history =useHistory()
-
+console.log(window.location.pathname)
   let navigate = useNavigate();
   
   const rendertomyprofile=()=>{
@@ -23,7 +22,7 @@ export default function Navbar(props) {
   return (
     <>
      {
-      window.location.pathname !== '/' ?  <nav>
+      window.location.pathname !== '/'  || window.location.pathname !== '/membership' &&  <nav>
       <div className="logo">
           <img src={Logo} alt="" />
       </div>
@@ -35,7 +34,7 @@ export default function Navbar(props) {
         
         <button className='btn tirtiary'>Save As Draft</button>
       </div>}
-  </nav>:""
+  </nav>
     }
     </>
   )
