@@ -1,0 +1,25 @@
+.main-header{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    height: 6rem;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+.main-header--active{
+    background: #fff;
+    box-shadow: 1px 0px 10px rgba(248, 40, 25, 0.297);
+}
+.main-header .btns-wrapper{
+    display: flex;
+}
+.main-header .btn-login{
+    background: transparent;
+    color: var(--muted-black);
+    box-shadow: none;
+    margin-right: 1rem;
+}

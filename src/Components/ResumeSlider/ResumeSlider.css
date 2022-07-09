@@ -1,0 +1,33 @@
+.resume-slider{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 2rem;
+    position: relative;
+}
+.resume-slider::after{
+    content: '';
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255,0.3 ) 100%);
+    pointer-events: none;
+}
+.resume-slider-wrapper{
+    display: grid;
+}
+.resume-slider .slide{
+    margin: 1rem 4rem;
+}
+.resume{
+    width: 100%;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+}
+.resume-slider .slider-title{
+    text-align: center;
+    font-family: var(--font-poppins);
+}
+.resume-slider .slide--active{
+    transform: scale(1.1);
+}

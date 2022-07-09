@@ -1,4 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+  } from 'redux-persist'
 import API from "../../API";
 
 
@@ -95,6 +104,15 @@ export const  validateOtp = createAsyncThunk('authentication/validateOtp',async(
         return rejectWithValue(error.response.data);
     }
 })
+
+export const logOut = createAsyncThunk('authentication/logout',async(body,{rejectWithValue})=>{
+    try{
+        console.log("===========",sessionStorage)
+        return {};
+    } catch(error){
+        return rejectWithValue(error.response.data);
+    }
+})
 export const authenticationSlice = createSlice({
     name: 'authentication',
     initialState,
@@ -103,7 +121,8 @@ export const authenticationSlice = createSlice({
             state.authToken +=1;
         },
         logout : (state)=>{
-            state.authToken= null;
+            state = null;
+            sessionStorage.clear();
         },
         setError : (state,action)=>{
             console.log('setError:',    action.payload)
@@ -208,6 +227,16 @@ export const authenticationSlice = createSlice({
             state.message = action.payload.data
 
 
+        })
+        .addCase(logOut.pending, (state,action)=>{
+            state.status = 'loading'
+        }).addCase(logOut.fulfilled, (state, action) => {
+            console.log("=======")
+            state.loading = false
+            state = action    
+        })
+        .addCase(logOut.rejected, (state, action) => {
+            state.loading = false
         })
     }
 })

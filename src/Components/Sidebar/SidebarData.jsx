@@ -44,7 +44,7 @@ export const SidebarData = [
     {
         title : "Logout",
         icon : <RiLogoutCircleRLine/>,
-        link : "/logout"
+        link : "/"
     },
 
 ]

@@ -3,14 +3,21 @@ import "../../App.css";
 import { SidebarData } from './SidebarData';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css'
-import logo from "../../Assests/LOGO.png"
+import logo from "../../Assests/sidebarLogo.png"
 import {FiMenu} from "react-icons/fi"
 import { useNavigate } from "react-router-dom";
+import {logout} from "../../redux/Features/AuthenticationSlice";
+import { useDispatch, useSelector } from 'react-redux';
 
 function Sidebar(props) { 
+  const dispatch = useDispatch()
 
   const sendProp = (pagelink) => {
     props.currentPage(pagelink)
+  }
+
+  const logoutUser = () => {
+    dispatch(logout())
   }
 
   const navigate = useNavigate();
@@ -58,7 +65,8 @@ function Sidebar(props) {
                    } placement="right-start" interactive={true}>
                       <div id="title">{val.title}</div>
                    </Tippy>
-                ) :(val.title == 'Dashboard' ?  <div id="title" onClick={()=>{sendProp("/dashboard")}}>{val.title}</div> : <div id="title">{val.title}</div> )}
+                ) :(val.title == 'Dashboard' ?  <div id="title" onClick={()=>{sendProp("/dashboard")}}>{val.title}</div> : (val.title == 'Logout' ? 
+                <div id="title" onClick={()=>{logoutUser()}}>{val.title}</div> :<div id="title">{val.title}</div>) )}
 
                  </li>
              )

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #f08465;
+        stroke-width: 234.75px;
+      }
+
+      .cls-2, .cls-3, .cls-8 {
+        fill: #fff;
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        stroke: #106281;
+        stroke-width: 0;
+      }
+
+      .cls-2 {
+        filter: url(#filter);
+      }
+
+      .cls-3 {
+        filter: url(#filter-2);
+      }
+
+      .cls-4 {
+        fill: #23cf93;
+      }
+
+      .cls-5 {
+        fill: #ffe4dc;
+        fill-rule: evenodd;
+      }
+
+      .cls-5, .cls-8 {
+        stroke: #f09b83;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+
+      .cls-6 {
+        font-size: 33.333px;
+        fill: #3e3e3e;
+      }
+
+      .cls-6, .cls-7 {
+        font-family: Aleo;
+        font-weight: 700;
+      }
+
+      .cls-7 {
+        font-size: 20.833px;
+        fill: #484848;
+      }
+
+      .cls-8 {
+        filter: url(#filter-3);
+      }
+    </style>
+    <filter id="filter" x="555" y="250" width="731" height="565" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="14" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="7.348"/>
+      <feFlood result="flood" flood-color="#8b8b8b" flood-opacity="0.39"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+    <filter id="filter-2" x="738" y="628" width="689" height="227" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="14" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="7.348"/>
+      <feFlood result="flood" flood-color="#8b8b8b" flood-opacity="0.39"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+    <filter id="filter-3" x="1129" y="661" width="161" height="161" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="14" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="7.348"/>
+      <feFlood result="flood" flood-color="#f08364" flood-opacity="0.39"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <circle class="cls-1" cx="1563.5" cy="830.5" r="798.5"/>
+  <g style="fill: #fff; filter: url(#filter)">
+    <rect id="rect-2" class="cls-2" x="610" y="291" width="620" height="454" rx="20" ry="20" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#rect-2" style="stroke: #106281; filter: none; fill: none"/>
+  <g style="fill: #fff; filter: url(#filter-2)">
+    <rect id="rect" class="cls-3" x="793" y="669" width="578" height="116" rx="27" ry="27" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#rect" style="stroke: #106281; filter: none; fill: none"/>
+  <rect class="cls-4" x="886" y="724" width="393" height="7" rx="3.5" ry="3.5"/>
+  <path class="cls-5" d="M700.822,417H867.576a25.822,25.822,0,1,1,0,51.644H700.822A25.822,25.822,0,0,1,700.822,417Z"/>
+  <path id="Rectangle_4_copy" data-name="Rectangle 4 copy" class="cls-5" d="M938.831,417h74.049a25.822,25.822,0,0,1,0,51.644H938.831A25.822,25.822,0,0,1,938.831,417Z"/>
+  <path id="Rectangle_4_copy_2" data-name="Rectangle 4 copy 2" class="cls-5" d="M1084.13,417h74.05a25.822,25.822,0,0,1,0,51.644h-74.05A25.822,25.822,0,0,1,1084.13,417Z"/>
+  <text id="Skills" class="cls-6" x="683.34" y="358.193">Skills</text>
+  <text id="Software_Developer" data-name="Software Developer" class="cls-7" transform="translate(699.372 448.336) scale(0.891 0.89)">Software Developer</text>
+  <path id="Rectangle_4_copy_6" data-name="Rectangle 4 copy 6" class="cls-5" d="M700.822,571H867.576a25.822,25.822,0,1,1,0,51.644H700.822A25.822,25.822,0,0,1,700.822,571Z"/>
+  <text id="Digital_Marketing" data-name="Digital Marketing" class="cls-7" transform="translate(708.371 602.337) scale(0.891 0.89)">Digital Marketing</text>
+  <text id="HTML" class="cls-7" transform="translate(948.077 448.336) scale(0.891 0.89)">HTML</text>
+  <path id="Rectangle_4_copy_7" data-name="Rectangle 4 copy 7" class="cls-5" d="M938.831,571h74.049a25.822,25.822,0,0,1,0,51.644H938.831A25.822,25.822,0,0,1,938.831,571Z"/>
+  <text id="ReactJS" class="cls-7" transform="translate(943.077 603.337) scale(0.891 0.89)">ReactJS</text>
+  <path id="Rectangle_4_copy_3" data-name="Rectangle 4 copy 3" class="cls-5" d="M706.17,495.356h74.047a25.822,25.822,0,0,1,0,51.644H706.17A25.822,25.822,0,0,1,706.17,495.356Z"/>
+  <text id="CSS" class="cls-7" transform="translate(727.897 527.583) scale(0.891 0.89)">CSS</text>
+  <path id="Rectangle_4_copy_4" data-name="Rectangle 4 copy 4" class="cls-5" d="M848.8,495.356h74.047a25.822,25.822,0,0,1,0,51.644H848.8A25.822,25.822,0,1,1,848.8,495.356Z"/>
+  <text id="SCRIPT" class="cls-7" transform="translate(854.479 527.583) scale(0.891 0.89)">SCRIPT</text>
+  <path id="Rectangle_4_copy_5" data-name="Rectangle 4 copy 5" class="cls-5" d="M991.424,495.356h74.046a25.822,25.822,0,0,1,0,51.644H991.424A25.822,25.822,0,1,1,991.424,495.356Z"/>
+  <text id="NODE" class="cls-7" transform="translate(1001.562 527.583) scale(0.891 0.89)">NODE</text>
+  <text id="JAVA" class="cls-7" transform="translate(1094.269 449.227) scale(0.891 0.89)">JAVA</text>
+  <g style="fill: #fff; filter: url(#filter-3)">
+    <circle id="circle" class="cls-8" cx="1209" cy="727" r="25" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#circle" style="stroke: #f09b83; filter: none; fill: none"/>
+  <text id="_82_" data-name="82%" class="cls-7" x="1301.412" y="703.658">82%</text>
+</svg>

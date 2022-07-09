@@ -15,21 +15,22 @@ import { resumeInfo, selectFormId, selectReload } from './redux/Features/ResumeS
 import { resetError, selectAuthentication } from './redux/Features/AuthenticationSlice';
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
-import Landing from './Components/LandingPage/Landing';
 import Dashboard from './Components/Dashboard/Dashboard';
-import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
 import CVReview from './Components/CVEditor/CVReview'
 import DummyForm from './Components/EditForms/ProfilePicture'
 import CognitiveSkills from './Components/Form/CognitiveSkills';
 import Resume from './Components/ResumeTemplate/Resume';
 import NotFound from './Components/Not_Found/Notfound';
+import Header from './Components/Header/Header';
+import Home from './Components/Home/Home';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
+  const routeWithoutNav = ['/','/membership',"MyProfile"]
   useEffect(() => {
     if(auth.authToken&&reload){
       console.log('Reload Resume Update')
@@ -87,8 +88,8 @@ function App() {
   
   return (
     <div className="App">
-      <Navbar/>
-      {/* <Sidebar/> */}
+      {window.location.pathname ==='/' ? <Header/> : ""}
+      {!routeWithoutNav.includes(window.location.pathname) ? <Navbar/> : ""}
       <Routes>
        <Route path='/login' element={<PreventedRoute><Login/></PreventedRoute> }/>
        <Route path='/OTP-login' element={<PreventedRoute><OTPLogin/></PreventedRoute>}/>
@@ -97,7 +98,7 @@ function App() {
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
-       <Route path='/' element={<Landing/>}/>
+       <Route path='/' element={<Home/>}/>
 
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>

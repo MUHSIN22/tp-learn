@@ -11,19 +11,16 @@ import { useState } from 'react';
 export default function Navbar(props) {
   const user = useSelector(selectUserFirstName)
 console.log(window.location.pathname)
-const routeWithoutNav = ['/','/membership',"MyProfile"]
   let navigate = useNavigate();
   
   const rendertomyprofile=()=>{
     navigate('/MyProfile')
   }
  
-
   
   return (
     <>
-     {
-      !routeWithoutNav.includes(window.location.pathname) ? ( <nav>
+       <nav>
       <div className="logo">
           <img src={Logo} alt="" />
       </div>
@@ -35,8 +32,7 @@ const routeWithoutNav = ['/','/membership',"MyProfile"]
         
         <button className='btn tirtiary'>Save As Draft</button>
       </div>}
-  </nav>) : ""
-    }
+  </nav>
     </>
   )
 }
