@@ -107,9 +107,9 @@ const exec = () => {
       </div>
 
       <div className="d-flex justify-content-between text-light">
-        <div className="col-30 bg-dark mx-1">
+        <div className="col-30 bg-dark mx-1 py-2">
         <div className="skills-head text-left">
-              <h3 className=" ml-3">PERSONAL DETAILS</h3>
+              <h3 className="pl-3">PERSONAL DETAILS</h3>
               <hr className="horizone_line " />
           </div>
           <div className="personal_detail_sec text-light d-flex ">
@@ -143,9 +143,9 @@ const exec = () => {
             </div>
           </div>
 
-          <div className="col-100 skills mt-5 ">
+          <div className="col-100 skills mt-2 ">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">SKILLS</h3>
+              <h3 className="pl-3">SKILLS</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column pl-3 mt-0-5" style={{"textAlign":"left"}}>
@@ -158,7 +158,7 @@ const exec = () => {
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">EDUCATION</h3>
+              <h3 className="pl-3">EDUCATION</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column pl-3" style={{"textAlign":"left"}}>
@@ -171,7 +171,7 @@ const exec = () => {
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">CERTIFICATION</h3>
+              <h3 className="pl-3">CERTIFICATION</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column pl-3" style={{"textAlign":"left"}}>
@@ -184,62 +184,62 @@ const exec = () => {
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">HOBBIES</h3>
+              <h3 className="pl-3">HOBBIES</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column text-left pl-3" style={{"textAlign":"left"}}>
               <div className="my-2">
                 <h3>Entertainment</h3>
-                <div className="box_1">{hobbies.entertainment.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.entertainment.split(",").join(" | ")}</div>
               </div>
               <div className="my-2">
                 <h3>Music</h3>
-                <div className="box_1">{hobbies.music.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.music.split(",").join(" | ")}</div>
               </div>
               <div className="my-2">
                 <h3span>Sports</h3span>
-                <div className="box_1">{hobbies.sports.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.sports.split(",").join(" | ")}</div>
               </div>
               <div className="my-2">
                 <h3>Leisure</h3>
-                <div className="box_1">{hobbies.leisure.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.leisure.split(",").join(" | ")}</div>
               </div>
               <div className="my-2">
                 <h3>Adventure</h3>
-                <div className="box_1">{hobbies.adventure.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.adventure.split(",").join(" | ")}</div>
               </div>
               {hobbies.travel!=="" && <div className="my-2">
                 <h3>travel</h3>
-                <div className="box_1">{hobbies.travel.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.travel.split(",").join(" | ")}</div>
               </div>}
               
               {hobbies.books!=="" && <div className="my-2">
                 <h3>books</h3>
-                <div className="box_1">{hobbies.books.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.books.split(",").join(" | ")}</div>
               </div>}
               
               {hobbies.any_other!=='' && <div className="my-2">
                 <h3>Any other</h3>
-                <div className="box_1">{hobbies.any_other.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.any_other.split(",").join(" | ")}</div>
               </div>}
             </div>
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">AWARDS</h3>
+              <h3 className="pl-3">AWARDS</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added text-left pl-3">
-              <p className="my-2">Adobe PhotoshopAdobe</p>
-              <p className="my-2">IllustratorAdobe</p>
-              <p className="my-2">In DesignMicroshop</p>
-              <p className="my-2">office</p>
-              <p className="my-2">ProgramCSS/HTMLSeo</p>
+              <h4 className="my-2">Adobe PhotoshopAdobe</h4>
+              <h4 className="my-2">IllustratorAdobe</h4>
+              <h4 className="my-2">In DesignMicroshop</h4>
+              <h4 className="my-2">office</h4>
+              <h4 className="my-2">ProgramCSS/HTMLSeo</h4>
             </div>
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">SOCIAL MEDIA</h3>
+              <h3 className="pl-3">SOCIAL MEDIA</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column text-left ml-3 g-2" style={{"textAlign":"left","color":"white"}}>
@@ -285,7 +285,7 @@ const exec = () => {
                 <div className="grid_1 col-30">
                   <div className="grid_1_head">
                     <h4 className="companyDetails">{company.company_name}</h4>
-                    <div>
+                    <div className="roles_respResume">
                       <div className="flex-row-fit align-center g-1">
                       <Device /> <p>{company.industry_name}</p>
                       </div>
@@ -312,9 +312,13 @@ const exec = () => {
                 </div>
                 {company && company.job_role.map((job)=>{
                    return <div className="grid_1 col-70 ">
-                   <div className="grid_1_head d-flex justify-around">
+                   <div className="grid_1_head d-flex justify-between">
+                    <div>
                      <h3 className="companyDetails">{job.designation_name}</h3>
-                     <h3 className="companyDetails text-center">{job.job_start_date} To {job.job_end_date}</h3>
+                       </div>
+                       <div>
+                     <h3 className="companyDetails text-center" style={{"paddingRight":"30px"}}>{job.job_start_date} To {job.job_end_date}</h3>
+                      </div>
                    </div>
                    <div className="d-flex justify-around">
                      <div className="col-50 roles_respResume"><p>{job.role_responsibilties}</p></div>
@@ -340,14 +344,14 @@ const exec = () => {
                      </div>
                    </div>
                    <div className="mt-5">
-                    {job.project && <h2>Projects</h2>}
+                    {job.project && <h3 className="companyDetails">Projects:</h3>}
                     {job.project && job.project.map((proj)=>{
                       return <>
-                      <h3>{proj.project_name}</h3>
+                      <h3 className="companyDetails">{proj.project_name}</h3>
                      <div className=" ">
                        <div className="skills mx-1 d-flex">
                          <div className="main_head_skills">
-                           <h4>ClientName - {proj.client_name}</h4>
+                           <h4 className="companyDetails">ClientName - {proj.client_name}</h4>
                          </div>
                          {/* <div className="d-flex flex-column">
                            <span className="nameClient_skill">skills</span>
@@ -365,11 +369,11 @@ const exec = () => {
                            <textarea className="nameClient_skill mt-2"></textarea>
                          </div>
                        </div> */}
-                       <div className="skills mx-1 mt-5 g-2">
+                       <div className="skills mx-1 mt-2 g-2">
                          <div className="main_head_skills d-flex justify-between">
-                           <div className="d-flex justify-between ">
+                           {/* <div className="d-flex justify-between ">
                                 SKILLS USED
-                           </div>
+                           </div> */}
                          </div>
                          <div className="d-flex justify-between">
                            <div>Skills</div>
