@@ -41,7 +41,6 @@ export default function CVBuilder() {
     console.log(isShow);
   };
 const newRef= React.useRef();
-const histor = useNavigate()
 
 
 const generatePdf = () => {

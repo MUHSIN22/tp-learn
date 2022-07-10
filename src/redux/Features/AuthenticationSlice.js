@@ -107,7 +107,6 @@ export const  validateOtp = createAsyncThunk('authentication/validateOtp',async(
 
 export const logOut = createAsyncThunk('authentication/logout',async(body,{rejectWithValue})=>{
     try{
-        console.log("===========",sessionStorage)
         return {};
     } catch(error){
         return rejectWithValue(error.response.data);
@@ -121,7 +120,8 @@ export const authenticationSlice = createSlice({
             state.authToken +=1;
         },
         logout : (state)=>{
-            state = null;
+            state.authToken= null;
+            state.status= null;
             sessionStorage.clear();
         },
         setError : (state,action)=>{

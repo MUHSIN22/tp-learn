@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import {logout} from "../../redux/Features/AuthenticationSlice";
 import { useDispatch, useSelector } from 'react-redux';
 
+
 function Sidebar(props) { 
   const dispatch = useDispatch()
 
@@ -37,7 +38,9 @@ function Sidebar(props) {
          {
          SidebarData.map((val,key)=>{
              return (
-                 <li key={key} id={window.location.pathname == val.link ? "active" : ""} onClick={()=>{navigate(`${val.link}`);}} className="SidebarRow">{" "}
+                 <li key={key} id={window.location.pathname == val.link ? "active" : ""} onClick={()=>{if(val.link =='/logout'){
+                  dispatch(logout())
+                } navigate(`${val.link}`);}} className="SidebarRow">{" "}
                  <div id="icon"> {val.icon}</div>{" "}
                  &nbsp; &nbsp; &nbsp;
                 {val.title == 'My Profile' ? (

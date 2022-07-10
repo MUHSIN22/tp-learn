@@ -8,11 +8,12 @@ import { useSelector } from 'react-redux';
 import { selectUserFirstName } from '../../redux/Features/ResumeSlice';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { selectAuthentication } from '../../redux/Features/AuthenticationSlice';
 export default function Navbar(props) {
   const user = useSelector(selectUserFirstName)
 console.log(window.location.pathname)
   let navigate = useNavigate();
-  
+  const auth = useSelector(selectAuthentication)
   const rendertomyprofile=()=>{
     navigate('/MyProfile')
   }
@@ -24,7 +25,7 @@ console.log(window.location.pathname)
       <div className="logo">
           <img src={Logo} alt="" />
       </div>
-     {user&& <div className="controls">
+     {(auth['authToken'] && user) && <div className="controls">
       <span className='flex-row-start align-center g-0-5' onClick={()=>rendertomyprofile()}><button className='profile'>
         
         <User/>

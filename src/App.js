@@ -24,6 +24,7 @@ import Resume from './Components/ResumeTemplate/Resume';
 import NotFound from './Components/Not_Found/Notfound';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
+import Logout from './Components/Logout/Logout';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -107,6 +108,7 @@ function App() {
        <Route path='/cs' element={<CognitiveSkills/>}/>
        <Route path='/resume' element={<Resume/>}/>
        <Route path="*" element={<NotFound/>}/>
+       <Route path='/logout' element={<Logout/> }/>
       </Routes>
     </div>
   );

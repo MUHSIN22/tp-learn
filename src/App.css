@@ -1589,3 +1589,38 @@ video{
   font-size: 1.1rem;
   text-decoration: none;
 }
+
+.profile_bio h6 p, .roles_respResume {
+  font-size: 8px !important;
+  font-weight: 400;
+  line-height: 10px;
+  font-family: Arial;
+  color: #211C1A !important;
+  
+}
+
+.profile_head{
+  font-weight: 700 !important;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.profileName{
+  font-size: 32px !important;
+    margin-bottom: 2px !important;
+    font-weight: 700 !important;
+    line-height:38.73px !important
+}
+
+.currentDegi{
+  font-size: 12px;
+  font-weight: 300;
+  line-height:15px;
+}
+
+.companyDetails{
+  font-size: 12px;
+  line-height: 9.35px;
+  font-weight: 700;
+  margin-bottom: 25px !important;
+}

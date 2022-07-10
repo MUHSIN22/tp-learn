@@ -59,6 +59,7 @@ const  Resume =({newRef})=>{
 
 React.useEffect(() => {
   //  template = document.getElementById('tpcv');
+  if(newRef)
  newRef.current = exec
 }, [])
 
@@ -99,9 +100,9 @@ const exec = () => {
         <div className="col-30">
           <img className="Profile_resume_img" src={profile} crossOrigin="true" rossOrigin="anonymous"/>
         </div>
-        <div className="col-70 Profile_resume_name_sec text-left">
-          <h1>{resumeDetails.name}</h1>
-          <h2>{lastJob}</h2>
+        <div className="col-70 Profile_resume_name_sec">
+          <h2 className="profileName text-left">{resumeDetails.name}</h2>
+          <h2 className="currentDegi text-left">{lastJob}</h2>
         </div>
       </div>
 
@@ -262,13 +263,13 @@ const exec = () => {
           <div className="col-80 control">
             <div className="profile">
               <div className="profile_head text-left">
-                <h2>PROFILE</h2>
+                <h4>PROFILE</h4>
                 <hr />
               </div>
               <div className="profile_bio text-left">
-                <p>
+                <h6>
                 {parser(bio)}
-                </p>
+                </h6>
               </div>
             </div>
           </div>
@@ -276,14 +277,14 @@ const exec = () => {
           <div className="col-80 control">
             <div className="profile">
               <div className="profile_head text-left">
-                <h2>WORK EXPERIENCE</h2>
+                <h4>WORK EXPERIENCE</h4>
                 <hr />
               </div>
               {companyInfo && companyInfo.map((company)=>{
                 return <div className="profile_bio text-left d-flex justify-around">
                 <div className="grid_1 col-30">
                   <div className="grid_1_head">
-                    <h2>{company.company_name}</h2>
+                    <h4 className="companyDetails">{company.company_name}</h4>
                     <div>
                       <div className="flex-row-fit align-center g-1">
                       <Device /> <p>{company.industry_name}</p>
@@ -312,11 +313,11 @@ const exec = () => {
                 {company && company.job_role.map((job)=>{
                    return <div className="grid_1 col-70 ">
                    <div className="grid_1_head d-flex justify-around">
-                     <h3>{job.designation_name}</h3>
-                     <h5 className="text-center">{job.job_start_date} To {job.job_end_date}</h5>
+                     <h3 className="companyDetails">{job.designation_name}</h3>
+                     <h3 className="companyDetails text-center">{job.job_start_date} To {job.job_end_date}</h3>
                    </div>
                    <div className="d-flex justify-around">
-                     <div className="col-50 roles_resp">{job.role_responsibilties}</div>
+                     <div className="col-50 roles_respResume"><p>{job.role_responsibilties}</p></div>
                      <div className="col-50 ">
                      <div className="skills d-flex justify-aroundx pl-1">
                         <div className="col-100">
