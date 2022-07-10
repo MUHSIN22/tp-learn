@@ -1,7 +1,7 @@
 import React, {  useEffect, useState } from 'react'
 import './CardRadioGroup.css'
-export default function CardRadioGroup({ name , state, setState, option,name_field,label, default_value=null, disabled, autofill}) {
-    const [current,setCurrent] = useState(default_value||'');
+export default function CardRadioGroup({ name , state, setState, option,name_field,label,defaultValue,default_value=null, disabled, autofill }) {
+    const [current,setCurrent] = useState('');
     const clickHandler = (index)=>{
         if(!disabled){
             let temp = state;
@@ -28,7 +28,7 @@ export default function CardRadioGroup({ name , state, setState, option,name_fie
         <label>{label}</label>
          <div className="CardRadioGroup">
                 {option.map((option,i)=>{
-                    return  <RadioCard key={i} index={i} clickHandler={clickHandler} label={option[name_field]} status={current===i?'active':'inactive'} />
+                    return  <RadioCard key={i} index={i} clickHandler={clickHandler} label={option[name_field]} status={current===i || (state.nature_of_job_id==option.id && name=='nature_of_job_id') || (state.scale_id==option.id && name=='scale_id') ? 'active':'inactive'} />
                 }) 
                }
         </div>

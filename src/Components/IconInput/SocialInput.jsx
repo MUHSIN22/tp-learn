@@ -13,8 +13,8 @@ export default function SocialInput({ type, label, name, handleChange=()=>{}, ic
   }
   useEffect(() => {
     if(!show){
-      setShow(state[name].length>0)
-      setSubmit(state[name].length>0)
+      setShow(state[name]?.length>0)
+      setSubmit(state[name]?.length>0)
     }
    
   

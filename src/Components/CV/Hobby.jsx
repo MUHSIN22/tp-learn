@@ -1,14 +1,22 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import hobbyImage from '../../Assests/HobbyImage.png'
-import { selectHobbies } from '../../redux/Features/ResumeSlice'
+import { selectHobbies,selectToEdit,changeEditPageDetails,changeToEdit } from '../../redux/Features/ResumeSlice'
+import { FaPencilAlt } from "react-icons/fa";
+
 export default function Hobby() {
     const hobby = useSelector(selectHobbies)
-
+    const dispatch = useDispatch();
+    const toEdit = useSelector(selectToEdit);
+    const handleEditForms = (data) => {
+    dispatch(changeEditPageDetails(data)).unwrap();
+  };
     return (
         <div className="col-50 section_2 align-center">
             <div className="col-90 align-start tex-left">
-                <h3>Hobbies</h3>
+                <h3>Hobbies {toEdit && (
+                     <span onClick={() => handleEditForms({ progress: 13,hobby})} className="px-1"><FaPencilAlt /></span>
+                    )}</h3>
                 <span className="divider"></span>
                 {hobby && <div className="hobby grid-auto">
                     <HobbyCard name={'Entertainment'} hobby={hobby} />

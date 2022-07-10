@@ -17,7 +17,7 @@ export default function Certificate1() {
     const [form, setForm] = useState({
         project_name: '',
         institute_name: '',
-        skills_ids:'',
+        skills_ids:[],
         certificate_start_date: '',
         certificate_end_date: '',
         certificate_project_info: '',
@@ -71,7 +71,12 @@ export default function Certificate1() {
         if(file) body.certificate_file = file
         
         body.user_id = user_id
-        body.skills_ids =JSON.stringify(selected_options)
+        body.skills_ids = selected_options.map((skill)=>{
+            let obj = {}
+            obj.skill_id = skill.skill_id;
+            obj.skill_name = skill.skill_name
+            return obj
+        })
         let form_data = JsonToFormData(body)
           try {
             dispatch(toggleNewCertificate(true))
@@ -192,13 +197,15 @@ export default function Certificate1() {
         </>
     )
 }
-const JsonToFormData=  (json={}) => {
+const JsonToFormData = (json = {}) => {
     var form_data = new FormData();
     for (var key in json) {
-      form_data.append(key, json[key]);
+        if(key=="skills_ids"){
+            form_data.append(key, JSON.stringify(json[key]))
+        }else{
+        form_data.append(key, json[key]);
+        }
     }
   
     return form_data
   }
-  
-  

@@ -10,6 +10,9 @@ const initialState = {
     error: '',
     message: '',
     form: null,
+    toEdit: false,
+    editPageDetails : {},
+    pageOn:'/personal-information',
     newJob: false,
     newDesignation:false,
     newEducation:false,
@@ -176,6 +179,7 @@ export const addCertification = createAsyncThunk('authentication/addCertificatio
         })
         return response.data
     } catch (error) {
+        console.log("==================",error);
         return rejectWithValue(error.response.data);
     }
 })
@@ -289,6 +293,45 @@ export const changeFormId = createAsyncThunk('authentication/changeFormId', asyn
         return rejectWithValue(error.response.data);
     }
 })
+export const changeToEdit = createAsyncThunk('authentication/changeToEdit', async (data, { rejectWithValue }) => {
+    if(data){
+        return data;
+    }else{
+        return rejectWithValue(data);
+    }
+})
+
+export const changeEditPageDetails = createAsyncThunk('authentication/changeEditPageDetails', async (data, { rejectWithValue }) => {
+    if(data){
+        return data;
+    }else{
+        return rejectWithValue(data);
+    }
+})
+
+export const addCognitiveSkills = createAsyncThunk('authentication/addCognitiveSkills', async (data, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/manage-cognitive-info`, encoded, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+export const changePageOn = createAsyncThunk('authentication/changePageOn', async (data, { rejectWithValue }) => {
+    if(data){
+        return data;
+    }else{
+        return rejectWithValue(data);
+    }
+})
 
 export const resumeSlice = createSlice({
     name: 'resume',
@@ -316,7 +359,7 @@ export const resumeSlice = createSlice({
             state.newProject = action.payload
         },
         nextForm: (state) => {
-            if (state.form < 17) state.form += 1;
+            if (state.form < 18) state.form += 1;
         },
         prevForm: (state) => {
             if (state.form > 1) state.form -= 1;
@@ -594,8 +637,40 @@ export const resumeSlice = createSlice({
             state.status = 'Rejected'
             state.error = action.payload.error
             state.message = action.payload.message
-
-
+        }).addCase(changeToEdit.fulfilled, (state, action) => {
+            state.loading = false
+            state.toEdit = action.payload
+        }).addCase(changeToEdit.rejected, (state, action) => {
+            state.loading = false
+            state.toEdit = action.payload
+        }).addCase(changeEditPageDetails.fulfilled, (state, action) => {
+            state.loading = false
+            state.editPageDetails = action.payload
+        })
+        .addCase(changeEditPageDetails.rejected, (state, action) => {
+            state.loading = false
+            state.editPageDetails = action.payload
+        }).addCase(addCognitiveSkills.pending, (state, action) => {
+            state.loading = true
+            state.status = 'loading'
+            state.error = false
+        }).addCase(addCognitiveSkills.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.message = 'Cognitive Skills'
+        }).addCase(addCognitiveSkills.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'Rejected'
+            state.error = action.payload.error
+            state.message = action.payload.data
+        })
+        .addCase(changePageOn.fulfilled, (state, action) => {
+            state.loading = false
+            state.pageOn = action.payload
+        })
+        .addCase(changePageOn.rejected, (state, action) => {
+            state.loading = false
+            state.pageOn = '/personal-information'
         })
     }
 
@@ -713,13 +788,19 @@ export const selectVideo = (state) => {
 export const selectSocilaLinks = (state) => {
     let record = state.resume.recordDetails.resume_info || {}
     return {
-        facebook: record.link_facebook,
-        twitter: record.link_twitter,
-        instagram: record.link_instagram,
-        linkedin: record.link_linkedin,
-        other: record.link_other
-    }
-}
+            entertainment:record.entertainment,
+            music:record.music,
+            sports:record.sports,
+            leisure:record.leisure,
+            adventure:record.adventure,
+            travel:record.travel,
+            books:record.books,
+            any_other:record.any_other
+        }}
+export const selectToEdit = (state)=> state.resume.toEdit;
+export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
+export const getPageOn = (state) => state.resume.pageOn;     
+
 export const selectNewJob = (state)=> state.resume.newJob
 export const selectNewEducation = (state)=> state.resume.newEducation
 export const selectNewCertificate = (state)=> state.resume.newCertificate
