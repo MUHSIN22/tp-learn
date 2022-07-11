@@ -42,7 +42,7 @@ import { selectKeySkills } from '../../redux/Features/GraphSlice'
 import { useSelector } from "react-redux";
 import html2canvas from "html2canvas";
 import jsPDF from  "jspdf";
-const  Resume =({newRef})=>{
+const  Resume =({newRef,shareOpts})=>{
   const companyInfo = useSelector(SelectCompanyDetails);
   const profile = useSelector(selectProfilePic);
   const bio = useSelector(selectBio);
@@ -86,10 +86,7 @@ const exec = () => {
     pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight);
     // pdf.output('dataurlnewwindow');
     pdf.save("download.pdf");
-    // window.close()
   })
-  // window.close()
-
 }
 
 
@@ -142,7 +139,6 @@ const exec = () => {
               <span className="mt-2 mb-0">{resumeDetails.gender_name}</span>
             </div>
           </div>
-
           <div className="col-100 skills mt-2 ">
             <div className="skills-head text-left">
               <h3 className="pl-3">SKILLS</h3>
