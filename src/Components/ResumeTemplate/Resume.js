@@ -42,7 +42,7 @@ import { selectKeySkills } from '../../redux/Features/GraphSlice'
 import { useSelector } from "react-redux";
 import html2canvas from "html2canvas";
 import jsPDF from  "jspdf";
-const  Resume =({newRef})=>{
+const  Resume =({newRef,shareOpts})=>{
   const companyInfo = useSelector(SelectCompanyDetails);
   const profile = useSelector(selectProfilePic);
   const bio = useSelector(selectBio);
@@ -85,7 +85,11 @@ const exec = () => {
     pdf.internal.pageSize.height = componentHeight
     pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight);
     // pdf.output('dataurlnewwindow');
-    pdf.save("download.pdf");
+    console.log("isShare",isShare,app)
+    if(isShare){
+      pdf.save("download.pdf");
+    }
+    
     // window.close()
   })
   // window.close()
