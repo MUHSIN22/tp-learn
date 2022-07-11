@@ -24,6 +24,7 @@ import DummyForm from './Components/EditForms/ProfilePicture'
 import CognitiveSkills from './Components/Form/CognitiveSkills';
 import Resume from './Components/ResumeTemplate/Resume';
 import NotFound from './Components/Not_Found/Notfound';
+import Home from './Components/Home/Home';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -97,7 +98,7 @@ function App() {
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
-       <Route path='/' element={<Landing/>}/>
+       <Route path='/' element={<Home/>}/>
 
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>

@@ -1,0 +1,180 @@
+<svg id="Circle_Date" data-name="Circle Date" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #5544e2;
+        stroke-width: 4.167px;
+      }
+
+      .cls-1, .cls-2, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        stroke: #fb637a;
+        stroke-width: 2.083px;
+      }
+
+      .cls-3, .cls-4 {
+        fill: #5544e2;
+      }
+
+      .cls-20, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8 {
+        stroke: #106281;
+        stroke-width: 0;
+      }
+
+      .cls-5 {
+        fill: #fb637a;
+      }
+
+      .cls-20, .cls-6, .cls-7, .cls-8 {
+        fill: #f1efe1;
+      }
+
+      .cls-6 {
+        filter: url(#filter);
+      }
+
+      .cls-7 {
+        filter: url(#filter-2);
+      }
+
+      .cls-8 {
+        filter: url(#filter-3);
+      }
+
+      .cls-9 {
+        fill: #d0baff;
+      }
+
+      .cls-10 {
+        fill: #ffbbdf;
+      }
+
+      .cls-11 {
+        fill: #ffd5a5;
+      }
+
+      .cls-12 {
+        fill: #00c57e;
+      }
+
+      .cls-13, .cls-14 {
+        fill: #fff;
+      }
+
+      .cls-14, .cls-15 {
+        font-size: 25px;
+      }
+
+      .cls-14, .cls-15, .cls-16, .cls-17, .cls-19 {
+        font-family: Poppins;
+      }
+
+      .cls-14 {
+        font-weight: 600;
+      }
+
+      .cls-15, .cls-16, .cls-17, .cls-19 {
+        font-weight: 500;
+      }
+
+      .cls-16 {
+        font-size: 37.5px;
+      }
+
+      .cls-17 {
+        font-size: 29.167px;
+      }
+
+      .cls-18 {
+        fill: #fff5fb;
+      }
+
+      .cls-19 {
+        font-size: 16.667px;
+      }
+    </style>
+    <filter id="filter" x="666" y="437" width="962" height="24" filterUnits="userSpaceOnUse">
+      <feImage preserveAspectRatio="none" x="666" y="437" width="962" height="24" result="image" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iOTYyIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgOTYyIDI0Ij4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiB1cmwoI2xpbmVhci1ncmFkaWVudCk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhci1ncmFkaWVudCIgeDE9IjMwOS4zOTIiIHkxPSIyNCIgeDI9IjY1Mi42MDgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmY4ZjBkIiBzdG9wLW9wYWNpdHk9IjAuOTk2Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmNjQ0ZCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iOTYyIiBoZWlnaHQ9IjI0Ii8+Cjwvc3ZnPgo="/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+    <filter id="filter-2" x="910" y="503" width="718" height="24" filterUnits="userSpaceOnUse">
+      <feImage preserveAspectRatio="none" x="910" y="503" width="718" height="24" result="image" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNzE4IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgNzE4IDI0Ij4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiB1cmwoI2xpbmVhci1ncmFkaWVudCk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhci1ncmFkaWVudCIgeDE9IjE4Ny4zOTIiIHkxPSIyNCIgeDI9IjUzMC42MDgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmY4ZjBkIiBzdG9wLW9wYWNpdHk9IjAuOTk2Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmNjQ0ZCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNzE4IiBoZWlnaHQ9IjI0Ii8+Cjwvc3ZnPgo="/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+    <filter id="filter-3" x="1087" y="570" width="541" height="24" filterUnits="userSpaceOnUse">
+      <feImage preserveAspectRatio="none" x="1087" y="570" width="541" height="24" result="image" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTQxIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgNTQxIDI0Ij4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiB1cmwoI2xpbmVhci1ncmFkaWVudCk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImxpbmVhci1ncmFkaWVudCIgeDE9Ijk4Ljg5MiIgeTE9IjI0IiB4Mj0iNDQyLjEwOCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZjhmMGQiIHN0b3Atb3BhY2l0eT0iMC45OTYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmY2NDRkIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCBjbGFzcz0iY2xzLTEiIHdpZHRoPSI1NDEiIGhlaWdodD0iMjQiLz4KPC9zdmc+Cg=="/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <path class="cls-1" d="M498,797c30.262-12.2,57.384-14.6,81-6,40.67,14.814,50.749,63.4,84,67,36.272,3.922,63.139-48.3,124-108,43.572-42.742,79.088-60.261,95-56,40.413,10.821,54.706,105.123,93,154,31.48,40.185,87.23,88.291,127,75,35.72-11.938,39.12-74.058,75-110,28.38-28.433,70.34-46.912,126-53,70.43-7.7,111.06,3.6,130,29,26.5,35.541-3,79.87,19,117,25.24,42.594,97.37,52.528,191,44"/>
+  <path class="cls-2" d="M499,752c67.488,1.8,116.466,18.46,141,54,10.811,15.661,16.676,51.541,30,54,31.375,5.789,66.362-138.866,165-181,32.173-13.743,61.3-14.1,73-11,74.575,19.737,92.48,153.965,134,153,34.17-.794,48.03-98.03,110-140,45.01-30.483,115.39-43.823,157-15,57.34,39.724,24.14,136.332,74,169,49.38,32.355,146.16-20.306,251-101"/>
+  <circle id="Ellipse_4_copy" data-name="Ellipse 4 copy" class="cls-3" cx="469.5" cy="790.5" r="34.5"/>
+  <path id="Ellipse_4_copy_5" data-name="Ellipse 4 copy 5" class="cls-4" d="M271,956.544a12.23,12.23,0,1,1-12,12.228A12.116,12.116,0,0,1,271,956.544Z"/>
+  <circle id="Ellipse_4_copy_3" data-name="Ellipse 4 copy 3" class="cls-3" cx="1662.5" cy="945.5" r="34.5"/>
+  <circle class="cls-5" cx="466.5" cy="755.5" r="34.5"/>
+  <circle id="Ellipse_4_copy_4" data-name="Ellipse 4 copy 4" class="cls-5" cx="271" cy="903.235" r="12"/>
+  <circle id="Ellipse_4_copy_2" data-name="Ellipse 4 copy 2" class="cls-5" cx="1662.5" cy="721.5" r="34.5"/>
+  <g style="fill: #f1efe1; filter: url(#filter)">
+    <rect id="rect" class="cls-6" x="666" y="437" width="962" height="24" rx="12" ry="12" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#rect" style="stroke: #106281; filter: none; fill: none"/>
+  <g style="fill: #f1efe1; filter: url(#filter-2)">
+    <rect id="Rectangle_8_copy" data-name="Rectangle 8 copy" class="cls-7" x="910" y="503" width="718" height="24" rx="12" ry="12" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#Rectangle_8_copy" style="stroke: #106281; filter: none; fill: none"/>
+  <g style="fill: #f1efe1; filter: url(#filter-3)">
+    <rect id="Rectangle_8_copy_2" data-name="Rectangle 8 copy 2" class="cls-8" x="1087" y="570" width="541" height="24" rx="12" ry="12" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#Rectangle_8_copy_2" style="stroke: #106281; filter: none; fill: none"/>
+  <rect class="cls-9" x="443" y="120" width="413" height="188"/>
+  <rect id="Rectangle_6_copy" data-name="Rectangle 6 copy" class="cls-10" x="856" y="120" width="316" height="188"/>
+  <rect id="Rectangle_6_copy_2" data-name="Rectangle 6 copy 2" class="cls-11" x="1172" y="120" width="456" height="188"/>
+  <rect class="cls-12" x="436" y="106" width="1047" height="28"/>
+  <circle class="cls-13" cx="442" cy="119" r="61"/>
+  <circle id="Ellipse_3_copy_6" data-name="Ellipse 3 copy 6" class="cls-12" cx="442.5" cy="119.5" r="54.5"/>
+  <circle id="Ellipse_3_copy" data-name="Ellipse 3 copy" class="cls-13" cx="649" cy="119" r="61"/>
+  <circle id="Ellipse_3_copy_2" data-name="Ellipse 3 copy 2" class="cls-13" cx="856" cy="119" r="61"/>
+  <circle id="Ellipse_3_copy_3" data-name="Ellipse 3 copy 3" class="cls-13" cx="1063" cy="119" r="61"/>
+  <circle id="Ellipse_3_copy_4" data-name="Ellipse 3 copy 4" class="cls-13" cx="1270" cy="119" r="61"/>
+  <circle id="Ellipse_3_copy_5" data-name="Ellipse 3 copy 5" class="cls-13" cx="1477" cy="119" r="61"/>
+  <circle id="Ellipse_3_copy_7" data-name="Ellipse 3 copy 7" class="cls-12" cx="648.5" cy="118.5" r="54.5"/>
+  <circle id="Ellipse_3_copy_8" data-name="Ellipse 3 copy 8" class="cls-12" cx="855.5" cy="118.5" r="54.5"/>
+  <circle id="Ellipse_3_copy_9" data-name="Ellipse 3 copy 9" class="cls-12" cx="1062.5" cy="118.5" r="54.5"/>
+  <circle id="Ellipse_3_copy_10" data-name="Ellipse 3 copy 10" class="cls-12" cx="1270.5" cy="118.5" r="54.5"/>
+  <circle id="Ellipse_3_copy_11" data-name="Ellipse 3 copy 11" class="cls-12" cx="1477.5" cy="118.5" r="54.5"/>
+  <text id="_2016" data-name="2016" class="cls-14" x="413.7" y="126.355">2016</text>
+  <text id="_2017" data-name="2017" class="cls-14" x="619.701" y="126.355">2017</text>
+  <text id="_2018" data-name="2018" class="cls-14" x="825.7" y="126.355">2018</text>
+  <text id="_2019" data-name="2019" class="cls-14" x="1032.701" y="126.355">2019</text>
+  <text id="_2020" data-name="2020" class="cls-14" x="1239.7" y="126.355">2020</text>
+  <text id="_2021" data-name="2021" class="cls-14" x="1447.701" y="126.355">2021</text>
+  <text id="Penny_Pvt._Ltd" data-name="Penny Pvt. Ltd" class="cls-15" x="497.053" y="220.749">Penny Pvt. Ltd</text>
+  <text id="Skills" class="cls-16" x="235.052" y="368.749">Skills</text>
+  <text id="Salary_Management_Graph" data-name="Salary &amp; Management Graph" class="cls-16" x="235.052" y="678.749">Salary &amp; Management Graph</text>
+  <text id="Adobe_Illustrator" data-name="Adobe Illustrator" class="cls-17" x="232.053" y="460.749">Adobe Illustrator</text>
+  <text id="Adobe_Photoshop" data-name="Adobe Photoshop" class="cls-17" x="232.053" y="526.748">Adobe Photoshop</text>
+  <text id="After_Effect" data-name="After Effect" class="cls-17" x="232.053" y="593.748">After Effect</text>
+  <text id="Salary" class="cls-17" x="298.053" y="910.748">Salary</text>
+  <text id="Management" class="cls-17" x="298.053" y="979.748">Management</text>
+  <text id="Designer" class="cls-15" x="497.053" y="252.748">Designer</text>
+  <text id="Zomato" class="cls-15" x="908.052" y="220.749">Zomato</text>
+  <text id="UI_Designer" data-name="UI Designer" class="cls-15" x="908.052" y="252.748">UI Designer</text>
+  <text id="Disney_Hotstar" data-name="Disney Hotstar" class="cls-15" x="1269.053" y="220.749">Disney Hotstar</text>
+  <text id="Director" class="cls-15" x="1269.053" y="252.748">Director</text>
+  <rect class="cls-18" x="1060" y="297" width="340" height="43" rx="10" ry="10"/>
+  <text id="Promoted_To_Senior_Designer" data-name="Promoted To Senior Designer" class="cls-19" x="1108.053" y="326.749">Promoted To Senior Designer</text>
+  <circle class="cls-20" cx="964" cy="449" r="12"/>
+  <circle id="Ellipse_5_copy" data-name="Ellipse 5 copy" class="cls-20" cx="1281" cy="449" r="12"/>
+  <circle id="Ellipse_5_copy_2" data-name="Ellipse 5 copy 2" class="cls-20" cx="1281" cy="515" r="12"/>
+  <circle id="Ellipse_5_copy_3" data-name="Ellipse 5 copy 3" class="cls-20" cx="1385" cy="582" r="12"/>
+</svg>
