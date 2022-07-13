@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import homeBannerImage from '../../Assets/Home Banner.svg'
+import homeBannerImage from '../../Assets/Home Banner.gif'
 import bannerWave from '../../Assets/Banner wave.png'
 import bannerBackground from '../../Assets/Banner background.png'
 import secondSectionImage from '../../Assets/section 2.png'
