@@ -61,11 +61,11 @@ export default function Memberships() {
 
   return (
     <div className="container membershp">
-      <div className="flex-row-center">
+      <div className="flex-row-start">
         <div className="col-fit">
           <Sidebar/>
         </div>
-        <div className="col">
+        <div className="col" style={{"paddingTop":"6rem"}}>
           <div className="flex-row-center g-2">
             <div className="col-20">
               <button type="button" className="btn-square orange" onClick={()=>console.log("clicked")}>

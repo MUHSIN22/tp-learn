@@ -36,35 +36,78 @@ import {
   selectCertificate,
   selectHobbies,
   selectSocilaLinks,
-  selectSocialContribution
+  selectSocialContribution,
+  uploadResume
 } from "../../redux/Features/ResumeSlice";
 import { selectKeySkills } from '../../redux/Features/GraphSlice'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import html2canvas from "html2canvas";
 import jsPDF from  "jspdf";
-const  Resume =({newRef})=>{
+import { selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
+
+const  Resume =({newRef,shareOpts})=>{
+  const dispatch = useDispatch()
   const companyInfo = useSelector(SelectCompanyDetails);
   const profile = useSelector(selectProfilePic);
   const bio = useSelector(selectBio);
   const resumeDetails = useSelector(selectResumeDetails);
   let lastCompany = useSelector(selectLastCompany);
-  let lastJob = lastCompany.job_role[lastCompany.job_role.length -1].designation_name
+  console.log("=======",lastCompany)
+  let lastJob = lastCompany ? lastCompany.job_role[lastCompany.job_role.length -1].designation_name : ""
   let keySkills = useSelector(selectKeySkills);
-  const educations = useSelector(selectEducation);
-  const certificates = useSelector(selectCertificate);
+  const educations = useSelector(selectEducation) || [];
+  const certificates = useSelector(selectCertificate) || [];
   const hobbies = useSelector(selectHobbies);
   const socialLink = useSelector(selectSocilaLinks)
   const socialContribution = useSelector(selectSocialContribution);
+  const token = useSelector(selectAuthToken)
+  const user_id = useSelector(selectUser_id)
 
 React.useEffect(() => {
   //  template = document.getElementById('tpcv');
+  if(newRef)
  newRef.current = exec
+ newRef.current.share = exect
 }, [])
 
 // React.useEffect(() => {
 //   exec()
 // }, [])
  
+const exect = (shareOpts) => {
+  
+  const template = document.getElementById('tpcv');
+  html2canvas(template,{
+    useCORS: true, 
+    logging: true,
+    letterRendering: 1,
+    allowTaint: false})
+  .then((canvas) => {
+    const componentWidth = template.offsetWidth
+    const componentHeight = template.offsetHeight
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF(
+      "p", "mm", "a4"
+    );
+    pdf.internal.pageSize.width = componentWidth
+    pdf.internal.pageSize.height = componentHeight
+   pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight); 
+   let resume_pdf =  pdf.output('blob')  
+   resume_pdf = new File([resume_pdf], "name.pdf");
+
+   let body = {user_id:user_id,resume_pdf:resume_pdf};
+   var form_data = new FormData();
+  form_data.append('user_id',user_id );   
+  form_data.append('resume_pdf', resume_pdf);
+  body = form_data;
+  try {
+    dispatch(uploadResume({body,auth:token})).unwrap()
+  } catch (err) {
+    console.log(err)
+  }
+
+  })
+}
 const exec = () => {
   const template = document.getElementById('tpcv');
   html2canvas(template,{
@@ -84,10 +127,7 @@ const exec = () => {
     pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight);
     // pdf.output('dataurlnewwindow');
     pdf.save("download.pdf");
-    // window.close()
   })
-  // window.close()
-
 }
 
 
@@ -98,16 +138,16 @@ const exec = () => {
         <div className="col-30">
           <img className="Profile_resume_img" src={profile} crossOrigin="true" rossOrigin="anonymous"/>
         </div>
-        <div className="col-70 Profile_resume_name_sec text-left">
-          <h1>{resumeDetails.name}</h1>
-          <h2>{lastJob}</h2>
+        <div className="col-70 Profile_resume_name_sec">
+          <h2 className="profileName text-left">{resumeDetails.name}</h2>
+          <h2 className="currentDegi text-left">{lastJob}</h2>
         </div>
       </div>
 
       <div className="d-flex justify-content-between text-light">
-        <div className="col-30 bg-dark mx-1">
+        <div className="col-30 bg-dark mx-1 py-2">
         <div className="skills-head text-left">
-              <h3 className=" ml-3">PERSONAL DETAILS</h3>
+              <h3 className="pl-3">PERSONAL DETAILS</h3>
               <hr className="horizone_line " />
           </div>
           <div className="personal_detail_sec text-light d-flex ">
@@ -140,10 +180,9 @@ const exec = () => {
               <span className="mt-2 mb-0">{resumeDetails.gender_name}</span>
             </div>
           </div>
-
-          <div className="col-100 skills mt-5 ">
+          <div className="col-100 skills mt-2 ">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">SKILLS</h3>
+              <h3 className="pl-3">SKILLS</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column pl-3 mt-0-5" style={{"textAlign":"left"}}>
@@ -156,7 +195,7 @@ const exec = () => {
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">EDUCATION</h3>
+              <h3 className="pl-3">EDUCATION</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column pl-3" style={{"textAlign":"left"}}>
@@ -169,7 +208,7 @@ const exec = () => {
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">CERTIFICATION</h3>
+              <h3 className="pl-3">CERTIFICATION</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column pl-3" style={{"textAlign":"left"}}>
@@ -182,62 +221,62 @@ const exec = () => {
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">HOBBIES</h3>
+              <h3 className="pl-3">HOBBIES</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column text-left pl-3" style={{"textAlign":"left"}}>
               <div className="my-2">
                 <h3>Entertainment</h3>
-                <div className="box_1">{hobbies.entertainment.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.entertainment.split(",").join(" | ")}</div>
               </div>
               <div className="my-2">
                 <h3>Music</h3>
-                <div className="box_1">{hobbies.music.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.music.split(",").join(" | ")}</div>
               </div>
               <div className="my-2">
                 <h3span>Sports</h3span>
-                <div className="box_1">{hobbies.sports.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.sports.split(",").join(" | ")}</div>
               </div>
               <div className="my-2">
                 <h3>Leisure</h3>
-                <div className="box_1">{hobbies.leisure.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.leisure.split(",").join(" | ")}</div>
               </div>
               <div className="my-2">
                 <h3>Adventure</h3>
-                <div className="box_1">{hobbies.adventure.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.adventure.split(",").join(" | ")}</div>
               </div>
               {hobbies.travel!=="" && <div className="my-2">
                 <h3>travel</h3>
-                <div className="box_1">{hobbies.travel.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.travel.split(",").join(" | ")}</div>
               </div>}
               
               {hobbies.books!=="" && <div className="my-2">
                 <h3>books</h3>
-                <div className="box_1">{hobbies.books.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.books.split(",").join(" | ")}</div>
               </div>}
               
               {hobbies.any_other!=='' && <div className="my-2">
                 <h3>Any other</h3>
-                <div className="box_1">{hobbies.any_other.split(",").join("|")}</div>
+                <div className="box_1">{hobbies.any_other.split(",").join(" | ")}</div>
               </div>}
             </div>
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">AWARDS</h3>
+              <h3 className="pl-3">AWARDS</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added text-left pl-3">
-              <p className="my-2">Adobe PhotoshopAdobe</p>
-              <p className="my-2">IllustratorAdobe</p>
-              <p className="my-2">In DesignMicroshop</p>
-              <p className="my-2">office</p>
-              <p className="my-2">ProgramCSS/HTMLSeo</p>
+              <h4 className="my-2">Adobe PhotoshopAdobe</h4>
+              <h4 className="my-2">IllustratorAdobe</h4>
+              <h4 className="my-2">In DesignMicroshop</h4>
+              <h4 className="my-2">office</h4>
+              <h4 className="my-2">ProgramCSS/HTMLSeo</h4>
             </div>
           </div>
           <div className="col-100 skills mt-5">
             <div className="skills-head text-left">
-              <h3 className=" ml-3">SOCIAL MEDIA</h3>
+              <h3 className="pl-3">SOCIAL MEDIA</h3>
               <hr className="horizone_line " />
             </div>
             <div className="skills_added d-flex flex-column text-left ml-3 g-2" style={{"textAlign":"left","color":"white"}}>
@@ -261,13 +300,13 @@ const exec = () => {
           <div className="col-80 control">
             <div className="profile">
               <div className="profile_head text-left">
-                <h2>PROFILE</h2>
+                <h4>PROFILE</h4>
                 <hr />
               </div>
               <div className="profile_bio text-left">
-                <p>
+                <h6>
                 {parser(bio)}
-                </p>
+                </h6>
               </div>
             </div>
           </div>
@@ -275,15 +314,15 @@ const exec = () => {
           <div className="col-80 control">
             <div className="profile">
               <div className="profile_head text-left">
-                <h2>WORK EXPERIENCE</h2>
+                <h4>WORK EXPERIENCE</h4>
                 <hr />
               </div>
               {companyInfo && companyInfo.map((company)=>{
                 return <div className="profile_bio text-left d-flex justify-around">
                 <div className="grid_1 col-30">
                   <div className="grid_1_head">
-                    <h2>{company.company_name}</h2>
-                    <div>
+                    <h4 className="companyDetails">{company.company_name}</h4>
+                    <div className="roles_respResume">
                       <div className="flex-row-fit align-center g-1">
                       <Device /> <p>{company.industry_name}</p>
                       </div>
@@ -310,12 +349,16 @@ const exec = () => {
                 </div>
                 {company && company.job_role.map((job)=>{
                    return <div className="grid_1 col-70 ">
-                   <div className="grid_1_head d-flex justify-around">
-                     <h3>{job.designation_name}</h3>
-                     <h5 className="text-center">{job.job_start_date} To {job.job_end_date}</h5>
+                   <div className="grid_1_head d-flex justify-between">
+                    <div>
+                     <h3 className="companyDetails">{job.designation_name}</h3>
+                       </div>
+                       <div>
+                     <h3 className="companyDetails text-center" style={{"paddingRight":"30px"}}>{job.job_start_date} To {job.job_end_date}</h3>
+                      </div>
                    </div>
                    <div className="d-flex justify-around">
-                     <div className="col-50 roles_resp">{job.role_responsibilties}</div>
+                     <div className="col-50 roles_respResume"><p>{job.role_responsibilties}</p></div>
                      <div className="col-50 ">
                      <div className="skills d-flex justify-aroundx pl-1">
                         <div className="col-100">
@@ -338,14 +381,14 @@ const exec = () => {
                      </div>
                    </div>
                    <div className="mt-5">
-                    {job.project && <h2>Projects</h2>}
+                    {job.project && <h3 className="companyDetails">Projects:</h3>}
                     {job.project && job.project.map((proj)=>{
                       return <>
-                      <h3>{proj.project_name}</h3>
+                      <h3 className="companyDetails">{proj.project_name}</h3>
                      <div className=" ">
                        <div className="skills mx-1 d-flex">
                          <div className="main_head_skills">
-                           <h4>ClientName - {proj.client_name}</h4>
+                           <h4 className="companyDetails">ClientName - {proj.client_name}</h4>
                          </div>
                          {/* <div className="d-flex flex-column">
                            <span className="nameClient_skill">skills</span>
@@ -363,11 +406,11 @@ const exec = () => {
                            <textarea className="nameClient_skill mt-2"></textarea>
                          </div>
                        </div> */}
-                       <div className="skills mx-1 mt-5 g-2">
+                       <div className="skills mx-1 mt-2 g-2">
                          <div className="main_head_skills d-flex justify-between">
-                           <div className="d-flex justify-between ">
+                           {/* <div className="d-flex justify-between ">
                                 SKILLS USED
-                           </div>
+                           </div> */}
                          </div>
                          <div className="d-flex justify-between">
                            <div>Skills</div>
@@ -463,3 +506,13 @@ function StartEndDate(jobs = []) {
 
 
 export default Resume;
+
+
+const JsonToFormData = (json = {}) => {
+  var form_data = new FormData();
+  for (var key in json) {
+    form_data.append(key, json[key]);
+  }
+
+  return form_data
+}

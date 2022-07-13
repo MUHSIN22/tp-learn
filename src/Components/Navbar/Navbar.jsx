@@ -8,26 +8,24 @@ import { useSelector } from 'react-redux';
 import { selectUserFirstName } from '../../redux/Features/ResumeSlice';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { selectAuthentication } from '../../redux/Features/AuthenticationSlice';
 export default function Navbar(props) {
   const user = useSelector(selectUserFirstName)
-  // const history =useHistory()
-
+console.log(window.location.pathname)
   let navigate = useNavigate();
-  
+  const auth = useSelector(selectAuthentication)
   const rendertomyprofile=()=>{
     navigate('/MyProfile')
   }
  
-
   
   return (
     <>
-     {
-      window.location.pathname !== '/' ?  <nav>
+       <nav>
       <div className="logo">
           <img src={Logo} alt="" />
       </div>
-     {user&& <div className="controls">
+     {(auth['authToken'] && user) && <div className="controls">
       <span className='flex-row-start align-center g-0-5' onClick={()=>rendertomyprofile()}><button className='profile'>
         
         <User/>
@@ -35,8 +33,7 @@ export default function Navbar(props) {
         
         <button className='btn tirtiary'>Save As Draft</button>
       </div>}
-  </nav>:""
-    }
+  </nav>
     </>
   )
 }

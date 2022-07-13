@@ -28,7 +28,7 @@ export default function FormContainer() {
 const dispatch = useDispatch()
 const token = useSelector(selectAuthToken)
 const user_id = useSelector(selectUser_id)
-const progress = 18
+const progress = parseInt(useSelector(selectFormId)) + 1 || 1
 const setProgress = (id)=>{
   let body = {
     form_id: id,

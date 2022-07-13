@@ -95,14 +95,12 @@ export default function CVBuilder() {
           ...progress,
           'Additional Skills': { id: 11, state: 'active' },
         })
-      } else if(form_id <18){
-        console.log('5th');
-      } else if (form_id < 16) {
+      } else if (form_id < 18) {
         setProgress({
           ...progress,
           'Career Objective': { id: 15, state: 'active' }
         })
-      } else if (form_id == 16) {
+      } else if (form_id == 18) {
 
         setProgress({
           ...progress,

@@ -261,6 +261,24 @@ export const uploadCVvideos = createAsyncThunk('authentication/uploadCVvideos', 
         return rejectWithValue(error.response.data);
     }
 })
+
+export const uploadResume = createAsyncThunk('authentication/uploadedResumeurl', async (data, { rejectWithValue }) => {
+    console.log("bodyyyyyyyyyyyy",data.body)
+    // let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    try {
+        const response = await API.post(`/upload-resume-pdf`, data.body, {
+            headers: {
+                "Content-Type": `multipart/form-data`,
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        console.log(response.data);
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
 export const addSocialLinks = createAsyncThunk('authentication/addSocialLinks', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     console.log(encoded)
