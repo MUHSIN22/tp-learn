@@ -36,13 +36,17 @@ import {
   selectCertificate,
   selectHobbies,
   selectSocilaLinks,
-  selectSocialContribution
+  selectSocialContribution,
+  uploadResume
 } from "../../redux/Features/ResumeSlice";
 import { selectKeySkills } from '../../redux/Features/GraphSlice'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import html2canvas from "html2canvas";
 import jsPDF from  "jspdf";
+import { selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
+
 const  Resume =({newRef,shareOpts})=>{
+  const dispatch = useDispatch()
   const companyInfo = useSelector(SelectCompanyDetails);
   const profile = useSelector(selectProfilePic);
   const bio = useSelector(selectBio);
@@ -56,17 +60,54 @@ const  Resume =({newRef,shareOpts})=>{
   const hobbies = useSelector(selectHobbies);
   const socialLink = useSelector(selectSocilaLinks)
   const socialContribution = useSelector(selectSocialContribution);
+  const token = useSelector(selectAuthToken)
+  const user_id = useSelector(selectUser_id)
 
 React.useEffect(() => {
   //  template = document.getElementById('tpcv');
   if(newRef)
  newRef.current = exec
+ newRef.current.share = exect
 }, [])
 
 // React.useEffect(() => {
 //   exec()
 // }, [])
  
+const exect = (shareOpts) => {
+  
+  const template = document.getElementById('tpcv');
+  html2canvas(template,{
+    useCORS: true, 
+    logging: true,
+    letterRendering: 1,
+    allowTaint: false})
+  .then((canvas) => {
+    const componentWidth = template.offsetWidth
+    const componentHeight = template.offsetHeight
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF(
+      "p", "mm", "a4"
+    );
+    pdf.internal.pageSize.width = componentWidth
+    pdf.internal.pageSize.height = componentHeight
+   pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight); 
+   let resume_pdf =  pdf.output('blob')  
+   resume_pdf = new File([resume_pdf], "name.pdf");
+
+   let body = {user_id:user_id,resume_pdf:resume_pdf};
+   var form_data = new FormData();
+  form_data.append('user_id',user_id );   
+  form_data.append('resume_pdf', resume_pdf);
+  body = form_data;
+  try {
+    dispatch(uploadResume({body,auth:token})).unwrap()
+  } catch (err) {
+    console.log(err)
+  }
+
+  })
+}
 const exec = () => {
   const template = document.getElementById('tpcv');
   html2canvas(template,{
@@ -465,3 +506,13 @@ function StartEndDate(jobs = []) {
 
 
 export default Resume;
+
+
+const JsonToFormData = (json = {}) => {
+  var form_data = new FormData();
+  for (var key in json) {
+    form_data.append(key, json[key]);
+  }
+
+  return form_data
+}

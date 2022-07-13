@@ -119,11 +119,10 @@ export default function CVBuilder() {
   const cvShare = async (app) => {
     console.log(shareOpts, "hellopp");
     setTimeout(() => {
-      newRef.current()();   
+      newRef.current.share(shareOpts)();   
     }, 1000);
     setShareOpts({ isShare: 1, app: app });
     console.log(shareOpts, "hello");  
-    
   };
 
   return (
