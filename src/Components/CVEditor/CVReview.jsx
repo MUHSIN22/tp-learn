@@ -46,9 +46,28 @@ export default function CVBuilder() {
   const [isShow, setIsshow] = useState(false);
   const [progress, setProgress] = useState(0);
   const [shareOpts, setShareOpts] = useState({ isShare: 0, app: "facebook" });
+  const [resumePdf,setResumePdf] = useState(null)
   const dispatch = useDispatch();
   let toEdit = useSelector(selectToEdit);
   let editPageDetails = useSelector(selectEditPageDetails);
+
+  useEffect(() => {
+    console.log(resumePdf,'pdf from page');
+    if(resumePdf){
+      switch(shareOpts.app){
+        case 'facebook':
+          window.location.href = "https://www.facebook.com/sharer/sharer.php?u="+resumePdf
+          break;
+        case 'whatsapp':
+          window.location.href = 'https://api.whatsapp.com/send?text=Take a look at my resume%0a"'+resumePdf
+          break;
+        default:
+          break;
+      }
+    }
+  },[resumePdf])
+
+
   const handleEdit = (e) => {
     dispatch(changeToEdit(!toEdit)).unwrap();
     dispatch(changeEditPageDetails({}));
@@ -90,7 +109,7 @@ export default function CVBuilder() {
             <div className="d-flex justify-between" style={{ width: "10rem" }}>
               <div
                 onClick={async () => {
-                  cvShare("whatsapp");
+                  cvShare("facebook");
                 }}
               >
                 <img
@@ -99,7 +118,9 @@ export default function CVBuilder() {
                   style={{ width: "2rem", height: "2rem" }}
                 />
               </div>
-              <div onClick={() => newRef.current()()}>
+              <div onClick={() => {
+                  cvShare("whatsapp");
+                }}>
                 <img src={wp_icon} alt="" />
               </div>
               <div onClick={() => newRef.current()()}>
@@ -117,9 +138,11 @@ export default function CVBuilder() {
   );
 
   const cvShare = async (app) => {
-    console.log(shareOpts, "hellopp");
+    console.log(shareOpts, "hellopp",app);
     setTimeout(() => {
-      newRef.current.share(shareOpts)();   
+      newRef.current.share(shareOpts)();  
+      newRef.current.app(app)()
+      console.log(newRef); 
     }, 1000);
     setShareOpts({ isShare: 1, app: app });
     console.log(shareOpts, "hello");  
@@ -182,7 +205,7 @@ export default function CVBuilder() {
               overflow: "hidden",
             }}
           >
-            <ResumeDownload newRef={newRef} shareOpts={shareOpts} />
+            <ResumeDownload newRef={newRef} shareOptions={shareOpts} setResumePdf={setResumePdf}/>
           </div>
         </div>
       </div>

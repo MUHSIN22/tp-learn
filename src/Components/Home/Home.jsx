@@ -23,7 +23,8 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import ResumeSlider from '../ResumeSlider/ResumeSlider'
 import Header from '../Header/Header'
-
+import Lottie from 'react-lottie'
+import bannerAnimation from '../../Assets/Animations/Banner Image.json'
 
 let team = [
     {
@@ -62,6 +63,13 @@ export default function Home() {
     const [marginLeft, setMarginLeft] = useState(0);
     const sliderRef = useRef(null);
     const teamSectionRef = useRef(null);
+
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: bannerAnimation,
+        renderer: 'svg'
+    }
 
     useEffect(() => {
         setInterval(() => {
@@ -122,7 +130,8 @@ export default function Home() {
                         <Link to="/" className='btn-primary'>Build My Resume</Link>
                     </div>
                     <div className="banner-image-wrapper">
-                        <img src={homeBannerImage} alt="" className="banner-image" />
+                        {/* <img src={homeBannerImage} alt="" className="banner-image" /> */}
+                        <Lottie options={defaultOptions} className="banner-image" />
                     </div>
                     <img src={bannerWave} className="banner-wave" alt="" />
                 </section>

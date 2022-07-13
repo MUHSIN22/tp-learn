@@ -3,10 +3,7 @@
     overflow: hidden;
     margin-top: 2rem;
     position: relative;
-<<<<<<< HEAD
     cursor: grab;
-=======
->>>>>>> origin/main
 }
 .resume-slider::after{
     content: '';
@@ -20,17 +17,11 @@
 }
 .resume-slider-wrapper{
     display: grid;
-<<<<<<< HEAD
     transition: all 0.3s ease;
 }
 .resume-slider .slide{
     margin: 1rem 4rem;
     transition: all 0.3s ease;
-=======
-}
-.resume-slider .slide{
-    margin: 1rem 4rem;
->>>>>>> origin/main
 }
 .resume{
     width: 100%;
@@ -42,7 +33,6 @@
 }
 .resume-slider .slide--active{
     transform: scale(1.1);
-<<<<<<< HEAD
 }
 
 @media only screen and (max-width: 768px) {
@@ -58,6 +48,4 @@
         width: 200%;
         transform: translateX(-25%);
     }
-=======
->>>>>>> origin/main
 }

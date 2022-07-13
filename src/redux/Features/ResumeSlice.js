@@ -266,16 +266,17 @@ export const uploadResume = createAsyncThunk('authentication/uploadedResumeurl',
     console.log("bodyyyyyyyyyyyy",data.body)
     // let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     try {
-        const response = await API.post(`/upload-resume-pdf`, data.body, {
+        const response = await API.post(`/upload-resume-pdf`, data.body , {
             headers: {
                 "Content-Type": `multipart/form-data`,
                 'Cache-Control': 'no-cache',
                 'authorization': `bearer ${data.auth}`
             }
         })
-        console.log(response.data);
-        return response.data
+        console.log(response.data.data);
+        return response.data.data
     } catch (error) {
+        console.log(error);
         return rejectWithValue(error.response.data);
     }
 })

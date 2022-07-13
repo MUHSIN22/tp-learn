@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
-<<<<<<< HEAD
 import resume1 from '../../Assets/resume/resume 1.png'
 import resume2 from '../../Assets/resume/resume 2.png'
 import resume3 from '../../Assets/resume/resume 3.png'
@@ -22,7 +21,9 @@ export default function ResumeSlider() {
     const [slideCount,setSlideCount] = useState(0);
     const [activeIndex,setActiveIndex] = useState(1 + itemPerWindow);
     const [marginCount,setMarginCount] = useState(itemPerWindow);
+    const [isPaused,setPause] = useState(false);
     let initialPosition = 0;
+    let slideInterval;
 
     useEffect(() => {
         let slides = document.querySelectorAll(".slide")
@@ -53,6 +54,20 @@ export default function ResumeSlider() {
         sliderRef.current.children[0].children[activeIndex].classList.add("slide--active")
     },[activeIndex])
 
+
+    useEffect(() => {
+        if(isPaused){
+            clearInterval(slideInterval)
+        }else{
+            slideInterval = setInterval(() => {
+                shiftSlide(1)
+            },5000)
+        }
+        return () => {
+            clearInterval(slideInterval)
+        }
+    },[slideCount,isPaused])
+
     const dragStart = (event) => {
         event = event || window.event;
         if(event.type === "touchstart"){
@@ -67,7 +82,6 @@ export default function ResumeSlider() {
     const dragEnd = (event) => {
         event = event || window.event;
 
-        let sliderContainer = document.querySelector('.resume-slider-wrapper')
         let finalPosition;
         if(event.type === "touchend"){
              finalPosition = event.changedTouches[0].clientX
@@ -76,7 +90,17 @@ export default function ResumeSlider() {
         }   
 
         if(initialPosition - finalPosition > 20){
+            shiftSlide(1);
+        }else if(initialPosition - finalPosition < -20){
+            shiftSlide(-1);
+        }
+    }
+
+    const shiftSlide = (direction) => {
+        let sliderContainer = document.querySelector('.resume-slider-wrapper')
+        if(direction === 1){
             setMarginCount(prev => {
+                console.log(prev ,slideCount - itemPerWindow -1,slideCount,itemPerWindow);
                 if(prev ===slideCount - itemPerWindow - 1){
                     setTimeout(() => {
                         sliderContainer.style.transition = 'none';
@@ -92,7 +116,7 @@ export default function ResumeSlider() {
                     return prev + 1;
                 }
             })
-        }else if(initialPosition - finalPosition < -20){
+        }else if(direction === -1){
             setMarginCount(prev => {
                 if(prev === 1){
                     setTimeout(() => {
@@ -114,7 +138,11 @@ export default function ResumeSlider() {
     }
 
     return (
-        <div className="resume-slider" ref={sliderRef}>
+        <div className="resume-slider" 
+            ref={sliderRef} 
+            onMouseOver={() => setPause(true)}
+            onMouseOut={() => setPause(false)}
+        >
             <div 
                 className="resume-slider-wrapper" 
                 style={{
@@ -125,32 +153,11 @@ export default function ResumeSlider() {
                 onTouchStart={dragStart} 
                 onTouchEnd={dragEnd}
             > 
-=======
-import resume1 from '../../Assests/resume/resume1.png'
-import './ResumeSlider.css'
-export default function ResumeSlider() {
-    const sliderRef = useRef(null);
-    let itemPerWindow = 3;
-    const [slideWidth,setSlideWidth] = useState(0);
-    const [slideCount,setSlideCount] = useState(0);
-    const [activeIndex,setActiveIndex] = useState(1)
-
-    useEffect(() => {
-        setSlideWidth(sliderRef.current.offsetWidth / itemPerWindow)
-        setSlideCount(sliderRef.current.children[0].children.length);
-        sliderRef.current.children[0].children[activeIndex].classList.add("slide--active")
-    },[])
-
-    return (
-        <div className="resume-slider" ref={sliderRef}>
-            <div className="resume-slider-wrapper" style={{gridTemplateColumns: `repeat(${slideCount},${slideWidth}px)`}}> 
->>>>>>> origin/main
                 <div className="slide">
                     <img src={resume1} className="resume" alt="" />
                     <h3 className="slider-title">Graphic Designer</h3>
                 </div>
                 <div className="slide">
-<<<<<<< HEAD
                     <img src={resume2} className="resume" alt="" />
                     <h3 className="slider-title">Graphic Designer</h3>
                 </div>
@@ -180,33 +187,6 @@ export default function ResumeSlider() {
                 </div>
                 <div className="slide">
                     <img src={resume9} className="resume" alt="" />
-=======
-                    <img src={resume1} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
-                </div>
-                <div className="slide">
-                    <img src={resume1} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
-                </div>
-                <div className="slide">
-                    <img src={resume1} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
-                </div>
-                <div className="slide">
-                    <img src={resume1} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
-                </div>
-                <div className="slide">
-                    <img src={resume1} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
-                </div>
-                <div className="slide">
-                    <img src={resume1} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
-                </div>
-                <div className="slide">
-                    <img src={resume1} className="resume" alt="" />
->>>>>>> origin/main
                     <h3 className="slider-title">Graphic Designer</h3>
                 </div>
             </div>

@@ -477,7 +477,6 @@
     .home-banner .banner-content-wrapper h1 span {
         font-size: 3rem;
     }
-<<<<<<< HEAD
 }
 @media only screen and (max-width: 768px) {
     .home-banner .banner-wave {
@@ -735,6 +734,4 @@
         width: 1rem;
         height: 1rem;
     }
-=======
->>>>>>> origin/main
 }
