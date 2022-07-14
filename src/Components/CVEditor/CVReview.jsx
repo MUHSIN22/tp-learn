@@ -25,6 +25,7 @@ import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from "react-redux";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import {Spinner} from "./Spinner";
 import {
   selectToEdit,
   changeToEdit,
@@ -32,6 +33,7 @@ import {
   changeEditPageDetails,
   changePageOn,
   getPageOn,
+  getLoaderstate,
 } from "../../redux/Features/ResumeSlice";
 import { useNavigate } from "react-router-dom";
 import Tippy from "@tippyjs/react";
@@ -40,21 +42,31 @@ import "tippy.js/themes/light.css";
 import fb_icon from "../../Assests/icons/facebook.svg";
 import wp_icon from "../../Assests/icons/whatsapp.png";
 import insta_icon from "../../Assests/icons/instagram.png";
+import { useCallback } from "react";
 
 export default function CVBuilder() {
   const page = useSelector(getPageOn);
   const [isShow, setIsshow] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [shareOpts, setShareOpts] = useState({ isShare: 0, app: "facebook" });
+  const [shareOpts, setShareOpts] = useState({ isShare: 0, app: "" });
   const dispatch = useDispatch();
   let toEdit = useSelector(selectToEdit);
   let editPageDetails = useSelector(selectEditPageDetails);
+  // let loaderState=useSelector(getLoaderstate)
   const handleEdit = (e) => {
     dispatch(changeToEdit(!toEdit)).unwrap();
     dispatch(changeEditPageDetails({}));
     setIsshow(true);
     console.log(isShow);
   };
+  const [loader,setloader] = useState(0);
+
+  const changeLoader = (value)=>{
+    console.log("data",value, "data");
+    setloader(value)
+  }
+  
+
   const newRef = React.useRef();
 
   const generatePdf = () => {
@@ -65,7 +77,7 @@ export default function CVBuilder() {
   };
 
   const pull_data = (data) => {
-    console.log(data, "data");
+   
     dispatch(changePageOn(data));
   };
   editPageDetails && editPageDetails.progress && window.scrollTo(0, 0);
@@ -89,9 +101,7 @@ export default function CVBuilder() {
           content={
             <div className="d-flex justify-between" style={{ width: "10rem" }}>
               <div
-                onClick={async () => {
-                  cvShare("whatsapp");
-                }}
+                onClick={async () => { await cvShare("facebook")}}
               >
                 <img
                   src={fb_icon}
@@ -99,10 +109,14 @@ export default function CVBuilder() {
                   style={{ width: "2rem", height: "2rem" }}
                 />
               </div>
-              <div onClick={() => newRef.current()()}>
+              <div onClick={async () => {
+                  await cvShare("whatsapp");
+                }}>
                 <img src={wp_icon} alt="" />
               </div>
-              <div onClick={() => newRef.current()()}>
+              <div onClick={async () => {
+                  await cvShare("instagram");
+                }}>
                 <img src={insta_icon} alt="" />
               </div>
             </div>
@@ -117,12 +131,13 @@ export default function CVBuilder() {
   );
 
   const cvShare = async (app) => {
-    console.log(shareOpts, "hellopp");
+    setloader(1)
     setTimeout(() => {
-      newRef.current.share(shareOpts)();   
+      newRef.current.share(shareOpts)(); 
+      setloader(0)  
     }, 1000);
-    setShareOpts({ isShare: 1, app: app });
-    console.log(shareOpts, "hello");  
+    shareOpts.app=app
+    setShareOpts({shareOpts});
   };
 
   return (
@@ -139,38 +154,41 @@ export default function CVBuilder() {
           >
             {floatingButton}
           </div>
+          {
+              loader==1 && <Spinner />
+            }
           <div className="flex-row-center justify-end m-0 px-1">
             {editPageDetails && editPageDetails.progress && (
               <EditFormContainer data={editPageDetails} />
             )}
           </div>
-          {(page === "/personal-information" || page === "/dashboard") && (
+          {((page === "/personal-information" || page === "/dashboard") && loader!=1) && (
             <Section1 />
           )}
-          {(page === "/Experience" || page === "/dashboard") && <Section3 />}
-          {(page === "/Education" || page === "/dashboard") && (
+          {((page === "/Experience" || page === "/dashboard") && loader!=1 ) && <Section3 />}
+          {((page === "/Education" || page === "/dashboard") && loader!=1 ) && (
             <EducationReview />
           )}
-          {(page === "/languages" || page === "/dashboard") && <Languages />}
-          {(page === "/hobbies" || page === "/dashboard") && <Hobby />}
-          {(page === "/Videos" || page === "/dashboard") && <VideosReview />}
-          {(page === "/career-timeline" || page === "/dashboard") && (
+          {((page === "/languages" || page === "/dashboard") && loader!=1) && <Languages />}
+          {((page === "/hobbies" || page === "/dashboard") && loader!=1) && <Hobby />}
+          {((page === "/Videos" || page === "/dashboard") && loader!=1) && <VideosReview />}
+          {((page === "/career-timeline" || page === "/dashboard") && loader!=1) && (
             <Section2Review />
           )}
-          {(page === "/SocialMedia" || page === "/dashboard") && (
+          {((page === "/SocialMedia" || page === "/dashboard") && loader!=1) && (
             <SocialMedia />
           )}
-          {(page === "/Certification" || page === "/dashboard") && (
+          {((page === "/Certification" || page === "/dashboard") && loader!=1) && (
             <Cerification />
           )}
-          {(page === "/SocialContribution" || page === "/dashboard") && (
+          {((page === "/SocialContribution" || page === "/dashboard") && loader!=1) && (
             <SocialContribution />
           )}
-          {(page === "/Recommendation" || page === "/dashboard") && (
+          {((page === "/Recommendation" || page === "/dashboard") && loader!=1) && (
             <Recommendation />
           )}
-          {(page === "/Docs" || page === "/dashboard") && <DocsReview />}
-          {(page === "/self-declaration" || page === "/dashboard") && (
+          {((page === "/Docs" || page === "/dashboard") && loader!=1) && <DocsReview />}
+          {((page === "/self-declaration" || page === "/dashboard") && loader!=1) && (
             <SelfDeclaration />
           )}
           <div
@@ -182,7 +200,7 @@ export default function CVBuilder() {
               overflow: "hidden",
             }}
           >
-            <ResumeDownload newRef={newRef} shareOpts={shareOpts} />
+            <ResumeDownload newRef={newRef} shareOpts={shareOpts} changeLoaderval={()=>changeLoader() } />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React,{useEffect, useRef} from "react";
+import React,{useEffect, useRef,useState} from "react";
 import { FaFileContract } from "react-icons/fa";
 import { BiMessageMinus } from "react-icons/bi";
 import { BsGenderMale,BsFacebook,BsTwitter ,BsLinkedin} from "react-icons/bs";
@@ -37,15 +37,17 @@ import {
   selectHobbies,
   selectSocilaLinks,
   selectSocialContribution,
-  uploadResume
+  uploadResume,
+  getDownLoadDetails,
+  reload
 } from "../../redux/Features/ResumeSlice";
 import { selectKeySkills } from '../../redux/Features/GraphSlice'
 import { useDispatch, useSelector } from "react-redux";
 import html2canvas from "html2canvas";
 import jsPDF from  "jspdf";
-import { selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
+import { selectAuthLoading, selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
 
-const  Resume =({newRef,shareOpts})=>{
+const  Resume =({newRef,shareOpts,changeLoaderval})=>{
   const dispatch = useDispatch()
   const companyInfo = useSelector(SelectCompanyDetails);
   const profile = useSelector(selectProfilePic);
@@ -62,20 +64,22 @@ const  Resume =({newRef,shareOpts})=>{
   const socialContribution = useSelector(selectSocialContribution);
   const token = useSelector(selectAuthToken)
   const user_id = useSelector(selectUser_id)
+  const downloadlink=useSelector(getDownLoadDetails)
+  const loading = useSelector(selectResumeLoading);
+  const [loadValue,setloadValue]=useState(loading)
 
-React.useEffect(() => {
+useEffect(() => {
   //  template = document.getElementById('tpcv');
   if(newRef)
  newRef.current = exec
  newRef.current.share = exect
-}, [])
+}, [loadValue])
 
-// React.useEffect(() => {
-//   exec()
-// }, [])
+
+
  
-const exect = (shareOpts) => {
-  
+const exect = async (shareOpts) => {
+  console.log("shareOpts",shareOpts);
   const template = document.getElementById('tpcv');
   html2canvas(template,{
     useCORS: true, 
@@ -85,14 +89,14 @@ const exect = (shareOpts) => {
   .then((canvas) => {
     const componentWidth = template.offsetWidth
     const componentHeight = template.offsetHeight
-    const imgData = canvas.toDataURL('image/png');
+    const imgData = canvas.toDataURL('image/png',0.2);
     const pdf = new jsPDF(
-      "p", "mm", "a4"
+      "p", "mm", "a4",true
     );
     pdf.internal.pageSize.width = componentWidth
     pdf.internal.pageSize.height = componentHeight
-   pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight); 
-   let resume_pdf =  pdf.output('blob')  
+   pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight,undefined,'FAST'); 
+   let resume_pdf =  pdf.output('blob') 
    resume_pdf = new File([resume_pdf], "name.pdf");
 
    let body = {user_id:user_id,resume_pdf:resume_pdf};
@@ -100,8 +104,26 @@ const exect = (shareOpts) => {
   form_data.append('user_id',user_id );   
   form_data.append('resume_pdf', resume_pdf);
   body = form_data;
+  let result_pdf=sessionStorage.getItem("resume_link")
   try {
-    dispatch(uploadResume({body,auth:token})).unwrap()
+    
+    dispatch(uploadResume({body,auth:token,app:shareOpts.app})).unwrap().then(response=>{
+      let shareLink;
+      const resume_link = response.resumePdfUrl;
+      if(response.app === "whatsapp"){
+        shareLink = `https://api.whatsapp.com/send?text=${resume_link}`
+      } else if(response.app === "facebook"){
+        shareLink = `https://www.facebook.com/sharer/sharer.php?u=${resume_link}`
+      } else if(response.app === "instagram"){
+        shareLink = `https://www.instagram.com/?url=${resume_link}`    
+      }
+      changeLoaderval(1)
+      window.open(shareLink, '_blank', 'noopener,noreferrer')
+        
+    })
+    // if(){
+
+    // }
   } catch (err) {
     console.log(err)
   }
@@ -118,13 +140,13 @@ const exec = () => {
   .then((canvas) => {
     const componentWidth = template.offsetWidth
     const componentHeight = template.offsetHeight
-    const imgData = canvas.toDataURL('image/png');
+    const imgData = canvas.toDataURL('image/png',0.2);
     const pdf = new jsPDF(
-      "p", "mm", "a4"
+      "p", "mm", "a4", true
     );
     pdf.internal.pageSize.width = componentWidth
     pdf.internal.pageSize.height = componentHeight
-    pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight);
+    pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight,undefined,'FAST');
     // pdf.output('dataurlnewwindow');
     pdf.save("download.pdf");
   })
