@@ -115,7 +115,7 @@ const exect = async (shareOpts) => {
       } else if(response.app === "facebook"){
         shareLink = `https://www.facebook.com/sharer/sharer.php?u=${resume_link}`
       } else if(response.app === "instagram"){
-        shareLink = `https://www.instagram.com/?url=${resume_link}`    
+        shareLink = `https://www.instagram.com/direct?url=${resume_link}`    
       }
       changeLoaderval(1)
       window.open(shareLink, '_blank', 'noopener,noreferrer')
