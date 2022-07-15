@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React,{useEffect, useRef,useState} from "react";
 import { FaFileContract } from "react-icons/fa";
 import { BiMessageMinus } from "react-icons/bi";
 import { BsGenderMale, BsFacebook, BsTwitter, BsLinkedin } from "react-icons/bs";
@@ -37,7 +37,9 @@ import {
   selectHobbies,
   selectSocilaLinks,
   selectSocialContribution,
-  uploadResume
+  uploadResume,
+  getDownLoadDetails,
+  reload
 } from "../../redux/Features/ResumeSlice";
 import { selectKeySkills } from '../../redux/Features/GraphSlice'
 import { useDispatch, useSelector } from "react-redux";
@@ -62,84 +64,93 @@ const Resume = ({ newRef, shareOptions,setResumePdf }) => {
   const socialContribution = useSelector(selectSocialContribution);
   const token = useSelector(selectAuthToken)
   const user_id = useSelector(selectUser_id)
+  const downloadlink=useSelector(getDownLoadDetails)
+  const loading = useSelector(selectResumeLoading);
+  const [loadValue,setloadValue]=useState(loading)
 
-  React.useEffect(() => {
-    //  template = document.getElementById('tpcv');
-    if (newRef)
-      newRef.current = exec
-    newRef.current.share = exect
-  }, [])
+useEffect(() => {
+  //  template = document.getElementById('tpcv');
+  if(newRef)
+ newRef.current = exec
+ newRef.current.share = exect
+}, [loadValue])
 
-  useEffect(() => {
-    setShareConfig(shareOptions)
-    console.log(shareOptions,'share options here');
-  },[shareOptions])
 
-  // React.useEffect(() => {
-  //   exec()
-  // }, [])
 
-  const exect = (shareOpts) => {
+ 
+const exect = async (shareOpts) => {
+  console.log("shareOpts",shareOpts);
+  const template = document.getElementById('tpcv');
+  html2canvas(template,{
+    useCORS: true, 
+    logging: true,
+    letterRendering: 1,
+    allowTaint: false})
+  .then((canvas) => {
+    const componentWidth = template.offsetWidth
+    const componentHeight = template.offsetHeight
+    const imgData = canvas.toDataURL('image/png',0.2);
+    const pdf = new jsPDF(
+      "p", "mm", "a4",true
+    );
+    pdf.internal.pageSize.width = componentWidth
+    pdf.internal.pageSize.height = componentHeight
+   pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight,undefined,'FAST'); 
+   let resume_pdf =  pdf.output('blob') 
+   resume_pdf = new File([resume_pdf], "name.pdf");
 
-    const template = document.getElementById('tpcv');
-    html2canvas(template, {
-      useCORS: true,
-      logging: true,
-      letterRendering: 1,
-      allowTaint: false
+   let body = {user_id:user_id,resume_pdf:resume_pdf};
+   var form_data = new FormData();
+  form_data.append('user_id',user_id );   
+  form_data.append('resume_pdf', resume_pdf);
+  body = form_data;
+  let result_pdf=sessionStorage.getItem("resume_link")
+  try {
+    
+    dispatch(uploadResume({body,auth:token,app:shareOpts.app})).unwrap().then(response=>{
+      let shareLink;
+      const resume_link = response.resumePdfUrl;
+      if(response.app === "whatsapp"){
+        shareLink = `https://api.whatsapp.com/send?text=${resume_link}`
+      } else if(response.app === "facebook"){
+        shareLink = `https://www.facebook.com/sharer/sharer.php?u=${resume_link}`
+      } else if(response.app === "instagram"){
+        shareLink = `https://www.instagram.com/direct?url=${resume_link}`    
+      }
+      changeLoaderval(1)
+      window.open(shareLink, '_blank', 'noopener,noreferrer')
+        
     })
-      .then(async (canvas) => {
-        const componentWidth = template.offsetWidth
-        const componentHeight = template.offsetHeight
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF(
-          "p", "mm", "a4"
-        );
-        pdf.internal.pageSize.width = componentWidth
-        pdf.internal.pageSize.height = componentHeight
-        pdf.addImage(imgData, 'JPEG', 0, 0, componentWidth, componentHeight);
-        let resume_pdf = pdf.output('blob')
-        resume_pdf = new File([resume_pdf], "name.pdf");
+    // if(){
 
-        let body = { user_id: user_id, resume_pdf: resume_pdf };
-        var form_data = new FormData();
-        console.log(user_id, "user ID-------------------------");
-        console.log(resume_pdf);
-        form_data.append('user_id', user_id);
-        form_data.append('resume_pdf', resume_pdf);
-        body = form_data;
-        try {
-          let response = await dispatch(uploadResume({ body, auth: token, app: shareConfig.app })).unwrap()
-          console.log(response,'here');
-          setResumePdf(response.resume_pdf)
-        } catch (err) {
-          console.log(err)
-        }
+    // }
+  } catch (err) {
+    console.log(err)
+  }
 
-      })
-  }
-  const exec = () => {
-    const template = document.getElementById('tpcv');
-    html2canvas(template, {
-      useCORS: true,
-      logging: true,
-      letterRendering: 1,
-      allowTaint: false
-    })
-      .then((canvas) => {
-        const componentWidth = template.offsetWidth
-        const componentHeight = template.offsetHeight
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF(
-          "p", "mm", "a4"
-        );
-        pdf.internal.pageSize.width = componentWidth
-        pdf.internal.pageSize.height = componentHeight
-        pdf.addImage(imgData, 'JPEG', 0, 0, componentWidth, componentHeight);
-        // pdf.output('dataurlnewwindow');
-        pdf.save("download.pdf");
-      })
-  }
+  })
+}
+const exec = () => {
+  const template = document.getElementById('tpcv');
+  html2canvas(template,{
+    useCORS: true, 
+    logging: true,
+    letterRendering: 1,
+    allowTaint: false})
+  .then((canvas) => {
+    const componentWidth = template.offsetWidth
+    const componentHeight = template.offsetHeight
+    const imgData = canvas.toDataURL('image/png',0.2);
+    const pdf = new jsPDF(
+      "p", "mm", "a4", true
+    );
+    pdf.internal.pageSize.width = componentWidth
+    pdf.internal.pageSize.height = componentHeight
+    pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight,undefined,'FAST');
+    // pdf.output('dataurlnewwindow');
+    pdf.save("download.pdf");
+  })
+}
 
 
 
