@@ -69,7 +69,8 @@ export default function Experience5() {
         temp.skill_complexity = e.target.value
     }
     const handleAddSkill = () => {
-        set_Selected_options([...selected_options, temp])
+        temp.skill_name = temp.skill_id == '' ? search :  temp.skill_name;
+        set_Selected_options([...selected_options , temp])
         document.getElementById('iconinput-Skills').value = '';
         document.getElementById('iconinput-complexity').value = '';
 

@@ -16,7 +16,10 @@ const initialState = {
     newCertificate:false,
     newAdditionalSkill:false,
     newPhotoMedia:false,
-    newProject:false
+    newProject:false,
+    toEdit: false,
+    editPageDetails : {},
+    pageOn:'/personal-information'
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
@@ -176,6 +179,7 @@ export const addCertification = createAsyncThunk('authentication/addCertificatio
         })
         return response.data
     } catch (error) {
+        console.log("==================",error);
         return rejectWithValue(error.response.data);
     }
 })
@@ -287,6 +291,29 @@ export const changeFormId = createAsyncThunk('authentication/changeFormId', asyn
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
+    }
+})
+export const changeToEdit = createAsyncThunk('authentication/changeToEdit', async (data, { rejectWithValue }) => {
+    if(data){
+        return data;
+    }else{
+        return rejectWithValue(data);
+    }
+})
+
+export const changeEditPageDetails = createAsyncThunk('authentication/changeEditPageDetails', async (data, { rejectWithValue }) => {
+    if(data){
+        return data;
+    }else{
+        return rejectWithValue(data);
+    }
+})
+
+export const changePageOn = createAsyncThunk('authentication/changePageOn', async (data, { rejectWithValue }) => {
+    if(data){
+        return data;
+    }else{
+        return rejectWithValue(data);
     }
 })
 
@@ -594,8 +621,27 @@ export const resumeSlice = createSlice({
             state.status = 'Rejected'
             state.error = action.payload.error
             state.message = action.payload.message
-
-
+        }).addCase(changeToEdit.fulfilled, (state, action) => {
+            state.loading = false
+            state.toEdit = action.payload
+        }).addCase(changeToEdit.rejected, (state, action) => {
+            state.loading = false
+            state.toEdit = action.payload
+        }).addCase(changeEditPageDetails.fulfilled, (state, action) => {
+            state.loading = false
+            state.editPageDetails = action.payload
+        })
+        .addCase(changeEditPageDetails.rejected, (state, action) => {
+            state.loading = false
+            state.editPageDetails = action.payload
+        })
+        .addCase(changePageOn.fulfilled, (state, action) => {
+            state.loading = false
+            state.pageOn = action.payload
+        })
+        .addCase(changePageOn.rejected, (state, action) => {
+            state.loading = false
+            state.pageOn = '/personal-information'
         })
     }
 
@@ -727,8 +773,13 @@ export const selectNewAdditionalSkill =  (state)=> state.resume.newAdditionalSki
 export const selectNewDesignation = (state)=> state.resume.newDesignation
 export const selectNewPhotoMedia = (state)=> state.resume.newPhotoMedia
 export const selectNewProject = (state)=> state.resume.newProject
+export const selectSocialContribution = (state) => state.resume.recordDetails.resume_info.additional_skill;   
+export const SelectDocuments = (state) => state.resume.recordDetails.resume_info.upload_photo_media;  
+export const selectVideo = (state)=>   state.resume.recordDetails.resume_info.video_from_url;
+export const selectToEdit = (state)=> state.resume.toEdit;
+export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
+export const getPageOn = (state) => state.resume.pageOn;     
 export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject } = resumeSlice.actions;
-
 export default resumeSlice.reducer;
 
 
