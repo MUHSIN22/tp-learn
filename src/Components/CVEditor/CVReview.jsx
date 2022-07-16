@@ -7,7 +7,7 @@ import Cerification from "../CV/CerificationReview";
 import DocsReview from "../CV/DocsReview";
 import EducationReview from "../CV/EducationReview.jsx";
 import Hobby from "../CV/Hobby";
-import Languages from "../CV/Languages";
+import Languages from "../CV/LanguagesReview";
 import Portfolio from "../CV/Portfolio";
 import Recommendation from "../CV/Recommendation";
 import Section1 from "../CV/Section1";
@@ -172,8 +172,11 @@ export default function CVBuilder() {
           {((page === "/Education" || page === "/dashboard") && loader!=1 ) && (
             <EducationReview />
           )}
-          {((page === "/languages" || page === "/dashboard") && loader!=1) && <Languages />}
-          {((page === "/hobbies" || page === "/dashboard") && loader!=1) && <Hobby />}
+          {((page === "/Recommendation" || page === "/dashboard") && loader!=1) && (
+            <Recommendation />
+          )}
+          {((page === "/languages" || page === "/dashboard" || page === "/hobbies") && loader!=1) && <div className="flex-row-between g-2 mt-2"><Hobby /> <Languages /></div>}
+          {/* {((page === "/hobbies" || page === "/dashboard") && loader!=1) && <Hobby />} */}
           {((page === "/Videos" || page === "/dashboard") && loader!=1) && <VideosReview />}
           {((page === "/career-timeline" || page === "/dashboard") && loader!=1) && (
             <Section2Review />
@@ -183,9 +186,6 @@ export default function CVBuilder() {
           )}
           {((page === "/SocialContribution" || page === "/dashboard") && loader!=1) && (
             <SocialContribution />
-          )}
-          {((page === "/Recommendation" || page === "/dashboard") && loader!=1) && (
-            <Recommendation />
           )}
           {((page === "/Docs" || page === "/dashboard") && loader!=1) && <DocsReview />}
           {((page === "/self-declaration" || page === "/dashboard") && loader!=1) && (

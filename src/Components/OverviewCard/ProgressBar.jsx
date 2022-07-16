@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function ProgressBar({ value, color, hide_percent,label }) {
+    console.log("valllllllllllllllllll",value,color)
     return (
         <div className="progress-container">
             <div className="col-100 align-start g-0-5">

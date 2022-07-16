@@ -34,9 +34,9 @@ const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
     return (
-        <div className="certificate-grid">
+        <div className="certificate-grid flex-row-start g-2">
             <img src={logo} alt="" />
-            <div className="col-100 align-start justify-between g-1">
+            <div className="col-100 align-start justify-between g-2">
                 <div>
                     <h5>{project_name} {toEdit && (
                      <span onClick={() => handleEditForms({ 
@@ -53,9 +53,11 @@ const handleEditForms = (data) => {
                         skills 
                     })} style={{"marginLeft":"1rem"}}><FaPencilAlt /></span>
                     )}</h5>
-                    <p>{TimeDiff(certificate_end_date, certificate_start_date,)}</p>
                 </div>
-
+                <div className='<div className="flex-row-start mt-0-5">'>
+                    <p>{TimeDiff(certificate_end_date, certificate_start_date,)}</p>
+                         
+                    </div>
                 <div className="flex-row-start g-0-5">
                     {skills.map((skill, i) => <div key={i} className="skill">
                         {skill}

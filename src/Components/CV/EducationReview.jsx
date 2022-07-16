@@ -12,6 +12,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { selectUniversityList } from "../../redux/Features/MasterSlice";
 import { saveAs } from "file-saver";
 import { FiDownload } from "react-icons/fi";
+import moment from "moment";
 export default function EducationReview() {
   const education = useSelector(selectEducation);
   const loading = useSelector(selectResumeLoading);
@@ -110,7 +111,7 @@ function EducationCard({
             <p>{university_name}</p>
 
             <span className="gradientDivider-v"></span>
-            <p>{TimeDiff(course_end_date, course_start_date)}</p>
+            <p>{moment(course_start_date, "DD-MM-YYYY").format("yyyy MMM")} to {moment(course_end_date, "DD-MM-YYYY").format("yyyy")}</p>
           </div>
         <div className="flex-row-start g-0-5">
           {skills.map((skill, i) => (
