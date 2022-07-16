@@ -6,7 +6,7 @@ export default function IconInput({type='text', label, name, handleChange=()=>{}
             <label htmlFor={name}>{label}</label>
             <div className="input-container">
                 {icon}
-                <input id={`iconinput-${name}`} defaultValue={defaultValue} autoComplete='off' type={type} onChange={handleChange} name={name} placeholder={placeholder} />  
+                <input id={`iconinput-${name}`} defaultValue={defaultValue} autoComplete='off' type={type} onChange={handleChange} name={name} placeholder={placeholder} {...props} />  
             </div>
             {validation&&<span className='validation-message .shake-horizontal'>{validation}</span>}
         </div>

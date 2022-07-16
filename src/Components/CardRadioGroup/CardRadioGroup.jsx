@@ -1,6 +1,7 @@
 import React, {  useEffect, useState } from 'react'
-import './CardRadioGroup.cexport default function CardRadioGroup({ name , state, setState, option,name_field,label, default_value=null, disabled, autofill, defaultValue}) {
-    const [current,setCurrent] = useState(default_value||'');
+import './CardRadioGroup.css'
+export default function CardRadioGroup({ name , state, setState, option,name_field,label,defaultValue,default_value=null, disabled, autofill }) {
+    const [current,setCurrent] = useState('');
     const clickHandler = (index)=>{
         if(!disabled){
             let temp = state;

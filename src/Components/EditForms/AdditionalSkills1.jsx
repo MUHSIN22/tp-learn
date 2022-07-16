@@ -4,7 +4,7 @@ import IconSelect from '../IconInput/IconSelect'
 import IconTextArea from '../IconInput/IconTextArea'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux'
-import { additionalSkills, reload, selectResumeError, selectResumeLoading } from '../../redux/Features/ResumeSlice'
+import { addAdditionalSkills, reload, selectResumeError, selectResumeLoading } from '../../redux/Features/ResumeSlice'
 import Control from './Control';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
@@ -40,7 +40,7 @@ export default function AdditionalSkills1({data}) {
         let body = form
         body.user_id = user_id
         try {
-          dispatch(additionalSkills({auth:token,body:{...form,user_id}})).unwrap()
+          dispatch(addAdditionalSkills({auth:token,body:{...form,user_id}})).unwrap()
          console.log(form)
         } catch (error) {
             showAlert(true)

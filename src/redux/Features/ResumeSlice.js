@@ -19,7 +19,15 @@ const initialState = {
     newProject:false,
     toEdit: false,
     editPageDetails : {},
-    pageOn:'/personal-information'
+    pageOn:'/personal-information',
+    newJob: false,
+    newDesignation:false,
+    newEducation:false,
+    newCertificate:false,
+    newAdditionalSkill:false,
+    newPhotoMedia:false,
+    newProject:false,
+    downLoadDetails: {}
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
@@ -261,6 +269,24 @@ export const uploadCVvideos = createAsyncThunk('authentication/uploadCVvideos', 
         return rejectWithValue(error.response.data);
     }
 })
+
+export const uploadResume = createAsyncThunk('authentication/uploadedResumeurl', async (data, { rejectWithValue }) => {
+    console.log("bodyyyyyyyyyyyy",data.body)
+    // let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    try {
+        const response = await API.post(`/upload-resume-pdf`, data.body, {
+            headers: {
+                "Content-Type": `multipart/form-data`,
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        sessionStorage.setItem("resume_link",response.data.data.resume_pdf)
+        return {resumePdfUrl: response.data.data.resume_pdf,app:data.app}
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
 export const addSocialLinks = createAsyncThunk('authentication/addSocialLinks', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     console.log(encoded)
@@ -309,6 +335,22 @@ export const changeEditPageDetails = createAsyncThunk('authentication/changeEdit
     }
 })
 
+export const addCognitiveSkills = createAsyncThunk('authentication/addCognitiveSkills', async (data, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/manage-cognitive-info`, encoded, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
 export const changePageOn = createAsyncThunk('authentication/changePageOn', async (data, { rejectWithValue }) => {
     if(data){
         return data;
@@ -343,7 +385,7 @@ export const resumeSlice = createSlice({
             state.newProject = action.payload
         },
         nextForm: (state) => {
-            if (state.form < 17) state.form += 1;
+            if (state.form < 18) state.form += 1;
         },
         prevForm: (state) => {
             if (state.form > 1) state.form -= 1;
@@ -634,6 +676,19 @@ export const resumeSlice = createSlice({
         .addCase(changeEditPageDetails.rejected, (state, action) => {
             state.loading = false
             state.editPageDetails = action.payload
+        }).addCase(addCognitiveSkills.pending, (state, action) => {
+            state.loading = true
+            state.status = 'loading'
+            state.error = false
+        }).addCase(addCognitiveSkills.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.message = 'Cognitive Skills'
+        }).addCase(addCognitiveSkills.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'Rejected'
+            state.error = action.payload.error
+            state.message = action.payload.data
         })
         .addCase(changePageOn.fulfilled, (state, action) => {
             state.loading = false
@@ -642,6 +697,21 @@ export const resumeSlice = createSlice({
         .addCase(changePageOn.rejected, (state, action) => {
             state.loading = false
             state.pageOn = '/personal-information'
+        })
+        .addCase(uploadResume.pending,(state,action) => {
+            state.loading = true
+            state.status = 'loading'
+            state.error = false
+            state.downLoadDetails = action.payload
+        })
+        .addCase(uploadResume.fulfilled,(state,action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.downLoadDetails = action.payload
+        })
+        .addCase(uploadResume.rejected,(state,action) => {
+            state.loading = false
+            state.downLoadDetails = {};
         })
     }
 
@@ -773,13 +843,23 @@ export const selectNewAdditionalSkill =  (state)=> state.resume.newAdditionalSki
 export const selectNewDesignation = (state)=> state.resume.newDesignation
 export const selectNewPhotoMedia = (state)=> state.resume.newPhotoMedia
 export const selectNewProject = (state)=> state.resume.newProject
-export const selectSocialContribution = (state) => state.resume.recordDetails.resume_info.additional_skill;   
-export const SelectDocuments = (state) => state.resume.recordDetails.resume_info.upload_photo_media;  
-export const selectVideo = (state)=>   state.resume.recordDetails.resume_info.video_from_url;
 export const selectToEdit = (state)=> state.resume.toEdit;
 export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
 export const getPageOn = (state) => state.resume.pageOn;     
+export const selectToEdit = (state)=> state.resume.toEdit;
+export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
+export const getPageOn = (state) => state.resume.pageOn;   
+export const getLoaderstate = (state) => state.resume.loaderval;     
+export const selectNewJob = (state)=> state.resume.newJob
+export const selectNewEducation = (state)=> state.resume.newEducation
+export const selectNewCertificate = (state)=> state.resume.newCertificate
+export const selectNewAdditionalSkill =  (state)=> state.resume.newAdditionalSkill
+export const selectNewDesignation = (state)=> state.resume.newDesignation
+export const selectNewPhotoMedia = (state)=> state.resume.newPhotoMedia
+export const selectNewProject = (state)=> state.resume.newProject
+export const getDownLoadDetails = (state)=> state.resume.downLoadDetails
 export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject } = resumeSlice.actions;
+
 export default resumeSlice.reducer;
 
 

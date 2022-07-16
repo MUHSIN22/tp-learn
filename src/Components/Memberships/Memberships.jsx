@@ -61,11 +61,11 @@ export default function Memberships() {
 
   return (
     <div className="container membershp">
-      <div className="flex-row-center">
+      <div className="flex-row-start">
         <div className="col-fit">
           <Sidebar/>
         </div>
-        <div className="col">
+        <div className="col" style={{"paddingTop":"6rem"}}>
           <div className="flex-row-center g-2">
             <div className="col-20">
               <button type="button" className="btn-square orange" onClick={()=>console.log("clicked")}>
@@ -207,6 +207,7 @@ export default function Memberships() {
                   border: "1px solid white",
                   "boxShadow": "1px 0px 4px 0 white",
                 }}
+                onClick={()=> displayRazorpay(500)}
               >
                 Monthly
               </button>
@@ -264,6 +265,7 @@ export default function Memberships() {
                 type="button"
                 className="btn-square orange mt-3"
                 style={{ "boxShadow": "0px 7px 12px 0 #ec957c" }}
+                onClick={()=> displayRazorpay(900)}
               >
                 Monthly
               </button>

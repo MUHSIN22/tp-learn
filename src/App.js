@@ -1,7 +1,7 @@
 
 import './App.css';
 import Login from './Components/Login/Login';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Router, Routes, useLocation } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import Onboarding from './Components/Onboarding/Onboarding';
 import Signup from './Components/Signup/Signup';
@@ -16,16 +16,22 @@ import { resetError, selectAuthentication } from './redux/Features/Authenticatio
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
 import Dashboard from './Components/Dashboard/Dashboard';
-import Sidebar from './Components/Sidebar/Sidebar';
 import Membership from './Components/Memberships/Memberships';
 import CVReview from './Components/CVEditor/CVReview'
 import DummyForm from './Components/EditForms/ProfilePicture'
+import CognitiveSkills from './Components/Form/CognitiveSkills';
+import Resume from './Components/ResumeTemplate/Resume';
+import NotFound from './Components/Not_Found/Notfound';
+import Header from './Components/Header/Header';
+import Home from './Components/Home/Home';
+import Logout from './Components/Logout/Logout';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
+  const routeWithoutNav = ['/','/membership',"MyProfile"]
   useEffect(() => {
     if(auth.authToken&&reload){
       console.log('Reload Resume Update')
@@ -83,20 +89,26 @@ function App() {
   
   return (
     <div className="App">
-      <Navbar/>
-      {/* <Sidebar/> */}
+      {window.location.pathname ==='/' ? <Header/> : ""}
+      {!routeWithoutNav.includes(window.location.pathname) ? <Navbar/> : ""}
       <Routes>
-       <Route path='/' element={<PreventedRoute><Login/></PreventedRoute> }/>
+       <Route path='/login' element={<PreventedRoute><Login/></PreventedRoute> }/>
        <Route path='/OTP-login' element={<PreventedRoute><OTPLogin/></PreventedRoute>}/>
        <Route path='/signup' element={<PreventedRoute><Signup/></PreventedRoute>}/>
        <Route path='/OTP-signup' element={<PreventedRoute><OTPSignup/></PreventedRoute>}/>
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
+       <Route path='/' element={<Home/>}/>
+
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>
        <Route path='/MyProfile' element={<CVReview/>}/>
        <Route path='/dummy' element={<DummyForm/>}/>
+       <Route path='/cs' element={<CognitiveSkills/>}/>
+       <Route path='/resume' element={<Resume/>}/>
+       <Route path="*" element={<NotFound/>}/>
+       <Route path='/logout' element={<Logout/> }/>
       </Routes>
     </div>
   );
