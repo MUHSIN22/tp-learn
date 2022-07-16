@@ -9,6 +9,7 @@ import { selectUserFirstName } from '../../redux/Features/ResumeSlice';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { selectAuthentication } from '../../redux/Features/AuthenticationSlice';
+
 export default function Navbar(props) {
   const user = useSelector(selectUserFirstName)
 console.log(window.location.pathname)

@@ -101,7 +101,6 @@ export default function CVBuilder() {
           'Career Objective': { id: 15, state: 'active' }
         })
       } else if (form_id == 18) {
-
         setProgress({
           ...progress,
           Experience: { id:1, state: 'complete' },

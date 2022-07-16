@@ -10,6 +10,13 @@ const initialState = {
     error: '',
     message: '',
     form: null,
+    newJob: false,
+    newDesignation:false,
+    newEducation:false,
+    newCertificate:false,
+    newAdditionalSkill:false,
+    newPhotoMedia:false,
+    newProject:false,
     toEdit: false,
     editPageDetails : {},
     pageOn:'/personal-information',
@@ -822,15 +829,23 @@ export const selectVideo = (state) => {
 export const selectSocilaLinks = (state) => {
     let record = state.resume.recordDetails.resume_info || {}
     return {
-            entertainment:record.entertainment,
-            music:record.music,
-            sports:record.sports,
-            leisure:record.leisure,
-            adventure:record.adventure,
-            travel:record.travel,
-            books:record.books,
-            any_other:record.any_other
-        }}
+        facebook: record.link_facebook,
+        twitter: record.link_twitter,
+        instagram: record.link_instagram,
+        linkedin: record.link_linkedin,
+        other: record.link_other
+    }
+}
+export const selectNewJob = (state)=> state.resume.newJob
+export const selectNewEducation = (state)=> state.resume.newEducation
+export const selectNewCertificate = (state)=> state.resume.newCertificate
+export const selectNewAdditionalSkill =  (state)=> state.resume.newAdditionalSkill
+export const selectNewDesignation = (state)=> state.resume.newDesignation
+export const selectNewPhotoMedia = (state)=> state.resume.newPhotoMedia
+export const selectNewProject = (state)=> state.resume.newProject
+export const selectToEdit = (state)=> state.resume.toEdit;
+export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
+export const getPageOn = (state) => state.resume.pageOn;     
 export const selectToEdit = (state)=> state.resume.toEdit;
 export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
 export const getPageOn = (state) => state.resume.pageOn;   

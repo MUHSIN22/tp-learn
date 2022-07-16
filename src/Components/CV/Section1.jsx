@@ -17,7 +17,8 @@ export default function Section1() {
     const contactInfo = useSelector(selectResumeDetails)
     const profilePic = useSelector(selectProfilePic)
     const bio = useSelector(selectBio)
-    const dispatch = useDispatch();
+    const firstCompany = useSelector(selectFirstCompany)
+    const dispatch = useDispatch();finalBranch
     const toEdit = useSelector(selectToEdit);
 const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
