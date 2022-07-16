@@ -19,8 +19,8 @@ import ResumeDownload from "../ResumeTemplate/Resume";
 
 import SocialMedia from "../CV/SocialMedia";
 import VideosReview from "../CV/VideosReview";
-import { FaEdit, FaShareAlt } from "react-icons/fa";
-import { FiDownload } from "react-icons/fi";
+import { FiEdit,FiShare2 } from "react-icons/fi";
+import {BsDownload} from "react-icons/bs"
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from "react-redux";
 import jsPDF from "jspdf";
@@ -83,16 +83,16 @@ export default function CVBuilder() {
   editPageDetails && editPageDetails.progress && window.scrollTo(0, 0);
 
   const floatingButton = (
-    <div>
+    <div className="headerButtons">
       <div
         className="floating-btn orange"
         style={{ boxShadow: "5px 10px 20px 0 #ec957c" }}
       >
         <div className="" onClick={handleEdit}>
-          <FaEdit />
+          <FiEdit style={{"width":"1.5rem","height":"1.5rem","fontWeight":"100"}}/>
         </div>
         <div className="" onClick={() => newRef.current()()}>
-          <FiDownload />
+          <BsDownload style={{"width":"1.5rem","height":"1.5rem","fontWeight":"100"}}/>
         </div>
         <Tippy
           placement="bottom-end"
@@ -123,7 +123,7 @@ export default function CVBuilder() {
           }
         >
           <div>
-            <FaShareAlt />
+            <FiShare2 style={{"width":"1.5rem","height":"1.5rem","fontWeight":"100"}}/>
           </div>
         </Tippy>
       </div>
@@ -147,13 +147,13 @@ export default function CVBuilder() {
         <Sidebar currentPage={pull_data} />
       </div>
       <div className="col-100">
-        <div className="CVReview">
-          <div
-            className="flex-row-center justify-end px-1 mt-4"
+      <div
+            className="flex-row-center justify-end px-1"
             style={{ cursor: "pointer" }}
           >
             {floatingButton}
           </div>
+        <div className="CVReview">
           {
               loader==1 && <Spinner />
             }

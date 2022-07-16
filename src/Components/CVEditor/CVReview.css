@@ -14,10 +14,11 @@
     display: flex;
     flex-direction: column;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 0.4rem 1rem;
-    margin-top: 0.4rem;
-    
+    margin: 2.2rem 4.5rem 0 4.5rem;
+    border: 1px solid #8080804d;
+    box-shadow: 0 0 8px #80808026;
 }
 
 .cvEditContainer {
@@ -420,6 +421,11 @@
 }
 .CVReview .hobby-card{
     width: fit-content  ;
+}
+
+.headerButtons {
+    width: 15rem !important;
+    margin-top: 2.1rem;
 }
 
 /* @media only screen and (max-width:1024px) {

@@ -1576,8 +1576,8 @@ video{
   justify-content: center;
   gap: 3rem;
   align-content: center!important;
-  border: 1px solidred;
-  border-radius: 1.5rem;
+  border: 1px solid red;
+  border-radius: 2.5rem;
   font-size: 1.1rem;
   text-decoration: none;
 }
