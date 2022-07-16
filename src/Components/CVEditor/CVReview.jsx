@@ -12,7 +12,7 @@ import Portfolio from "../CV/Portfolio";
 import Recommendation from "../CV/Recommendation";
 import Section1 from "../CV/Section1";
 import Section2Review from "../CV/Section2Review";
-import Section3 from "../CV/Section3";
+import Section3 from "../CV/Section3Review";
 import SelfDeclaration from "../CV/SelfDeclaration";
 import SocialContribution from "../CV/SocialContribution";
 import ResumeDownload from "../ResumeTemplate/Resume";
@@ -166,6 +166,9 @@ export default function CVBuilder() {
             <Section1 />
           )}
           {((page === "/Experience" || page === "/dashboard") && loader!=1 ) && <Section3 />}
+          {((page === "/Certification" || page === "/dashboard") && loader!=1) && (
+            <Cerification />
+          )}
           {((page === "/Education" || page === "/dashboard") && loader!=1 ) && (
             <EducationReview />
           )}
@@ -177,9 +180,6 @@ export default function CVBuilder() {
           )}
           {((page === "/SocialMedia" || page === "/dashboard") && loader!=1) && (
             <SocialMedia />
-          )}
-          {((page === "/Certification" || page === "/dashboard") && loader!=1) && (
-            <Cerification />
           )}
           {((page === "/SocialContribution" || page === "/dashboard") && loader!=1) && (
             <SocialContribution />

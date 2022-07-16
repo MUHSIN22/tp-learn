@@ -9,7 +9,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto Slab";
 }
 :root {
   --c2: #22ce93;
@@ -835,7 +835,8 @@ object-fit: contain;
   margin-top: 5rem !important;
 }
 .my-2{
-  margin-bottom: 2rem !important  ;
+  margin-bottom: 2rem !important;
+  margin-top: 2rem !important;
 }
 .my-0 {
   margin-top: 0 !important;
@@ -1623,4 +1624,18 @@ video{
   line-height: 9.35px;
   font-weight: 700;
   margin-bottom: 5px !important;
+}
+
+.profileNameFont{
+  font-family: "Roboto Slab" !important;
+  font-size: 1.7rem !important;
+  font-weight: 600 !important;
+  color: #000000 !important;
+}
+.skills_names{
+  display: flex;  
+  flex-wrap: wrap;
+  grid-column-gap: 3rem;
+  grid-row-gap: 0.6rem;
+  justify-content: space-between;
 }

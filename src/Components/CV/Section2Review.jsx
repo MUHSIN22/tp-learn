@@ -9,7 +9,7 @@ export default function Section2() {
   const timelineGraph = useSelector(selectJObSalaryTimeline)
   const resumeInfo = useSelector(selectResumeInfo)
   return (
-    <div className="section_2 col-100 align-center">
+    <div className="col-100 align-center">
       <div className="col-90 align-start">
         <h3>Career Timeline</h3>
         <span className="divider"></span>

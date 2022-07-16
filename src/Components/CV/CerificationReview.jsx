@@ -9,7 +9,7 @@ export default function CerificationReview() {
     const loading = useSelector(selectResumeLoading)
     const Cerification = useSelector(selectCertificate) || []
     return (
-        <div className='section_2 col-100 align-center'>
+        <div className='section_2 col-100 align-center mt-2'>
             <div className="col-90">
                 <h3 className="text-left">Certification courses</h3>
                 <span className="divider"></span>

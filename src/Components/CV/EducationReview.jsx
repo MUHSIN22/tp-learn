@@ -15,6 +15,7 @@ import { FiDownload } from "react-icons/fi";
 export default function EducationReview() {
   const education = useSelector(selectEducation);
   const loading = useSelector(selectResumeLoading);
+  console.log("-----------------education",education)
   return (
     <div className="section_2 my-2 col-100 align-center">
       <div className="col-90">
