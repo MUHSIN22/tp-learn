@@ -6,7 +6,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import Cerification from "../CV/CerificationReview";
 import DocsReview from "../CV/DocsReview";
 import EducationReview from "../CV/EducationReview.jsx";
-import Hobby from "../CV/Hobby";
+import Hobby from "../CV/HobbyReview";
 import Languages from "../CV/LanguagesReview";
 import Portfolio from "../CV/Portfolio";
 import Recommendation from "../CV/Recommendation";
@@ -14,7 +14,7 @@ import Section1 from "../CV/Section1";
 import Section2Review from "../CV/Section2Review";
 import Section3 from "../CV/Section3Review";
 import SelfDeclaration from "../CV/SelfDeclaration";
-import SocialContribution from "../CV/SocialContribution";
+import SocialContribution from "../CV/SocialContributionReview";
 import ResumeDownload from "../ResumeTemplate/Resume";
 
 import SocialMedia from "../CV/SocialMedia";
@@ -165,6 +165,9 @@ export default function CVBuilder() {
           {((page === "/personal-information" || page === "/dashboard") && loader!=1) && (
             <Section1 />
           )}
+           {((page === "/career-timeline" || page === "/dashboard") && loader!=1) && (
+            <Section2Review />
+          )}
           {((page === "/Experience" || page === "/dashboard") && loader!=1 ) && <Section3 />}
           {((page === "/Certification" || page === "/dashboard") && loader!=1) && (
             <Cerification />
@@ -177,17 +180,14 @@ export default function CVBuilder() {
           )}
           {((page === "/languages" || page === "/dashboard" || page === "/hobbies") && loader!=1) && <div className="flex-row-between g-2 mt-2"><Hobby /> <Languages /></div>}
           {/* {((page === "/hobbies" || page === "/dashboard") && loader!=1) && <Hobby />} */}
-          {((page === "/Videos" || page === "/dashboard") && loader!=1) && <VideosReview />}
-          {((page === "/career-timeline" || page === "/dashboard") && loader!=1) && (
-            <Section2Review />
-          )}
-          {((page === "/SocialMedia" || page === "/dashboard") && loader!=1) && (
-            <SocialMedia />
-          )}
           {((page === "/SocialContribution" || page === "/dashboard") && loader!=1) && (
             <SocialContribution />
           )}
           {((page === "/Docs" || page === "/dashboard") && loader!=1) && <DocsReview />}
+          {((page === "/Videos" || page === "/dashboard") && loader!=1) && <VideosReview />}
+          {((page === "/SocialMedia" || page === "/dashboard") && loader!=1) && (
+            <SocialMedia />
+          )}
           {((page === "/self-declaration" || page === "/dashboard") && loader!=1) && (
             <SelfDeclaration />
           )}
