@@ -18,12 +18,11 @@ export default function Section1() {
     const profilePic = useSelector(selectProfilePic)
     const bio = useSelector(selectBio)
     const firstCompany = useSelector(selectFirstCompany)
-    const dispatch = useDispatch();finalBranch
+    const dispatch = useDispatch();
     const toEdit = useSelector(selectToEdit);
 const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
-    const firstCompany = useSelector(selectFirstCompany)
     return (
         <div className="section_1">
             <div className="personal_info">

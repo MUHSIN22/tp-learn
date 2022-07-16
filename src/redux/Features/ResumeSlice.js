@@ -843,20 +843,10 @@ export const selectNewAdditionalSkill =  (state)=> state.resume.newAdditionalSki
 export const selectNewDesignation = (state)=> state.resume.newDesignation
 export const selectNewPhotoMedia = (state)=> state.resume.newPhotoMedia
 export const selectNewProject = (state)=> state.resume.newProject
-export const selectToEdit = (state)=> state.resume.toEdit;
 export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
 export const getPageOn = (state) => state.resume.pageOn;     
 export const selectToEdit = (state)=> state.resume.toEdit;
-export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
-export const getPageOn = (state) => state.resume.pageOn;   
 export const getLoaderstate = (state) => state.resume.loaderval;     
-export const selectNewJob = (state)=> state.resume.newJob
-export const selectNewEducation = (state)=> state.resume.newEducation
-export const selectNewCertificate = (state)=> state.resume.newCertificate
-export const selectNewAdditionalSkill =  (state)=> state.resume.newAdditionalSkill
-export const selectNewDesignation = (state)=> state.resume.newDesignation
-export const selectNewPhotoMedia = (state)=> state.resume.newPhotoMedia
-export const selectNewProject = (state)=> state.resume.newProject
 export const getDownLoadDetails = (state)=> state.resume.downLoadDetails
 export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject } = resumeSlice.actions;
 

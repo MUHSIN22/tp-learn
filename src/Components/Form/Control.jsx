@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch,useSelector } from 'react-redux'
-import { changeFormId, selectFormId, selectResumeLoading, prevForm, selectFormId } from '../../redux/Features/ResumeSlice'
+import { changeFormId, selectFormId, selectResumeLoading, prevForm } from '../../redux/Features/ResumeSlice'
 import { ReactComponent as ChevronLeft } from '../../Assests/icons/chvron-left.svg';
 import { ReactComponent as ChevronRight } from '../../Assests/icons/chvron-right.svg';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';

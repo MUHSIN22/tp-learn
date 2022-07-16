@@ -56,10 +56,6 @@ export default function Section3() {
             </button>
           </div>
         </div>
- <div className="col-100 justify-end">
-                <h5 className='text-right'>{company.company_name}</h5>
-                {companyWise&&<LineGraph salary={companyWise.salary } management={companyWise.managementLevelValue} />}
-   </div>
         <span className="divider"></span>
         {console.log(companyInfo)}
         {companyInfo && companyInfo.length > 0 ? (
