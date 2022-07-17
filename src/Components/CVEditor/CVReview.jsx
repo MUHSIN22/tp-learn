@@ -148,7 +148,7 @@ export default function CVBuilder() {
       </div>
       <div className="col-100">
       <div
-            className="flex-row-center justify-end px-1"
+            className="flex-row-center justify-end px-3 mx-1"
             style={{ cursor: "pointer" }}
           >
             {floatingButton}
