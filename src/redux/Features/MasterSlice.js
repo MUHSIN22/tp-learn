@@ -21,6 +21,7 @@ const initialState = {
     currencyList:[],
     status: '',
     error: '',
+    sidebarval:1
 }
 export const getCountryCodeList = createAsyncThunk('authentication/getCountryCodeList', async (data,{ rejectWithValue }) => {
     try {
@@ -261,6 +262,15 @@ export const getCurrencyList = createAsyncThunk('authentication/getCurrencyList'
     }
 }
 )
+export const setSidebarVal = createAsyncThunk('authentication/sidebarval', async (data,{ rejectWithValue }) => {
+    try {
+        console.log("hello",data);
+        return data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+}
+)
 export const masterSlice = createSlice({
     name: 'master',
     initialState,
@@ -462,6 +472,12 @@ export const masterSlice = createSlice({
             state.error = action.payload.error
 
         })
+        .addCase(setSidebarVal.fulfilled, (state, action) => {
+            state.loading=false
+             state.sidebarval = action
+            //  state.error = action.payload.error
+ 
+         })
     }
 })
 
@@ -482,4 +498,5 @@ export const selectUniversityList = (state) => state.masters.universityList;
 export const selectCollageList = (state) => state.masters.collageList;
 export const selectCompanyBasedList = (state) => state.masters.companyBasedList;
 export const selectCurrencylist = (state) => state.masters.currencyList;
+export const selectSidebarValue = (state) => state.masters.sidebarval;
 export default masterSlice.reducer;
