@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import {Spinner} from "./Spinner";
+import PDF from "../../Assests/PDF.png"
 import {
   selectToEdit,
   changeToEdit,
@@ -91,9 +92,22 @@ export default function CVBuilder() {
         <div className="" onClick={handleEdit}>
           <FiEdit style={{"width":"1.5rem","height":"1.5rem","fontWeight":"100"}}/>
         </div>
-        <div className="" onClick={() => newRef.current()()}>
+        <Tippy 
+          placement="bottom-end"
+          interactive={true}
+          theme="light"
+          content={
+            <div className="d-flex justify-between">
+              <div onClick={() => newRef.current()()}>
+                <img src={PDF} alt="" />
+              </div>
+            </div>
+          }
+        >
+          <div className="">
           <BsDownload style={{"width":"1.5rem","height":"1.5rem","fontWeight":"100"}}/>
         </div>
+        </Tippy>
         <Tippy 
           placement="bottom-end"
           interactive={true}
@@ -193,12 +207,12 @@ export default function CVBuilder() {
           )}
           <div
             id="hello"
-            style={{
-              position: "fixed",
-              padding: 0,
-              clip: "rect(0 0 0 0)",
-              overflow: "hidden",
-            }}
+            // style={{
+            //   position: "fixed",
+            //   padding: 0,
+            //   clip: "rect(0 0 0 0)",
+            //   overflow: "hidden",
+            // }}
           >
             <ResumeDownload newRef={newRef} shareOpts={shareOpts} changeLoaderval={()=>changeLoader() } />
           </div>
