@@ -6,31 +6,31 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 
 
 export const SidebarData = [
-    {
-        title : "Dashboard",
-        icon : <MdOutlineDashboard/>,
-        link : "/dashboard"
-    },
+    // {
+    //     title : "Dashboard",
+    //     icon : <MdOutlineDashboard/>,
+    //     link : "/dashboard"
+    // },
     {
         title : "My Profile",
         icon : <FaUserAlt/>,
         link : "/MyProfile"
     },
-    {
-        title : "Assessments",
-        icon : <MdAssessment/>,
-        link : "/assessments"
-    },
-    {
-        title : "My Portfolio",
-        icon : <FaPortrait/>,
-        link : "/MyPortfolio"
-    },
-    {
-        title : "Interview Preparation",
-        icon : <FaUserTie/>,
-        link : "/IP"
-    },
+    // {
+    //     title : "Assessments",
+    //     icon : <MdAssessment/>,
+    //     link : "/assessments"
+    // },
+    // {
+    //     title : "My Portfolio",
+    //     icon : <FaPortrait/>,
+    //     link : "/MyPortfolio"
+    // },
+    // {
+    //     title : "Interview Preparation",
+    //     icon : <FaUserTie/>,
+    //     link : "/IP"
+    // },
     {
         title : "Membership",
         icon : <FaUserFriends/>,

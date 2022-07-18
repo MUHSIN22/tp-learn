@@ -23,7 +23,7 @@ export default function SuggestiveInput({ type, label, name, selected=()=>{alert
             <label htmlFor={name}>{label}</label>
             <div className="input-container">
                 {icon}
-                <input id={`iconinput-${name}`} onChange={searchHandler} onFocus={()=>setShowSuggestion(true)} autoComplete='off' type={type} name={name} placeholder={placeholder} defaultValue={defaultValue}/>
+                <input id={`iconinput-${name}`} value={value} onChange={searchHandler} onFocus={()=>setShowSuggestion(true)} autoComplete='off' type={type} name={name} placeholder={placeholder} defaultValue={defaultValue} />
             </div>
             {validation && <span className='validation-message .shake-horizontal'>{validation}</span>}
             {showSuggestion && suggestions.length>0 && <div className="suggestion-list">

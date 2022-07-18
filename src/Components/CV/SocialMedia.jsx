@@ -34,7 +34,7 @@ export default function SocialMedia() {
                     <a href={socialLink.linkedin} style={{color:'#0274B3'}} className="flex-row-start g-1 align-center">
                         <Linkedin/> Linkedin
                     </a>
-                    <a href={socialLink.instagram} style={{color:'#219FFF'}} className="flex-row-start g-1 align-center">
+                    <a href={socialLink.instagram} style={{color:'rgb(251 84 80)'}} className="flex-row-start g-1 align-center">
                         <Instagram/> Instagram
                     </a>
                     <a href={socialLink.twitter} style={{color:'#219FFF'}} className="flex-row-start g-1 align-center">
