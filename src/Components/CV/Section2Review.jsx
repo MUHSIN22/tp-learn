@@ -9,11 +9,11 @@ export default function Section2() {
   const timelineGraph = useSelector(selectJObSalaryTimeline)
   const resumeInfo = useSelector(selectResumeInfo)
   return (
-    <div className="section_2 col-100 align-center">
-      <div className="col-90 align-start">
+    <div className="col-100 align-center CareerTimeline">
+      <div className="col-90 align-start py-2 px-2">
         <h3>Career Timeline</h3>
         <span className="divider"></span>
-      {timelineGraph&&timelineGraph.company_info&&timelineGraph.skill_info&&<JobTimeline jobs={timelineGraph.company_info}  skills={timelineGraph.skill_info} />}
+      {timelineGraph&&timelineGraph.company_info&&timelineGraph.skill_info&&<JobTimeline jobs={timelineGraph.company_info}  skills={timelineGraph.skill_info}/>}
       </div>
 
       <div className="col-90 g-1 my-2">

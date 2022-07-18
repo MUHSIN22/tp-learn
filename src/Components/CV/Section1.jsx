@@ -1,5 +1,5 @@
 import React from 'react'
-import avatar from '../../Assests/avatar.jpg'
+import avatar from '../../Assests/avatar1.jpg'
 import { ReactComponent as More } from '../../Assests/icons/more.svg';
 import { ReactComponent as Calling } from '../../Assests/icons/call-calling.svg';
 import { ReactComponent as Location } from '../../Assests/icons/location-o.svg';
@@ -55,9 +55,9 @@ const handleEditForms = (data) => {
                 </div>
             </div>
             <div className="col-inherit">
-                <h1>{contactInfo.name} {toEdit && (
+                <p className='profileNameFont'>{contactInfo.name} {toEdit && (
                      <span onClick={() => handleEditForms({ progress: 14,bio:bio ? bio: '' })}><FaPencilAlt /></span>
-                    )}</h1>
+                    )}</p>
                 {firstCompany&&firstCompany.job_role&&<p>{firstCompany.job_role[0].designation_name}</p>}
                 <span className="divider"></span>
                 {!loading&&bio?<p>{parser(bio)}</p>:<BioLoader/>}

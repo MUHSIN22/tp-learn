@@ -17,22 +17,23 @@ export default function OverviewCard() {
     <>
 
     {overview&&overview.length>0?<div className="overview responsive-grid">
-        <div className="col-100 multiDonut">
+        <div className="col-100 multiDonut lineToright">
           <h3>Industry overview</h3>
           <MultiDonut width={'150%'} data={formatData(overview)}/>
         </div>
-        <div className="col-100 guage-container">
+        <div className="col-100 guage-container lineToright gapForReview">
           <h3>Cognitive skillset </h3>
-          <div className="grid">
+          <div className="grid gapForReview">
             <Guage label='Teamwork' value={4.3} color={'_1'}/>
             <Guage label='Creative Thinking' value={8.3} color={'_2'}/>
             <Guage label='Analytical' value={5.3} color={'_3'}/>
             <Guage label='Social Sesirability' value={7.3} color={'_4'}/>
             <Guage label='Communication' value={5.3} color={'_1'}/>
+            <Guage label='Analytical' value={5.3} color={'_3'}/>
           </div>
             
         </div>
-        <div className="col-100 progress">
+        <div className="col-100 progress gapForReview">
             <h3>Top 5 Skills</h3>
             {
              skills&& skills.map((skill,i)=><ProgressBar key={i} label={skill.name} value={skill.value} color={`_${i+1}`}/>)

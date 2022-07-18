@@ -1,12 +1,15 @@
 .jobTimeline{
     position: relative;
     align-self: flex-end;
-    width: 90%;
+    width: 100%;
     display: grid;
     grid-column-gap: 0px;
     grid-row-gap: 15px;
     background-color: #fff;
     z-index: 2;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 1rem;
 }
 
 .jobTimeline .years, .yearsReview{
