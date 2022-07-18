@@ -156,7 +156,7 @@ const exec = () => {
 
   return (
     <div className="mt-5" id="tpcv" >
-      <div className="d-flex mb-2" style={{height:"11rem","paddingLeft":"1rem"}}>
+      <div className="d-flex mb-2" style={{height:"11rem","paddingLeft":"1rem",paddingTop: "1.2rem"}}>
         <div className="col-30 bg-dark" style={{position:"relative",borderRadius:"11rem 0rem 0rem 0rem"}}>
           <img className="Profile_resume_img" src={profile}/>
         </div>

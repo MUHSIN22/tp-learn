@@ -651,13 +651,13 @@ body {
   justify-content: space-between;
 }
 .Profile_resume_img{
-  height: 11rem;
-  width: 11rem;
+  height: 9rem;
+  width: 9rem;
   object-fit: fill;
   border-radius:50%;
   position: absolute;
-  top: -1rem;
-  left: -1.5rem;
+  top: -0.7rem;
+  left: -0.8rem;
   border: 3px solid darkgreen;
 }
 .bg-dark{
