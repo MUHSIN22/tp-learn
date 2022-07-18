@@ -41,7 +41,7 @@ function FileCard({ file_url, title, icon, description,user_resume_photo_media_i
     <a href={file_url || file_path} className="card flex-row-start g-1" download>
       <img src={file_path} alt={title} />
 
-      <div className="col-fit">
+      <div className="col-fit g-1">
         <h4>
           {title}{" "}
           {toEdit && (

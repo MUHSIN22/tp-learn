@@ -6,21 +6,21 @@ import Sidebar from "../Sidebar/Sidebar";
 import Cerification from "../CV/CerificationReview";
 import DocsReview from "../CV/DocsReview";
 import EducationReview from "../CV/EducationReview.jsx";
-import Hobby from "../CV/Hobby";
-import Languages from "../CV/Languages";
+import Hobby from "../CV/HobbyReview";
+import Languages from "../CV/LanguagesReview";
 import Portfolio from "../CV/Portfolio";
 import Recommendation from "../CV/Recommendation";
 import Section1 from "../CV/Section1";
 import Section2Review from "../CV/Section2Review";
-import Section3 from "../CV/Section3";
+import Section3 from "../CV/Section3Review";
 import SelfDeclaration from "../CV/SelfDeclaration";
-import SocialContribution from "../CV/SocialContribution";
+import SocialContribution from "../CV/SocialContributionReview";
 import ResumeDownload from "../ResumeTemplate/Resume";
 
 import SocialMedia from "../CV/SocialMedia";
 import VideosReview from "../CV/VideosReview";
-import { FaEdit, FaShareAlt } from "react-icons/fa";
-import { FiDownload } from "react-icons/fi";
+import { FiEdit,FiShare2 } from "react-icons/fi";
+import {BsDownload} from "react-icons/bs"
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from "react-redux";
 import jsPDF from "jspdf";
@@ -83,23 +83,23 @@ export default function CVBuilder() {
   editPageDetails && editPageDetails.progress && window.scrollTo(0, 0);
 
   const floatingButton = (
-    <div>
+    <div className="headerButtons">
       <div
         className="floating-btn orange"
         style={{ boxShadow: "5px 10px 20px 0 #ec957c" }}
       >
         <div className="" onClick={handleEdit}>
-          <FaEdit />
+          <FiEdit style={{"width":"1.5rem","height":"1.5rem","fontWeight":"100"}}/>
         </div>
         <div className="" onClick={() => newRef.current()()}>
-          <FiDownload />
+          <BsDownload style={{"width":"1.5rem","height":"1.5rem","fontWeight":"100"}}/>
         </div>
-        <Tippy
+        <Tippy 
           placement="bottom-end"
           interactive={true}
           theme="light"
           content={
-            <div className="d-flex justify-between" style={{ width: "10rem" }}>
+            <div className="d-flex justify-between" style={{ width: "10rem"}}>
               <div
                 onClick={async () => { await cvShare("facebook")}}
               >
@@ -123,7 +123,7 @@ export default function CVBuilder() {
           }
         >
           <div>
-            <FaShareAlt />
+            <FiShare2 style={{"width":"1.5rem","height":"1.5rem","fontWeight":"100"}}/>
           </div>
         </Tippy>
       </div>
@@ -147,13 +147,13 @@ export default function CVBuilder() {
         <Sidebar currentPage={pull_data} />
       </div>
       <div className="col-100">
-        <div className="CVReview">
-          <div
-            className="flex-row-center justify-end px-1 mt-4"
+      <div
+            className="flex-row-center justify-end px-3 mx-1"
             style={{ cursor: "pointer" }}
           >
             {floatingButton}
           </div>
+        <div className="CVReview">
           {
               loader==1 && <Spinner />
             }
@@ -165,40 +165,40 @@ export default function CVBuilder() {
           {((page === "/personal-information" || page === "/dashboard") && loader!=1) && (
             <Section1 />
           )}
-          {((page === "/Experience" || page === "/dashboard") && loader!=1 ) && <Section3 />}
-          {((page === "/Education" || page === "/dashboard") && loader!=1 ) && (
-            <EducationReview />
-          )}
-          {((page === "/languages" || page === "/dashboard") && loader!=1) && <Languages />}
-          {((page === "/hobbies" || page === "/dashboard") && loader!=1) && <Hobby />}
-          {((page === "/Videos" || page === "/dashboard") && loader!=1) && <VideosReview />}
-          {((page === "/career-timeline" || page === "/dashboard") && loader!=1) && (
+           {((page === "/career-timeline" || page === "/dashboard") && loader!=1) && (
             <Section2Review />
           )}
-          {((page === "/SocialMedia" || page === "/dashboard") && loader!=1) && (
-            <SocialMedia />
-          )}
+          {((page === "/Experience" || page === "/dashboard") && loader!=1 ) && <Section3 />}
           {((page === "/Certification" || page === "/dashboard") && loader!=1) && (
             <Cerification />
           )}
-          {((page === "/SocialContribution" || page === "/dashboard") && loader!=1) && (
-            <SocialContribution />
+          {((page === "/Education" || page === "/dashboard") && loader!=1 ) && (
+            <EducationReview />
           )}
           {((page === "/Recommendation" || page === "/dashboard") && loader!=1) && (
             <Recommendation />
           )}
+          {((page === "/languages" || page === "/dashboard" || page === "/hobbies") && loader!=1) && <div className="flex-row-between g-2 mt-2"><Hobby /> <Languages /></div>}
+          {/* {((page === "/hobbies" || page === "/dashboard") && loader!=1) && <Hobby />} */}
+          {((page === "/SocialContribution" || page === "/dashboard") && loader!=1) && (
+            <SocialContribution />
+          )}
           {((page === "/Docs" || page === "/dashboard") && loader!=1) && <DocsReview />}
+          {((page === "/Videos" || page === "/dashboard") && loader!=1) && <VideosReview />}
+          {((page === "/SocialMedia" || page === "/dashboard") && loader!=1) && (
+            <SocialMedia />
+          )}
           {((page === "/self-declaration" || page === "/dashboard") && loader!=1) && (
             <SelfDeclaration />
           )}
           <div
             id="hello"
-            style={{
-              position: "fixed",
-              padding: 0,
-              clip: "rect(0 0 0 0)",
-              overflow: "hidden",
-            }}
+            // style={{
+            //   position: "fixed",
+            //   padding: 0,
+            //   clip: "rect(0 0 0 0)",
+            //   overflow: "hidden",
+            // }}
           >
             <ResumeDownload newRef={newRef} shareOpts={shareOpts} changeLoaderval={()=>changeLoader() } />
           </div>

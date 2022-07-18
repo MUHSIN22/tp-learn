@@ -13,11 +13,12 @@
 .CVReview {
     display: flex;
     flex-direction: column;
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 0.4rem 1rem;
-    margin-top: 0.4rem;
-    
+    background-color: #8080800d;
+    border-radius: 20px;
+    padding: 00.4rem 2rem 2rem 3rem;
+    margin: 2.2rem 4.5rem 0 4.5rem;
+    border: 1px solid #8080804d;
+    box-shadow: 0 0 8px #80808026;
 }
 
 .cvEditContainer {
@@ -45,6 +46,7 @@
     margin: 0;
     text-align: left;
     font-family: 'Mulish', sans-serif;
+    font-size: 0.7rem;
 }
 
 .CVReview .section_1 {
@@ -53,11 +55,12 @@
     grid-template-columns: 25% 70%;
     grid-column-gap: 2.5rem;
     padding-top: 4rem;
+    margin-top: 3rem;
 }
 
 .CVReview .section_1 .personal_info {
     width: inherit;
-    background-color: #F9F8FC;
+    background-color: #eeecf65e;
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -158,11 +161,19 @@
     font-weight: 500;
 }
 
-.CVReview .section_2 {
+.CVReview .section_2,.CVReview .LanguagesReview {
     box-shadow: 0px 10px 40px rgba(3, 21, 15, 0.05);
     border-radius: 0.5rem;
     /* padding: 1rem 0; */
-    margin: 1rem 0;
+    background-color: white !important;
+    border-radius: 0.8rem 0.8rem 0.8rem 0.8rem;
+    padding-bottom:2rem;
+    padding-top: 1.5rem !important;
+}
+
+.CVReview .LanguagesReview{
+    text-align: left;
+    /* padding: 0 0 0 2rem; */
 }
 
 .CVReview .grid-35-65 {
@@ -170,15 +181,19 @@
     grid-column-gap: 0rem;
     grid-template-columns: 30% 70%;
 }
+.CVReview .grid-67-33 {
+    display: grid;
+    grid-column-gap: 0rem;
+    grid-template-columns: 67% 33%;
+}
 
 .CVReview .skill-card {
     background-color: #F9F8FC;
     border-radius: 1rem;
     padding: 0.8rem;
-    gap: 0.5rem;
+    gap: 1.5rem;
     align-self: flex-start;
-    width: 95%;
-
+    width: 100%;
 }
 
 .CVReview .skill-card h5 {
@@ -208,14 +223,14 @@
     width: clamp(20px, 70%, 80px);
     height: 2px;
     background: rgb(28, 27, 44);
-    background: linear-gradient(90deg, rgba(28, 27, 44, 0) 0%, rgba(28, 27, 44, 1) 50%, rgba(28, 27, 44, 0) 100%);
+    /* background: linear-gradient(90deg, rgba(28, 27, 44, 0) 0%, rgba(28, 27, 44, 1) 50%, rgba(28, 27, 44, 0) 100%); */
 }
 
 .CVReview .gradientDivider-v {
     margin: 0 0.5rem;
     width: 2px;
     background: rgb(28, 27, 44);
-    background: linear-gradient(0deg, rgba(28, 27, 44, 0) 0%, rgba(28, 27, 44, 1) 50%, rgba(28, 27, 44, 0) 100%);
+    /* background: linear-gradient(0deg, rgba(28, 27, 44, 0) 0%, rgba(28, 27, 44, 1) 50%, rgba(28, 27, 44, 0) 100%); */
 }
 
 .CVReview .gradientDivider-v:last-child {
@@ -225,12 +240,12 @@
 .CVReview .skill-grid {
     display: grid;
     -ms-grid-row-align: center;
-    grid-template-columns: 25% 33% 42%;
-    grid-column-gap: 1rem;
+    grid-template-columns: 18% 33% 48%;
+    grid-column-gap: 2rem;
     align-items: center;
 }
 
-.CVReview .skill-grid .skillName {
+.CVReview .skill-grid .skillName, .CVReview .role_skills .skillName {
     width: max-content;
     align-self: center;
     box-shadow: 0px 7px 20px 0px rgb(22 8 49 / 6%);
@@ -238,8 +253,16 @@
     padding: 0.5rem 1rem;
     color: #EF6239;
     font-style: 0.9rem;
+    font-weight: 300;
+    font-size: 0.7rem !important;
+    border:1px solid #d3d3d375
 }
 
+.CVReview .skill-grid .application{
+    font-size: 0.8rem;
+    font-style: 0.9rem;
+    font-weight: 300;
+}
 .CVReview .certificate-grid {
     display: grid;
     -ms-grid-row-align: center;
@@ -248,16 +271,17 @@
 }
 
 .CVReview .certificate-grid img {
-    width: 100%;
+    width: 7.3rem;
     background-color: #f1f1f1;
-    border-radius: 1rem;
     border: 1px solid #DCDAE1;
     object-fit: cover;
     align-self: stretch;
+    height: 7.3rem;
 }
 
 .CVReview .certificate-grid img:first-child {
     aspect-ratio: 1/1;
+    border-radius: 1rem;
 }
 
 .CVReview .certificate-grid img:last-child {
@@ -338,19 +362,21 @@
     text-align: left;
 }
 .CVReview .recommendation img{
-    width: 60%;
-    border-radius: 50%;
+    width: 6rem;
+    /* border-radius: 50%;
     aspect-ratio: 1/1;
     object-fit: contain;
     background-color: #f1f1f1;
-    padding: 1rem;
+    padding: 1rem; */
 
 }
 .CVReview .hobby-card img{
     width:clamp(1.5rem, 3%, 2.5rem);
     background: linear-gradient(0deg, #FFBEF9 0%, #FFF1FF 100%);
-    padding: 0.4rem;
+    padding: 0.5rem;
     border-radius: 50%;
+    width: 4.4rem  ;
+    height:4.4rem;
 }
 .CVReview .hobby-card h4{
     font-weight: 600;
@@ -373,22 +399,25 @@
 }
 
 .CVReview .socialContribution .card img{
-    width: 60%;
+    width: 7.5rem;
     aspect-ratio: 1/1;
     border-radius:1rem;
     border: solid 1px #DCDAE1;
     padding: 0.5rem;
+    height: 7.5rem;
 }
 .CVReview .docs{
     text-align: left;
+    margin-top: 2rem;
 }
 .CVReview .docs .card img{
-    width:clamp(1.5rem,5%,10%) ;
+    width:4.7rem ;
     aspect-ratio: 1/1;
     object-fit: contain;
     border-radius:0.6rem;
     border: solid 1px #DCDAE1;
     padding: 0.6rem;
+    height: 4.7rem;
 }
 .CVReview .docs a{
     width: fit-content;
@@ -414,13 +443,56 @@
 .hobby.grid-auto{
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px,1fr));
+    grid-template-columns: 50% 50%;
     grid-column-gap: 1rem;
-    grid-row-gap: 1rem;
+    grid-row-gap: 2.4rem;
 }
 .CVReview .hobby-card{
-    width: fit-content  ;
+    width: 100%  ;
+    text-align: center;
 }
+
+.headerButtons {
+    width: 15rem !important;
+    margin-top: 2.1rem;
+}
+
+.CVReview .section3Review,.CVReview .CareerTimeline{
+    margin-top: 2rem;
+    background-color: white;
+    padding-bottom: 2rem;
+    border-radius: 0 0 0.8rem 0.8rem
+}
+
+.lineToright{
+    border-right: 1px solid #80808038 !important;
+    padding-right: 10px !important; 
+}
+
+.gapForReview {
+    gap: 1.4rem !important;
+}
+
+.CVReview .CareerTimeline{
+    border-radius: 0.8rem 0.8rem 0.8rem 0.8rem !important
+}
+
+.CVReview .socialMedia, .declaration{
+    margin-top: 2rem;
+}
+/* .lineToright {
+    margin-right: 1rem  ;
+    position: relative;
+}
+
+.lineToright::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 2rem;
+    height: 75%;
+    border-right: 1px solid rgb(196, 191, 191);
+} */
 
 /* @media only screen and (max-width:1024px) {
     .CVReview {
