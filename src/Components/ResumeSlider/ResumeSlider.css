@@ -3,6 +3,7 @@
     overflow: hidden;
     margin-top: 2rem;
     position: relative;
+    cursor: grab;
 }
 .resume-slider::after{
     content: '';
@@ -16,9 +17,12 @@
 }
 .resume-slider-wrapper{
     display: grid;
+    transition: all 0.3s ease;
 }
 .resume-slider .slide{
     margin: 1rem 4rem;
+    transition: all 0.3s ease;
+    transform: scale(0.9);
 }
 .resume{
     width: 100%;
@@ -30,4 +34,19 @@
 }
 .resume-slider .slide--active{
     transform: scale(1.1);
+}
+
+@media only screen and (max-width: 768px) {
+    .resume-slider .slide{
+        margin: 1rem;
+    }
+    .resume-slider .slider-title{
+        font-size: 1rem;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .resume-slider {
+        width: 200%;
+        transform: translateX(-25%);
+    }
 }

@@ -25,6 +25,7 @@ import NotFound from './Components/Not_Found/Notfound';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Logout from './Components/Logout/Logout';
+import Resume2 from './Components/Resume2/Resume2';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -106,7 +107,7 @@ function App() {
        <Route path='/MyProfile' element={<CVReview/>}/>
        <Route path='/dummy' element={<DummyForm/>}/>
        <Route path='/cs' element={<CognitiveSkills/>}/>
-       <Route path='/resume' element={<Resume/>}/>
+       <Route path='/resume' element={<Resume2/>}/>
        <Route path="*" element={<NotFound/>}/>
        <Route path='/logout' element={<Logout/> }/>
       </Routes>
