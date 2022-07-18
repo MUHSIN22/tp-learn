@@ -28,6 +28,7 @@ export default function Experience2() {
     const loading = useSelector(selectResumeLoading);
   
     function handleChange(evt) {
+        console.log("--------------",evt.target.value,evt.target.name)
         const value = evt.target.value;
         setForm({
             ...form,
@@ -75,7 +76,7 @@ export default function Experience2() {
                 <IconSelect value={form.industry_id} disabled={companyDetails.industry_id!==""} name={'industry_id'} label={'Select the industry'} field={'industry_size'} state={form} handleChange={handleChange}  options={industryList} name_field={'industry_name'} defaultValue={'Information Technology'} />
             </div>
             <div className="form-row">
-                <CardRadioGroup autofill={companyDetails.scale_id!==""} label='Define the scale of buisness?' name={'scale_id'} state={form} setState={setForm}  option={buisnessScaleList} name_field={'scale_of_business_name'} disabled={companyDetails.scale_id!==""} />
+                <CardRadioGroup label='Define the scale of buisness?' autofill={companyDetails.scale_id!==""} name={'scale_id'} state={form} setState={setForm}  option={buisnessScaleList} name_field={'scale_of_business_name'} disabled={companyDetails.scale_id!==""} />
             </div>
             <div className="form-row">
                 <IconSelect value={form.type_of_company} disabled={companyDetails.type_of_company_id!==""} placeholder={'Slsls'} name={'type_of_company'} label={'Product / Service based'} field={'industry_size'} handleChange={handleChange}  options={companyBasedList} name_field={'company_based_name'} defaultValue={'Information Technology'} />
