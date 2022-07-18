@@ -207,12 +207,12 @@ export default function CVBuilder() {
           )}
           <div
             id="hello"
-            // style={{
-            //   position: "fixed",
-            //   padding: 0,
-            //   clip: "rect(0 0 0 0)",
-            //   overflow: "hidden",
-            // }}
+            style={{
+              position: "fixed",
+              padding: 0,
+              clip: "rect(0 0 0 0)",
+              overflow: "hidden",
+            }}
           >
             <ResumeDownload newRef={newRef} shareOpts={shareOpts} changeLoaderval={()=>changeLoader() } />
           </div>
