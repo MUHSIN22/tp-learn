@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap');
 
 :root{
   --muted-black: #434552;
@@ -7,7 +7,7 @@
   --green-muted: #DBEAE5;
   --orange-muted: #F0967D;
   --orange-contrast: #EC6138;
-  --font-poppins: 'Poppins', sans-serif;
+  --font-poppins:  'Playfair Display', serif;;
 }
 body {
   margin: 0;
@@ -34,7 +34,7 @@ a{
   border-radius: 50px;
   font-size: 1.1rem;
   font-weight: 600;
-  box-shadow: 0px 16px 39px var(--orange-muted);
+  box-shadow: 0px 5px 15px var(--orange-muted);
   transition: box-shadow 0.3s ease;
   display: block;
   width: max-content;

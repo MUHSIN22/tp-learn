@@ -61,40 +61,40 @@ export default function ResumeSlider() {
         }else{
             slideInterval = setInterval(() => {
                 shiftSlide(1)
-            },5000)
+            },2000)
         }
         return () => {
             clearInterval(slideInterval)
         }
     },[slideCount,isPaused])
 
-    const dragStart = (event) => {
-        event = event || window.event;
-        if(event.type === "touchstart"){
-            initialPosition =  event.touches[0].clientX;
-        }else{
-            event.preventDefault();
-            initialPosition = event.clientX
-            document.onmouseup = dragEnd;
-        }
-    }
+    // const dragStart = (event) => {
+    //     event = event || window.event;
+    //     if(event.type === "touchstart"){
+    //         initialPosition =  event.touches[0].clientX;
+    //     }else{
+    //         event.preventDefault();
+    //         initialPosition = event.clientX
+    //         document.onmouseup = dragEnd;
+    //     }
+    // }
 
-    const dragEnd = (event) => {
-        event = event || window.event;
+    // const dragEnd = (event) => {
+    //     event = event || window.event;
 
-        let finalPosition;
-        if(event.type === "touchend"){
-             finalPosition = event.changedTouches[0].clientX
-        }else{
-             finalPosition = event.clientX
-        }   
+    //     let finalPosition;
+    //     if(event.type === "touchend"){
+    //          finalPosition = event.changedTouches[0].clientX
+    //     }else{
+    //          finalPosition = event.clientX
+    //     }   
 
-        if(initialPosition - finalPosition > 20){
-            shiftSlide(1);
-        }else if(initialPosition - finalPosition < -20){
-            shiftSlide(-1);
-        }
-    }
+    //     if(initialPosition - finalPosition > 20){
+    //         shiftSlide(1);
+    //     }else if(initialPosition - finalPosition < -20){
+    //         shiftSlide(-1);
+    //     }
+    // }
 
     const shiftSlide = (direction) => {
         let sliderContainer = document.querySelector('.resume-slider-wrapper')
@@ -140,8 +140,8 @@ export default function ResumeSlider() {
     return (
         <div className="resume-slider" 
             ref={sliderRef} 
-            onMouseOver={() => setPause(true)}
-            onMouseOut={() => setPause(false)}
+            // onMouseOver={() => setPause(true)}
+            // onMouseOut={() => setPause(false)}
         >
             <div 
                 className="resume-slider-wrapper" 
@@ -149,9 +149,9 @@ export default function ResumeSlider() {
                     gridTemplateColumns: `repeat(${slideCount},${slideWidth}px)`,
                     marginLeft: `-${marginCount * slideWidth}px`
                 }} 
-                onMouseDown={dragStart} 
-                onTouchStart={dragStart} 
-                onTouchEnd={dragEnd}
+                // onMouseDown={dragStart} 
+                // onTouchStart={dragStart} 
+                // onTouchEnd={dragEnd}
             > 
                 <div className="slide">
                     <img src={resume1} className="resume" alt="" />
@@ -193,3 +193,4 @@ export default function ResumeSlider() {
         </div>
     )
 }
+

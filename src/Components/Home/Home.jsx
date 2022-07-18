@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import homeBannerImage from '../../Assets/Home Banner.gif'
+import homeBannerImage from '../../Assets/Home Banner.svg'
 import bannerWave from '../../Assets/Banner wave.png'
 import bannerBackground from '../../Assets/Banner background.png'
 import secondSectionImage from '../../Assets/section 2.png'
@@ -25,6 +25,10 @@ import ResumeSlider from '../ResumeSlider/ResumeSlider'
 import Header from '../Header/Header'
 import Lottie from 'react-lottie'
 import bannerAnimation from '../../Assets/Animations/Banner Image.json'
+import easyBuildAnimation from '../../Assets/Animations/animationnumber2.json'
+import secondSectionAnimation from '../../Assets/Animations/secondSection.json'
+import graphAnimation from '../../Assets/Animations/graphAnimation.json'
+import circle from '../../Assets/circle.png'
 
 let team = [
     {
@@ -67,7 +71,6 @@ export default function Home() {
     const defaultOptions = {
         loop: true,
         autoplay: true,
-        animationData: bannerAnimation,
         renderer: 'svg'
     }
 
@@ -118,7 +121,7 @@ export default function Home() {
         <>
             <Header />
             <main className="home-page">
-                <section className="home-banner" style={{ background: `url('${bannerBackground}')` }}>
+                <section className="home-banner" >
                     <div className="banner-content-wrapper">
                         <h1 className="banner-title">
                             Build a Data-Driven
@@ -131,17 +134,18 @@ export default function Home() {
                     </div>
                     <div className="banner-image-wrapper">
                         {/* <img src={homeBannerImage} alt="" className="banner-image" /> */}
-                        <Lottie options={defaultOptions} className="banner-image" />
+                        <Lottie options={{...defaultOptions,animationData: bannerAnimation}} className="banner-image" />
                     </div>
                     <img src={bannerWave} className="banner-wave" alt="" />
                 </section>
 
                 <section className="easy-build-section container-padding">
                     <div className="easy-build-image-wrapper">
-                        <img src={secondSectionImage} alt="" className="easy-build-image" />
+                        <Lottie options={{...defaultOptions, animationData: secondSectionAnimation}} className="easy-build-image" />
+                        {/* <img src={secondSectionImage} alt="" className="easy-build-image" /> */}
                     </div>
                     <div className="easy-build-content-wrapper">
-                        <h2 className="title-secondary">Wow recruiters and getmore interview calls</h2>
+                        <h2 className="title-secondary">Wow recruiters and get more interview calls</h2>
                         <p className="para-primary">
                             Just fill in your current designation and our AI-engine will fetch a convincing description and roles & responsibilities fitting your profile, along with useful insights for your career
                         </p>
@@ -150,23 +154,23 @@ export default function Home() {
                             <ul className="easy-build-list">
                                 <li>
                                     <span></span>
-                                    <p>Visually appealing resume with graphicalrepresentation of your career progression</p>
+                                    <p>Visually appealing resume with graphical representation of your career progression</p>
                                 </li>
                                 <li>
                                     <span></span>
-                                    <p>ATS-friendly resume builder to get past thetracking systems of top companies</p>
+                                    <p>ATS-friendly resume builder to get past the tracking systems of top companies</p>
                                 </li>
                                 <li>
                                     <span></span>
-                                    <p>Get data-driven insights on how to advanceon your career ladder.</p>
+                                    <p>Get data-driven insights on how to advance on your career ladder.</p>
                                 </li>
                                 <li>
                                     <span></span>
-                                    <p>Suggested resume templates designed bya team of HR experts</p>
+                                    <p>Suggested resume templates designed by a team of HR experts</p>
                                 </li>
                                 <li>
                                     <span></span>
-                                    <p>Easily downloadable and shareable resumeformat you can use to apply for jobs and featureon LinkedIn.</p>
+                                    <p>Easily downloadable and shareable resume format you can use to apply for jobs and feature on LinkedIn.</p>
                                 </li>
                             </ul>
                         </div>
@@ -182,7 +186,9 @@ export default function Home() {
                         </p>
                     </div>
                     <div className="skill-industry-image-wrapper">
-                        <img src={thirdSectionImage} alt="" className="skill-industry-image" />
+                    <Lottie options={{...defaultOptions,animationData:easyBuildAnimation}} className="skill-industry-image"/>
+
+                        {/* <img src={thirdSectionImage} alt="" className="skill-industry-image" /> */}
                     </div>
                 </section>
 
@@ -212,7 +218,8 @@ export default function Home() {
                         </p>
                     </div>
                     <div className="analytics-image-wrapper">
-                        <img src={fifthSectionImage} className="analytics-image" alt="" />
+                        <Lottie options={{...defaultOptions,animationData: graphAnimation}} className="analytics-image" />
+                        {/* <img src={fifthSectionImage} className="analytics-image" alt="" /> */}
                     </div>
                     <img src={orangeWave} alt="" className="analytics-wave" />
                 </section>
@@ -264,8 +271,8 @@ export default function Home() {
                     </div>
                 </section>
 
-
                 <section className="team-section container-padding">
+                    <img src={circle} className="bg-circle" alt="" />
                     <div className="team-content" ref={teamSectionRef}>
                         <p className="team-para">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident error illum vel. Architecto assumenda aut error non libero aliquid repudiandae maxime vel beatae facere, blanditiis a nostrum ex eligendi atque!
@@ -306,7 +313,7 @@ export default function Home() {
 
                 <section className="footer-home container-padding">
                     <div className="footer-image-wrapper">
-                        <img src={fifthSectionImage} alt="" className="footer-image" />
+                        <img src={homeBannerImage} alt="" className="footer-image" />
                     </div>
                     <div className="footer-content">
                         <h2 className="title-secondary">Let you resume do <br />the work</h2>

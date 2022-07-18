@@ -22,6 +22,7 @@
 .resume-slider .slide{
     margin: 1rem 4rem;
     transition: all 0.3s ease;
+    transform: scale(0.9);
 }
 .resume{
     width: 100%;

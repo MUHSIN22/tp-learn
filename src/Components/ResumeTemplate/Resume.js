@@ -44,11 +44,10 @@ import {
 import { selectKeySkills } from '../../redux/Features/GraphSlice'
 import { useDispatch, useSelector } from "react-redux";
 import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import { selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
+import jsPDF from  "jspdf";
+import { selectAuthLoading, selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
 
-const Resume = ({ newRef, shareOptions,setResumePdf }) => {
-  const [shareConfig,setShareConfig] = useState({})
+const  Resume =({newRef,shareOpts,changeLoaderval})=>{
   const dispatch = useDispatch()
   const companyInfo = useSelector(SelectCompanyDetails);
   const profile = useSelector(selectProfilePic);
@@ -118,8 +117,7 @@ const exect = async (shareOpts) => {
         shareLink = `https://www.instagram.com/direct?url=${resume_link}`    
       }
       changeLoaderval(1)
-      window.open(shareLink, '_blank', 'noopener,noreferrer')
-        
+      window.open(shareLink, '_blank', 'noopener,noreferrer') 
     })
     // if(){
 
