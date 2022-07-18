@@ -8,7 +8,7 @@ export default function LanguagesReview() {
             <h3 style={{"marginLeft":"1rem"}}>Language</h3>
             <span className="divider"></span>
 
-            <div className="col-100 g-1">
+            <div className="col-100 g-3">
                 <LanguageCard language={'Hindi'} color='_1' value={50}/>
                 <LanguageCard language={'English'} color='_4' value={80}/>
                 <LanguageCard language={'German'} color='_3' value={40}/>

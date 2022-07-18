@@ -156,13 +156,13 @@ const exec = () => {
 
   return (
     <div className="mt-5" id="tpcv" >
-      <div className="d-flex">
-        <div className="col-30">
-          <img className="Profile_resume_img" src={profile} crossOrigin="true" rossOrigin="anonymous"/>
+      <div className="d-flex mb-2" style={{height:"11rem","paddingLeft":"1rem"}}>
+        <div className="col-30 bg-dark" style={{position:"relative",borderRadius:"11rem 0rem 0rem 0rem"}}>
+          <img className="Profile_resume_img" src={profile}/>
         </div>
-        <div className="col-70 Profile_resume_name_sec">
+        <div className="col-70 Profile_resume_name_sec bg-dark">
           <h2 className="profileName text-left">{resumeDetails.name}</h2>
-          <h2 className="currentDegi text-left">{lastJob}</h2>
+          <h2 className="currentDegi text-left" style={{color:"white"}}>{lastJob}</h2>
         </div>
       </div>
 

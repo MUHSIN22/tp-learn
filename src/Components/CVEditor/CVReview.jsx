@@ -94,12 +94,12 @@ export default function CVBuilder() {
         <div className="" onClick={() => newRef.current()()}>
           <BsDownload style={{"width":"1.5rem","height":"1.5rem","fontWeight":"100"}}/>
         </div>
-        <Tippy
+        <Tippy 
           placement="bottom-end"
           interactive={true}
           theme="light"
           content={
-            <div className="d-flex justify-between" style={{ width: "10rem" }}>
+            <div className="d-flex justify-between" style={{ width: "10rem"}}>
               <div
                 onClick={async () => { await cvShare("facebook")}}
               >
@@ -193,12 +193,12 @@ export default function CVBuilder() {
           )}
           <div
             id="hello"
-            style={{
-              position: "fixed",
-              padding: 0,
-              clip: "rect(0 0 0 0)",
-              overflow: "hidden",
-            }}
+            // style={{
+            //   position: "fixed",
+            //   padding: 0,
+            //   clip: "rect(0 0 0 0)",
+            //   overflow: "hidden",
+            // }}
           >
             <ResumeDownload newRef={newRef} shareOpts={shareOpts} changeLoaderval={()=>changeLoader() } />
           </div>
