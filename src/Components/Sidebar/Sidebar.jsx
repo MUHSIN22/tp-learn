@@ -226,13 +226,14 @@ function Sidebar(props) {
                         interactive={true}
                       >
                         
-                                   
-
-                      </Tippy>
-                      <div id="title" >
+                        <div id="title" >
                           <span className="mt-1">{val.title}</span>
                          
                         </div>
+                                   
+
+                      </Tippy>
+                      
                         </>
                       
                       
