@@ -314,7 +314,7 @@ function Sidebar(props) {
                     {" "}
                     <div id="icon_small" className="icon_small" onClick={()=>setSidebarval(0)}>
                       {" "}
-                      {val.icon}
+                      { val.title == 'My Profile' ? "" :val.icon}
                     </div>{" "}
                     &nbsp; &nbsp; &nbsp;
               {val.title == 'My Profile' ? (
@@ -342,7 +342,7 @@ function Sidebar(props) {
                    </div>
                   
                  } placement="right-start" interactive={true}>
-                    {/* <div id="title">{val.title}</div> */}
+                    <div id="title " className="profile_ico">{val.icon}</div>
                  </Tippy>
                   </div>
                  
