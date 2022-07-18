@@ -16,11 +16,11 @@ root.render(
   // <React.StrictMode>
   <Router>
     <Provider store={store}>
-      <StyledEngineProvider injectFirst>
+      
         <PersistGate persistor={persistor}>
           <App />
         </PersistGate>
-      </StyledEngineProvider>
+  
     </Provider>
   </Router>
   // </React.StrictMode>
