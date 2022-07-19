@@ -26,6 +26,7 @@ import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Logout from './Components/Logout/Logout';
 import Resume2 from './Components/Resume2/Resume2';
+import Settings from './Components/Setings/Settings';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -104,6 +105,7 @@ function App() {
 
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>
+       <Route path="/settings" element={<Settings/>}/>
        <Route path='/MyProfile' element={<CVReview/>}/>
        <Route path='/dummy' element={<DummyForm/>}/>
        <Route path='/cs' element={<CognitiveSkills/>}/>
