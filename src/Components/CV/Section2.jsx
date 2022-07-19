@@ -27,7 +27,7 @@ export default function Section2() {
             </div>
             <div className='flex-row-fit g-0-5 align-center'>
               <div className='dot _4'></div>
-              management
+              Management
             </div>
 
           </div>

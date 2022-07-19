@@ -65,8 +65,8 @@ export default function Memberships() {
         <div className="col-fit">
           <Sidebar/>
         </div>
-        <div className="col" style={{"paddingTop":"6rem"}}>
-          <div className="flex-row-center g-2">
+        <div className="col-100" style={{"padding":"6rem"}}>
+          {/* <div className="flex-row-center g-2">
             <div className="col-20">
               <button type="button" className="btn-square orange" onClick={()=>console.log("clicked")}>
                 Monthly
@@ -90,68 +90,54 @@ export default function Memberships() {
                 grows with your business
               </p>
             </div>
-          </div>
+          </div> */}
 
-          <div className="flex-row-center membershipCardRow g-3 mt-3">
-            <div className="col-20 membershipCard">
-              <span className="mb-1" style={{ "fontSize": "1.5rem" }}>
-                Sederhana
-              </span>
-              <span className="mb-1" style={{ "fontSize": "1.5rem" }}>
-                $49{" "}
-                <span className="" style={{ "fontSize": "1rem" }}>
-                  / month
-                </span>
-              </span>
-              <span className="mb-1" style={{ "fontSize": "1.1rem" }}>
-                Lorem Ipsum is simply dummy text of the printing
-              </span>
+          <div className="flex-row-center membershipCardRow g-3">
+            <div className="col-fit membershipCard">
+              <h1 className="mb-1" style={{ "fontSize": "3rem",fontWeight:"600" }}>
+                3 Months Access
+              </h1>
+              <div className="g-2" style={{paddingLeft:"2rem"}}>
               <div className="flex-row-start">
-                <label className="control control-checkbox">
-                  2Gb storage
+              <div className="mb-1">
+                <p className="m-0" style={{ "fontSize": "5rem","color":"#e97453", fontWeight:"600"}}>&#x20b9;499/-</p>
+              </div>
+              </div>
+              <div className="flex-row-start">
+                <label className="control control-checkbox labelsCss">
+                Unlimited Printing
                   <div className="checked-circle"></div>
                 </label>
               </div>
               <div className="flex-row-start">
-                <label className="control control-checkbox">
-                  Unlimited bandwidth
+                <label className="control control-checkbox labelsCss">
+                  Downloading (PDF)
                   <div className="checked-circle"></div>
                 </label>
               </div>
               <div className="flex-row-start">
-                <label className="control control-checkbox">
-                  chat support
+                <label className="control control-checkbox labelsCss">
+                  Sharing
                   <div className="checked-circle"></div>
                 </label>
               </div>
               <div className="flex-row-start">
-                <label className="control control-checkbox">
-                  Single website
+                <label className="control control-checkbox labelsCss">
+                  Unlimited Edit Access
                   <div className="checked-circle"></div>
                 </label>
               </div>
-              <div className="flex-row-start">
-                <label className="control control-checkbox">
-                  Free domain 1 year
-                  <div className="checked-circle"></div>
-                </label>
-              </div>
-              <div className="flex-row-start">
-                <label className="control control-checkbox">
-                  Standered Feature
-                  <div className="checked-circle"></div>
-                </label>
               </div>
               <button
                 type="button"
                 className="btn-square orange mt-3"
-                style={{ "boxShadow": "0px 7px 12px 0 #ec957c" }}
-                onClick={()=> displayRazorpay(200)}
+                style={{ "boxShadow": "0px 14px 10px rgb(236 149 124 / 70%)","border":"1px solid white" }}
+                onClick={()=> displayRazorpay(499)}
               >
-                Monthly
+                Buy Now
               </button>
             </div>
-            <div className="col-20 membershipCard-2">
+            {/* <div className="col-20 membershipCard-2">
               <span className="mb-1" style={{ "fontSize": "1.5rem" }}>
                 Manangah
               </span>
@@ -269,81 +255,10 @@ export default function Memberships() {
               >
                 Monthly
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
-
-      {/* <h3>More Power and Scale When You Need It</h3>
-      <div className="flex-row-start">
-      <div className="align-center col-30 text-left">
-        <div className="col-90 membershipCard">
-          <div className="col-100 g-1">
-            <h3>Self-declaration</h3>
-            <p>
-              In the other hand, we denounce with righteous indignation and
-              dislike men who are so beguiled and demoralized by the charms of
-              pleasure of the moment, so blinded by desire, that they cannot
-              foresee the pain and trouble that are bound to ensue.
-            </p>
-            <div className="flex-row-start">
-              <label className="control control-checkbox">
-                I agree terms and condition
-                <input type="checkbox" />
-                <div className="control_indicator"></div>
-              </label>
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="col-100">
-              <button className="btn primary">
-                  Buy Now
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="align-center col-30 text-left">
-        <div className="col-90">
-          <h3>Self-declaration</h3>
-          <div className="col-100 g-1">
-            <p>
-              In the other hand, we denounce with righteous indignation and
-              dislike men who are so beguiled and demoralized by the charms of
-              pleasure of the moment, so blinded by desire, that they cannot
-              foresee the pain and trouble that are bound to ensue.
-            </p>
-            <div className="flex-row-start">
-              <label className="control control-checkbox">
-                I agree terms and condition
-                <input type="checkbox" />
-                <div className="control_indicator"></div>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="align-center col-30 text-left">
-        <div className="col-90">
-          <h3>Self-declaration</h3>
-          <div className="col-100 g-1">
-            <p>
-              In the other hand, we denounce with righteous indignation and
-              dislike men who are so beguiled and demoralized by the charms of
-              pleasure of the moment, so blinded by desire, that they cannot
-              foresee the pain and trouble that are bound to ensue.
-            </p>
-            <div className="flex-row-start">
-              <label className="control control-checkbox">
-                I agree terms and condition
-                <input type="checkbox" />
-                <div className="control_indicator"></div>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div> */}
     </div>
   );
 }

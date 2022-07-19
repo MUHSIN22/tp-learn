@@ -1,46 +1,31 @@
-
-import React from "react";
-import LineGraph from "../Graphs/LineGraph";
-import Scale from "../Graphs/Scale";
-import parser from "html-react-parser";
-import { ReactComponent as Device } from "../../Assests/icons/monitor-mobile.svg";
-import { ReactComponent as Chart } from "../../Assests/icons/chart.svg";
-import { ReactComponent as Headphone } from "../../Assests/icons/headphone.svg";
-import { ReactComponent as Location } from "../../Assests/icons/location.svg";
-import { ReactComponent as Calendar } from "../../Assests/icons/calendar.svg";
-import { ReactComponent as Clock } from "../../Assests/icons/clock.svg";
-import { ReactComponent as BarGraph } from "../../Assests/icons/barGraph.svg";
-import { ReactComponent as BarGraphO } from "../../Assests/icons/chart_o.svg";
-import { ReactComponent as Human } from "../../Assests/icons/human.svg";
-import { ReactComponent as HumanG } from "../../Assests/icons/human_g.svg";
-import { ReactComponent as Webcam } from "../../Assests/icons/webcam.svg";
-import { ReactComponent as Right } from "../../Assests/icons/arrow-circle-right.svg";
-import { ReactComponent as Left } from "../../Assests/icons/arrow-circle-left.svg";
-import ProgressBar from "../OverviewCard/ProgressBar";
-import {
-  SelectCompanyDetails,
-  selectResumeLoading,
-} from "../../redux/Features/ResumeSlice";
-import { useDispatch, useSelector } from "react-redux";
-import ExperienceLoader from "../Loaders/ExperienceLoader";
-import { useState } from "react";
-import JobOverviewLoader from "../Loaders/JobOverviewLoader";
-import RoleLoader from "../Loaders/RoleLoader";
-import {
-  companyWiseGraph,
-  selectCompanyWise,
-} from "../../redux/Features/GraphSlice";
-import { useEffect } from "react";
-import {
-  selectAuthToken,
-  selectUser_id,
-} from "../../redux/Features/AuthenticationSlice";
+import React from 'react'
+import LineGraph from '../Graphs/LineGraph'
+import Scale from '../Graphs/Scale'
+import parser from 'html-react-parser';
+import { ReactComponent as Device } from '../../Assests/icons/monitor-mobile.svg';
+import { ReactComponent as Chart } from '../../Assests/icons/chart.svg';
+import { ReactComponent as Headphone } from '../../Assests/icons/headphone.svg';
+import { ReactComponent as Location } from '../../Assests/icons/location.svg';
+import { ReactComponent as Calendar } from '../../Assests/icons/calendar.svg';
+import { ReactComponent as Clock } from '../../Assests/icons/clock.svg';
+import { ReactComponent as BarGraph } from '../../Assests/icons/barGraph.svg';
+import { ReactComponent as BarGraphO } from '../../Assests/icons/chart_o.svg';
+import { ReactComponent as Human } from '../../Assests/icons/human.svg';
+import { ReactComponent as HumanG } from '../../Assests/icons/human_g.svg';
+import { ReactComponent as Webcam } from '../../Assests/icons/webcam.svg';
+import { ReactComponent as Right } from '../../Assests/icons/arrow-circle-right.svg';
+import { ReactComponent as Left } from '../../Assests/icons/arrow-circle-left.svg';
+import ProgressBar from '../OverviewCard/ProgressBar';
+import { SelectCompanyDetails, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails} from '../../redux/Features/ResumeSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import ExperienceLoader from '../Loaders/ExperienceLoader';
+import { useState } from 'react';
+import JobOverviewLoader from '../Loaders/JobOverviewLoader';
+import RoleLoader from '../Loaders/RoleLoader';
+import { companyWiseGraph, selectCompanyWise } from '../../redux/Features/GraphSlice';
+import { useEffect } from 'react';
+import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { FaPencilAlt } from "react-icons/fa";
-import {
-  selectToEdit,
-  changeToEdit,
-  changeEditPageDetails,
-} from "../../redux/Features/ResumeSlice";
 import EditFormContainer from "../EditForms/EditFromContainer";
 export default function Section3() {
   const loading = useSelector(selectResumeLoading);
@@ -373,9 +358,9 @@ function ProjectOverview({ projects:{projects,company_job_record_id,company_reco
           <h5 className="text-left">Complexity</h5>
           <h5 className="text-left">Applicaion</h5>
         </div>
-        {project_skill?.map((skill, i) => (
-          <SkillGrid key={i} color={`_${i + 1}`} {...skill} />
-        ))}
+         {
+                    project_skill&& project_skill.map((skill, i) => <SkillGrid key={i} color={`_${i+1}`} {...skill} />)
+                }
       </div>
     </>
   );

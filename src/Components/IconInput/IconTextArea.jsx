@@ -8,7 +8,7 @@ export default function IconTextArea({rows, label, name, handleChange, state,ico
 
             <div className="textArea-container">
                 {icon}
-                <textarea rows={rows} value={state} onChange={handleChange} name={name} placeholder={placeholder} defaultValue={defaultValue} {...props}/>
+                <textarea rows={rows} value={state} onChange={handleChange} name={name} placeholder={placeholder} defaultValue={defaultValue} {...props} />
             </div>
             {validation&&<span className='validation-message .shake-horizontal'>{validation}</span>}
         </div>

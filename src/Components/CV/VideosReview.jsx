@@ -47,7 +47,7 @@ function FileCard({ url, filename, icon }) {
     <a href={url} className="card flex-row-start g-1" download={download}>
       <img src={icon} alt={filename} />
 
-      <div className="col-fit">
+      <div className="col-fit g-1">
         <h4>{filename} {toEdit && (
             <span
               onClick={() => handleEditForms({ progress: 16,url})}

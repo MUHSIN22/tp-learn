@@ -15,7 +15,9 @@ import { ReactComponent as HumanG } from "../../Assests/icons/human_g.svg";
 import { ReactComponent as Webcam } from "../../Assests/icons/webcam.svg";
 import { ReactComponent as Right } from "../../Assests/icons/arrow-circle-right.svg";
 import { ReactComponent as Left } from "../../Assests/icons/arrow-circle-left.svg";
+import { ReactComponent as TickCircle } from "../../Assests/icons/tick-circle.svg";
 import ProgressBar from "../OverviewCard/ProgressBar";
+import RedialBar from "../Graphs/RedialBar";
 import {
   SelectCompanyDetails,
   selectResumeLoading,
@@ -41,13 +43,12 @@ import {
   changeEditPageDetails,
 } from "../../redux/Features/ResumeSlice";
 import EditFormContainer from "../EditForms/EditFromContainer";
-
 export default function Section3Review() {
   const loading = useSelector(selectResumeLoading);
   const companyInfo = useSelector(SelectCompanyDetails);
   const [index, setIndex] = useState(0);
   return (
-    <div className="section_2 col-100 align-center">
+    <div className="section3Review col-100 align-center">
       <Scale first={30} second={60} />
       <div className="col-90">
         <div className="flex-row-between align-center">
@@ -148,7 +149,7 @@ function CompanyOverview({ company }) {
         </div>
       </div>
       <div className="col-100 justify-end">
-        <h5 className="text-right">{toEdit && (
+        <h5 className="text-right profileNameFont">{toEdit && (
               <span className="px-1" onClick={() =>
                 handleEditForms({
                   progress: 1,
@@ -247,7 +248,7 @@ function DesignationOverview(props) {
       </p>
       <span className="divider"></span>
       <div className="grid-35-65">
-        <div className="col-100 g-1">
+        <div className="col-100 g-2">
           <div className="flex-row-fit align-center g-1">
             <BarGraphO /> <p>{job_role[index].job_level_name || ""}</p>
           </div>
@@ -264,18 +265,25 @@ function DesignationOverview(props) {
         </div>
         {console.log("----------", job_role[index].skills)}
         {job_role && job_role[index]?.skills && (
-          <div className="col-100 skill-card">
+          <div className="col-100 skill-card g-3">
             <h5 className="text-left">Key Skills Used</h5>
             {job_role[index].skills.map((skill, i) => (
-              <div key={i} className="flex-row-between align-start">
+              <div key={i} className="flex-row-between justify-between">
+                <div className="col-90">
+                <div className="flex-row-between align-start">
                 <p>{skill.skill_name}</p>
                 <div className="col-70 justify-center">
                   <ProgressBar
                     value={skill.skill_complexity}
                     color={`_${i + 1}`}
                     hide_percent
-                  />
+                  /> 
+                </div>  
+                </div> 
                 </div>
+                <div>
+                  <p>{skill.skill_complexity}%</p>
+                  </div> 
               </div>
             ))}
           </div>
@@ -302,9 +310,12 @@ function ResponsibiltiensOverview({ data }) {
   const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
+  let rolesString = parser(data.role_responsibilties)
+  rolesString = rolesString.replace(/<\/?[^>]+(>|$)/g, "");
+  const rolesList = rolesString.split(".")
   return (
     <>
-      <div className="flex-row-between align-center">
+      <div className="flex-row-between align-center my-2">
         <h3 className="text-left">Roles and Responsibilities</h3>
         {toEdit && (
           <div className="flex-row-fit g-1 align-center">
@@ -315,13 +326,36 @@ function ResponsibiltiensOverview({ data }) {
         )}
       </div>
       <span className="divider"></span>
+      <div className="grid-67-33">
       {data && data.role_responsibilties ? (
-        <div className="role col-100 g-0-5 text-left">
-          {parser(parser(data.role_responsibilties))}
+        <div className="role col-50 g-0-5 text-left g-2">
+          {rolesList && rolesList.map((role)=>{
+            if(role!=='&nbsp;'){
+            return <div className="flex-row-fit g-1"><TickCircle /> 
+            <div>
+              <p>{role}</p>
+            </div>
+            </div>
+            }
+          })}
         </div>
       ) : (
         <RoleLoader />
       )}
+      <div className="role_skills">
+        <div>
+        <RedialBar value={"50%"} color={'_4'}/>
+        </div>
+        <div className="skills_names">
+        {data && data.skills.map((skill)=>{
+            return <div className="skillName">
+              {skill.skill_name}
+            </div>
+        })}
+        </div>
+        
+      </div>
+      </div>
     </>
   );
 }
@@ -336,7 +370,7 @@ function ProjectOverview({ projects:{projects,company_job_record_id,company_reco
   };
   return (
     <>
-      <div className="flex-row-between align-center">
+      <div className="flex-row-between align-center my-2">
         <h3 className="text-left m-0">Projects worked on</h3>
         <div className="flex-row-fit g-1 align-center">
           {toEdit && (

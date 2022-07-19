@@ -17,6 +17,7 @@ import AdditionalSkills3 from './AdditionalSkills3';
 import CareerObjective1 from './CareerObjective1';
 import CareerObjective3 from './CareerObjective3';
 import CareerObjective2 from './CareerObjective2';
+import CognitiveSkills from './CognitiveSkills';
 
 
 export default function EditFormContainer({data}) {
@@ -39,10 +40,9 @@ export default function EditFormContainer({data}) {
       {progress === 14 && <AdditionalSkills3 data = {data} />}
       {progress === 15 && <CareerObjective1  data = {data}/>}
       {progress === 16 && <CareerObjective2  data = {data}/>}
-      {progress === 17 && <CareerObjective3  data = {data}/>}
-
-
-
+      {progress === 17 && <CognitiveSkills data = {data}/>}
+      {progress === 18 && <CareerObjective3 data={data}/>}
+      {progress === 19 && <CognitiveSkills/>}
 
       { /*
       (progress!==6&&progress!==7&&progress!==17)&& <>

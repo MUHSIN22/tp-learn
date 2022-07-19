@@ -28,6 +28,7 @@ export default function Experience2() {
     const loading = useSelector(selectResumeLoading);
   
     function handleChange(evt) {
+        console.log("--------------",buisnessScaleList)
         const value = evt.target.value;
         setForm({
             ...form,

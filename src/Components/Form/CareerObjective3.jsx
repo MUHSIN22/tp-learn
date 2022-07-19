@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSocialLinks, selectResumeError, selectResumeLoading, selectResumeMessage, selectSocilaLinks } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
+import { useNavigate } from 'react-router-dom';
 export default function CareerObjective3() {
     const dispatch = useDispatch()
     const [form, setForm] = useState({
@@ -25,6 +26,7 @@ export default function CareerObjective3() {
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     const socialLinks = useSelector(selectSocilaLinks)
+    const navigate = useNavigate();
     function handleChange(evt) {
         const value = evt.target.value;
 
@@ -86,10 +88,10 @@ export default function CareerObjective3() {
             </div>
             <div className="flex-row-end g-1">
                 <div className="col-30">
-                    <button className='btn'>Review</button>
+                    <button onClick={()=>navigate('/MyProfile',{state:{page:"/dashboard"}})} className='btn'>Review</button>
                 </div>
                 <div className="col-30">
-                    <button onClick={handleSubmit} className='btn primary'><Add />Add more</button>
+                    <button onClick={handleSubmit} className='btn primary'>Submit</button>
                 </div>
             </div>
 

@@ -8,6 +8,7 @@ import { addBio, nextForm, selectResumeError, selectResumeInfo, selectResumeLoad
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import { getRoleSuggestionList, selectRoleSuggestionList } from '../../redux/Features/MasterSlice';
+import CognitiveSkills from './CognitiveSkills';
 import Control from './Control';
 
 export default function AdditionalSkills3({data}) {
@@ -92,7 +93,6 @@ export default function AdditionalSkills3({data}) {
                 <label htmlFor="">Upload your profile picture</label>
                 <DragDropInput file={file} setFile={setFile}/>
             </div>
-
             <Control handleSubmit={handleSubmit} />
         </>
 

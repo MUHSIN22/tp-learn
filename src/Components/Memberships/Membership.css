@@ -17,7 +17,7 @@
     align-content: center!important;
     border: none;
     border-radius: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 2rem;
     text-decoration: none;
   }
 
@@ -43,9 +43,12 @@
 .membershipCard{
     border-radius: 0.5rem;
     background-color: #fafafa;
-    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-    box-shadow:2px 2px 2px 2px #fafafa;
+    padding: 5.5rem 4.5rem 5.5rem 4.5rem;
+    box-shadow:0.8rem 0.8rem 0.8rem 0.8rem #fafafa;
     text-align: left !important;
+    height: 43rem;
+    width: 31rem;
+    border:1px solid #e974537d;
 }
 .membershipCard-2{
     border-radius: 0.5rem;
@@ -58,26 +61,31 @@
 
 .checked-circle {
     position: absolute;
-    top: -1px;
+    top: 0.45rem;
     left: 0;
     height: 20px;
     width: 20px;
-    background: #e6e6e6;
+    background: #f0967c;
     border: 0px solid #000000;
     border-radius: 50px;
   }
 
 .membershp{
-  z-index:999
+  z-index:999;
+}
+
+.labelsCss{
+font-size: 1.7rem;
+}
+
+.membershipCard h1{
+  font-family: 'Unna', serif !important; 
 }
 @media only screen and (max-width:700px) {
     .membershipCardRow {
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-    }
-    .membershipCardRow .col-20{
-        width: 40% !important;
     }
     .head-2{
     font-size: 1.5rem !important;

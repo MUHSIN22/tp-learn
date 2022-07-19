@@ -32,7 +32,7 @@ function App() {
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
-  const routeWithoutNav = ['/','/membership',"MyProfile"]
+  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard"]
   useEffect(() => {
     if(auth.authToken&&reload){
       console.log('Reload Resume Update')
