@@ -32,7 +32,7 @@ console.log(window.location.pathname)
         <User/>
         </button>{user}</span>
         
-        <button className='btn tirtiary'>Save As Draft</button>
+        <button className='btn tirtiary' onClick={()=>rendertomyprofile()}>Save As Draft</button>
       </div>}
   </nav>
     </>

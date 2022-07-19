@@ -86,12 +86,12 @@ function Sidebar(props) {
                     className="SidebarRow"
                   >
                     {" "}
-                    <div id="icon" className={val.title =="My Profile" ? "myprofico":""}> {val.icon}</div> &nbsp; &nbsp; &nbsp;
-                   
+                    <div id="icon" className={val.title =="My Profile" ? "myprofico":""} onClick={() => {sendProp("/dashboard");}}> {val.icon}</div> &nbsp; &nbsp; &nbsp;
+
                     {val.title == "My Profile" ? (
 
                       <>
-                      <div id="title" onClick={()=>sethamburgericon(true)} onMouseEnter={()=>sethamburgericon(true)}  >
+                      <div id="title" onClick={()=>{sethamburgericon(true);sendProp("/dashboard")}}   >
                           <span className="" >{val.title}</span>
                       </div>
                         <Tippy
@@ -134,7 +134,7 @@ function Sidebar(props) {
                             </h4>
                             <h4
                               onClick={() => {
-                                sendProp("/personal-information");
+                                sendProp("/Experience");
                               }}
                             >
                               Roles and Responsibilities
@@ -228,8 +228,6 @@ function Sidebar(props) {
                         placement="right-start"
                         interactive={true}
                       >
-                        
-                        
                            <div className={`${hamburgericon ? "icon_hamb":"not_icon_hamb"}`}>
                     <span className="menu-icon mt-4" >
               {" "}

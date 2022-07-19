@@ -33,7 +33,7 @@ export default function CognitiveSkills({}) {
         decision_making:"",
         presentation_skills:""
     })
-    const [selected_options,set_Selected_options] = useState([]) 
+    const [selected_options,set_Selected_options] = useState([]);
     const error = useSelector(selectResumeError);
     const loading = useSelector(selectResumeLoading);
     const [showAlert, setShowAlert] = useState(false);
@@ -66,11 +66,11 @@ export default function CognitiveSkills({}) {
             ...form,
             [evt.target.name]: value
         });
-        console.log(form)
+        if(!selected_options.includes(evt.target.name)){
+            set_Selected_options([...selected_options,evt.target.name])
+        }
     }
-    // const handleSkill_desc = (e)=>{
-    //     temp.skill_desc = e.target.value
-    // }
+    console.log("ppppppppppppppppp",selected_options.length)
     // const handleAddSkill = () => {
     //     console.log(temp)
     //     set_Selected_options([...selected_options,temp])
@@ -91,48 +91,48 @@ export default function CognitiveSkills({}) {
             <div className='responsive-grid'>
                 <div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'communication'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><FiCheckSquare style={{"fontSize":"1.3rem"}}/></span><span>  &nbsp; &nbsp;Communication </span></>}/>
+                        <MarkedSlider disabled={selected_options.length>=6 && form["communication"]==""?true:false} handleChange={handleComplexity} name={'communication'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><FiCheckSquare style={{"fontSize":"1.3rem"}}/></span><span>  &nbsp; &nbsp;Communication </span></>}/>
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'teamwork'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Teamwork </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["teamwork"]==""?true:false} handleChange={handleComplexity} name={'teamwork'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Teamwork </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'leadership'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Leadership </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["leadership"]==""?true:false} handleChange={handleComplexity} name={'leadership'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Leadership </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'flexibility_adaptability'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Flexibility/adaptability </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["flexibility_adaptability"]==""?true:false} handleChange={handleComplexity} name={'flexibility_adaptability'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Flexibility/adaptability </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'problem_solving'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Problem-solving </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["problem_solving"]==""?true:false} handleChange={handleComplexity} name={'problem_solving'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Problem-solving </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'handling_pressure'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Handling pressure </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["handling_pressure"]==""?true:false} handleChange={handleComplexity} name={'handling_pressure'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Handling pressure </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'analytical_skills'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Analytical skills </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["analytical_skills"]==""?true:false} handleChange={handleComplexity} name={'analytical_skills'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Analytical skills </span></>} />
                     </div>
                 </div>
                 <div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'creativity'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Creativity </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["creativity"]==""?true:false} handleChange={handleComplexity} name={'creativity'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Creativity </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'time_management'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Time Management </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["time_management"]==""?true:false} handleChange={handleComplexity} name={'time_management'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Time Management </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'negotiating'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Negotiating </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["negotiating"]==""?true:false} handleChange={handleComplexity} name={'negotiating'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Negotiating </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'strategic_planning'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Strategic Planning </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["strategic_planning"]==""?true:false} handleChange={handleComplexity} name={'strategic_planning'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Strategic Planning </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'handling_feedback'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Handling Feedback </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["handling_feedback"]==""?true:false} handleChange={handleComplexity} name={'handling_feedback'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Handling Feedback </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'decision_making'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Decision-making </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["decision_making"]==""?true:false} handleChange={handleComplexity} name={'decision_making'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Decision-making </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider handleChange={handleComplexity} name={'presentation_skills'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Presentation skills </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["presentation_skills"]==""?true:false} handleChange={handleComplexity} name={'presentation_skills'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Presentation skills </span></>} />
                     </div>
                 </div>
             </div>
