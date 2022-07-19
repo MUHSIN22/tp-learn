@@ -17,10 +17,10 @@ function Settings() {
           <div className="col-100 ml-5">
             <div class="containersetting">
               <div class="content">
-                <button className="btn-square orange " onClick={()=>navigate('/dashboard')}>
-                  Edit Your Profile
+                <button className="btn-square btn_edit " onClick={()=>navigate('/dashboard')}>
+                  Edit Resume
                 </button>
-                <button className="btn-square btn_reset mt-3">
+                <button className="btn-square btn_reset mt-3" onClick={()=>navigate('/change_password')}>
                   Change PassWord
                 </button>
               </div>

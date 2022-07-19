@@ -1739,6 +1739,11 @@ video{
 
 
 .btn_reset{
-  background: #d0d0d0;
+  background: #fff;
+  box-shadow: 0 0 5px 5px #d0d0d0;
+}
+.btn_edit{
+  box-shadow: 0 0 5px 5px #d0d0d0;
+  background-color: #fff;
 }
 
