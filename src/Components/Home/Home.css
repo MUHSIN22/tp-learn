@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+.home-page{
+    background: #EFEEE4;
+}
 .home-banner{
     background-size: cover;
     background-position: center;
@@ -53,8 +56,6 @@
     display: grid;
     place-items: center;
     z-index: 10;
-    transform: scale(1.2);
-    margin-top: 1rem;
 }
 .home-banner .banner-image{
     width: 100%;
@@ -66,6 +67,7 @@
     grid-template-columns: 2fr 1fr;
     grid-gap: 2rem;
     grid-template-areas: 'image content';
+
 }
 .easy-build-image-wrapper{
     grid-area: image;
