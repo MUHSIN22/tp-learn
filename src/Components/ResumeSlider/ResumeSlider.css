@@ -12,7 +12,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    background: linear-gradient(270deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255,0.3 ) 100%);
+    background: linear-gradient(270deg, rgba(239, 238, 228,0.7) 0%, rgba(239, 238, 228,0.3 ) 100%);
     pointer-events: none;
 }
 .resume-slider-wrapper{
