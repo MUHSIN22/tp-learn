@@ -15,7 +15,7 @@ import "../../App.css";
 import { FiCheckSquare} from "react-icons/fi"
 
 const DEBOUNCE_DELAY = 600;
-export default function CognitiveSkills() {
+export default function CognitiveSkills({}) {
     const dispatch = useDispatch()
     const [form, setForm] = useState({
         communication:"",
@@ -138,9 +138,9 @@ export default function CognitiveSkills() {
 
             </div>
             <div className="flex-row-end">
-                <button className="btn-fit transparent g-0-5" onClick={handleCognitiveSkills} ><AddCircle width={30} /> </button>
+                <button className="btn-fit btn-primary g-0-5" style={{"color":"white", "width":"2rem", font}} onClick={handleCognitiveSkills} > <AddCircle/></button>
             </div>
-            <Control handleSubmit={()=>{dispatch(reload()); handleCognitiveSkills}}/>
+            {/* <Control handleSubmit={()=>{dispatch(reload()); handleCognitiveSkills}}/> */}
            
         </>
     )

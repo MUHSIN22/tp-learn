@@ -390,7 +390,7 @@ const exec = () => {
                           <h4 >EXPERTISE</h4>
                         </div>
                      </div>
-                     {job.skills.map((skill)=>{
+                     {job?.skills?.map((skill)=>{
                          return  <div className="skills d-flex justify-aroundx pl-1">
                          <div className="col-100">
                            <p className="skills">{skill.skill_name}</p>
