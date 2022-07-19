@@ -140,7 +140,7 @@ export default function CognitiveSkills() {
             <div className="flex-row-end">
                 <button className="btn-fit transparent g-0-5" onClick={handleCognitiveSkills} ><AddCircle width={30} /> </button>
             </div>
-            <Control handleSubmit={()=>{dispatch(reload()); handleCognitiveSkills}}/>
+            <Control handleSubmit={()=>{dispatch(reload()); handleCognitiveSkills()}}/>
            
         </>
     )
