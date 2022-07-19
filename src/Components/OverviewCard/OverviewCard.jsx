@@ -4,18 +4,22 @@ import './OverviewCard.css'
 import Guage from './Guage'
 import ProgressBar from './ProgressBar'
 import MultiDonut from '../Graphs/MultiDonut'
-import { useSelector } from 'react-redux'
-import { selectResumeLoading } from '../../redux/Features/ResumeSlice'
+import { useSelector,useDispatch } from 'react-redux'
+import { selectResumeLoading,selectToEdit,changeEditPageDetails } from '../../redux/Features/ResumeSlice'
 import OverviewCardLoader from '../Loaders/OverviewCard'
 import { selectOverview,selectKeySkills, selectCognitive_info } from '../../redux/Features/GraphSlice'
-
+import { FaPencilAlt } from "react-icons/fa";
 export default function OverviewCard() {
  const loading = useSelector(selectResumeLoading)
  const overview = useSelector(selectOverview)
  const skills = useSelector(selectKeySkills)
  const cognitive_info = useSelector(selectCognitive_info) || [];
  let color = "_1"
-
+ const dispatch = useDispatch();
+const toEdit = useSelector(selectToEdit);
+const handleEditForms = (data) => {
+  dispatch(changeEditPageDetails(data)).unwrap();
+};
   return (
     <>
 
@@ -25,7 +29,9 @@ export default function OverviewCard() {
           <MultiDonut width={'150%'} data={formatData(overview)}/>
         </div>
         <div className="col-100 guage-container lineToright gapForReview">
-          <h3>Cognitive skillset </h3>
+          <h3>Cognitive skillset {toEdit && (
+                     <span onClick={() => handleEditForms({ progress: 19 })}><FaPencilAlt /></span>
+                    )} </h3>
           <div className="grid gapForReview">
             {cognitive_info && cognitive_info.map((cogInfo)=>{
                 color = Math.floor(Math.random() * (4 - 1 + 1) + 1)

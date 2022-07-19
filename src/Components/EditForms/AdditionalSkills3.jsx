@@ -93,9 +93,6 @@ export default function AdditionalSkills3({data}) {
                 <label htmlFor="">Upload your profile picture</label>
                 <DragDropInput file={file} setFile={setFile}/>
             </div>
-
-            <CognitiveSkills/>
-
             <Control handleSubmit={handleSubmit} />
         </>
 
