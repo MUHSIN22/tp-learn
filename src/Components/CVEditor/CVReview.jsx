@@ -23,6 +23,7 @@ import { FiEdit,FiShare2 } from "react-icons/fi";
 import {BsDownload} from "react-icons/bs"
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import {Spinner} from "./Spinner";
@@ -36,7 +37,6 @@ import {
   getPageOn,
   getLoaderstate,
 } from "../../redux/Features/ResumeSlice";
-import { useNavigate } from "react-router-dom";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
@@ -53,6 +53,7 @@ export default function CVBuilder() {
   const dispatch = useDispatch();
   let toEdit = useSelector(selectToEdit);
   let editPageDetails = useSelector(selectEditPageDetails);
+  const location = useLocation();
   // let loaderState=useSelector(getLoaderstate)
   const handleEdit = (e) => {
     dispatch(changeToEdit(!toEdit)).unwrap();
@@ -66,7 +67,10 @@ export default function CVBuilder() {
     console.log("data",value, "data");
     setloader(value)
   }
-  
+
+  if(location?.state?.page === "/dashboard"){
+    dispatch(changePageOn("/dashboard"));
+  }
 
   const newRef = React.useRef();
 
