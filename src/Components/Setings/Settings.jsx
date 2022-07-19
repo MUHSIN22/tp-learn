@@ -21,7 +21,7 @@ function Settings() {
                   Edit Your Profile
                 </button>
                 <button className="btn-square btn_reset mt-3">
-                  Reset PassWord
+                  Change PassWord
                 </button>
               </div>
               <div class="flap"></div>
