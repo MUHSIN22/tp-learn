@@ -14,6 +14,7 @@ function Sidebar(props) {
   const dispatch = useDispatch();
   const sidebarvaluedata = useSelector(selectSidebarValue)
   const [sidebarval, setSidebarval] = useState(1);
+  const [hamburgericon,sethamburgericon] =useState(false)
 
   const sendProp = (pagelink) => {
     props.currentPage(pagelink);
@@ -27,13 +28,12 @@ function Sidebar(props) {
     dispatch(logout());
   };
 
+  useEffect(()=>{
+    console.log(window.location.pathname);
+  },[])
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(sidebarvaluedata);
-  }, [])
-  
 
   return (
     <>
@@ -86,11 +86,14 @@ function Sidebar(props) {
                     className="SidebarRow"
                   >
                     {" "}
-                    <div id="icon"> {val.icon}</div> &nbsp; &nbsp; &nbsp;
-                    
+                    <div id="icon" className={val.title =="My Profile" ? "myprofico":""}> {val.icon}</div> &nbsp; &nbsp; &nbsp;
+                   
                     {val.title == "My Profile" ? (
 
                       <>
+                      <div id="title" onClick={()=>sethamburgericon(true)} onMouseEnter={()=>sethamburgericon(true)}  >
+                          <span className="" >{val.title}</span>
+                      </div>
                         <Tippy
                         content={
                           <div
@@ -226,10 +229,21 @@ function Sidebar(props) {
                         interactive={true}
                       >
                         
-                        <div id="title" >
-                          <span className="mt-1">{val.title}</span>
-                         
-                        </div>
+                        
+                           <div className={`${hamburgericon ? "icon_hamb":"not_icon_hamb"}`}>
+                    <span className="menu-icon mt-4" >
+              {" "}
+              <FiMenu
+                style={{
+                  width: "2rem",
+                  height: "50px",
+                  color: "white",
+                  marginLeft: "5rem",
+                }}
+              />{" "}
+            </span>
+                    </div>
+                        
                                    
 
                       </Tippy>

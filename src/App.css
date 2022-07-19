@@ -1692,3 +1692,58 @@ video{
 .profile_ico{
   margin-right: 2.3rem;
 }
+.not_icon_hamb{
+  visibility: hidden;
+}
+.icon_hamb{
+  background-image: linear-gradient(to right, #f08e71, #f08768, #f0805e, #f07855, #ef714b);
+  position: relative;
+  left: 2rem;
+  height: 3.2rem;
+}
+.myprofico{
+  margin-left: 2rem;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
+
+
+.containersetting  {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 25rem;
+  width: 35rem;
+  background: #fafafa;
+  overflow: hidden;
+  border-radius: 1.4rem;
+  cursor: pointer;
+  margin-left: 2rem;
+  border: 1px solid #f08768;
+  box-shadow: 0 0 20px 8px #d0d0d0;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translatey(-50%);
+  text-align: justify;
+  color: black;
+  padding: 40px;
+  font-family: 'Merriweather', serif;
+}
+
+
+.btn_reset{
+  background: #fff;
+  box-shadow: 0 0 5px 5px #d0d0d0;
+}
+.btn_edit{
+  box-shadow: 0 0 5px 5px #d0d0d0;
+  background-color: #fff;
+}
+
