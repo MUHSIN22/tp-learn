@@ -144,6 +144,7 @@ const exec = () => {
     const pdf = new jsPDF(
       "p", "mm", "a4", true
     );
+    console.log('profile------------------',profile);
     pdf.internal.pageSize.width = componentWidth
     pdf.internal.pageSize.height = componentHeight
     pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight,undefined,'FAST');
@@ -158,7 +159,7 @@ const exec = () => {
     <div className="mt-5" id="tpcv" >
       <div className="d-flex mb-2" style={{height:"11rem","paddingLeft":"1rem",paddingTop: "1.2rem"}}>
         <div className="col-30 bg-dark" style={{position:"relative",borderRadius:"11rem 0rem 0rem 0rem"}}>
-          <img className="Profile_resume_img" src={profile}/>
+          <img className="Profile_resume_img" src={profile} style={{width: '10rem',height:'10rem'}}/>
         </div>
         <div className="col-70 Profile_resume_name_sec bg-dark">
           <h2 className="profileName text-left">{resumeDetails.name}</h2>

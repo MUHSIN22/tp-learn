@@ -330,9 +330,9 @@ function ResponsibiltiensOverview({ data }) {
       {data && data.role_responsibilties ? (
         <div className="role col-50 g-0-5 text-left g-2">
           {rolesList && rolesList.map((role)=>{
-            if(role!=='&nbsp;'){
-            return <div className="flex-row-fit g-1"><TickCircle /> 
-            <div>
+            if(role!=='&nbsp;' && role!=''){
+            return <div className="flex-row-fit g-1"><TickCircle className="role-tick-icon"/> 
+            <div className="role-wrapper">
               <p>{role}</p>
             </div>
             </div>
