@@ -3,9 +3,9 @@
     background: #EFEEE4;
 }
 .home-banner{
+    background-image: url('../../Assets/Banner background.png');
     background-size: cover;
     background-position: center;
-    background: #e3fef4;
     height: 100vh;
     width: 100%;
     display: grid;
@@ -523,6 +523,11 @@
     }
     .home-banner .banner-content-wrapper h1 {
         text-align: center;
+    }
+    .home-banner .banner-image-wrapper{
+        height: auto;
+        width: 90%;
+        z-index: 10;
     }
     .easy-build-section {
         display: grid;

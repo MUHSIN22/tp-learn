@@ -13,7 +13,7 @@
 
 .overview .col-100 h3{
     font-weight: 500;
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin: 0;
     color: #565B6B;
 }
@@ -73,10 +73,13 @@
  text-align: left;
 }
 .guage-container .grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(3.8rem,1fr));
-    grid-row-gap: 0.3rem;
-    grid-column-gap:0.3rem ;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    justify-content: center;
+}
+.guage-container .grid .g-0-5{
+    width: max-content;
 }
 .guage{
     width: 2.5rem;
@@ -94,9 +97,10 @@
     align-items: center;
     justify-content: center;
     background-color: #fff;
+    font-size: 0.8rem;
 }
 .guage-label{
-    font-size: 0.6rem!important;
+    font-size: 0.8rem!important;
     margin: 0;
 }
 .donut .legend{
@@ -108,7 +112,7 @@
 }
 .donut .legend span{
     width: 100%;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -116,7 +120,7 @@
 
 }
 .donut .legend span p{
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     width: 70%;
     margin: 0;
 

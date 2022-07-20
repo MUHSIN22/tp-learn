@@ -4,6 +4,9 @@
     justify-content:space-between;
     align-items: flex-start;
 }
+.markedSlider--disabled{
+  opacity: 0.5;
+}
 .markedSlider .range{
     padding-left:3px;
     width: 100%;
@@ -21,6 +24,12 @@
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
+}
+.markedSlider .slider:disabled{
+  background: rgba(87, 81, 78, 0.307);
+}
+.markedSlider .slider:disabled::-webkit-slider-thumb{
+  background: rgb(74, 70, 70);
 }
 .markedSlider .slider::-webkit-slider-thumb {
     -webkit-appearance: none;

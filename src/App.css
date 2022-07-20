@@ -1448,7 +1448,14 @@ video{
   z-index: 999;
   min-height: 100vh;
 }
-
+.Sidebar .tippy-box{
+  background-color: #22232fcc;
+  padding: 2rem;
+  border-radius: 0;
+}
+.Sidebar .tippy-box[data-placement^=right]>.tippy-arrow:before{
+  display: none;
+}
 .SidebarList {
   height: auto;
   width: 100%;
@@ -1684,9 +1691,10 @@ video{
 .skills_names{
   display: flex;  
   flex-wrap: wrap;
-  grid-column-gap: 3rem;
+  grid-column-gap: 1rem;
   grid-row-gap: 0.6rem;
   justify-content: space-between;
+  width: max-content;
 }
 
 .profile_ico{

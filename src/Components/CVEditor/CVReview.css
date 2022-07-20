@@ -26,7 +26,7 @@
     height: 100%;
 }
 .CVReview h3 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 1rem 0 0 0;
 }
 
@@ -46,7 +46,7 @@
     margin: 0;
     text-align: left;
     font-family: 'Mulish', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
 }
 
 .CVReview .section_1 {
@@ -69,7 +69,12 @@
     padding: 6rem 1rem 1rem 1rem;
     gap: 1rem;
 }
-
+.CVReview .role-tick-icon{
+    font-size: 1.5rem;
+}
+.CVReview .role-wrapper{
+    flex-shrink: 4;
+}
 .CVReview .section_1 .personal_info .row {
     width: 100%;
     display: flex;
@@ -80,7 +85,7 @@
 
 .CVReview .section_1 .personal_info .row p {
     font-weight: 500;
-    font-size: 0.8em;
+    font-size: 1rem;
     width: 100%;
     text-align: left;
 
@@ -94,7 +99,8 @@
 .CVReview .section_1 .personal_info .profile img {
     width: 100%;
     border-radius: 50%;
-
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
 .CVReview .section_1 .personal_info .divider {
@@ -122,7 +128,7 @@
 }
 
 .CVReview .section_1 p {
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .CVReview .section_1 .mphasis {
@@ -207,20 +213,22 @@
 }
 
 .CVReview .project_tile {
-    width: clamp(80px, 40%, 200px);
+    width: clamp(80px, 40%, 250px);
 }
 
 .CVReview .project_tile p {
     width: fit-content;
+    font: 1rem;
 }
 
 .CVReview .project_tile h5 {
+    font-size: 1.1rem;
     margin: 0;
     color: #565B6B;
 }
 
 .CVReview .gradientDivider-h {
-    width: clamp(20px, 70%, 80px);
+    width: clamp(20px, 70%, 128px);
     height: 2px;
     background: rgb(28, 27, 44);
     /* background: linear-gradient(90deg, rgba(28, 27, 44, 0) 0%, rgba(28, 27, 44, 1) 50%, rgba(28, 27, 44, 0) 100%); */
@@ -254,7 +262,7 @@
     color: #EF6239;
     font-style: 0.9rem;
     font-weight: 300;
-    font-size: 0.7rem !important;
+    font-size: 0.9rem !important;
     border:1px solid #d3d3d375
 }
 
@@ -285,7 +293,7 @@
 }
 
 .CVReview .certificate-grid img:last-child {
-    height: 100%;
+    width: 13rem;
 }
 
 .CVReview h5 {

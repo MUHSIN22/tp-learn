@@ -114,7 +114,7 @@ export default function CognitiveSkills({}) {
                 </div>
                 <div>
                     <div className='mt-2'>
-                        <MarkedSlider disabled={selected_options.length>=6 && form["creativity"]==""?true:false} handleChange={handleComplexity} name={'creativity'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Creativity </span></>} />
+                        <MarkedSlider disabled={selected_options.length>=6 && form["creativity"]==""?true:false} handleChange={handleComplexity} className={(selected_options.length>=6 && form["creativity"]=="")?"disabled":''} name={'creativity'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Creativity </span></>} />
                     </div>
                     <div className='mt-2'>
                         <MarkedSlider disabled={selected_options.length>=6 && form["time_management"]==""?true:false} handleChange={handleComplexity} name={'time_management'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span><strong><FiCheckSquare style={{"fontSize":"1.3rem"}}/></strong></span><span>  &nbsp; &nbsp;Time Management </span></>} />

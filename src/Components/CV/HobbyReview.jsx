@@ -50,10 +50,7 @@ function HobbyCard({ name, icon, hobby }) {
         <div className="hobby-card g-1">
             <img src={icon || hobbyImage} alt="" />
             <div className="align-center">
-                <h5>{name}</h5>
-            </div>
-            <div className="col-100 ml-2">
-                {arr.map((hobby, i) => <div className="flex-row-start g-0-5 align-center"><div className="dot"></div><p>{hobby}</p></div>)}
+                <h5>{arr.map(hobby => hobby)}</h5>
             </div>
 
         </div>

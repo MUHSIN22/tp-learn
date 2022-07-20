@@ -95,6 +95,7 @@ export default function ResumeSlider() {
     //         shiftSlide(-1);
     //     }
     // }
+    
 
     const shiftSlide = (direction) => {
         let sliderContainer = document.querySelector('.resume-slider-wrapper')
@@ -155,27 +156,27 @@ export default function ResumeSlider() {
             > 
                 <div className="slide">
                     <img src={resume1} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
+                    <h3 className="slider-title">Marketing Manager</h3>
                 </div>
                 <div className="slide">
                     <img src={resume2} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
+                    <h3 className="slider-title">Junior Data Analyst</h3>
                 </div>
                 <div className="slide">
                     <img src={resume3} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
+                    <h3 className="slider-title">Web & Graphic Designer</h3>
                 </div>
                 <div className="slide">
                     <img src={resume4} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
+                    <h3 className="slider-title">IT Project Manager</h3>
                 </div>
                 <div className="slide">
                     <img src={resume5} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
+                    <h3 className="slider-title">Software Engineer</h3>
                 </div>
                 <div className="slide">
                     <img src={resume6} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
+                    <h3 className="slider-title">UI/UX Designer</h3>
                 </div>
                 <div className="slide">
                     <img src={resume7} className="resume" alt="" />
@@ -183,7 +184,7 @@ export default function ResumeSlider() {
                 </div>
                 <div className="slide">
                     <img src={resume8} className="resume" alt="" />
-                    <h3 className="slider-title">Graphic Designer</h3>
+                    <h3 className="slider-title">Copywriter</h3>
                 </div>
                 <div className="slide">
                     <img src={resume9} className="resume" alt="" />
