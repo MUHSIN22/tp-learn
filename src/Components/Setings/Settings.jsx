@@ -21,7 +21,7 @@ function Settings() {
                   Edit Resume
                 </button>
                 <button className="btn-square btn_reset mt-3" onClick={()=>navigate('/change_password')}>
-                  Change PassWord
+                  Change Password
                 </button>
               </div>
               <div class="flap"></div>
