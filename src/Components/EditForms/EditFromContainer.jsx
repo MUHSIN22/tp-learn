@@ -40,9 +40,8 @@ export default function EditFormContainer({data}) {
       {progress === 14 && <AdditionalSkills3 data = {data} />}
       {progress === 15 && <CareerObjective1  data = {data}/>}
       {progress === 16 && <CareerObjective2  data = {data}/>}
-      {progress === 17 && <CognitiveSkills data = {data}/>}
-      {progress === 18 && <CareerObjective3 data={data}/>}
-      {progress === 19 && <CognitiveSkills/>}
+      {progress === 17 && <CareerObjective3  data = {data}/>}
+      {progress === 18 && <CognitiveSkills data={data}/>}
 
       { /*
       (progress!==6&&progress!==7&&progress!==17)&& <>

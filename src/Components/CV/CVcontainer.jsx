@@ -37,7 +37,6 @@ export default function CVcontainer({ progress }) {
       <Videos/>
       <SocialMedia/>
       <SelfDeclaration/>
-      <CognitiveSkills/> 
     </div>
   )
 }
