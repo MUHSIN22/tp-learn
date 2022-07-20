@@ -30,7 +30,7 @@ const handleEditForms = (data) => {
         </div>
         <div className="col-100 guage-container lineToright gapForReview">
           <h3>Cognitive skillset {toEdit && (
-                     <span onClick={() => handleEditForms({ progress: 18 })}><FaPencilAlt /></span>
+                     <span onClick={() => handleEditForms({ progress: 18,cognitive_info })}><FaPencilAlt /></span>
                     )} </h3>
           <div className="grid gapForReview">
             {cognitive_info && cognitive_info.map((cogInfo)=>{

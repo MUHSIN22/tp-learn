@@ -112,6 +112,24 @@ export const logOut = createAsyncThunk('authentication/logout',async(body,{rejec
         return rejectWithValue(error.response.data);
     }
 })
+
+export const  changePassword = createAsyncThunk('authentication/changePassword',async(data,{ rejectWithValue })=>{
+    console.log('body',data)
+    try {
+        const response =await API.post(`/change-password`,data.body,{
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+          })
+       
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const authenticationSlice = createSlice({
     name: 'authentication',
     initialState,
@@ -234,9 +252,19 @@ export const authenticationSlice = createSlice({
             console.log("=======")
             state.loading = false
             state = action    
-        })
-        .addCase(logOut.rejected, (state, action) => {
+        }).addCase(logOut.rejected, (state, action) => {
             state.loading = false
+        }).addCase(changePassword.pending, (state,action)=>{
+            state.status = 'loading'
+        }).addCase(changePassword.fulfilled,(state,action)=>{
+            state.status = 'succeeded'             
+        }).addCase(changePassword.rejected,(state,action)=>{
+            state.status = 'Rejected' 
+            state.loading= false
+            state.error = action.payload.error
+            state.message = action.payload.data
+
+
         })
     }
 })
