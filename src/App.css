@@ -660,7 +660,7 @@ body {
   position: absolute;
   top: -0.7rem;
   left: -0.8rem;
-  border: 3px solid darkgreen;
+  /* border: 3px solid darkgreen; */
 }
 .bg-dark{
   background-color: #000000;
@@ -1719,39 +1719,21 @@ video{
 
 
 .containersetting  {
-  position: absolute;
+  /* position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 25rem;
+  top: 50%; */
+  height: 21rem;
   width: 35rem;
-  background: #fafafa;
-  overflow: hidden;
+  background: white;
   border-radius: 1.4rem;
-  cursor: pointer;
-  margin-left: 2rem;
-  border: 1px solid #f08768;
-  box-shadow: 0 0 20px 8px #d0d0d0;
-}
-
-.content {
-  position: absolute;
-  top: 50%;
-  left: 15%;
-  transform: translatey(-50%);
-  text-align: justify;
-  color: black;
-  padding: 40px;
+  box-shadow:  0 0 0.8rem #e4e4e4;
+  padding: 6rem 5rem;
+  display: flex;
+  flex-direction: column;
   font-family: 'Merriweather', serif;
 }
 
-
 .btn_reset{
-  background: #fff;
-  box-shadow: 0 0 5px 5px #d0d0d0;
-}
-.btn_edit{
-  box-shadow: 0 0 5px 5px #d0d0d0;
-  background-color: #fff;
+ cursor: pointer !important;
 }
 
