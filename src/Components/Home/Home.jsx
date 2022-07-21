@@ -69,7 +69,6 @@ export default function Home() {
     const [marginLeft, setMarginLeft] = useState(0);
     const sliderRef = useRef(null);
     const teamSectionRef = useRef(null);
-    const [instance, updateInstance] = usePDF({document: PdfGenerator })
 
     const defaultOptions = {
         loop: true,

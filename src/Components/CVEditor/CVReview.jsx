@@ -44,6 +44,8 @@ import fb_icon from "../../Assests/icons/facebook.svg";
 import wp_icon from "../../Assests/icons/whatsapp.png";
 import insta_icon from "../../Assests/icons/instagram.png";
 import { useCallback } from "react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PdfGenerator from "../Resume2/PdfGenerator";
 
 export default function CVBuilder() {
   const page = useSelector(getPageOn);
@@ -102,8 +104,14 @@ export default function CVBuilder() {
           theme="light"
           content={
             <div className="d-flex justify-between">
+              <PDFDownloadLink document={<PdfGenerator/>} fileName="abc.pdf">
+                {({blob,url,loading,error}) => (
+                  loading? "loading" : <img src={PDF} alt="" />
+                )}
+
+              </PDFDownloadLink>
               <div onClick={() => newRef.current()()}>
-                <img src={PDF} alt="" />
+                abc
               </div>
             </div>
           }

@@ -26,7 +26,8 @@ import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Logout from './Components/Logout/Logout';
 import Settings from './Components/Setings/Settings';
-import { PDFViewer } from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import PdfGenerator from './Components/Resume2/PdfGenerator';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -109,11 +110,6 @@ function App() {
        <Route path='/MyProfile' element={<CVReview/>}/>
        <Route path='/dummy' element={<DummyForm/>}/>
        <Route path='/cs' element={<CognitiveSkills/>}/>
-       {/* <Route path='/resume' element={
-        <>
-          <PDFViewer ></PDFViewer>
-        </>
-       }/> */}
        <Route path="*" element={<NotFound/>}/>
        <Route path='/logout' element={<Logout/> }/>
       </Routes>
