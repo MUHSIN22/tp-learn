@@ -12,6 +12,7 @@ import Alert from '../Alert/Alert';
 import Control from './Control';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
 import moment  from 'moment'
+import { useNavigate } from 'react-router-dom';
 export default function Education({data}) {
   console.log("===========================",data)
   let {
@@ -46,6 +47,7 @@ export default function Education({data}) {
     university_name : university_name || ''
 
   })
+  const navigate=useNavigate()
   const [file, setFile] = useState(null)
   const error = useSelector(selectResumeError);
   const loading = useSelector(selectResumeLoading);

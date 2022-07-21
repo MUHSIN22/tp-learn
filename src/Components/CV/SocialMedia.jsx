@@ -28,7 +28,7 @@ export default function SocialMedia() {
           )}</h3>
                 <span className="divider"></span>
                 <div className="flex-wrap g-2">
-                    <a href={socialLink.facebook} style={{color:'#219FFF'}} className="flex-row-start g-1 align-center">
+                    <a href={socialLink.facebook} target="_blank" style={{color:'#219FFF'}} className="flex-row-start g-1 align-center">
                         <Facebook/> Facebook
                     </a>
                     <a href={socialLink.linkedin} style={{color:'#0274B3'}} className="flex-row-start g-1 align-center">

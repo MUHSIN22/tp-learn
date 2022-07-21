@@ -15,7 +15,7 @@ import "../../App.css";
 import { FiCheckSquare} from "react-icons/fi"
 
 const DEBOUNCE_DELAY = 600;
-export default function CognitiveSkills({}) {
+export default function CognitiveSkills({data}) {
     const dispatch = useDispatch()
     const [form, setForm] = useState({
         communication:"",
@@ -39,10 +39,6 @@ export default function CognitiveSkills({}) {
     const [showAlert, setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
-    // const resumeInfo = useSelector(selectResumeInfo)
-    // const skillList = useSelector(selectSkillList)
-    // const [search, setSearch] = useState('')
-    // const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
 
     const handleCognitiveSkills = (e)=>{
         e.preventDefault();
@@ -70,7 +66,16 @@ export default function CognitiveSkills({}) {
             set_Selected_options([...selected_options,evt.target.name])
         }
     }
-    console.log("ppppppppppppppppp",selected_options.length)
+    useEffect(()=>{
+        const newObj = {};
+      data?.cognitive_info && data.cognitive_info.map((ele)=>{
+        let skillString = ele.name.split(" ")
+        skillString = skillString.join('_');
+        skillString = ele.name.toLowerCase()
+        newObj[skillString] = ele.value
+      })
+      setForm({...form,...newObj})
+    },[data])
     // const handleAddSkill = () => {
     //     console.log(temp)
     //     set_Selected_options([...selected_options,temp])

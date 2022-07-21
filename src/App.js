@@ -28,13 +28,14 @@ import Logout from './Components/Logout/Logout';
 import Settings from './Components/Setings/Settings';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import PdfGenerator from './Components/Resume2/PdfGenerator';
+import ChangePassword from './Components/ChangePassword/ChangePassword';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
-  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings"]
+  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password"]
   useEffect(() => {
     if(auth.authToken&&reload){
       console.log('Reload Resume Update')
@@ -112,6 +113,7 @@ function App() {
        <Route path='/cs' element={<CognitiveSkills/>}/>
        <Route path="*" element={<NotFound/>}/>
        <Route path='/logout' element={<Logout/> }/>
+       <Route path='/change_password' element={<ChangePassword/> }/>
       </Routes>
     </div>
   );

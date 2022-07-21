@@ -46,27 +46,26 @@ export default function CareerObjective3({data}) {
             setShowAlert(true)
         }
     }
+
+    console.log("------djad",data.facebook)
     return (
         <>
             {showAlert && !loading && <Alert error={error} message={error ? 'Failed to update Social Links' : 'Social Links updated'} />}
-            <div className="form-row">
-                <SocialInput name='link_facebook'  handleChange={handleChange} label={form.link_facebook!=='' ? form.link_facebook : 'Facebook'} icon={<Facebook></Facebook>}/>
+            <div className="form-row pt-2">
+                <SocialInput state={form} name='link_facebook'  handleChange={handleChange} label={form?.link_facebook!=='' ? form.link_facebook : 'Facebook'} icon={<Facebook></Facebook>}/>
             </div>
             <div className="form-row">
-                <SocialInput name='link_twitter'  handleChange={handleChange} label={form.link_twitter!=='' ? form.link_twitter : 'Twitter'} icon={<Twitter></Twitter>}/>
+                <SocialInput state={form} name='link_twitter'  handleChange={handleChange} label={form?.link_twitter!=='' ? form.link_twitter : 'Twitter'} icon={<Twitter></Twitter>}/>
             </div>
             <div className="form-row">
-                <SocialInput name='link_instagram' handleChange={handleChange} label={'Instagram'} icon={<Instagram></Instagram>}/>
+                <SocialInput state={form} name='link_instagram' handleChange={handleChange} label={'Instagram'} icon={<Instagram></Instagram>}/>
             </div>
             <div className="form-row">
-                <SocialInput name='link_linkedin' handleChange={handleChange} label={'Linkedin'} icon={<Linkedin></Linkedin>}/>
+                <SocialInput state={form} name='link_linkedin' handleChange={handleChange} label={'Linkedin'} icon={<Linkedin></Linkedin>}/>
             </div>
             <div className="flex-row-end g-1">
             <div className="col-30">
-                <button className='btn'>Review</button>
-            </div>
-            <div className="col-30">
-                <button onClick={handleSubmit} className='btn primary'><Add/>Add more</button>
+                <button onClick={handleSubmit} className='btn primary'>Save</button>
             </div>
             </div>
             
