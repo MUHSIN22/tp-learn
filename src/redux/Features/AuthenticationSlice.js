@@ -138,9 +138,9 @@ export const authenticationSlice = createSlice({
             state.authToken +=1;
         },
         logout : (state)=>{
-            state.authToken= null;
-            state.status= null;
-            sessionStorage.clear();
+                state.authToken= null;
+                state.status= null;
+                sessionStorage.clear();
         },
         setError : (state,action)=>{
             console.log('setError:',    action.payload)

@@ -36,6 +36,9 @@ import {
   changePageOn,
   getPageOn,
   getLoaderstate,
+  selectBio,
+  selectResumeDetails,
+  uploadResume,
 } from "../../redux/Features/ResumeSlice";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -44,8 +47,9 @@ import fb_icon from "../../Assests/icons/facebook.svg";
 import wp_icon from "../../Assests/icons/whatsapp.png";
 import insta_icon from "../../Assests/icons/instagram.png";
 import { useCallback } from "react";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFDownloadLink, usePDF } from "@react-pdf/renderer";
 import PdfGenerator from "../Resume2/PdfGenerator";
+import { selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
 
 export default function CVBuilder() {
   const page = useSelector(getPageOn);
@@ -56,6 +60,14 @@ export default function CVBuilder() {
   let toEdit = useSelector(selectToEdit);
   let editPageDetails = useSelector(selectEditPageDetails);
   const location = useLocation();
+  const bio = useSelector(selectBio);
+  const resumeDetails = useSelector(selectResumeDetails);
+  const user_id = useSelector(selectUser_id)
+  const token = useSelector(selectAuthToken)
+  const [instance,setInstance] = usePDF({document: <PdfGenerator bio={bio} resumeDetails={resumeDetails} />})
+
+
+
   // let loaderState=useSelector(getLoaderstate)
   const handleEdit = (e) => {
     dispatch(changeToEdit(!toEdit)).unwrap();
@@ -89,6 +101,29 @@ export default function CVBuilder() {
   };
   editPageDetails && editPageDetails.progress && window.scrollTo(0, 0);
 
+
+  const shareResume = (media) => {
+    let formData = new FormData();
+    formData.append('user_id',user_id);
+    formData.append("resume_pdf",instance.blob,"resume.pdf");
+    try{
+      dispatch(uploadResume({body:formData,auth: token})).unwrap().then(response => {
+        let shareLink;
+        const resume_link = response.resumePdfUrl;
+        if(media === "whatsapp"){
+          shareLink = `https://api.whatsapp.com/send?text=${resume_link}`
+        } else if(media === "facebook"){
+          shareLink = `https://www.facebook.com/sharer/sharer.php?u=${resume_link}`
+        } else if(media === "instagram"){
+          shareLink = `https://www.instagram.com/direct?url=${resume_link}`    
+        }
+        window.open(shareLink, '_blank', 'noopener,noreferrer')
+      })
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   const floatingButton = (
     <div className="headerButtons">
       <div
@@ -104,15 +139,12 @@ export default function CVBuilder() {
           theme="light"
           content={
             <div className="d-flex justify-between">
-              <PDFDownloadLink document={<PdfGenerator/>} fileName="abc.pdf">
+              <PDFDownloadLink document={<PdfGenerator bio={bio} resumeDetails={resumeDetails}/>} fileName="abc.pdf">
                 {({blob,url,loading,error}) => (
                   loading? "loading" : <img src={PDF} alt="" />
                 )}
 
               </PDFDownloadLink>
-              <div onClick={() => newRef.current()()}>
-                abc
-              </div>
             </div>
           }
         >
@@ -127,7 +159,7 @@ export default function CVBuilder() {
           content={
             <div className="d-flex justify-between" style={{ width: "10rem"}}>
               <div
-                onClick={async () => { await cvShare("facebook")}}
+                onClick={() => shareResume("facebook")}
               >
                 <img
                   src={fb_icon}
@@ -135,14 +167,10 @@ export default function CVBuilder() {
                   style={{ width: "2rem", height: "2rem" }}
                 />
               </div>
-              <div onClick={async () => {
-                  await cvShare("whatsapp");
-                }}>
+              <div onClick={() => shareResume("whatsapp")}>
                 <img src={wp_icon} alt="" />
               </div>
-              <div onClick={async () => {
-                  await cvShare("instagram");
-                }}>
+              <div onClick={() => shareResume("instagram")}>
                 <img src={insta_icon} alt="" />
               </div>
             </div>

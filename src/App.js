@@ -29,6 +29,7 @@ import Settings from './Components/Setings/Settings';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import PdfGenerator from './Components/Resume2/PdfGenerator';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
+import Checking from './Components/checking/Checking';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -104,7 +105,7 @@ function App() {
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path='/' element={<Home/>}/>
-
+      <Route path='/check' element={<Checking/>} />
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>
        <Route path="/settings" element={<Settings/>}/>

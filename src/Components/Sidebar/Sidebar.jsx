@@ -15,6 +15,7 @@ function Sidebar(props) {
   const sidebarvaluedata = useSelector(selectSidebarValue)
   const [sidebarval, setSidebarval] = useState(1);
   const [hamburgericon,sethamburgericon] =useState(false)
+  const navigate = useNavigate();
 
   const sendProp = (pagelink) => {
     props.currentPage(pagelink);
@@ -25,14 +26,17 @@ function Sidebar(props) {
   }
 
   const logoutUser = () => {
-    dispatch(logout());
+    let isConfirm = window.confirm("Are you sure to logout?");
+    if(isConfirm){
+      navigate('/')
+      dispatch(logout());
+    }
   };
 
   useEffect(()=>{
     console.log(window.location.pathname);
   },[])
 
-  const navigate = useNavigate();
 
 
   return (
@@ -77,9 +81,10 @@ function Sidebar(props) {
                     key={key}
                     id={window.location.pathname == val.link ? "active" : ""}
                     onClick={() => {
-                      if (val.link == "/logout") {
-                        dispatch(logout());
-                      }
+                      console.log(val);
+                      // if (val.link == "/logout") {
+                      //   dispatch(logout());
+                      // }
                       navigate(`${val.link}`);
                       
                     }}
@@ -312,12 +317,14 @@ function Sidebar(props) {
                     key={key}
                     id={window.location.pathname == val.link ? "active" : ""}
                     onClick={async() => {
-                      if (val.link == "/logout") {
-                        dispatch(logout());
+                      
+                      if (val.title == "Logout") {
+                        logoutUser();
+                        return
                       }
                       await setSidebarval(0)
                       console.log(sidebarval)
-                      console.log(val.link);
+                      console.log(val);
                       navigate(`${val.link}`,{ replace: true });
                       
                     }}

@@ -67,7 +67,6 @@ const  Resume =({newRef,shareOpts,changeLoaderval})=>{
   const downloadlink=useSelector(getDownLoadDetails)
   const loading = useSelector(selectResumeLoading);
   const [loadValue,setloadValue]=useState(loading)
-
 useEffect(() => {
   //  template = document.getElementById('tpcv');
   if(newRef)
