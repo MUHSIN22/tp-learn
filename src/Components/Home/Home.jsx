@@ -29,6 +29,8 @@ import easyBuildAnimation from '../../Assets/Animations/animationnumber2.json'
 import secondSectionAnimation from '../../Assets/Animations/secondSection.json'
 import graphAnimation from '../../Assets/Animations/graphAnimation.json'
 import circle from '../../Assets/circle.png'
+import { usePDF } from '@react-pdf/renderer'
+import PdfGenerator from '../Resume2/PdfGenerator'
 
 let team = [
     {
@@ -67,6 +69,7 @@ export default function Home() {
     const [marginLeft, setMarginLeft] = useState(0);
     const sliderRef = useRef(null);
     const teamSectionRef = useRef(null);
+    const [instance, updateInstance] = usePDF({document: PdfGenerator })
 
     const defaultOptions = {
         loop: true,
