@@ -1,15 +1,15 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { nextForm } from '../../redux/Features/ResumeSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { nextForm, selectResumeDetails } from '../../redux/Features/ResumeSlice'
 import Control from './Control'
 
 export default function Experience9({setProgress}) {
   const dispatch = useDispatch()
-
+  const info = useSelector(selectResumeDetails)
   return (
     <>
     <div className='col-100 align-start'>
-        <h1>Wow, Pratiksha! We had no idea you were this talented. </h1>
+        <h1>Wow, {info.name}! We had no idea you were this talented. </h1>
         <p className='text-left'>Gone are the days when there was an age to learn and then the age to earn. Now is the time for continuous learning. </p>
         <span className="crumbs-red">
              Earn as you learn 

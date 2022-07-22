@@ -1,14 +1,15 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { nextForm } from '../../redux/Features/ResumeSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { nextForm, selectResumeDetails } from '../../redux/Features/ResumeSlice'
 import Control from './Control'
 
 export default function Certificate2({setProgress}) {
     const dispatch = useDispatch()
+    const info = useSelector(selectResumeDetails)
     return (
         <>
             <h1 className='text-left my-0'><span>Pheww! </span></h1>
-            <h1 className='text-left my-0'>Thank you so much Pratiksha for your time & efforts. We really appreciate the fact that
+            <h1 className='text-left my-0'>Thank you so much {info.name} for your time & efforts. We really appreciate the fact that
                 you are ready to invest so much in your
                 growth & future.
             </h1>

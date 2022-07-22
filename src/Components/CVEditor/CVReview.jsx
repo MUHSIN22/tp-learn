@@ -124,6 +124,7 @@ export default function CVBuilder() {
     }
   }
 
+
   const floatingButton = (
     <div className="headerButtons">
       <div
@@ -139,7 +140,7 @@ export default function CVBuilder() {
           theme="light"
           content={
             <div className="d-flex justify-between">
-              <PDFDownloadLink document={<PdfGenerator bio={bio} resumeDetails={resumeDetails}/>} fileName="abc.pdf">
+              <PDFDownloadLink document={<PdfGenerator bio={bio} resumeDetails={resumeDetails}/>} fileName={`Resume_${resumeDetails.fname}_${resumeDetails.lname}.pdf`}>
                 {({blob,url,loading,error}) => (
                   loading? "loading" : <img src={PDF} alt="" />
                 )}

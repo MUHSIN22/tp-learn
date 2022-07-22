@@ -1,5 +1,5 @@
 import React from 'react'
-import avatar from '../../Assests/avatar1.jpg'
+import avatar from '../../Assets/avatar.png'
 import { ReactComponent as More } from '../../Assests/icons/more.svg';
 import { ReactComponent as Calling } from '../../Assests/icons/call-calling.svg';
 import { ReactComponent as Location } from '../../Assests/icons/location-o.svg';

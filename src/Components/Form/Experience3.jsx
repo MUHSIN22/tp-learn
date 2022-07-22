@@ -29,8 +29,10 @@ export default function Experience3() {
         end_salary_currency:'',
         current_working:'no',
         hide_salary:'no',
-
     })
+    const [isCurrentWorking,setCurrentWorking] = useState(false)
+    const [isRemoteWorking, setRemoteWorking] = useState(false);
+    const [isHideSalary, setHideSalary] = useState(false);
 
     const [showAlert,setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)
@@ -61,6 +63,9 @@ export default function Experience3() {
         setSearch(e.target.value)
     }
     function handleDesignationForm(evt){
+        if(evt.target.name === "current_working"){
+            setCurrentWorking(!isCurrentWorking)
+        }
         const value = evt.target.value;
         setForm({
             ...form,
@@ -144,6 +149,7 @@ export default function Experience3() {
       }
     }, [lastJob])
     
+    console.log(functionalAreaList,'ml list');
     return (
         <>  
             {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
@@ -154,12 +160,15 @@ export default function Experience3() {
             </div>
             <div className="form-row">
                 <IconInput value={form.location}  name='location' handleChange={handleDesignationForm} label='Location' placeholder='Your place of work' width={45} />
-                <IconSelect value={form.functional_area_id} name='functional_area_id' handleChange={handleDesignationForm} label='Functional Area' placeholder='i.e. CXO Level' width={45} options={functionalAreaList} name_field='functional_area_name' />
+                <IconSelect value={form.functional_area_id} name='functional_area_id' handleChange={handleDesignationForm} label='Functional Area' placeholder='i.e. CXO Level' width={45} options={[{id:0,functional_area_name: "Select a functional area"},...functionalAreaList]} name_field='functional_area_name' />
             </div>
             <div className="flex-row-start">
                 <label className="control control-checkbox">
                     I work remotely
-                    <input name='remote_work' value={'yes'} onChange={handleDesignationForm} type="checkbox" checked={form.remote_work==='yes'} />
+                    <input name='remote_work' value={isRemoteWorking ? 'yes' : 'no'} onChange={event => {
+                        handleDesignationForm(event)
+                        setRemoteWorking(!isRemoteWorking)
+                    }} type="checkbox" checked={form.remote_work==='yes'} />
                     <div className="control_indicator"></div>
                 </label>
             </div>
@@ -168,16 +177,19 @@ export default function Experience3() {
                 <IconInput value={form.start_salary} name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='Per Annum' width={40} />
                 <IconSelect value={form.start_salary_currency} name='start_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={10} />
             </div>
-            <div className="form-row">
-                <IconInput value={form.end_date} name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
-                <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package in this role' placeholder='Per Annum' width={40} />
-                <IconSelect value={form.end_salary_currency} name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={10} />
-            </div>
+            {
+                !isCurrentWorking &&
+                <div className="form-row">
+                    <IconInput value={form.end_date} name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
+                    <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package in this role' placeholder='Per Annum' width={40} />
+                    <IconSelect value={form.end_salary_currency} name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={10} />
+                </div>
+            }
             <div className="form-row">
                 <div className="control-group">
                     <label className="control control-checkbox">
                         I am currently working in this job role
-                        <input name='current_working' value={'yes'}  onChange={handleDesignationForm} type="checkbox" checked={form.current_working==='yes'} />
+                        <input name='current_working' value={!isCurrentWorking ? 'yes' : "no"}  onChange={handleDesignationForm} type="checkbox" checked={form.current_working==='yes'} />
                         <div className="control_indicator"></div>
                     </label>
                 </div>
@@ -185,7 +197,10 @@ export default function Experience3() {
             <div className="control-group">
                 <label className="control control-checkbox">
                      Hide my salary
-                    <input name='hide_salary' value={'yes'} onChange={handleDesignationForm} type="checkbox" checked={form.hide_salary==='yes'}  />
+                    <input name='hide_salary' value={!isHideSalary ? 'yes' : "no"} onChange={(event) => {
+                        handleDesignationForm(event);
+                        setHideSalary(!isHideSalary);
+                    }} type="checkbox" checked={form.hide_salary==='yes'}  />
                     <div className="control_indicator"></div>
                 </label>
             </div>
