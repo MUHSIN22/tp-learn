@@ -19,6 +19,7 @@ export default function AdditionalSkills1() {
         description: '',
         additional_skill_record_id: '',
     })
+    const [isCurrentWorking,setCurrentWorking] = useState(false);
     const error = useSelector(selectResumeError);
     const loading = useSelector(selectResumeLoading);
     const [showAlert, setShowAlert] = useState(false);
@@ -102,11 +103,14 @@ export default function AdditionalSkills1() {
             </div>
             <div className="form-row">
                 <IconInput value={form.from_duration} name='from_duration' handleChange={handleChange} type={'date'} label='Duration (From)' placeholder='i.e. Duration date' width={50} />
-                <IconInput value={form.to_duration} name='to_duration' handleChange={handleChange} type={'date'} label='Duration (to)' placeholder='i.e. Duration date' width={50} />
+                {
+                    !isCurrentWorking&&
+                    <IconInput value={form.to_duration} name='to_duration' handleChange={handleChange} type={'date'} label='Duration (to)' placeholder='i.e. Duration date' width={50} />
+                }
             </div>
             <label className="control control-checkbox">
                 I am currently working here
-                <input name='currently_working' onChange={handleChange} value={'yes'} checked={form.currently_working==='yes'} type="checkbox" />
+                <input name='currently_working' onChange={e => {handleChange(e);setCurrentWorking(!isCurrentWorking)}} value={!isCurrentWorking ? 'yes' : 'no'} checked={form.currently_working==='yes'} type="checkbox" />
                 <div className="control_indicator"></div>
             </label>
             <div className="form-row">

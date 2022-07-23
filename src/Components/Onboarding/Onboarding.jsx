@@ -15,10 +15,6 @@ export default function Onboarding() {
     const error = useSelector(selectResumeError)
     const buttonText = [
         'Create',
-        'Yes. Tell me more…',
-        'Yes, I am In',
-        'Enough, let’s get started already!',
-        'Next',
         'Next',
     ]
     function clickHandler(){
@@ -40,12 +36,8 @@ export default function Onboarding() {
             <div className={step%2===0?"content slide-in-top1 ":"content slide-in-top2 "}>
                 {error&&message&&<Alert error={error} message={error&&message ? Object.values(message) : message}/>}
                 {step === 1 && <Step1 name={resumeDetails.fname} />}
-                {step === 2 && <Step2 />}
-                {step === 3 && <Step3 />}
-                {step === 4 && <Step4 />}
-                {step === 5 && <Step5 name={resumeDetails.fname} />}
-                {step === 6 && <Step6 />}
-                {step<6&&<button onClick={clickHandler} className='btn primary'>{buttonText[step - 1]} <ChevronRight /> </button>}
+                {step === 2 && <Step6 />}
+                {step<2&&<button onClick={clickHandler} className='btn primary'>{buttonText[step - 1]} <ChevronRight /> </button>}
             </div>
 
         </div>
@@ -98,9 +90,10 @@ function Step5({name}) {
 }
 function Step6() {
     const [form, setForm] = useState({
-        job_start_date:'-',
+        job_start_date: new Date().toLocaleDateString(),
         is_fresher:'no',
     });
+    const [isFresher,setFresher] = useState(false);
     const dispatch = useDispatch();
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
@@ -132,16 +125,18 @@ function Step6() {
         <div className="step">
             <h5>So tell us, how many years of experience do you hold, whether as a full-time employee, a freelancer or as an entrepreneur? </h5>
            
-            <div className="form-row">
-                <IconInput icon={<></>} handleChange={handleChange} type='date' name='job_start_date' placeholder='Years' width={50} label='When did you start your first job'/>
-
-            </div>
+            {
+                !isFresher&&
+                <div className="form-row">
+                    <IconInput icon={<></>} handleChange={handleChange} type='date' name='job_start_date' placeholder='Years' width={50} label='When did you start your first job'/>
+                </div>
+            }
 
            
             <div className="control-group">
                 <label className="control control-checkbox">
                     I am a fresher 
-                    <input name='is_fresher' onChange={handleChange} value={'yes'} type="checkbox" />
+                    <input name='is_fresher' onChange={(e) => {handleChange(e); setFresher(!isFresher)}} value={!isFresher ? 'yes' : 'no'} type="checkbox" />
                     <div className="control_indicator"></div>
                 </label>
             </div>

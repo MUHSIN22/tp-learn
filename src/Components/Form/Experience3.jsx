@@ -25,15 +25,15 @@ export default function Experience3() {
         start_salary:'',
         end_date:'',
         end_salary:'',
-        start_salary_currency:'' ,
-        end_salary_currency:'',
+        start_salary_currency:'INR' ,
+        end_salary_currency:'INR',
         current_working:'no',
         hide_salary:'no',
     })
     const [isCurrentWorking,setCurrentWorking] = useState(false)
     const [isRemoteWorking, setRemoteWorking] = useState(false);
     const [isHideSalary, setHideSalary] = useState(false);
-
+    const [otherDesignation,setOtherDesignation] = useState(false);
     const [showAlert,setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
@@ -72,9 +72,15 @@ export default function Experience3() {
             [evt.target.name]: value
         });
     }
-    const selectHandler = (i) => {
-        setForm({ ...form, designation_id: designationlist[i].id })
-        setSearch(designationlist[i].job_title_name)
+    const selectHandler = (i,selected,value ) => {
+        console.log(value);
+        if(selected.id !== null){
+            setForm({ ...form, designation_id: designationlist[i].id })
+            setSearch(designationlist[i].job_title_name)
+        }else{
+            setOtherDesignation(true);
+            setForm({ ...form, other_designation_name: value })
+        }
     }
     function handleAddDesignation() {
         const body = {...form, user_id}
@@ -149,14 +155,14 @@ export default function Experience3() {
       }
     }, [lastJob])
     
-    console.log(functionalAreaList,'ml list');
+    console.log(designationlist,'ml list');
     return (
         <>  
             {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <h1>Now tell us about all the job roles at which you have worked, starting with the latest one.</h1>
             <div className="form-row">
-                <SuggestiveInput icon={<></>} value={search} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' width={45} suggestions={designationlist} name_field={'job_title_name'} searchHandler={searchHandler} selected={selectHandler}  />
-                <IconSelect value={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' width={45} options={managementLevelList} name_field={'level_name'} />
+                <SuggestiveInput icon={<></>} value={search} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' width={45} suggestions={[...designationlist,{id:null,job_title_name: "Add designation"}]} name_field={'job_title_name'} searchHandler={searchHandler} selected={selectHandler}  />
+                <IconSelect value={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' width={45} options={[{id:0,level_name: "Select a level"},...managementLevelList]} name_field={'level_name'} />
             </div>
             <div className="form-row">
                 <IconInput value={form.location}  name='location' handleChange={handleDesignationForm} label='Location' placeholder='Your place of work' width={45} />

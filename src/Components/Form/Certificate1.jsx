@@ -189,7 +189,6 @@ export default function Certificate1() {
                 <button onClick={handleSubmit} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more certifications</button>
             </div>
             <Control handleSubmit={(e) =>{
-
                  handleSubmit(e)
                  dispatch(toggleNewCertificate(false))
                  setReloadFlag(true)

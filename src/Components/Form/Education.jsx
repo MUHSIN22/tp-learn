@@ -146,17 +146,19 @@ export default function Education() {
       dispatch(reload())
     }
   },[reloadFlag,loading])
+
+  console.log(degreeList ,'deg');
   return (
     <>
       <h1>Now, let’s move on to your learning journey so far. </h1>
       {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
       <div className="form-row">
-        <IconSelect value={form.degree_id} name={'degree_id'} handleChange={handleChange} label='Degree/Qualification' placeholder={'e.g. MCA (Masters in Computer Applications)'} width={50} options={degreeList} name_field={'degree_name'} />
-        <SuggestiveInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution' placeholder={'e.g. University of Delhi'} width={50} searchHandler={addUniversityHandler} suggestions={universityList} name_field={'education_name'} />
+        <IconSelect value={form.degree_id} name={'degree_id'} handleChange={handleChange} label='Degree/Qualification*' placeholder={'e.g. MCA (Masters in Computer Applications)'} width={50} options={[{id:0,degree_name:'Select your degree'},...degreeList]} name_field={'degree_name'} />
+        <SuggestiveInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} width={50} searchHandler={addUniversityHandler} suggestions={universityList} name_field={'education_name'} />
       </div>
       <div className="form-row">
-        <SuggestiveInput value={form.other_collage_name} name={'collage_id'} selected={CollageSelectHandler} label='College' placeholder={'e.g. Bharti College'} width={50} searchHandler={addCollageHandler} suggestions={collageList} name_field='education_name' />
-        <IconInput value={form.location} name={'location'} handleChange={handleChange} label='Your Location' placeholder={'e.g. New Delhi'} width={50} />
+        <SuggestiveInput value={form.other_collage_name} name={'collage_id'} selected={CollageSelectHandler} label='College*' placeholder={'e.g. Bharti College'} width={50} searchHandler={addCollageHandler} suggestions={collageList} name_field='education_name' />
+        <IconInput value={form.location} name={'location'} handleChange={handleChange} label='Your Location*' placeholder={'e.g. New Delhi'} width={50} />
       </div>
       <div className="flex-row-end">
         <label className="control control-checkbox">
@@ -166,8 +168,8 @@ export default function Education() {
         </label>
       </div>
       <div className="form-row">
-        <IconInput value={form.course_start_date} type={'date'} handleChange={handleChange} name={'course_start_date'} label='Duration (From)' placeholder={'Bachelor/Honors'} width={50} />
-        <IconInput value={form.course_end_date} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)' placeholder={'i.e. University name'} width={50} />
+        <IconInput value={form.course_start_date} type={'date'} handleChange={handleChange} name={'course_start_date'} label='Duration (From)*' placeholder={'Bachelor/Honors'} width={50} />
+        <IconInput value={form.course_end_date} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} width={50} />
       </div>
       <IconInput value={form.course_cgpa} name={'course_cgpa'} handleChange={handleChange} label='CGPA' placeholder={'CGPA'} width={100} />
       {false && <IconInput name={'skills_learned'} label='Key Skills learnt' placeholder={'Skills mastered in this course'} width={100} />}

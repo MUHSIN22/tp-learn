@@ -3,6 +3,8 @@ import { Page, Text, View, Document, StyleSheet, Link, Image, Font } from '@reac
 import robotoBold from '../../Assets/fonts/Roboto-Bold.ttf'
 import robotoMedium from '../../Assets/fonts/Roboto-Medium.ttf'
 import robotoRegular from '../../Assets/fonts/Roboto-Regular.ttf'
+import { ErrorBoundary } from 'react-error-boundary'
+import ErrorHandler from '../ErrorHandler/ErrorHandler';
 
 export default function PdfGenerator({ bio, resumeDetails }) {
   const [newBio, setNewBio] = useState(bio)
@@ -10,7 +12,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
 
   Font.register({
     family: "Roboto",
-    fonts:[
+    fonts: [
       {
         src: robotoBold,
         fontWeight: "bold"
@@ -27,9 +29,9 @@ export default function PdfGenerator({ bio, resumeDetails }) {
   })
 
   const styles = StyleSheet.create({
-    page: { backgroundColor: 'white', fontFamily: "Roboto" , padding: 30, paddingTop: 60, paddingBottom: 60 },
+    page: { backgroundColor: 'white', fontFamily: "Roboto", padding: 30, paddingTop: 60, paddingBottom: 60 },
     addressWrapper: { display: "flex", justifyContent: "space-between", flexDirection: "row", alignItems: "flex-end" },
-    nameText: {marginBottom: '5', color:"#F0967D", fontWeight: "bold"},
+    nameText: { marginBottom: '5', color: "#F0967D", fontWeight: "bold" },
     profileImage: { width: "80px", height: "80px" },
     small: { fontSize: 10, textAlign: 'right', marginTop: 5 },
     links: { color: '#567088', textDecoration: "none", padding: 0 },
@@ -83,166 +85,166 @@ export default function PdfGenerator({ bio, resumeDetails }) {
     return blob
   }
   return (
-    <Document>
-      {
-        resumeDetails &&
-        <Page size="A4" style={styles.page}>
-          <View style={styles.addressWrapper}>
-            <View>
-              <Text style={styles.nameText}>{resumeDetails.name}</Text>
-              <Text style={styles.small}> <Link src={"mailto:" + resumeDetails.email} style={styles.links} >{resumeDetails.email} </Link></Text>
-              <Text style={styles.small}>{resumeDetails.address}</Text>
-              <Text style={styles.small}>(+91) {resumeDetails.contact}</Text>
-              <Text style={styles.small}>
-                {
-                  resumeInfo.link_linkedin &&
-                  <Link src={resumeInfo.link_linkedin} style={styles.links}>Linkedin</Link>
-                }
-                {
-                  resumeInfo.link_facebook &&
-                  <>
-                    <Text> | </Text>
-                    <Link src={resumeInfo.link_facebook} style={styles.links}>Facebook</Link>
-                  </>
-                }
-                {
-                  resumeInfo.link_instagram &&
-                  <>
-                    <Text> | </Text>
-                    <Link src={resumeInfo.link_instagram} style={styles.links}>Instagram</Link>
-                  </>
-                }
-                {
-                  resumeInfo.link_twitter &&
-                  <>
-                    <Text> | </Text>
-                    <Link src={resumeInfo.link_twitter} style={styles.links}>Twitter</Link>
-                  </>
-                }
-              </Text>
-              
+      <Document>
+        {
+          resumeDetails &&
+          <Page size="A4" style={styles.page}>
+            <View style={styles.addressWrapper}>
+              <View>
+                <Text style={styles.nameText}>{resumeDetails.name}</Text>
+                <Text style={styles.small}> <Link src={"mailto:" + resumeDetails.email} style={styles.links} >{resumeDetails.email} </Link></Text>
+                <Text style={styles.small}>{resumeDetails.address}</Text>
+                <Text style={styles.small}>(+91) {resumeDetails.contact}</Text>
+                <Text style={styles.small}>
+                  {
+                    resumeInfo.link_linkedin &&
+                    <Link src={resumeInfo.link_linkedin} style={styles.links}>Linkedin</Link>
+                  }
+                  {
+                    resumeInfo.link_facebook &&
+                    <>
+                      <Text> | </Text>
+                      <Link src={resumeInfo.link_facebook} style={styles.links}>Facebook</Link>
+                    </>
+                  }
+                  {
+                    resumeInfo.link_instagram &&
+                    <>
+                      <Text> | </Text>
+                      <Link src={resumeInfo.link_instagram} style={styles.links}>Instagram</Link>
+                    </>
+                  }
+                  {
+                    resumeInfo.link_twitter &&
+                    <>
+                      <Text> | </Text>
+                      <Link src={resumeInfo.link_twitter} style={styles.links}>Twitter</Link>
+                    </>
+                  }
+                </Text>
+
+              </View>
+              <Image src={resumeInfo.profile_pic} style={styles.profileImage}></Image>
             </View>
-            <Image src={linkToBlob("https://cv-builder.talentplace.ai/certificate/man_1655800191.jpg")} debug="true" style={styles.profileImage}></Image>
-          </View>
-          <View style={styles.nameWrapper}>
-          </View>
-          <View style={styles.mainRow}>
-            <Text style={styles.sectionTitle}>Profile</Text>
-            <Text style={styles.description1}>
-              {newBio}
-            </Text>
-          </View>
-          <View style={styles.linePrimary}></View>
-          <View style={styles.mainRow}>
-            <Text style={styles.sectionTitle}>Experience</Text>
-            <View style={styles.rightSection}>
-              {
-                resumeInfo.company &&
-                resumeInfo.company.map((item, index) => (
-                  <View style={styles.rightSectionContentWrapper} key={index}>
-                    <Text style={styles.rightSectionMainText} >{item.job_role[0].designation_name}</Text>
-                    <Text style={styles.rightSectionMainText} >{item.company_name}</Text>
-                    <Text style={styles.rightSectionDate}>{item.industry_name}</Text>
-                    <Text style={styles.rightSectionDate}>{item.job_role[0].job_start_date} - {item.job_role[0].job_end_date}</Text>
-                    <View style={styles.list}>
+            <View style={styles.nameWrapper}>
+            </View>
+            <View style={styles.mainRow}>
+              <Text style={styles.sectionTitle}>Profile</Text>
+              <Text style={styles.description1}>
+                {newBio}
+              </Text>
+            </View>
+            <View style={styles.linePrimary}></View>
+            <View style={styles.mainRow}>
+              <Text style={styles.sectionTitle}>Experience</Text>
+              <View style={styles.rightSection}>
+                {
+                  resumeInfo.company &&
+                  resumeInfo.company.map((item, index) => (
+                    <View style={styles.rightSectionContentWrapper} key={index}>
+                      <Text style={styles.rightSectionMainText} >{item.job_role[0].designation_name}</Text>
+                      <Text style={styles.rightSectionMainText} >{item.company_name}</Text>
+                      <Text style={styles.rightSectionDate}>{item.industry_name}</Text>
+                      <Text style={styles.rightSectionDate}>{item.job_role[0].job_start_date} - {item.job_role[0].job_end_date}</Text>
+                      <View style={styles.list}>
+                        {
+                          makePoints(item.job_role[0].role_responsibilties).map((item, index) => (
+                            <Fragment>
+                              {
+                                index !== 0 &&
+                                <View style={styles.listItem}>
+                                  <Text style={styles.listBullet}>•</Text>
+                                  <Text>
+                                    {item}
+                                  </Text>
+                                </View>
+                              }
+                            </Fragment>
+                          ))
+                        }
+                      </View>
                       {
-                        makePoints(item.job_role[0].role_responsibilties).map((item, index) => (
-                          <Fragment>
+                        item.job_role[0].project[0] &&
+                        <Text style={styles.rightSectionBlueTitle} >Projects: </Text>
+                      }
+                      {/* {
+                        item.job_role[0].project[0] &&
+                        item.job_role[0].project.map((project, index) => (
+                          <Fragment key={index}>
+                            <Text style={[styles.rightSectionDate, { marginBottom: 5 }]}>{project.project_name}</Text>
+                            <Text style={[styles.rightSectionDate, { marginBottom: 3 }]}>Client Name: {project.client_name}</Text>
+                            <View style={styles.projectDetailsWrapper}>
+                              <Text style={[styles.projectSkill, { fontWeight: "medium" }]}>Skills</Text>
+                              <Text style={[styles.projectComplexity, { fontWeight: "medium" }]}>Complexity</Text>
+                              <Text style={[styles.projectOutcome, { fontWeight: "medium" }]}>Outcome</Text>
+                            </View>
                             {
-                              index !== 0 &&
-                              <View style={styles.listItem}>
-                                <Text style={styles.listBullet}>•</Text>
-                                <Text>
-                                  {item}
-                                </Text>
-                              </View>
+                              project.project_skill[0] &&
+                              project.project_skill.map((skill, i) => (
+                                <View style={styles.projectDetailsWrapper}>
+                                  <Text style={styles.projectSkill}>{skill.skill_name}</Text>
+                                  <Text style={styles.projectComplexity}>{skill.skill_complexity}</Text>
+                                  <Text style={styles.projectOutcome}>{skill.skill_desc}</Text>
+                                </View>
+                              ))
                             }
                           </Fragment>
                         ))
-                      }
+                      } */}
                     </View>
-                    {
-                      item.job_role[0].project[0] &&
-                      <Text style={styles.rightSectionBlueTitle} >Projects: </Text>
-                    }
-                    {
-                      item.job_role[0].project[0] &&
-                      item.job_role[0].project.map((project, index) => (
-                        <Fragment key={index}>
-                          <Text style={[styles.rightSectionDate, { marginBottom: 5 }]}>{project.project_name}</Text>
-                          <Text style={[styles.rightSectionDate,{marginBottom: 3}]}>Client Name: {project.client_name}</Text>
-                          <View style={styles.projectDetailsWrapper}>
-                            <Text style={[styles.projectSkill,{fontWeight: "medium"}]}>Skills</Text>
-                            <Text style={[styles.projectComplexity,{fontWeight: "medium"}]}>Complexity</Text>
-                            <Text style={[styles.projectOutcome,{fontWeight: "medium"}]}>Outcome</Text>
-                          </View>
-                          {
-                            project.project_skill[0] &&
-                            project.project_skill.map((skill, i) => (
-                              <View style={styles.projectDetailsWrapper}>
-                                <Text style={styles.projectSkill}>{skill.skill_name}</Text>
-                                <Text style={styles.projectComplexity}>{skill.skill_complexity}</Text>
-                                <Text style={styles.projectOutcome}>{skill.skill_desc}</Text>
-                              </View>
-                            ))
-                          }
-                        </Fragment>
-                      ))
-                    }
-                  </View>
-                ))
-              }
+                  ))
+                }
+              </View>
             </View>
-          </View>
-          <View style={styles.linePrimary}></View>
-          <View style={styles.mainRow}>
-            <Text style={styles.sectionTitle}>EDUCATION</Text>
-            <View style={styles.rightSection}>
-              {
-                resumeInfo.education &&
-                resumeInfo.education.map((item, index) => (
-                  <View style={styles.rightSectionContentWrapper} key={index}>
-                    <Text style={styles.rightSectionMainText} >{item.degree_name} ({item.course_end_date} - {item.course_start_date})</Text>
-                    <Text style={styles.rightSectionDate} >{item.university_name}</Text>
-                    <Text style={styles.rightSectionDate} >{item.course_cgpa}</Text>
-                    <Text style={styles.rightSectionDate} >{item.course_extra_activity}</Text>
-                    <Link src={item.upload_degree} style={styles.rightSectionDate}>Link to certificate</Link>
-                  </View>
-                ))
-              }
+            <View style={styles.linePrimary}></View>
+            <View style={styles.mainRow}>
+              <Text style={styles.sectionTitle}>EDUCATION</Text>
+              <View style={styles.rightSection}>
+                {
+                  resumeInfo.education &&
+                  resumeInfo.education.map((item, index) => (
+                    <View style={styles.rightSectionContentWrapper} key={index}>
+                      <Text style={styles.rightSectionMainText} >{item.degree_name} ({item.course_end_date} - {item.course_start_date})</Text>
+                      <Text style={styles.rightSectionDate} >{item.university_name}</Text>
+                      <Text style={styles.rightSectionDate} >{item.course_cgpa}</Text>
+                      <Text style={styles.rightSectionDate} >{item.course_extra_activity}</Text>
+                      <Link src={item.upload_degree} style={styles.rightSectionDate}>Link to certificate</Link>
+                    </View>
+                  ))
+                }
+              </View>
             </View>
-          </View>
 
-          <View style={styles.linePrimary}></View>
+            <View style={styles.linePrimary}></View>
 
-          <View style={styles.mainRow}>
-            <Text style={styles.sectionTitle}>Certification Courses</Text>
-            <View style={styles.rightSection}>
-              {
-                resumeInfo.certificate &&
-                resumeInfo.certificate.map((item, index) => (
-                  <View style={styles.rightSectionContentWrapper} key={index}>
-                    <Text style={styles.rightSectionMainText} >{item.project_name} [{item.institute_name}]</Text>
-                    <Link src={item.certificate_file} style={styles.rightSectionDate}>Link to certificate</Link>
-                  </View>
-                ))
-              }
+            <View style={styles.mainRow}>
+              <Text style={styles.sectionTitle}>Certification Courses</Text>
+              <View style={styles.rightSection}>
+                {
+                  resumeInfo.certificate &&
+                  resumeInfo.certificate.map((item, index) => (
+                    <View style={styles.rightSectionContentWrapper} key={index}>
+                      <Text style={styles.rightSectionMainText} >{item.project_name} [{item.institute_name}]</Text>
+                      <Link src={item.certificate_file} style={styles.rightSectionDate}>Link to certificate</Link>
+                    </View>
+                  ))
+                }
+              </View>
             </View>
-          </View>
 
-          <View style={styles.linePrimary}></View>
+            <View style={styles.linePrimary}></View>
 
-          <View style={styles.mainRow}>
-            <Text style={styles.sectionTitle}>Hobbies</Text>
-            <View style={styles.rightSectionOfSkills}>
-              <Text style={styles.description1}>
-                {commaSeparator(resumeInfo.adventure)}{commaSeparator(resumeInfo.entertainment)}{commaSeparator(resumeInfo.leisure)}{commaSeparator(resumeInfo.sports)}
-              </Text>
+            <View style={styles.mainRow}>
+              <Text style={styles.sectionTitle}>Hobbies</Text>
+              <View style={styles.rightSectionOfSkills}>
+                <Text style={styles.description1}>
+                  {commaSeparator(resumeInfo.adventure)}{commaSeparator(resumeInfo.entertainment)}{commaSeparator(resumeInfo.leisure)}{commaSeparator(resumeInfo.sports)}
+                </Text>
+              </View>
             </View>
-          </View>
-        </Page>
-      }
-    </Document>
+          </Page>
+        }
+      </Document>
   );
 }
 

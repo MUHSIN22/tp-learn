@@ -19,7 +19,7 @@ export default function Steps({name, state,index,id}) {
     }
   }
   return (
-    <div className={`step ${state}`} onClick={handleClick}>
+    <div className={`step ${state}`} onClick={handleClick} style={{cursor:"pointer"}}>
         <div className="circle">
             {state==='complete'?<Check/>:index}
         </div>
