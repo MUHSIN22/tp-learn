@@ -58,7 +58,7 @@
     z-index: 10;
 }
 .home-banner .banner-image{
-    width: 100%;
+    width: 50vw;
 
 }
 
@@ -529,6 +529,9 @@
         width: 90%;
         z-index: 10;
     }
+    .home-banner .banner-image{
+        width: 80%;
+    }
     .easy-build-section {
         display: grid;
         grid-template-columns: 1fr;
@@ -676,6 +679,9 @@
     }
     .home-banner .banner-content-wrapper h1 span{
         font-size: 1.8rem;
+    }
+    .home-banner .banner-image{
+        width: 100%;
     }
     .video-list-wrapper, .easy-build-list-wrapper {
         flex-direction: column;

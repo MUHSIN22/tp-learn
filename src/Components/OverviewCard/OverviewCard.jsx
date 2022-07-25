@@ -48,7 +48,7 @@ const handleEditForms = (data) => {
             
         </div>
         <div className="col-100 progress gapForReview">
-            <h3>Top 5 Skills</h3>
+            <h3>Top Skills</h3>
             {
              skills&& skills.map((skill,i)=><ProgressBar key={i} label={skill.name} value={skill.value} color={`_${i+1}`}/>)
             }

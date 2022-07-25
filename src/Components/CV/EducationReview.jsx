@@ -1,5 +1,5 @@
 import React from "react";
-import UdemyLogo from "../../Assests/udemy.jpg";
+import UdemyLogo from "../../Assets/Dashboard icons/education.png";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectEducation,
@@ -73,7 +73,7 @@ function EducationCard({
 
   return (
     <div className="education-review-grid flex-row-start g-2">
-      <img src={upload_degree} alt="" />
+      <img src={UdemyLogo} alt="" />
       <div className="col-100 align-start justify-between">
         <div>
           <h5 className="text-left">{degree_name}

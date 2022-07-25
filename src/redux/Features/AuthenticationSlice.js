@@ -28,6 +28,7 @@ const headers = {
 
 export const  registerUser = createAsyncThunk('authentication/registerUser',async(body,{ rejectWithValue })=>{
     let encoded = new URLSearchParams(Object.entries(body)).toString()
+    console.log(encoded);
         let response = null
         try{
              response =await API.post(`/signup`,encoded,{
@@ -36,7 +37,6 @@ export const  registerUser = createAsyncThunk('authentication/registerUser',asyn
            
             return response.data
         }catch(error){
-            console.log(error,{response})
            return rejectWithValue(error.response.data)
         }
        

@@ -1,5 +1,5 @@
 import React from 'react'
-import UdemyLogo from '../../Assests/udemy.jpg'
+import UdemyLogo from '../../Assets/Dashboard icons/certificate.png'
 import dummyCertificate from '../../Assests/dummyCertificate.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCertificate, selectResumeLoading,selectToEdit, changeToEdit, changeEditPageDetails} from '../../redux/Features/ResumeSlice'

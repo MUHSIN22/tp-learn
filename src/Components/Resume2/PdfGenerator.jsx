@@ -135,71 +135,11 @@ export default function PdfGenerator({ bio, resumeDetails }) {
               </Text>
             </View>
             <View style={styles.linePrimary}></View>
-            <View style={styles.mainRow}>
-              <Text style={styles.sectionTitle}>Experience</Text>
-              <View style={styles.rightSection}>
-                {
-                  resumeInfo.company &&
-                  resumeInfo.company.map((item, index) => (
-                    <View style={styles.rightSectionContentWrapper} key={index}>
-                      <Text style={styles.rightSectionMainText} >{item.job_role[0].designation_name}</Text>
-                      <Text style={styles.rightSectionMainText} >{item.company_name}</Text>
-                      <Text style={styles.rightSectionDate}>{item.industry_name}</Text>
-                      <Text style={styles.rightSectionDate}>{item.job_role[0].job_start_date} - {item.job_role[0].job_end_date}</Text>
-                      <View style={styles.list}>
-                        {
-                          makePoints(item.job_role[0].role_responsibilties).map((item, index) => (
-                            <Fragment>
-                              {
-                                index !== 0 &&
-                                <View style={styles.listItem}>
-                                  <Text style={styles.listBullet}>•</Text>
-                                  <Text>
-                                    {item}
-                                  </Text>
-                                </View>
-                              }
-                            </Fragment>
-                          ))
-                        }
-                      </View>
-                      {
-                        item.job_role[0].project[0] &&
-                        <Text style={styles.rightSectionBlueTitle} >Projects: </Text>
-                      }
-                      {/* {
-                        item.job_role[0].project[0] &&
-                        item.job_role[0].project.map((project, index) => (
-                          <Fragment key={index}>
-                            <Text style={[styles.rightSectionDate, { marginBottom: 5 }]}>{project.project_name}</Text>
-                            <Text style={[styles.rightSectionDate, { marginBottom: 3 }]}>Client Name: {project.client_name}</Text>
-                            <View style={styles.projectDetailsWrapper}>
-                              <Text style={[styles.projectSkill, { fontWeight: "medium" }]}>Skills</Text>
-                              <Text style={[styles.projectComplexity, { fontWeight: "medium" }]}>Complexity</Text>
-                              <Text style={[styles.projectOutcome, { fontWeight: "medium" }]}>Outcome</Text>
-                            </View>
-                            {
-                              project.project_skill[0] &&
-                              project.project_skill.map((skill, i) => (
-                                <View style={styles.projectDetailsWrapper}>
-                                  <Text style={styles.projectSkill}>{skill.skill_name}</Text>
-                                  <Text style={styles.projectComplexity}>{skill.skill_complexity}</Text>
-                                  <Text style={styles.projectOutcome}>{skill.skill_desc}</Text>
-                                </View>
-                              ))
-                            }
-                          </Fragment>
-                        ))
-                      } */}
-                    </View>
-                  ))
-                }
-              </View>
-            </View>
+            {/*  */}
             <View style={styles.linePrimary}></View>
             <View style={styles.mainRow}>
               <Text style={styles.sectionTitle}>EDUCATION</Text>
-              <View style={styles.rightSection}>
+              {/* <View style={styles.rightSection}>
                 {
                   resumeInfo.education &&
                   resumeInfo.education.map((item, index) => (
@@ -212,7 +152,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                     </View>
                   ))
                 }
-              </View>
+              </View> */}
             </View>
 
             <View style={styles.linePrimary}></View>

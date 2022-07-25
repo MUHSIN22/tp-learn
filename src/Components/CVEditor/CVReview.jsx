@@ -233,7 +233,7 @@ export default function CVBuilder() {
           {((page === "/Recommendation" || page === "/dashboard") && loader!=1) && (
             <Recommendation />
           )}
-          {((page === "/languages" || page === "/dashboard" || page === "/hobbies") && loader!=1) && <div className="flex-row-between g-2 mt-2"><Hobby /> <Languages /></div>}
+          {((page === "/languages" || page === "/dashboard" || page === "/hobbies") && loader!=1) && <div className="flex-row-between g-2 mt-2"><Hobby /></div>}
           {/* {((page === "/hobbies" || page === "/dashboard") && loader!=1) && <Hobby />} */}
           {((page === "/SocialContribution" || page === "/dashboard") && loader!=1) && (
             <SocialContribution />
@@ -255,7 +255,7 @@ export default function CVBuilder() {
               overflow: "hidden",
             }}
           >
-            <ResumeDownload newRef={newRef} shareOpts={shareOpts} changeLoaderval={()=>changeLoader() } />
+            {/* <ResumeDownload newRef={newRef} shareOpts={shareOpts} changeLoaderval={()=>changeLoader() } /> */}
           </div>
         </div>
       </div>

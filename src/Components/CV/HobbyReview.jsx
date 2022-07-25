@@ -1,9 +1,12 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import hobbyImage from '../../Assests/HobbyImage.png'
-import hobbyImage2 from "../../Assests/hobbyImage2.svg"
-import hobbyImage3 from "../../Assests/hobbyImage3.svg"
-import hobbyImage4 from "../../Assests/hobbyImage4.svg"
+import adventure from '../../Assets/hobbies/ADVENTURE.png'
+import entertainment from '../../Assets/hobbies/ENTERTENMENT.png'
+import liesure from '../../Assets/hobbies/LIESURE.png'
+import music from '../../Assets/hobbies/MUSIC.png'
+import sports from '../../Assets/hobbies/SPORT.png'
+import travel from '../../Assets/hobbies/TRAVEl.png'
+import book from '../../Assets/hobbies/BOOK.png'
 import { selectHobbies,selectToEdit,changeEditPageDetails,changeToEdit } from '../../redux/Features/ResumeSlice'
 import { FaPencilAlt } from "react-icons/fa";
 
@@ -22,13 +25,13 @@ export default function HobbyReview() {
                     )}</h3>
                 <span className="divider"></span>
                 {hobby && <div className="hobby grid-auto">
-                    <HobbyCard name={'Entertainment'} hobby={hobby} />
-                    <HobbyCard name={'Music'} hobby={hobby} />
-                    <HobbyCard name={'Sports'} hobby={hobby} icon={hobbyImage2}/>
-                    <HobbyCard name={'Leisure'} hobby={hobby} icon={hobbyImage3}/>
-                    <HobbyCard name={'Adventure'} hobby={hobby} icon={hobbyImage4}/>
-                    <HobbyCard name={'travel'} hobby={hobby} />
-                    <HobbyCard name={'books'} hobby={hobby}/>
+                    <HobbyCard name={'Entertainment'} hobby={hobby} icon={entertainment}/>
+                    <HobbyCard name={'Music'} hobby={hobby} icon={music} />
+                    <HobbyCard name={'Sports'} hobby={hobby} icon={sports}/>
+                    <HobbyCard name={'Leisure'} hobby={hobby} icon={liesure}/>
+                    <HobbyCard name={'Adventure'} hobby={hobby} icon={adventure}/>
+                    <HobbyCard name={'travel'} hobby={hobby} icon={travel} />
+                    <HobbyCard name={'books'} hobby={hobby} icon={book} />
                     <HobbyCard name={'Any other'} hobby={hobby} />
 
                 </div>}
@@ -48,9 +51,9 @@ function HobbyCard({ name, icon, hobby }) {
         arr.length>0&&
 
         <div className="hobby-card g-1">
-            <img src={icon || hobbyImage} alt="" />
-            <div className="align-center">
-            {arr.map(hobby => <h5>{hobby}</h5>)}
+            <img src={icon} alt="" />
+            <div className="align-center d-flex justify-center">
+            {arr.map(hobby => <h5>{hobby},</h5>)}
             </div>
 
         </div>

@@ -50,12 +50,15 @@ export default function AdditionalSkills3() {
     }
     useEffect(() => {
         try {
+            // console.log(,'title is-----------');
             const body = {
-                job_title_id: job_title_id,
+                job_title_id: resumeInfo.company[0],
                 search_role: '',
                 page_no: ''
             }
-            dispatch(getRoleSuggestionList({ auth: token, body })).unwrap()
+            dispatch(getRoleSuggestionList({ auth: token, body })).unwrap().then((res) => {
+                console.log(res,'roles----------------------');
+            })
         } catch (e) {
             console.log(e)
         }
@@ -67,7 +70,6 @@ export default function AdditionalSkills3() {
     useEffect(() => {
       setForm({...form, your_bio: bio})
       return () => {
-        
       }
     }, [])
     

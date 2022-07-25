@@ -1,5 +1,5 @@
 import React from 'react'
-import dummy from '../../Assests/dummySocialContribution.png'
+import dummy from '../../Assets/Dashboard icons/social.png'
 import { useSelector,useDispatch } from 'react-redux';
 import { selectSocialContribution,selectToEdit,changeEditPageDetails } from '../../redux/Features/ResumeSlice';
 import SocialContributionLoader from '../Loaders/SocialContributionLoader';

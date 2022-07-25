@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import loginVector from '../../Assests/CreatePass-vector.png'
 import { ReactComponent as Password } from '../../Assests/icons/lock.svg';
 import IconPasswordInput from '../IconInput/IconPasswordInput';
@@ -42,7 +42,17 @@ export default function CreatePassword() {
         <div className="login">
             <div className="col-30 justify-center">
                 <form>
-                {message&&!loading&& Object.values(message)[0] && <Alert error={error} message={error ? Object.values(message)[0]: Object.values(message)[0]} />}
+                {message&&!loading && 
+                    Object.values(message)[0] &&
+                    Object.values(message).map((item,index) => (
+                        <Fragment key={index}>
+                            {
+                                item[0]&&
+                                <Alert error={error} message={item[0]}/>
+                            }
+                        </Fragment>
+                    ))
+                }
                     <h1>Set your password here</h1>
                     <div className="form-row">
                         <IconPasswordInput name={'password'} handleChange={handleChange} placeholder='Password' label='Create a strong password' icon={<Password />} tooltip={tooltip} width='95' validation={message&&message.password} />

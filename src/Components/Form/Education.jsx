@@ -8,11 +8,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCollageList, getDegreeList, getUniversityList, selectCollageList, selectDegreeList, selectUniversityList } from '../../redux/Features/MasterSlice';
 import { addEducation, selectResumeError, selectResumeLoading, reload, selectResumeMessage, selectEducation, selectNewEducation, toggleNewEducation } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
+import { ReactComponent as Location } from '../../Assests/icons/location.svg';
 import Alert from '../Alert/Alert';
 import Control from './Control';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
+import IconAutoComplete from '../IconInput/IconAutocomplete';
 export default function Education() {
   const dispatch = useDispatch()
+  const [location,setLocation] = useState('')
   const [form, setForm] = useState({
     degree_id: '',
     university_id: '',
@@ -70,6 +73,7 @@ export default function Education() {
   function handleSubmit(e,reload=false) {
     e.preventDefault();
     let body = form
+    body.location = location;
     body.user_id = user_id
     if(file) body.upload_degree = file
     body = JsonToFormData(body)
@@ -108,7 +112,7 @@ export default function Education() {
         other_university_name: lastEducation.university_name,
         collage_id: lastEducation.collage_id,
         other_collage_name: lastEducation.collage_name,
-        location: lastEducation.location,
+        location: location,
         course_start_date: lastEducation.course_start_date.split("-").reverse().join("-"),
         course_end_date: lastEducation.course_end_date.split("-").reverse().join("-"),
         course_cgpa: lastEducation.course_cgpa,
@@ -158,7 +162,7 @@ export default function Education() {
       </div>
       <div className="form-row">
         <SuggestiveInput value={form.other_collage_name} name={'collage_id'} selected={CollageSelectHandler} label='College*' placeholder={'e.g. Bharti College'} width={50} searchHandler={addCollageHandler} suggestions={collageList} name_field='education_name' />
-        <IconInput value={form.location} name={'location'} handleChange={handleChange} label='Your Location*' placeholder={'e.g. New Delhi'} width={50} />
+        <IconAutoComplete icon={<Location />} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="eg. New Delhi" width={45} validation={message&&message.address} />
       </div>
       <div className="flex-row-end">
         <label className="control control-checkbox">

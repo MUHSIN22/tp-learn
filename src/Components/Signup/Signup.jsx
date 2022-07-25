@@ -56,13 +56,10 @@ export default function Signup() {
         if (Validation(body, dispatch)) {
             try {
                 dispatch(registerUser(form)).unwrap()
-
             } catch (error) {
                 console.log(error)
             }
-
         }
-
     }
 
     //fetch country code and gender list

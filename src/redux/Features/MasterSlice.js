@@ -191,7 +191,6 @@ export const getRoleSuggestionList = createAsyncThunk('authentication/getRoleSug
                 'authorization': `bearer ${data.auth}`
             }
           })
-       
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);

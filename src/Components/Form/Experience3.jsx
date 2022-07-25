@@ -4,7 +4,9 @@ import useDebounce from '../../DebouncedSearch'
 import {  selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import { getCurrencyList, getFunctionalAreaList, getLevelList, searchDesignation, selectCurrencylist, selectDesignationList, selectFunctionalAreaList, selectManagementLevelList } from '../../redux/Features/MasterSlice'
 import { addJobDesignation, selectLastCompany, selectLastJob, selectNewDesignation, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
+import { ReactComponent as Location } from '../../Assests/icons/location.svg';
 import Alert from '../Alert/Alert'
+import IconAutoComplete from '../IconInput/IconAutocomplete'
 import IconInput from '../IconInput/IconInput'
 import IconSelect from '../IconInput/IconSelect'
 import SuggestiveInput from '../IconInput/SuggestiveInput'
@@ -25,8 +27,8 @@ export default function Experience3() {
         start_salary:'',
         end_date:'',
         end_salary:'',
-        start_salary_currency:'INR' ,
-        end_salary_currency:'INR',
+        start_salary_currency:'7' ,
+        end_salary_currency:'7',
         current_working:'no',
         hide_salary:'no',
     })
@@ -34,6 +36,7 @@ export default function Experience3() {
     const [isRemoteWorking, setRemoteWorking] = useState(false);
     const [isHideSalary, setHideSalary] = useState(false);
     const [otherDesignation,setOtherDesignation] = useState(false);
+    const [location,setLocation] = useState('')
     const [showAlert,setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
@@ -83,7 +86,7 @@ export default function Experience3() {
         }
     }
     function handleAddDesignation() {
-        const body = {...form, user_id}
+        const body = {...form, user_id,location}
         if(form.remote_work!=='yes')  body.remote_work = 'no'
         if(form.hide_salary!=='yes')  body.hide_salary = 'no'
         if(form.current_working!=='yes')  body.current_working = 'no'
@@ -165,7 +168,7 @@ export default function Experience3() {
                 <IconSelect value={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' width={45} options={[{id:0,level_name: "Select a level"},...managementLevelList]} name_field={'level_name'} />
             </div>
             <div className="form-row">
-                <IconInput value={form.location}  name='location' handleChange={handleDesignationForm} label='Location' placeholder='Your place of work' width={45} />
+                <IconAutoComplete icon={<Location />} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={45} validation={message&&message.address} />
                 <IconSelect value={form.functional_area_id} name='functional_area_id' handleChange={handleDesignationForm} label='Functional Area' placeholder='i.e. CXO Level' width={45} options={[{id:0,functional_area_name: "Select a functional area"},...functionalAreaList]} name_field='functional_area_name' />
             </div>
             <div className="flex-row-start">
@@ -183,14 +186,14 @@ export default function Experience3() {
                 <IconInput value={form.start_salary} name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='Per Annum' width={40} />
                 <IconSelect value={form.start_salary_currency} name='start_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={10} />
             </div>
-            {
-                !isCurrentWorking &&
                 <div className="form-row">
-                    <IconInput value={form.end_date} name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
+                    {
+                        !isCurrentWorking&&
+                        <IconInput value={form.end_date} name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
+                    }
                     <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package in this role' placeholder='Per Annum' width={40} />
                     <IconSelect value={form.end_salary_currency} name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={10} />
                 </div>
-            }
             <div className="form-row">
                 <div className="control-group">
                     <label className="control control-checkbox">

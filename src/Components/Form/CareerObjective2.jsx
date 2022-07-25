@@ -32,8 +32,8 @@ export default function CareerObjective2() {
         let body = form
         body.user_id = user_id
         try {
-            dispatch(uploadCVvideos({ auth: token, body })).unwrap()
-            console.log(form)
+            let videoURL = dispatch(uploadCVvideos({ auth: token, body })).unwrap()
+            console.log(videoURL,'video url------------------')
         } catch (error) {
             showAlert(true)
         } finally {
@@ -54,7 +54,6 @@ export default function CareerObjective2() {
         
       }
     }, [])
-    
     return (
         <>
             <h1 className='text-left'>
@@ -63,7 +62,7 @@ export default function CareerObjective2() {
                 share the link with us.
             </h1>
             {console.log(error)}
-            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
+            {message && showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <div className="form-row">
                 <IconInput value={form.video_from_url} name='video_from_url' handleChange={handleChange} label='Upload from a URL' placeholder='Paste the link to your video CV' width={100} />
             </div>

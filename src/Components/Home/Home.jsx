@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import homeBannerImage from '../../Assets/Home Banner.svg'
 import bannerWave from '../../Assets/Banner wave.png'
-import bannerBackground from '../../Assets/Banner background.png'
+import bannerBackground from '../../Assets/Banner background.gif'
 import secondSectionImage from '../../Assets/section 2.png'
 import thirdSectionImage from '../../Assets/section 3.png'
 import credibilityBadge from '../../Assets/credibility badge.png'
@@ -135,8 +135,8 @@ export default function Home() {
                         <Link to="/" className='btn-primary'>Build My Resume</Link>
                     </div>
                     <div className="banner-image-wrapper">
-                        {/* <img src={homeBannerImage} alt="" className="banner-image" /> */}
-                        <Lottie options={{...defaultOptions,animationData: bannerAnimation}} className="banner-image" />
+                        <img src={bannerBackground} alt="" className="banner-image" />
+                        {/* <Lottie options={{...defaultOptions,animationData: bannerAnimation}} className="banner-image" /> */}
                     </div>
                     <img src={bannerWave} className="banner-wave" alt="" />
                 </section>
