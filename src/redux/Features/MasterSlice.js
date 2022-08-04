@@ -330,7 +330,8 @@ export const masterSlice = createSlice({
             state.loading = true
             state.status = 'loading'
         }).addCase(getIndustryList.fulfilled, (state, action) => {
-           state.loading=false
+            console.log(action.payload,'here in the redux');
+            state.loading=false
             state.status = 'succeeded'
             state.industryList = action.payload.data.recordDetails
         }).addCase(getIndustryList.rejected, (state, action) => {
@@ -430,7 +431,7 @@ export const masterSlice = createSlice({
             state.status = 'succeeded'
             state.degreeList = action.payload.data.recordDetails
         }).addCase(getDegreeList.rejected, (state, action) => {
-           state.loading=false
+            state.loading=false
             state.status = 'Rejected'
             state.error = action.payload.error
 

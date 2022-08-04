@@ -41,7 +41,8 @@ export default function CareerObjective3() {
         let body = form
         body.user_id = user_id
         try {
-            dispatch(addSocialLinks({ auth: token, body })).unwrap()
+            // dispatch(addSocialLinks({ auth: token, body })).unwrap()
+            navigate('/MyProfile')
             console.log(form)
         } catch (error) {
             showAlert(true)

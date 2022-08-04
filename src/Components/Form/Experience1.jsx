@@ -46,6 +46,7 @@ export default function Experience1() {
     function searchHandler(e) {
         setSearch(e.target.value)
     }
+
     const selectHandler = (i) => {
         setForm({ ...form, company_id: companyList[i].id })
         setSearch(companyList[i].name )
@@ -54,7 +55,15 @@ export default function Experience1() {
         let body = form
         if (form.company_id.length < 1) {
             body.other_company_name = debouncedSearchState
+            console.log('first');
         }
+        console.log(form.company_name ,'asdjfka sdkf;as d  \n',debouncedSearchState, 'here its ikasd;fjklasd j;jasl');
+        if(form.company_name !== "" && form.company_name !== search){
+            console.log("second");
+            form.other_company_name = search
+            form.company_id = null
+        }
+        
         body.user_id = user_id
         try {
             dispatch(addCompany({ auth: token, body })).unwrap()
@@ -76,12 +85,11 @@ export default function Experience1() {
     }, [debouncedSearchState, searchCompanyList])
     useEffect(() => {
         if (jobNatureList.length === 0) dispatch(getJobNatureList(token)).unwrap()
-
-
         return () => {
 
         }
     }, [jobNatureList.length, dispatch, token])
+    
     useEffect(() => {
         if (message === 'Company Added') {
 
@@ -92,13 +100,14 @@ export default function Experience1() {
         }
     }, [message, dispatch])
     useEffect(() => {
-        console.log(lastCompany, form);
+        console.log(lastCompany, form,'last company');
         if (!newJob&&lastCompany) {
             setForm({
                 ...form,
                 nature_of_job_id: lastCompany.nature_of_job_id,
                 company_id: lastCompany.company_id,
                 user_company_record_id: lastCompany.company_record_id,
+                company_name: lastCompany.company_name
 
             })
             setSearch(lastCompany.company_name)

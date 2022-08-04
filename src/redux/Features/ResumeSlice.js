@@ -351,6 +351,197 @@ export const addCognitiveSkills = createAsyncThunk('authentication/addCognitiveS
         return rejectWithValue(error.response.data);
     }
 })
+
+export const updateProfileInfo = createAsyncThunk('authentication/updateProfileInfo', async (data, { rejectWithValue }) => {
+    console.log(data);
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/update-profile`, data.body, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const sendVerificationCode = createAsyncThunk('authentication/send-verification-otp', async (data, { rejectWithValue }) => {
+    console.log(data);
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/send-verification-otp`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const deleteCompany = createAsyncThunk('authentication/delete-company', async (data, { rejectWithValue }) => {
+    console.log(data);
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/delete-company-info`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        data.dispatch(reload());
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const deleteProject = createAsyncThunk('authentication/delete-project', async (data, { rejectWithValue }) => {
+    console.log(data);
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/delete-project-info`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        data.dispatch(reload());
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const deleteJobRole = createAsyncThunk('authentication/delete-job-role', async (data, { rejectWithValue }) => {
+    console.log(data);
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/delete-job-role-info`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        data.dispatch(reload());
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const deleteEducation = createAsyncThunk('authentication/delete-education-info', async (data, { rejectWithValue }) => {
+    console.log(data);
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/delete-education-info`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        data.dispatch(reload());
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const deleteCertificate = createAsyncThunk('authentication/delete-certificate-info', async (data, { rejectWithValue }) => {
+    console.log(data);
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/delete-certificate-info`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        data.dispatch(reload());
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const deleteAdditionalSkill = createAsyncThunk('authentication/delete-additional-skill-info', async (data, { rejectWithValue }) => {
+    console.log(data);
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/delete-additional-skill-info`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        data.dispatch(reload());
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const verifyOTP = createAsyncThunk('authentication/verify-email-mobile-otp', async (data, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/verify-email-mobile-otp`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        if(data.body.mode === "email"){
+            localStorage.removeItem("email")
+        }else{
+            localStorage.removeItem("mobile")
+        }
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const verifyPayment = createAsyncThunk('authentication/verify-razorpay-payment', async (data, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    console.log(encoded)
+    try {
+        const response = await API.post(`/verify-razorpay-payment`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        data.dispatch(reload())
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const changePageOn = createAsyncThunk('authentication/changePageOn', async (data, { rejectWithValue }) => {
     if(data){
         return data;
@@ -429,8 +620,6 @@ export const resumeSlice = createSlice({
             state.status = 'Rejected'
             state.error = action.payload.error
             state.message = action.payload.data.error_message
-
-
         }).addCase(addCompany.pending, (state, action) => {
             state.loading = true
             state.status = 'loading'
@@ -447,7 +636,6 @@ export const resumeSlice = createSlice({
             state.status = 'Rejected'
             state.error = action.payload.error
             state.message = action.payload.data.error_message
-
         }).addCase(addIndustryInfo.pending, (state, action) => {
             state.loading = true
             state.status = 'loading'
@@ -713,6 +901,115 @@ export const resumeSlice = createSlice({
             state.loading = false
             state.downLoadDetails = {};
         })
+        .addCase(deleteAdditionalSkill.fulfilled, (state, action) => {
+            state.message = "Deleted successfully!";
+            state.loading = false;
+            state.error = false;
+        })
+        .addCase(deleteAdditionalSkill.pending, (state,action) => {
+            state.loading = true;
+        })
+        .addCase(deleteAdditionalSkill.rejected, (state,action) => {
+            state.loading = false;
+            state.error = true;
+            state.message = "Something went wrong in deletion! Try again"
+        })
+        .addCase(updateProfileInfo.pending,(state,acton) => {
+            state.loading = true;
+            state.profileInfo = {};
+            state.message = null 
+        })
+        .addCase(updateProfileInfo.fulfilled, (state,action) => {
+            state.loading = false;
+            state.profileInfo = action.payload.data;
+            state.message = action.payload.data.message
+        })
+        .addCase(updateProfileInfo.rejected, (state,action) => {
+            state.loading = false;
+            state.profileInfo = {};
+            state.message = "Something went wrong in updatio! Try again"
+        })
+        .addCase(sendVerificationCode.rejected,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+            state.error = true
+        })
+        .addCase(verifyOTP.rejected,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+            state.error = true
+        })
+        .addCase(sendVerificationCode.fulfilled,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+            state.error = false
+        })
+        .addCase(verifyOTP.fulfilled,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+            state.error = false
+        })
+        .addCase(deleteCompany.pending,(state,action) => {
+            state.loading = true
+        })
+        .addCase(deleteCompany.fulfilled,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+        })
+        .addCase(deleteCompany.rejected,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+            state.error = true;
+        })
+        .addCase(deleteProject.pending,(state,action) => {
+            state.loading = true
+        })
+        .addCase(deleteProject.fulfilled,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+        })
+        .addCase(deleteProject.rejected,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+            state.error = true;
+        })
+        .addCase(deleteJobRole.pending,(state,action) => {
+            state.loading = true
+        })
+        .addCase(deleteJobRole.fulfilled,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+        })
+        .addCase(deleteJobRole.rejected,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+            state.error = true;
+        })
+        .addCase(deleteEducation.pending,(state,action) => {
+            state.loading = true
+        })
+        .addCase(deleteEducation.fulfilled,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+        })
+        .addCase(deleteEducation.rejected,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+            state.error = true;
+        })
+        .addCase(deleteCertificate.pending,(state,action) => {
+            state.loading = true
+        })
+        .addCase(deleteCertificate.fulfilled,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+        })
+        .addCase(deleteCertificate.rejected,(state,action) => {
+            state.loading = false
+            state.message = action.payload.data.message
+            state.error = true;
+        })
+        
     }
 
 })
@@ -843,6 +1140,7 @@ export const selectNewAdditionalSkill =  (state)=> state.resume.newAdditionalSki
 export const selectNewDesignation = (state)=> state.resume.newDesignation
 export const selectNewPhotoMedia = (state)=> state.resume.newPhotoMedia
 export const selectNewProject = (state)=> state.resume.newProject
+export const selectUserInfo = (state) => state.resume.recordDetails
 export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
 export const getPageOn = (state) => state.resume.pageOn;     
 export const selectToEdit = (state)=> state.resume.toEdit;

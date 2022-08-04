@@ -11,9 +11,7 @@ import fifthSectionImage from '../../Assets/section 5.svg'
 import slide1 from '../../Assets/home slider/slide 1.jpg'
 import slide2 from '../../Assets/home slider/slide 2.jpg'
 import slide3 from '../../Assets/home slider/slide 3.jpg'
-import slide4 from '../../Assets/home slider/slide 4.jpg'
-import slide5 from '../../Assets/home slider/slide 5.jpg'
-import demoVideo from '../../Assets/video/demo video.mp4'
+import demoVideo from '../../Assets/video/Testimonial video.m4v'
 import { GrPlayFill } from 'react-icons/gr'
 import { IoMdPause } from 'react-icons/io'
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
@@ -34,29 +32,22 @@ import PdfGenerator from '../Resume2/PdfGenerator'
 
 let team = [
     {
-        name: 'Julie Kendrick',
-        designation: "Graphic designer",
-        company: "Talentplace"
+        name: 'Anuradha',
+        designation: "Team Lead",
+        company: "Accenture",
+        testimonial: "Talentplace cv builder is highly recommended for experienced professionals. Even if you are not looking for a switch, this CV builder will show you the trajectory of your career and help you to plan it further. its roles and responsibility analysis and suggestion is impressive."
     },
     {
-        name: 'John Doe',
-        designation: "UI/UX designer",
-        company: "Talentplace"
+        name: 'Roshni Rawat',
+        designation: "Senior Associate",
+        company: "Larsen & Toubro Infotech",
+        testimonial: "TalentPlace cv builder is the most potent and must-use tool for growing professionals. It has very few data input points, and in most places, it uses its intelligent mechanism to analyze your skills, roles, responsibilities, etc., and develop a stunning resume."
     },
     {
-        name: 'Abhishek Kumar',
-        designation: "Web Developer",
-        company: "Talentplace"
-    },
-    {
-        name: 'John Disosa',
-        designation: "Bussiness Development",
-        company: "Talentplace"
-    },
-    {
-        name: 'Julie Kendrick',
-        designation: "Graphic designer",
-        company: "Talentplace"
+        name: 'Tulsi Gurung',
+        designation: "Marketing Specialist",
+        company: "Book my Wizard",
+        testimonial: "I am wowed with this website. Putting my experience into words was the most challenging task for me, but with the help of TalentPlace CV builder, I created my CV within no time and with complete professionalism. It helped me represent my true self."
     }
 ]
 
@@ -132,7 +123,7 @@ export default function Home() {
                             <br />
                             in 11 Minutes
                         </h1>
-                        <Link to="/" className='btn-primary'>Build My Resume</Link>
+                        <Link to="/signup" className='btn-primary'>Get Started</Link>
                     </div>
                     <div className="banner-image-wrapper">
                         <img src={bannerBackground} alt="" className="banner-image" />
@@ -176,7 +167,7 @@ export default function Home() {
                                 </li>
                             </ul>
                         </div>
-                        <Link to="/" className='btn-primary'>Build My Resume</Link>
+                        <Link to="/signup" className='btn-primary'>Build My Resume</Link>
                     </div>
                 </section>
 
@@ -277,7 +268,7 @@ export default function Home() {
                     <img src={circle} className="bg-circle" alt="" />
                     <div className="team-content" ref={teamSectionRef}>
                         <p className="team-para">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident error illum vel. Architecto assumenda aut error non libero aliquid repudiandae maxime vel beatae facere, blanditiis a nostrum ex eligendi atque!
+                            {team[marginLeft].testimonial}
                         </p>
                         <strong className="team-member-name">{team[marginLeft].name}</strong>
                         <p className="team-member-designation">{team[marginLeft].designation}</p>
@@ -299,8 +290,6 @@ export default function Home() {
                             <img src={slide1} alt="" width="100px" className="team-slide" />
                             <img src={slide2} alt="" width="100px" className="team-slide" />
                             <img src={slide3} alt="" width="100px" className="team-slide" />
-                            <img src={slide4} alt="" width="100px" className="team-slide" />
-                            <img src={slide5} alt="" width="100px" className="team-slide" />
                         </div>
                     </div>
                 </section>
@@ -322,7 +311,7 @@ export default function Home() {
                         <p className="para-primary">
                             Join 1,300,000 job seekers worldwide and get hired faster with your best resume yet
                         </p>
-                        <Link to="/" className='btn-primary' >Get Started</Link>
+                        <Link to="/signup" className='btn-primary' >Get Started</Link>
                     </div>
                 </section>
             </main>

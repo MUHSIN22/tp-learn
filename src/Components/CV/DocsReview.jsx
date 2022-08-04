@@ -12,26 +12,31 @@ import { FaPencilAlt } from "react-icons/fa";
 export default function DocsReview() {
   const documents = useSelector(SelectDocuments);
   return (
-    <div className="docs section_2 col-100 align-center">
-      <div className="col-90 py-1">
-        <h3>Docs files </h3>
-        <span className="divider"></span>
-        <div className="flex-row-start g-5 docFilesDiv">
-          {documents && documents.length > 0 ? (
-            <div className="g-1">
-              {documents.map((doc, i) => (
-                <FileCard {...doc} icon={PDFIcon} />
-              ))}
+    <>
+      {
+        documents[0] &&
+        <div className="docs section_2 col-100 align-center">
+          <div className="col-90 py-1">
+            <h3>Docs files </h3>
+            <span className="divider"></span>
+            <div className="flex-row-start g-5 docFilesDiv">
+              {documents && documents.length > 0 ? (
+                <div className="g-1">
+                  {documents.map((doc, i) => (
+                    <FileCard {...doc} icon={PDFIcon} />
+                  ))}
+                </div>
+              ) : (
+                <FileLoaderHorizontal />
+              )}
             </div>
-          ) : (
-            <FileLoaderHorizontal />
-          )}
+          </div>
         </div>
-      </div>
-    </div>
+      }
+    </>
   );
 }
-function FileCard({ file_url, title, icon, description,user_resume_photo_media_id,file_path }) {
+function FileCard({ file_url, title, icon, description, user_resume_photo_media_id, file_path }) {
   const dispatch = useDispatch();
   const toEdit = useSelector(selectToEdit);
   const handleEditForms = (data) => {
@@ -46,7 +51,7 @@ function FileCard({ file_url, title, icon, description,user_resume_photo_media_i
           {title}{" "}
           {toEdit && (
             <span
-              onClick={() => handleEditForms({ progress: 15,file_url,title,description,user_resume_photo_media_id,file_path })}
+              onClick={() => handleEditForms({ progress: 15, file_url, title, description, user_resume_photo_media_id, file_path })}
               style={{ marginLeft: "0.5rem" }}
             >
               <FaPencilAlt />

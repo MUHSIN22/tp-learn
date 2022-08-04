@@ -110,17 +110,24 @@ function SuggestionBox({ handleSelect = () => { }, suggestions = [], name_field 
     return (
         <div className="suggestions col-50 align-center">
             <p className='head'>Suggestions</p>
-            <div className="col-100">
-                {suggestions.map((s, i) => <div className="suggestion-card flex-row-start align-start g-0-5" onClick={() => handleSelect(s[name_field])}>
-                    <div className="col-20">
-                        <button><AddCircle /></button>
-                    </div>
+            {
+                (suggestions && suggestions[0]) ?
                     <div className="col-100">
-                        <p>{s[name_field]}</p>
+                        {suggestions.map((s, i) => <div className="suggestion-card flex-row-start align-start g-0-5" onClick={() => handleSelect(s[name_field])}>
+                            <div className="col-20">
+                                <button><AddCircle /></button>
+                            </div>
+                            <div className="col-100">
+                                <p>{s[name_field]}</p>
+                            </div>
+                        </div>)
+                        }
                     </div>
-                </div>)
-                }
-            </div>
+                    :
+                    <div className="col-100">
+                        <p className="text-center">No suggestions</p>
+                    </div>
+            }
 
 
         </div>

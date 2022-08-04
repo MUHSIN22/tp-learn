@@ -3,7 +3,7 @@ import DragDropInput from '../DragDropInput/DragDropInput'
 import IconInput from '../IconInput/IconInput'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux'
-import { addCertification, reload, selectCertificate, selectNewCertificate, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewCertificate } from '../../redux/Features/ResumeSlice'
+import { addCertification, nextForm, reload, selectCertificate, selectNewCertificate, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewCertificate } from '../../redux/Features/ResumeSlice'
 import Control from './Control';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
@@ -162,18 +162,18 @@ export default function Certificate1() {
             <h1>Add any certification courses/trainings you have done</h1>
             {showAlert &&!loading&&<Alert error={error} message={error&&message ? Object.values(message): message} />}
             <div className="form-row">
-                <IconInput value={form.project_name} name='project_name' handleChange={handleChange} label='Name of the program' placeholder='e.g. Digital Marketing Associate' width={100} />
+                <IconInput value={form.project_name} name='project_name' handleChange={handleChange} label='Name of the program*' placeholder='e.g. Digital Marketing Associate' width={100} />
             </div>
             <div className="form-row">
-                <IconInput value={form.institute_name} name='institute_name' handleChange={handleChange} label='Institution' placeholder='Udemy' width={100} />
+                <IconInput value={form.institute_name} name='institute_name' handleChange={handleChange} label='Institution*' placeholder='Udemy' width={100} />
             </div>
             <div className="form-row">
-                <IconInput value={form.certificate_start_date} name='certificate_start_date' handleChange={handleChange} type={'date'} label='Duration (From)' placeholder='i.e. Duration date' width={50} />
-                <IconInput value={form.certificate_end_date} name='certificate_end_date' handleChange={handleChange} type={'date'} label='Duration (to)' placeholder='i.e. Duration date' width={50} />
+                <IconInput value={form.certificate_start_date} name='certificate_start_date' handleChange={handleChange} type={'date'} label='Duration (From)*' placeholder='i.e. Duration date' width={50} />
+                <IconInput value={form.certificate_end_date} name='certificate_end_date' handleChange={handleChange} type={'date'} label='Duration (to)*' placeholder='i.e. Duration date' width={50} />
             </div>
             <MultiSelectedOptions options={selected_options} value_field={'skill_name'} deleteHandler={handleDeleteSkill} />
             <div className="form-row">
-                <SuggestiveInput name='Skills' searchHandler={searchHandler} label={`Key skills learned`} placeholder='Skills mastered in this course' width={100} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
+                <SuggestiveInput name='Skills' searchHandler={searchHandler} label={`Key skills learned*`} placeholder='Skills mastered in this course' width={100} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
             </div>
             <div className="form-row">
                 <IconInput value={form.certificate_project_info} name='certificate_project_info' handleChange={handleChange} label='Projects, if any' placeholder='Tell us how you applied those skills?' width={100} />
@@ -192,7 +192,7 @@ export default function Certificate1() {
                  handleSubmit(e)
                  dispatch(toggleNewCertificate(false))
                  setReloadFlag(true)
-                 }} />
+                 }} handleSkip={() => dispatch(nextForm())} />
         </>
     )
 }

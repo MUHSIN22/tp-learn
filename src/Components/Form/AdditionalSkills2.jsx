@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
-import { addHobbies, selectHobbies, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
+import { addHobbies, nextForm, selectHobbies, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice'
 import Alert from '../Alert/Alert'
 import IconInput from '../IconInput/IconInput'
 import Control from './Control'
@@ -92,7 +92,7 @@ export default function AdditionalSkills2() {
             </div>
 
 
-            <Control handleSubmit={handleSubmit}/>
+            <Control handleSubmit={handleSubmit} handleSkip={() => dispatch(nextForm())}/>
         </>
     )
 }

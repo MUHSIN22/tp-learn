@@ -8,24 +8,29 @@ export default function Cerification() {
     const loading = useSelector(selectResumeLoading)
     const Cerification = useSelector(selectCertificate) || []
     return (
-        <div className='section_2 col-100 align-center'>
-            <div className="col-90">
-                <h3 className="text-left">Certification courses</h3>
-                <span className="divider"></span>
-                {!loading && Array.isArray(Cerification) ? <div className="col-100 g-1">
-                    {
+        <>
+            {
+                Cerification[0] &&
+                <div className='section_2 col-100 align-center'>
+                    <div className="col-90">
+                        <h3 className="text-left">Certification courses</h3>
+                        <span className="divider"></span>
+                        {!loading && Array.isArray(Cerification) ? <div className="col-100 g-1">
+                            {
 
-                        Cerification.map((c, i) => <CerificationCard key={i} logo={UdemyLogo} {...c} certificate={dummyCertificate} />)
-                    }
-                </div>:<CertificateCardLoader/>}
+                                Cerification.map((c, i) => <CerificationCard key={i} logo={UdemyLogo} {...c} certificate={dummyCertificate} />)
+                            }
+                        </div> : <CertificateCardLoader />}
 
-            </div>
+                    </div>
 
-        </div>
+                </div>
+            }
+        </>
     )
 }
-function CerificationCard({ project_name, logo, certificate_start_date, certificate_end_date, skills_names ='', certificate }) {
-    let skills = skills_names.split(',') 
+function CerificationCard({ project_name, logo, certificate_start_date, certificate_end_date, skills_names = '', certificate }) {
+    let skills = skills_names.split(',')
     return (
         <div className="certificate-grid">
             <img src={logo} alt="" />
@@ -56,9 +61,9 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
     return months <= 0 ? 0 : months;
 }*/
 function TimeDiff(date1, date2) {
-    let year = parseInt((date1.split('-')[2])) -  parseInt((date2.split('-')[2]))
-    let month = parseInt(date1.split('-')[1]) -parseInt(date2.split('-')[1])
-    let days = parseInt(date1.split('-')[0]) -parseInt(date2.split('-')[0])
+    let year = parseInt((date1.split('-')[2])) - parseInt((date2.split('-')[2]))
+    let month = parseInt(date1.split('-')[1]) - parseInt(date2.split('-')[1])
+    let days = parseInt(date1.split('-')[0]) - parseInt(date2.split('-')[0])
 
     if (year < 1) {
         if (month < 1) {

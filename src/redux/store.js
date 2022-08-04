@@ -20,7 +20,7 @@ import storageSession from 'redux-persist/lib/storage/session'
 
 const persistConfig = {
     key: 'authentication',
-    storage:storageSession,
+    storage: storageSession,
     blacklist: [masterReducer,resumeReducer,graphReducer]
 }
 const reducers = combineReducers({

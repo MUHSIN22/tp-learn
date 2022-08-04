@@ -3,7 +3,7 @@ import DragDropInput from '../DragDropInput/DragDropInput'
 import IconInput from '../IconInput/IconInput'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { reload, SelectDocuments, selectNewPhotoMedia, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewPhotoMedia, uploadPhotomedia } from '../../redux/Features/ResumeSlice';
+import { nextForm, reload, SelectDocuments, selectNewPhotoMedia, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewPhotoMedia, uploadPhotomedia } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import Control from './Control';
@@ -35,8 +35,8 @@ export default function CareerObjective1() {
         let form_Data = JsonToFormData(body)
         try {
             dispatch(toggleNewPhotoMedia(true))
-            dispatch(uploadPhotomedia({ auth: token, body:form_Data })).unwrap()
-            console.log(form)
+            let uploaded = dispatch(uploadPhotomedia({ auth: token, body:form_Data })).unwrap()
+            console.log(form,uploaded,"jkasdjf;ajdsfk jl;asdjfl")
         } catch (error) {
             showAlert(true)
         } finally {
@@ -87,13 +87,13 @@ export default function CareerObjective1() {
           dispatch(reload())
         }
       },[reloadFlag,loading])
-   
+   console.log(message,'messageeeeeeeeee');
     return (
         <>
             <h1 className='text-left'>
                 The world has to know how talented you are. Upload docs, PDFs, Image files, video links, etc. to showcase your portfolio.
             </h1>
-            {showAlert &&!loading&&<Alert error={error} message={error&&message ? Object.values(message): message} />}
+            {showAlert &&!loading && <Alert error={error} message={error && message ? Object.values(message): message} />}
             <div className="form-row">
                 <IconInput value={form.title} name='title' handleChange={handleChange} label='Title' placeholder='eg Resume' width={100} />
             </div>
@@ -115,7 +115,7 @@ export default function CareerObjective1() {
                 handleSubmit(e)
                 setReloadFlag(true)
                 dispatch(toggleNewPhotoMedia(false))
-                }} />
+                }} handleSkip={() => dispatch(nextForm())} />
         </>
     )
 }

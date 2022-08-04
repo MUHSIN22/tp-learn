@@ -18,6 +18,8 @@ import { getCountryCodeList, getGenderList, selectCountryCodes, selectGenderList
 import isEmail from 'validator/lib/isEmail';
 import Alert from '../Alert/Alert';
 import IconAutoComplete from '../IconInput/IconAutocomplete';
+import Select from 'react-select';
+import CountryInput from '../IconInput/CountryInput';
 export default function Signup() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,6 +31,7 @@ export default function Signup() {
     const reg_id = useSelector(selectReg_id);
     const error = useSelector(selectAutheError)
 
+    const [countryCode,setCountryCode] = useState(91);
     const [form, setForm] = useState({
         fname: '',
         lname: '',
@@ -50,9 +53,10 @@ export default function Signup() {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(form)
         let body = form
         body.address = location
+        body.country_code = countryCode
+        console.log(body);
         if (Validation(body, dispatch)) {
             try {
                 dispatch(registerUser(form)).unwrap()
@@ -110,7 +114,7 @@ export default function Signup() {
                         <IconInput icon={<Mail />} handleChange={handleChange} name="email" type='email' label="E-Mail Address" placeholder="John123@abc.com" width={100} validation={message&&message.email} />
                     </div>
                     <div className="flex-row-start align-end g-3">
-                        <IconSelect name='country_code' icon={<USFlag />} label={' '} handleChange={handleChange} width={20} options={countryCodeList} name_field='country_code' validation={message&&message.country_code} />
+                        <CountryInput setCountryCode={setCountryCode} countryCode={countryCodeList} />
                         <IconInput name='mobile_no' icon={<Phone />} handleChange={handleChange} label='Phone Number' placeholder={'8955-656-989'} width={70} validation={message&&message.mobile_no} />
                     </div>
                     <div className="form-row">

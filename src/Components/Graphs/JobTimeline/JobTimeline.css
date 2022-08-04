@@ -1,68 +1,43 @@
-.jobTimeline{
-    position: relative;
-    align-self: flex-end;
+.job-timeline-wrapper{
     width: 100%;
-    display: grid;
-    grid-column-gap: 0px;
-    grid-row-gap: 15px;
-    background-color: #fff;
-    z-index: 2;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-radius: 1rem;
-}
-
-.jobTimeline .years, .yearsReview{
-    width: max-content;
-    height: max-content;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    border: solid 5px #fff;
+    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    background-color: #21CE93;
-    color: #fff;
-    font-weight: 600;
-    font-size: 0.8rem;
-    box-shadow:0px 7.35294px 7.35294px rgba(0, 0, 0, 0.051);
-    position: relative;
-    left: -50%;
+    max-width: 100%;
+    overflow-x: scroll;
 }
-.jobTimeline .years::after{
-    content: " ";
-    width: 300%;
-    left: 50%;
-    position: absolute;
-    background-color: aliceblue;
-    height: 10px;
-    z-index: -1;
+.jobTimeline .job{
+    margin-top: 3rem;
 }
-
-.yearsReview::after {
-    content: " ";
-    width: 350%;
-    left: 50%;
-    position: absolute;
-    background-color: #21CE93;
-    height: 20px;
-    z-index: -1;
+.jobTimeline .job h6{
+    font-size: 1rem;
+    margin: 0;
 }
-
-.jobTimeline .company{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    border-radius: 1rem;
-}
-.jobTimeline .company h5{
+.jobTimeline .job span{
     font-size: 0.9rem;
-    font-weight: 500;
 }
-.jobTimeline .company span{
+.jobTimeline .job-details{
+    padding: 2rem 1rem;
+}
+.jobTimeline .time-bar{
+    display: flex;
+    align-items: center;
+    margin-top: -2rem;
+}
+.jobTimeline .year{
+    background: #00dd97;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 8px solid #fff;
+    display: grid;
+    place-items: center;
+    color: #fff;
     font-size: 0.8rem;
-    font-weight: 400;
+    transform: scale(1.04);
+}
+.jobTimeline .time-bar--bar{
+    background: #00dd97;
+    flex: 1;
+    height: 1.5rem;
+    min-width: 2rem;
 }

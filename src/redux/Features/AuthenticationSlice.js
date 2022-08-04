@@ -249,7 +249,6 @@ export const authenticationSlice = createSlice({
         .addCase(logOut.pending, (state,action)=>{
             state.status = 'loading'
         }).addCase(logOut.fulfilled, (state, action) => {
-            console.log("=======")
             state.loading = false
             state = action    
         }).addCase(logOut.rejected, (state, action) => {

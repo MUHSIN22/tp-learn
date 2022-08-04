@@ -135,6 +135,7 @@ export default function Certificate1({data}) {
 
         }
     }, [])
+
     return (
         <>
             <h1>Add any certification courses/trainings you have done</h1>
@@ -166,7 +167,7 @@ export default function Certificate1({data}) {
             <div className="flex-row-end">
                 <button onClick={handleSubmit} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more certifications</button>
             </div>
-            <Control handleSubmit={() => dispatch(reload())}/>
+            <Control handleSubmit={(e) => handleSubmit(e)}/>
         </>
     )
 }

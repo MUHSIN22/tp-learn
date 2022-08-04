@@ -236,6 +236,7 @@ select:-webkit-autofill:focus {
   top: 100%;
   left: auto;
   right: auto;
+  padding-left: 0.5rem;
   background-color: #f1f1f1;
   border-radius:0 0 0.5rem 0.5rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -262,6 +263,7 @@ select:-webkit-autofill:focus {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  text-align: center;
 }
 .suggestion-list .option span{
   width: max-content;
@@ -275,6 +277,45 @@ select:-webkit-autofill:focus {
 .slide-in-right {
   -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
   animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.country-input-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  border: solid 1px #c1c1c1;
+  padding: 0 0.5em;
+  border-radius: 0.5rem;
+  background-color: #ffff;
+  font-size: 1rem;
+  position: relative;
+}
+.country-input-wrapper input{
+  outline: none;
+  border: none;
+  width: 3rem;
+  margin-left: 0.5rem;
+}
+.country-suggestions{
+  position: absolute;
+  top: calc(100% - 1rem);
+  background-color: #f1f1f1;
+  border-radius:0 0 0.5rem 0.5rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-height: 15rem;
+  overflow-y: scroll;
+}
+.country-suggestions .option{
+  padding: 0.5rem;
+  border-bottom: solid 1px #dcdcdc;
+}
+.country-suggestions  :hover{
+  background-color:#e0dfdf ;
 }
 
 /* ----------------------------------------------

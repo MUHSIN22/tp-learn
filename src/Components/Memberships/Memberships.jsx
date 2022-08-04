@@ -1,7 +1,13 @@
 import React from "react";
 import "./Membership.css";
 import Sidebar from '../Sidebar/Sidebar';
+import { useDispatch, useSelector } from "react-redux";
+import { verifyPayment } from "../../redux/Features/ResumeSlice";
+import { selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
 export default function Memberships() {
+  const dispatch = useDispatch();
+  const user_id = useSelector(selectUser_id);
+  const token = useSelector(selectAuthToken)
 
   const displayRazorpay =async (amount) => {
     const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
@@ -11,16 +17,18 @@ export default function Memberships() {
       return
     }
 
+    console.log(res);
+
     const option = {
-      key:"rzp_test_2Ox0LKQowZvZPD",
+      key:"rzp_test_B4uZC1xOIWiQLV",
       currency:'INR',
       amount: amount * 100,
       name: "Talent Place",
       description: "Thanks for Being a valuable member with us!",
       image:"https://images.unsplash.com/photo-1616077167555-51f6bc516dfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
       handler: function(response){
-        alert(response.razorpay_payment_id)
-        alert("Payment Successfull")
+        console.log(response);
+        dispatch(verifyPayment({auth: token, body:{razorpay_payment_id: response.razorpay_payment_id, user_id},dispatch}))
       },
       "prefill": {
         "name": "Talent Price",

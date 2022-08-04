@@ -2,62 +2,83 @@ import React from 'react'
 import UdemyLogo from '../../Assets/Dashboard icons/certificate.png'
 import dummyCertificate from '../../Assests/dummyCertificate.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectCertificate, selectResumeLoading,selectToEdit, changeToEdit, changeEditPageDetails} from '../../redux/Features/ResumeSlice'
+import { selectCertificate, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails, deleteCertificate } from '../../redux/Features/ResumeSlice'
 import CertificateCardLoader from '../Loaders/CerificateCardLoader'
 import { FaPencilAlt } from "react-icons/fa";
+import { AiFillDelete } from 'react-icons/ai'
+import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 export default function CerificationReview() {
     const loading = useSelector(selectResumeLoading)
     const Cerification = useSelector(selectCertificate) || []
+    console.log(Cerification, "This is certification");
     return (
-        <div className='section_2 col-100 align-center mt-2'>
-            <div className="col-90">
-                <h3 className="text-left">Certification courses</h3>
-                <span className="divider"></span>
-                {!loading && Array.isArray(Cerification) ? <div className="col-100 g-1">
-                    {
+        <>
+            {
+                Cerification[0] &&
+                <div className='section_2 col-100 align-center mt-2'>
+                    <div className="col-90">
+                        <h3 className="text-left">Certification courses</h3>
+                        <span className="divider"></span>
+                        {!loading && Array.isArray(Cerification) ? <div className="col-100 g-1">
+                            {
 
-                        Cerification.map((c, i) => <CerificationCard logo={UdemyLogo} {...c} certificate={dummyCertificate} />)
-                    }
-                </div>:<CertificateCardLoader/>}
+                                Cerification.map((c, i) => <CerificationCard logo={UdemyLogo} {...c} certificate={dummyCertificate} />)
+                            }
+                        </div> : <CertificateCardLoader />}
 
-            </div>
+                    </div>
 
-        </div>
+                </div>
+            }
+        </>
     )
 }
-function CerificationCard({ project_name, logo, certificate_start_date, certificate_end_date, certificate_project_info,certificate,skills_ids,certificate_record_id,certificate_file,is_online,institute_name,skills_names ='' }) {
-    let skills = skills_names.split(',') 
-    let skill_ids = skills_ids ? skills_ids.split(","): [];
+function CerificationCard({ project_name, logo, certificate_start_date, certificate_end_date, certificate_project_info, certificate, skills_ids, certificate_record_id, certificate_file, is_online, institute_name, skills_names = '' }) {
+    let skills = skills_names.split(',')
+    let skill_ids = skills_ids ? skills_ids.split(",") : [];
     const dispatch = useDispatch();
     const toEdit = useSelector(selectToEdit);
-const handleEditForms = (data) => {
-    dispatch(changeEditPageDetails(data)).unwrap();
-  };
+    const user_id = useSelector(selectUser_id);
+    const token = useSelector(selectAuthToken)
+    const handleEditForms = (data) => {
+        dispatch(changeEditPageDetails(data)).unwrap();
+    };
+
+    const handleDeleteEducation = (data) => {
+        let confirm = window.confirm('Are you sure to delete?');
+        if(confirm) dispatch(deleteCertificate({auth: token, body: data, dispatch}))
+    }
     return (
         <div className="certificate-grid flex-row-start g-2">
             <img src={logo} alt="" />
             <div className="col-100 align-start justify-between g-2">
                 <div>
                     <h5>{project_name} {toEdit && (
-                     <span onClick={() => handleEditForms({ 
-                        progress: 10,
-                        project_name,
-                        institute_name,
-                        skills_ids:skill_ids,
-                        certificate_start_date,
-                        certificate_end_date,
-                        certificate_project_info,
-                        certificate_file,
-                        is_online,
-                        certification_record_id: certificate_record_id,
-                        skills 
-                    })} style={{"marginLeft":"1rem"}}><FaPencilAlt /></span>
+                        <>
+                            <span onClick={() => handleEditForms({
+                                progress: 10,
+                                project_name,
+                                institute_name,
+                                skills_ids: skill_ids,
+                                certificate_start_date,
+                                certificate_end_date,
+                                certificate_project_info,
+                                certificate_file,
+                                is_online,
+                                certification_record_id: certificate_record_id,
+                                skills
+                            })} style={{ "marginLeft": "1rem" }}><FaPencilAlt /></span>
+                            <span onClick={() => handleDeleteEducation({
+                                certificate_record_id: certificate_record_id,
+                                user_id
+                            })} style={{ "marginLeft": "1rem" }}><AiFillDelete /></span>
+                        </>
                     )}</h5>
                 </div>
                 <div className='<div className="flex-row-start mt-0-5">'>
                     <p>{TimeDiff(certificate_end_date, certificate_start_date,)}</p>
-                         
-                    </div>
+
+                </div>
                 <div className="flex-row-start g-0-5">
                     {skills.map((skill, i) => <div key={i} className="skill">
                         {skill}
@@ -79,9 +100,9 @@ const handleEditForms = (data) => {
     return months <= 0 ? 0 : months;
 }*/
 function TimeDiff(date1, date2) {
-    let year = parseInt((date1.split('-')[2])) -  parseInt((date2.split('-')[2]))
-    let month = parseInt(date1.split('-')[1]) -parseInt(date2.split('-')[1])
-    let days = parseInt(date1.split('-')[0]) -parseInt(date2.split('-')[0])
+    let year = parseInt((date1.split('-')[2])) - parseInt((date2.split('-')[2]))
+    let month = parseInt(date1.split('-')[1]) - parseInt(date2.split('-')[1])
+    let days = parseInt(date1.split('-')[0]) - parseInt(date2.split('-')[0])
 
     if (year < 1) {
         if (month < 1) {

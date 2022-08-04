@@ -4,13 +4,19 @@ import './CVBuilder.css'
 import FormContainer from '../Form/FormContainer'
 import CVcontainer from '../CV/CVcontainer'
 import { useSelector } from 'react-redux';
-import { selectBio, selectCertificate, selectEducation, selectFirstJob, selectFormId, selectSocilaLinks } from '../../redux/Features/ResumeSlice';
+import { selectBio, selectCertificate, selectEducation, selectFirstCompany, selectFirstJob, selectFormId, selectResumeDetails, selectResumeInfo, selectSocilaLinks, selectUserInfo } from '../../redux/Features/ResumeSlice';
+import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
+import API from '../../API'
 export default function CVBuilder() {
   const first_job = useSelector(selectFirstJob)
   const Education = useSelector(selectEducation)
   const Certifications = useSelector(selectCertificate)
   const bio = useSelector(selectBio)
   const socialLinks = useSelector(selectSocilaLinks)
+  const resumeInfo = useSelector(selectUserInfo)
+  const details = useSelector(selectResumeDetails)
+  const authToken = useSelector(selectAuthToken);
+  const user_id = useSelector(selectUser_id)
   const [progress, setProgress] = useState({
     'Contact Info': { id:1, state: 'complete' },
     'Experience': { id:1, state: 'active' },
@@ -20,6 +26,17 @@ export default function CVBuilder() {
     'Career Objective': { id: 15, state: 'inactive' }
   })
   const form_id = useSelector(selectFormId)
+
+  useEffect(() => {
+    if(details.resume_info && details.resume_info.is_fresher === 1){
+      setProgress(prev => {
+        delete prev.Experience;
+        prev['Contact Info'].id = 9
+        return prev;
+      })
+    }
+  },[details,Education, Certifications, bio, socialLinks,form_id])
+
   useEffect(() => {
     if (first_job[0]) {
       setProgress({

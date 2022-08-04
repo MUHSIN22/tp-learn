@@ -1,0 +1,42 @@
+.personal-info-edit{
+    background-color: #fbf7fd;
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 2rem;
+    align-items: center;
+}
+.personal-info-edit .profile-image{
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.personal-info-edit .btn-upload-image,
+.personal-info-edit button{
+    font-size: 1.1rem;
+    border: 2px solid #ff8f77;
+    padding: 0.5rem 2rem;
+    background: #fff;
+    border-radius: 7px;
+    cursor: pointer;
+    box-shadow: 0px 10px 16px #ff907789;
+    transition: box-shadow 0.3s ease;
+}
+.personal-info-edit .btn-upload-image:hover,
+.personal-info-edit button:hover{
+    box-shadow: 0px 1px 10px #ff907789;
+}
+.personal-info-edit .btn-upload-image input{
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+.inputs-grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 2rem;
+    width: 90%;
+}

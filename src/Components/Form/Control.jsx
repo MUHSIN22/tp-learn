@@ -5,7 +5,7 @@ import { ReactComponent as ChevronLeft } from '../../Assests/icons/chvron-left.s
 import { ReactComponent as ChevronRight } from '../../Assests/icons/chvron-right.svg';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { useState } from 'react';
-export default function Control({handleSubmit}) {
+export default function Control({handleSubmit, handleSkip }) {
     const dispatch = useDispatch()
     const token = useSelector(selectAuthToken)
     const form_id = useSelector(selectFormId)
@@ -25,15 +25,20 @@ export default function Control({handleSubmit}) {
               }
               setBtnClicked(false)
         }
-       
-      }
+    }
+
+
     return (
         <div className="form-row">
             <div className="col-30">
                 <button className={`btn tertiary ${loading&&'disabled'} `} onClick={() =>backHandler()} disabled={loading}><ChevronLeft /> {!btnClicked&&loading?'Loading...':'Back'}</button>
             </div>
 
-            <div className="col-30">
+            <div className="col-30" style={{flexDirection: 'row', gap: '1rem'}}>
+                {
+                    handleSkip&&
+                    <button className={`btn tetiary ${loading&&'disabled'}`} onClick={handleSkip}>Skip</button>
+                }
                 <button className={`btn primary ${loading&&'disabled'}`} onClick={handleSubmit} disabled={loading} >{btnClicked&&loading?'Saving...':'Next'} <ChevronRight /></button>
             </div>
 

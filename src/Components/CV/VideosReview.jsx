@@ -12,25 +12,30 @@ import { FaPencilAlt } from "react-icons/fa";
 export default function VideosReview() {
   const video = useSelector(selectVideo);
   return (
-    <div className="docs section_2 col-100 align-center">
-      <div className="col-90 py-1">
-        <h3>Video files </h3>
-        <span className="divider"></span>
-        <div className="flex-row-start g-5 docFilesDiv">
-          {video && video.length > 0 ? (
-            <div className="g-1  ">
-              <FileCard
-                url={video}
-                filename={"Talent Place - CV Builder.Mp4"}
-                icon={VideoIcon}
-              />
+    <>
+      {
+        video &&
+        <div className="docs section_2 col-100 align-center">
+          <div className="col-90 py-1">
+            <h3>Video files </h3>
+            <span className="divider"></span>
+            <div className="flex-row-start g-5 docFilesDiv">
+              {video && video.length > 0 ? (
+                <div className="g-1  ">
+                  <FileCard
+                    url={video}
+                    filename={"Talent Place - CV Builder.Mp4"}
+                    icon={VideoIcon}
+                  />
+                </div>
+              ) : (
+                <FileLoaderHorizontal />
+              )}
             </div>
-          ) : (
-            <FileLoaderHorizontal />
-          )}
+          </div>
         </div>
-      </div>
-    </div>
+      }
+    </>
   );
 }
 function FileCard({ url, filename, icon }) {

@@ -11,7 +11,7 @@ import {
   getIndustryList,
   selectBuisnessScaleList,
   selectCompanyBasedList,
-  selectIndustryList,
+  selectIndustryList
 } from "../../redux/Features/MasterSlice";
 import {
   resetError,
@@ -38,6 +38,7 @@ import Control from "./Control";
 const DEBOUNCE_DELAY = 600;
 export default function Experience1({ data }) {
   const dispatch = useDispatch();
+  console.log(data,"this is data");
   const [form, setForm] = useState({
     user_id: "",
     nature_of_job_id: data.nature_of_job_id,
@@ -60,8 +61,8 @@ export default function Experience1({ data }) {
   const jobNatureList = useSelector(selectJobNatureList);
   const lastCompany = useSelector(selectLastCompany);
   const firstName = useSelector(selectUserFirstName);
-  const industryList = useSelector(selectIndustryList);
-  const buisnessScaleList = useSelector(selectBuisnessScaleList);
+  const industryList = useSelector(selectIndustryList)
+  const buisnessScaleList = useSelector(selectBuisnessScaleList)
   const companyBasedList = useSelector(selectCompanyBasedList);
   const loading = useSelector(selectResumeLoading);
 
@@ -110,6 +111,8 @@ export default function Experience1({ data }) {
       company_name
     };
 
+    console.log(body,form,'form and body--------------');
+
     const body2 = {
       industry_id: form.industry_id,
       scale_id: form.scale_id,
@@ -122,6 +125,7 @@ export default function Experience1({ data }) {
       body.other_company_name = debouncedSearchState;
     }
     body.user_id = user_id;
+    console.log(body2,"this is body 2");
     try {
      dispatch(addCompany({ auth: token, body })).unwrap();
      dispatch(addIndustryInfo({auth:token,body:body2})).unwrap()

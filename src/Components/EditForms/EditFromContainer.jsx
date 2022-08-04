@@ -18,12 +18,15 @@ import CareerObjective1 from './CareerObjective1';
 import CareerObjective3 from './CareerObjective3';
 import CareerObjective2 from './CareerObjective2';
 import CognitiveSkills from './CognitiveSkills';
+import PersonalInfo from './PersonalInfo';
+import PersonalInfoVerification from './PersonalInfoVerification';
 
 
 export default function EditFormContainer({data}) {
   const progress = data.progress;
   return (
     <div className="formContainer col-100 px-0 py-0" style={{"width":"100%"}}>
+      {progress === 0 && <PersonalInfo data={data} /> }
       {progress === 1 && <Experience1 data = {data} />}
       {progress === 2 && <Experience2 data = {data} />}
       {progress === 3 && <Experience3 data = {data} />}
@@ -42,7 +45,6 @@ export default function EditFormContainer({data}) {
       {progress === 16 && <CareerObjective2  data = {data}/>}
       {progress === 17 && <CareerObjective3  data = {data}/>}
       {progress === 18 && <CognitiveSkills data={data}/>}
-
       { /*
       (progress!==6&&progress!==7&&progress!==17)&& <>
           <span className='divider'></span>

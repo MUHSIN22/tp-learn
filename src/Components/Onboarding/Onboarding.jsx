@@ -90,7 +90,7 @@ function Step5({name}) {
 }
 function Step6() {
     const [form, setForm] = useState({
-        job_start_date: new Date().toLocaleDateString(),
+        job_start_date: '',
         is_fresher:'no',
     });
     const [isFresher,setFresher] = useState(false);

@@ -3,7 +3,7 @@ import IconInput from '../IconInput/IconInput'
 import IconTextArea from '../IconInput/IconTextArea'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux'
-import { addAdditionalSkills, reload, selectAdditionalSkills, selectNewAdditionalSkill, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewAdditionalSkills } from '../../redux/Features/ResumeSlice'
+import { addAdditionalSkills, nextForm, reload, selectAdditionalSkills, selectNewAdditionalSkill, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewAdditionalSkills } from '../../redux/Features/ResumeSlice'
 import Control from './Control';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
@@ -123,8 +123,7 @@ export default function AdditionalSkills1() {
                 handleSubmit(e)
                 dispatch(toggleNewAdditionalSkills(false))
                 setReloadFlag(true)
-
-            }} />
+            }} handleSkip={() => dispatch(nextForm())} />
         </>
     )
 }

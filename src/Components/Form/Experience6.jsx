@@ -3,7 +3,7 @@ import IconInput from '../IconInput/IconInput'
 import MarkedSlider from '../MarkedSlider/MarkedSlider'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProject, reload, selectLastCompany, selectLastJob, selectNewProject, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage, toggleNewProject } from '../../redux/Features/ResumeSlice';
+import { addProject, nextForm, reload, selectLastCompany, selectLastJob, selectNewProject, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage, toggleNewProject } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { searchSkills, selectSkillList } from '../../redux/Features/MasterSlice';
 import Control from './Control';
@@ -11,7 +11,11 @@ import useDebounce from '../../DebouncedSearch';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
 import Alert from '../Alert/Alert';
 import MultiSelectedOptions from './MultiSelectedOptions';
+import { FaClosedCaptioning } from 'react-icons/fa';
 const DEBOUNCE_DELAY = 600;
+
+const temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
+
 export default function Experience6() {
     const dispatch = useDispatch()
     const [form, setForm] = useState({
@@ -36,20 +40,27 @@ export default function Experience6() {
     const lastCompany = useSelector(selectLastCompany)
     const [reloadFlag, setReloadFlag] = useState(false)
     const newProject = useSelector(selectNewProject);
+    const [validationError,setValidationError] = useState(null)
+    const [showAlertInner,setAlertInnder] = useState(false)
+    const [temporary,setTemporary] = useState({ skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' })
     const handleAddProject = (e) => {
         e.preventDefault();
         let body = form
         body.user_id = user_id
         body.project_skills = selected_options.map((x) => { return { skill_id: x.skill_id, skill_complexity: x.skill_complexity, skill_desc: x.skill_desc } })
         body.project_skills = JSON.stringify(body.project_skills)
-        try {
-            dispatch(toggleNewProject(true))
-            dispatch(addProject({ auth: token, body: { ...form, user_id } })).unwrap()
-            console.log(form)
-        } catch (error) {
-            showAlert(true)
-        } finally {
-            setShowAlert(true)
+        let formValidation = projectFormValidator();
+        console.log(formValidation);
+        if(formValidation){
+            try {
+                dispatch(toggleNewProject(true))
+                dispatch(addProject({ auth: token, body: { ...form, user_id } })).unwrap()
+                console.log(form)
+            } catch (error) {
+                showAlert(true)
+            } finally {
+                setShowAlert(true)
+            }
         }
     }
     function handleChange(evt) {
@@ -63,27 +74,63 @@ export default function Experience6() {
     function searchHandler(e) {
         setSearch(e.target.value)
     }
-    const temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
     const selectSkillHandler = (i) => {
-
+        console.log(i);
         temp.skill_id = skillList[i].id
         temp.skill_name = skillList[i].skill_name
+        setTemporary(temp)
     }
     const handleComplexity = (e) => {
+        console.log(temp);
         console.log(e.target.value)
         temp.skill_complexity = e.target.value
+        setTemporary(temp)
     }
     const handleSkill_desc = (e) => {
         temp.skill_desc = e.target.value
+        setTemporary(temp)
     }
-    const handleAddSkill = () => {
+    const handleAddSkill = (event) => {
         console.log(temp)
-        set_Selected_options([...selected_options, temp])
-        document.getElementById('iconinput-Skills').value = '';
-        document.getElementById('iconinput-skill_complexity').value = 0;
-        document.getElementById('iconinput-skill_desc').value = '';
+        setAlertInnder(false)
+        if(temp.skill_desc && temp.skill_complexity && temp.skill_id && temp.skill_name){
+            console.log('here');
+            setAlertInnder(false)
+            set_Selected_options([...selected_options, temp])
+            document.getElementById('iconinput-Skills').value = '';
+            document.getElementById('iconinput-skill_complexity').value = 0;
+            document.getElementById('iconinput-skill_desc').value = '';
+            temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
+        }else{
+            setAlertInnder(true);
+            setValidationError("All skill fields are required!")
+        }
+        
 
     }
+
+    const projectFormValidator = () => {
+        if(form.project_name != ""){
+            if(temp.skill_id.length > 0 || temp.skill_name.length > 0){
+                if(temp.skill_desc.length > 0 && temp.skill_complexity.length > 0){
+                    setAlertInnder(false);
+                    return true
+                }else{
+                    setAlertInnder(true);
+                    setValidationError("All skill fields are required!")
+                    return false;
+                }
+            }else{
+                setAlertInnder(false)
+                return true
+            }
+        }
+    }
+
+    const handleSkip = () => {
+        dispatch(nextForm());
+    }
+
     const handleDeleteSkill = (i) => {
         const newList = selected_options.filter((x, index) => index !== i)
         set_Selected_options(newList)
@@ -153,7 +200,7 @@ export default function Experience6() {
         }
 
         return () => {
-
+ 
         }
     }, [lastJob, newProject,loading])
     useEffect(() => {
@@ -165,6 +212,7 @@ export default function Experience6() {
     return (
         <>
             {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
+            {showAlertInner && !loading && validationError && <Alert error={true} message={validationError} />}
             <h1>Now the most amazing part! If you have worked on any projects in this job role, please mention the skills you specifically used, how you applied them and its complexity level.</h1>
             <div className="card g-1">
                 <div className="form-row">
@@ -192,7 +240,7 @@ export default function Experience6() {
                 handleAddProject(e)
                 setReloadFlag(true)
                 dispatch(toggleNewProject(false))
-            }} />
+            }} handleSkip={handleSkip}/>
         </>
     )
 }

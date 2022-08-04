@@ -18,6 +18,7 @@ import { getCountryCodeList, selectCountryCodes } from '../../redux/Features/Mas
 import isEmail from 'validator/lib/isEmail';
 import isStrongPassword from 'validator/lib/isStrongPassword'
 import Alert from '../Alert/Alert';
+import CountryInput from '../IconInput/CountryInput';
 export default function Login() {
     const dispatch = useDispatch();
     const [form, setForm] = useState({});
@@ -27,6 +28,7 @@ export default function Login() {
     const loading = useSelector(selectAuthLoading);
     const error = useSelector(selectAutheError)
     const navigate = useNavigate()
+    const [countryCode,setCountryCode] = useState(91)
     function handleChange(evt) {
         const value = evt.target.value;
         setForm({
@@ -50,10 +52,12 @@ export default function Login() {
     const handleMobileLogin = async (e) => {
         e.preventDefault();
         console.log(form)
-        let encoded = new URLSearchParams(Object.entries(form)).toString()
+        let body = form;
+        body.country_code = countryCode
+        let encoded = new URLSearchParams(Object.entries(body)).toString()
         e.preventDefault();
         console.log(encoded)
-        if (form.mobile_no && form.country_code) {
+        if (body.mobile_no && body.country_code) {
             try {
                 dispatch(mobileLogin(encoded)).unwrap()
 
@@ -62,10 +66,10 @@ export default function Login() {
             }
         }else{
             dispatch(setError({
-                "country_code":!form.country_code&&[
+                "country_code":!body.country_code&&[
                     "Select country code"
                 ],
-                "mobile_no":!form.mobile_no&& [
+                "mobile_no":!body.mobile_no&& [
                     "Enter valid mobile no"
                 ]
             }))
@@ -130,7 +134,7 @@ export default function Login() {
                         <span className='line'></span>
                     </div>
                     <div className="flex-row-start align-end g-3">
-                        <IconSelect name='country_code' icon={<USFlag />} label={' '} handleChange={handleChange} width={20} options={codes} name_field={'country_code'} validation={message&&message.country_code} name_value={true} />
+                        <CountryInput  setCountryCode={setCountryCode}/>
                         <IconInput name='mobile_no' icon={<Phone />} label='Phone Number' placeholder={'8955-656-989'} handleChange={handleChange} width={65} validation={message&&message.mobile_no} />
                     </div>
                     <div className="form-row my-2">

@@ -20,9 +20,9 @@ export default function Section1() {
     const firstCompany = useSelector(selectFirstCompany)
     const dispatch = useDispatch();
     const toEdit = useSelector(selectToEdit);
-const handleEditForms = (data) => {
-    dispatch(changeEditPageDetails(data)).unwrap();
-  };
+    const handleEditForms = (data) => {
+        dispatch(changeEditPageDetails(data)).unwrap();
+    };
     return (
         <div className="section_1">
             <div className="personal_info">
@@ -31,8 +31,7 @@ const handleEditForms = (data) => {
                 </div>
                 <div className="row">
                     <p>Personal Information </p>
-                    <More />
-
+                    {toEdit && <span onClick={() => handleEditForms({ progress: 0, data: contactInfo ? contactInfo: '' })}><FaPencilAlt /></span> }
                 </div>
                 <span className='divider'></span>
                 <div className="col-100">

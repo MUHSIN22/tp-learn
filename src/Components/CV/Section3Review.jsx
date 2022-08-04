@@ -19,6 +19,9 @@ import { ReactComponent as TickCircle } from "../../Assests/icons/tick-circle.sv
 import ProgressBar from "../OverviewCard/ProgressBar";
 import RedialBar from "../Graphs/RedialBar";
 import {
+  deleteCompany,
+  deleteJobRole,
+  deleteProject,
   SelectCompanyDetails,
   selectResumeLoading,
 } from "../../redux/Features/ResumeSlice";
@@ -43,55 +46,62 @@ import {
   changeEditPageDetails,
 } from "../../redux/Features/ResumeSlice";
 import EditFormContainer from "../EditForms/EditFromContainer";
+import { AiFillDelete } from "react-icons/ai";
 export default function Section3Review() {
   const loading = useSelector(selectResumeLoading);
   const companyInfo = useSelector(SelectCompanyDetails);
   const [index, setIndex] = useState(0);
   return (
-    <div className="section3Review col-100 align-center">
-      <Scale first={30} second={60} />
-      <div className="col-90">
-        <div className="flex-row-between align-center">
-          <h3 className="text-left">Experience</h3>
-          <div className="flex-row-fit g-1 align-center">
-            <button
-              className="btn-fit transparent"
-              onClick={() => {
-                index > 0 && setIndex(index - 1);
-              }}
-            >
-              <Left />
-            </button>
-            <button
-              className="btn-fit transparent"
-              onClick={() => {
-                index < companyInfo.length - 1 && setIndex(index + 1);
-              }}
-            >
-              <Right />
-            </button>
-          </div>
-        </div>
+    <>
+      {
+        companyInfo && companyInfo.map((item, index) => (
+          <div className="section3Review col-100 align-center">
+            {/* <Scale first={30} second={60} /> */}
+            <div className="col-90">
+              <div className="flex-row-between align-center">
+                <h3 className="text-left">Experience</h3>
+                {/* <div className="flex-row-fit g-1 align-center">
+                  <button
+                    className="btn-fit transparent"
+                    onClick={() => {
+                      index > 0 && setIndex(index - 1);
+                    }}
+                  >
+                    <Left />
+                  </button>
+                  <button
+                    className="btn-fit transparent"
+                    onClick={() => {
+                      index < companyInfo.length - 1 && setIndex(index + 1);
+                    }}
+                  >
+                    <Right />
+                  </button>
+                </div> */}
+              </div>
 
-        <span className="divider"></span>
-        {console.log(companyInfo)}
-        {companyInfo && companyInfo.length > 0 ? (
-          <CompanyOverview company={companyInfo[index]} />
-        ) : (
-          <ExperienceLoader />
-        )}
-        {companyInfo && companyInfo[index]?.job_role ? (
-          <DesignationOverview
-            job_role={{
-              job_role: companyInfo[index].job_role || [],
-              company_record_id: companyInfo[index].company_record_id,
-            }}
-          />
-        ) : (
-          <JobOverviewLoader />
-        )}
-      </div>
-    </div>
+              <span className="divider"></span>
+              {console.log(companyInfo)}
+              {companyInfo && companyInfo.length > 0 ? (
+                <CompanyOverview company={companyInfo[index]} />
+              ) : (
+                <ExperienceLoader />
+              )}
+              {companyInfo && companyInfo[index]?.job_role ? (
+                <DesignationOverview
+                  job_role={{
+                    job_role: companyInfo[index].job_role || [],
+                    company_record_id: companyInfo[index].company_record_id,
+                  }}
+                />
+              ) : (
+                <JobOverviewLoader />
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </>
   );
 }
 function CompanyOverview({ company }) {
@@ -101,8 +111,13 @@ function CompanyOverview({ company }) {
   const dispatch = useDispatch();
   const toEdit = useSelector(selectToEdit);
   const handleEditForms = (data) => {
+    console.log(data, "data in handle Edit forms");
     dispatch(changeEditPageDetails(data)).unwrap();
   };
+
+  const handleDeleteForms = (data) => {
+    dispatch(deleteCompany({ auth: token, body: data, dispatch }));
+  }
 
   useEffect(() => {
     try {
@@ -116,7 +131,7 @@ function CompanyOverview({ company }) {
       console.log(error);
     }
 
-    return () => {};
+    return () => { };
   }, [company.company_record_id, dispatch]);
 
   return (
@@ -133,7 +148,7 @@ function CompanyOverview({ company }) {
           <Headphone /> <p>{company.type_of_company_name}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
-          <Location /> <p>{company.job_role && company.job_role.length>0 ? company.job_role[0].job_location : ''}</p>
+          <Location /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].job_location : ''}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
           <Calendar /> <p>{StartEndDate(company.job_role)}</p>
@@ -150,25 +165,35 @@ function CompanyOverview({ company }) {
       </div>
       <div className="col-100 justify-end">
         <h5 className="text-right profileNameFont">{toEdit && (
-              <span className="px-1" onClick={() =>
-                handleEditForms({
-                  progress: 1,
-                  company_record_id: company.company_record_id,
-                  company_id: company.company_id,
-                  company_name: company.company_name,
-                  nature_of_job_id: company.nature_of_job_id,
-                  nature_of_job_name: company.nature_of_job_name,
-                  industry_id: company.industry_id,
-                  industry_name: company.industry_name,
-                  scale_id: company.scale_id,
-                  scale_name: company.scale_name,
-                  type_of_company_id: company.type_of_company_id,
-                  type_of_company_name : company.type_of_company_name
-                })
-              }>
-                <FaPencilAlt />
-              </span>
-            )} {company.company_name}</h5>
+          <>
+            <span className="px-1" onClick={() =>
+              handleEditForms({
+                progress: 1,
+                company_record_id: company.company_record_id,
+                company_id: company.company_id,
+                company_name: company.company_name,
+                nature_of_job_id: company.nature_of_job_id,
+                nature_of_job_name: company.nature_of_job_name,
+                industry_id: company.industry_id,
+                industry_name: company.industry_name,
+                scale_id: company.scale_id,
+                scale_name: company.scale_name,
+                type_of_company_id: company.type_of_company_id,
+                type_of_company_name: company.type_of_company_name
+              })
+            }>
+              <FaPencilAlt />
+            </span>
+            <span className='px-1' onClick={() => {
+              handleDeleteForms({
+                company_record_id: company.company_record_id,
+                user_id
+              })
+            }}>
+              <AiFillDelete />
+            </span>
+          </>
+        )} {company.company_name}</h5>
         {console.log(companyWise)}
         {companyWise && (
           <LineGraph
@@ -182,47 +207,64 @@ function CompanyOverview({ company }) {
 }
 function DesignationOverview(props) {
   const { job_role, company_record_id } = props.job_role;
-  console.log("ppppppppppp", job_role);
   const [index, setIndex] = useState(0);
   const toEdit = useSelector(selectToEdit);
+  const user_id = useSelector(selectUser_id)
+  const token = useSelector(selectAuthToken);
   const dispatch = useDispatch();
   const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
+  const handleDeleteJobRole = (data) => {
+    let confirm = window.confirm('Are you sure to delete?')
+    if(confirm){
+      dispatch(deleteJobRole({auth: token, body: data, dispatch}))
+    }
+  }
+
   return (
     <>
       <div className="flex-row-between align-center">
         <h3 className="text-left m-0">{job_role[index].designation_name}</h3>
         <div className="flex-row-fit g-1 align-center">
           {toEdit && (
-            <div
-              onClick={() =>
-                handleEditForms({
-                    
-                  designation_id:job_role[index].designation_id,
-                  level_id:job_role[index].job_level,
-                  location:job_role[index].job_location,
-                  remote_work:job_role[index].job_remote_work,
-                  functional_area_id:job_role[index].function_area_id,
-                  start_salary: job_role[index].job_start_salary,
-                  end_date: job_role[index].job_end_date,
-                  start_date: job_role[index].job_start_date,
-                  user_company_record_id: company_record_id,
-                  user_company_job_record_id:job_role[index].company_job_record_id,
-                  start_salary_currency:job_role[index].start_salary_currency,
-                  end_salary_currency:job_role[index].end_salary_currency,
-                  current_working:job_role[index].current_working,
-                  hide_salary:job_role[index].hide_salary,
-                  end_salary:job_role[index].job_end_salary,
-                  designation_name: job_role[index].designation_name,
-                  progress: 3,
-                })
-              }
-            >
-              <FaPencilAlt />
-            </div>
+            <>
+              <div
+                onClick={() =>
+                  handleEditForms({
+                    designation_id: job_role[index].designation_id,
+                    level_id: job_role[index].job_level,
+                    location: job_role[index].job_location,
+                    remote_work: job_role[index].job_remote_work,
+                    functional_area_id: job_role[index].function_area_id,
+                    start_salary: job_role[index].job_start_salary,
+                    end_date: job_role[index].job_end_date,
+                    start_date: job_role[index].job_start_date,
+                    user_company_record_id: company_record_id,
+                    user_company_job_record_id: job_role[index].company_job_record_id,
+                    start_salary_currency: job_role[index].start_salary_currency,
+                    end_salary_currency: job_role[index].end_salary_currency,
+                    current_working: job_role[index].current_working,
+                    hide_salary: job_role[index].hide_salary,
+                    end_salary: job_role[index].job_end_salary,
+                    designation_name: job_role[index].designation_name,
+                    progress: 3,
+                  })
+                }
+              >
+                <FaPencilAlt />
+              </div>
+              <span onClick={() =>
+                  handleDeleteJobRole({
+                    company_job_record_id: job_role[index].company_job_record_id,
+                    user_id
+                  })
+                }>
+                <AiFillDelete />
+              </span>
+            </>
           )}
-          <button
+          {/* <button
             className="btn-fit transparent"
             onClick={() => {
               index > 0 && setIndex(index - 1);
@@ -237,7 +279,7 @@ function DesignationOverview(props) {
             }}
           >
             <Right />
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -263,27 +305,26 @@ function DesignationOverview(props) {
             <Location /> <p>{job_role[index].job_location || ""}</p>
           </div>
         </div>
-        {console.log("----------", job_role[index].skills)}
         {job_role && job_role[index]?.skills && (
           <div className="col-100 skill-card g-3">
             <h5 className="text-left">Key Skills Used</h5>
             {job_role[index].skills.map((skill, i) => (
               <div key={i} className="flex-row-between justify-between">
                 <div className="col-90">
-                <div className="flex-row-between align-start">
-                <p>{skill.skill_name}</p>
-                <div className="col-70 justify-center">
-                  <ProgressBar
-                    value={skill.skill_complexity}
-                    color={`_${i + 1}`}
-                    hide_percent
-                  /> 
-                </div>  
-                </div> 
+                  <div className="flex-row-between align-start">
+                    <p>{skill.skill_name}</p>
+                    <div className="col-70 justify-center">
+                      <ProgressBar
+                        value={skill.skill_complexity}
+                        color={`_${i + 1}`}
+                        hide_percent
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <p>{skill.skill_complexity}%</p>
-                  </div> 
+                </div>
               </div>
             ))}
           </div>
@@ -299,7 +340,7 @@ function DesignationOverview(props) {
         }}
       />
       {job_role[index].project && (
-        <ProjectOverview projects={{projects:job_role && job_role[index]?.project,company_job_record_id: job_role[index].company_job_record_id,company_record_id: company_record_id}} />
+        <ProjectOverview projects={{ projects: job_role && job_role[index]?.project, company_job_record_id: job_role[index].company_job_record_id, company_record_id: company_record_id }} />
       )}
     </>
   );
@@ -327,56 +368,67 @@ function ResponsibiltiensOverview({ data }) {
       </div>
       <span className="divider"></span>
       <div className="grid-67-33">
-      {data && data.role_responsibilties ? (
-        <div className="role col-50 g-0-5 text-left g-2">
-          {rolesList && rolesList.map((role)=>{
-            if(role!=='&nbsp;' && role!=''){
-            return <div className="flex-row-fit g-1"><TickCircle className="role-tick-icon"/> 
-            <div className="role-wrapper">
-              <p>{role}</p>
-            </div>
-            </div>
-            }
-          })}
+        {data && data.role_responsibilties ? (
+          <div className="role col-50 g-0-5 text-left g-2">
+            {rolesList && rolesList.map((role) => {
+              if (role !== '&nbsp;' && role != '') {
+                return <div className="flex-row-fit g-1"><TickCircle className="role-tick-icon" />
+                  <div className="role-wrapper">
+                    <p>{role}</p>
+                  </div>
+                </div>
+              }
+            })}
+          </div>
+        ) : (
+          <RoleLoader />
+        )}
+        <div className="role_skills">
+          <div className="skills_names">
+            {data && data.skills.map((skill) => {
+              return <div className="skillName">
+                {skill.skill_name}
+              </div>
+            })}
+          </div>
+
         </div>
-      ) : (
-        <RoleLoader />
-      )}
-      <div className="role_skills">
-        <div>
-        <RedialBar value={"50%"} color={'_4'}/>
-        </div>
-        <div className="skills_names">
-        {data && data.skills.map((skill)=>{
-            return <div className="skillName">
-              {skill.skill_name}
-            </div>
-        })}
-        </div>
-        
-      </div>
       </div>
     </>
   );
 }
-function ProjectOverview({ projects:{projects,company_job_record_id,company_record_id} }) {
-  console.log("prof",projects)
+function ProjectOverview({ projects: { projects, company_job_record_id, company_record_id } }) {
+  console.log("prof", projects)
   const [index, setIndex] = useState(0);
-  let { project_name, client_name, project_skill ,job_project_record_id} = projects[index];
+  let { project_name, client_name, project_skill, job_project_record_id } = projects[index];
   const toEdit = useSelector(selectToEdit);
+  const user_id = useSelector(selectUser_id)
+  const token = useSelector(selectAuthToken)
   const dispatch = useDispatch();
   const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
+  const handleDeleteProject = (data) => {
+    let confirm = window.confirm("Are you sure to delete?");
+    if(confirm){
+      dispatch(deleteProject({auth:token,body: data, dispatch }))
+    }
+  }
   return (
     <>
       <div className="flex-row-between align-center my-2">
         <h3 className="text-left m-0">Projects worked on</h3>
         <div className="flex-row-fit g-1 align-center">
           {toEdit && (
-            <div onClick={() => handleEditForms({ job_project_record_id,project_skill: project_skill ? project_skill : [],client_name,project_name,company_job_record_id,company_record_id,progress: 5 })}>
-              <FaPencilAlt />
-            </div>
+            <>
+              <div onClick={() => handleEditForms({ job_project_record_id, project_skill: project_skill ? project_skill : [], client_name, project_name, company_job_record_id, company_record_id, progress: 5 })}>
+                <FaPencilAlt />
+              </div>
+              <div onClick={() => handleDeleteProject({ job_project_record_id, user_id  })}>
+                <AiFillDelete />
+              </div>
+           </>
+            
           )}
           <button
             className="btn-fit transparent"
@@ -400,7 +452,7 @@ function ProjectOverview({ projects:{projects,company_job_record_id,company_reco
       <div className="flex-wrap align-stretch g-1">
         <ProjectTile project_name={project_name} client_name={client_name} />
 
-        <p>{}</p>
+        <p>{ }</p>
       </div>
       <span className="divider"></span>
       <div className="col-100 g-1">
@@ -439,7 +491,7 @@ function SkillGrid({ color, skill_complexity, skill_desc, skill_name }) {
       <div className="skillName">{skill_name}</div>
       <div className="complexity flex-row-start g-0-5 align-center">
         <ProgressBar value={skill_complexity * 10} color={color} hide_percent />
-        <p>{skill_complexity >0 && skill_complexity <10 ? "0"+skill_complexity + "/10" : skill_complexity + "/10"}</p>
+        <p>{skill_complexity > 0 && skill_complexity < 10 ? "0" + skill_complexity + "/10" : skill_complexity + "/10"}</p>
       </div>
       <div className="application">
         <p>{skill_desc || "000000000"}</p>

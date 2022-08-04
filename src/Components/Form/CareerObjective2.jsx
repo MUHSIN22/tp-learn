@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
-import { selectResumeError, selectResumeLoading, selectResumeMessage, selectVideo, uploadCVvideos } from '../../redux/Features/ResumeSlice'
+import { nextForm, selectResumeError, selectResumeLoading, selectResumeMessage, selectVideo, uploadCVvideos } from '../../redux/Features/ResumeSlice'
 import Alert from '../Alert/Alert'
 
 import IconInput from '../IconInput/IconInput'
@@ -66,7 +66,7 @@ export default function CareerObjective2() {
             <div className="form-row">
                 <IconInput value={form.video_from_url} name='video_from_url' handleChange={handleChange} label='Upload from a URL' placeholder='Paste the link to your video CV' width={100} />
             </div>
-            <Control handleSubmit={handleSubmit}/>
+            <Control handleSubmit={handleSubmit} handleSkip={() => dispatch(nextForm())} />
         </>
     )
 }

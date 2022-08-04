@@ -1,0 +1,21 @@
+.personal-info-input-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgb(28, 26, 26);
+    gap: 2rem;
+}
+.CVReview .personal-info-input-wrapper label{
+    font-size: 1.2rem;
+}
+.personal-info-input-wrapper input{
+    background: transparent;
+    outline: none;
+    border: none;
+    font-size: 1.2rem;
+    flex: 1;
+}
+.personal-info-input-wrapper .edit-icon{
+    cursor: pointer;
+}

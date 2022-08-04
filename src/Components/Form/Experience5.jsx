@@ -69,8 +69,8 @@ export default function Experience5() {
         temp.skill_complexity = e.target.value
     }
     const handleAddSkill = () => {
-        temp.skill_name = temp.skill_id == '' ? search :  temp.skill_name;
-        set_Selected_options([...selected_options , temp])
+        temp.skill_name = temp.skill_id == '' ? search : temp.skill_name;
+        set_Selected_options([...selected_options, temp])
         document.getElementById('iconinput-Skills').value = '';
         document.getElementById('iconinput-complexity').value = '';
 
@@ -135,27 +135,27 @@ export default function Experience5() {
     }, [dispatch, job_title_id, token])
 
     useEffect(() => {
-        if ((lastJob||lastCompany)&&form.user_company_record_id==='') {
+        if ((lastJob || lastCompany) && form.user_company_record_id === '') {
             setForm({
                 ...form,
-                role_responsibilities:lastJob.role_responsibilties?parse(lastJob.role_responsibilties):"" ,
-                external_client_desc:lastJob.external_client_desc ,
+                role_responsibilities: lastJob.role_responsibilties ? parse(lastJob.role_responsibilties) : "",
+                external_client_desc: lastJob.external_client_desc,
                 user_company_record_id: lastCompany.company_record_id,
-                user_company_job_record_id:lastJob.company_job_record_id,
+                user_company_job_record_id: lastJob.company_job_record_id,
                 job_title_id
             })
-            set_Selected_options(lastJob.skills||[])
+            set_Selected_options(lastJob.skills || [])
         }
 
         return () => {
 
         }
-    }, [lastJob,lastCompany,form])
+    }, [lastJob, lastCompany, form])
 
 
     return (
         <>
-        {console.log(form)}
+            {console.log(form)}
             {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
             <h1>So far so good! Now it’s time to flaunt your amazing skills.</h1>
             <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />
@@ -195,17 +195,24 @@ function SuggestionBox({ handleSelect = () => { }, suggestions = [], name_field 
     return (
         <div className="suggestions col-50 align-center">
             <p className='head'>Suggestions</p>
-            <div className="col-100">
-                {suggestions.map((s, i) => <div key={i} className="suggestion-card flex-row-start align-start g-0-5" onClick={() => handleSelect(s[name_field])}>
-                    <div className="col-20">
-                        <button><AddCircle /></button>
-                    </div>
+            {
+                suggestions[0] ?
                     <div className="col-100">
-                        <p>{s[name_field]}</p>
+                        {suggestions.map((s, i) => <div key={i} className="suggestion-card flex-row-start align-start g-0-5" onClick={() => handleSelect(s[name_field])}>
+                            <div className="col-20">
+                                <button><AddCircle /></button>
+                            </div>
+                            <div className="col-100">
+                                <p>{s[name_field]}</p>
+                            </div>
+                        </div>)
+                        }
                     </div>
-                </div>)
-                }
-            </div>
+                    :
+                    <div className="col-100">
+                        <p className='text-center w-100' >No Suggestions found</p>
+                    </div>
+            }
 
 
         </div>

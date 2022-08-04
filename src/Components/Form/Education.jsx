@@ -18,6 +18,7 @@ export default function Education() {
   const [location,setLocation] = useState('')
   const [form, setForm] = useState({
     degree_id: '',
+    other_degree_name: '',
     university_id: '',
     other_university_name: [],
     collage_id: '',
@@ -45,6 +46,9 @@ export default function Education() {
   const collageList = useSelector(selectCollageList);
   const newEducation = useSelector(selectNewEducation);
   const [reloadFlag, setReloadFlag] = useState(false)
+  const [universities,setUniversities] = useState(universityList)
+  const [colleges,setColleges] = useState(collageList);
+  const [degree,setDegree] = useState(degreeList);
   function handleChange(evt) {
     const value = evt.target.value;
 
@@ -57,18 +61,42 @@ export default function Education() {
   const UniversitySelectHandler = (i) => {
     setForm({ ...form, university_id: universityList[i].id, other_university_name: universityList[i].education_name })
   }
+
+  const degreeSelectHandler = (i) => {
+    setForm({ ...form, degree_id: degreeList[i].id, other_degree_name: degreeList[i].degree_name })
+  }
   const CollageSelectHandler = (i) => {
     setForm({ ...form, collage_id: collageList[i].id, other_collage_name: collageList[i].education_name })
   }
 
   const addUniversityHandler = (e) => {
     setForm({ ...form, university_id: '', other_university_name: e.target.value })
-
-
+    let ul = universityList;
+    ul = ul.filter((item) => {
+      let regex = new RegExp(`^${e.target.value}`,"gi");
+      return item.education_name.match(regex);
+    })
+    setUniversities(ul);
   }
+
+  const addDegreeHandler = (e) => {
+    setForm({...form,degree_id: '', other_degree_name: e.target.value});
+    let ul = degreeList;
+    ul = ul.filter(item => {
+      let regex = new RegExp(`${e.target.value}`,"gi");
+      return item.degree_name.match(regex);
+    })
+    setDegree(ul);
+  }
+
   const addCollageHandler = (e) => {
     setForm({ ...form, collage_id: '', other_collage_name: e.target.value })
-
+    let cl = collageList;
+    cl = cl.filter((item) => {
+      let regex = new RegExp(`^${e.target.value}`,"gi");
+      return item.education_name.match(regex);
+    })
+    setColleges(cl);
   }
   function handleSubmit(e,reload=false) {
     e.preventDefault();
@@ -109,6 +137,7 @@ export default function Education() {
         ...form,
         degree_id: lastEducation.degree_id,
         university_id: lastEducation.university_id,
+        other_degree_name: lastEducation.other_degree_name,
         other_university_name: lastEducation.university_name,
         collage_id: lastEducation.collage_id,
         other_collage_name: lastEducation.collage_name,
@@ -126,6 +155,7 @@ export default function Education() {
         setForm({
           degree_id: '',
           university_id: '',
+          other_degree_name: '',
           other_university_name: [],
           collage_id: '',
           other_collage_name: '',
@@ -151,17 +181,17 @@ export default function Education() {
     }
   },[reloadFlag,loading])
 
-  console.log(degreeList ,'deg');
   return (
     <>
       <h1>Now, let’s move on to your learning journey so far. </h1>
       {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
       <div className="form-row">
-        <IconSelect value={form.degree_id} name={'degree_id'} handleChange={handleChange} label='Degree/Qualification*' placeholder={'e.g. MCA (Masters in Computer Applications)'} width={50} options={[{id:0,degree_name:'Select your degree'},...degreeList]} name_field={'degree_name'} />
-        <SuggestiveInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} width={50} searchHandler={addUniversityHandler} suggestions={universityList} name_field={'education_name'} />
+        {/* <IconSelect value={form.degree_id} name={'degree_id'} handleChange={handleChange} label='Degree/Qualification*' placeholder={'e.g. MCA (Masters in Computer Applications)'} width={50} options={[{id:0,degree_name:'Select your degree'},...degreeList]} name_field={'degree_name'} /> */}
+        <SuggestiveInput value={form.other_degree_name} name={'degree_id'} selected={degreeSelectHandler} label='Degree/Qualification*' placeholder={'e.g. BSc Computer Science'} width={50} searchHandler={addDegreeHandler} suggestions={degree} name_field={'degree_name'} />
+        <SuggestiveInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} width={50} searchHandler={addUniversityHandler} suggestions={universities} name_field={'education_name'} />
       </div>
       <div className="form-row">
-        <SuggestiveInput value={form.other_collage_name} name={'collage_id'} selected={CollageSelectHandler} label='College*' placeholder={'e.g. Bharti College'} width={50} searchHandler={addCollageHandler} suggestions={collageList} name_field='education_name' />
+        <SuggestiveInput value={form.other_collage_name} name={'collage_id'} selected={CollageSelectHandler} label='College*' placeholder={'e.g. Bharti College'} width={50} searchHandler={addCollageHandler} suggestions={colleges} name_field='education_name' />
         <IconAutoComplete icon={<Location />} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="eg. New Delhi" width={45} validation={message&&message.address} />
       </div>
       <div className="flex-row-end">

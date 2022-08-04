@@ -16,7 +16,7 @@ import { ReactComponent as Webcam } from '../../Assests/icons/webcam.svg';
 import { ReactComponent as Right } from '../../Assests/icons/arrow-circle-right.svg';
 import { ReactComponent as Left } from '../../Assests/icons/arrow-circle-left.svg';
 import ProgressBar from '../OverviewCard/ProgressBar';
-import { SelectCompanyDetails, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails} from '../../redux/Features/ResumeSlice';
+import { SelectCompanyDetails, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails, deleteCompany} from '../../redux/Features/ResumeSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ExperienceLoader from '../Loaders/ExperienceLoader';
 import { useState } from 'react';
@@ -26,6 +26,7 @@ import { companyWiseGraph, selectCompanyWise } from '../../redux/Features/GraphS
 import { useEffect } from 'react';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { FaPencilAlt } from "react-icons/fa";
+import { AiFillDelete } from 'react-icons/ai'
 import EditFormContainer from "../EditForms/EditFromContainer";
 export default function Section3() {
   const loading = useSelector(selectResumeLoading);
@@ -33,11 +34,11 @@ export default function Section3() {
   const [index, setIndex] = useState(0);
   return (
     <div className="section_2 col-100 align-center">
-      <Scale first={30} second={60} />
+      {/* <Scale first={30} second={60} /> */}
       <div className="col-90">
         <div className="flex-row-between align-center">
           <h3 className="text-left">Experience</h3>
-          <div className="flex-row-fit g-1 align-center">
+          {/* <div className="flex-row-fit g-1 align-center">
             <button
               className="btn-fit transparent"
               onClick={() => {
@@ -54,7 +55,7 @@ export default function Section3() {
             >
               <Right />
             </button>
-          </div>
+          </div> */}
         </div>
         <span className="divider"></span>
         {console.log(companyInfo)}
@@ -86,6 +87,10 @@ function CompanyOverview({ company }) {
   const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
+
+  const handleDeleteForms = (data) =>  {
+    dispatch(deleteCompany({auth: token, body: data, dispatch}));
+  }
 
   useEffect(() => {
     try {
@@ -133,24 +138,34 @@ function CompanyOverview({ company }) {
       </div>
       <div className="col-100 justify-end">
         <h5 className="text-right">{toEdit && (
-              <span className="px-1" onClick={() =>
-                handleEditForms({
-                  progress: 1,
-                  company_record_id: company.company_record_id,
-                  company_id: company.company_id,
-                  company_name: company.company_name,
-                  nature_of_job_id: company.nature_of_job_id,
-                  nature_of_job_name: company.nature_of_job_name,
-                  industry_id: company.industry_id,
-                  industry_name: company.industry_name,
-                  scale_id: company.scale_id,
-                  scale_name: company.scale_name,
-                  type_of_company_id: company.type_of_company_id,
-                  type_of_company_name : company.type_of_company_name
-                })
-              }>
-                <FaPencilAlt />
-              </span>
+              <>
+                <span className="px-1" onClick={() =>
+                  handleEditForms({
+                    progress: 1,
+                    company_record_id: company.company_record_id,
+                    company_id: company.company_id,
+                    company_name: company.company_name,
+                    nature_of_job_id: company.nature_of_job_id,
+                    nature_of_job_name: company.nature_of_job_name,
+                    industry_id: company.industry_id,
+                    industry_name: company.industry_name,
+                    scale_id: company.scale_id,
+                    scale_name: company.scale_name,
+                    type_of_company_id: company.type_of_company_id,
+                    type_of_company_name : company.type_of_company_name
+                  })
+                }>
+                  <FaPencilAlt />
+                </span>
+                <span className='px-1' onClick={() => {
+                  handleDeleteForms({
+                    company_record_id: company.company_record_id,
+                    user_id
+                  })
+                }}>
+                  <AiFillDelete />
+                </span>
+              </>
             )} {company.company_name}</h5>
         {console.log(companyWise)}
         {companyWise && (

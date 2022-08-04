@@ -67,7 +67,6 @@ export default function CVBuilder() {
   const [instance,setInstance] = usePDF({document: <PdfGenerator bio={bio} resumeDetails={resumeDetails} />})
 
 
-
   // let loaderState=useSelector(getLoaderstate)
   const handleEdit = (e) => {
     dispatch(changeToEdit(!toEdit)).unwrap();
@@ -194,7 +193,7 @@ export default function CVBuilder() {
     shareOpts.app=app
     setShareOpts({shareOpts});
   };
-
+  
   return (
     // <div className="cvEditor">
     <div className="flex-row-center cvEditContainer" id="cv-pdf-content">
@@ -213,7 +212,7 @@ export default function CVBuilder() {
               loader==1 && <Spinner />
             }
           <div className="flex-row-center justify-end m-0 px-1">
-            {editPageDetails && editPageDetails.progress && (
+            {(editPageDetails && editPageDetails.hasOwnProperty('progress')) && (
               <EditFormContainer data={editPageDetails} />
             )}
           </div>
@@ -230,9 +229,9 @@ export default function CVBuilder() {
           {((page === "/Education" || page === "/dashboard") && loader!=1 ) && (
             <EducationReview />
           )}
-          {((page === "/Recommendation" || page === "/dashboard") && loader!=1) && (
+          {/* {((page === "/Recommendation" || page === "/dashboard") && loader!=1) && (
             <Recommendation />
-          )}
+          )} */}
           {((page === "/languages" || page === "/dashboard" || page === "/hobbies") && loader!=1) && <div className="flex-row-between g-2 mt-2"><Hobby /></div>}
           {/* {((page === "/hobbies" || page === "/dashboard") && loader!=1) && <Hobby />} */}
           {((page === "/SocialContribution" || page === "/dashboard") && loader!=1) && (
