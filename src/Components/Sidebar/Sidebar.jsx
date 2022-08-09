@@ -111,7 +111,7 @@ function Sidebar(props) {
                           >
                             <h4
                               onClick={() => {
-                                sendProp("/personal-information");
+                                sendProp("/dashboard");
                               }}
                             >
                               Personal Information
@@ -132,7 +132,7 @@ function Sidebar(props) {
                             </h4>
                             <h4
                               onClick={() => {
-                                sendProp("/personal-information");
+                                sendProp("/dashboard");
                               }}
                             >
                               Full-stack Developer
@@ -167,7 +167,7 @@ function Sidebar(props) {
                             </h4>
                             <h4
                               onClick={() => {
-                                sendProp("/personal-information");
+                                sendProp("/dashboard");
                               }}
                             >
                               Portfolio
@@ -341,15 +341,15 @@ function Sidebar(props) {
                     
                     <Tippy content={
                    <div className='text-left' style={{"margin":"2rem 2rem 2rem 2rem","z-index":"1000"}}>
-                       <h4 onClick={()=>{sendProp("/personal-information")}}>Personal Information</h4>
+                       <h4 onClick={()=>{sendProp("/dashboard")}}>Personal Information</h4>
                        <h4 onClick={()=>{sendProp("/career-timeline")}}>Career Timeline</h4>
                        <h4 onClick={()=>{sendProp("/Experience")}}>Experience</h4>
-                       <h4 onClick={()=>{sendProp("/personal-information")}}>Full-stack Developer</h4>
-                       <h4 onClick={()=>{sendProp("/personal-information")}}>Roles and Responsibilities</h4>
+                       <h4 onClick={()=>{sendProp("/dashboard")}}>Full-stack Developer</h4>
+                       <h4 onClick={()=>{sendProp("/dashboard")}}>Roles and Responsibilities</h4>
                        <h4 onClick={()=>{sendProp("/Experience")}}>Projects worked on</h4>
                        <h4 onClick={()=>{sendProp("/Certification")}}>Certification Courses</h4>
                        <h4 onClick={()=>{sendProp("/Education")}}>Education</h4>
-                       <h4 onClick={()=>{sendProp("/personal-information")}}>Portfolio</h4>
+                       <h4 onClick={()=>{sendProp("/dashboard")}}>Portfolio</h4>
                        <h4 onClick={()=>{sendProp("/Recommendation")}}>Recommendation</h4>
                        <h4 onClick={()=>{sendProp("/languages")}}>Languages</h4>
                        <h4 onClick={()=>{sendProp("/hobbies")}}>Hobbies</h4>
@@ -379,7 +379,7 @@ function Sidebar(props) {
 
 export default Sidebar;
 
-// {page === "/personal-information" && <Section1 />}
+// {page === "/dashboard" && <Section1 />}
 // {page === "/Experience" && <Section3 />}
 // {page === "/Education" && <Education />}
 // {page === "/Docs" && <Docs />}

@@ -39,7 +39,7 @@ export default function Experience5({data}) {
     const skillList = useSelector(selectSkillList)
     const [search, setSearch] = useState('')
 
-    const job_title_id = resumeInfo.company && resumeInfo.company[0].job_role[0].designation_id
+    const job_title_id = resumeInfo.company && resumeInfo.company[0].job_role && resumeInfo.company[0].job_role[0].designation_id
     const roleSuggestions = useSelector(selectRoleSuggestionList)
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
 
@@ -167,15 +167,15 @@ export default function Experience5({data}) {
             {showAlert && !loading && <Alert error={error} message={error ? 'Failed to update Job skills' : 'Job skills updated'} />}
             <h1>So far so good! Now it’s time to flaunt your amazing skills.</h1>
             <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity'  deleteHandler={handleDeleteSkill} />
-            <div className="form-row">
+            <div className="form-row skill-inputs">
             
                 <SuggestiveInput name='Skills' searchHandler={searchHandler} label='Please enter all the skills you applied' placeholder='Select Skills' width={70} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
 
                 <IconInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' width={20} />
                 <button onClick={handleAddSkill} className='btn-fit transparent'><AddCircle /></button>
             </div>
-            <div className="form-col">
-                <div className="flex-row-between align-stretch g-1">
+            <div className="form-col ">
+                <div className="flex-row-between align-stretch g-1 role-and-suggestions">
                     <div className="editor col-50 g-0-5">
                         <label className='text-left' htmlFor="">Roles and Responsibilities</label>
                         <CKEditor

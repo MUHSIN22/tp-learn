@@ -141,6 +141,9 @@ export default function Education({data}) {
     return () => { }
   }, [degreeList.length, universityList.length, collageList.length, dispatch, token])
 
+  useEffect(() => {
+    dispatch(reload())
+  },[])
 
   const getDegreeById = (id) => {
     console.log(degreeList,id);

@@ -86,6 +86,8 @@ export default function CVBuilder() {
 
     }
   }, [ Education, Certifications, bio, socialLinks])
+  
+  
   useEffect(() => {
     let x = setTimeout(() => {
       if (form_id < 8) {
@@ -94,13 +96,11 @@ export default function CVBuilder() {
           Experience: { id:1, state: 'active' }
         })
       } else if (form_id < 9) {
-
         setProgress({
           ...progress,
           Education: { id: 9, state: 'active' }
         })
       } else if (form_id < 10) {
-
         setProgress({
           ...progress,
           Certifications: { id: 10, state: 'active' },

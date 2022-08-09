@@ -59,14 +59,14 @@ export default function Education() {
   }
 
   const UniversitySelectHandler = (i) => {
-    setForm({ ...form, university_id: universityList[i].id, other_university_name: universityList[i].education_name })
+    setForm({ ...form, university_id: universities[i].id, other_university_name: universities[i].education_name })
   }
 
   const degreeSelectHandler = (i) => {
-    setForm({ ...form, degree_id: degreeList[i].id, other_degree_name: degreeList[i].degree_name })
+    setForm({ ...form, degree_id: degree[i].id, other_degree_name: degree[i].degree_name })
   }
   const CollageSelectHandler = (i) => {
-    setForm({ ...form, collage_id: collageList[i].id, other_collage_name: collageList[i].education_name })
+    setForm({ ...form, collage_id: colleges[i].id, other_collage_name: colleges[i].education_name })
   }
 
   const addUniversityHandler = (e) => {
@@ -118,6 +118,11 @@ export default function Education() {
     }
   }
 
+  useEffect(() =>{
+      dispatch(getDegreeList(token)).unwrap()
+      dispatch(getUniversityList(token)).unwrap()
+      dispatch(getCollageList(token)).unwrap()
+  },[])
 
   useEffect(() => {
 
@@ -132,16 +137,16 @@ export default function Education() {
     console.log(newEducation)
     if (!newEducation&&education && education.length > 0) {
       let lastEducation = education[education.length - 1]
-      console.log(lastEducation)
+      console.log(lastEducation,"this is last education")
       setForm({
         ...form,
         degree_id: lastEducation.degree_id,
         university_id: lastEducation.university_id,
-        other_degree_name: lastEducation.other_degree_name,
+        other_degree_name: lastEducation.other_degree_name || lastEducation.degree_name,
         other_university_name: lastEducation.university_name,
         collage_id: lastEducation.collage_id,
         other_collage_name: lastEducation.collage_name,
-        location: location,
+        location: lastEducation.location,
         course_start_date: lastEducation.course_start_date.split("-").reverse().join("-"),
         course_end_date: lastEducation.course_end_date.split("-").reverse().join("-"),
         course_cgpa: lastEducation.course_cgpa,
@@ -150,6 +155,7 @@ export default function Education() {
         education_record_id: lastEducation.education_record_id,
         
       })
+      setLocation(lastEducation.location)
     } else {
       console.log('reset')
         setForm({
@@ -192,9 +198,9 @@ export default function Education() {
       </div>
       <div className="form-row">
         <SuggestiveInput value={form.other_collage_name} name={'collage_id'} selected={CollageSelectHandler} label='College*' placeholder={'e.g. Bharti College'} width={50} searchHandler={addCollageHandler} suggestions={colleges} name_field='education_name' />
-        <IconAutoComplete icon={<Location />} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="eg. New Delhi" width={45} validation={message&&message.address} />
+        <IconAutoComplete icon={<Location />} value={form.location} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="eg. New Delhi" width={45} validation={message&&message.address} />
       </div>
-      <div className="flex-row-end">
+      <div className="flex-row-end" style={{width: '100%'}}>
         <label className="control control-checkbox">
           Online Course
           <input name type="checkbox" />

@@ -87,7 +87,7 @@ export default function CareerObjective3() {
             <div className="form-row">
                 <SocialInput state={form} name='link_linkedin' handleChange={handleChange} label={'Linkedin'} icon={<Linkedin></Linkedin>} handleSubmit={handleSubmit} />
             </div>
-            <div className="flex-row-end g-1">
+            <div className="flex-row-end g-1" style={{width: '100%',display:"flex",justifyContent:"center"}}>
                 <div className="col-30">
                     <button onClick={()=>navigate('/MyProfile',{state:{page:"/dashboard"}})} className='btn'>Review</button>
                 </div>

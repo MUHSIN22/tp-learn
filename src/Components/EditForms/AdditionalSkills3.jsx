@@ -72,7 +72,7 @@ export default function AdditionalSkills3({data}) {
             <h1 className='text-left'>Tell us about yourself.</h1>
             {showAlert && !loading && <Alert error={error} message={error ? 'Failed to update Bio' : 'Bio updated'} />}
             <div className="form-col">
-                <div className="flex-row-between align-stretch g-1">
+                <div className="flex-row-between align-stretch g-1 role-and-suggestions">
                     <div className="editor col-50 g-0-5">
                         <label className='text-left' htmlFor="">Professional summary</label>
                         <CKEditor

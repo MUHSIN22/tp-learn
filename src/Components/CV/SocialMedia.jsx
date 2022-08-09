@@ -17,6 +17,16 @@ export default function SocialMedia() {
   const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
+
+  const urlChecker = (url) => {
+    let link
+    try{
+      link = new URL(url);
+    }catch(err){
+      return false
+    }
+    return link.protocol === "http:" || link.protocol === "https:"
+  }
   return (
     <>
       {
@@ -35,25 +45,25 @@ export default function SocialMedia() {
             <div className="flex-wrap g-2">
               {
                 socialLink.facebook !== "" && socialLink.facebook &&
-                <a href={socialLink.facebook} target="_blank" style={{ color: '#219FFF' }} className="flex-row-start g-1 align-center">
+                <a href={(urlChecker(socialLink.facebook)?"":"https://")+socialLink.facebook} target="_blank" style={{ color: '#219FFF' }} className="flex-row-start g-1 align-center">
                   <Facebook /> Facebook
                 </a>
               }
               {
                 socialLink.linkedin !== "" && socialLink.linkedin &&
-                <a href={socialLink.linkedin} target="_blank" style={{ color: '#219FFF' }} className="flex-row-start g-1 align-center">
+                <a href={(urlChecker(socialLink.linkedin)?"":"https://")+socialLink.linkedin} target="_blank" style={{ color: '#219FFF' }} className="flex-row-start g-1 align-center">
                   <Linkedin /> Linkedin
                 </a>
               }
               {
                 socialLink.instagram !== "" && socialLink.instagram &&
-                <a href={socialLink.instagram} target="_blank" style={{ color: '#219FFF' }} className="flex-row-start g-1 align-center">
-                  <Instagram /> Instagram
+                <a href={(urlChecker(socialLink.instagram)?"":"https://")+socialLink.instagram} target="_blank" style={{ color: '#219FFF' }} className="flex-row-start g-1 align-center">
+                  <Instagram />Instagram
                 </a>
               }
               {
                 socialLink.twitter !== "" && socialLink.twitter &&
-                <a href={socialLink.twitter} target="_blank" style={{ color: '#219FFF' }} className="flex-row-start g-1 align-center">
+                <a href={(urlChecker(socialLink.twitter)?"":"https://")+socialLink.twitter} target="_blank" style={{ color: '#219FFF' }} className="flex-row-start g-1 align-center">
                   <Twitter /> Twitter
                 </a>
               }

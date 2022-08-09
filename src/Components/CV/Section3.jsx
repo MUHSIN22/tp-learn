@@ -33,49 +33,56 @@ export default function Section3() {
   const companyInfo = useSelector(SelectCompanyDetails);
   const [index, setIndex] = useState(0);
   return (
-    <div className="section_2 col-100 align-center">
-      {/* <Scale first={30} second={60} /> */}
-      <div className="col-90">
-        <div className="flex-row-between align-center">
-          <h3 className="text-left">Experience</h3>
-          {/* <div className="flex-row-fit g-1 align-center">
-            <button
-              className="btn-fit transparent"
-              onClick={() => {
-                index > 0 && setIndex(index - 1);
-              }}
-            >
-              <Left />
-            </button>
-            <button
-              className="btn-fit transparent"
-              onClick={() => {
-                index < companyInfo.length - 1 && setIndex(index + 1);
-              }}
-            >
-              <Right />
-            </button>
-          </div> */}
-        </div>
-        <span className="divider"></span>
-        {console.log(companyInfo)}
-        {companyInfo && companyInfo.length > 0 ? (
-          <CompanyOverview company={companyInfo[index]} />
-        ) : (
-          <ExperienceLoader />
-        )}
-        {companyInfo && companyInfo[index]?.job_role ? (
-          <DesignationOverview
-            job_role={{
-              job_role: companyInfo[index].job_role || [],
-              company_record_id: companyInfo[index].company_record_id,
-            }}
-          />
-        ) : (
-          <JobOverviewLoader />
-        )}
-      </div>
-    </div>
+    <>
+      {
+        companyInfo && companyInfo.map((item, index) => (
+          <div className="section3Review col-100 align-center">
+            {/* <Scale first={30} second={60} /> */}
+            <div className="col-90">
+              <div className="flex-row-between align-center">
+                <h3 className="text-left">Experience</h3>
+                {/* <div className="flex-row-fit g-1 align-center">
+                  <button
+                    className="btn-fit transparent"
+                    onClick={() => {
+                      index > 0 && setIndex(index - 1);
+                    }}
+                  >
+                    <Left />
+                  </button>
+                  <button
+                    className="btn-fit transparent"
+                    onClick={() => {
+                      index < companyInfo.length - 1 && setIndex(index + 1);
+                    }}
+                  >
+                    <Right />
+                  </button>
+                </div> */}
+              </div>
+
+              <span className="divider"></span>
+              {console.log(companyInfo)}
+              {companyInfo && companyInfo.length > 0 ? (
+                <CompanyOverview company={companyInfo[index]} />
+              ) : (
+                <ExperienceLoader />
+              )}
+              {companyInfo && companyInfo[index]?.job_role ? (
+                <DesignationOverview
+                  job_role={{
+                    job_role: companyInfo[index].job_role || [],
+                    company_record_id: companyInfo[index].company_record_id,
+                  }}
+                />
+              ) : (
+                <JobOverviewLoader />
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </>
   );
 }
 function CompanyOverview({ company }) {

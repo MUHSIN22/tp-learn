@@ -59,7 +59,7 @@ function HobbyCard({ name, icon, hobby }) {
         <div className="hobby-card g-1">
             <img src={icon} alt="" />
             <div className="align-center d-flex justify-center">
-                {arr.map(hobby => <h5>{hobby},</h5>)}
+                {arr.map(hobby => <h5 className='hobby-title'>{hobby},</h5>)}
             </div>
 
         </div>

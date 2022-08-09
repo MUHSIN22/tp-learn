@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './PersonalInfo.css'
-import profile from '../../Assets/test user.jpeg'
 import PersonalInfoInput from '../PersonalInfoInput/PersonalInfoInput';
 import moment from 'moment';
 import PersonalInfoVerification from './PersonalInfoVerification';
@@ -8,12 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reload, selectResumeError, selectResumeMessage, updateProfileInfo } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
+import profile from '../../Assets/avatar.png'
 
 export default function PersonalInfo({ data: { data } }) {
   const dispatch = useDispatch();
   const token = useSelector(selectAuthToken)
   const currentEmail = data.email, currentContact = data.contact;
-  const [profilePic, setProfilePic] = useState(data.resume_info.profile_pic)
+  const [profilePic, setProfilePic] = useState(data.resume_info.profile_pic || profile)
   const [profileFile, setProfileFile] = useState(null);
   const [isMobileEditable, setMobileEditable] = useState(false);
   const [isEmailEditable, setEmailEditable] = useState(false);
@@ -49,12 +49,12 @@ export default function PersonalInfo({ data: { data } }) {
     let body = form;
     let formData = new FormData();
     body.address = address;
-    body.profile_pic = profileFile ? profileFile : null
+    if(profileFile) body.profile_pic = profileFile
 
     Object.keys(body).forEach((item) => {
       formData.append(item, body[item]);
     })
-    dispatch(updateProfileInfo({auth: token, body: formData}))
+    dispatch(updateProfileInfo({auth: token, body: formData, dispatch}))
     
     if (currentEmail !== form.email) {
       localStorage.setItem("email",form.email);
@@ -68,7 +68,7 @@ export default function PersonalInfo({ data: { data } }) {
       setVerification('mobile')
       return
     }
-    dispatch(reload())
+    
   }
 
   useEffect(() => {

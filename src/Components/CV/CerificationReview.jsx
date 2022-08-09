@@ -51,7 +51,7 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
     return (
         <div className="certificate-grid flex-row-start g-2">
             <img src={logo} alt="" />
-            <div className="col-100 align-start justify-between g-2">
+            <div className="col-100 align-start justify-between g-2 certificate-content">
                 <div>
                     <h5>{project_name} {toEdit && (
                         <>
@@ -79,7 +79,7 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
                     <p>{TimeDiff(certificate_end_date, certificate_start_date,)}</p>
 
                 </div>
-                <div className="flex-row-start g-0-5">
+                <div className="flex-row-start g-0-5 skill-list">
                     {skills.map((skill, i) => <div key={i} className="skill">
                         {skill}
                     </div>)}

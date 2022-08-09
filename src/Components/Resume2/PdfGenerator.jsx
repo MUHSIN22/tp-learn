@@ -139,7 +139,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
             <View style={styles.linePrimary}></View>
             <View style={styles.mainRow}>
               <Text style={styles.sectionTitle}>EDUCATION</Text>
-              {/* <View style={styles.rightSection}>
+              <View style={styles.rightSection}>
                 {
                   resumeInfo.education &&
                   resumeInfo.education.map((item, index) => (
@@ -152,25 +152,28 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                     </View>
                   ))
                 }
-              </View> */}
+              </View>
             </View>
 
             <View style={styles.linePrimary}></View>
 
-            <View style={styles.mainRow}>
-              <Text style={styles.sectionTitle}>Certification Courses</Text>
-              <View style={styles.rightSection}>
-                {
-                  resumeInfo.certificate &&
-                  resumeInfo.certificate.map((item, index) => (
-                    <View style={styles.rightSectionContentWrapper} key={index}>
-                      <Text style={styles.rightSectionMainText} >{item.project_name} [{item.institute_name}]</Text>
-                      <Link src={item.certificate_file} style={styles.rightSectionDate}>Link to certificate</Link>
-                    </View>
-                  ))
-                }
-              </View>
-            </View>
+           {
+            resumeInfo.certificate&&
+             <View style={styles.mainRow}>
+             <Text style={styles.sectionTitle}>Certification Courses</Text>
+             <View style={styles.rightSection}>
+               {
+                 resumeInfo.certificate &&
+                 resumeInfo.certificate.map((item, index) => (
+                   <View style={styles.rightSectionContentWrapper} key={index}>
+                     <Text style={styles.rightSectionMainText} >{item.project_name} [{item.institute_name}]</Text>
+                     <Link src={item.certificate_file} style={styles.rightSectionDate}>Link to certificate</Link>
+                   </View>
+                 ))
+               }
+             </View>
+           </View>
+           }
 
             <View style={styles.linePrimary}></View>
 

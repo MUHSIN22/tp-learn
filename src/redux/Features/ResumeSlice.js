@@ -364,6 +364,7 @@ export const updateProfileInfo = createAsyncThunk('authentication/updateProfileI
                 'authorization': `bearer ${data.auth}`
             }
         })
+        data.dispatch(reload())
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);

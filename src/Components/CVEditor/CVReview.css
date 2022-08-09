@@ -488,6 +488,115 @@
 .CVReview .socialMedia, .declaration{
     margin-top: 2rem;
 }
+@media only screen and (max-width: 1000px) {
+    .sidebar-wrapper{
+        display: none;
+    }
+    .CVReview{
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .CVReview .section_1 {
+        grid-template-columns: 1fr;
+        padding-top: 1rem;
+        margin-top: 3rem;
+    }
+    .CVReview .section_1 .personal_info .profile img {
+        width: 6rem;
+    }
+    .CVReview .section_1 .personal_info .background {
+        display: none;
+    }
+    .CVReview .section_2, .CVReview .LanguagesReview {
+        padding: 1rem;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .CVReview {
+        margin: 0;
+        border: none;
+    }
+    .CVReview .company-overview-grid{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .CVReview .col-90{
+        width: 100%;
+    }
+    .CVReview .divider{
+        margin: 0.5rem 0;
+    }
+    .CVReview .my-2{
+        margin: 0.5rem 0 !important;
+    }
+    .CVReview h3 {
+        font-size: 1rem;
+        margin: 0.5rem 0 0 0;
+    }
+    .profileNameFont {
+        font-family: "Roboto Slab" !important;
+        font-size: 1.3rem !important;
+        font-weight: 600 !important;
+        color: #000000 !important;
+        text-align: left;
+    }
+    .form-edit-wrapper{
+        padding: 0;
+    }
+    .CVReview .form-row{
+        flex-direction: row;
+    }
+    .CVReview .skill-inputs{
+        flex-direction: column;
+    }
+    .CVReview .form-row{
+        flex-direction: column;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .CVReview .certificate-grid {
+        display: grid;
+        -ms-grid-row-align: center;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .CVReview .certificate-grid img:first-child {
+        aspect-ratio: 1/1;
+        border-radius: 8px;
+        width: 4rem;
+        height: auto;
+        justify-self: start;
+    }
+    .CVReview .skill-list{
+        flex-wrap: wrap;
+    }
+    .CVReview .certificate-content{
+        gap: 0.5rem;
+    }
+    .CVReview .certificate-grid img {
+        width: 80%;
+        background-color: #f1f1f1;
+        border: 1px solid #DCDAE1;
+        object-fit: cover;
+        align-self: stretch;
+        height: auto;
+        justify-self: center;
+    }
+    .CVReview .hobby-title {
+        font-size: 0.7rem;
+    }
+    .hobby.grid-auto {
+        grid-template-columns: 1fr;
+        grid-column-gap: 1rem;
+        grid-row-gap: 1rem;
+    }
+    .CVReview .skill-grid .skillName, .CVReview .role_skills .skillName {
+        font-size: 0.7rem !important;
+    }
+}
 /* .lineToright {
     margin-right: 1rem  ;
     position: relative;

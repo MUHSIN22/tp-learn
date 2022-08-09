@@ -12,27 +12,30 @@ export default function Hobby() {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
     return (
-        <div className="col-50 section_2 align-center">
-            <div className="col-90 align-start tex-left">
-                <h3>Hobbies {toEdit && (
-                     <span onClick={() => handleEditForms({ progress: 13,hobby})} className="px-1"><FaPencilAlt /></span>
-                    )}</h3>
-                <span className="divider"></span>
-                {hobby && <div className="hobby grid-auto">
-                    <HobbyCard name={'Entertainment'} hobby={hobby} />
-                    <HobbyCard name={'Music'} hobby={hobby} />
-                    <HobbyCard name={'Sports'} hobby={hobby} />
-                    <HobbyCard name={'Leisure'} hobby={hobby} />
-                    <HobbyCard name={'Adventure'} hobby={hobby} />
-                    <HobbyCard name={'travel'} hobby={hobby} />
-                    <HobbyCard name={'books'} hobby={hobby} />
-                    <HobbyCard name={'Any other'} hobby={hobby} />
-
-                </div>}
-            </div>
-
-
-        </div>
+        <>
+            {
+                (hobby.entertainment || hobby.adventure || hobby.any_other || hobby.books || hobby.leisure || hobby.music || hobby.sports || hobby.travel) &&
+                <div className="col-50 section_2 align-center" style={{width: "100%"}}>
+                    <div className="col-90 align-start tex-left">
+                        <h3>Hobbies {toEdit && (
+                             <span onClick={() => handleEditForms({ progress: 13,hobby})} className="px-1"><FaPencilAlt /></span>
+                            )}</h3>
+                        <span className="divider"></span>
+                        {hobby && <div className="hobby grid-auto">
+                            <HobbyCard name={'Entertainment'} hobby={hobby} />
+                            <HobbyCard name={'Music'} hobby={hobby} />
+                            <HobbyCard name={'Sports'} hobby={hobby} />
+                            <HobbyCard name={'Leisure'} hobby={hobby} />
+                            <HobbyCard name={'Adventure'} hobby={hobby} />
+                            <HobbyCard name={'travel'} hobby={hobby} />
+                            <HobbyCard name={'books'} hobby={hobby} />
+                            <HobbyCard name={'Any other'} hobby={hobby} />
+        
+                        </div>}
+                    </div>
+                </div>
+            }
+        </>
     )
 }
 function HobbyCard({ name, icon, hobby }) {

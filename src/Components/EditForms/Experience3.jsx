@@ -10,6 +10,8 @@ import IconSelect from '../IconInput/IconSelect'
 import SuggestiveInput from '../IconInput/SuggestiveInput'
 import moment  from 'moment'
 import Control from './Control'
+import IconAutoComplete from '../IconInput/IconAutocomplete'
+import { BiLocationPlus } from 'react-icons/bi'
 const DEBOUNCE_DELAY = 600;
 export default function Experience3({data}) {
     const dispatch = useDispatch()
@@ -34,6 +36,10 @@ export default function Experience3({data}) {
 
     })
     const [showAlert,setShowAlert] = useState(false);
+    const [isCurrentWorking,setCurrentWorking] = useState(false)
+    const [isRemoteWorking, setRemoteWorking] = useState(false);
+    const [isHideSalary, setHideSalary] = useState(false);
+    const [location,setLocation] = useState('')
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     const error = useSelector(selectResumeError);
@@ -126,40 +132,49 @@ export default function Experience3({data}) {
         if(currencyList.length>0&& (form.start_salary_currency===''||form.end_salary_currency==='')) setForm({...form , start_salary_currency: currencyList[0].id, end_salary_currency: currencyList[0].id})
     },[currencyList])
     return (
-        <>  
-            {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Industry details': 'Industry details added'}/>}
+        <div className='designation-form'>  
+            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <h1>Now tell us about all the job roles at which you have worked, starting with the latest one.</h1>
             <div className="form-row">
-                <SuggestiveInput icon={<></>} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' width={45} suggestions={designationlist} name_field={'job_title_name'} searchHandler={searchHandler} selected={selectHandler} defaultValue={form.designation_name}/>
-                <IconSelect name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' width={45} options={managementLevelList} name_field={'level_name'} defaultValue={form.level_id}/>
+                <SuggestiveInput icon={<></>} value={search} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' width={45} suggestions={[...designationlist,{id:null,job_title_name: "Add designation"}]} name_field={'job_title_name'} searchHandler={searchHandler} selected={selectHandler}  />
+                <IconSelect value={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' width={45} options={[{id:0,level_name: "Select a level"},...managementLevelList]} name_field={'level_name'} />
             </div>
             <div className="form-row">
-                <IconInput name='location' handleChange={handleDesignationForm} label='Location' placeholder='Your place of work' width={45} defaultValue={form.location}/>
-                <IconSelect name='functional_area_id' handleChange={handleDesignationForm} label='Functional Area' placeholder='i.e. CXO Level' width={45} options={functionalAreaList} name_field='functional_area_name' defaultValue={form.functional_area_id}/>
+                <IconAutoComplete icon={<BiLocationPlus />} value={form.location} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={45} validation={message&&message.address} />
+                <IconSelect value={form.functional_area_id} name='functional_area_id' handleChange={handleDesignationForm} label='Functional Area' placeholder='i.e. CXO Level' width={45} options={[{id:0,functional_area_name: "Select a functional area"},...functionalAreaList]} name_field='functional_area_name' />
             </div>
-            <div className="flex-row-start">
+            <div className="flex-row-start" style={{width: '100%'}}>
                 <label className="control control-checkbox">
                     I work remotely
-                    { form.remote_work == 'yes' ? <input name='remote_work' value={form.remote_work} onChange={handleDesignationForm} type="checkbox" checked/> : <input name='remote_work' value={'yes'} onChange={handleDesignationForm} type="checkbox" /> }
+                    <input name='remote_work' value={isRemoteWorking ? 'yes' : 'no'} onChange={event => {
+                        handleDesignationForm(event)
+                        setRemoteWorking(!isRemoteWorking)
+                    }} type="checkbox" checked={form.remote_work==='yes'} />
                     <div className="control_indicator"></div>
                 </label>
             </div>
             <div className="form-row">
-                <IconInput name='start_date' handleChange={handleDesignationForm} type='date' label='When did you start' placeholder='MM/DD/YYYY' width={40} defaultValue={form.start_date} />
-                <IconInput name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='Per Annum' width={40} defaultValue={form.start_salary}/>
-                <IconSelect name='start_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={10} defaultValue={currencyList.find(curr=>{if(curr.currency_name==data.start_salary_currency){return curr.id}})}/>
+                <IconInput value={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='When did you start' placeholder='MM/DD/YYYY' width={40} />
+                <div className="salary-wrapper">
+                    <IconInput value={form.start_salary} name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='Per Annum' width={100} />
+                    <IconSelect value={form.start_salary_currency} name='start_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
+                </div>
             </div>
-            <div className="form-row">
-                <IconInput name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} defaultValue={form.end_date}/>
-                <IconInput name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package in this role' placeholder='Per Annum' width={40} defaultValue={form.end_salary}/>
-                <IconSelect name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={10} defaultValue={currencyList.find(curr=>{if(curr.currency_name==data.end_salary_currency){return curr.id}})}/>
-            </div>
+                <div className="form-row">
+                    {
+                        !isCurrentWorking&&
+                        <IconInput value={form.end_date} name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
+                    }
+                    <div className="salary-wrapper">
+                        <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package in this role' placeholder='Per Annum' width={100} />
+                        <IconSelect value={form.end_salary_currency} name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
+                    </div>
+                </div>
             <div className="form-row">
                 <div className="control-group">
                     <label className="control control-checkbox">
                         I am currently working in this job role
-                        {form.current_working == 'yes' ? <input name='current_working' value={form.current_working}  onChange={handleDesignationForm} type="checkbox" checked/> : <input name='current_working' value={'yes'}  onChange={handleDesignationForm} type="checkbox" />}
-                        <input name='current_working' value={'yes'}  onChange={handleDesignationForm} type="checkbox" />
+                        <input name='current_working' value={!isCurrentWorking ? 'yes' : "no"}  onChange={handleDesignationForm} type="checkbox" checked={form.current_working==='yes'} />
                         <div className="control_indicator"></div>
                     </label>
                 </div>
@@ -167,7 +182,10 @@ export default function Experience3({data}) {
             <div className="control-group">
                 <label className="control control-checkbox">
                      Hide my salary
-                    { form.hide_salary == 'yes' ? <input name='hide_salary' value={form.hide_salary} onChange={handleDesignationForm} type="checkbox" checked/> : <input name='hide_salary' value={'yes'} onChange={handleDesignationForm} type="checkbox" /> }
+                    <input name='hide_salary' value={!isHideSalary ? 'yes' : "no"} onChange={(event) => {
+                        handleDesignationForm(event);
+                        setHideSalary(!isHideSalary);
+                    }} type="checkbox" checked={form.hide_salary==='yes'}  />
                     <div className="control_indicator"></div>
                 </label>
             </div>
@@ -175,7 +193,7 @@ export default function Experience3({data}) {
                 <p>Check this box to hide salary from others. It is only for data analytics and predicting your future salary.</p>
             </div>
             <Control handleSubmit={handleAddDesignation} />
-        </>
+        </div>
     )
 }
 function lastElement(arr){

@@ -5,7 +5,7 @@ import { ReactComponent as ChevronRight } from '../../Assests/icons/chvron-right
 import IconInput from '../IconInput/IconInput';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addExperience, selectFormId, selectReload, selectResumeDetails, selectResumeError, selectResumeInfo, selectResumeMessage, selectResumeStatus } from '../../redux/Features/ResumeSlice';
+import { addExperience, changeFormId, selectFormId, selectReload, selectResumeDetails, selectResumeError, selectResumeInfo, selectResumeMessage, selectResumeStatus } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 export default function Onboarding() {
@@ -47,7 +47,7 @@ function Step1({ name }) {
     return (
         <div className="step">
 
-            <p style={{fontSize:'3rem'}}>Hey {name}</p>
+            <p style={{fontSize:'3rem'}} className="name-preview">Hey {name}</p>
             <h1>Let’s create your Intelligent Resume</h1>
         </div>
     )
@@ -98,7 +98,6 @@ function Step6() {
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     function handleSUbmit(){
-        console.log(form)
         try {
             dispatch(addExperience({
                 auth:token,body:{
@@ -107,6 +106,15 @@ function Step6() {
                     is_fresher: form.is_fresher
                 }
             })).unwrap()
+            console.log(form.is_fresher,'is fresher variable value');
+            let body = {
+                form_id: 8,
+                user_id: user_id
+              }
+            if(form.is_fresher === "yes"){
+                console.log("inside fresher");
+                dispatch(changeFormId({auth:token,body})).unwrap()
+            }
         } catch (error) {
             console.log(error)
         }

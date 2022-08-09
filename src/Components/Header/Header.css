@@ -23,7 +23,7 @@
     box-shadow: none;
     margin-right: 1rem;
 }
-.hamburger{
+.hamburger-home{
     display: none;
 }
 
@@ -50,14 +50,15 @@
     .main-header .btn-primary{
         padding: 0.5rem 1rem;
         box-shadow: none;
+        font-size: 0.9rem;
     }
-    .hamburger{
+    .hamburger-home{
         display: block;
         width: 29px;
         list-style: none;
         padding: 0;
       }
-      .hamburger .layer{
+      .hamburger-home .layer{
         width: 100%;
         height: 4px;
         border-radius: 50px;
@@ -65,18 +66,18 @@
         transition: all 0.3s ease;
         pointer-events: none;
       }
-      .hamburger .layer:nth-child(2){
+      .hamburger-home .layer:nth-child(2){
         margin: 4px 0;
       }
-      .hamburger--active .layer:last-child{
+      .hamburger-home--active .layer:last-child{
         transform: rotate(-45deg) translateY(-3px);
         transform-origin: center;
       }
-      .hamburger--active .layer:first-child{
+      .hamburger-home--active .layer:first-child{
         transform: rotate(45deg) translateY(3px);
         transform-origin: center;
       }
-      .hamburger--active .layer:nth-child(2){
+      .hamburger-home--active .layer:nth-child(2){
         display: none;
       }
 }

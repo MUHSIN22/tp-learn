@@ -24,3 +24,8 @@
 .input-drop{
     border-color: #21CE93;
 }
+@media only screen and (max-width: 500px) {
+    .dragDropInput{
+        width: 100%;
+    }
+}

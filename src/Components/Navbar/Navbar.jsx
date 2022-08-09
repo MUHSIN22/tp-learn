@@ -27,10 +27,10 @@ console.log(window.location.pathname)
           <img src={Logo} alt="" />
       </div>
      {(auth['authToken'] && user) && <div className="controls">
-      <span className='flex-row-start align-center g-0-5' onClick={()=>rendertomyprofile()}><button className='profile'>
-        
-        <User/>
-        </button>{user}</span>
+      <span className='flex-row-start align-center g-0-5 ' onClick={()=>rendertomyprofile()}>
+        <button className='profile'>
+          <User/>
+        </button><span className='user-name'>{user}</span></span>
         
         <button className='btn tirtiary' onClick={()=>rendertomyprofile()}>Save As Draft</button>
       </div>}

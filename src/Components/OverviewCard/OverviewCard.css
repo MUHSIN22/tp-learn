@@ -130,3 +130,15 @@
     height: 10px;
     border-radius: 50%;
 }
+
+@media only screen and (max-width: 500px) {
+    .overview-grid{
+        grid-template-columns: 1fr;
+        margin: 0.5rem 0;
+    }
+    .overview .donut-graph{
+        /* display: none; */
+        width: 75vw;
+        border-right: none !important;
+    }
+}

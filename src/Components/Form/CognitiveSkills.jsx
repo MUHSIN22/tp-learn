@@ -124,7 +124,7 @@ export default function CognitiveSkills({}) {
         {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Project': 'Project added'}/>}
            
             <div className="card g-1" id="tpcv"> 
-            <div className='responsive-grid'>
+            <div className='responsive-grid cognetive-grid'>
                 <div>
                     <div className='mt-2'>
                         <MarkedSlider disabled={checkEnabled('communication')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'communication'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span>  &nbsp; &nbsp;Communication </span></>}/>

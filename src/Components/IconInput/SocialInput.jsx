@@ -33,9 +33,13 @@ export default function SocialInput({ type, label, name, handleChange=()=>{}, ic
           <label htmlFor={name}>{label}</label>
         </div>
         {!submit ? <div className='align'>
-          {show ? <> <input autoComplete='off' type={type} value={state[name]} onChange={changeHandler} name={name} placeholder={placeholder} />
-            <button className='btn-link' onClick={submitHandler}>Submit</button>
-            <button onClick={() => { setShow(false) }} className='btn-fit transparent'><Cross /></button></> :
+          {show ? <> 
+            <input autoComplete='off' type={type} value={state[name]} onChange={changeHandler} name={name} placeholder={placeholder} />
+            <div className="submit-wrapper">
+              <button className='btn-link' onClick={submitHandler}>Submit</button>
+              <button onClick={() => { setShow(false) }} className='btn-fit transparent'><Cross /></button>
+            </div>
+            </> :
             <button onClick={() => { setShow(true) }} className='btn-show slide-in-right'>Link</button>}
         </div> :
           <div className="align">

@@ -40,7 +40,7 @@ export default function CreatePassword() {
     }
     return (
         <div className="login">
-            <div className="col-30 justify-center">
+            <div className="col-30 justify-center otp-side">
                 <form>
                 {message&&!loading && 
                     Object.values(message)[0] &&
@@ -67,7 +67,7 @@ export default function CreatePassword() {
 
                 </form>
             </div>
-            <div className="col-70">
+            <div className="col-70 image-side">
                 <img src={loginVector} alt="" />
             </div>
         </div>

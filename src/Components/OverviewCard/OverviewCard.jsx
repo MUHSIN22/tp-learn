@@ -23,8 +23,8 @@ const handleEditForms = (data) => {
   return (
     <>
 
-    {overview&&overview.length>0?<div className="overview responsive-grid">
-        <div className="col-100 multiDonut lineToright">
+    {overview&&overview.length>0?<div className="overview responsive-grid overview-grid">
+        <div className="col-100 multiDonut lineToright donut-graph">
           <h3>Industry overview</h3>
           <MultiDonut width={'150%'} data={formatData(overview)}/>
         </div>

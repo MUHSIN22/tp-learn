@@ -29,7 +29,7 @@ export default function Control({handleSubmit, handleSkip }) {
 
 
     return (
-        <div className="form-row">
+        <div className="form-row" style={{flexDirection: "row"}}>
             <div className="col-30">
                 <button className={`btn tertiary ${loading&&'disabled'} `} onClick={() =>backHandler()} disabled={loading}><ChevronLeft /> {!btnClicked&&loading?'Loading...':'Back'}</button>
             </div>

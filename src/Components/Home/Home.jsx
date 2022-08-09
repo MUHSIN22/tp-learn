@@ -112,7 +112,7 @@ export default function Home() {
     }
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <main className="home-page">
                 <section className="home-banner" >
                     <div className="banner-content-wrapper">

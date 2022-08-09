@@ -69,7 +69,9 @@ export default function Experience5() {
         temp.skill_complexity = e.target.value
     }
     const handleAddSkill = () => {
+        console.log(temp.skill_id,search,);
         temp.skill_name = temp.skill_id == '' ? search : temp.skill_name;
+        console.log(temp,'this is temp');
         set_Selected_options([...selected_options, temp])
         document.getElementById('iconinput-Skills').value = '';
         document.getElementById('iconinput-complexity').value = '';
@@ -89,9 +91,10 @@ export default function Experience5() {
         let body = form
         body.job_skills = JSON.stringify(body.job_skills)
         body.user_id = user_id
-        body.job_skills = JSON.stringify(selected_options.map((x) => { return { skill_id: x.skill_id, skill_complexity: x.skill_complexity } }))
+        body.job_skills = JSON.stringify(selected_options.map((x) => { return { skill_id: x.skill_id, skill_name: x.skill_name, skill_complexity: x.skill_complexity } }))
         body.user_company_job_record_id = lastJob.company_job_record_id
         body.user_company_record_id = lastCompany.company_record_id
+        console.log(body,'this is body');
         try {
             dispatch(addJobSkills({ auth: token, body })).unwrap()
             console.log(form)
@@ -167,7 +170,7 @@ export default function Experience5() {
                 <button onClick={handleAddSkill} className='btn-fit transparent'><AddCircle /></button>
             </div>
             <div className="form-col">
-                <div className="flex-row-between align-stretch g-1">
+                <div className="flex-row-between align-stretch g-1 role-and-suggestions">
                     <div className="editor col-50 g-0-5">
                         <label className='text-left' htmlFor="">Roles and Responsibilities</label>
                         <CKEditor

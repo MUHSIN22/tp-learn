@@ -145,6 +145,7 @@ export default function Experience3() {
             user_company_job_record_id: lastJob.company_job_record_id,
             user_company_record_id: lastCompany.company_record_id
         })
+        setLocation(lastJob.job_location)
         setSearch(lastJob.designation_name||'')
       }else{
         setForm({
@@ -168,10 +169,10 @@ export default function Experience3() {
                 <IconSelect value={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' width={45} options={[{id:0,level_name: "Select a level"},...managementLevelList]} name_field={'level_name'} />
             </div>
             <div className="form-row">
-                <IconAutoComplete icon={<Location />} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={45} validation={message&&message.address} />
+                <IconAutoComplete icon={<Location />} value={form.location} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={45} validation={message&&message.address} />
                 <IconSelect value={form.functional_area_id} name='functional_area_id' handleChange={handleDesignationForm} label='Functional Area' placeholder='i.e. CXO Level' width={45} options={[{id:0,functional_area_name: "Select a functional area"},...functionalAreaList]} name_field='functional_area_name' />
             </div>
-            <div className="flex-row-start">
+            <div className="flex-row-start" style={{width: '100%'}}>
                 <label className="control control-checkbox">
                     I work remotely
                     <input name='remote_work' value={isRemoteWorking ? 'yes' : 'no'} onChange={event => {
@@ -183,16 +184,20 @@ export default function Experience3() {
             </div>
             <div className="form-row">
                 <IconInput value={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='When did you start' placeholder='MM/DD/YYYY' width={40} />
-                <IconInput value={form.start_salary} name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='Per Annum' width={40} />
-                <IconSelect value={form.start_salary_currency} name='start_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={10} />
+                <div className="salary-wrapper">
+                    <IconInput value={form.start_salary} name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='Per Annum' width={100} />
+                    <IconSelect value={form.start_salary_currency} name='start_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
+                </div>
             </div>
                 <div className="form-row">
                     {
                         !isCurrentWorking&&
                         <IconInput value={form.end_date} name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
                     }
-                    <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package in this role' placeholder='Per Annum' width={40} />
-                    <IconSelect value={form.end_salary_currency} name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={10} />
+                    <div className="salary-wrapper">
+                        <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package in this role' placeholder='Per Annum' width={100} />
+                        <IconSelect value={form.end_salary_currency} name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
+                    </div>
                 </div>
             <div className="form-row">
                 <div className="control-group">

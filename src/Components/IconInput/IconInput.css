@@ -219,6 +219,9 @@ select:-webkit-autofill:focus {
   border: none;
 }
 
+.socialInput .submit-wrapper{
+  display: flex;
+}
 .socialInput .btn-link {
   color: #EF6239;
 }
@@ -316,6 +319,39 @@ select:-webkit-autofill:focus {
 }
 .country-suggestions  :hover{
   background-color:#e0dfdf ;
+}
+
+@media only screen and (max-width: 500px) {
+  .iconInput{
+    width: 100% !important;
+  }
+  .socialInput .input-container{
+    flex-direction: column;
+    height: max-content;
+    gap: 0.5rem;
+  }
+  .has-tooltip {
+    display: flex;
+    flex-direction: column;
+  }
+  .tooltip {
+    position: initial;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 2s, visibility 1s ease-in-out;
+    width: 100%;
+    font-size: 0.7rem;
+    text-align: left;
+    max-width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    display: none;
+  }
+  .has-tooltip:where(:hover, :focus-within)>.tooltip {
+    display: block;
+  }
 }
 
 /* ----------------------------------------------

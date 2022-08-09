@@ -19,7 +19,6 @@ import { selectAuthToken, selectUser_id } from "../../redux/Features/Authenticat
 export default function EducationReview() {
   const education = useSelector(selectEducation);
   const loading = useSelector(selectResumeLoading);
-  console.log("-----------------education", education)
   return (
     <>
       {

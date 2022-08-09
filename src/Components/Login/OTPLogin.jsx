@@ -42,7 +42,7 @@ function handleExpire(){
 
   return (
     <div className="login">
-      <div className="col-30">
+      <div className="col-30 otp-side">
         <form>
         {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: Object.values(message)[0]} />}
           <h1>Enter the OTP here to login</h1>
@@ -52,7 +52,7 @@ function handleExpire(){
             <OTP otp={otp} setOtp={setOtp} /> 
             </div> 
             <div className="form-row">
-              <div className="col-20">
+              <div className="col-20 code-not-recieve">
               <p>Didn’t receive the code? <button className='btn-link'>Resend Code </button> </p>
               </div>
               
@@ -63,7 +63,7 @@ function handleExpire(){
 
         </form>
       </div>
-      <div className="col-70">
+      <div className="col-70 image-side">
         <img src={loginVector} alt="" />
       </div>
     </div>

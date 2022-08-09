@@ -20,7 +20,7 @@ export default function Header() {
 
     const handleHamburgerClick = (event) => {
         let activeItem = document.querySelector(".dropdown--active")
-        event.target.classList.toggle("hamburger--active")
+        event.target.classList.toggle("hamburger-home--active")
         menuRef.current.classList.toggle('btns-wrapper--active')
         if(activeItem){
           activeItem.classList.remove("dropdown--active")
@@ -35,7 +35,7 @@ export default function Header() {
                 <Link to="/login" className='btn-primary btn-login'>Login</Link>
                 <Link to="/signup" className='btn-primary'>Create My Resume</Link>
             </div>
-            <ul className="hamburger" ref={hamRef} onClick={handleHamburgerClick}>
+            <ul className="hamburger-home" ref={hamRef} onClick={handleHamburgerClick}>
                 <li className="layer"></li>
                 <li className="layer"></li>
                 <li className="layer"></li>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { selectJObSalaryTimeline, selectSalaryGraph } from '../../redux/Features/GraphSlice'
 import JobTimeline from '../Graphs/JobTimeline/JobTimeline'
 import LineGraph from '../Graphs/LineGraph'
@@ -8,21 +8,20 @@ export default function Section2() {
   const salaryGraph = useSelector(selectSalaryGraph)
   const timelineGraph = useSelector(selectJObSalaryTimeline)
   const resumeInfo = useSelector(selectResumeInfo)
-  console.log(timelineGraph, salaryGraph, "timeline and salary");
   return (
     <>
       {
-        timelineGraph && timelineGraph.company_info && timelineGraph.company_info[0] && salaryGraph[0] &&
+        ((timelineGraph && timelineGraph.company_info ) || salaryGraph ) &&
         <div className="col-100 align-center CareerTimeline">
           <div className="col-90 align-start py-2 px-2">
             <h3>Career Timeline</h3>
             <span className="divider"></span>
-            {timelineGraph && timelineGraph.company_info && timelineGraph.skill_info && <JobTimeline jobs={timelineGraph.company_info} skills={timelineGraph.skill_info} />}
+            {((timelineGraph && timelineGraph.company_info) || timelineGraph.skill_info) && <JobTimeline jobs={timelineGraph.company_info} skills={timelineGraph.skill_info} />}
           </div>
 
           <div className="col-90 g-1 my-2">
 
-            <div className="flex-row-between">
+            <div className="flex-row-between salary-management-header">
               <h3>Salary & management Graph</h3>
               <div className='flex-row-fit g-0-5 align-center'>
                 <div className='flex-row-fit g-0-5 align-center'>

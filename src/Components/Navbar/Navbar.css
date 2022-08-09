@@ -33,3 +33,27 @@ nav .profile{
 nav button{
     font-size: 1rem!important;
 }
+@media only screen and (max-width: 768px) {
+    nav {
+        padding: 0.5rem;
+    }
+    nav .logo {
+        width: max-content;
+        margin-left: 0;
+        margin-right: auto;
+    }
+    nav .logo img{
+        width: 6rem
+    }
+    .btn {
+        width: max-content;
+        font-size: 0.8rem !important;
+        padding: 0.8rem;
+    }
+    .user-name{
+        display: none;
+    }
+    nav .controls {
+        margin-right: 0;
+    }
+}

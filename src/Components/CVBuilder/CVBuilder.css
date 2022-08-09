@@ -142,5 +142,9 @@
     .cvbuilder .step-row{
         display: none;
     }
+    .cvbuilder {
+        padding-top: 1rem;
+    }
+    
 }
 

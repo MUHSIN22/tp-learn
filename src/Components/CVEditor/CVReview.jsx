@@ -50,6 +50,7 @@ import { useCallback } from "react";
 import { PDFDownloadLink, usePDF } from "@react-pdf/renderer";
 import PdfGenerator from "../Resume2/PdfGenerator";
 import { selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
+import MobileHeader from "../MobileHeader/MobileHeader";
 
 export default function CVBuilder() {
   const page = useSelector(getPageOn);
@@ -81,8 +82,8 @@ export default function CVBuilder() {
     setloader(value)
   }
 
-  if(location?.state?.page === "/dashboard"){
-    dispatch(changePageOn("/dashboard"));
+  if(location?.state?.page === "/personal-information"){
+    dispatch(changePageOn("/personal-information"));
   }
 
   const newRef = React.useRef();
@@ -95,7 +96,6 @@ export default function CVBuilder() {
   };
 
   const pull_data = (data) => {
-   
     dispatch(changePageOn(data));
   };
   editPageDetails && editPageDetails.progress && window.scrollTo(0, 0);
@@ -197,7 +197,8 @@ export default function CVBuilder() {
   return (
     // <div className="cvEditor">
     <div className="flex-row-center cvEditContainer" id="cv-pdf-content">
-      <div className="col-fit">
+      <MobileHeader />
+      <div className="col-fit sidebar-wrapper">
         <Sidebar currentPage={pull_data} />
       </div>
       <div className="col-100">
@@ -211,38 +212,38 @@ export default function CVBuilder() {
           {
               loader==1 && <Spinner />
             }
-          <div className="flex-row-center justify-end m-0 px-1">
+          <div className="flex-row-center justify-end m-0 px-1 form-edit-wrapper">
             {(editPageDetails && editPageDetails.hasOwnProperty('progress')) && (
               <EditFormContainer data={editPageDetails} />
             )}
           </div>
-          {((page === "/personal-information" || page === "/dashboard") && loader!=1) && (
+          {((page === "/dashboard" || page === "/personal-information") && loader!=1) && (
             <Section1 />
           )}
-           {((page === "/career-timeline" || page === "/dashboard") && loader!=1) && (
+           {((page === "/career-timeline" || page === "/personal-information") && loader!=1) && (
             <Section2Review />
           )}
-          {((page === "/Experience" || page === "/dashboard") && loader!=1 ) && <Section3 />}
-          {((page === "/Certification" || page === "/dashboard") && loader!=1) && (
+          {((page === "/Experience" || page === "/personal-information") && loader!=1 ) && <Section3 />}
+          {((page === "/Certification" || page === "/personal-information") && loader!=1) && (
             <Cerification />
           )}
-          {((page === "/Education" || page === "/dashboard") && loader!=1 ) && (
+          {((page === "/Education" || page === "/personal-information") && loader!=1 ) && (
             <EducationReview />
           )}
-          {/* {((page === "/Recommendation" || page === "/dashboard") && loader!=1) && (
+          {/* {((page === "/Recommendation" || page === "/personal-information") && loader!=1) && (
             <Recommendation />
           )} */}
-          {((page === "/languages" || page === "/dashboard" || page === "/hobbies") && loader!=1) && <div className="flex-row-between g-2 mt-2"><Hobby /></div>}
-          {/* {((page === "/hobbies" || page === "/dashboard") && loader!=1) && <Hobby />} */}
-          {((page === "/SocialContribution" || page === "/dashboard") && loader!=1) && (
+          {((page === "/languages" || page === "/personal-information" || page === "/hobbies") && loader!=1) && <div className="flex-row-between g-2 mt-2"><Hobby /></div>}
+          {/* {((page === "/hobbies" || page === "/personal-information") && loader!=1) && <Hobby />} */}
+          {((page === "/SocialContribution" || page === "/personal-information") && loader!=1) && (
             <SocialContribution />
           )}
-          {((page === "/Docs" || page === "/dashboard") && loader!=1) && <DocsReview />}
-          {((page === "/Videos" || page === "/dashboard") && loader!=1) && <VideosReview />}
-          {((page === "/SocialMedia" || page === "/dashboard") && loader!=1) && (
+          {((page === "/Docs" || page === "/personal-information") && loader!=1) && <DocsReview />}
+          {((page === "/Videos" || page === "/personal-information") && loader!=1) && <VideosReview />}
+          {((page === "/SocialMedia" || page === "/personal-information") && loader!=1) && (
             <SocialMedia />
           )}
-          {((page === "/self-declaration" || page === "/dashboard") && loader!=1) && (
+          {((page === "/self-declaration" || page === "/personal-information") && loader!=1) && (
             <SelfDeclaration />
           )}
           <div

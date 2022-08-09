@@ -1,13 +1,10 @@
 .formContainer{
     width: 50%;
-
     display: flex;
     flex-direction: column;
     padding: 2rem;
-
     background-color: #fff;
     border-radius: 5px;
-
     gap: 1rem;
 }
 .formContainer h1{
@@ -135,6 +132,12 @@
     font-size: 0.8rem;
     color: #1C1B2C;
 }
+.salary-wrapper{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    flex: 1;
+    gap: 1rem;
+}
 
 @media only screen and (max-width:1024px) {
     .formContainer{
@@ -146,6 +149,9 @@
     .suggestion-card{
         display: flex;
         flex-direction: column;
+    }
+    .formContainer{
+        width: 100% !important;
     }
 }
 @media only screen and (max-width:600px) {
@@ -162,5 +168,48 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .formContainer{
+        padding: 1rem !important;
+    }
+    .formContainer h1 {
+        font-size: 1.3rem !important;
+    }
+    .formContainer label {
+        font-size: 0.7rem;
+    }
+    .iconInput .input-container input {
+        border-radius: 7px;
+        font-size: 0.8rem;
+    }
+    .salary-wrapper{
+        display: grid;
+        grid-template-columns:2fr 1fr;
+        width: 100%;
+        grid-gap: 0.5rem;
+    }
+    .role-and-suggestions{
+        flex-direction: column-reverse;
+    }
+    .role-and-suggestions > div{
+        width: 100%;
+    }
+    .formContainer .card{
+        width: 100%;
+    }
+    .markedSlider {
+        width: 100% !important;
+    }
+    .cognetive-grid{
+        flex-direction: column;
+        display: flex;
+    }
+    .option-card p {
+        font-family: poppins;
+        font-weight: 600;
+        font-size: 0.7rem;
+        margin: 0;
     }
 }
