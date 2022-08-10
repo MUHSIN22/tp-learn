@@ -30,7 +30,7 @@ export default function Signup() {
     const message = useSelector(selectAuthMessage);
     const reg_id = useSelector(selectReg_id);
     const error = useSelector(selectAutheError)
-
+    
     const [countryCode,setCountryCode] = useState(91);
     const [form, setForm] = useState({
         fname: '',
@@ -135,7 +135,7 @@ export default function Signup() {
                         <span className='line'></span>
                     </div>
                     <div className="form-row">
-                        <Link to='/' className='btn secondary'>Login</Link>
+                        <Link to='/login' className='btn secondary'>Login</Link>
                     </div>
 
                 </form>

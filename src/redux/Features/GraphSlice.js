@@ -35,7 +35,7 @@ export const companyWiseGraph = createAsyncThunk('authentication/companyWiseGrap
             }
         })
 
-        console.log(response.data);
+        console.log(response.data,'company graph');
 
         return response.data
     } catch (error) {

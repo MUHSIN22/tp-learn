@@ -67,7 +67,7 @@ export default function CVBuilder() {
   const token = useSelector(selectAuthToken)
   const [instance,setInstance] = usePDF({document: <PdfGenerator bio={bio} resumeDetails={resumeDetails} />})
 
-
+  console.log(resumeDetails,'resume details');
   // let loaderState=useSelector(getLoaderstate)
   const handleEdit = (e) => {
     dispatch(changeToEdit(!toEdit)).unwrap();

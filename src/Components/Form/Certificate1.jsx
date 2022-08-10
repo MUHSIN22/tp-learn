@@ -157,6 +157,7 @@ export default function Certificate1() {
           
         }
       },[reloadFlag,loading])
+      console.log(message,'this is message',error);
     return (
         <>
             <h1>Add any certification courses/trainings you have done</h1>

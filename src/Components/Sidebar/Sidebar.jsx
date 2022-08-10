@@ -85,6 +85,7 @@ function Sidebar(props) {
                       // if (val.link == "/logout") {
                       //   dispatch(logout());
                       // }
+                      sendProp('/personal-information')
                       navigate(`${val.link}`);
                       
                     }}

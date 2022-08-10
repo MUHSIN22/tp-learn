@@ -741,7 +741,7 @@ export const resumeSlice = createSlice({
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.message
+            state.message = action.payload.data.error_message
 
 
         }).addCase(addAdditionalSkills.pending, (state, action) => {
@@ -788,7 +788,7 @@ export const resumeSlice = createSlice({
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.message
+            state.message = action.payload.data.error_message
 
 
         }).addCase(uploadPhotomedia.pending, (state, action) => {
