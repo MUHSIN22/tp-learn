@@ -14,6 +14,7 @@ const colors = [
 ];
 export default function JobTimeline({ jobs = [], skills = [] }) {
   let current_year = new Date().getFullYear();
+  const [jobList,setJobList] = useState(jobs)
 
   let start_year = jobs[0] && jobs[0].timeline[0].job_start_date.split("-")[2];
   let year_list = [start_year];
@@ -36,26 +37,33 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
 
   useEffect(() => {
     console.log(jobs,'this is jobs');
-    jobs.forEach((job,index) => checkJobsGap(index))
+    jobList.forEach((job,index) => checkJobsGap(index))
   },[jobs])
 
 
   const checkJobsGap = (startIndex) => {
+    let newJob = []
+    console.log(jobs[startIndex],jobs[startIndex + 1],'startIndex and str1');
     if(jobs[startIndex+1]){
       let firstJobEnd = jobs[startIndex].timeline[0].job_end_date.split('-')[2]
       let secondJobStart = jobs[startIndex+1].timeline[0].job_start_date.split('-')[2]
       if((secondJobStart-firstJobEnd) > 0){
+        
         let noExperience = {
           company_name:"No experience",
           timeline:[{
             job_start_date:"19-11-"+firstJobEnd,
             job_end_date:`19-11-${secondJobStart}`
           }]}
-          jobs.splice(startIndex+1,0,noExperience);
-        console.log(secondJobStart-firstJobEnd,'diff',secondJobStart,firstJobEnd);
+          let arr1 = jobs.slice(0,startIndex+1);
+          let arr2 = jobs.slice(startIndex+1);
+          let newJob = [...arr1,noExperience,...arr2];
+          console.log(newJob,'Splitted arrays');
+          // newJob.splice(startIndex+1,0,{...noExperience});
+          
+          console.log(jobs,'jobx');
+          setJobList(newJob)
       }
-      console.log(jobs,'```````````````````````````````````````');
-      console.log(firstJobEnd,secondJobStart,"```````````````````````````");
     }else{
       let lastJobEnd = jobs[startIndex].timeline[0].job_end_date.split('-')[2]
       console.log(new Date().getFullYear() - parseInt(lastJobEnd),"last diff");
@@ -66,7 +74,7 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
             job_start_date:"19-11-"+lastJobEnd,
             job_end_date:`19-11-${new Date().getFullYear()}`
           }]}
-          jobs.push(noExperience)
+          setJobList(prev => [...prev,noExperience])
       }
     }
   }
@@ -74,7 +82,7 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
   return (
     <div id="jobTimeline" className="jobTimeline">
       <div className="job-timeline-wrapper">
-        { jobs && jobs[0] && jobs.map((item, index) => (
+        { jobList && jobList[0] && jobList.map((item, index) => (
           <div className="job" style={{ backgroundColor: (item.company_name === 'No experience' ? "rgba(99,99,99,5.4)" : colors[index]) }}>
             {item.type}
             <div className="time-bar">
