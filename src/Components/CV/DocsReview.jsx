@@ -17,7 +17,7 @@ export default function DocsReview() {
         documents[0] &&
         <div className="docs section_2 col-100 align-center">
           <div className="col-90 py-1">
-            <h3>Docs files </h3>
+            <h1>Docs files </h1>
             <span className="divider"></span>
             <div className="flex-row-start g-5 docFilesDiv">
               {documents && documents.length > 0 ? (

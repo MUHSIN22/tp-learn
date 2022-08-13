@@ -127,8 +127,8 @@ export default function Experience1({ data }) {
     body.user_id = user_id;
     console.log(body2,"this is body 2");
     try {
-     dispatch(addCompany({ auth: token, body })).unwrap();
-     dispatch(addIndustryInfo({auth:token,body:body2})).unwrap()
+     dispatch(addCompany({ auth: token, body,dispatch })).unwrap();
+     dispatch(addIndustryInfo({auth:token,body:body2,dispatch})).unwrap()
     } catch (error) {
       console.log(error);
     } finally {

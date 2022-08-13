@@ -42,7 +42,7 @@ export default function AdditionalSkills3({data}) {
         }
         let form_Data = JsonToFormData(body)
         try {
-            dispatch(addBio({ auth: token, body:form_Data })).unwrap()
+            dispatch(addBio({ auth: token, body:form_Data,dispatch })).unwrap()
             console.log(form)
         } catch (error) {
             showAlert(true)

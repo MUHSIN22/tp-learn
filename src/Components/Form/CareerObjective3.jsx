@@ -10,8 +10,10 @@ import { addSocialLinks, selectResumeError, selectResumeLoading, selectResumeMes
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import { useNavigate } from 'react-router-dom';
+import SelfDeclaration from '../CV/SelfDeclaration';
 export default function CareerObjective3() {
     const dispatch = useDispatch()
+    const [checked,setChecked] = useState(false)
     const [form, setForm] = useState({
         link_facebook: '',
         link_twitter: '',
@@ -20,12 +22,13 @@ export default function CareerObjective3() {
         link_other: '',
     })
     const error = useSelector(selectResumeError);
-    const message = useSelector(selectResumeMessage);
+    let message = useSelector(selectResumeMessage);
     const loading = useSelector(selectResumeLoading);
     const [showAlert, setShowAlert] = useState(false);
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     const socialLinks = useSelector(selectSocilaLinks)
+    const [agreementError,setAgreementError] = useState(false)
     const navigate = useNavigate();
     function handleChange(evt) {
         const value = evt.target.value;
@@ -36,18 +39,23 @@ export default function CareerObjective3() {
         });
     }
     const handleSubmit = (e) => {
-        console.log('submit called')
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        try {
-            // dispatch(addSocialLinks({ auth: token, body })).unwrap()
-            navigate('/MyProfile')
-            console.log(form)
-        } catch (error) {
-            showAlert(true)
-        } finally {
-            setShowAlert(true)
+        console.log(checked,'checked');
+        setAgreementError(false)
+        if(checked){
+            try {
+                dispatch(addSocialLinks({ auth: token, body })).unwrap()
+                navigate('/MyProfile')
+                console.log(form)
+            } catch (error) {
+                showAlert(true)
+            } finally {
+                setShowAlert(true)
+            }
+        }else{
+            setAgreementError("Please tick the self Declaration!")
         }
     }
     useEffect(() => {
@@ -74,6 +82,7 @@ export default function CareerObjective3() {
             <h1 className='text-left'>
                 <span>Voila!</span> Take a moment to clap for yourself a little since you made it this far. Here, share your social media links and move on to the last step.
             </h1>
+            {agreementError && <Alert error={true} message={agreementError} />}
             {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
             <div className="form-row">
                 <SocialInput state={form} name='link_facebook' handleChange={handleChange} label={'Facebook'} icon={<Facebook></Facebook>} handleSubmit={handleSubmit} />
@@ -86,6 +95,9 @@ export default function CareerObjective3() {
             </div>
             <div className="form-row">
                 <SocialInput state={form} name='link_linkedin' handleChange={handleChange} label={'Linkedin'} icon={<Linkedin></Linkedin>} handleSubmit={handleSubmit} />
+            </div>
+            <div className="form-row">
+                <SelfDeclaration setChecked={setChecked} />
             </div>
             <div className="flex-row-end g-1" style={{width: '100%',display:"flex",justifyContent:"center"}}>
                 <div className="col-30">

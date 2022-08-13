@@ -11,7 +11,7 @@ export default function Education() {
                 education &&
                 <div className='section_2 my-2 col-100 align-center'>
                     <div className="col-90">
-                        <h3 className="text-left">Education</h3>
+                        <h1 className="text-left">Education</h1>
                         <span className="divider"></span>
                         <div className="flex-row-between">
                             <div className="col-100 g-1">

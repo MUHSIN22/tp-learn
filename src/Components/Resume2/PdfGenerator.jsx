@@ -5,6 +5,7 @@ import robotoMedium from '../../Assets/fonts/Roboto-Medium.ttf'
 import robotoRegular from '../../Assets/fonts/Roboto-Regular.ttf'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorHandler from '../ErrorHandler/ErrorHandler';
+import moment from 'moment';
 
 export default function PdfGenerator({ bio, resumeDetails }) {
   const [newBio, setNewBio] = useState(bio)
@@ -150,10 +151,10 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                       {
                         item.job_role ?
                         <View style={styles.rightSectionContentWrapper} key={index}>
-                          <Text style={styles.rightSectionMainText} >{item.job_role[0].designation_name}</Text>
                           <Text style={styles.rightSectionMainText} >{item.company_name}</Text>
+                          <Text style={[styles.rightSectionMainText,{fontSize: 9}]} >{item.job_role[0].designation_name}</Text>
                           <Text style={styles.rightSectionDate}>{item.industry_name}</Text>
-                          <Text style={styles.rightSectionDate}>{item.job_role[0].job_start_date} - {item.job_role[0].job_end_date}</Text>
+                          <Text style={styles.rightSectionDate}>{moment(item.job_role[0].job_start_date,'DD-MM-YYYY').format('yyyy MMM')} - {moment(item.job_role[0].job_end_date,'DD-MM-YYYY').format('yyyy MM')}</Text>
                            <View style={styles.list}>
                             {
                               makePoints(item.job_role[0].role_responsibilties).map((item, index) => (
@@ -202,6 +203,10 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                         </View>
                         :null
                       }
+                      {
+                        (resumeInfo.company.length - 1 !== index) &&
+                        <View style={styles.linePrimary}></View>
+                      }
                     </>
                   ))
                 }
@@ -218,7 +223,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                 resumeInfo.education &&
                 resumeInfo.education.map((item, index) => (
                   <View style={styles.rightSectionContentWrapper} key={index}>
-                    <Text style={styles.rightSectionMainText} >{item.degree_name} ({item.course_end_date} - {item.course_start_date})</Text>
+                    <Text style={styles.rightSectionMainText} >{item.degree_name} ({moment(item.course_start_date,'DD-MM-YYYY').format('yyyy MMM')} - {moment(item.course_start_date,'DD-MM-YYYY').format('yyyy MMM')})</Text>
                     <Text style={styles.rightSectionDate} >{item.university_name}</Text>
                     <Text style={styles.rightSectionDate} >{item.course_cgpa}</Text>
                     <Text style={styles.rightSectionDate} >{item.course_extra_activity}</Text>

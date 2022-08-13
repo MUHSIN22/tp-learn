@@ -39,7 +39,7 @@ export default function Experience2({ }) {
         const body = {...form, user_id,company_record_id}
         console.log(form)
         try {
-            dispatch(addIndustryInfo({auth:token,body})).unwrap()
+            dispatch(addIndustryInfo({auth:token,body,dispatch})).unwrap()
         } catch (error) {
             console.log(error);
         }finally{

@@ -16,7 +16,7 @@ export default function Control({handleSubmit}) {
         }
         try {
             dispatch(changeEditPageDetails({})).unwrap()
-            dispatch(changeFormId({auth:token,body})).unwrap()
+            dispatch(changeFormId({auth:token,body,dispatch})).unwrap()
         } catch (error) {
           
         }

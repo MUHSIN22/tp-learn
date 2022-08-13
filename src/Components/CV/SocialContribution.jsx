@@ -13,7 +13,7 @@ export default function SocialContribution() {
                 socialContribution[0] &&
                 <div className="socialContribution section_2 col-100 align-center">
                     <div className="col-90">
-                        <h3 className='text-left'>Social contribution </h3>
+                        <h1 className='text-left'>Social contribution </h1>
                         <span className="divider"></span>
                     </div>
                     {socialContribution && socialContribution.length > 0 ? <div className="col-90 g-1">

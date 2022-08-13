@@ -57,7 +57,6 @@ export default function Experience1() {
             body.other_company_name = debouncedSearchState
             console.log('first');
         }
-        console.log(form.company_name ,'asdjfka sdkf;as d  \n',debouncedSearchState, 'here its ikasd;fjklasd j;jasl');
         if(form.company_name !== "" && form.company_name !== search){
             console.log("second");
             form.other_company_name = search
@@ -66,7 +65,7 @@ export default function Experience1() {
         
         body.user_id = user_id
         try {
-            dispatch(addCompany({ auth: token, body })).unwrap()
+            dispatch(addCompany({ auth: token, body,dispatch })).unwrap()
         } catch (error) {
             console.log(error);
         } finally {
@@ -113,7 +112,7 @@ export default function Experience1() {
             setSearch(lastCompany.company_name)
         }
 
-        return () => {
+        return () => { 
 
         }
     }, [newJob,lastCompany])

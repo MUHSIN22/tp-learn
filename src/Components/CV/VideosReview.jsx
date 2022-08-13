@@ -17,7 +17,7 @@ export default function VideosReview() {
         video &&
         <div className="docs section_2 col-100 align-center">
           <div className="col-90 py-1">
-            <h3>Video files </h3>
+            <h1>Video files </h1>
             <span className="divider"></span>
             <div className="flex-row-start g-5 docFilesDiv">
               {video && video.length > 0 ? (

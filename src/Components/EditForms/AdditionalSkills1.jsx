@@ -40,7 +40,7 @@ export default function AdditionalSkills1({data}) {
         let body = form
         body.user_id = user_id
         try {
-          dispatch(addAdditionalSkills({auth:token,body:{...form,user_id}})).unwrap()
+          dispatch(addAdditionalSkills({auth:token,body:{...form,user_id},dispatch})).unwrap()
          console.log(form)
         } catch (error) {
             showAlert(true)

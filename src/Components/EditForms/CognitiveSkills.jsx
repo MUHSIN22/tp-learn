@@ -61,8 +61,7 @@ export default function CognitiveSkills({data}) {
         let body = form
         body.user_id = user_id
         try {
-          dispatch(addCognitiveSkills({auth:token,body:{...form,user_id}})).unwrap()
-          dispatch(reload())
+          dispatch(addCognitiveSkills({auth:token,body:{...form,user_id},dispatch})).unwrap()
          console.log(form)
         } catch (error) {
             showAlert(true)

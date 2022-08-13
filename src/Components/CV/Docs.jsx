@@ -11,7 +11,7 @@ export default function Docs() {
                 documents[0] &&
                 <div className="docs section_2 col-100 align-center">
                     <div className="col-90">
-                        <h3>Docs files </h3>
+                        <h1>Docs files </h1>
                         <span className="divider"></span>
                         {documents && documents.length > 0 ? <div className="flex-wrap g-1  ">
                             {

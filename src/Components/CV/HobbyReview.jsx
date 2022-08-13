@@ -24,9 +24,9 @@ export default function HobbyReview() {
                 (hobby.entertainment || hobby.adventure || hobby.any_other || hobby.books || hobby.leisure || hobby.music || hobby.sports || hobby.travel) &&
                 <div className="col-50 section_2 align-center" style={{ width: '100%' }} >
                     <div className="col-90 align-start tex-left">
-                        <h3>Hobbies {toEdit && (
+                        <h1>Hobbies {toEdit && (
                             <span onClick={() => handleEditForms({ progress: 13, hobby })} className="px-1"><FaPencilAlt /></span>
-                        )}</h3>
+                        )}</h1>
                         <span className="divider"></span>
                         {hobby && <div className="hobby grid-auto">
                             <HobbyCard name={'Entertainment'} hobby={hobby} icon={entertainment} />

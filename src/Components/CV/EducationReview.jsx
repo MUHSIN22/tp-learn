@@ -7,6 +7,7 @@ import {
   changeEditPageDetails,
   selectToEdit,
   deleteEducation,
+  selectResumeDetails,
 } from "../../redux/Features/ResumeSlice";
 import EducationLoader from "../Loaders/EducationLoader";
 import { FaPencilAlt } from "react-icons/fa";
@@ -18,14 +19,16 @@ import { AiFillDelete } from "react-icons/ai";
 import { selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
 export default function EducationReview() {
   const education = useSelector(selectEducation);
+  const details = useSelector(selectResumeDetails)
   const loading = useSelector(selectResumeLoading);
+  console.log(education,'this is eductaion',details);
   return (
     <>
       {
         education &&
         <div className="section_2 my-2 col-100 align-center">
           <div className="col-90">
-            <h3 className="text-left">Education</h3>
+            <h1 className="text-left">Education</h1>
             <span className="divider"></span>
             <div className="flex-row-between">
               <div className="col-100 g-1">
@@ -90,7 +93,7 @@ function EducationCard({
   return (
     <div className="education-review-grid flex-row-start g-2">
       <img src={UdemyLogo} alt="" />
-      <div className="col-100 align-start justify-between">
+      <div className="col-100 align-start justify-start">
         <div>
           <h5 className="text-left">{degree_name}
             {toEdit && (
@@ -136,19 +139,19 @@ function EducationCard({
             )}
           </h5>
         </div>
-        <div className="flex-row-start mt-0-5">
+        <div className="flex-row-start mt-0-5" >
           <p>{university_name}</p>
 
           <span className="gradientDivider-v"></span>
-          <p>{moment(course_start_date, "DD-MM-YYYY").format("yyyy MMM")} to {moment(course_end_date, "DD-MM-YYYY").format("yyyy")}</p>
+          <p>{moment(course_start_date, "DD-MM-YYYY").format("yyyy MMM")} to {moment(course_end_date, "DD-MM-YYYY").format("yyyy MMM")}</p>
         </div>
-        <div className="flex-row-start g-0-5">
+        {/* <div className="flex-row-start g-0-5">
           {skills.map((skill, i) => (
             <div key={i} className="skill">
               {skill}
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

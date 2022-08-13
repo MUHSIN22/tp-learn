@@ -96,7 +96,7 @@ export default function Experience5() {
         body.user_company_record_id = lastCompany.company_record_id
         console.log(body,'this is body');
         try {
-            dispatch(addJobSkills({ auth: token, body })).unwrap()
+            dispatch(addJobSkills({ auth: token, body, dispatch })).unwrap()
             console.log(form)
         } catch (error) {
             showAlert(true)
@@ -166,7 +166,7 @@ export default function Experience5() {
 
                 <SuggestiveInput name='Skills' searchHandler={searchHandler} label='Please enter all the skills you applied' placeholder='Select Skills' width={70} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
 
-                <IconInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' width={20} />
+                <IconInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' width={20} />
                 <button onClick={handleAddSkill} className='btn-fit transparent'><AddCircle /></button>
             </div>
             <div className="form-col">

@@ -47,6 +47,7 @@ import {
 } from "../../redux/Features/ResumeSlice";
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { AiFillDelete } from "react-icons/ai";
+import moment from "moment";
 export default function Section3Review() {
   const loading = useSelector(selectResumeLoading);
   const companyInfo = useSelector(SelectCompanyDetails);
@@ -59,11 +60,10 @@ export default function Section3Review() {
             {/* <Scale first={30} second={60} /> */}
             <div className="col-90">
               <div className="flex-row-between align-center">
-                <h3 className="text-left">Experience</h3>
+                <h1 className="text-left">Experience</h1>
               </div>
 
               <span className="divider"></span>
-              {console.log(companyInfo)}
               {companyInfo && companyInfo.length > 0 ? (
                 <CompanyOverview company={companyInfo[index]} />
               ) : (
@@ -146,10 +146,11 @@ function CompanyOverview({ company }) {
           <Clock /> <p>{company.nature_of_job_name}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
-          <BarGraph /> <p>{company.job_level_name}</p>
+          {console.log(company,'company from here00000000000000000000000')}
+          <BarGraph /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].job_level_name : ''}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
-          <Human /> <p>{company.function_area_name}</p>
+          <Human /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].function_area_name : ''}</p>
         </div>
       </div>
       <div className="col-100 justify-end">
@@ -187,6 +188,7 @@ function CompanyOverview({ company }) {
         {companyWise && (
           <LineGraph
             salary={companyWise.salary}
+            category={companyWise.duration}
             management={companyWise.managementLevelValue}
           />
         )}
@@ -273,9 +275,9 @@ function DesignationOverview(props) {
       </div>
 
       <p>
-        {job_role[index].job_start_date ||
-          "unknown" + " - " + job_role[index].job_end_date ||
-          "unknown"}
+        {(moment(job_role[index].job_start_date,"DD-MM-YYYY").format("yyyy MMM") ||
+          "unknown" )+ " - " + (moment(job_role[index].job_end_date,"DD-MM-YYYY").format("yyyy MMM") ||
+          "unknown")}
       </p>
       <span className="divider"></span>
       <div className="grid-35-65 company-overview-grid">

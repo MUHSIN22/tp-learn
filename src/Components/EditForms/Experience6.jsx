@@ -40,7 +40,7 @@ export default function Experience6({data}) {
         body.project_skills = selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity, skill_name:x.skill_name,skill_desc:x.skill_desc} })
         body.project_skills = JSON.stringify(body.project_skills)
         try {
-          dispatch(addProject({auth:token,body:{...form,user_id}})).unwrap()
+          dispatch(addProject({auth:token,body:{...form,user_id},dispatch})).unwrap()
          console.log(form)
         } catch (error) {
             showAlert(true)

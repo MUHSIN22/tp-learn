@@ -92,7 +92,7 @@ export default function Experience3() {
         if(form.current_working!=='yes')  body.current_working = 'no'
         console.log(form)
         try {
-            dispatch(addJobDesignation({auth:token,body})).unwrap()
+            dispatch(addJobDesignation({auth:token,body,dispatch})).unwrap()
             
         } catch (error) {
             console.log(error);

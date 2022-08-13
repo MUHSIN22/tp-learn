@@ -50,7 +50,7 @@ export default function AdditionalSkills2({data}) {
         let body = form
         body.user_id = user_id
         try {
-          dispatch(addHobbies({auth:token,body:{...form,user_id}})).unwrap()
+          dispatch(addHobbies({auth:token,body:{...form,user_id},dispatch})).unwrap()
          console.log(form)
         } catch (error) {
             showAlert(true)

@@ -31,7 +31,7 @@ export default function CareerObjective2({data}) {
         let body = form
         body.user_id = user_id
         try {
-            dispatch(uploadCVvideos({ auth: token, body })).unwrap()
+            dispatch(uploadCVvideos({ auth: token, body,dispatch })).unwrap()
             console.log(form)
         } catch (error) {
             showAlert(true)

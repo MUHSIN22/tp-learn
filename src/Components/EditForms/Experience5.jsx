@@ -98,7 +98,7 @@ export default function Experience5({data}) {
         body.job_skills =JSON.stringify( selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity,skill_name:x.skill_name} }))
 
         try {
-            dispatch(addJobSkills({ auth: token, body })).unwrap()
+            dispatch(addJobSkills({ auth: token, body,dispatch })).unwrap()
             console.log(form)
             if(showAlert && !loading){
                 dispatch(changeEditPageDetails({})).unwrap()

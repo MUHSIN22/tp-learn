@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function SelfDeclaration() {
+export default function SelfDeclaration({setChecked}) {
   return (
-    <div className="declaration  section_2 col-100 align-center text-left">
+    <div className="declaration  section_2 col-100 align-center text-left" style={{paddingTop: 0, marginTop: 0}}>
     <div className="col-90">
         <h3>Self-declaration</h3>
         <span className="divider"></span>
@@ -11,7 +11,7 @@ export default function SelfDeclaration() {
         <div className="flex-row-start">
         <label className="control control-checkbox">
         I agree terms and condition
-          <input type="checkbox" />
+          <input type="checkbox" onChange={event => setChecked(event.target.checked)}/>
           <div className="control_indicator"></div>
         </label>
       </div>

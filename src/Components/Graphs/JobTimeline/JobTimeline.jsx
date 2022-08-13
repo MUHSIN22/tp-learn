@@ -33,13 +33,50 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
     }
     return () => {};
   }, [start_year]);
-  console.log(jobs,'jobss');
+
+  useEffect(() => {
+    console.log(jobs,'this is jobs');
+    jobs.forEach((job,index) => checkJobsGap(index))
+  },[jobs])
+
+
+  const checkJobsGap = (startIndex) => {
+    if(jobs[startIndex+1]){
+      let firstJobEnd = jobs[startIndex].timeline[0].job_end_date.split('-')[2]
+      let secondJobStart = jobs[startIndex+1].timeline[0].job_start_date.split('-')[2]
+      if((secondJobStart-firstJobEnd) > 0){
+        let noExperience = {
+          company_name:"No experience",
+          timeline:[{
+            job_start_date:"19-11-"+firstJobEnd,
+            job_end_date:`19-11-${secondJobStart}`
+          }]}
+          jobs.splice(startIndex+1,0,noExperience);
+        console.log(secondJobStart-firstJobEnd,'diff',secondJobStart,firstJobEnd);
+      }
+      console.log(jobs,'```````````````````````````````````````');
+      console.log(firstJobEnd,secondJobStart,"```````````````````````````");
+    }else{
+      let lastJobEnd = jobs[startIndex].timeline[0].job_end_date.split('-')[2]
+      console.log(new Date().getFullYear() - parseInt(lastJobEnd),"last diff");
+      if((new Date().getFullYear() - parseInt(lastJobEnd)) > 0){
+        let noExperience = {
+          company_name:"No experience",
+          timeline:[{
+            job_start_date:"19-11-"+lastJobEnd,
+            job_end_date:`19-11-${new Date().getFullYear()}`
+          }]}
+          jobs.push(noExperience)
+      }
+    }
+  }
 
   return (
     <div id="jobTimeline" className="jobTimeline">
       <div className="job-timeline-wrapper">
         { jobs && jobs[0] && jobs.map((item, index) => (
-          <div className="job" style={{ backgroundColor: colors[index] }}>
+          <div className="job" style={{ backgroundColor: (item.company_name === 'No experience' ? "rgba(99,99,99,5.4)" : colors[index]) }}>
+            {item.type}
             <div className="time-bar">
               <span className="time-bar--bar"></span>
               <span className="year">{item.timeline[0].job_start_date.split("-")[2]}</span>

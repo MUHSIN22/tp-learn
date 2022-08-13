@@ -1,10 +1,10 @@
 import Chart from "react-apexcharts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import moment from "moment";
 
 export default function LineGraph({label,category,x_series, salary,management}) {
     const [state, setState] = useState({
         options: {
-
             chart: {
                 type: 'area',
                 toolbar :{
@@ -30,20 +30,12 @@ export default function LineGraph({label,category,x_series, salary,management}) 
                 colors:['#EF6239','#21CE93','#219FFF','#FFA114']
             },
             xaxis: {
-                type: 'category',
-                categories: category,
-                lines: {
-                    show: true,
-                },
-                labels:{
-                    show:label
-                },
-                axisBorder: {
-                    show: false,
-                },
-                axisTicks: {
-                    show: true,
-                }
+               type: 'datetime',
+               categories: category,
+               title: {
+                text: "Year"
+               },
+               label: 'this is x axis'
             },
             yaxis:[
                 {
@@ -60,10 +52,19 @@ export default function LineGraph({label,category,x_series, salary,management}) 
               ],
             grid: {
                 show: true,
-                borderColor: '#F3F4F6',
-                strokeDashArray: 0,
+                borderColor: '#8c8c8c63',
+                strokeDashArray: 20,
                 position: 'back',
                 yaxis: {
+                    lines: {
+                        show: true,
+                        offsetX: 0,
+                        offsetY: 0,
+                        opacityFrom: 0.5,
+                        opacityTo: 0.5
+                    }
+                },
+                xaxis: {
                     lines: {
                         show: true,
                         offsetX: 0,
@@ -74,13 +75,18 @@ export default function LineGraph({label,category,x_series, salary,management}) 
                 }
             },
             tooltip: {
-                enabled: true
+                enabled: true,
+                x:{
+                    show: true,
+                    format: 'yyyy'
+                }
             },
             legend:{
                 show: false
             }
         },
-        series: [{
+        series: [
+        {
             name: 'Salary',
             data: salary
         },
@@ -88,7 +94,7 @@ export default function LineGraph({label,category,x_series, salary,management}) 
             name: 'Management',
             data: management
         }
-    ],
+        ],
     })
     return (
         <div className="ArearChart">

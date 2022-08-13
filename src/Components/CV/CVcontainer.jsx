@@ -36,7 +36,7 @@ export default function CVcontainer({ progress }) {
       <Docs/>
       <Videos/>
       <SocialMedia/>
-      <SelfDeclaration/>
+      {/* <SelfDeclaration/> */}
     </div>
   )
 }

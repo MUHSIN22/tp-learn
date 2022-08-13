@@ -14,7 +14,7 @@ export default function Section2() {
         (timelineGraph && timelineGraph.company_info && timelineGraph.company_info[0] && salaryGraph[0]) &&
         <div className="section_2 col-100 align-center">
           <div className="col-90 align-start">
-            <h3>Career Timeline</h3>
+            <h1>Career Timeline</h1>
             <span className="divider"></span>
             {timelineGraph && timelineGraph.company_info && timelineGraph.skill_info && <JobTimeline jobs={timelineGraph.company_info} skills={timelineGraph.skill_info} />}
           </div>

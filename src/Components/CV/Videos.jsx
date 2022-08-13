@@ -11,7 +11,7 @@ export default function Videos() {
                 video &&
                 <div className="docs section_2 col-100 align-center">
                     <div className="col-90">
-                        <h3>Video files </h3>
+                        <h1>Video files </h1>
                         <span className="divider"></span>
                         {video && video.length > 0 ? <div className="flex-wrap g-1  ">
                             <FileCard url={video} filename={'Talent Place - CV Builder.Mp4'} icon={VideoIcon} />

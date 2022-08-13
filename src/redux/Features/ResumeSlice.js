@@ -57,7 +57,10 @@ export const addExperience = createAsyncThunk('authentication/addExperience', as
                 'authorization': `bearer ${data.auth}`
             }
         })
-
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -74,7 +77,10 @@ export const addCompany = createAsyncThunk('authentication/addCompany', async (d
                 'authorization': `bearer ${data.auth}`
             }
         })
-
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -91,6 +97,10 @@ export const addIndustryInfo = createAsyncThunk('authentication/addIndustryInfo'
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -107,6 +117,10 @@ export const addJobDesignation = createAsyncThunk('authentication/addJobDesignat
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -123,6 +137,10 @@ export const addJobSalary = createAsyncThunk('authentication/addJobSalary', asyn
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -139,6 +157,10 @@ export const addJobSkills = createAsyncThunk('authentication/addJobSkills', asyn
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -155,6 +177,10 @@ export const addProject = createAsyncThunk('authentication/addProject', async (d
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -170,6 +196,10 @@ export const addEducation = createAsyncThunk('authentication/addEducation', asyn
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -185,6 +215,10 @@ export const addCertification = createAsyncThunk('authentication/addCertificatio
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -201,6 +235,10 @@ export const addAdditionalSkills = createAsyncThunk('authentication/addAdditiona
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -217,6 +255,10 @@ export const addHobbies = createAsyncThunk('authentication/add-hobbies', async (
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -232,6 +274,10 @@ export const addBio = createAsyncThunk('authentication/addBio', async (data, { r
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -247,6 +293,10 @@ export const uploadPhotomedia = createAsyncThunk('authentication/uploadPhotomedi
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.dispatch){
+            data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -756,7 +806,7 @@ export const resumeSlice = createSlice({
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.message
+            state.message = action.payload.data.error_message
 
 
         }).addCase(addHobbies.pending, (state, action) => {

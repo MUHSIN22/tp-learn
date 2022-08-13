@@ -90,7 +90,7 @@ export default function Certificate1({data}) {
         }
         let form_data = JsonToFormData(body)
           try {
-              dispatch(addCertification({ auth: token, body:form_data })).unwrap()
+              dispatch(addCertification({ auth: token, body:form_data,dispatch })).unwrap()
               console.log(form)
           } catch (error) {
               showAlert(true)

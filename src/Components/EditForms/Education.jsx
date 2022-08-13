@@ -20,6 +20,7 @@ export default function Education({data}) {
     university_id,
     university_name,
     other_degree_name,
+    degree_name,
     collage_id,
     collage_name,
     location,
@@ -33,7 +34,7 @@ export default function Education({data}) {
   const dispatch = useDispatch()
   const [form, setForm] = useState({
     degree_id: degree_id || null,
-    other_degree_name: other_degree_name || '',
+    other_degree_name: other_degree_name || degree_name || '',
     university_id: 135 ||university_id || '',
     other_university_name:university_name || [],
     collage_id: collage_id,
@@ -49,6 +50,7 @@ export default function Education({data}) {
     university_name : university_name || ''
 
   })
+  console.log(data,'this is data');
   const navigate=useNavigate()
   const [file, setFile] = useState(null)
   const error = useSelector(selectResumeError);
@@ -124,7 +126,7 @@ export default function Education({data}) {
     body = JsonToFormData(body)
 
     try {
-      dispatch(addEducation({ auth: token, body })).unwrap()
+      dispatch(addEducation({ auth: token, body, dispatch })).unwrap()
       dispatch(reload())
     } catch (error) {
       showAlert(true)

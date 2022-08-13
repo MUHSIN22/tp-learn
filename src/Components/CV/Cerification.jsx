@@ -13,7 +13,7 @@ export default function Cerification() {
                 Cerification[0] &&
                 <div className='section_2 col-100 align-center'>
                     <div className="col-90">
-                        <h3 className="text-left">Certification courses</h3>
+                        <h1 className="text-left">Certification courses</h1>
                         <span className="divider"></span>
                         {!loading && Array.isArray(Cerification) ? <div className="col-100 g-1">
                             {
@@ -47,7 +47,7 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
                 </div>
 
             </div>
-            <img src={certificate} alt="" />
+            {certificate && <img src={certificate} alt="" />}
         </div>
     )
 }

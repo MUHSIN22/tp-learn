@@ -56,7 +56,7 @@ export default function CareerObjective1({ data }) {
     }
     let form_Data = JsonToFormData(body);
     try {
-      dispatch(uploadPhotomedia({ auth: token, body: form_Data })).unwrap();
+      dispatch(uploadPhotomedia({ auth: token, body: form_Data, dispatch})).unwrap();
       console.log(form);
     } catch (error) {
       showAlert(true);

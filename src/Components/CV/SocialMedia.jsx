@@ -33,14 +33,14 @@ export default function SocialMedia() {
         ((socialLink.facebook !== "" && socialLink.facebook) || (socialLink.linkedin !== "" && socialLink.linkedin) || (socialLink.instagram !== "" && socialLink.instagram) || (socialLink.twitter !== "" && socialLink.twitter)) &&
         <div className="socialMedia section_2 col-100 align-center">
           <div className="col-90 py-1">
-            <h3 className='text-left'>Social Media {toEdit && (
+            <h1 className='text-left'>Social Media {toEdit && (
               <span
                 onClick={() => handleEditForms({ progress: 17, facebook: socialLink.facebook, linkedin: socialLink.linkedin, instagram: socialLink.instagram, twitter: socialLink.twitter })}
                 style={{ marginLeft: "0.5rem" }}
               >
                 <FaPencilAlt />
               </span>
-            )}</h3>
+            )}</h1>
             <span className="divider"></span>
             <div className="flex-wrap g-2">
               {

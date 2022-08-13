@@ -121,6 +121,7 @@ export default function CognitiveSkills({}) {
     return (
         <>  
          <h1 className='text-left'>Now, tell us how do you rank to yourself in these Cognitive Skills?</h1>
+         <p>Select your any 6 top skills</p>
         {showAlert&&!loading&&<Alert error={error} message={error?'Failed to add Project': 'Project added'}/>}
            
             <div className="card g-1" id="tpcv"> 

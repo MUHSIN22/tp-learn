@@ -40,7 +40,7 @@ export default function Section3() {
             {/* <Scale first={30} second={60} /> */}
             <div className="col-90">
               <div className="flex-row-between align-center">
-                <h3 className="text-left">Experience</h3>
+                <h1 className="text-left">Experience</h1>
                 {/* <div className="flex-row-fit g-1 align-center">
                   <button
                     className="btn-fit transparent"
