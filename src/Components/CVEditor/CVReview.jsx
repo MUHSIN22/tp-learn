@@ -39,6 +39,7 @@ import {
   selectBio,
   selectResumeDetails,
   uploadResume,
+  verifyPayment,
 } from "../../redux/Features/ResumeSlice";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -113,16 +114,89 @@ export default function CVBuilder() {
         const resume_link = response.resumePdfUrl;
         if (media === "whatsapp") {
           shareLink = `https://api.whatsapp.com/send?text=${resume_link}`
+          
         } else if (media === "facebook") {
           shareLink = `https://www.facebook.com/sharer/sharer.php?u=${resume_link}`
         } else if (media === "instagram") {
           shareLink = `https://www.instagram.com/direct?url=${resume_link}`
         }
-        window.open(shareLink, '_blank', 'noopener,noreferrer')
+
+        let open = window.open(shareLink, '_blank', 'noopener,noreferrer,popup=1')
+        if(!open){
+          window.location.href = shareLink;
+        }
       })
     } catch (err) {
       console.log(err);
     }
+  }
+
+  const getPaymentAndShare = (media) => { 
+    displayRazorpay(499,media);
+  }
+
+  const displayRazorpay = async (amount,media) => {
+    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+
+    if (!res) {
+      alert("Aww Snap! you are offline, failed to load razorpay")
+      return
+    }
+
+    console.log(res);
+
+    const option = {
+      key: "rzp_test_B4uZC1xOIWiQLV",
+      currency: 'INR',
+      amount: amount * 100,
+      name: "Talent Place",
+      description: "Thanks for Being a valuable member with us!",
+      image: "https://images.unsplash.com/photo-1616077167555-51f6bc516dfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
+      handler: async function (response) {
+        let result = await dispatch(verifyPayment({ auth: token, body: { razorpay_payment_id: response.razorpay_payment_id, user_id },dispatch}))
+        if(result.payload.data.message){
+          if(media){
+            shareResume(media)
+          }else{
+            let open = window.open(instance.url,"_blank")
+            if(!open){
+              window.location.href = instance.url;
+            }
+          }
+        }
+      },
+      "prefill": {
+        "name": "Talent Price",
+        "email": "talentplace@tp.com",
+        "contact": "9999999999"
+      },
+      "notes": {
+        "address": "Talent Place Corporate Office"
+      },
+      "theme": {
+        "color": "#ff7752"
+      }
+    }
+
+    const paymentObject = new window.Razorpay(option)
+    paymentObject.open()
+  }
+
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script')
+      script.src = src
+
+      script.onload = () => {
+        resolve(true)
+      }
+
+      script.onerror = () => {
+        resolve(false)
+      }
+
+      document.body.appendChild(script)
+    })
   }
 
 
@@ -153,9 +227,9 @@ export default function CVBuilder() {
                     )}
                   </PDFDownloadLink>
                   :
-                  <Link to='/membership'>
+                  <span onClick={() => displayRazorpay(499)}>
                     <img src={PDF} alt="" />
-                  </Link>
+                  </span>
               }
               {/* <PDFDownloadLink document={<PdfGenerator bio={bio} resumeDetails={resumeDetails} />} fileName={`Resume_${resumeDetails.fname}_${resumeDetails.lname}.pdf`}>
                 {({ blob, url, loading, error }) => (
@@ -181,7 +255,7 @@ export default function CVBuilder() {
           content={
             <div className="d-flex justify-between" style={{ width: "10rem" }}>
               <div
-                onClick={() =>  resumeDetails.subscription_status !== 1 ? navigate('/membership') :shareResume("facebook")}
+                onClick={() =>  resumeDetails.subscription_status !== 1 ? getPaymentAndShare("facebook") :shareResume("facebook")}
               >
                 <img
                   src={fb_icon}
@@ -189,10 +263,10 @@ export default function CVBuilder() {
                   style={{ width: "2rem", height: "2rem" }}
                 />
               </div>
-              <div onClick={() => resumeDetails.subscription_status !== 1 ? navigate('/membership') :shareResume("whatsapp")}>
+              <div onClick={() => resumeDetails.subscription_status !== 1 ? getPaymentAndShare("whatsapp") :shareResume("whatsapp")}>
                 <img src={wp_icon} alt="" />
               </div>
-              <div onClick={() => resumeDetails.subscription_status !== 1 ? navigate('/membership') :shareResume("instagram")}>
+              <div onClick={() => resumeDetails.subscription_status !== 1 ? getPaymentAndShare("instagram") :shareResume("instagram")}>
                 <img src={insta_icon} alt="" />
               </div>
             </div>

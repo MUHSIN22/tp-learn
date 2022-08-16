@@ -127,7 +127,10 @@ export default function PdfGenerator({ bio, resumeDetails }) {
               </Text>
 
             </View>
-            <Image src={resumeInfo.profile_pic} style={styles.profileImage}></Image>
+            {
+              resumeInfo.profile_pic &&
+              <Image src={resumeInfo.profile_pic} style={styles.profileImage}></Image>
+            }
           </View>
           <View style={styles.nameWrapper}>
           </View>

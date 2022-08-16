@@ -9,7 +9,7 @@ export default function CountryInput({setCountryCode}) {
     const [dialCode, setDialCode] = useState("91");
     const [flag, setFlag] = useState("🇮🇳")
     const [isSearching, setSearching] = useState(false);
-    const [searchText, setSearchText] = useState('91')
+    const [searchText, setSearchText] = useState('+91')
 
     const handleInputChange = (event) => {
         setSearching(true);
@@ -31,7 +31,7 @@ export default function CountryInput({setCountryCode}) {
                     isSearching &&
                     <ul className="country-suggestions">
                         {
-                            countryCodeList[0] ?
+                            countryCodeList && countryCodeList[0] ?
                                 <>
                                     {
                                         countryCodeList.map((item, index) => (
