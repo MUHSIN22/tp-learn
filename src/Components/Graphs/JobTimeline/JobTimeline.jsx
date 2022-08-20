@@ -89,7 +89,7 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
               <span className="time-bar--bar"></span>
               <span className="year">{item.timeline[0].job_start_date.split("-")[2]}</span>
               <span className="time-bar--bar"></span>
-              <span className="year">{item.timeline[0].job_end_date.split("-")[2]}</span>
+              <span className="year">{item.timeline[0].job_end_date ? item.timeline[0].job_end_date.split("-")[2] : "C"}</span>
               <span className="time-bar--bar"></span>
             </div>
             <div className="job-details">

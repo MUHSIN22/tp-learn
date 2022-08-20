@@ -54,6 +54,7 @@ export default function Experience5({data}) {
         [dispatch, token],
     )
     function searchHandler(e) {
+        console.log(selected_options);
         setSearch(e.target.value)
     }
     const temp = {
@@ -71,11 +72,10 @@ export default function Experience5({data}) {
         temp.skill_complexity = e.target.value
     }
     const handleAddSkill = () => {
-        if(temp.skill_id==''){
-            temp.skill_name=search;
-        }
-        console.log("tems",temp)
-        set_Selected_options([...selected_options , temp])
+        console.log(temp.skill_id,search,);
+        temp.skill_name = temp.skill_id == '' ? search : temp.skill_name;
+        console.log(temp,'this is temp');
+        set_Selected_options([...selected_options, temp])
         document.getElementById('iconinput-Skills').value = '';
         document.getElementById('iconinput-complexity').value = '';
 
@@ -118,8 +118,11 @@ export default function Experience5({data}) {
         });
     }
     useEffect(() => {
-        console.log(debouncedSearchState)
         set_Selected_options([...form.job_skills])
+    },[])
+    useEffect(() => {
+        console.log(debouncedSearchState)
+        
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {

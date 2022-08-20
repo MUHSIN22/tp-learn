@@ -140,7 +140,10 @@ export default function PdfGenerator({ bio, resumeDetails }) {
               {newBio}
             </Text>
           </View>
-          <View style={styles.linePrimary}></View>
+          {
+            resumeInfo.company && 
+            <View style={styles.linePrimary}></View>
+          }
           {/*  */}
           {
             resumeInfo.company &&
@@ -160,7 +163,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                           <Text style={styles.rightSectionDate}>{moment(item.job_role[0].job_start_date,'DD-MM-YYYY').format('yyyy MMM')} - {moment(item.job_role[0].job_end_date,'DD-MM-YYYY').format('yyyy MM')}</Text>
                            <View style={styles.list}>
                             {
-                              makePoints(item.job_role[0].role_responsibilties).map((item, index) => (
+                              item.job_role[0].role_responsibilties && makePoints(item.job_role[0].role_responsibilties).map((item, index) => (
                                 <Fragment>
                                   {
                                     index !== 0 &&
@@ -218,7 +221,10 @@ export default function PdfGenerator({ bio, resumeDetails }) {
           }
 
 
-          <View style={styles.linePrimary}></View>
+          {
+            resumeInfo.education &&
+            <View style={styles.linePrimary}></View>
+          }
           <View style={styles.mainRow}>
             <Text style={styles.sectionTitle}>EDUCATION</Text>
             <View style={styles.rightSection}>
@@ -227,9 +233,10 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                 resumeInfo.education.map((item, index) => (
                   <View style={styles.rightSectionContentWrapper} key={index}>
                     <Text style={styles.rightSectionMainText} >{item.degree_name} ({moment(item.course_start_date,'DD-MM-YYYY').format('yyyy MMM')} - {moment(item.course_start_date,'DD-MM-YYYY').format('yyyy MMM')})</Text>
-                    <Text style={styles.rightSectionDate} >{item.university_name}</Text>
-                    <Text style={styles.rightSectionDate} >{item.course_cgpa}</Text>
-                    <Text style={styles.rightSectionDate} >{item.course_extra_activity}</Text>
+                    <Text style={styles.rightSectionDate} >{item.university_name} | {item.course_cgpa} CGPA</Text>
+                    <Text style={styles.rightSectionDate} ></Text>
+                    <Text style={styles.rightSectionDate} >Extra Curricular Activity: {item.course_extra_activity}</Text>
+                    <Text style={styles.rightSectionDate} >Projects: {item.course_project_info}</Text>
                     {item.upload_degree && <Link src={item.upload_degree} style={styles.rightSectionDate}>Link to certificate</Link>}
                   </View>
                 ))
@@ -237,7 +244,10 @@ export default function PdfGenerator({ bio, resumeDetails }) {
             </View>
           </View>
 
-          <View style={styles.linePrimary}></View>
+          {
+            resumeInfo.certificate &&
+            <View style={styles.linePrimary}></View>
+          }
 
           {
             resumeInfo.certificate &&
@@ -257,16 +267,22 @@ export default function PdfGenerator({ bio, resumeDetails }) {
             </View>
           }
 
-          <View style={styles.linePrimary}></View>
+          {
+            (commaSeparator(resumeInfo.entertainment) !== "" || commaSeparator(resumeInfo.adventure) !== "" || commaSeparator(resumeInfo.leisure) !== "" || commaSeparator(resumeInfo.sports) !== "" ) &&
+            <View style={styles.linePrimary}></View>
+          }
 
-          <View style={styles.mainRow}>
-            <Text style={styles.sectionTitle}>Hobbies</Text>
-            <View style={styles.rightSectionOfSkills}>
-              <Text style={styles.description1}>
-                {commaSeparator(resumeInfo.adventure)}{commaSeparator(resumeInfo.entertainment)}{commaSeparator(resumeInfo.leisure)}{commaSeparator(resumeInfo.sports)}
-              </Text>
+          {
+            (commaSeparator(resumeInfo.entertainment) !== "" || commaSeparator(resumeInfo.adventure) !== "" || commaSeparator(resumeInfo.leisure) !== "" || commaSeparator(resumeInfo.sports) !== "" ) &&
+            <View style={styles.mainRow}>
+              <Text style={styles.sectionTitle}>Hobbies</Text>
+              <View style={styles.rightSectionOfSkills}>
+                <Text style={styles.description1}>
+                  {commaSeparator(resumeInfo.adventure)}{commaSeparator(resumeInfo.entertainment)}{commaSeparator(resumeInfo.leisure)}{commaSeparator(resumeInfo.sports)}
+                </Text>
+              </View>
             </View>
-          </View>
+          }
         </Page>
       }
     </Document>

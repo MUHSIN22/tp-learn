@@ -53,6 +53,7 @@ export default function Experience5() {
     )
     function searchHandler(e) {
         setSearch(e.target.value)
+        console.log(selected_options);
     }
     const temp = {
         skill_id: '',
@@ -60,7 +61,6 @@ export default function Experience5() {
         skill_complexity: ''
     }
     const selectSkillHandler = (i) => {
-
         temp.skill_id = skillList[i].id
         temp.skill_name = skillList[i].skill_name
     }

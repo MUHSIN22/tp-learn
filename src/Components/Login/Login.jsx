@@ -28,7 +28,7 @@ export default function Login() {
     const loading = useSelector(selectAuthLoading);
     const error = useSelector(selectAutheError)
     const navigate = useNavigate()
-    const [countryCode,setCountryCode] = useState(91)
+    const [countryCode,setCountryCode] = useState("+91")
     function handleChange(evt) {
         const value = evt.target.value;
         setForm({

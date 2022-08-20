@@ -12,6 +12,8 @@ import SuggestiveInput from '../IconInput/SuggestiveInput';
 import Alert from '../Alert/Alert';
 import MultiSelectedOptions from './MultiSelectedOptions';
 const DEBOUNCE_DELAY = 600;
+let temp = {skill_id: '', skill_name:'',skill_complexity: '',skill_desc:''}
+
 export default function Experience6({data}) {
     const dispatch = useDispatch()
     const [form, setForm] = useState({
@@ -32,20 +34,30 @@ export default function Experience6({data}) {
     const skillList = useSelector(selectSkillList)
     const [search, setSearch] = useState('')
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
+    const [temporary,setTemporary] = useState({ skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' })
+    const [validationError,setValidationError] = useState(null)
+    const [showAlertInner,setAlertInnder] = useState(false)
 
-    const handleAddProject = (e)=>{
+    const handleAddProject = (e,isReload)=>{
         e.preventDefault();
         let body = form
+        delete body.user_company_job_project_record_id
         body.user_id = user_id
         body.project_skills = selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity, skill_name:x.skill_name,skill_desc:x.skill_desc} })
         body.project_skills = JSON.stringify(body.project_skills)
-        try {
-          dispatch(addProject({auth:token,body:{...form,user_id},dispatch})).unwrap()
-         console.log(form)
-        } catch (error) {
-            showAlert(true)
-        }finally{
-            setShowAlert(true)
+        let formValidation = projectFormValidator();
+        console.log(isReload);
+        if(!isReload){
+            body.dispatch = dispatch;
+        }
+        if(formValidation){
+            try {
+                dispatch(addProject({ auth: token, body: { ...form, user_id }, dispatch: isReload? dispatch: null })).unwrap()
+            } catch (error) {
+                showAlert(true)
+            } finally {
+                setShowAlert(true)
+            }
         }
     }
     function handleChange(evt) {
@@ -59,37 +71,64 @@ export default function Experience6({data}) {
     function searchHandler(e) {
         setSearch(e.target.value)
     }
-    const temp = {skill_id: '', skill_name:'',skill_complexity: '',skill_desc:''}
+   
     const selectSkillHandler = (i) => {
-
+        console.log(i);
         temp.skill_id = skillList[i].id
         temp.skill_name = skillList[i].skill_name
+        setTemporary(temp)
     }
     const handleComplexity = (e) => {
         console.log(e.target.value)
         temp.skill_complexity = e.target.value
+        setTemporary(temp)
     }
     const handleSkill_desc = (e)=>{
         temp.skill_desc = e.target.value
+        setTemporary(temp)
     }
-    const handleAddSkill = () => {
+    const handleAddSkill = (event) => {
         console.log(temp)
-        if(temp.skill_id==''){
-            temp.skill_name=search;
+        setAlertInnder(false)
+        if(temp.skill_desc && temp.skill_complexity && temp.skill_id && temp.skill_name){
+            console.log('here');
+            setAlertInnder(false)
+            set_Selected_options([...selected_options, temp])
+            document.getElementById('iconinput-Skills').value = '';
+            document.getElementById('iconinput-skill_complexity').value = 0;
+            document.getElementById('iconinput-skill_desc').value = '';
+            temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
+        }else{
+            setAlertInnder(true);
+            setValidationError("All skill fields are required!")
         }
-        set_Selected_options([...selected_options,temp])
-        document.getElementById('iconinput-Skills').value='';
-        document.getElementById('iconinput-skill_complexity').value=0;
-        document.getElementById('iconinput-skill_desc').value='';
         
+
     }
+
     const handleDeleteSkill = (i)=>{
-        console.log("---------------",i)
         const newList =selected_options.filter((x,index)=> index!==i)
-        console.log('================',selected_options)
-        console.log('================',newList)
         set_Selected_options(newList) 
       }
+
+    const projectFormValidator = () => {
+        if(form.project_name != ""){
+            if(temp.skill_id.length > 0 || temp.skill_name.length > 0){
+                if(temp.skill_desc.length > 0 && temp.skill_complexity.length > 0){
+                    setAlertInnder(false);
+                    return true
+                }else{
+                    setAlertInnder(true);
+                    setValidationError("All skill fields are required!")
+                    return false;
+                }
+            }else{
+                setAlertInnder(false)
+                return true
+            }
+        }
+    }
+    
     const searchSkillList = useCallback(
         (keywords) => {
             try {
@@ -100,9 +139,13 @@ export default function Experience6({data}) {
         },
         [dispatch, token],
     )
+
+    useEffect(() => {
+        set_Selected_options([...form.project_skills])
+    },[])
+
     useEffect(() => {
         console.log(debouncedSearchState)
-        set_Selected_options([...form.project_skills])
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {
@@ -130,7 +173,8 @@ export default function Experience6({data}) {
     },[showAlert,error])
     return (
         <>  
-        {showAlert&&!loading&&<Alert error={error} message={error?'Failed to update Project': 'Project updated'}/>}
+            {showAlert&&!loading&&<Alert error={error} message={error?'Failed to update Project': 'Project updated'}/>}
+            {showAlertInner && !loading && validationError && <Alert error={true} message={validationError} />}
             {/* <h1>Now the most amazing part! If you have worked on any projects in this job role, please mention the skills you specifically used, how you applied them and its complexity level.</h1> */}
             <div className="card g-1">
                 <div className="form-row">
@@ -142,7 +186,7 @@ export default function Experience6({data}) {
                 </div>
                 <MultiSelectedOptions options={selected_options} value_field={'skill_name'} subValue_field='skill_complexity'  deleteHandler={handleDeleteSkill} />
                 <div className="form-row">
-                <SuggestiveInput name='Skills' searchHandler={searchHandler} label={`Skill ${form.project_skills.length+1}`} placeholder='Select Skills' width={45} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
+                    <SuggestiveInput name='Skills' searchHandler={searchHandler} label={`Skill ${form.project_skills.length+1}`} placeholder='Select Skills' width={45} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
                     <MarkedSlider handleChange={handleComplexity} name={'skill_complexity'} state={form} setState={setForm} min={1} max={10} width={'48%'} label={'Complexity Level'} />
                 </div>
                 <div className="flex-row-end">
@@ -155,9 +199,9 @@ export default function Experience6({data}) {
                 </div>
             </div>
             <div className="flex-row-end">
-                <button className="btn-fit transparent g-0-5" onClick={handleAddProject}><AddCircle width={30} /> Add another Project</button>
+                <button className="btn-fit transparent g-0-5" onClick={e => handleAddProject(e,false)}><AddCircle width={30} /> Add another Project</button>
             </div>
-            <Control handleSubmit={()=>dispatch(reload())}/>
+            <Control handleSubmit={(e) => handleAddProject(e,true)}/>
         </>
     )
 }

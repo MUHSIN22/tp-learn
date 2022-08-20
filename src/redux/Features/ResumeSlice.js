@@ -177,6 +177,7 @@ export const addProject = createAsyncThunk('authentication/addProject', async (d
                 'authorization': `bearer ${data.auth}`
             }
         })
+        console.log(data.dispatch);
         if(data.dispatch){
             data.dispatch(reload())
             data.dispatch(changeEditPageDetails({progress: null})).unwrap();
@@ -364,6 +365,9 @@ export const changeFormId = createAsyncThunk('authentication/changeFormId', asyn
                 'authorization': `bearer ${data.auth}`
             }
         })
+        if(data.navigate){
+            data.navigate('/cv-builder')
+        }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);

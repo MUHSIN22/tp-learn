@@ -52,6 +52,7 @@ export default function Experience3() {
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
     const lastJob = useSelector(selectLastJob)
     const newDesignation = useSelector(selectNewDesignation)
+    const [endSalaryError,setEndSalaryError] = useState(null)
     const searchCompanyList = useCallback(
         (keywords) => {
             try {
@@ -86,6 +87,10 @@ export default function Experience3() {
         }
     }
     function handleAddDesignation() {
+        if(form.end_salary === ''){
+            setEndSalaryError("End Salary is required!")
+            return
+        }
         const body = {...form, user_id,location}
         if(form.remote_work!=='yes')  body.remote_work = 'no'
         if(form.hide_salary!=='yes')  body.hide_salary = 'no'
@@ -162,6 +167,7 @@ export default function Experience3() {
     console.log(designationlist,'ml list');
     return (
         <>  
+            {endSalaryError &&<Alert error={true} message={endSalaryError} />}
             {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <h1>Now tell us about all the job roles at which you have worked, starting with the latest one.</h1>
             <div className="form-row">

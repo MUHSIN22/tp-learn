@@ -23,7 +23,7 @@ console.log(window.location.pathname)
   return (
     <>
        <nav>
-      <div className="logo">
+      <div className="logo" onClick={() => navigate('/')}>
           <img src={Logo} alt="" />
       </div>
      {(auth['authToken'] && user) && <div className="controls">

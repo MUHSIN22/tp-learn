@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import LineGraph from "../Graphs/LineGraph";
 import Scale from "../Graphs/Scale";
 import parser from "html-react-parser";
@@ -19,6 +19,7 @@ import { ReactComponent as TickCircle } from "../../Assests/icons/tick-circle.sv
 import ProgressBar from "../OverviewCard/ProgressBar";
 import RedialBar from "../Graphs/RedialBar";
 import {
+  changeFormId,
   deleteCompany,
   deleteJobRole,
   deleteProject,
@@ -39,7 +40,7 @@ import {
   selectAuthToken,
   selectUser_id,
 } from "../../redux/Features/AuthenticationSlice";
-import { FaPencilAlt } from "react-icons/fa";
+import { FaPencilAlt, FaPlus } from "react-icons/fa";
 import {
   selectToEdit,
   changeToEdit,
@@ -48,6 +49,7 @@ import {
 import EditFormContainer from "../EditForms/EditFromContainer";
 import { AiFillDelete } from "react-icons/ai";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 export default function Section3Review() {
   const loading = useSelector(selectResumeLoading);
   const companyInfo = useSelector(SelectCompanyDetails);
@@ -90,22 +92,23 @@ function CompanyOverview({ company }) {
   const user_id = useSelector(selectUser_id);
   const token = useSelector(selectAuthToken);
   // const companyWise = useSelector(selectCompanyWise);
-  const [companyWise,setCompanyWise] = useState(null)
+  const [companyWise, setCompanyWise] = useState(null)
   const dispatch = useDispatch();
   const toEdit = useSelector(selectToEdit);
+  const navigate = useNavigate();
   const handleEditForms = (data) => {
     console.log(data, "data in handle Edit forms");
     dispatch(changeEditPageDetails(data)).unwrap();
   };
 
-  console.log(company,'this is company info 123');
+  console.log(company, 'this is company info 123');
   const handleDeleteForms = (data) => {
     dispatch(deleteCompany({ auth: token, body: data, dispatch }));
   }
 
   useEffect(() => {
     try {
-      
+
       (async () => {
         let response = await dispatch(
           companyWiseGraph({
@@ -115,7 +118,7 @@ function CompanyOverview({ company }) {
         ).unwrap();
         setCompanyWise(response.data.recordDetails.salary_management_graph)
       })()
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -146,7 +149,7 @@ function CompanyOverview({ company }) {
           <Clock /> <p>{company.nature_of_job_name}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
-          {console.log(company,'company from here00000000000000000000000')}
+          {console.log(company, 'company from here00000000000000000000000')}
           <BarGraph /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].job_level_name : ''}</p>
         </div>
         <div className="flex-row-fit align-center g-1">
@@ -182,9 +185,14 @@ function CompanyOverview({ company }) {
             }}>
               <AiFillDelete />
             </span>
+            <span className="px-1" onClick={() => {
+              dispatch(changeFormId({ auth: token, body: { user_id, form_id: 0 }, navigate }))
+            }}>
+              <FaPlus />
+            </span>
           </>
         )} {company.company_name}</h5>
-        {console.log(companyWise,"this is company wise")}
+        {console.log(companyWise, "this is company wise")}
         {companyWise && (
           <LineGraph
             salary={companyWise.salary}
@@ -208,8 +216,8 @@ function DesignationOverview(props) {
   };
   const handleDeleteJobRole = (data) => {
     let confirm = window.confirm('Are you sure to delete?')
-    if(confirm){
-      dispatch(deleteJobRole({auth: token, body: data, dispatch}))
+    if (confirm) {
+      dispatch(deleteJobRole({ auth: token, body: data, dispatch }))
     }
   }
 
@@ -246,11 +254,11 @@ function DesignationOverview(props) {
                 <FaPencilAlt />
               </div>
               <span onClick={() =>
-                  handleDeleteJobRole({
-                    company_job_record_id: job_role[index].company_job_record_id,
-                    user_id
-                  })
-                }>
+                handleDeleteJobRole({
+                  company_job_record_id: job_role[index].company_job_record_id,
+                  user_id
+                })
+              }>
                 <AiFillDelete />
               </span>
             </>
@@ -275,9 +283,9 @@ function DesignationOverview(props) {
       </div>
 
       <p>
-        {(moment(job_role[index].job_start_date,"DD-MM-YYYY").format("yyyy MMM") ||
-          "unknown" )+ " - " + (moment(job_role[index].job_end_date,"DD-MM-YYYY").format("yyyy MMM") ||
-          "unknown")}
+        {(moment(job_role[index].job_start_date, "DD-MM-YYYY").format("yyyy MMM") ||
+          "unknown") + " - " + (moment(job_role[index].job_end_date, "DD-MM-YYYY").format("yyyy MMM") ||
+            "unknown")}
       </p>
       <span className="divider"></span>
       <div className="grid-35-65 company-overview-grid">
@@ -342,9 +350,12 @@ function ResponsibiltiensOverview({ data }) {
   const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
-  let rolesString = parser(data.role_responsibilties)
-  rolesString = rolesString.replace(/<\/?[^>]+(>|$)/g, "");
-  const rolesList = rolesString.split(".")
+  let rolesList = []
+  if (data.role_responsibilties) {
+    let rolesString = parser(data.role_responsibilties)
+    rolesString = rolesString.replace(/<\/?[^>]+(>|$)/g, "");
+    rolesList = rolesString.split(".")
+  }
   return (
     <>
       <div className="flex-row-between align-center my-2">
@@ -376,7 +387,7 @@ function ResponsibiltiensOverview({ data }) {
         )}
         <div className="role_skills">
           <div className="skills_names">
-            {data && data.skills.map((skill) => {
+            {data.skills && data.skills[0] && data.skills.map((skill) => {
               return <div className="skillName">
                 {skill.skill_name}
               </div>
@@ -401,27 +412,32 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
   };
   const handleDeleteProject = (data) => {
     let confirm = window.confirm("Are you sure to delete?");
-    if(confirm){
-      dispatch(deleteProject({auth:token,body: data, dispatch }))
+    if (confirm) {
+      dispatch(deleteProject({ auth: token, body: data, dispatch }))
     }
   }
+  console.log(projects,'this is projects');
   return (
     <>
-      <div className="flex-row-between align-center my-2">
-        <h3 className="text-left m-0">Projects worked on</h3>
-        <div className="flex-row-fit g-1 align-center">
-          {toEdit && (
-            <>
-              <div onClick={() => handleEditForms({ job_project_record_id, project_skill: project_skill ? project_skill : [], client_name, project_name, company_job_record_id, company_record_id, progress: 5 })}>
-                <FaPencilAlt />
-              </div>
-              <div onClick={() => handleDeleteProject({ job_project_record_id, user_id  })}>
-                <AiFillDelete />
-              </div>
-           </>
-            
-          )}
-          <button
+      {
+        projects && projects[0] &&
+        projects.map((item, index) => (
+          <Fragment key={index}>
+            <div className="flex-row-between align-center my-2">
+              <h3 className="text-left m-0">Projects worked on</h3>
+              <div className="flex-row-fit g-1 align-center">
+                {toEdit && (
+                  <>
+                    <div onClick={() => handleEditForms({ job_project_record_id: item.job_project_record_id, project_skill: item.project_skill ? item.project_skill : [], client_name: item.client_name, project_name: item.project_name, company_job_record_id: item.company_job_record_id, company_record_id: item.company_record_id, progress: 5 })}>
+                      <FaPencilAlt />
+                    </div>
+                    <div onClick={() => handleDeleteProject({ job_project_record_id: item.job_project_record_id, user_id })}>
+                      <AiFillDelete />
+                    </div>
+                  </>
+
+                )}
+                {/* <button
             className="btn-fit transparent"
             onClick={() => {
               index > 0 && setIndex(index - 1);
@@ -436,26 +452,29 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
             }}
           >
             <Right />
-          </button>
-        </div>
-      </div>
-      <span className="divider"></span>
-      <div className="flex-wrap align-stretch g-1">
-        <ProjectTile project_name={project_name} client_name={client_name} />
+          </button> */}
+              </div>
+            </div>
+            <span className="divider"></span>
+            <div className="flex-wrap align-stretch g-1">
+              <ProjectTile project_name={item.project_name} client_name={item.client_name} />
 
-        <p>{ }</p>
-      </div>
-      <span className="divider"></span>
-      <div className="col-100 g-1">
-        <div className="skill-grid">
-          <h5 className="text-left">Skill Used</h5>
-          <h5 className="text-left">Complexity</h5>
-          <h5 className="text-left">Applicaion</h5>
-        </div>
-        {project_skill?.map((skill, i) => (
-          <SkillGrid key={i} color={`_${i + 1}`} {...skill} />
-        ))}
-      </div>
+              <p>{ }</p>
+            </div>
+            <span className="divider"></span>
+            <div className="col-100 g-1">
+              <div className="skill-grid">
+                <h5 className="text-left">Skill Used</h5>
+                <h5 className="text-left">Complexity</h5>
+                <h5 className="text-left">Applicaion</h5>
+              </div>
+              {item.project_skill?.map((skill, i) => (
+                <SkillGrid key={i} color={`_${i + 1}`} {...skill} />
+              ))}
+            </div>
+          </Fragment>
+        ))
+      }
     </>
   );
 }

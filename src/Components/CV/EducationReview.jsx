@@ -8,15 +8,17 @@ import {
   selectToEdit,
   deleteEducation,
   selectResumeDetails,
+  changeFormId,
 } from "../../redux/Features/ResumeSlice";
 import EducationLoader from "../Loaders/EducationLoader";
-import { FaPencilAlt } from "react-icons/fa";
+import { FaPencilAlt, FaPlus } from "react-icons/fa";
 import { selectUniversityList } from "../../redux/Features/MasterSlice";
 import { saveAs } from "file-saver";
 import { FiDownload } from "react-icons/fi";
 import moment from "moment";
 import { AiFillDelete } from "react-icons/ai";
 import { selectAuthToken, selectUser_id } from "../../redux/Features/AuthenticationSlice";
+import { useNavigate } from "react-router-dom";
 export default function EducationReview() {
   const education = useSelector(selectEducation);
   const details = useSelector(selectResumeDetails)
@@ -74,6 +76,7 @@ function EducationCard({
   const toEdit = useSelector(selectToEdit);
   const user_id = useSelector(selectUser_id)
   const token = useSelector(selectAuthToken);
+  const navigate = useNavigate()
   const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
@@ -95,7 +98,7 @@ function EducationCard({
       <img src={UdemyLogo} alt="" />
       <div className="col-100 align-start justify-start">
         <div>
-          <h5 className="text-left">{degree_name}
+          <h5 className="text-left">{degree_name} ({course_cgpa} CGPA)
             {toEdit && (
               <>
                 <span
@@ -135,16 +138,32 @@ function EducationCard({
                 >
                   <AiFillDelete />
                 </span>
+                <span className="px-1" onClick={() => {
+                    dispatch(changeFormId({ auth: token, body: { user_id, form_id: 8 }, navigate }))
+                }}>
+                  <FaPlus />
+                </span>
               </>
             )}
           </h5>
         </div>
         <div className="flex-row-start mt-0-5" >
           <p>{university_name}</p>
-
           <span className="gradientDivider-v"></span>
           <p>{moment(course_start_date, "DD-MM-YYYY").format("yyyy MMM")} to {moment(course_end_date, "DD-MM-YYYY").format("yyyy MMM")}</p>
         </div>
+        {
+          course_project_info &&
+          <div className="flex-row-start mt-0-5" >
+            <p>Project : {course_project_info}</p>
+          </div>
+        }
+        {
+          course_extra_activity &&
+          <div className="flex-row-start mt-0-5" >
+            <p>Extra Curricular Activity : {course_extra_activity}</p>
+          </div>
+        }
         {/* <div className="flex-row-start g-0-5">
           {skills.map((skill, i) => (
             <div key={i} className="skill">

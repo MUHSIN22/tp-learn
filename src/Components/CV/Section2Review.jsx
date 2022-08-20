@@ -9,7 +9,7 @@ export default function Section2() {
   const salaryGraph = useSelector(selectSalaryGraph)
   const timelineGraph = useSelector(selectJObSalaryTimeline)
   const resumeInfo = useSelector(selectResumeInfo)
-  console.log(salaryGraph,'salary graph is this');
+  console.log(timelineGraph,salaryGraph,'salary graph is this');
   const createYears = () => {
     let currentYear = new Date().getFullYear();
     let years = []
@@ -22,19 +22,20 @@ export default function Section2() {
   return (
     <>
       {
-        ((timelineGraph && timelineGraph.company_info ) || salaryGraph ) &&
+        ((timelineGraph && timelineGraph.company_info && timelineGraph.company_info[0] ) || (salaryGraph && salaryGraph.salary) ) &&
         <div className="col-100 align-center CareerTimeline">
           <div className="col-90 align-start py-2 px-2">
             <h1>Career Timeline</h1>
             <span className="divider"></span>
             {((timelineGraph && timelineGraph.company_info) || timelineGraph.skill_info) && <JobTimeline jobs={timelineGraph.company_info} skills={timelineGraph.skill_info} />}
           </div>
-          <div className="col-90 g-1 my-2">
-            <h3 style={{textAlign: 'left'}}>Skills</h3>
-            {timelineGraph.skill_info && <TimelineChart skills={timelineGraph.skill_info} />}
-          </div>
-
-
+          {
+           ( timelineGraph.skill_info && timelineGraph.skill_info[0]) &&
+            <div className="col-90 g-1 my-2">
+              <h3 style={{textAlign: 'left'}}>Skills</h3>
+              {timelineGraph.skill_info && <TimelineChart skills={timelineGraph.skill_info} />}
+            </div>
+          }
           <div className="col-90 g-1 my-2">
 
             <div className="flex-row-between salary-management-header">

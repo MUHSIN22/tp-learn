@@ -11,7 +11,8 @@ import { useSelector,useDispatch } from 'react-redux';
 import { selectBio, selectProfilePic, selectFirstCompany ,selectResumeDetails, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails } from '../../redux/Features/ResumeSlice';
 import BioLoader from '../Loaders/BioLoader';
 import parser from 'html-react-parser';
-import { FaPencilAlt } from "react-icons/fa";
+import { FaPencilAlt, FaPlus } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 export default function Section1() {
     const loading = useSelector(selectResumeLoading)
     const contactInfo = useSelector(selectResumeDetails)
@@ -19,6 +20,7 @@ export default function Section1() {
     const bio = useSelector(selectBio)
     const firstCompany = useSelector(selectFirstCompany)
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const toEdit = useSelector(selectToEdit);
     const handleEditForms = (data) => {
         dispatch(changeEditPageDetails(data)).unwrap();
@@ -55,7 +57,9 @@ export default function Section1() {
             </div>
             <div className="col-inherit">
                 <p className='profileNameFont'>{contactInfo.name} {toEdit && (
-                     <span onClick={() => handleEditForms({ progress: 14,bio:bio ? bio: '' })}><FaPencilAlt /></span>
+                     <>
+                        <span onClick={() => handleEditForms({ progress: 14,bio:bio ? bio: '' })}><FaPencilAlt /></span>
+                     </>
                     )}</p>
                 {firstCompany&&firstCompany.job_role&&<p>{firstCompany.job_role[0].designation_name}</p>}
                 <span className="divider"></span>

@@ -219,19 +219,22 @@ export default function Home() {
 
                 <section className="video-section container-padding">
                     <div className="video-wrapper">
-                        <video width="100%" height="auto" className='video-player'>
+                        <video width="100%" height="auto" controls={isPlaying} className='video-player'>
                             <source src={demoVideo} />
                         </video>
-                        <div className="play-pause-wrapper">
-                            <div className="play-and-pause-icon" onClick={playAndPauseVideo}>
-                                {
-                                    !isPlaying ?
-                                        <GrPlayFill />
-                                        :
-                                        <IoMdPause />
-                                }
+                        {
+                            !isPlaying &&
+                            <div className="play-pause-wrapper">
+                                <div className="play-and-pause-icon" onClick={playAndPauseVideo}>
+                                    {
+                                        !isPlaying ?
+                                            <GrPlayFill />
+                                            :
+                                            <IoMdPause />
+                                    }
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
                     <div className="video-content-wrapper">
                         <h2 className="title-secondary">What the Top <br />HR Leaders has to say?</h2>

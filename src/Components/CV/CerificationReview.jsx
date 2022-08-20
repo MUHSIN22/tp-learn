@@ -2,11 +2,12 @@ import React from 'react'
 import UdemyLogo from '../../Assets/Dashboard icons/certificate.png'
 import dummyCertificate from '../../Assests/dummyCertificate.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectCertificate, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails, deleteCertificate } from '../../redux/Features/ResumeSlice'
+import { selectCertificate, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails, deleteCertificate, changeFormId } from '../../redux/Features/ResumeSlice'
 import CertificateCardLoader from '../Loaders/CerificateCardLoader'
-import { FaPencilAlt } from "react-icons/fa";
+import { FaPencilAlt, FaPlus } from "react-icons/fa";
 import { AiFillDelete } from 'react-icons/ai'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
+import { useNavigate } from 'react-router-dom'
 export default function CerificationReview() {
     const loading = useSelector(selectResumeLoading)
     const Cerification = useSelector(selectCertificate) || []
@@ -39,6 +40,7 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
     const dispatch = useDispatch();
     const toEdit = useSelector(selectToEdit);
     const user_id = useSelector(selectUser_id);
+    const navigate = useNavigate();
     const token = useSelector(selectAuthToken)
     const handleEditForms = (data) => {
         dispatch(changeEditPageDetails(data)).unwrap();
@@ -46,7 +48,7 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
 
     const handleDeleteEducation = (data) => {
         let confirm = window.confirm('Are you sure to delete?');
-        if(confirm) dispatch(deleteCertificate({auth: token, body: data, dispatch}))
+        if (confirm) dispatch(deleteCertificate({ auth: token, body: data, dispatch }))
     }
     return (
         <div className="certificate-grid flex-row-start g-2">
@@ -72,6 +74,11 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
                                 certificate_record_id: certificate_record_id,
                                 user_id
                             })} style={{ "marginLeft": "1rem" }}><AiFillDelete /></span>
+                            <span className="px-1" onClick={() => {
+                                dispatch(changeFormId({ auth: token, body: { user_id, form_id: 9 }, navigate }))
+                            }}>
+                                <FaPlus />
+                            </span>
                         </>
                     )}</h5>
                 </div>

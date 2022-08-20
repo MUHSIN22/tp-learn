@@ -28,7 +28,7 @@ export default function OTP({setOtp}) {
 
            otp+= input.value;
            console.log(otp)
-           input.disabled = true
+          //  input.disabled = true
          })
          console.log('otp',otp)
          setOtp(otp);
@@ -49,12 +49,12 @@ export default function OTP({setOtp}) {
 
   return (
     <div className="otp">
-        <input name='d1' type="text" placeholder='_' maxLength={1} pattern= "[0-9]" />
-        <input name='d2' type="text" placeholder='_' maxLength={1} />
-        <input name='d3'type="text"  placeholder='_'maxLength={1} />
-        <input name='d4' type="text" placeholder='_' maxLength={1} />
-        <input name='d5' type="text" placeholder='_' maxLength={1} />
-        <input name='d6' type="text" placeholder='_' maxLength={1} />
+        <input name='d1' type="text" placeholder='_' maxLength={1} pattern= "[0-9]"/>
+        <input name='d2' type="text" placeholder='_' maxLength={1} pattern= "[0-9]"/>
+        <input name='d3' type="text" placeholder='_' maxLength={1} pattern= "[0-9]"/>
+        <input name='d4' type="text" placeholder='_' maxLength={1} pattern= "[0-9]"/>
+        <input name='d5' type="text" placeholder='_' maxLength={1} pattern= "[0-9]"/>
+        <input name='d6' type="text" placeholder='_' maxLength={1} pattern= "[0-9]"/>
     </div>
   )
 }
