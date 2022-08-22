@@ -91,7 +91,6 @@ export default function Experience6({data}) {
         console.log(temp)
         setAlertInnder(false)
         if(temp.skill_desc && temp.skill_complexity && temp.skill_id && temp.skill_name){
-            console.log('here');
             setAlertInnder(false)
             set_Selected_options([...selected_options, temp])
             document.getElementById('iconinput-Skills').value = '';

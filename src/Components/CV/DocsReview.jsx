@@ -43,8 +43,10 @@ function FileCard({ file_url, title, icon, description, user_resume_photo_media_
     dispatch(changeEditPageDetails(data)).unwrap();
   };
   return (
-    <a href={file_url || file_path} className="card flex-row-start g-1" download>
-      <img src={file_path} alt={title} />
+    <div className="card flex-row-start g-1" download>
+      <a href={file_url || file_path} download>
+        <img src={file_path} alt={title} />
+      </a>
 
       <div className="col-fit g-1">
         <h4>
@@ -60,6 +62,6 @@ function FileCard({ file_url, title, icon, description, user_resume_photo_media_
         </h4>
         <p>{description}</p>
       </div>
-    </a>
+    </div>
   );
 }

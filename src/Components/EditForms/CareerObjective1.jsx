@@ -40,6 +40,7 @@ export default function CareerObjective1({ data }) {
   const [showAlert, setShowAlert] = useState(false);
   const token = useSelector(selectAuthToken);
   const user_id = useSelector(selectUser_id);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     let body = form;
@@ -57,13 +58,14 @@ export default function CareerObjective1({ data }) {
     let form_Data = JsonToFormData(body);
     try {
       dispatch(uploadPhotomedia({ auth: token, body: form_Data, dispatch})).unwrap();
-      console.log(form);
+      console.log(form,'this is form 123');
     } catch (error) {
       showAlert(true);
     } finally {
       setShowAlert(true);
     }
   };
+
   function handleChange(evt) {
     const value = evt.target.value;
     console.log(value);
@@ -119,13 +121,13 @@ export default function CareerObjective1({ data }) {
           defaultValue={form.description}
         />
       </div>
-      <div className="flex-row-end">
-        <button onClick={handleSubmit} className="btn-fit transparent g-0-5">
+      {/* <div className="flex-row-end">
+        <button onClick={e => handleSubmit(e,true)} className="btn-fit transparent g-0-5">
               <AddCircle width={30} />
               Add more
         </button>
-      </div>
-      <Control handleSubmit={() => dispatch(reload())} />
+      </div> */}
+      <Control handleSubmit={handleSubmit} />
     </>
   );
 }

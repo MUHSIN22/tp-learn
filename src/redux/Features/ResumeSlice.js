@@ -644,6 +644,34 @@ export const resumeSlice = createSlice({
         reload: (state) => {
             state.reload = true
         },
+        resetResume : (state) => {
+            state.loading = false;
+            state.recordDetails = {};
+            state.company_job_record_id = '';
+            state.status = '';
+            state.reload = true;
+            state.error = '';
+            state.message = '';
+            state.form = null;
+            state.newJob = false;
+            state.newDesignation =false;
+            state.newEducation =false;
+            state.newCertificate =false;
+            state.newAdditionalSkill =false;
+            state.newPhotoMedia =false;
+            state.newProject =false;
+            state.toEdit = false;
+            state.editPageDetails  = {};
+            state.pageOn ='/personal-information';
+            state.newJob = false;
+            state.newDesignation =false;
+            state.newEducation =false;
+            state.newCertificate =false;
+            state.newAdditionalSkill =false;
+            state.newPhotoMedia =false;
+            state.newProject =false;
+            state.downLoadDetails = {};
+        }
     },
     extraReducers(builder) {
         builder.addCase(resumeInfo.pending, (state, action) => {
@@ -1201,7 +1229,7 @@ export const getPageOn = (state) => state.resume.pageOn;
 export const selectToEdit = (state)=> state.resume.toEdit;
 export const getLoaderstate = (state) => state.resume.loaderval;     
 export const getDownLoadDetails = (state)=> state.resume.downLoadDetails
-export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject } = resumeSlice.actions;
+export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
 

@@ -14,7 +14,7 @@ import MultiSelectedOptions from './MultiSelectedOptions';
 import { FaClosedCaptioning } from 'react-icons/fa';
 const DEBOUNCE_DELAY = 600;
 
-const temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
+let temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
 
 export default function Experience6() {
     const dispatch = useDispatch()
@@ -65,7 +65,6 @@ export default function Experience6() {
     }
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -96,6 +95,7 @@ export default function Experience6() {
         if(temp.skill_desc && temp.skill_complexity && temp.skill_id && temp.skill_name){
             console.log('here');
             setAlertInnder(false)
+            console.log(selected_options, 'this is selected options');
             set_Selected_options([...selected_options, temp])
             document.getElementById('iconinput-Skills').value = '';
             document.getElementById('iconinput-skill_complexity').value = 0;

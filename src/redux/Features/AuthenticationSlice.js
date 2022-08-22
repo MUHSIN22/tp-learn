@@ -140,6 +140,8 @@ export const authenticationSlice = createSlice({
         logout : (state)=>{
                 state.authToken= null;
                 state.status= null;
+                state.user_id = null;
+                state.otp_verified = false;
                 sessionStorage.clear();
         },
         setError : (state,action)=>{

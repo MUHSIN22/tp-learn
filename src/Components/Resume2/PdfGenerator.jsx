@@ -140,6 +140,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
               {newBio}
             </Text>
           </View>
+          
           {
             resumeInfo.company && 
             <View style={styles.linePrimary}></View>

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/Features/AuthenticationSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {setSidebarVal,selectSidebarValue} from '../../redux/Features/MasterSlice'
+import { resetResume } from "../../redux/Features/ResumeSlice";
 
 function Sidebar(props) {
   const dispatch = useDispatch();
@@ -29,7 +30,11 @@ function Sidebar(props) {
     let isConfirm = window.confirm("Are you sure to logout?");
     if(isConfirm){
       navigate('/')
+      sessionStorage.clear();
+      console.log(sessionStorage.getItem('persist:authentication'),"This is session storage");
+      sessionStorage.removeItem("persist:authentication")
       dispatch(logout());
+      dispatch(resetResume())
     }
   };
 

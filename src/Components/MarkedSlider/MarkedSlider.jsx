@@ -1,6 +1,6 @@
 import React from 'react'
 import './MarkedSlider.css'
-export default function MarkedSlider({min,max,value,name,state,setState,width,label, handleChange=()=>{},disabled=false, handleEnabling, isCongetive}) {
+export default function MarkedSlider({min,max,value,name,state,setState,width,label, handleChange=()=>{},disabled=false, handleEnabling, isCognetive}) {
     let range = []
     for(let i = min;i<=max;i++){
         range.push(i);
@@ -15,7 +15,7 @@ export default function MarkedSlider({min,max,value,name,state,setState,width,la
     <div className={"markedSlider g-0-5"+(disabled?" markedSlider--disabled" : '')} style={{width:width}}>
         <label htmlFor="">
             {
-                isCongetive &&
+                isCognetive &&
                 <span><input type="checkbox" onChange={event => handleEnabling(event)}  name={name} className="checkbox" /></span>
             }
             {label}
