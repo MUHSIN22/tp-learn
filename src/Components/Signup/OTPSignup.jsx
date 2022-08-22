@@ -17,6 +17,7 @@ export default function OTPSignup() {
   const otp_verified = useSelector(selectOtp_verified)
   const [otp,setOtp] = useState('')
   const dispatch = useDispatch();
+  console.log(reg_id, navigate,location,message,otp_verified,'all details');
   const handleSubmit = (e)=>{
     e.preventDefault();
     try {
@@ -39,13 +40,15 @@ export default function OTPSignup() {
   const resendCode = (event) => {
     event.preventDefault();
     dispatch(resendOTP({user_id: reg_id,country_code: location.state.code, mobile_no: location.state.num}))
-
   }
+  useEffect(() => {
+    console.log(message, "this is message");
+  },[message])
   return (
     <div className="login">
       <div className="col-30 otp-side">
         <form>
-        {/* {message&&!loading&&<Alert error={error} message={error ? message:null} />} */}
+        {message&&!loading&&<Alert error={error} message={typeof message === "string" ? message:null} />}
           <h1>Enter the OTP here to set your password</h1>
           <p>Enter OTP sent to {location.state.mobile_no}</p>
           {expired? <p>Please resend code</p> :<p> This code will expire in <Countdown minutes={1} seconds={30} trigger={handleExpire}/></p>}
