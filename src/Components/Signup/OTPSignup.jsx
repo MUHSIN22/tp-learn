@@ -4,7 +4,7 @@ import { ReactComponent as ChevronRight } from '../../Assests/icons/chvron-right
 import loginVector from '../../Assests/OTP-vector.png'
 import OTP from '../IconInput/OTP'
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAutheError, selectAuthLoading, selectAuthMessage, selectOtp_verified, selectReg_id, signupOtp } from '../../redux/Features/AuthenticationSlice';
+import { resendOTP, selectAutheError, selectAuthLoading, selectAuthMessage, selectOtp_verified, selectReg_id, signupOtp } from '../../redux/Features/AuthenticationSlice';
 import Countdown from '../../Countdown';
 import Alert from '../Alert/Alert';
 export default function OTPSignup() {
@@ -36,11 +36,16 @@ export default function OTPSignup() {
   function handleExpire(){
     setExpired(true)
   }
+  const resendCode = (event) => {
+    event.preventDefault();
+    dispatch(resendOTP({user_id: reg_id,country_code: location.state.code, mobile_no: location.state.num}))
+
+  }
   return (
     <div className="login">
       <div className="col-30 otp-side">
         <form>
-        {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: Object.values(message)[0]} />}
+        {/* {message&&!loading&&<Alert error={error} message={error ? message:null} />} */}
           <h1>Enter the OTP here to set your password</h1>
           <p>Enter OTP sent to {location.state.mobile_no}</p>
           {expired? <p>Please resend code</p> :<p> This code will expire in <Countdown minutes={1} seconds={30} trigger={handleExpire}/></p>}
@@ -49,7 +54,7 @@ export default function OTPSignup() {
             </div> 
             <div className="form-row">
               <div className="col-20 code-not-recieve">
-              <p>Didn’t recieve the code? <button className='btn-link'>Resend Code </button> </p>
+              <p>Didn’t recieve the code? <button className='btn-link' onClick={resendCode}>Resend Code </button> </p>
               </div>
               
             </div>

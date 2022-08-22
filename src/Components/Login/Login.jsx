@@ -83,7 +83,7 @@ export default function Login() {
     }, [dispatch])
     useEffect(() => {
         if (auth.status === 'succeeded' && auth.user_id) {
-            navigate('/otp-login',{state:{mobile_no:form.country_code+' '+form.mobile_no}})
+            navigate('/otp-login',{state:{mobile_no:form.country_code+' '+form.mobile_no,code: form.country_code,num: form.mobile_no}})
         }
 
         return () => {

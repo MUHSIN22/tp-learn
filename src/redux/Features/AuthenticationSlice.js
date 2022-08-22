@@ -105,6 +105,20 @@ export const  validateOtp = createAsyncThunk('authentication/validateOtp',async(
     }
 })
 
+export const  resendOTP = createAsyncThunk('authentication/resendOTP',async(body,{ rejectWithValue })=>{
+    let encoded = new URLSearchParams(Object.entries(body)).toString()
+    console.log('body',encoded)
+    try {
+        const response =await API.post(`/signup-resend-otp`,encoded,{
+            headers: headers
+          })
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+
 export const logOut = createAsyncThunk('authentication/logout',async(body,{rejectWithValue})=>{
     try{
         return {};
@@ -264,8 +278,20 @@ export const authenticationSlice = createSlice({
             state.loading= false
             state.error = action.payload.error
             state.message = action.payload.data
-
-
+        }).addCase(resendOTP.pending,(state,action) =>{
+            state.status = "loading"
+            state.loading = true
+            state.error = false
+        }).addCase(resendOTP.fulfilled,(state,action) =>{
+            state.status = "succeed"
+            state.loading = true
+            state.error = false
+            state.message = "OTP resent successfully!"
+        }).addCase(resendOTP.rejected,(state,action) =>{
+            state.status = "Rejected"
+            state.loading = false
+            state.error = true
+            state.message = "Error in sending OTP! Please try again"
         })
     }
 })

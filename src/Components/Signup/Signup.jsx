@@ -93,7 +93,7 @@ export default function Signup() {
     }, [countryCodeList, genderList, form.country_code, form.gender])
     //navigate to otp-singup
     useEffect(() => {
-        if (authStatus === 'succeeded' && reg_id) navigate('/OTP-signup', { state: { mobile_no: form.country_code + ' ' + form.mobile_no } })
+        if (authStatus === 'succeeded' && reg_id) navigate('/OTP-signup', { state: { mobile_no: form.country_code + ' ' + form.mobile_no, code: form.country_code, num: form.mobile_no } })
 
         return () => {
 

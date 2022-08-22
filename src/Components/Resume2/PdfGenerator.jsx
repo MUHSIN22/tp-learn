@@ -64,6 +64,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
   }, [bio])
 
   const makePoints = (data) => {
+    console.log(data,'this is roles data');
     let splittedData = data.split("&lt;p&gt;");
     splittedData.forEach((item, index) => {
       splittedData[index] = item.replace("&lt;/p&gt;", "")
@@ -87,6 +88,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
   }
 
   console.log(resumeInfo.company, "this is company");
+  console.log(resumeInfo.company[0].job_role[0].role_responsibilties,'this is job roles');
   return (
     <Document>
       {
@@ -162,7 +164,14 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                           <Text style={[styles.rightSectionMainText,{fontSize: 9}]} >{item.job_role[0].designation_name}</Text>
                           <Text style={styles.rightSectionDate}>{item.industry_name}</Text>
                           <Text style={styles.rightSectionDate}>{moment(item.job_role[0].job_start_date,'DD-MM-YYYY').format('yyyy MMM')} - {moment(item.job_role[0].job_end_date,'DD-MM-YYYY').format('yyyy MM')}</Text>
-                           <View style={styles.list}>
+                          {
+                            item.job_role[0].role_responsibilties &&
+                            <Fragment>
+                              <Text style={styles.rightSectionBlueTitle} >Roles and Responsibilities: </Text>
+                              <Text style={styles.rightSectionDate}>{item.job_role[0].role_responsibilties}</Text>
+                            </Fragment>
+                          }
+                           {/* <View style={styles.list}>
                             {
                               item.job_role[0].role_responsibilties && makePoints(item.job_role[0].role_responsibilties).map((item, index) => (
                                 <Fragment>
@@ -178,7 +187,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                                 </Fragment>
                               ))
                             }
-                          </View>
+                          </View> */}
                           {
                             item.job_role[0].project && item.job_role[0].project[0] &&
                             <Text style={styles.rightSectionBlueTitle} >Projects: </Text>
@@ -187,7 +196,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                             item.job_role[0].project && item.job_role[0].project[0] &&
                             item.job_role[0].project.map((project, index) => (
                               <Fragment key={index}>
-                                <Text style={[styles.rightSectionDate, { marginBottom: 5 }]}>{project.project_name}</Text>
+                                <Text style={[styles.rightSectionDate, { marginBottom: 5 }]}>Project Name: {project.project_name}</Text>
                                 <Text style={[styles.rightSectionDate, { marginBottom: 3 }]}>Client Name: {project.client_name}</Text>
                                 <View style={styles.projectDetailsWrapper}>
                                   <Text style={[styles.projectSkill, { fontWeight: "medium" }]}>Skills</Text>
