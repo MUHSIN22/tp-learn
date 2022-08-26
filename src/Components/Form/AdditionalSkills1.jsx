@@ -43,7 +43,7 @@ export default function AdditionalSkills1() {
         body.user_id = user_id
         try {
             dispatch(toggleNewAdditionalSkills(true))
-            dispatch(addAdditionalSkills({ auth: token, body: { ...form, user_id } })).unwrap()
+            dispatch(addAdditionalSkills({ auth: token, body: { ...form, user_id }, dispatch })).unwrap()
             console.log(form)
         } catch (error) {
             console.log(error)

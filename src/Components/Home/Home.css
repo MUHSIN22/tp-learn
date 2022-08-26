@@ -99,6 +99,7 @@
     font-family: var(--font-poppins);
     margin: 0;
     text-align: left;
+    font-weight: 400;
 }
 .video-list-wrapper,
 .easy-build-list-wrapper{

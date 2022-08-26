@@ -49,6 +49,7 @@ export default function Education() {
   const [universities,setUniversities] = useState(universityList)
   const [colleges,setColleges] = useState(collageList);
   const [degree,setDegree] = useState(degreeList);
+  const [updated,setUpdated] = useState(false);
   function handleChange(evt) {
     const value = evt.target.value;
 
@@ -98,7 +99,7 @@ export default function Education() {
     })
     setColleges(cl);
   }
-  function handleSubmit(e,reload=false) {
+  async function handleSubmit(e,reload=false) {
     e.preventDefault();
     let body = form
     body.location = location;
@@ -108,7 +109,10 @@ export default function Education() {
 
     try {
       dispatch(toggleNewEducation(true))
-      dispatch(addEducation({ auth: token, body })).unwrap()
+      let data = await dispatch(addEducation({ auth: token, body,dispatch })).unwrap()
+      if(data){
+        setUpdated(true)
+      }
     } catch (error) {
       console.log(error)
       setShowAlert(true)
@@ -158,22 +162,25 @@ export default function Education() {
       setLocation(lastEducation.location)
     } else {
       console.log('reset')
-        setForm({
-          degree_id: '',
-          university_id: '',
-          other_degree_name: '',
-          other_university_name: [],
-          collage_id: '',
-          other_collage_name: '',
-          location: '',
-          course_start_date: '',
-          course_end_date: '',
-          course_cgpa: '',
-          course_extra_activity: '',
-          course_project_info: '',
-          education_record_id: '',
-          
-        })
+          if(updated){
+            setForm({
+              degree_id: '',
+              university_id: '',
+              other_degree_name: '',
+              other_university_name: [],
+              collage_id: '',
+              other_collage_name: '',
+              location: '',
+              course_start_date: '',
+              course_end_date: '',
+              course_cgpa: '',
+              course_extra_activity: '',
+              course_project_info: '',
+              education_record_id: '',
+              
+            })
+            setUpdated(false);
+          }
     }
 
     return () => {
@@ -211,7 +218,7 @@ export default function Education() {
         <IconInput value={form.course_start_date} type={'date'} handleChange={handleChange} name={'course_start_date'} label='Duration (From)*' placeholder={'Bachelor/Honors'} width={50} />
         <IconInput value={form.course_end_date} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} width={50} />
       </div>
-      <IconInput value={form.course_cgpa} name={'course_cgpa'} handleChange={handleChange} label='CGPA' placeholder={'CGPA'} width={100} />
+      <IconInput value={form.course_cgpa} name={'course_cgpa'} type="number" handleChange={handleChange} label='CGPA' placeholder={'CGPA'} width={100} />
       {false && <IconInput name={'skills_learned'} label='Key Skills learnt' placeholder={'Skills mastered in this course'} width={100} />}
       <IconTextArea value={form.course_extra_activity} rows={8} name={'course_extra_activity'} handleChange={handleChange} label='Extra-curricular activities' placeholder={'Extra-academic participation'} width={100} />
       <IconInput value={form.course_project_info} name={'course_project_info'} handleChange={handleChange} label='Projects, if any' placeholder={'Academic projects undertaken'} width={100} />

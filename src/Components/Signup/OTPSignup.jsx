@@ -16,12 +16,14 @@ export default function OTPSignup() {
   const message = useSelector(selectAuthMessage)
   const otp_verified = useSelector(selectOtp_verified)
   const [otp,setOtp] = useState('')
+  const [toggleOTP,setToggleOTP] = useState(false)
   const dispatch = useDispatch();
   console.log(reg_id, navigate,location,message,otp_verified,'all details');
   const handleSubmit = (e)=>{
     e.preventDefault();
     try {
       dispatch(signupOtp({user_id:reg_id,otp})).unwrap()
+      setToggleOTP(!toggleOTP)
     } catch (error) {
         console.log(error)
     }
@@ -53,7 +55,7 @@ export default function OTPSignup() {
           <p>Enter OTP sent to {location.state.mobile_no}</p>
           {expired? <p>Please resend code</p> :<p> This code will expire in <Countdown minutes={1} seconds={30} trigger={handleExpire}/></p>}
            <div className="form-row">
-            <OTP setOtp={setOtp}/> 
+            <OTP setOtp={setOtp} toggleOTP={toggleOTP}/> 
             </div> 
             <div className="form-row">
               <div className="col-20 code-not-recieve">

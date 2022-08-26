@@ -238,7 +238,6 @@ export const addAdditionalSkills = createAsyncThunk('authentication/addAdditiona
         })
         if(data.dispatch){
             data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
         }
         return response.data
     } catch (error) {
@@ -885,7 +884,7 @@ export const resumeSlice = createSlice({
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.message
+            state.message = action.payload.data.error_message
 
 
         }).addCase(uploadCVvideos.pending, (state, action) => {

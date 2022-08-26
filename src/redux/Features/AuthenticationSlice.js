@@ -244,8 +244,8 @@ export const authenticationSlice = createSlice({
         }).addCase(signupOtp.rejected,(state,action)=>{
             state.loading= false
             state.status = 'Rejected' 
-            state.error = action.payload.error
-            state.message = action.payload.data
+            state.error = "Something went wrong in sending OTP!"
+            state.message = action.payload.data.scalar
             
 
 

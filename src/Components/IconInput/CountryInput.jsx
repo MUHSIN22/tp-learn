@@ -15,15 +15,22 @@ export default function CountryInput({setCountryCode}) {
         setSearching(true);
         setSearchText(event.target.value)
         let codes = countryCode;
-        let regex = new RegExp(`^${event.target.value}`, "gi")
+        console.log(escapeRegExp(event.target.value));
+        let regex = new RegExp(`^${escapeRegExp(event.target.value)}`, "gi")
         codes = countryCode.filter(item => {
             return item.country_code.match(regex)
         })
+        console.log(codes);
         setCountryCodeList(codes)
     }
+
+    function escapeRegExp(text) {
+        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+      }
+
     return (
         <div className="country-input-container">
-            <label htmlFor=""></label>
+            <label htmlFor="">Country Code</label>
             <div className="country-input-wrapper">
                 <span>{flag}</span>
                 <input type="text" className="country-search" value={!isSearching ? dialCode : searchText} onChange={handleInputChange} />

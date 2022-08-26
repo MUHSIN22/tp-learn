@@ -61,7 +61,7 @@ export default function Experience2() {
     useEffect(() => {
       if(companyBasedList.length&&form.type_of_company==='') setForm({...form,type_of_company:companyDetails.type_of_company_id!==""?companyDetails.type_of_company_id: companyBasedList[0].id})
       if(industryList.length&&form.industry_id==='') setForm({...form,industry_id:companyDetails.industry_id!==""?companyDetails.industry_id: industryList[0].id})
-      if(buisnessScaleList.length&&form.scale_id==='') setForm({...form, scale_id: companyDetails.scale_id!==""?companyDetails.scale_id:buisnessScaleList[0].id})
+      if(buisnessScaleList.length&&form.scale_id==='') setForm({...form, scale_id: companyDetails.scale_id!==""?companyDetails.scale_id:""})
       console.log(buisnessScaleList.length,form.scale_id==='')
       return () => {
         

@@ -28,7 +28,7 @@ export default function Education() {
         </>
     )
 }
-function EducationCard({ degree_name, upload_degree, course_start_date, course_end_date, university_name, skills, certificate }) {
+function EducationCard({ degree_name, upload_degree, course_start_date, course_end_date, university_name, skills, certificate, course_extra_activity,course_project_info, }) {
     return (
         <div className="education-grid">
             <img src={upload_degree} alt="" />
@@ -41,13 +41,24 @@ function EducationCard({ degree_name, upload_degree, course_start_date, course_e
                         <p>{TimeDiff(course_end_date, course_start_date)}</p>
                     </div>
                 </div>
+                {
+                    course_project_info &&
+                    <div className="flex-row-start mt-0-5" >
+                        <p>Project : {course_project_info}</p>
+                    </div>
+                }
+                {
+                    course_extra_activity &&
+                    <div className="flex-row-start mt-0-5" >
+                        <p>Extra Curricular Activity : {course_extra_activity}</p>
+                    </div>
+                }
 
-
-                <div className="flex-row-start g-0-5">
+                {/* <div className="flex-row-start g-0-5">
                     {skills.map((skill, i) => <div key={i} className="skill">
                         {skill}
                     </div>)}
-                </div>
+                </div> */}
 
             </div>
         </div>

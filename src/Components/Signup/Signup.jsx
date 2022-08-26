@@ -20,6 +20,7 @@ import Alert from '../Alert/Alert';
 import IconAutoComplete from '../IconInput/IconAutocomplete';
 import Select from 'react-select';
 import CountryInput from '../IconInput/CountryInput';
+import moment from 'moment';
 export default function Signup() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -93,43 +94,45 @@ export default function Signup() {
     }, [countryCodeList, genderList, form.country_code, form.gender])
     //navigate to otp-singup
     useEffect(() => {
-        if (authStatus === 'succeeded' && reg_id) navigate('/OTP-signup', { state: { mobile_no: form.country_code + ' ' + form.mobile_no, code: form.country_code, num: form.mobile_no } })
+        if (authStatus === 'succeeded' && reg_id && form.country_code && form.mobile_no) navigate('/OTP-signup', { state: { mobile_no: form.country_code + ' ' + form.mobile_no, code: form.country_code, num: form.mobile_no } })
 
         return () => {
 
         }
     }, [authStatus, reg_id, navigate])
 
+    console.log(message);
+
     return (
         <div className="login">
             <div className="form-container col-30">
                 <form>
-                {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: Object.values(message)[0]} />}
+                {message&&!loading&&<Alert error={error} message={error ? [Object.values(message)]: Object.values(message)[0]} />}
                     <h1>Create Account</h1>
-                    <div className="form-row">
+                    <div className="form-row signup-form-row">
                         <IconInput icon={<User />} handleChange={handleChange} name="fname" type='text' label="First Name" placeholder="John" width={50} validation={message&&message.fname} />
                         <IconInput icon={<User />} handleChange={handleChange} name="lname" type='text' label="Last Name" placeholder="Doe" width={50} validation={message&&message.lname} />
                     </div>
-                    <div className="form-row">
+                    <div className="form-row signup-form-row">
                         <IconInput icon={<Mail />} handleChange={handleChange} name="email" type='email' label="E-Mail Address" placeholder="John123@abc.com" width={100} validation={message&&message.email} />
                     </div>
-                    <div className="flex-row-start align-end g-3">
+                    <div className="flex-row-start align-end g-3 signup-form-row">
                         <CountryInput setCountryCode={setCountryCode} countryCode={countryCodeList} />
                         <IconInput name='mobile_no' icon={<Phone />} handleChange={handleChange} label='Phone Number' placeholder={'8955-656-989'} width={70} validation={message&&message.mobile_no} />
                     </div>
-                    <div className="form-row">
+                    <div className="form-row signup-form-row">
                         <IconInput icon={<Calendar />} handleChange={handleChange} name="dob" type='date' label="Date of Birth" placeholder="" width={100} validation={message&&message.dob} />
                     </div>
-                    <div className="form-row">
+                    <div className="form-row signup-form-row">
                         <IconSelect icon={<User />} handleChange={handleChange} name="gender" label="Gender" width={100} options={genderList} name_field='gender_name' />
                     </div>
-                    <div className="form-row">
+                    <div className="form-row signup-form-row">
                         <IconAutoComplete icon={<Location />} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={100} validation={message&&message.address} />
                     </div>
-                    <div className="form-row">
+                    <div className="form-row signup-form-row">
                         <button onClick={handleSubmit} className='btn primary'>Continue <ChevronRight /></button>
                     </div>
-                    <div className="form-row noGap align-center">
+                    <div className="form-row signup-form-row noGap align-center">
                         <span className='line'></span>
                         <p className='w-100'>Already have a Talentplace account?</p>
                         <span className='line'></span>
@@ -202,6 +205,8 @@ function Validation(form, dispatch) {
     if (form.dob.length < 1) {
         errorList.dob[0] = 'Enter Your DOB';
         flag = false;
+    }else if(moment(form.dob).isAfter()){
+        errorList.dob[0] = "Please enter a valid DOB"
     } else {
         errorList.dob[0] = null
     }

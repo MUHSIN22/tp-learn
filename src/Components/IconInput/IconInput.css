@@ -24,7 +24,8 @@ select:-webkit-autofill:focus {
   position: relative;
 }
 
-.iconInput label {
+.iconInput label,
+.country-input-container label {
   font-size: 0.9rem;
   color: #565B6B;
   font-family: 'Poppins', sans-serif;
@@ -293,6 +294,7 @@ select:-webkit-autofill:focus {
   background-color: #ffff;
   font-size: 1rem;
   position: relative;
+  margin-top: 0.5rem;
 }
 .country-input-wrapper input{
   outline: none;

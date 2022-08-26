@@ -30,6 +30,9 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import PdfGenerator from './Components/Resume2/PdfGenerator';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
 import Checking from './Components/checking/Checking';
+import Footer from './Components/Footer/Footer';
+import PrivacyPolicy from './Components/Footer Links/PrivacyPolicy/PrivacyPolicy';
+import TermsAndConditions from './Components/Footer Links/TermAndConditions/TermsAndConditions';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -105,7 +108,9 @@ function App() {
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path='/' element={<Home/>}/>
-      <Route path='/check' element={<Checking/>} />
+       <Route path='/check' element={<Checking/>} />
+       {/* <Route path='/privacy-policy' element={<PrivacyPolicy />} /> */}
+       {/* <Route path='/terms-and-conditions' element={<TermsAndConditions />} /> */}
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>
        <Route path="/settings" element={<Settings/>}/>
@@ -116,6 +121,7 @@ function App() {
        <Route path='/logout' element={<Logout/> }/>
        <Route path='/change_password' element={<ChangePassword/> }/>
       </Routes>
+      <Footer />
     </div>
   );
 }

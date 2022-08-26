@@ -49,7 +49,7 @@ export default function OTPLogin() {
     <div className="login">
       <div className="col-30 otp-side">
         <form>
-          {message && !loading && <Alert error={error} message={error ? message : message} />}
+          {message && !loading && <Alert error={error} message={typeof message === "string" ? message : null} />}
           <h1>Enter the OTP here to login</h1>
           <p>Enter OTP sent to {location.state.mobile_no}</p>
           {expired ? <p>Please resend code</p> : <p> This code will expire in <Countdown minutes={1} seconds={30} trigger={handleExpire} /></p>}

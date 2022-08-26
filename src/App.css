@@ -1013,6 +1013,9 @@ body {
   align-items: flex-end;
   gap: 2rem;
 }
+.signup-form-row{
+  align-items: flex-start;
+}
 .form-col {
   width: 100%;
   display: flex;

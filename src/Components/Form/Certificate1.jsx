@@ -40,6 +40,7 @@ export default function Certificate1() {
     const certificates = useSelector(selectCertificate)
     const [reloadFlag, setReloadFlag] = useState(false)
     const newCertificate = useSelector(selectNewCertificate)
+    const [updated,setUpdated] = useState(false);
     function handleChange(evt) {
         const value = evt.target.value;
         console.log(value)
@@ -65,7 +66,7 @@ export default function Certificate1() {
         setSearch(e.target.value)
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         let body = form
         if(file) body.certificate_file = file
@@ -79,9 +80,12 @@ export default function Certificate1() {
         })
         let form_data = JsonToFormData(body)
           try {
-            dispatch(toggleNewCertificate(true))
-              dispatch(addCertification({ auth: token, body:form_data })).unwrap()
-              console.log(form)
+              dispatch(toggleNewCertificate(true))
+              let data = await dispatch(addCertification({ auth: token, body:form_data, setUpdated })).unwrap()
+              if(data){
+                setUpdated(true);
+              }
+              console.log(data,'this is data')
           } catch (error) {
               showAlert(true)
           } finally {
@@ -130,25 +134,26 @@ export default function Certificate1() {
         })
         set_Selected_options(skills)
       }else{
-        setForm({
-            project_name: '',
-            institute_name: '',
-            skills_ids:'',
-            certificate_start_date: '',
-            certificate_end_date: '',
-            certificate_project_info: '',
-            is_online: 'no',
-            certification_record_id: '',
-    
-        })
-        set_Selected_options([])
-        setSearch('')
+        if(updated){
+            setForm({
+                project_name: '',
+                institute_name: '',
+                skills_ids:'',
+                certificate_start_date: '',
+                certificate_end_date: '',
+                certificate_project_info: '',
+                is_online: 'no',
+                certification_record_id: '',
+            })
+            set_Selected_options([])
+            setSearch('')
+        }
       }
        
       return () => {
         
       }
-    }, [newCertificate,certificates,loading])
+    }, [newCertificate,certificates,loading, updated])
     useEffect(()=>{
 
         if(reloadFlag&&!loading){

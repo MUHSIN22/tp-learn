@@ -126,7 +126,7 @@ export default function Home() {
                         <Link to="/signup" className='btn-primary'>Get Started</Link>
                     </div>
                     <div className="banner-image-wrapper">
-                        <img src={bannerBackground} alt="" className="banner-image" />
+                        <img src={bannerBackground} alt="TalentPlace Resume Builder" className="banner-image" />
                         {/* <Lottie options={{...defaultOptions,animationData: bannerAnimation}} className="banner-image" /> */}
                     </div>
                     <img src={bannerWave} className="banner-wave" alt="" />
@@ -139,9 +139,9 @@ export default function Home() {
                     </div>
                     <div className="easy-build-content-wrapper">
                         <h2 className="title-secondary">Wow recruiters and get more interview calls</h2>
-                        <p className="para-primary">
+                        <h3 className="para-primary">
                             Just fill in your current designation and our AI-engine will fetch a convincing description and roles & responsibilities fitting your profile, along with useful insights for your career
-                        </p>
+                        </h3>
                         <hr />
                         <div className="easy-build-list-wrapper">
                             <ul className="easy-build-list">
@@ -174,9 +174,9 @@ export default function Home() {
                 <section className="skill-industry-section container-padding">
                     <div className="skill-industry-content">
                         <h2 className="title-secondary">Skill & Industry <br /> Focussed Resume</h2>
-                        <p className="para-primary">
+                        <h3 className="para-primary">
                             Instead of using vague and non-measurable terms like proficient, highly-skilled, result-driven, etc, we feature your best skills and your level of expertise in each of those. This will help you match with best suited job roles and increase your chances of getting an interview
-                        </p>
+                        </h3>
                     </div>
                     <div className="skill-industry-image-wrapper">
                     <Lottie options={{...defaultOptions,animationData:easyBuildAnimation}} className="skill-industry-image"/>
@@ -197,18 +197,18 @@ export default function Home() {
                     </div>
                     <div className="credibility-content">
                         <h2 className="title-secondary">Increase credibility <br />through Assessment <br />badges</h2>
-                        <p className="para-primary">
+                        <h3 className="para-primary">
                             Proven skills serve as a point of differentiation. Stand out from competition and let hiring managers verify your skills through skill badges. Take free assessment tests and show off your score on your dynamic resume to increase your chances of getting hired
-                        </p>
+                        </h3>
                     </div>
                 </section>
 
                 <section className="analytics-section" style={{ backgroundImage: `url('${lineBackground}')` }}>
                     <div className="analytics-content">
                         <h2 className="title-secondary">Analytics that <br />measures your growth</h2>
-                        <p className="para-primary">
+                        <h3 className="para-primary">
                             Visually present your growth trajectory in the same company (promotions & appraisals). Back up your achievements with numbers. Your important metrics like sales numbers, customer satisfaction ratings, or tickets completed will be highlighted in your dynamic resume to let employers know you mean business.
-                        </p>
+                        </h3>
                     </div>
                     <div className="analytics-image-wrapper">
                         <Lottie options={{...defaultOptions,animationData: graphAnimation}} className="analytics-image" />
@@ -220,7 +220,7 @@ export default function Home() {
                 <section className="video-section container-padding">
                     <div className="video-wrapper">
                         <video width="100%" height="auto" controls={isPlaying} className='video-player'>
-                            <source src={demoVideo} />
+                            <source src={demoVideo}/>
                         </video>
                         {
                             !isPlaying &&
@@ -238,9 +238,9 @@ export default function Home() {
                     </div>
                     <div className="video-content-wrapper">
                         <h2 className="title-secondary">What the Top <br />HR Leaders has to say?</h2>
-                        <p className="para-primary">
+                        <h3 className="para-primary">
                             Let's hear it from the experts who know it the best. Top hiring experts share their views on the best resumes they have seen, tips to craft a hireable resume, what makes them tick a candidate, along with meaningful career advice on getting hired by top companies.
-                        </p>
+                        </h3>
                         <hr />
                         <div className="video-list-wrapper">
                             <ul className="video-list">
@@ -290,30 +290,30 @@ export default function Home() {
                             gridTemplateColumns: `repeat(${itemCount},${slideWidth}px)`,
                             marginLeft: `-${marginLeft * slideWidth}px`
                         }}>
-                            <img src={slide1} alt="" width="100px" className="team-slide" />
-                            <img src={slide2} alt="" width="100px" className="team-slide" />
-                            <img src={slide3} alt="" width="100px" className="team-slide" />
+                            <img src={slide1} alt="Accenture " width="100px" className="team-slide" />
+                            <img src={slide2} alt="L&T Infotech " width="100px" className="team-slide" />
+                            <img src={slide3} alt="Marketing Strategiest " width="100px" className="team-slide" />
                         </div>
                     </div>
                 </section>
 
                 <section className="resume-section container-padding">
                     <h2 className="title-secondary">Pick a resume template. <br /> that defines you best.</h2>
-                    <p className="para-primary">
+                    <h3 className="para-primary">
                         Show off your skills and impress your future employer through these job-winning resume templates.
-                    </p>
+                    </h3>
                     <ResumeSlider />
                 </section>
 
                 <section className="footer-home container-padding">
                     <div className="footer-image-wrapper">
-                        <img src={homeBannerImage} alt="" className="footer-image" />
+                        <img src={homeBannerImage} alt="Resume Maker TalentPlace" className="footer-image" />
                     </div>
                     <div className="footer-content">
                         <h2 className="title-secondary">Let you resume do <br />the work</h2>
-                        <p className="para-primary">
+                        <h3 className="para-primary">
                             Join 1,300,000 job seekers worldwide and get hired faster with your best resume yet
-                        </p>
+                        </h3>
                         <Link to="/signup" className='btn-primary' >Get Started</Link>
                     </div>
                 </section>

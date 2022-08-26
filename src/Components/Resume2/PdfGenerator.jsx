@@ -86,9 +86,6 @@ export default function PdfGenerator({ bio, resumeDetails }) {
     console.log(blob);
     return blob
   }
-
-  console.log(resumeInfo.company, "this is company");
-  console.log(resumeInfo.company[0].job_role[0].role_responsibilties,'this is job roles');
   return (
     <Document>
       {

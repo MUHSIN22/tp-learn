@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+.main-footer{
+    background: rgba(47, 47, 61, 1);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr 1fr;
+    grid-template-areas: 'sec1 sec2 sec3 sec4''copy copy copy copy';
+    text-align: left;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    padding: 2rem 7%;
+    grid-gap: 1rem;
+    z-index: 1000;
+    position: relative;
+}
+.main-footer ul{
+    list-style: none;
+    padding: 0;
+}
+.main-footer ul li{
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+.main-footer .footer-section:nth-child(1){
+    grid-area: sec1;
+}
+.main-footer .footer-section:nth-child(2){
+    grid-area: sec2;
+}
+.main-footer .footer-section:nth-child(3){
+    grid-area: sec3;
+}
+.main-footer .footer-section:nth-child(4){
+    grid-area: sec4;
+}
+.main-footer .footer-title{
+    font-size: 1.5rem;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+.main-footer .footer-contact-social{
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+}
+.main-footer .footer-copyright{
+    grid-area: copy;
+    border-top: 1px solid #fff;
+    padding-top: 1rem;
+    text-align: right;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-footer{
+        padding: 1rem;
+    }
+    .main-footer .footer-title{
+        font-size: 1.2rem;
+    }
+    .main-footer ul li{
+        font-size: 0.9rem;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .main-footer{
+        grid-template-areas: 'sec1''sec2''sec3''sec4''copy';
+        grid-template-columns: 1fr;
+    }
+}

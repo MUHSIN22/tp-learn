@@ -52,15 +52,13 @@
     
 }
 .CardRadioGroup .active .dot{
-    width: 10px;
-    height: 10px;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
     border-radius: 50%;
-    background-color: #fff;
-    transform: scale(1);
-    margin: auto;
-    position: relative;
-    top: 2.5px;
-    right: 0.3px;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    transform: translateY(-77%);
 }
 .CardRadioGroup .inactive .dot{
     transition: all 0.3s ease;

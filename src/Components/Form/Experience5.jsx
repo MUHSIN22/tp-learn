@@ -72,9 +72,12 @@ export default function Experience5() {
         console.log(temp.skill_id,search,);
         temp.skill_name = temp.skill_id == '' ? search : temp.skill_name;
         console.log(temp,'this is temp');
-        set_Selected_options([...selected_options, temp])
-        document.getElementById('iconinput-Skills').value = '';
-        document.getElementById('iconinput-complexity').value = '';
+        if((temp.skill_id !== "" || temp.skill_name !== "") && temp.skill_complexity !== ""){
+            set_Selected_options([...selected_options, temp])
+            document.getElementById('iconinput-Skills').value = '';
+            document.getElementById('iconinput-complexity').value = '';
+        }
+        
 
 
     }
@@ -139,10 +142,11 @@ export default function Experience5() {
 
     useEffect(() => {
         if ((lastJob || lastCompany) && form.user_company_record_id === '') {
+            console.log(typeof lastJob.external_client_desc,lastJob,"this is abc");
             setForm({
                 ...form,
                 role_responsibilities: lastJob.role_responsibilties ? parse(lastJob.role_responsibilties) : "",
-                external_client_desc: lastJob.external_client_desc,
+                external_client_desc: lastJob.external_client_desc == "undefined" ? "" :lastJob.external_client_desc ,
                 user_company_record_id: lastCompany.company_record_id,
                 user_company_job_record_id: lastJob.company_job_record_id,
                 job_title_id
@@ -188,7 +192,7 @@ export default function Experience5() {
                 </div>
             </div>
             <div className="form-row">
-                <IconInput value={lastJob.external_client_desc} name='external_client_desc' handleChange={handleChange} label='Have you worked for any external clients? If yes, please mention below:' placeholder='Which clients did you work for' width={100} />
+                <IconInput value={form.external_client_desc} name='external_client_desc' handleChange={handleChange} label='Have you worked for any external clients? If yes, please mention below:' placeholder='Which clients did you work for' width={100} />
             </div>
             <Control handleSubmit={handleSubmit} />
         </>

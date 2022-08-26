@@ -79,7 +79,7 @@ export default function Section3Review() {
                   }}
                 />
               ) : (
-                <JobOverviewLoader />
+                null
               )}
             </div>
           </div>
@@ -129,32 +129,54 @@ function CompanyOverview({ company }) {
   return (
     <div className="grid-35-65 company-overview-grid">
       <div className="col-100 g-1">
-        <div className="flex-row-fit align-center g-1">
-          <Device /> <p>{company.industry_name}</p>
-
-        </div>
-        <div className="flex-row-fit align-center g-1">
-          <Chart /> <p>{company.scale_name}</p>
-        </div>
-        <div className="flex-row-fit align-center g-1">
-          <Headphone /> <p>{company.type_of_company_name}</p>
-        </div>
-        <div className="flex-row-fit align-center g-1">
-          <Location /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].job_location : ''}</p>
-        </div>
-        <div className="flex-row-fit align-center g-1">
-          <Calendar /> <p>{StartEndDate(company.job_role)}</p>
-        </div>
-        <div className="flex-row-fit align-center g-1">
-          <Clock /> <p>{company.nature_of_job_name}</p>
-        </div>
-        <div className="flex-row-fit align-center g-1">
-          {console.log(company, 'company from here00000000000000000000000')}
-          <BarGraph /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].job_level_name : ''}</p>
-        </div>
-        <div className="flex-row-fit align-center g-1">
-          <Human /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].function_area_name : ''}</p>
-        </div>
+        {
+          company.industry_name&&
+          <div className="flex-row-fit align-center g-1">
+            <Device /> <p>{company.industry_name}</p>
+          </div>
+        }
+        {
+          company.scale_name&&
+          <div className="flex-row-fit align-center g-1">
+            <Chart /> <p>{company.scale_name}</p>
+          </div>
+        }
+        {
+          company.type_of_company_name&&
+          <div className="flex-row-fit align-center g-1">
+            <Headphone /> <p>{company.type_of_company_name}</p>
+          </div>
+        }
+        {
+          (company.job_role && company.job_role.length > 0 ) &&
+          <div className="flex-row-fit align-center g-1">
+            <Location /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].job_location : ''}</p>
+          </div>
+        }
+        {
+          StartEndDate(company.job_role) !== "unknown-unknown" &&
+          <div className="flex-row-fit align-center g-1">
+            <Calendar /> <p>{StartEndDate(company.job_role)}</p>
+          </div>
+        }
+        {
+          company.nature_of_job_name &&
+          <div className="flex-row-fit align-center g-1">
+            <Clock /> <p>{company.nature_of_job_name}</p>
+          </div>
+        }
+        {
+          (company.job_role && company.job_role.length > 0) &&
+          <div className="flex-row-fit align-center g-1">
+            <BarGraph /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].job_level_name : ''}</p>
+          </div>
+        }
+        {
+          (company.job_role && company.job_role.length > 0) &&
+          <div className="flex-row-fit align-center g-1">
+            <Human /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].function_area_name : ''}</p>
+          </div>
+        }
       </div>
       <div className="col-100 justify-end">
         <h5 className="text-right profileNameFont">{toEdit && (
@@ -192,7 +214,6 @@ function CompanyOverview({ company }) {
             </span>
           </>
         )} {company.company_name}</h5>
-        {console.log(companyWise, "this is company wise")}
         {companyWise && (
           <LineGraph
             salary={companyWise.salary}
@@ -290,12 +311,18 @@ function DesignationOverview(props) {
       <span className="divider"></span>
       <div className="grid-35-65 company-overview-grid">
         <div className="col-100 g-2">
-          <div className="flex-row-fit align-center g-1">
-            <BarGraphO /> <p>{job_role[index].job_level_name || ""}</p>
-          </div>
-          <div className="flex-row-fit align-center g-1">
-            <HumanG /> <p>{job_role[index].function_area_name || ""}</p>
-          </div>
+          {
+            job_role[index].job_level_name &&
+            <div className="flex-row-fit align-center g-1">
+              <BarGraphO /> <p>{job_role[index].job_level_name || ""}</p>
+            </div>
+          }
+          {
+            job_role[index].function_area_name &&
+            <div className="flex-row-fit align-center g-1">
+              <HumanG /> <p>{job_role[index].function_area_name || ""}</p>
+            </div>
+          }
           <div className="flex-row-fit align-center g-1">
             <Webcam />{" "}
             <p>{job_role[index].job_remote_work === 0 ? "No" : "Yes"}</p>

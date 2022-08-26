@@ -11,6 +11,7 @@ import IconInput from '../IconInput/IconInput'
 import IconSelect from '../IconInput/IconSelect'
 import SuggestiveInput from '../IconInput/SuggestiveInput'
 import Control from './Control'
+import errorMessageHandler from '../../functionUtils/errorMessageHandler'
 const DEBOUNCE_DELAY = 600;
 export default function Experience3() {
     const dispatch = useDispatch()
@@ -89,7 +90,12 @@ export default function Experience3() {
     function handleAddDesignation() {
         if(form.end_salary === ''){
             setEndSalaryError("End Salary is required!")
+            setTimeout(() => {
+                setEndSalaryError(false)
+            },3000)
             return
+        }else{
+            setEndSalaryError(false);
         }
         const body = {...form, user_id,location}
         if(form.remote_work!=='yes')  body.remote_work = 'no'
@@ -164,11 +170,13 @@ export default function Experience3() {
       }
     }, [lastJob])
     
-    console.log(designationlist,'ml list');
+    console.log(errorMessageHandler(message),'error message');
+    console.log(message,'ml error list');
     return (
         <>  
             {endSalaryError &&<Alert error={true} message={endSalaryError} />}
-            {showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
+            {console.log(errorMessageHandler(message, 'error display'))}
+            {showAlert &&!loading&&<Alert error={error} message={error ? errorMessageHandler(message) : message} />}
             <h1>Now tell us about all the job roles at which you have worked, starting with the latest one.</h1>
             <div className="form-row">
                 <SuggestiveInput icon={<></>} value={search} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' width={45} suggestions={[...designationlist,{id:null,job_title_name: "Add designation"}]} name_field={'job_title_name'} searchHandler={searchHandler} selected={selectHandler}  />
@@ -201,7 +209,7 @@ export default function Experience3() {
                         <IconInput value={form.end_date} name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
                     }
                     <div className="salary-wrapper">
-                        <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package in this role' placeholder='Per Annum' width={100} />
+                        <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package' placeholder='Per Annum' width={100} />
                         <IconSelect value={form.end_salary_currency} name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
                     </div>
                 </div>

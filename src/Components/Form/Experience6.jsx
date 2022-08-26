@@ -102,8 +102,15 @@ export default function Experience6() {
             document.getElementById('iconinput-skill_desc').value = '';
             temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
         }else{
-            setAlertInnder(true);
-            setValidationError("All skill fields are required!")
+            if(temp.skill_desc.length <= 0){
+                setAlertInnder(true);
+                setValidationError("Skill description required!")
+                return false;
+            }else if(temp.skill_complexity.length  <= 0){
+                setAlertInnder(true);
+                setValidationError("Skill complexity required!")
+                return false;
+            }
         }
         
 
@@ -115,9 +122,13 @@ export default function Experience6() {
                 if(temp.skill_desc.length > 0 && temp.skill_complexity.length > 0){
                     setAlertInnder(false);
                     return true
-                }else{
+                }else if(temp.skill_desc.length <= 0){
                     setAlertInnder(true);
-                    setValidationError("All skill fields are required!")
+                    setValidationError("Skill description required!")
+                    return false;
+                }else if(temp.skill_complexity.length  <= 0){
+                    setAlertInnder(true);
+                    setValidationError("Skill description required!")
                     return false;
                 }
             }else{

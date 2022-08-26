@@ -66,12 +66,12 @@ export default function Login() {
             }
         }else{
             dispatch(setError({
+                "mobile_no":!body.mobile_no&& [
+                    "Enter valid mobile no"
+                ],
                 "country_code":!body.country_code&&[
                     "Select country code"
                 ],
-                "mobile_no":!body.mobile_no&& [
-                    "Enter valid mobile no"
-                ]
             }))
         }
     }
@@ -82,7 +82,7 @@ export default function Login() {
         }
     }, [dispatch])
     useEffect(() => {
-        if (auth.status === 'succeeded' && auth.user_id) {
+        if (auth.status === 'succeeded' && auth.user_id && form.country_code && form.mobile_no) {
             navigate('/otp-login',{state:{mobile_no:form.country_code+' '+form.mobile_no,code: form.country_code,num: form.mobile_no}})
         }
 
@@ -101,6 +101,12 @@ export default function Login() {
         
       }
     }, [codes])
+
+    useEffect(() => {
+        if(error && message){
+            console.log(message);
+        }
+    },[message])
     
 
     return (
@@ -109,7 +115,7 @@ export default function Login() {
            
             <div className="form-container col-30">
                 <form autocomplete="off">
-               {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: message} />}
+                    {message&&!loading&&<Alert error={error} message={error ? Object.values(message)[0]: message} />}
                     <h1>Login</h1>
                     <div className="form-row">
                         <IconInput icon={<Mail />} handleChange={handleChange} name="email" type='email' label="E-Mail Address" placeholder="Enter your primary email address" width={95} validation={message&&message.email} />

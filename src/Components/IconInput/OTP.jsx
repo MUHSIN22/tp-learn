@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 
 
-export default function OTP({setOtp}) {
+export default function OTP({setOtp, toggleOTP}) {
   useEffect(() => {
     
     var inputs = document.querySelectorAll(".otp input") 
@@ -44,6 +44,13 @@ export default function OTP({setOtp}) {
     }
   }, [setOtp])
   
+  useEffect(() => {
+    var inputs = document.querySelectorAll(".otp input") 
+    inputs.forEach((input) => {
+      console.log(input);
+      input.value = ""
+    })
+  },[toggleOTP])
   
 
 
