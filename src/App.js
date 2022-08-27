@@ -109,8 +109,8 @@ function App() {
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path='/' element={<Home/>}/>
        <Route path='/check' element={<Checking/>} />
-       {/* <Route path='/privacy-policy' element={<PrivacyPolicy />} /> */}
-       {/* <Route path='/terms-and-conditions' element={<TermsAndConditions />} /> */}
+       <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+       <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
        <Route path="/dashboard" element={<Dashboard/>}/>
        <Route path='/membership' element={<Membership/>}/>
        <Route path="/settings" element={<Settings/>}/>

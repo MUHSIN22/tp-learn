@@ -54,7 +54,7 @@ export default function Experience6() {
         if(formValidation){
             try {
                 dispatch(toggleNewProject(true))
-                dispatch(addProject({ auth: token, body: { ...form, user_id } })).unwrap()
+                dispatch(addProject({ auth: token, body: { ...form, user_id }, dispatch })).unwrap()
                 console.log(form)
             } catch (error) {
                 showAlert(true)
@@ -186,7 +186,7 @@ export default function Experience6() {
     }, [showAlert, error])
 
     useEffect(() => {
-        if (!newProject && lastJob.project && lastJob.project[lastJob.project.length - 1]) {
+        if (!newProject && lastJob.project && lastJob.project[lastJob.project.length - 1] && !newProject) {
             let lastProject = lastJob.project[lastJob.project.length - 1]
             setForm({
                 ...form,

@@ -99,7 +99,7 @@ export default function Experience1() {
         }
     }, [message, dispatch])
     useEffect(() => {
-        console.log(lastCompany, form,'last company');
+        console.log(lastCompany, form,newJob,'last company');
         if (!newJob&&lastCompany) {
             setForm({
                 ...form,

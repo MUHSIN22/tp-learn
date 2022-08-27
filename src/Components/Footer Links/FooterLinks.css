@@ -114,3 +114,26 @@
     display: block;
     margin: 0.5rem 0;
 }
+@media only screen and (max-width: 768px) {
+    .privacy-main-wrapper {
+        padding: 0 1rem;
+        grid-template-columns: 10rem auto;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .privacy-main-wrapper{
+        grid-template-columns: 1fr;
+        max-height: max-content;
+    }
+    .privacy-btns-wrapper{
+        display: none;
+    }
+    .privacy-content-wrapper {
+        max-height: 100%;
+        padding-right: 0;
+        text-align: justify;
+    }
+    .privacy-container h2{
+        font-size: 0.9rem;
+    }
+}

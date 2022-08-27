@@ -6,9 +6,9 @@ import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg'
 import { useDispatch, useSelector } from 'react-redux';
 import useDebounce from '../../DebouncedSearch';
 import { getRoleSuggestionList, searchSkills, selectRoleSuggestionList, selectSkillList } from '../../redux/Features/MasterSlice';
-import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
+import {  selectAuthToken, selectUser_id, setError } from '../../redux/Features/AuthenticationSlice';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
-import { addJobSkills, selectLastCompany, selectLastJob, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { addJobSkills, resetError, selectLastCompany, selectLastJob, selectNewDesignation, selectNewJob, selectNewRoles, selectResumeError, selectResumeLoading, selectResumeMessage, setResumeError } from '../../redux/Features/ResumeSlice';
 import Control from './Control';
 import Alert from '../Alert/Alert';
 import MultiSelectedOptions from './MultiSelectedOptions';
@@ -40,6 +40,7 @@ export default function Experience5() {
     const lastJob = useSelector(selectLastJob)
     const lastCompany = useSelector(selectLastCompany)
     const job_title_id = lastJob.designation_id
+    const newRoles = useSelector(selectNewRoles);
 
     const searchSkillList = useCallback(
         (keywords) => {
@@ -68,18 +69,22 @@ export default function Experience5() {
         console.log(e.target.value)
         temp.skill_complexity = e.target.value
     }
-    const handleAddSkill = () => {
+    const handleAddSkill = async () => {
         console.log(temp.skill_id,search,);
         temp.skill_name = temp.skill_id == '' ? search : temp.skill_name;
         console.log(temp,'this is temp');
+        if(parseInt(temp.skill_complexity) > 100 || temp.skill_complexity < 0){
+            dispatch(setResumeError({skill_complexity: ["Skill complexity should be a percentage between 0 to 100"]}))
+            setShowAlert(true)
+            document.getElementById('iconinput-Skills').value = '';
+            document.getElementById('iconinput-complexity').value = '';
+            return true;
+        }
         if((temp.skill_id !== "" || temp.skill_name !== "") && temp.skill_complexity !== ""){
             set_Selected_options([...selected_options, temp])
             document.getElementById('iconinput-Skills').value = '';
             document.getElementById('iconinput-complexity').value = '';
         }
-        
-
-
     }
     const handleDeleteSkill = (i) => {
         const newList = selected_options.filter((x, index) => index !== i)
@@ -141,7 +146,7 @@ export default function Experience5() {
     }, [dispatch, job_title_id, token])
 
     useEffect(() => {
-        if ((lastJob || lastCompany) && form.user_company_record_id === '') {
+        if ((lastJob || lastCompany) && form.user_company_record_id === '' && !newRoles) {
             console.log(typeof lastJob.external_client_desc,lastJob,"this is abc");
             setForm({
                 ...form,
@@ -170,7 +175,7 @@ export default function Experience5() {
 
                 <SuggestiveInput name='Skills' searchHandler={searchHandler} label='Please enter all the skills you applied' placeholder='Select Skills' width={70} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
 
-                <IconInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' width={20} />
+                <IconInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' max={100} width={20} />
                 <button onClick={handleAddSkill} className='btn-fit transparent'><AddCircle /></button>
             </div>
             <div className="form-col">

@@ -88,7 +88,7 @@ export default function Section3() {
 function CompanyOverview({ company }) {
   const user_id = useSelector(selectUser_id);
   const token = useSelector(selectAuthToken);
-  const companyWise = useSelector(selectCompanyWise);
+  const [companyWise, setCompanyWise] = useState(null)
   const dispatch = useDispatch();
   const toEdit = useSelector(selectToEdit);
   const handleEditForms = (data) => {
@@ -101,17 +101,22 @@ function CompanyOverview({ company }) {
 
   useEffect(() => {
     try {
-      dispatch(
-        companyWiseGraph({
-          auth: token,
-          body: { user_id, user_company_record_id: company.company_record_id },
-        })
-      ).unwrap();
+
+      (async () => {
+        let response = await dispatch(
+          companyWiseGraph({
+            auth: token,
+            body: { user_id, user_company_record_id: company.company_record_id },
+          })
+        ).unwrap();
+        setCompanyWise(response.data.recordDetails.salary_management_graph)
+      })()
+
     } catch (error) {
       console.log(error);
     }
 
-    return () => {};
+    return () => { };
   }, [company.company_record_id, dispatch]);
 
   return (
@@ -174,10 +179,11 @@ function CompanyOverview({ company }) {
                 </span>
               </>
             )} {company.company_name}</h5>
-        {console.log(companyWise)}
+        {console.log(companyWise,"this is company wise")}
         {companyWise && (
           <LineGraph
             salary={companyWise.salary}
+            category={companyWise.duration}
             management={companyWise.managementLevelValue}
           />
         )}

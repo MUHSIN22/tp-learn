@@ -36,6 +36,7 @@ export default function Experience3({data}) {
 
     })
     const [showAlert,setShowAlert] = useState(false);
+    const [otherDesignation,setOtherDesignation] = useState(false);
     const [isCurrentWorking,setCurrentWorking] = useState(false)
     const [isRemoteWorking, setRemoteWorking] = useState(false);
     const [isHideSalary, setHideSalary] = useState(false);
@@ -51,7 +52,7 @@ export default function Experience3({data}) {
     const currencyList = useSelector(selectCurrencylist);
     const resumeInfo = useSelector(selectResumeInfo)
     const job_Record_id = useSelector(SelectCompanyJobRecordId);
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState( data.designation_name || '')
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
 
     const searchCompanyList = useCallback(
@@ -78,8 +79,14 @@ export default function Experience3({data}) {
             [evt.target.name]: value
         });
     }
-    const selectHandler = (i) => {
-        setForm({ ...form, designation_id: designationlist[i].id })
+    const selectHandler = (i,selected, value) => {
+        if(selected.id !== null){
+            setForm({ ...form, designation_id: designationlist[i].id })
+            setSearch(designationlist[i].job_title_name)
+        }else{
+            setOtherDesignation(true);
+            setForm({ ...form, other_designation_name: value })
+        }
     }
     function handleAddDesignation() {
         const body = {...form, user_id}

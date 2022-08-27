@@ -12,6 +12,7 @@ const initialState = {
     form: null,
     newJob: false,
     newDesignation:false,
+    newRoles: false,
     newEducation:false,
     newCertificate:false,
     newAdditionalSkill:false,
@@ -614,6 +615,17 @@ export const resumeSlice = createSlice({
         toggleNewDesignation: (state)=>{
             state.newDesignation = !state.newDesignation
         },
+        setResumeError: (state,action) => {
+            state.error = true
+            state.message = action.payload
+        },
+        resetError : (state,action) => {
+            state.error = false
+            state.message = null
+        },
+        toggleNewRoles : (state) => {
+            state.newRoles = !state.newRoles;
+        },
         toggleNewEducation: (state,action)=>{
             state.newEducation = action.payload
         },
@@ -774,6 +786,7 @@ export const resumeSlice = createSlice({
             state.loading = false
             state.status = 'succeeded'
             state.message = action.payload.data.message
+            state.newRoles = false;
             state.reload = true
         }).addCase(addJobSkills.rejected, (state, action) => {
             state.loading = false
@@ -788,6 +801,7 @@ export const resumeSlice = createSlice({
         }).addCase(addProject.fulfilled, (state, action) => {
             state.loading = false
             state.status = 'succeeded'
+            state.newProject = false;
             state.message = action.payload.data.message
         }).addCase(addProject.rejected, (state, action) => {
             state.loading = false
@@ -1222,13 +1236,14 @@ export const selectNewAdditionalSkill =  (state)=> state.resume.newAdditionalSki
 export const selectNewDesignation = (state)=> state.resume.newDesignation
 export const selectNewPhotoMedia = (state)=> state.resume.newPhotoMedia
 export const selectNewProject = (state)=> state.resume.newProject
+export const selectNewRoles = (state) => state.resume.newRoles
 export const selectUserInfo = (state) => state.resume.recordDetails
 export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
 export const getPageOn = (state) => state.resume.pageOn;     
 export const selectToEdit = (state)=> state.resume.toEdit;
 export const getLoaderstate = (state) => state.resume.loaderval;     
 export const getDownLoadDetails = (state)=> state.resume.downLoadDetails
-export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume } = resumeSlice.actions;
+export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
 

@@ -6,6 +6,8 @@ import robotoRegular from '../../Assets/fonts/Roboto-Regular.ttf'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorHandler from '../ErrorHandler/ErrorHandler';
 import moment from 'moment';
+import RichText, { HTMLParser } from '../../functionUtils/HTMLParser';
+import Html from 'react-pdf-html';
 
 export default function PdfGenerator({ bio, resumeDetails }) {
   const [newBio, setNewBio] = useState(bio)
@@ -164,8 +166,13 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                           {
                             item.job_role[0].role_responsibilties &&
                             <Fragment>
+                              {/* <View>
+                                <RichText note={item.job_role[0].role_responsibilties}/>
+                              </View> */}
+                              {/* <RichText note={item.job_role[0].role_responsibilties}/> */}
                               <Text style={styles.rightSectionBlueTitle} >Roles and Responsibilities: </Text>
                               <Text style={styles.rightSectionDate}>{item.job_role[0].role_responsibilties}</Text>
+                              <Html>{item.job_role[0].role_responsibilties}</Html>
                             </Fragment>
                           }
                            {/* <View style={styles.list}>

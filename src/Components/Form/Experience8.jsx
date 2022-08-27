@@ -14,8 +14,9 @@ export default function Experience8({setProgress}) {
         <div className="flex-row-start g-1" style={{display: 'flex',width: '100%', justifyContent:"center"}}>
             <div className="col-20">
                 <button className='btn secondary' onClick={()=>{
-                  setProgress(2)
-                  dispatch(changeFormId({auth:token,body:{form_id: 0, user_id}}))
+                  setProgress(0)
+                  dispatch(toggleNewJob())
+                  // dispatch(changeFormId({auth:token,body:{form_id: 0, user_id}}))
                   }}>Yes</button>
             </div>
             <div className="col-20">

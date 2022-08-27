@@ -25,6 +25,7 @@ import {
   deleteProject,
   SelectCompanyDetails,
   selectResumeLoading,
+  toggleNewJob,
 } from "../../redux/Features/ResumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ExperienceLoader from "../Loaders/ExperienceLoader";
@@ -208,6 +209,7 @@ function CompanyOverview({ company }) {
               <AiFillDelete />
             </span>
             <span className="px-1" onClick={() => {
+              dispatch(toggleNewJob())
               dispatch(changeFormId({ auth: token, body: { user_id, form_id: 0 }, navigate }))
             }}>
               <FaPlus />
