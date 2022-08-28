@@ -2,7 +2,7 @@ import React from 'react'
 import UdemyLogo from '../../Assets/Dashboard icons/certificate.png'
 import dummyCertificate from '../../Assests/dummyCertificate.jpg'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectCertificate, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails, deleteCertificate, changeFormId } from '../../redux/Features/ResumeSlice'
+import { selectCertificate, selectResumeLoading, selectToEdit, changeToEdit, changeEditPageDetails, deleteCertificate, changeFormId, toggleNewCertificate } from '../../redux/Features/ResumeSlice'
 import CertificateCardLoader from '../Loaders/CerificateCardLoader'
 import { FaPencilAlt, FaPlus } from "react-icons/fa";
 import { AiFillDelete } from 'react-icons/ai'
@@ -75,6 +75,7 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
                                 user_id
                             })} style={{ "marginLeft": "1rem" }}><AiFillDelete /></span>
                             <span className="px-1" onClick={() => {
+                                dispatch(toggleNewCertificate(true))
                                 dispatch(changeFormId({ auth: token, body: { user_id, form_id: 9 }, navigate }))
                             }}>
                                 <FaPlus />

@@ -82,7 +82,6 @@ export default function AdditionalSkills3() {
                     <div className="editor col-50 g-0-5">
                         <label className='text-left' htmlFor="">Professional summary</label>
                         <CKEditor
-
                             editor={ClassicEditor}
                             data={form.your_bio}
                             config={{ placeholder: 'Keep it brief and to the point' }}

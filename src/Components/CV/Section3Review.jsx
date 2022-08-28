@@ -24,6 +24,7 @@ import {
   deleteJobRole,
   deleteProject,
   SelectCompanyDetails,
+  selectNewJob,
   selectResumeLoading,
   toggleNewJob,
 } from "../../redux/Features/ResumeSlice";
@@ -97,6 +98,7 @@ function CompanyOverview({ company }) {
   const dispatch = useDispatch();
   const toEdit = useSelector(selectToEdit);
   const navigate = useNavigate();
+  const newJob = useSelector(selectNewJob);
   const handleEditForms = (data) => {
     console.log(data, "data in handle Edit forms");
     dispatch(changeEditPageDetails(data)).unwrap();
@@ -209,7 +211,7 @@ function CompanyOverview({ company }) {
               <AiFillDelete />
             </span>
             <span className="px-1" onClick={() => {
-              dispatch(toggleNewJob())
+              !newJob && dispatch(toggleNewJob())
               dispatch(changeFormId({ auth: token, body: { user_id, form_id: 0 }, navigate }))
             }}>
               <FaPlus />
@@ -367,6 +369,7 @@ function DesignationOverview(props) {
           skills: job_role[index].skills,
         }}
       />
+      {console.log(job_role[index],'this is index')}
       {job_role[index].project && (
         <ProjectOverview projects={{ projects: job_role && job_role[index]?.project, company_job_record_id: job_role[index].company_job_record_id, company_record_id: company_record_id }} />
       )}
@@ -455,9 +458,10 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
             <div className="flex-row-between align-center my-2">
               <h3 className="text-left m-0">Projects worked on</h3>
               <div className="flex-row-fit g-1 align-center">
+                {console.log(item.project_name,item,'this is project')}
                 {toEdit && (
                   <>
-                    <div onClick={() => handleEditForms({ job_project_record_id: item.job_project_record_id, project_skill: item.project_skill ? item.project_skill : [], client_name: item.client_name, project_name: item.project_name, company_job_record_id: item.company_job_record_id, company_record_id: item.company_record_id, progress: 5 })}>
+                    <div onClick={() => handleEditForms({ job_project_record_id: item.job_project_record_id, project_skill: item.project_skill ? item.project_skill : [], client_name: item.client_name, project_name: item.project_name, company_job_record_id , company_record_id , progress: 5 })}>
                       <FaPencilAlt />
                     </div>
                     <div onClick={() => handleDeleteProject({ job_project_record_id: item.job_project_record_id, user_id })}>

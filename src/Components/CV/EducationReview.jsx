@@ -9,6 +9,7 @@ import {
   deleteEducation,
   selectResumeDetails,
   changeFormId,
+  toggleNewEducation,
 } from "../../redux/Features/ResumeSlice";
 import EducationLoader from "../Loaders/EducationLoader";
 import { FaPencilAlt, FaPlus } from "react-icons/fa";
@@ -139,6 +140,7 @@ function EducationCard({
                   <AiFillDelete />
                 </span>
                 <span className="px-1" onClick={() => {
+                    dispatch(toggleNewEducation(true))
                     dispatch(changeFormId({ auth: token, body: { user_id, form_id: 8 }, navigate }))
                 }}>
                   <FaPlus />

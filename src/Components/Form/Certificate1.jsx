@@ -81,7 +81,7 @@ export default function Certificate1() {
         let form_data = JsonToFormData(body)
           try {
               dispatch(toggleNewCertificate(true))
-              let data = await dispatch(addCertification({ auth: token, body:form_data, setUpdated })).unwrap()
+              let data = await dispatch(addCertification({ auth: token, body:form_data, setUpdated, dispatch })).unwrap()
               if(data){
                 setUpdated(true);
               }

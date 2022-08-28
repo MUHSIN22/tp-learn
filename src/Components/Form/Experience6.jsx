@@ -43,7 +43,7 @@ export default function Experience6() {
     const [validationError,setValidationError] = useState(null)
     const [showAlertInner,setAlertInnder] = useState(false)
     const [temporary,setTemporary] = useState({ skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' })
-    const handleAddProject = (e) => {
+    const handleAddProject = async (e) => {
         e.preventDefault();
         let body = form
         body.user_id = user_id
@@ -54,7 +54,7 @@ export default function Experience6() {
         if(formValidation){
             try {
                 dispatch(toggleNewProject(true))
-                dispatch(addProject({ auth: token, body: { ...form, user_id }, dispatch })).unwrap()
+                await dispatch(addProject({ auth: token, body: { ...form, user_id }, dispatch })).unwrap()
                 console.log(form)
             } catch (error) {
                 showAlert(true)

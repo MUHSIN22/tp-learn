@@ -41,12 +41,11 @@ export default function Experience6({data}) {
     const handleAddProject = (e,isReload)=>{
         e.preventDefault();
         let body = form
-        delete body.user_company_job_project_record_id
+        // delete body.user_company_job_project_record_id
         body.user_id = user_id
         body.project_skills = selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity, skill_name:x.skill_name,skill_desc:x.skill_desc} })
         body.project_skills = JSON.stringify(body.project_skills)
         let formValidation = projectFormValidator();
-        console.log(isReload);
         if(!isReload){
             body.dispatch = dispatch;
         }
