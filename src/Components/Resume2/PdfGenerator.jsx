@@ -172,7 +172,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                               {/* <RichText note={item.job_role[0].role_responsibilties}/> */}
                               <Text style={styles.rightSectionBlueTitle} >Roles and Responsibilities: </Text>
                               <Text style={styles.rightSectionDate}>{item.job_role[0].role_responsibilties}</Text>
-                              <Html>{item.job_role[0].role_responsibilties}</Html>
+                              {/* <Html>{item.job_role[0].role_responsibilties}</Html> */}
                             </Fragment>
                           }
                            {/* <View style={styles.list}>
