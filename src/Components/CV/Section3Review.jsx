@@ -73,16 +73,24 @@ export default function Section3Review() {
               ) : (
                 <ExperienceLoader />
               )}
-              {companyInfo && companyInfo[index]?.job_role ? (
-                <DesignationOverview
-                  job_role={{
-                    job_role: companyInfo[index].job_role || [],
-                    company_record_id: companyInfo[index].company_record_id,
-                  }}
-                />
-              ) : (
-                null
-              )}
+              {console.log(companyInfo, 'This is company info')}
+              {companyInfo && companyInfo[index]?.job_role ?
+                (
+                  <>
+                    {
+                      companyInfo[index].job_role.map((jobRole, index) => (
+                        <DesignationOverview
+                          job_role={{
+                            job_role: jobRole || [],
+                            company_record_id: companyInfo[index].company_record_id,
+                          }}
+                        />
+                      ))
+                    }
+                  </>
+                ) : (
+                  null
+                )}
             </div>
           </div>
         ))
@@ -133,25 +141,25 @@ function CompanyOverview({ company }) {
     <div className="grid-35-65 company-overview-grid">
       <div className="col-100 g-1">
         {
-          company.industry_name&&
+          company.industry_name &&
           <div className="flex-row-fit align-center g-1">
             <Device /> <p>{company.industry_name}</p>
           </div>
         }
         {
-          company.scale_name&&
+          company.scale_name &&
           <div className="flex-row-fit align-center g-1">
             <Chart /> <p>{company.scale_name}</p>
           </div>
         }
         {
-          company.type_of_company_name&&
+          company.type_of_company_name &&
           <div className="flex-row-fit align-center g-1">
             <Headphone /> <p>{company.type_of_company_name}</p>
           </div>
         }
         {
-          (company.job_role && company.job_role.length > 0 ) &&
+          (company.job_role && company.job_role.length > 0) &&
           <div className="flex-row-fit align-center g-1">
             <Location /> <p>{company.job_role && company.job_role.length > 0 ? company.job_role[0].job_location : ''}</p>
           </div>
@@ -249,29 +257,29 @@ function DesignationOverview(props) {
   return (
     <>
       <div className="flex-row-between align-center">
-        <h3 className="text-left m-0">{job_role[index].designation_name}</h3>
+        <h3 className="text-left m-0">{job_role.designation_name}</h3>
         <div className="flex-row-fit g-1 align-center">
           {toEdit && (
             <>
               <div
                 onClick={() =>
                   handleEditForms({
-                    designation_id: job_role[index].designation_id,
-                    level_id: job_role[index].job_level,
-                    location: job_role[index].job_location,
-                    remote_work: job_role[index].job_remote_work,
-                    functional_area_id: job_role[index].function_area_id,
-                    start_salary: job_role[index].job_start_salary,
-                    end_date: job_role[index].job_end_date,
-                    start_date: job_role[index].job_start_date,
+                    designation_id: job_role.designation_id,
+                    level_id: job_role.job_level,
+                    location: job_role.job_location,
+                    remote_work: job_role.job_remote_work,
+                    functional_area_id: job_role.function_area_id,
+                    start_salary: job_role.job_start_salary,
+                    end_date: job_role.job_end_date,
+                    start_date: job_role.job_start_date,
                     user_company_record_id: company_record_id,
-                    user_company_job_record_id: job_role[index].company_job_record_id,
-                    start_salary_currency: job_role[index].start_salary_currency,
-                    end_salary_currency: job_role[index].end_salary_currency,
-                    current_working: job_role[index].current_working,
-                    hide_salary: job_role[index].hide_salary,
-                    end_salary: job_role[index].job_end_salary,
-                    designation_name: job_role[index].designation_name,
+                    user_company_job_record_id: job_role.company_job_record_id,
+                    start_salary_currency: job_role.start_salary_currency,
+                    end_salary_currency: job_role.end_salary_currency,
+                    current_working: job_role.current_working,
+                    hide_salary: job_role.hide_salary,
+                    end_salary: job_role.job_end_salary,
+                    designation_name: job_role.designation_name,
                     progress: 3,
                   })
                 }
@@ -280,7 +288,7 @@ function DesignationOverview(props) {
               </div>
               <span onClick={() =>
                 handleDeleteJobRole({
-                  company_job_record_id: job_role[index].company_job_record_id,
+                  company_job_record_id: job_role.company_job_record_id,
                   user_id
                 })
               }>
@@ -308,37 +316,37 @@ function DesignationOverview(props) {
       </div>
 
       <p>
-        {(moment(job_role[index].job_start_date, "DD-MM-YYYY").format("yyyy MMM") ||
-          "unknown") + " - " + (moment(job_role[index].job_end_date, "DD-MM-YYYY").format("yyyy MMM") ||
+        {(moment(job_role.job_start_date, "DD-MM-YYYY").format("yyyy MMM") ||
+          "unknown") + " - " + (moment(job_role.job_end_date, "DD-MM-YYYY").format("yyyy MMM") ||
             "unknown")}
       </p>
       <span className="divider"></span>
       <div className="grid-35-65 company-overview-grid">
         <div className="col-100 g-2">
           {
-            job_role[index].job_level_name &&
+            job_role.job_level_name &&
             <div className="flex-row-fit align-center g-1">
-              <BarGraphO /> <p>{job_role[index].job_level_name || ""}</p>
+              <BarGraphO /> <p>{job_role.job_level_name || ""}</p>
             </div>
           }
           {
-            job_role[index].function_area_name &&
+            job_role.function_area_name &&
             <div className="flex-row-fit align-center g-1">
-              <HumanG /> <p>{job_role[index].function_area_name || ""}</p>
+              <HumanG /> <p>{job_role.function_area_name || ""}</p>
             </div>
           }
           <div className="flex-row-fit align-center g-1">
             <Webcam />{" "}
-            <p>{job_role[index].job_remote_work === 0 ? "No" : "Yes"}</p>
+            <p>{job_role.job_remote_work === 0 ? "No" : "Yes"}</p>
           </div>
           <div className="flex-row-fit align-center g-1">
-            <Location /> <p>{job_role[index].job_location || ""}</p>
+            <Location /> <p>{job_role.job_location || ""}</p>
           </div>
         </div>
-        {job_role && job_role[index]?.skills && (
+        {job_role && job_role?.skills && (
           <div className="col-100 skill-card g-3">
             <h5 className="text-left">Key Skills Used</h5>
-            {job_role[index].skills.map((skill, i) => (
+            {job_role.skills.map((skill, i) => (
               <div key={i} className="flex-row-between justify-between">
                 <div className="col-90">
                   <div className="flex-row-between align-start">
@@ -362,16 +370,16 @@ function DesignationOverview(props) {
       </div>
       <ResponsibiltiensOverview
         data={{
-          role_responsibilties: job_role[index].role_responsibilties || false,
-          company_job_record_id: job_role[index].company_job_record_id,
+          role_responsibilties: job_role.role_responsibilties || false,
+          company_job_record_id: job_role.company_job_record_id,
           company_record_id: company_record_id,
-          external_client_desc: job_role[index].external_client_desc,
-          skills: job_role[index].skills,
+          external_client_desc: job_role.external_client_desc,
+          skills: job_role.skills,
         }}
       />
-      {console.log(job_role[index],'this is index')}
-      {job_role[index].project && (
-        <ProjectOverview projects={{ projects: job_role && job_role[index]?.project, company_job_record_id: job_role[index].company_job_record_id, company_record_id: company_record_id }} />
+      {console.log(job_role, 'this is index')}
+      {job_role.project && (
+        <ProjectOverview projects={{ projects: job_role && job_role?.project, company_job_record_id: job_role.company_job_record_id, company_record_id: company_record_id }} />
       )}
     </>
   );
@@ -448,7 +456,7 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
       dispatch(deleteProject({ auth: token, body: data, dispatch }))
     }
   }
-  console.log(projects,'this is projects');
+  console.log(projects, 'this is projects');
   return (
     <>
       {
@@ -458,10 +466,10 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
             <div className="flex-row-between align-center my-2">
               <h3 className="text-left m-0">Projects worked on</h3>
               <div className="flex-row-fit g-1 align-center">
-                {console.log(item.project_name,item,'this is project')}
+                {console.log(item.project_name, item, 'this is project')}
                 {toEdit && (
                   <>
-                    <div onClick={() => handleEditForms({ job_project_record_id: item.job_project_record_id, project_skill: item.project_skill ? item.project_skill : [], client_name: item.client_name, project_name: item.project_name, company_job_record_id , company_record_id , progress: 5 })}>
+                    <div onClick={() => handleEditForms({ job_project_record_id: item.job_project_record_id, project_skill: item.project_skill ? item.project_skill : [], client_name: item.client_name, project_name: item.project_name, company_job_record_id, company_record_id, progress: 5 })}>
                       <FaPencilAlt />
                     </div>
                     <div onClick={() => handleDeleteProject({ job_project_record_id: item.job_project_record_id, user_id })}>

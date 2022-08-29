@@ -22,8 +22,12 @@
 }
 
 .cvEditContainer {
-    width: 100% !important;
+    /* width: 100% !important; */
     height: 100%;
+    /* display: grid;
+    grid-template-columns: 10rem auto;
+    grid-template-areas: 'sidebar content';
+    width: 100vw; */
 }
 .CVReview h3 {
     font-size: 1.2rem;

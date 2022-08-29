@@ -8,6 +8,8 @@ import ErrorHandler from '../ErrorHandler/ErrorHandler';
 import moment from 'moment';
 import RichText, { HTMLParser } from '../../functionUtils/HTMLParser';
 import Html from 'react-pdf-html';
+import ReactDomServer from 'react-dom/server'
+import ReactHtmlParser from 'react-html-parser'
 
 export default function PdfGenerator({ bio, resumeDetails }) {
   const [newBio, setNewBio] = useState(bio)
@@ -66,7 +68,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
   }, [bio])
 
   const makePoints = (data) => {
-    console.log(data,'this is roles data');
+    console.log(data, 'this is roles data');
     let splittedData = data.split("&lt;p&gt;");
     splittedData.forEach((item, index) => {
       splittedData[index] = item.replace("&lt;/p&gt;", "")
@@ -88,6 +90,27 @@ export default function PdfGenerator({ bio, resumeDetails }) {
     console.log(blob);
     return blob
   }
+
+
+  const rolesAndResponsiblities = (text) => {
+    console.log(text, "HTML String", ReactHtmlParser(ReactHtmlParser(text)), ReactDomServer.renderToStaticMarkup(ReactHtmlParser(ReactHtmlParser(text))));
+    return ReactDomServer.renderToStaticMarkup(ReactHtmlParser(ReactHtmlParser(text)))
+  }
+
+  const OrderedList = ({ children, depth }) => {
+    return <View style={styles.list}>{children}</View>;
+  };
+
+  const OrderedListItem = ({ children, index }) => {
+    return (
+      <View style={styles.listItem}>
+        <Text style={styles.listItemText}>
+          {index + 1}. &nbsp;<Text>{children}</Text>
+        </Text>
+      </View>
+    );
+  };
+
   return (
     <Document>
       {
@@ -141,9 +164,9 @@ export default function PdfGenerator({ bio, resumeDetails }) {
               {newBio}
             </Text>
           </View>
-          
+
           {
-            resumeInfo.company && 
+            resumeInfo.company &&
             <View style={styles.linePrimary}></View>
           }
           {/*  */}
@@ -158,24 +181,20 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                     <>
                       {
                         item.job_role ?
-                        <View style={styles.rightSectionContentWrapper} key={index}>
-                          <Text style={styles.rightSectionMainText} >{item.company_name}</Text>
-                          <Text style={[styles.rightSectionMainText,{fontSize: 9}]} >{item.job_role[0].designation_name}</Text>
-                          <Text style={styles.rightSectionDate}>{item.industry_name}</Text>
-                          <Text style={styles.rightSectionDate}>{moment(item.job_role[0].job_start_date,'DD-MM-YYYY').format('yyyy MMM')} - {moment(item.job_role[0].job_end_date,'DD-MM-YYYY').format('yyyy MM')}</Text>
-                          {
-                            item.job_role[0].role_responsibilties &&
-                            <Fragment>
-                              {/* <View>
-                                <RichText note={item.job_role[0].role_responsibilties}/>
-                              </View> */}
-                              {/* <RichText note={item.job_role[0].role_responsibilties}/> */}
-                              <Text style={styles.rightSectionBlueTitle} >Roles and Responsibilities: </Text>
-                              <Text style={styles.rightSectionDate}>{item.job_role[0].role_responsibilties}</Text>
-                              {/* <Html>{item.job_role[0].role_responsibilties}</Html> */}
-                            </Fragment>
-                          }
-                           {/* <View style={styles.list}>
+                          <View style={styles.rightSectionContentWrapper} key={index}>
+                            <Text style={styles.rightSectionMainText} >{item.company_name}</Text>
+                            <Text style={[styles.rightSectionMainText, { fontSize: 9 }]} >{item.job_role[0].designation_name}</Text>
+                            <Text style={styles.rightSectionDate}>{item.industry_name}</Text>
+                            <Text style={styles.rightSectionDate}>{moment(item.job_role[0].job_start_date, 'DD-MM-YYYY').format('yyyy MMM')} - {moment(item.job_role[0].job_end_date, 'DD-MM-YYYY').format('yyyy MM')}</Text>
+                            {
+                              item.job_role[0].role_responsibilties &&
+                              <Fragment>
+                                <Text style={styles.rightSectionBlueTitle} >Roles and Responsibilities: </Text>
+                                {/* <Text style={styles.rightSectionDate}>{item.job_role[0].role_responsibilties}</Text> */}
+                                <Html style={styles.rightSectionDate}>{rolesAndResponsiblities(item.job_role[0].role_responsibilties)}</Html>
+                              </Fragment>
+                            }
+                            {/* <View style={styles.list}>
                             {
                               item.job_role[0].role_responsibilties && makePoints(item.job_role[0].role_responsibilties).map((item, index) => (
                                 <Fragment>
@@ -192,36 +211,36 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                               ))
                             }
                           </View> */}
-                          {
-                            item.job_role[0].project && item.job_role[0].project[0] &&
-                            <Text style={styles.rightSectionBlueTitle} >Projects: </Text>
-                          }
-                          {
-                            item.job_role[0].project && item.job_role[0].project[0] &&
-                            item.job_role[0].project.map((project, index) => (
-                              <Fragment key={index}>
-                                <Text style={[styles.rightSectionDate, { marginBottom: 5 }]}>Project Name: {project.project_name}</Text>
-                                <Text style={[styles.rightSectionDate, { marginBottom: 3 }]}>Client Name: {project.client_name}</Text>
-                                <View style={styles.projectDetailsWrapper}>
-                                  <Text style={[styles.projectSkill, { fontWeight: "medium" }]}>Skills</Text>
-                                  <Text style={[styles.projectComplexity, { fontWeight: "medium" }]}>Complexity</Text>
-                                  <Text style={[styles.projectOutcome, { fontWeight: "medium" }]}>Outcome</Text>
-                                </View>
-                                {
-                                  project.project_skill && project.project_skill[0] &&
-                                  project.project_skill.map((skill, i) => (
-                                    <View style={styles.projectDetailsWrapper}>
-                                      <Text style={styles.projectSkill}>{skill.skill_name}</Text>
-                                      <Text style={styles.projectComplexity}>{skill.skill_complexity}</Text>
-                                      <Text style={styles.projectOutcome}>{skill.skill_desc}</Text>
-                                    </View>
-                                  ))
-                                }
-                              </Fragment>
-                            ))
-                          } 
-                        </View>
-                        :null
+                            {
+                              item.job_role[0].project && item.job_role[0].project[0] &&
+                              <Text style={styles.rightSectionBlueTitle} >Projects: </Text>
+                            }
+                            {
+                              item.job_role[0].project && item.job_role[0].project[0] &&
+                              item.job_role[0].project.map((project, index) => (
+                                <Fragment key={index}>
+                                  <Text style={[styles.rightSectionDate, { marginBottom: 5 }]}>Project Name: {project.project_name}</Text>
+                                  <Text style={[styles.rightSectionDate, { marginBottom: 3 }]}>Client Name: {project.client_name}</Text>
+                                  <View style={styles.projectDetailsWrapper}>
+                                    <Text style={[styles.projectSkill, { fontWeight: "medium" }]}>Skills</Text>
+                                    <Text style={[styles.projectComplexity, { fontWeight: "medium" }]}>Complexity</Text>
+                                    <Text style={[styles.projectOutcome, { fontWeight: "medium" }]}>Outcome</Text>
+                                  </View>
+                                  {
+                                    project.project_skill && project.project_skill[0] &&
+                                    project.project_skill.map((skill, i) => (
+                                      <View style={styles.projectDetailsWrapper}>
+                                        <Text style={styles.projectSkill}>{skill.skill_name}</Text>
+                                        <Text style={styles.projectComplexity}>{skill.skill_complexity}</Text>
+                                        <Text style={styles.projectOutcome}>{skill.skill_desc}</Text>
+                                      </View>
+                                    ))
+                                  }
+                                </Fragment>
+                              ))
+                            }
+                          </View>
+                          : null
                       }
                       {
                         (resumeInfo.company.length - 1 !== index) &&
@@ -246,7 +265,7 @@ export default function PdfGenerator({ bio, resumeDetails }) {
                 resumeInfo.education &&
                 resumeInfo.education.map((item, index) => (
                   <View style={styles.rightSectionContentWrapper} key={index}>
-                    <Text style={styles.rightSectionMainText} >{item.degree_name} ({moment(item.course_start_date,'DD-MM-YYYY').format('yyyy MMM')} - {moment(item.course_start_date,'DD-MM-YYYY').format('yyyy MMM')})</Text>
+                    <Text style={styles.rightSectionMainText} >{item.degree_name} ({moment(item.course_start_date, 'DD-MM-YYYY').format('yyyy MMM')} - {moment(item.course_start_date, 'DD-MM-YYYY').format('yyyy MMM')})</Text>
                     <Text style={styles.rightSectionDate} >{item.university_name} | {item.course_cgpa} CGPA</Text>
                     <Text style={styles.rightSectionDate} ></Text>
                     <Text style={styles.rightSectionDate} >Extra Curricular Activity: {item.course_extra_activity}</Text>
@@ -282,14 +301,14 @@ export default function PdfGenerator({ bio, resumeDetails }) {
           }
 
           {
-            (commaSeparator(resumeInfo.entertainment) !== "" || commaSeparator(resumeInfo.adventure) !== "" || commaSeparator(resumeInfo.leisure) !== "" || commaSeparator(resumeInfo.sports) !== "" ) &&
+            (commaSeparator(resumeInfo.entertainment) !== "" || commaSeparator(resumeInfo.adventure) !== "" || commaSeparator(resumeInfo.leisure) !== "" || commaSeparator(resumeInfo.sports) !== "") &&
             <View style={styles.linePrimary}></View>
           }
 
           {
-            (commaSeparator(resumeInfo.entertainment) !== "" || commaSeparator(resumeInfo.adventure) !== "" || commaSeparator(resumeInfo.leisure) !== "" || commaSeparator(resumeInfo.sports) !== "" ) &&
+            (commaSeparator(resumeInfo.entertainment) !== "" || commaSeparator(resumeInfo.adventure) !== "" || commaSeparator(resumeInfo.leisure) !== "" || commaSeparator(resumeInfo.sports) !== "") &&
             <View style={styles.mainRow}>
-              <Text style={styles.sectionTitle}>Hobbies</Text>
+              <Text style={styles.sectionTitle} >Hobbies</Text>
               <View style={styles.rightSectionOfSkills}>
                 <Text style={styles.description1}>
                   {commaSeparator(resumeInfo.adventure)}{commaSeparator(resumeInfo.entertainment)}{commaSeparator(resumeInfo.leisure)}{commaSeparator(resumeInfo.sports)}
@@ -302,5 +321,4 @@ export default function PdfGenerator({ bio, resumeDetails }) {
     </Document>
   );
 }
-
 

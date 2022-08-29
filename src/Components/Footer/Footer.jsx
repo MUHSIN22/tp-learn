@@ -27,7 +27,7 @@ export default function Footer() {
                     </li>
                     <li>
                         <span className="logo"><BsTelephoneFill /></span>
-                        <a href="mailto:contact@talentplace.ai" className="footer-contact-link">contact@talentplace.ai</a>
+                        <a href="tel:+918380090444" className="footer-contact-link">+91 838 00 90 444</a>
                     </li>
                 </ul>
                 <div className="footer-contact-social">

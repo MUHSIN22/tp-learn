@@ -157,9 +157,6 @@ const RichText = ({ note }) => {
     blocksFromHTML.contentBlocks,
     blocksFromHTML.entityMap,
   );
-  useEffect(() => {
-    return () => {}
-  },[])
 
   const editorState = EditorState.createWithContent(initialState);
   const rawContent = convertToRaw(editorState.getCurrentContent());
