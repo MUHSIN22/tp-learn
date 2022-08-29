@@ -199,7 +199,7 @@ export default function Experience3() {
             <div className="form-row">
                 <IconInput value={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='When did you start' placeholder='MM/DD/YYYY' width={40} />
                 <div className="salary-wrapper">
-                    <IconInput value={form.start_salary} name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='Per Annum' width={100} />
+                    <IconInput value={form.start_salary} name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='120000' width={100} />
                     <IconSelect value={form.start_salary_currency} name='start_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
                 </div>
             </div>
@@ -209,7 +209,7 @@ export default function Experience3() {
                         <IconInput value={form.end_date} name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
                     }
                     <div className="salary-wrapper">
-                        <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package' placeholder='Per Annum' width={100} />
+                        <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package' placeholder='180000' width={100} />
                         <IconSelect value={form.end_salary_currency} name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
                     </div>
                 </div>
