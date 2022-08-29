@@ -4,9 +4,15 @@ import '../FooterLinks.css'
 
 export default function PrivacyPolicy() {
     const itemRef = useRef([])
-    
-    const handleScroll = (index) => {
-        itemRef.current[index-1].scrollIntoView({behavior: 'smooth', block: 'start'});
+
+    const handleScroll = (event, index) => {
+        let activeItem = document.querySelector(".privacy-btn--active")
+        itemRef.current[index - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (activeItem) {
+            activeItem.classList.remove('privacy-btn--active')
+            event.target.classList.add('privacy-btn--active')
+        }
+
     }
     return (
         <main className="privacy-container">
@@ -16,21 +22,22 @@ export default function PrivacyPolicy() {
             </div>
             <div className="privacy-main-wrapper">
                 <div className="privacy-btns-wrapper">
-                    <button className="privacy-btn privacy-btn--active" onClick={() => handleScroll(1)}>1. Introduction</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(2)}>2. Types of Personal</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(3)}>3. How TOSPL</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(4)}>4. Cookies and Other</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(5)}>5. The Basis/ Grounds</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(6)}>6. Information Sharing</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(7)}>7. Third Party Content:</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(8)}>8. Children</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(9)}>9. Retention of Personal</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(10)}>10. Controlling your</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(11)}>10. Confidentiality and Security</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(12)}>11. Social media</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(13)}>12. Changes to this</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(14)}>13. Disclaimer</button>
-                    <button className="privacy-btn" onClick={() => handleScroll(15)}>14. Data Protection Officer</button>
+                    <button className="privacy-btn privacy-btn--active" onClick={(event) => handleScroll(event, 1)}>1. Introduction</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 2)}>2. Types of Personal</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 3)}>3. How TOSPL</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 4)}>4. Cookies and Other</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 5)}>5. The Basis/ Grounds</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 6)}>6. Information Sharing</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 7)}>7. Third Party Content:</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 8)}>8. Children</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 9)}>9. Retention of Personal</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 10)}>10. Controlling your</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 11)}>10. Confidentiality and Security</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 12)}>11. Social media</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 13)}>12. Changes to this</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 14)}>13. Disclaimer</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 15)}>14. Data Protection Officer</button>
+                    <button className="privacy-btn" onClick={(event) => handleScroll(event, 15)}>15. Cookies Policy</button>
                 </div>
                 <div className="privacy-content-wrapper">
                     <h2 className="privacy-content-title" ref={el => itemRef.current[0] = el}>1. Introduction</h2>
@@ -192,6 +199,134 @@ export default function PrivacyPolicy() {
                         Taxolawgy Online Services Pvt Ltd <br />
                         Nagpur<br />
                         Email: <a href="mailto:privacy@talentplace.ai">privacy@talentplace.ai</a>
+                    </p>
+
+
+                    <h1 className="privacy-main-title" style={{ textAlign: 'center' }}>Cookie Policy</h1>
+                    <h2 className="privacy-content-title" ref={el => itemRef.current[15] = el}>Introduction</h2>
+                    <p className="privacy-content">
+                        This Cookie Policy ("Policy") explains that we believe in being open and clear about how we use your information. In the spirit of transparency, this Policy provides detailed information about how and when we use cookies on our Websites. This cookie policy applies to any Talentplace.ai product or service that links to this policy or incorporates it by reference.
+                    </p>
+
+                    <h2 className="privacy-content-title" >a. Does Talentplace.ai uses cookies?</h2>
+                    <p className="privacy-content">
+                        Talentplace.ai uses cookies, tags and other technologies when you use any of the Talentplace.ai websites, mobile sites or mobile apps (collectively "the services"). Cookies are used to ensure everyone has their best possible experience. Cookies also help us keep your account safe. By continuing to visit or use our services, you are agreeing to the use of cookies and similar technologies for the purposes we describe in this policy. If you prefer not to receive cookies or web beacons, then you should stop using our site, or consult your browsing and third party cookie settings as described below.
+                    </p>
+
+                    <h2 className="privacy-content-title" >b. What is a cookie?</h2>
+                    <p className="privacy-content">
+                        Cookies are small pieces of text stored by a website you visit in your browser and subsequently sent by your web browser in every request to the website. A cookie file is stored in your web browser and allows the Site or a third-party to recognize you and make your next visit easier and the Site more useful to you. Essentially, cookies are a user’s identification card for the Talentplace.ai servers. Cookies allow Talentplace.ai to serve you better and more efficiently, and to personalize your experience on our site. Web beacons, tags and scripts may be used in the Websites or in emails to help us to deliver cookies, count visits, understand usage and campaign effectiveness and determine whether an email has been opened and acted upon. We may analyse or perform analysis based on the use of these technologies and generate reports on an individual and aggregated basis.
+                        <br /><br />
+                        Cookies can be "persistent" or "session" cookies. A persistent cookie helps us recognize you as an existing user, so it’s easier to return to Talentplace.ai or interact with our services without signing in again. After you sign in, a persistent cookie stays in your browser and will be read by Talentplace.ai when you return to one of our sites or a partner site that uses our services. Session cookies only last for as long as the session (usually the current visit to a website or a browser session).
+                    </p>
+
+                    <h2 className="privacy-content-title" >c. What are cookies used for?</h2>
+                    <p className="privacy-content">
+                        When you visit our Websites, we may place a number of cookies in your browser. These are known as First Party Cookies and are required to enable to hold session information as you navigate from page to page within the website. For example, we use cookies on our Websites to understand visitor and user preferences, improve their experience, and track and analyse usage, navigational and other statistical information. Additionally, cookies allow us to bring you advertising both on and off the Talentplace.ai site, and bring customized features to you. You can control the use of cookies at the individual browser level. If you elect not to activate the cookie or to later disable cookies, you may still visit our Websites, but your ability to use some features or areas of the Websites may be limited. We may use any of the following categories of cookies on the Websites as detailed below. Each cookie falls within one of the four following categories:
+                    </p>
+                    <table className="privacy-table" cellPadding="0" cellSpacing="0">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Essential Cookies</td>
+                                <td>Essential cookies (First Party Cookies) are sometimes called "strictly necessary" as without them we cannot provide many services that you need on the Website. For example, essential cookies help remember your preferences as you move around the Website. Essential cookies also keep you logged in into a website. Without them the login functionality would not work.</td>
+                            </tr>
+                            <tr>
+                                <td>Analytics Cookies</td>
+                                <td>These cookies track information about visits to the Talentplace.ai and partner (recruiter websites) websites so that we can make improvements and report our performance. For example: analyse visitor and user behaviour so as to provide more relevant content or suggest certain activities. They collect information about how visitors use the Websites, which site the user came from, the number of each user’s visits and how long a user stays on the Websites. We might also use analytics cookies to test new ads, pages, or features to see how users react to them.</td>
+                            </tr>
+                            <tr>
+                                <td>Functionality or Preference Cookies</td>
+                                <td>During your visit to the Websites, cookies are used to remember information you have entered or choices you make (such as your username, language or your region) on the Websites. They also store your preferences when personalizing the Websites to optimize your use of Talentplace.ai. These preferences are remembered, through the use of the persistent cookies, and the next time you visit the Websites you will not have to set them again.</td>
+                            </tr>
+                            <tr>
+                                <td>Targeting or Advertising Cookies</td>
+                                <td>These Cookies are placed by third party advertising platforms or networks or Talentplace.ai in order to, deliver ads and track ad performance, enable advertising networks to deliver ads that may be relevant to you based upon your activities (this is sometimes called "behavioural" "tracking" or "targeted" advertising) on the Websites. They may subsequently use information about your visit to target you with advertising that you may be interested in, on Talentplace.ai websites or other websites. For example, these cookies remember which browsers have visited the websites.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2 className="privacy-content-title" >d. When does Talentplace.ai place cookies?</h2>
+                    <p className="privacy-content">
+                        We use cookies on our websites, mobile sites and mobile applications. Any browser visiting these sites will receive cookies from us which helps us identify you more quickly when you return. Cookies help us to determine which pages or information you find most useful or interesting on our own websites.
+                        <br /><br />
+                        Talentplace.ai may also have some cookies for its own analytics i.e. analytics not part of Google Analytics. Such cookies help generate statistics and reports about visitors and their activities on the website or app.
+                    </p>
+
+                    <h2 className="privacy-content-title" >e. How cookies are used for online analytics purposes?</h2>
+                    <p className="privacy-content">
+                        We may use web analytics services on Talentplace.ai, such as those of Google Analytics. These services help us analyse how users use the services, including by noting the third-party website from which you arrive. The information collected by the technology will be disclosed to or collected directly by such service providers, who use the information to evaluate your use of the services. We also use Google Analytics for certain purposes related to online marketing, as described in the following sections.
+                    </p>
+
+                    <h2 className="privacy-content-title" >f. How are cookies used for advertising purposes?</h2>
+                    <p className="privacy-content">
+                        Cookies and other ad technology such as beacons, pixels, and tags help us serve relevant ads to you more effectively. They also help us provide aggregated auditing, research, and reporting for advertisers, understand and improve our service, and know when content has been shown to you. We work with website analytics and advertising partners, including Google Display Network, Facebook, etc. to deliver Talentplace.ai advertisements on third party publisher websites - these partners may set cookies on your computer's web browser. These cookies allow our partners to recognize your computer so that the ad server can show you Talentplace.ai advertisements elsewhere on the Internet, and so that our analytics software can measure your engagement and interactions while using Talentplace.ai services. In this way, ad servers may compile anonymous, de-identified information about where you, or others who are using your computer, saw our advertisements, whether or not you interacted with our advertisements, and actions performed on subsequent visits to Talentplace.ai websites and applications. This information allows an ad network to deliver targeted advertisements that they believe will be of most interest to you, and it allows Talentplace.ai to optimize the performance of our advertising campaigns and the usability of our website. In other words, we use analytics data in concert with data about our online ads that have been shown using the Google Display Network, Facebook for Advertisers, or other online advertising networks. By doing so, we can understand how anonymous users interacted with our website after seeing our ads.
+                    </p>
+
+                    <h2 className="privacy-content-title" >g. What third-party cookies does Talentplace.ai use?</h2>
+                    <p className="privacy-content">
+                        Please note that the third parties (advertising networks and providers of external services like web traffic analysis services) may also use cookies on our Services. Cookies on our sites. Also, note that the names of cookies, pixels and other technologies may change over time.
+                        <br /><br />
+                        We use trusted partners to help us service advertising, who may place cookies on your device. We also pull through content from social networks into our own pages, such as embedded Facebook feeds. The social networks, such as Facebook, Google, etc. may themselves also put cookies on your machine. If a user logs into Facebook, Twitter or Google+ via our website, they will leave a cookie on the users' computer. This is the same process as if the user logs into these social networks directly.
+                        <br /><br />
+                        We also use Google Analytics on our Services to help us analyse how our Services are used. Google Analytics uses performance cookies to track customer’s interactions. For example, by using cookies, Google can tell us which pages our users view, which are most popular, what time of day our websites are visited, whether visitors have been to our websites before, what website referred the visitor to our websites, and other similar information. All of this information is anonymized.
+                        <br /><br />
+                        We suggest that you should check the respective privacy policies for these external services to help you understand what data these organisations hold about you and how they process it.
+                        <br /><br />
+                        Facebook: <a href="https://www.facebook.com/policy.php" target="_blank">https://www.facebook.com/policy.php</a>
+                        <br /><br />
+                        AdSense: <a href="https://policies.google.com/technologies/ads" target="_blank">https://policies.google.com/technologies/ads</a>
+                        <br /><br />
+                        Google Analytics: <a href="https://www.google.com/analytics/learn/privacy.html" target="_blank">https://www.google.com/analytics/learn/privacy.html</a>
+                        <br /><br />
+                        Google Tag Manager:<a href="https://www.google.com/analytics/tag-manager/faq/" target="_blank">https://www.google.com/analytics/tag-manager/faq/</a>
+                        <br /><br />
+                        Google+: <a href="https://www.google.com/policies/privacy/" target="_blank">https://www.google.com/policies/privacy/</a>
+                        <br /><br />
+                        Twitter:  <a href="https://twitter.com/en/privacy" target="_blank">https://twitter.com/en/privacy</a>
+                        <br /><br />
+                        Google Double click: <a href="https://support.google.com/dfp_premium/answer/2839090?hl=en" target="_blank">https://support.google.com/dfp_premium/answer/2839090?hl=en</a>
+                    </p>
+
+                    <h2 className="privacy-content-title" >h. What are Web Beacons?</h2>
+                    <p className="privacy-content">
+                        Talentplace.ai occasionally advertises on third party websites. As part of our effort to track the success of our advertising campaigns, we may at times use a visitor identification technology such as "web beacons," or "action tags," which count visitors who have come to our site after being exposed to a Talentplace.ai banner ad on a third party site. Our partners may also use web beacons to collect data in the aggregate as provided by your browser while you are on our site or another site where Talentplace.ai is third party.
+                        <br /><br />
+                        By navigating on our site, you agree that we can place cookie and web beacons on your computer or device. If you prefer not to receive web beacons, then you should stop using our site, or consult your browsing settings.
+                    </p>
+
+                    <h2 className="privacy-content-title" >i. How to control cookies?</h2>
+                    <p className="privacy-content">
+                        Most browsers allow you to control cookies through their settings preferences. However, if you choose to turn off these cookies, you will still see advertising on the internet but it may not be tailored to your interests. It does not mean that you won't be served any advertisements whilst you are online. Whilst we have mentioned most of the third parties involved in using targeting or advertising cookies in the preceding section , the list is not exhaustive and is subject to change. Therefore, even if you choose to turn off all the third-party cookies listed in section , you may still receive some tailored advertisements and recommendations.
+                        <br /><br />
+                        There are a number of ways you can manage what cookies are set on your devices. Essential cookies, however, cannot be disabled. If you do not allow certain cookies to be installed, the website may not be accessible to you and/or the performance, features, or services of the website may be compromised.
+                        <br /><br />
+                        You can also manage this type of cookie in the privacy settings on the web browser you are using. Please note that if you use your browser settings to block all cookies you may not be able to access parts of our or others' websites. Please see below for more information.
+                        <br /><br />
+                        <b>Changing your Cookie Settings</b>: The browser settings for changing your cookies settings are usually found in the 'options' or 'preferences' menu of your internet browser. In order to understand these settings, the following links may be helpful. Otherwise you should use the 'Help' option in your internet browser for more details.
+                    </p>
+
+                    <ul className="privacy-list">
+                        <li>
+                            <a href="" target="_blank">Cookie settings in Internet Explorer</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">Cookie settings in Firefox</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">Cookie settings in Chrome</a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">Cookie settings in Safari</a>
+                        </li>
+                    </ul>
+                    <p className="privacy-content">
+                        <b>More information:</b> To find out more about cookies, including how to see what cookies have been set and how to manage and delete them, visit <a href=" www.allaboutcookies.org" target="_blank"> www.allaboutcookies.org</a> . You can learn more about opting out of receiving interest-based ads from other companies at optout.aboutads.info and <a href="www.networkadvertising.org/choices" target="_blank">www.networkadvertising.org/choices</a>. In addition, certain third party advertising networks, like Facebook (pixels) and Google, permit users to opt out of or customize preferences associated with your internet browsing. To learn more about this feature from Google, click here. For further information about the Facebook Pixel, click here.
                     </p>
 
                 </div>

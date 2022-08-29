@@ -24,10 +24,16 @@
 .cvEditContainer {
     /* width: 100% !important; */
     height: 100%;
+    display: grid;
+    grid-template-columns: 5rem calc(100vw - 5rem);
+    grid-template-areas: 'sidebar cv';
     /* display: grid;
     grid-template-columns: 10rem auto;
     grid-template-areas: 'sidebar content';
     width: 100vw; */
+}
+.cv-part{
+    grid-area: cv;
 }
 .CVReview h3 {
     font-size: 1.2rem;
@@ -475,7 +481,9 @@
     padding-bottom: 2rem;
     border-radius: 0 0 0.8rem 0.8rem
 }
-
+.CVReview .CareerTimeline{
+    width: 100%;
+}
 .lineToright{
     border-right: 1px solid #80808038 !important;
     padding-right: 10px !important; 

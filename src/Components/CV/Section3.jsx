@@ -68,16 +68,23 @@ export default function Section3() {
               ) : (
                 <ExperienceLoader />
               )}
-              {companyInfo && companyInfo[index]?.job_role ? (
-                <DesignationOverview
-                  job_role={{
-                    job_role: companyInfo[index].job_role || [],
-                    company_record_id: companyInfo[index].company_record_id,
-                  }}
-                />
-              ) : (
-                <JobOverviewLoader />
-              )}
+              {companyInfo && companyInfo[index]?.job_role ?
+                (
+                  <>
+                    {
+                      companyInfo[index].job_role.map((jobRole, index) => (
+                        <DesignationOverview
+                          job_role={{
+                            job_role: jobRole || [],
+                            company_record_id: companyInfo[index].company_record_id,
+                          }}
+                        />
+                      ))
+                    }
+                  </>
+                ) : (
+                  null
+                )}
             </div>
           </div>
         ))
@@ -203,29 +210,29 @@ function DesignationOverview(props) {
   return (
     <>
       <div className="flex-row-between align-center">
-        <h3 className="text-left m-0">{job_role[index].designation_name}</h3>
+        <h3 className="text-left m-0">{job_role.designation_name}</h3>
         <div className="flex-row-fit g-1 align-center">
           {toEdit && (
             <div
               onClick={() =>
                 handleEditForms({
                     
-                  designation_id:job_role[index].designation_id,
-                  level_id:job_role[index].job_level,
-                  location:job_role[index].job_location,
-                  remote_work:job_role[index].job_remote_work,
-                  functional_area_id:job_role[index].function_area_id,
-                  start_salary: job_role[index].job_start_salary,
-                  end_date: job_role[index].job_end_date,
-                  start_date: job_role[index].job_start_date,
+                  designation_id:job_role.designation_id,
+                  level_id:job_role.job_level,
+                  location:job_role.job_location,
+                  remote_work:job_role.job_remote_work,
+                  functional_area_id:job_role.function_area_id,
+                  start_salary: job_role.job_start_salary,
+                  end_date: job_role.job_end_date,
+                  start_date: job_role.job_start_date,
                   user_company_record_id: company_record_id,
-                  user_company_job_record_id:job_role[index].company_job_record_id,
-                  start_salary_currency:job_role[index].start_salary_currency,
-                  end_salary_currency:job_role[index].end_salary_currency,
-                  current_working:job_role[index].current_working,
-                  hide_salary:job_role[index].hide_salary,
-                  end_salary:job_role[index].job_end_salary,
-                  designation_name: job_role[index].designation_name,
+                  user_company_job_record_id:job_role.company_job_record_id,
+                  start_salary_currency:job_role.start_salary_currency,
+                  end_salary_currency:job_role.end_salary_currency,
+                  current_working:job_role.current_working,
+                  hide_salary:job_role.hide_salary,
+                  end_salary:job_role.job_end_salary,
+                  designation_name: job_role.designation_name,
                   progress: 3,
                 })
               }
@@ -233,52 +240,36 @@ function DesignationOverview(props) {
               <FaPencilAlt />
             </div>
           )}
-          <button
-            className="btn-fit transparent"
-            onClick={() => {
-              index > 0 && setIndex(index - 1);
-            }}
-          >
-            <Left />
-          </button>
-          <button
-            className="btn-fit transparent"
-            onClick={() => {
-              index < job_role.length - 1 && setIndex(index + 1);
-            }}
-          >
-            <Right />
-          </button>
         </div>
       </div>
 
       <p>
-        {job_role[index].job_start_date ||
-          "unknown" + " - " + job_role[index].job_end_date ||
+        {job_role.job_start_date ||
+          "unknown" + " - " + job_role.job_end_date ||
           "unknown"}
       </p>
       <span className="divider"></span>
       <div className="grid-35-65">
         <div className="col-100 g-1">
           <div className="flex-row-fit align-center g-1">
-            <BarGraphO /> <p>{job_role[index].job_level_name || ""}</p>
+            <BarGraphO /> <p>{job_role.job_level_name || ""}</p>
           </div>
           <div className="flex-row-fit align-center g-1">
-            <HumanG /> <p>{job_role[index].function_area_name || ""}</p>
+            <HumanG /> <p>{job_role.function_area_name || ""}</p>
           </div>
           <div className="flex-row-fit align-center g-1">
             <Webcam />{" "}
-            <p>{job_role[index].job_remote_work === 0 ? "No" : "Yes"}</p>
+            <p>{job_role.job_remote_work === 0 ? "No" : "Yes"}</p>
           </div>
           <div className="flex-row-fit align-center g-1">
-            <Location /> <p>{job_role[index].job_location || ""}</p>
+            <Location /> <p>{job_role.job_location || ""}</p>
           </div>
         </div>
-        {console.log("----------", job_role[index].skills)}
-        {job_role && job_role[index]?.skills && (
+        {console.log("----------", job_role.skills)}
+        {job_role && job_role?.skills && (
           <div className="col-100 skill-card">
             <h5 className="text-left">Key Skills Used</h5>
-            {job_role[index].skills.map((skill, i) => (
+            {job_role.skills.map((skill, i) => (
               <div key={i} className="flex-row-between align-start">
                 <p>{skill.skill_name}</p>
                 <div className="col-70 justify-center">
@@ -295,16 +286,18 @@ function DesignationOverview(props) {
       </div>
       <ResponsibiltiensOverview
         data={{
-          role_responsibilties: job_role[index].role_responsibilties || false,
-          company_job_record_id: job_role[index].company_job_record_id,
+          role_responsibilties: job_role.role_responsibilties || false,
+          company_job_record_id: job_role.company_job_record_id,
           company_record_id: company_record_id,
-          external_client_desc: job_role[index].external_client_desc,
-          skills: job_role[index].skills,
+          external_client_desc: job_role.external_client_desc,
+          skills: job_role.skills,
         }}
       />
-      {job_role[index].project && (
-        <ProjectOverview projects={{projects:job_role && job_role[index]?.project,company_job_record_id: job_role[index].company_job_record_id,company_record_id: company_record_id}} />
-      )}
+      {job_role.project && 
+        job_role?.project.map((project,index) => (
+          <ProjectOverview key={index} projects={{projects: project,company_job_record_id: job_role.company_job_record_id,company_record_id: company_record_id}} />
+        ))
+      }
     </>
   );
 }
@@ -340,7 +333,7 @@ function ResponsibiltiensOverview({ data }) {
 function ProjectOverview({ projects:{projects,company_job_record_id,company_record_id} }) {
   console.log("prof",projects)
   const [index, setIndex] = useState(0);
-  let { project_name, client_name, project_skill ,job_project_record_id} = projects[index];
+  let { project_name, client_name, project_skill ,job_project_record_id} = projects;
   const toEdit = useSelector(selectToEdit);
   const dispatch = useDispatch();
   const handleEditForms = (data) => {
@@ -356,22 +349,6 @@ function ProjectOverview({ projects:{projects,company_job_record_id,company_reco
               <FaPencilAlt />
             </div>
           )}
-          <button
-            className="btn-fit transparent"
-            onClick={() => {
-              index > 0 && setIndex(index - 1);
-            }}
-          >
-            <Left />
-          </button>
-          <button
-            className="btn-fit transparent"
-            onClick={() => {
-              index < projects.length - 1 && setIndex(index + 1);
-            }}
-          >
-            <Right />
-          </button>
         </div>
       </div>
       <span className="divider"></span>

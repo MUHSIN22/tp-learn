@@ -23,7 +23,7 @@ export default function Section2() {
     <>
       {
         ((timelineGraph && timelineGraph.company_info && timelineGraph.company_info[0] ) || (salaryGraph && salaryGraph.salary) ) &&
-        <div className="col-100 align-center CareerTimeline">
+        <div className="CareerTimeline">
           <div className="col-90 align-start py-2 px-2">
             <h1>Career Timeline</h1>
             <span className="divider"></span>

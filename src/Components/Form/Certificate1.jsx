@@ -66,7 +66,7 @@ export default function Certificate1() {
         setSearch(e.target.value)
     }
 
-    async function handleSubmit(e) {
+    async function handleSubmit(e,isAdd) {
         e.preventDefault();
         let body = form
         if(file) body.certificate_file = file
@@ -78,10 +78,17 @@ export default function Certificate1() {
             obj.skill_name = skill.skill_name
             return obj
         })
+
+        if(isAdd){
+            body.reload_request = "yes"
+          }
+
         let form_data = JsonToFormData(body)
           try {
-              dispatch(toggleNewCertificate(true))
               let data = await dispatch(addCertification({ auth: token, body:form_data, setUpdated, dispatch })).unwrap()
+              if(isAdd){
+                dispatch(toggleNewCertificate(true))
+              }
               if(data){
                 setUpdated(true);
               }
@@ -192,7 +199,7 @@ export default function Certificate1() {
 
             </div>
             <div className="flex-row-end">
-                <button onClick={handleSubmit} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more certifications</button>
+                <button onClick={e => handleSubmit(e,true)} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more certifications</button>
             </div>
             <Control handleSubmit={(e) =>{
                  handleSubmit(e)

@@ -26,16 +26,18 @@ export default function CareerObjective1() {
     const photoMedia = useSelector(SelectDocuments)
     const newPhotomedia = useSelector(selectNewPhotoMedia)
     const [reloadFlag, setReloadFlag] = useState(false)
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e,isAdd) => {
         e.preventDefault();
         let body = form
         body.user_id = user_id
         if (file) body.file_path = file
-
+        if(isAdd){
+            body.reload_request = "yes"
+          }
         let form_Data = JsonToFormData(body)
         try {
-            dispatch(toggleNewPhotoMedia(true))
             let uploaded = dispatch(uploadPhotomedia({ auth: token, body: form_Data })).unwrap()
+            if(isAdd) dispatch(toggleNewPhotoMedia(true))
             console.log(form, uploaded, "jkasdjf;ajdsfk jl;asdjfl")
         } catch (error) {
             showAlert(true)
@@ -114,7 +116,7 @@ export default function CareerObjective1() {
                 <IconInput value={form.description} name='description' handleChange={handleChange} label='Description' placeholder='' width={100} />
             </div>
             <div className="flex-row-end">
-                <button onClick={handleSubmit} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more</button>
+                <button onClick={e => handleSubmit(e,true)} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more</button>
             </div>
             <Control handleSubmit={(e) => {
 

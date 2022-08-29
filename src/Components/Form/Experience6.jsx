@@ -43,18 +43,22 @@ export default function Experience6() {
     const [validationError,setValidationError] = useState(null)
     const [showAlertInner,setAlertInnder] = useState(false)
     const [temporary,setTemporary] = useState({ skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' })
-    const handleAddProject = async (e) => {
+    const handleAddProject = async (e,isAdd) => {
         e.preventDefault();
         let body = form
         body.user_id = user_id
         body.project_skills = selected_options.map((x) => { return { skill_id: x.skill_id, skill_complexity: x.skill_complexity, skill_desc: x.skill_desc } })
         body.project_skills = JSON.stringify(body.project_skills)
         let formValidation = projectFormValidator();
-        console.log(formValidation);
+        if(isAdd){
+            body.reload_request = "yes"
+        }
         if(formValidation){
             try {
-                dispatch(toggleNewProject(true))
-                await dispatch(addProject({ auth: token, body: { ...form, user_id }, dispatch })).unwrap()
+                await dispatch(addProject({ auth: token, body: { ...body, user_id }, dispatch })).unwrap()
+                if(isAdd){
+                    dispatch(toggleNewProject(true))
+                }
                 console.log(form)
             } catch (error) {
                 showAlert(true)
@@ -186,7 +190,7 @@ export default function Experience6() {
     }, [showAlert, error])
 
     useEffect(() => {
-        if (!newProject && lastJob.project && lastJob.project[lastJob.project.length - 1] && !newProject) {
+        if (lastJob.project && lastJob.project[lastJob.project.length - 1] && !newProject) {
             let lastProject = lastJob.project[lastJob.project.length - 1]
             setForm({
                 ...form,
@@ -245,7 +249,7 @@ export default function Experience6() {
                 <button className='btn-fit small' onClick={handleAddSkill}>+ Add Skill</button>
             </div>
             <div className="flex-row-end">
-                <button className="btn-fit transparent g-0-5" onClick={handleAddProject}><AddCircle width={30} /> Add another Project</button>
+                <button className="btn-fit transparent g-0-5" onClick={(e) => handleAddProject(e,true)}><AddCircle width={30} /> Add another Project</button>
             </div>
             <Control handleSubmit={(e) => {
                 handleAddProject(e)

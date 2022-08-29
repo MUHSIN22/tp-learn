@@ -35,7 +35,6 @@
     position: sticky;
     top: 0;
     margin-bottom: 2rem;
-    margin-top: 4rem;
 }
 .privacy-btns-wrapper{
     display: flex;
@@ -105,7 +104,8 @@
 .privacy-list li::marker{
     color: rgba(72, 72, 72, 0.65);
 }
-.privacy-content a{
+.privacy-content a,
+.privacy-list a{
     color: blue;
 }
 .privacy-list-header{
@@ -113,6 +113,16 @@
     color: #000;
     display: block;
     margin: 0.5rem 0;
+}
+.privacy-table th{
+    background: #EF6239;
+    color: #fff;
+    border: 1px solid #000;
+    padding: 0.5rem;
+}
+.privacy-table td{
+    padding: 0.5rem;
+    border: 1px solid #000;
 }
 @media only screen and (max-width: 768px) {
     .privacy-main-wrapper {

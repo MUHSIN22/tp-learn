@@ -292,12 +292,12 @@ export default function CVBuilder() {
 
   return (
     // <div className="cvEditor">
-    <div className="flex-row-center cvEditContainer" id="cv-pdf-content">
+    <div className="cvEditContainer" id="cv-pdf-content">
       <MobileHeader />
       <div className="col-fit sidebar-wrapper">
         <Sidebar currentPage={pull_data} />
       </div>
-      <div className="col-100">
+      <div className="cv-part">
         <div
           className="flex-row-center justify-end px-3 mx-1"
           style={{ cursor: "pointer" }}

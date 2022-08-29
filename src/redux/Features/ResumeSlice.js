@@ -178,7 +178,6 @@ export const addProject = createAsyncThunk('authentication/addProject', async (d
                 'authorization': `bearer ${data.auth}`
             }
         })
-        console.log(data.dispatch);
         if(data.dispatch){
             data.dispatch(reload())
             data.dispatch(changeEditPageDetails({progress: null})).unwrap();

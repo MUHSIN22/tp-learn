@@ -37,13 +37,17 @@ export default function AdditionalSkills1() {
             [evt.target.name]: value
         });
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e,isAdd) => {
         e.preventDefault();
         let body = form
         body.user_id = user_id
+        if(isAdd){
+            body.reload_request = "yes"
+          }
         try {
-            dispatch(toggleNewAdditionalSkills(true))
-            dispatch(addAdditionalSkills({ auth: token, body: { ...form, user_id }, dispatch })).unwrap()
+            
+            await dispatch(addAdditionalSkills({ auth: token, body: { ...form, user_id }, dispatch })).unwrap()
+            if(isAdd) dispatch(toggleNewAdditionalSkills(true))
             console.log(form)
         } catch (error) {
             console.log(error)
@@ -117,7 +121,7 @@ export default function AdditionalSkills1() {
                 <IconTextArea value={form.description} name='description' handleChange={handleChange} label='Please describe your cause in brief' placeholder="e.g. Set up a 'Goonj' kiosk for clothing collection for needy " width={100} rows={8} />
             </div>
             <div className="flex-row-end">
-                <button onClick={handleSubmit} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more</button>
+                <button onClick={e => handleSubmit(e,true)} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more</button>
             </div>
             <Control handleSubmit={(e) => {
                 handleSubmit(e)

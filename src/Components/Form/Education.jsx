@@ -99,17 +99,21 @@ export default function Education() {
     })
     setColleges(cl);
   }
-  async function handleSubmit(e,reload=false) {
+  async function handleSubmit(e,isAdd) {
     e.preventDefault();
     let body = form
     body.location = location;
     body.user_id = user_id
     if(file) body.upload_degree = file
+    if(isAdd){
+      body.reload_request = "yes"
+    }
     body = JsonToFormData(body)
-
     try {
-      dispatch(toggleNewEducation(true))
       let data = await dispatch(addEducation({ auth: token, body,dispatch })).unwrap()
+      if(isAdd){
+        dispatch(toggleNewEducation(true))
+      }
       if(data){
         setUpdated(true)
       }
@@ -229,10 +233,10 @@ export default function Education() {
         </div>
       </div>
       <div className="flex-row-end">
-        <button onClick={handleSubmit} className="btn-fit transparent g-0-5"><AddCircle width={30} /> Add Another Qualification</button>
+        <button onClick={(e) => handleSubmit(e,true)} className="btn-fit transparent g-0-5"><AddCircle width={30} /> Add Another Qualification</button>
       </div>
       <Control handleSubmit={(e) => {
-        handleSubmit(e,true)
+        handleSubmit(e)
         dispatch(toggleNewEducation(false))
         setReloadFlag(true)
       }} />

@@ -82,7 +82,7 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
   return (
     <div id="jobTimeline" className="jobTimeline">
       <div className="job-timeline-wrapper">
-        {/* { jobList && jobList[0] && jobList.map((item, index) => (
+        { jobList && jobList[0] && jobList.map((item, index) => (
           <div className="job" style={{ backgroundColor: (item.company_name === 'No experience' ? "rgba(99,99,99,5.4)" : colors[index]) }}>
             {item.type}
             <div className="time-bar">
@@ -97,7 +97,7 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
               <span>{item.timeline.job_level_name}</span>
             </div>
           </div>
-        ))} */}
+        ))}
       </div>
       {/* {jobs.map((job, i) =>{ 
       
