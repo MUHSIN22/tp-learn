@@ -164,9 +164,9 @@ export default function Certificate1({data}) {
                 </div>
 
             </div>
-            <div className="flex-row-end">
+            {/* <div className="flex-row-end">
                 <button onClick={handleSubmit} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more certifications</button>
-            </div>
+            </div> */}
             <Control handleSubmit={(e) => handleSubmit(e)}/>
         </>
     )

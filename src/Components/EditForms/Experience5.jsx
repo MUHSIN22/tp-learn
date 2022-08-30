@@ -8,7 +8,7 @@ import useDebounce from '../../DebouncedSearch';
 import { getRoleSuggestionList, searchSkills, selectRoleSuggestionList, selectSkillList } from '../../redux/Features/MasterSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
-import { addJobSkills, nextForm, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage,changeEditPageDetails } from '../../redux/Features/ResumeSlice';
+import { addJobSkills, nextForm, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage,changeEditPageDetails, setResumeError } from '../../redux/Features/ResumeSlice';
 import Control from './Control';
 import Alert from '../Alert/Alert';
 import MultiSelectedOptions from './MultiSelectedOptions';
@@ -75,9 +75,18 @@ export default function Experience5({data}) {
         console.log(temp.skill_id,search,);
         temp.skill_name = temp.skill_id == '' ? search : temp.skill_name;
         console.log(temp,'this is temp');
-        set_Selected_options([...selected_options, temp])
-        document.getElementById('iconinput-Skills').value = '';
-        document.getElementById('iconinput-complexity').value = '';
+        if(parseInt(temp.skill_complexity) > 100 || temp.skill_complexity < 0){
+            dispatch(setResumeError({skill_complexity: ["Skill complexity should be a percentage between 0 to 100"]}))
+            setShowAlert(true)
+            document.getElementById('iconinput-Skills').value = '';
+            document.getElementById('iconinput-complexity').value = '';
+            return true;
+        }
+        if((temp.skill_id !== "" || temp.skill_name !== "") && temp.skill_complexity !== ""){
+            set_Selected_options([...selected_options, temp])
+            document.getElementById('iconinput-Skills').value = '';
+            document.getElementById('iconinput-complexity').value = '';
+        }
 
 
     }
@@ -174,7 +183,7 @@ export default function Experience5({data}) {
             
                 <SuggestiveInput name='Skills' searchHandler={searchHandler} label='Please enter all the skills you applied' placeholder='Select Skills' width={70} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
 
-                <IconInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' width={20} />
+                <IconInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' width={20} max={100} type="number" />
                 <button onClick={handleAddSkill} className='btn-fit transparent'><AddCircle /></button>
             </div>
             <div className="form-col ">
@@ -222,6 +231,7 @@ function SuggestionBox({ handleSelect = () => { }, suggestions = [], name_field 
         </div>
     )
 }
+
 function lastElement(arr){
     return arr[arr.length - 1]
 }

@@ -56,7 +56,7 @@ export default function AdditionalSkills1({data}) {
                 <IconInput name='role' handleChange={handleChange} label='Your role' placeholder='i.e. Volunteer' width={100} defaultValue={form.role}/>
             </div>
             <div className="form-row">
-                <IconSelect name='organization_name' handleChange={handleChange} label='Organisation name' placeholder='i.e. Gooni' width={100} options={[{id:'1',name:'Goonj'}, {id:'2',name: 'LPU'}, {id:'3',name:'CSIT'}]} name_field={'name'}defaultValue={form.organization_name}/>
+                <IconInput value={form.organization_name} name='organization_name' handleChange={handleChange} label='Organisation name' placeholder='i.e. Goonj' width={100} />
             </div>
             <div className="form-row">
                 <IconInput name='from_duration' handleChange={handleChange} type={'date'} label='Duration (From)' placeholder='i.e. Duration date' width={50} defaultValue={form.from_duration}/>
@@ -70,10 +70,10 @@ export default function AdditionalSkills1({data}) {
             <div className="form-row">
                 <IconTextArea  name='description' handleChange={handleChange} label='Please describe your cause in brief' placeholder="e.g. Set up a 'Goonj' kiosk for clothing collection for needy " width={100} rows={8} defaultValue={form.description}/>
             </div>
-            <div className="flex-row-end">
+            {/* <div className="flex-row-end">
                 <button onClick={handleSubmit} className="btn-fit transparent g-0-5"><AddCircle width={30} />Add more</button>
-            </div>
-            <Control handleSubmit={()=>dispatch(reload())}/>
+            </div> */}
+            <Control handleSubmit={handleSubmit}/>
         </>
     )
 }

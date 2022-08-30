@@ -82,7 +82,7 @@ export default function Section3Review() {
                         <DesignationOverview
                           job_role={{
                             job_role: jobRole || [],
-                            company_record_id: companyInfo[index].company_record_id,
+                            company_record_id: item.company_record_id,
                           }}
                         />
                       ))
@@ -377,7 +377,7 @@ function DesignationOverview(props) {
           skills: job_role.skills,
         }}
       />
-      {console.log(job_role, 'this is index')}
+      {console.log(job_role,company_record_id, 'this is index')}
       {job_role.project && (
         <ProjectOverview projects={{ projects: job_role && job_role?.project, company_job_record_id: job_role.company_job_record_id, company_record_id: company_record_id }} />
       )}

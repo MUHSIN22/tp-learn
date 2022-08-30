@@ -49,13 +49,15 @@ function SocialContributionCard({ image, organization_name, description, additio
             <div className="col-20">
                 <img src={image} alt="" />
             </div>
-            <div className="col-70 justify-start text-left g-2">
+            <div className="col-70 justify-start text-left" style={{gap: '0.5rem'}}>
                 <h4 style={{display: 'flex'}}><span>{organization_name}</span> {toEdit && (
                     <div className="edit-and-delete ">
                         <span onClick={() => handleEditForms({ progress: 12, organization_name, description, additional_skill_record_id, role, from_duration, to_duration, currently_working })} className="px-1"><FaPencilAlt /></span>
                         <span onClick={() => handleDeleteForm({ user_id, additional_skill_record_id })} className="px-1"><MdDelete /></span>
                     </div>
                 )}</h4>
+                <p>{role}</p>
+                <p>{from_duration.split('-')[2]} to {to_duration.split('-')[2]}</p>
                 <p>{description}</p>
             </div>
         </div>

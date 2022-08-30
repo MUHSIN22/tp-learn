@@ -238,6 +238,7 @@ export const addAdditionalSkills = createAsyncThunk('authentication/addAdditiona
         })
         if(data.dispatch){
             data.dispatch(reload())
+            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
         }
         return response.data
     } catch (error) {
