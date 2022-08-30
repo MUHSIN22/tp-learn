@@ -22,12 +22,13 @@ import ExperienceLoader from '../Loaders/ExperienceLoader';
 import { useState } from 'react';
 import JobOverviewLoader from '../Loaders/JobOverviewLoader';
 import RoleLoader from '../Loaders/RoleLoader';
-import { companyWiseGraph, selectCompanyWise } from '../../redux/Features/GraphSlice';
+import { companyWiseGraph, companyWiseGraphForShare, selectCompanyWise } from '../../redux/Features/GraphSlice';
 import { useEffect } from 'react';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { FaPencilAlt } from "react-icons/fa";
 import { AiFillDelete } from 'react-icons/ai'
 import EditFormContainer from "../EditForms/EditFromContainer";
+import { useParams } from 'react-router-dom';
 export default function Section3() {
   const loading = useSelector(selectResumeLoading);
   const companyInfo = useSelector(SelectCompanyDetails);
@@ -98,6 +99,7 @@ function CompanyOverview({ company }) {
   const [companyWise, setCompanyWise] = useState(null)
   const dispatch = useDispatch();
   const toEdit = useSelector(selectToEdit);
+  const {id} = useParams();
   const handleEditForms = (data) => {
     dispatch(changeEditPageDetails(data)).unwrap();
   };
@@ -110,12 +112,23 @@ function CompanyOverview({ company }) {
     try {
 
       (async () => {
-        let response = await dispatch(
-          companyWiseGraph({
-            auth: token,
-            body: { user_id, user_company_record_id: company.company_record_id },
-          })
-        ).unwrap();
+        let response;
+        
+        console.log(window.location.pathname.split('/'),window.location.pathname.split('/').includes('cv-share'),'locatinos');
+        if(window.location.pathname.split('/').includes('cv-share')){
+          response = await dispatch(
+            companyWiseGraphForShare({
+              body: { user_id: id, user_company_record_id: company.company_record_id },
+            })
+          ).unwrap();
+        }else{
+          response = await dispatch(
+            companyWiseGraph({
+              auth: token,
+              body: { user_id, user_company_record_id: company.company_record_id },
+            })
+          ).unwrap();
+        }
         setCompanyWise(response.data.recordDetails.salary_management_graph)
       })()
 

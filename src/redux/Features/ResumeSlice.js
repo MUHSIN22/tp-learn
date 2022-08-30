@@ -47,6 +47,23 @@ export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (b
     }
 })
 
+export const profileInfo = createAsyncThunk('authentication/profileInfo', async (body, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
+    try {
+        const response = await API.post(`/social-share-user-info`, encoded, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${body.auth}`
+            }
+        })
+
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const addExperience = createAsyncThunk('authentication/addExperience', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     console.log(encoded)
@@ -694,6 +711,20 @@ export const resumeSlice = createSlice({
             state.form = action.payload.data.recordDetails.form
             state.reload = false
         }).addCase(resumeInfo.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'Rejected'
+            state.error = action.payload.error
+            state.message = action.payload.data.error_message
+
+        }).addCase(profileInfo.pending, (state, action) => {
+            state.status = 'loading'
+        }).addCase(profileInfo.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.recordDetails = action.payload.data.recordDetails
+            state.form = action.payload.data.recordDetails.form
+            state.reload = false
+        }).addCase(profileInfo.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error

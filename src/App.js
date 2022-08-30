@@ -33,6 +33,8 @@ import Checking from './Components/checking/Checking';
 import Footer from './Components/Footer/Footer';
 import PrivacyPolicy from './Components/Footer Links/PrivacyPolicy/PrivacyPolicy';
 import TermsAndConditions from './Components/Footer Links/TermAndConditions/TermsAndConditions';
+import CVShare from './Components/CVShare/CVShare';
+import CVcontainer from './Components/CV/CVcontainer';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
@@ -108,6 +110,7 @@ function App() {
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path='/' element={<Home/>}/>
+       <Route path='/cv-share/:id' element={<CVShare />} />
        <Route path='/check' element={<Checking/>} />
        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
        <Route path='/terms-and-conditions' element={<TermsAndConditions />} />

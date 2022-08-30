@@ -113,18 +113,18 @@ export default function CVBuilder() {
         let shareLink;
         const resume_link = response.resumePdfUrl;
         if (media === "whatsapp") {
-          shareLink = `https://api.whatsapp.com/send?text=${resume_link}`
+          shareLink = `https://api.whatsapp.com/send?text=https://talentplace.ai/cv-share/${user_id}`
           
         } else if (media === "facebook") {
-          shareLink = `https://www.facebook.com/sharer/sharer.php?u=${resume_link}`
+          shareLink = `https://www.facebook.com/sharer/sharer.php?u=https://talentplace.ai/cv-share/${user_id}`
         } else if (media === "instagram") {
-          shareLink = `https://www.instagram.com/direct?url=${resume_link}`
+          shareLink = `https://www.instagram.com/direct?url=https://talentplace.ai/cv-share/${user_id}`
         }
 
-        let open = window.open(shareLink, '_blank', 'noopener,noreferrer,popup=1')
-        if(!open){
-          window.location.href = shareLink;
-        }
+        let open = window.open(shareLink, '_blank')
+        // if(!open){
+        //   window.location.href = shareLink;
+        // }
       })
     } catch (err) {
       console.log(err);

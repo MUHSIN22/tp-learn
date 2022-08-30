@@ -24,6 +24,24 @@ export const graphDetails = createAsyncThunk('authentication/graphDetails', asyn
         return rejectWithValue(error.response.data);
     }
 })
+
+export const graphDetailsForShare = createAsyncThunk('authentication/graphDetailsForShare', async (body, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
+    try {
+        const response = await API.post(`/social-share-industry-skill-mapping`, encoded, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                // 'authorization': `bearer ${body.auth}`
+            }
+        })
+
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const companyWiseGraph = createAsyncThunk('authentication/companyWiseGraph', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     try {
@@ -32,6 +50,25 @@ export const companyWiseGraph = createAsyncThunk('authentication/companyWiseGrap
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Cache-Control': 'no-cache',
                 'authorization': `bearer ${data.auth}`
+            }
+        })
+
+        console.log(response.data,'company graph');
+
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const companyWiseGraphForShare = createAsyncThunk('authentication/companyWiseGraphForShare', async (data, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    try {
+        const response = await API.post(`/social-share-company-wise-salary-chart`, encoded, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                // 'authorization': `bearer ${data.auth}`
             }
         })
 
@@ -67,6 +104,24 @@ export const graphSlice = createSlice({
             state.message = action.payload.data
 
 
+        }).addCase(graphDetailsForShare.pending, (state, action) => {
+            state.loading = true
+            state.status = 'loading'
+            state.error = false
+            state.graph ={}
+        }).addCase(graphDetailsForShare.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.message = ''
+            state.graph = action.payload.data.recordDetails
+            state.reload= false
+        }).addCase(graphDetailsForShare.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'Rejected'
+            state.error = action.payload.error
+            state.message = action.payload.data
+
+
         }).addCase(companyWiseGraph.pending, (state, action) => {
             state.loading = true
             state.status = 'loading'
@@ -83,8 +138,22 @@ export const graphSlice = createSlice({
             state.status = 'Rejected'
             state.error = action.payload.error
             state.message = action.payload.data
-
-
+        }).addCase(companyWiseGraphForShare.pending, (state, action) => {
+            state.loading = true
+            state.status = 'loading'
+            state.error = false
+            state.companyGraph= {}
+        }).addCase(companyWiseGraphForShare.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.message = ''
+            state.companyGraph = action.payload.data.recordDetails.salary_management_graph
+            state.reload= false
+        }).addCase(companyWiseGraphForShare.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'Rejected'
+            state.error = action.payload.error
+            state.message = action.payload.data
         })
     }
 })
