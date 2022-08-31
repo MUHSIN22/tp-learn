@@ -140,7 +140,7 @@ function CompanyOverview({ company }) {
   }, [company.company_record_id, dispatch]);
 
   return (
-    <div className="grid-35-65">
+    <div className="grid-35-65 company-overview-grid">
       <div className="col-100 g-1">
         <div className="flex-row-fit align-center g-1">
           <Device /> <p>{company.industry_name}</p>
@@ -338,7 +338,7 @@ function ResponsibiltiensOverview({ data }) {
           {parser(parser(data.role_responsibilties))}
         </div>
       ) : (
-        <RoleLoader />
+        null
       )}
     </>
   );

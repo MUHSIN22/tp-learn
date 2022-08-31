@@ -59,7 +59,8 @@
     font-size: 0.9rem;
 }
 
-.CVReview .section_1 {
+.CVReview .section_1,
+.cvcontainer .section_1 {
     width: 100%;
     display: grid;
     grid-template-columns: 25% 70%;
@@ -68,7 +69,8 @@
     margin-top: 3rem;
 }
 
-.CVReview .section_1 .personal_info {
+.CVReview .section_1 .personal_info,
+.cvcontainer .section_1 .personal_info {
     width: inherit;
     background-color: #eeecf65e;
     border-radius: 0.5rem;
@@ -85,7 +87,8 @@
 .CVReview .role-wrapper{
     flex-shrink: 4;
 }
-.CVReview .section_1 .personal_info .row {
+.CVReview .section_1 .personal_info .row,
+.cvcontainer .section_1 .personal_info .row {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -93,7 +96,8 @@
     gap: 0.5rem;
 }
 
-.CVReview .section_1 .personal_info .row p {
+.CVReview .section_1 .personal_info .row p,
+.cvcontainer .section_1 .personal_info .row p {
     font-weight: 500;
     font-size: 1rem;
     width: 100%;
@@ -101,27 +105,32 @@
 
 }
 
-.CVReview .section_1 .personal_info .profile {
+.CVReview .section_1 .personal_info .profile,
+.cvcontainer .section_1 .personal_info .profile {
     width: 50%;
     margin-top: -10rem;
 }
 
-.CVReview .section_1 .personal_info .profile img {
+.CVReview .section_1 .personal_info .profile img,
+.cvcontainer .section_1 .personal_info .profile img {
     width: 100%;
     border-radius: 50%;
     aspect-ratio: 1/1;
     object-fit: cover;
 }
 
-.CVReview .section_1 .personal_info .divider {
+.CVReview .section_1 .personal_info .divider,
+.cvcontainer .section_1 .personal_info .divider {
     margin: 0;
 }
 
-.CVReview .section_1 .personal_info .col-100 {
+.CVReview .section_1 .personal_info .col-100,
+.cvcontainer .section_1 .personal_info .col-100 {
     gap: 1rem
 }
 
-.CVReview .section_1 .personal_info .background {
+.CVReview .section_1 .personal_info .background,
+.cvcontainer .section_1 .personal_info .background {
     width: inherit;
     height: 6rem;
     background: url('../../Assests/profile_info_vector.svg');
@@ -130,18 +139,21 @@
     background-size: 10zrem;
 }
 
-.CVReview .section_1 h1 {
+.CVReview .section_1 h1,
+.cvcontainer .section_1 h1 {
     text-align: left;
     margin: 0 0 0.5rem 0;
     font-weight: 600;
     font-size: 1.6rem;
 }
 
-.CVReview .section_1 p {
+.CVReview .section_1 p,
+.cvcontainer .section_1 p {
     font-size: 1rem;
 }
 
-.CVReview .section_1 .mphasis {
+.CVReview .section_1 .mphasis,
+.cvcontainer .section_1 .mphasis {
     width: 96%;
     display: flex;
     flex-direction: row;
@@ -153,7 +165,8 @@
 
 }
 
-.CVReview .section_1 .mphasis .image {
+.CVReview .section_1 .mphasis .image,
+.cvcontainer .section_1 .mphasis .image {
     width: 3rem;
     aspect-ratio: 1/1;
     border: solid 1px #9DA2B2;
@@ -163,16 +176,19 @@
     border-radius: 1rem;
 }
 
-.CVReview .section_1 .mphasis .image img {
+.CVReview .section_1 .mphasis .image img,
+.cvcontainer .section_1 .mphasis .image img {
     width: 60%;
 }
 
-.CVReview .section_1 .mphasis h1 {
+.CVReview .section_1 .mphasis h1,
+.cvcontainer .section_1 .mphasis h1{
     margin: 0;
     font-size: 1.4rem;
 }
 
-.CVReview .section_1 .mphasis p {
+.CVReview .section_1 .mphasis p,
+.cvcontainer .section_1 .mphasis p {
     font-size: 0.65rem;
     font-weight: 500;
 }
@@ -511,15 +527,18 @@
     }
 }
 @media only screen and (max-width: 768px) {
-    .CVReview .section_1 {
+    .CVReview .section_1,
+    .cvcontainer .section_1 {
         grid-template-columns: 1fr;
         padding-top: 1rem;
         margin-top: 3rem;
     }
-    .CVReview .section_1 .personal_info .profile img {
+    .CVReview .section_1 .personal_info .profile img,
+    .cvcontainer .section_1 .personal_info .personal_info img {
         width: 6rem;
     }
-    .CVReview .section_1 .personal_info .background {
+    .CVReview .section_1 .personal_info .background,
+    .cvcontainer .section_1 .personal_info .background {
         display: none;
     }
     .CVReview .section_2, .CVReview .LanguagesReview {
@@ -531,7 +550,8 @@
         margin: 0;
         border: none;
     }
-    .CVReview .company-overview-grid{
+    .CVReview .company-overview-grid,
+    .cvcontainer .company-overview-grid{
         display: flex;
         flex-direction: column;
         gap: 0.5rem;

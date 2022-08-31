@@ -37,7 +37,7 @@ export default function CVShare() {
                 <>
                     {
                         userInfo && userInfo.subscription_status === 1 ?
-                            <div className="cv-share cvcontainer">
+                            <div className="cv-share CVReview cvcontainer">
                                 <div className="cv-share-wrapper">
                                     <Section1 />
                                     <Section2 />
