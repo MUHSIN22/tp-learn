@@ -246,7 +246,7 @@ export default function Home() {
                         }
                     </div>
                     <div className="video-content-wrapper">
-                        <h2 className="title-secondary">What the Top <br />HR Leaders has to say?</h2>
+                        <h2 className="title-secondary">What the Top <br />HR Leaders have to say?</h2>
                         <h3 className="para-primary">
                             Let's hear it from the experts who know it the best. Top hiring experts share their views on the best resumes they have seen, tips to craft a hireable resume, what makes them tick a candidate, along with meaningful career advice on getting hired by top companies.
                         </h3>
@@ -319,7 +319,7 @@ export default function Home() {
                         <img src={homeBannerImage} alt="Resume Maker TalentPlace" className="footer-image" />
                     </div>
                     <div className="footer-content">
-                        <h2 className="title-secondary">Let you resume do <br />the work</h2>
+                        <h2 className="title-secondary">Let your resume do <br />the work</h2>
                         <h3 className="para-primary">
                             Join 1,300,000 job seekers worldwide and get hired faster with your best resume yet
                         </h3>

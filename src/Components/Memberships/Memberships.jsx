@@ -22,7 +22,7 @@ export default function Memberships() {
 
 
     const option = {
-      key: "uv43t7WR3Bz13u2ETgExw8gN",
+      key: "rzp_live_QP1DKqGVP2iRRl",
       currency: 'INR',
       amount: amount * 100,
       name: "Talent Place",

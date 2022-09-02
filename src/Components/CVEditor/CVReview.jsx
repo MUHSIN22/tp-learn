@@ -140,7 +140,7 @@ export default function CVBuilder() {
     
     // rzp_test_B4uZC1xOIWiQLV         =  test key
     const option = {
-      key: "rzp_live_kiSR34gPWmm3Gc",
+      key: "rzp_live_QP1DKqGVP2iRRl",
       currency: 'INR',
       amount: amount * 100,
       name: "Talent Place",
