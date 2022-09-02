@@ -59,7 +59,6 @@ export default function Experience6() {
                 if(isAdd){
                     dispatch(toggleNewProject(true))
                 }
-                console.log(form)
             } catch (error) {
                 showAlert(true)
             } finally {
@@ -78,14 +77,11 @@ export default function Experience6() {
         setSearch(e.target.value)
     }
     const selectSkillHandler = (i) => {
-        console.log(i);
         temp.skill_id = skillList[i].id
         temp.skill_name = skillList[i].skill_name
         setTemporary(temp)
     }
     const handleComplexity = (e) => {
-        console.log(temp);
-        console.log(e.target.value)
         temp.skill_complexity = e.target.value
         setTemporary(temp)
     }
@@ -94,12 +90,9 @@ export default function Experience6() {
         setTemporary(temp)
     }
     const handleAddSkill = (event) => {
-        console.log(temp)
         setAlertInnder(false)
         if(temp.skill_desc && temp.skill_complexity && temp.skill_id && temp.skill_name){
-            console.log('here');
             setAlertInnder(false)
-            console.log(selected_options, 'this is selected options');
             set_Selected_options([...selected_options, temp])
             document.getElementById('iconinput-Skills').value = '';
             document.getElementById('iconinput-skill_complexity').value = 0;
@@ -155,13 +148,11 @@ export default function Experience6() {
             try {
                 dispatch(searchSkills({ auth: token, body: { search_skill: keywords } })).unwrap()
             } catch (error) {
-                console.log(error)
             }
         },
         [dispatch, token],
     )
     useEffect(() => {
-        console.log(debouncedSearchState)
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {

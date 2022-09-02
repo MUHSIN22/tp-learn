@@ -125,7 +125,6 @@ export default function Experience1({ data }) {
      dispatch(addCompany({ auth: token, body,dispatch })).unwrap();
      dispatch(addIndustryInfo({auth:token,body:body2,dispatch})).unwrap()
     } catch (error) {
-      console.log(error);
     } finally {
       setShowAlert(true);
     }
@@ -144,7 +143,6 @@ export default function Experience1({ data }) {
   }, [jobNatureList.length, dispatch, token]);
   useEffect(() => {
     if (message === "Company Added") {
-      console.log('--')
     }
     return () => {
       dispatch(resetError());

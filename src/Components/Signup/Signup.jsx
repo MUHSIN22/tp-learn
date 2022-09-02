@@ -57,12 +57,10 @@ export default function Signup() {
         let body = form
         body.address = location
         body.country_code = countryCode
-        console.log(body);
         if (Validation(body, dispatch)) {
             try {
                 dispatch(registerUser(form)).unwrap()
             } catch (error) {
-                console.log(error)
             }
         }
     }
@@ -101,7 +99,6 @@ export default function Signup() {
         }
     }, [authStatus, reg_id, navigate])
 
-    console.log(message);
 
     return (
         <div className="login">
@@ -152,7 +149,6 @@ export default function Signup() {
 }
 
 function Validation(form, dispatch) {
-    console.log(form)
     let errorList = {
         "fname": [],
         "lname": [],
@@ -195,7 +191,6 @@ function Validation(form, dispatch) {
     if (form.mobile_no.length !== 10) {
         errorList.mobile_no[0] = 'Enter valid mobile no';
         flag = false;
-        console.log('countrycode', form.country_code)
         if (form.country_code !== '') {
             errorList.country_code[0] = <>&nbsp;</>;
         }

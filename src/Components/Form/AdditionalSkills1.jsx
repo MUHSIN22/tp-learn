@@ -31,7 +31,6 @@ export default function AdditionalSkills1() {
     const [reloadFlag, setReloadFlag] = useState(false)
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -48,19 +47,15 @@ export default function AdditionalSkills1() {
             
             await dispatch(addAdditionalSkills({ auth: token, body: { ...form, user_id }, dispatch })).unwrap()
             if(isAdd) dispatch(toggleNewAdditionalSkills(true))
-            console.log(form)
         } catch (error) {
-            console.log(error)
             setShowAlert(true)
         } finally {
             setShowAlert(true)
         }
     }
     useEffect(() => {
-        console.log(additionalSkills)
         if (!newAdditionalSkills && additionalSkills && additionalSkills.length > 0) {
             let lastAS = additionalSkills[additionalSkills.length - 1]
-            console.log(lastAS)
             setForm({
                 ...form,
                 role: lastAS.role,

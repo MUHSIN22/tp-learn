@@ -61,7 +61,6 @@ export default function Experience6({data}) {
     }
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -72,13 +71,11 @@ export default function Experience6({data}) {
     }
    
     const selectSkillHandler = (i) => {
-        console.log(i);
         temp.skill_id = skillList[i].id
         temp.skill_name = skillList[i].skill_name
         setTemporary(temp)
     }
     const handleComplexity = (e) => {
-        console.log(e.target.value)
         temp.skill_complexity = e.target.value
         setTemporary(temp)
     }
@@ -87,7 +84,6 @@ export default function Experience6({data}) {
         setTemporary(temp)
     }
     const handleAddSkill = (event) => {
-        console.log(temp)
         setAlertInnder(false)
         if(temp.skill_desc && temp.skill_complexity && temp.skill_id && temp.skill_name){
             setAlertInnder(false)
@@ -132,7 +128,6 @@ export default function Experience6({data}) {
             try {
                 dispatch(searchSkills({ auth: token, body: { search_skill: keywords } })).unwrap()
             } catch (error) {
-                console.log(error)
             }
         },
         [dispatch, token],
@@ -143,7 +138,6 @@ export default function Experience6({data}) {
     },[])
 
     useEffect(() => {
-        console.log(debouncedSearchState)
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {

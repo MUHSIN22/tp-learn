@@ -11,7 +11,6 @@ export default function JobTimelineReview({ start_year, jobs = [], skills=[]}) {
     start_year++
   }
   let cols = year_list.length * 12
-  //console.log(year_list,jobs,skills)
   useEffect(() => {
     let timeline = document.getElementById('jobTimeline')
     timeline.style.gridTemplateColumns = `repeat(${cols},${100 / cols}%)`
@@ -48,7 +47,6 @@ function Company({ company_name, job_start_date, job_end_date, designation, i, y
 
   useEffect(() => {
     document.getElementById(`company${i}`).style.gridArea = `${i + 1}/${position_x}/${i + 1}/ ${(position_x)+ width}`
-    //console.log(`${position_y} / ${i+1} / ${(position_y)+1} / ${i+2}`)
     return () => {
 
     }
@@ -80,7 +78,6 @@ function Skill({ skill_name,rows, skill_start_date, skill_end_date, i,j, year_li
   let pos_y =rows-i
   useEffect(() => {
     document.getElementById(`skill${i}${j}`).style.gridArea = `${pos_y}/${position_x}/${pos_y + 1}/ ${(position_x) + width}`
-    //console.log(`${position_y} / ${i+1} / ${(position_y)+1} / ${i+2}`)
     return () => {
 
     }

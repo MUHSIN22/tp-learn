@@ -10,7 +10,6 @@ export default function Header() {
     const menuRef = useRef(null);
 
     window.addEventListener('scroll', () => {
-        console.log(window.scrollY);
         if (window.scrollY > 50) {
             setHeader(true)
         } else {

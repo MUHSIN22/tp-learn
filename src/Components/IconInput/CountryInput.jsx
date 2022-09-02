@@ -15,12 +15,10 @@ export default function CountryInput({setCountryCode}) {
         setSearching(true);
         setSearchText(event.target.value)
         let codes = countryCode;
-        console.log(escapeRegExp(event.target.value));
         let regex = new RegExp(`^${escapeRegExp(event.target.value)}`, "gi")
         codes = countryCode.filter(item => {
             return item.country_code.match(regex)
         })
-        console.log(codes);
         setCountryCodeList(codes)
     }
 

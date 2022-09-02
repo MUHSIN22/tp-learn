@@ -7,7 +7,6 @@ import './Settings.css'
 function Settings() {
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("hello");
   }, []);
   return (
     <>

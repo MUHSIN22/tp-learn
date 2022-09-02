@@ -22,7 +22,6 @@ function Sidebar(props) {
     props.currentPage(pagelink);
   };
  const sidebarvalueset=(data)=>{
-  console.log(data);
     dispatch(setSidebarVal(data))
   }
 
@@ -31,16 +30,11 @@ function Sidebar(props) {
     if(isConfirm){
       navigate('/')
       sessionStorage.clear();
-      console.log(sessionStorage.getItem('persist:authentication'),"This is session storage");
       sessionStorage.removeItem("persist:authentication")
       dispatch(logout());
       dispatch(resetResume())
     }
   };
-
-  useEffect(()=>{
-    console.log(window.location.pathname);
-  },[])
 
 
 
@@ -86,7 +80,6 @@ function Sidebar(props) {
                     key={key}
                     id={window.location.pathname == val.link ? "active" : ""}
                     onClick={() => {
-                      console.log(val);
                       // if (val.link == "/logout") {
                       //   dispatch(logout());
                       // }
@@ -329,8 +322,6 @@ function Sidebar(props) {
                         return
                       }
                       await setSidebarval(0)
-                      console.log(sidebarval)
-                      console.log(val);
                       navigate(`${val.link}`,{ replace: true });
                       
                     }}

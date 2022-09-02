@@ -55,7 +55,6 @@ export const getJobNatureList = createAsyncThunk('authentication/getJobNatureLis
 })
 export const searchCompany = createAsyncThunk('authentication/searchCompany', async (data,{ rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
     try {
         const response =await API.post(`/getCompanyList`,encoded,{
             headers: {
@@ -115,7 +114,7 @@ export const getBuisnessScaleList = createAsyncThunk('authentication/getBuisness
 })
 export const searchSkills = createAsyncThunk('authentication/searchSkills', async (data,{ rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+
     try {
         const response =await API.post(`/search-skill-list`,encoded,{
             headers: {
@@ -133,7 +132,6 @@ export const searchSkills = createAsyncThunk('authentication/searchSkills', asyn
 )
 export const searchDesignation = createAsyncThunk('authentication/searchDesignation', async (data,{ rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
     try {
         const response =await API.post(`/search-designation`,encoded,{
             headers: {
@@ -263,7 +261,6 @@ export const getCurrencyList = createAsyncThunk('authentication/getCurrencyList'
 )
 export const setSidebarVal = createAsyncThunk('authentication/sidebarval', async (data,{ rejectWithValue }) => {
     try {
-        console.log("hello",data);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -330,7 +327,6 @@ export const masterSlice = createSlice({
             state.loading = true
             state.status = 'loading'
         }).addCase(getIndustryList.fulfilled, (state, action) => {
-            console.log(action.payload,'here in the redux');
             state.loading=false
             state.status = 'succeeded'
             state.industryList = action.payload.data.recordDetails

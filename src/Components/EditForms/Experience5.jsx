@@ -48,13 +48,11 @@ export default function Experience5({data}) {
             try {
                 dispatch(searchSkills({ auth: token, body: { search_skill: keywords } })).unwrap()
             } catch (error) {
-                console.log(error)
             }
         },
         [dispatch, token],
     )
     function searchHandler(e) {
-        console.log(selected_options);
         setSearch(e.target.value)
     }
     const temp = {
@@ -68,13 +66,10 @@ export default function Experience5({data}) {
         temp.skill_name = skillList[i].skill_name
     }
     const handleComplexity = (e) => {
-        console.log(e.target.value)
         temp.skill_complexity = e.target.value
     }
     const handleAddSkill = () => {
-        console.log(temp.skill_id,search,);
         temp.skill_name = temp.skill_id == '' ? search : temp.skill_name;
-        console.log(temp,'this is temp');
         if(parseInt(temp.skill_complexity) > 100 || temp.skill_complexity < 0){
             dispatch(setResumeError({skill_complexity: ["Skill complexity should be a percentage between 0 to 100"]}))
             setShowAlert(true)
@@ -95,20 +90,17 @@ export default function Experience5({data}) {
       set_Selected_options(newList) 
     }
     const handleSuggestion = (value) => {
-        console.log(value)
         setForm({ ...form, role_responsibilities: form.role_responsibilities + value })
     }
     const handleSubmit = (e) => {
         e.preventDefault();
         let body = form
-        console.log("submit",selected_options)
         body.job_skills = JSON.stringify(body.job_skills)
         body.user_id = user_id
         body.job_skills =JSON.stringify( selected_options.map((x)=>{return {skill_id:x.skill_id, skill_complexity:x.skill_complexity,skill_name:x.skill_name} }))
 
         try {
             dispatch(addJobSkills({ auth: token, body,dispatch })).unwrap()
-            console.log(form)
             if(showAlert && !loading){
                 dispatch(changeEditPageDetails({})).unwrap()
                 }
@@ -120,7 +112,6 @@ export default function Experience5({data}) {
     }
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -130,8 +121,6 @@ export default function Experience5({data}) {
         set_Selected_options([...form.job_skills])
     },[])
     useEffect(() => {
-        console.log(debouncedSearchState)
-        
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {
@@ -147,7 +136,6 @@ export default function Experience5({data}) {
             }
             dispatch(getRoleSuggestionList({ auth: token, body })).unwrap()
         } catch (e) {
-            console.log(e)
         }
 
         return () => {

@@ -41,7 +41,6 @@ export default function AdditionalSkills3() {
         let form_Data = JsonToFormData(body)
         try {
             dispatch(addBio({ auth: token, body:form_Data })).unwrap()
-            console.log(form)
         } catch (error) {
             showAlert(true)
         } finally {
@@ -50,17 +49,14 @@ export default function AdditionalSkills3() {
     }
     useEffect(() => {
         try {
-            // console.log(,'title is-----------');
             const body = {
                 job_title_id: resumeInfo.company[0],
                 search_role: '',
                 page_no: ''
             }
             dispatch(getRoleSuggestionList({ auth: token, body })).unwrap().then((res) => {
-                console.log(res,'roles----------------------');
             })
         } catch (e) {
-            console.log(e)
         }
 
         return () => {

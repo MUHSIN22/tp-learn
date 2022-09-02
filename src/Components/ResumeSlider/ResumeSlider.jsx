@@ -101,7 +101,6 @@ export default function ResumeSlider() {
         let sliderContainer = document.querySelector('.resume-slider-wrapper')
         if(direction === 1){
             setMarginCount(prev => {
-                console.log(prev ,slideCount - itemPerWindow -1,slideCount,itemPerWindow);
                 if(prev ===slideCount - itemPerWindow - 1){
                     setTimeout(() => {
                         sliderContainer.style.transition = 'none';
@@ -122,7 +121,6 @@ export default function ResumeSlider() {
                 if(prev === 1){
                     setTimeout(() => {
                         sliderContainer.style.transition = 'none';
-                        console.log(prev,slideCount - itemPerWindow);
                         setMarginCount(slideCount - (2*itemPerWindow))
                         setActiveIndex(slideCount - itemPerWindow - 2)
                     },300)

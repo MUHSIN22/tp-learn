@@ -152,7 +152,6 @@ const renderers = {
 
 const RichText = ({ note }) => {
   const blocksFromHTML = convertFromHTML(note);
-  console.log(blocksFromHTML,'html');
   const initialState = ContentState.createFromBlockArray(
     blocksFromHTML.contentBlocks,
     blocksFromHTML.entityMap,

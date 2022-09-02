@@ -12,7 +12,6 @@ import { selectAuthentication } from '../../redux/Features/AuthenticationSlice';
 
 export default function Navbar(props) {
   const user = useSelector(selectUserFirstName)
-console.log(window.location.pathname)
   let navigate = useNavigate();
   const auth = useSelector(selectAuthentication)
   const rendertomyprofile=()=>{

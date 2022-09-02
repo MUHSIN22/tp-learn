@@ -75,7 +75,6 @@ export default function CognitiveSkills({}) {
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        console.log(body);
         try {
           let result =  await dispatch(addCognitiveSkills({auth:token,body:{...form,user_id}})).unwrap()
           dispatch(reload())
@@ -105,9 +104,7 @@ export default function CognitiveSkills({}) {
         }
 
     }
-    console.log("ppppppppppppppppp",selected_options.length)
     // const handleAddSkill = () => {
-    //     console.log(temp)
     //     set_Selected_options([...selected_options,temp])
     //     document.getElementById('iconinput-Skills').value='';
     //     document.getElementById('iconinput-skill_complexity').value=0;

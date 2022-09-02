@@ -21,7 +21,6 @@ export default function CareerObjective2() {
     const video_url = useSelector(selectVideo)
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -33,7 +32,6 @@ export default function CareerObjective2() {
         body.user_id = user_id
         try {
             let videoURL = dispatch(uploadCVvideos({ auth: token, body })).unwrap()
-            console.log(videoURL,'video url------------------')
         } catch (error) {
             showAlert(true)
         } finally {
@@ -42,7 +40,6 @@ export default function CareerObjective2() {
     }
     useEffect(() => {
       if(video_url){
-        console.log(video_url)
         setForm({
             ...form,
             video_from_url:video_url 
@@ -61,7 +58,6 @@ export default function CareerObjective2() {
                 sharing platform of your choice and
                 share the link with us.
             </h1>
-            {console.log(error)}
             {message && showAlert &&!loading&&<Alert error={error} message={error ? Object.values(message): message} />}
             <div className="form-row">
                 <IconInput value={form.video_from_url} name='video_from_url' handleChange={handleChange} label='Upload from a URL' placeholder='Paste the link to your video CV' width={100} />

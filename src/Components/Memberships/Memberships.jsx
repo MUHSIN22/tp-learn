@@ -12,8 +12,6 @@ export default function Memberships() {
   const token = useSelector(selectAuthToken)
   const userInfo = useSelector(selectResumeDetails)
   const [remainingDays, setRemainingDays] = useState(null)
-
-  console.log(userInfo);
   const displayRazorpay = async (amount) => {
     const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
 
@@ -22,7 +20,6 @@ export default function Memberships() {
       return
     }
 
-    console.log(res);
 
     const option = {
       key: "uv43t7WR3Bz13u2ETgExw8gN",
@@ -32,7 +29,6 @@ export default function Memberships() {
       description: "Thanks for Being a valuable member with us!",
       image: "https://images.unsplash.com/photo-1616077167555-51f6bc516dfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
       handler: function (response) {
-        console.log(response);
         dispatch(verifyPayment({ auth: token, body: { razorpay_payment_id: response.razorpay_payment_id, user_id }, dispatch }))
       },
       "prefill": {

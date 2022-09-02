@@ -17,7 +17,6 @@ export default function CreatePassword() {
     const dispatch = useDispatch()
     const reg_id = useSelector(selectReg_id)
     const error = useSelector(selectAutheError)
-    console.log(message,"..............Message");
     
     function handleChange(evt) {
         const value = evt.target.value
@@ -33,7 +32,6 @@ export default function CreatePassword() {
                 dispatch(createPassword({ ...form, user_id: reg_id })).unwrap()
 
             } catch (error) {
-                console.log(error)
             }
         }
 

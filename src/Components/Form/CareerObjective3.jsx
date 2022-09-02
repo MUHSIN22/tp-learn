@@ -42,13 +42,11 @@ export default function CareerObjective3() {
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        console.log(checked,'checked');
         setAgreementError(false)
         if(checked){
             try {
                 dispatch(addSocialLinks({ auth: token, body })).unwrap()
                 navigate('/MyProfile')
-                console.log(form)
             } catch (error) {
                 showAlert(true)
             } finally {
@@ -59,7 +57,6 @@ export default function CareerObjective3() {
         }
     }
     useEffect(() => {
-        console.log('prev data')
         if (socialLinks) {
             setForm({
                 ...form,

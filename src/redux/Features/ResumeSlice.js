@@ -67,7 +67,6 @@ export const profileInfo = createAsyncThunk('authentication/profileInfo', async 
 
 export const addExperience = createAsyncThunk('authentication/addExperience', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
     try {
         const response = await API.post(`/add-experience`, encoded, {
             headers: {
@@ -87,7 +86,6 @@ export const addExperience = createAsyncThunk('authentication/addExperience', as
 })
 export const addCompany = createAsyncThunk('authentication/addCompany', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
     try {
         const response = await API.post(`/add-company-info`, encoded, {
             headers: {
@@ -107,7 +105,6 @@ export const addCompany = createAsyncThunk('authentication/addCompany', async (d
 })
 export const addIndustryInfo = createAsyncThunk('authentication/addIndustryInfo', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
     try {
         const response = await API.post(`/add-company-industry-info`, encoded, {
             headers: {
@@ -127,7 +124,6 @@ export const addIndustryInfo = createAsyncThunk('authentication/addIndustryInfo'
 })
 export const addJobDesignation = createAsyncThunk('authentication/addJobDesignation', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded, data.body)
     try {
         const response = await API.post(`/job-designation`, encoded, {
             headers: {
@@ -146,7 +142,6 @@ export const addJobDesignation = createAsyncThunk('authentication/addJobDesignat
 })
 export const addJobSalary = createAsyncThunk('authentication/addJobSalary', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded, data.body)
     try {
         const response = await API.post(`/job-salary-info`, encoded, {
             headers: {
@@ -166,7 +161,6 @@ export const addJobSalary = createAsyncThunk('authentication/addJobSalary', asyn
 })
 export const addJobSkills = createAsyncThunk('authentication/addJobSkills', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
     try {
         const response = await API.post(`/add-job-skills`, encoded, {
             headers: {
@@ -186,7 +180,6 @@ export const addJobSkills = createAsyncThunk('authentication/addJobSkills', asyn
 })
 export const addProject = createAsyncThunk('authentication/addProject', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
     try {
         const response = await API.post(`/add-project-info`, encoded, {
             headers: {
@@ -244,7 +237,6 @@ export const addCertification = createAsyncThunk('authentication/addCertificatio
 })
 export const addAdditionalSkills = createAsyncThunk('authentication/addAdditionalSkills', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
     try {
         const response = await API.post(`/add-additional-info`, encoded, {
             headers: {
@@ -264,7 +256,7 @@ export const addAdditionalSkills = createAsyncThunk('authentication/addAdditiona
 })
 export const addHobbies = createAsyncThunk('authentication/add-hobbies', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/add-hobbies`, encoded, {
             headers: {
@@ -322,7 +314,7 @@ export const uploadPhotomedia = createAsyncThunk('authentication/uploadPhotomedi
 })
 export const uploadCVvideos = createAsyncThunk('authentication/uploadCVvideos', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/upload-cv-video`, encoded, {
             headers: {
@@ -338,7 +330,6 @@ export const uploadCVvideos = createAsyncThunk('authentication/uploadCVvideos', 
 })
 
 export const uploadResume = createAsyncThunk('authentication/uploadedResumeurl', async (data, { rejectWithValue }) => {
-    console.log("bodyyyyyyyyyyyy",data.body)
     // let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     try {
         const response = await API.post(`/upload-resume-pdf`, data.body , {
@@ -351,13 +342,12 @@ export const uploadResume = createAsyncThunk('authentication/uploadedResumeurl',
         sessionStorage.setItem("resume_link",response.data.data.resume_pdf)
         return {resumePdfUrl: response.data.data.resume_pdf,app:data.app}
     } catch (error) {
-        console.log(error);
         return rejectWithValue(error.response.data);
     }
 })
 export const addSocialLinks = createAsyncThunk('authentication/addSocialLinks', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/add-social-links`, encoded, {
             headers: {
@@ -373,7 +363,7 @@ export const addSocialLinks = createAsyncThunk('authentication/addSocialLinks', 
 })
 export const changeFormId = createAsyncThunk('authentication/changeFormId', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/update-form-id`, encoded, {
             headers: {
@@ -408,7 +398,7 @@ export const changeEditPageDetails = createAsyncThunk('authentication/changeEdit
 
 export const addCognitiveSkills = createAsyncThunk('authentication/addCognitiveSkills', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/manage-cognitive-info`, encoded, {
             headers: {
@@ -424,9 +414,9 @@ export const addCognitiveSkills = createAsyncThunk('authentication/addCognitiveS
 })
 
 export const updateProfileInfo = createAsyncThunk('authentication/updateProfileInfo', async (data, { rejectWithValue }) => {
-    console.log(data);
+    
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/update-profile`, data.body, {
             headers: {
@@ -443,9 +433,9 @@ export const updateProfileInfo = createAsyncThunk('authentication/updateProfileI
 })
 
 export const sendVerificationCode = createAsyncThunk('authentication/send-verification-otp', async (data, { rejectWithValue }) => {
-    console.log(data);
+    
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/send-verification-otp`, encoded , {
             headers: {
@@ -461,9 +451,9 @@ export const sendVerificationCode = createAsyncThunk('authentication/send-verifi
 })
 
 export const deleteCompany = createAsyncThunk('authentication/delete-company', async (data, { rejectWithValue }) => {
-    console.log(data);
+    
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/delete-company-info`, encoded , {
             headers: {
@@ -480,9 +470,9 @@ export const deleteCompany = createAsyncThunk('authentication/delete-company', a
 })
 
 export const deleteProject = createAsyncThunk('authentication/delete-project', async (data, { rejectWithValue }) => {
-    console.log(data);
+    
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/delete-project-info`, encoded , {
             headers: {
@@ -499,9 +489,9 @@ export const deleteProject = createAsyncThunk('authentication/delete-project', a
 })
 
 export const deleteJobRole = createAsyncThunk('authentication/delete-job-role', async (data, { rejectWithValue }) => {
-    console.log(data);
+    
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/delete-job-role-info`, encoded , {
             headers: {
@@ -518,9 +508,9 @@ export const deleteJobRole = createAsyncThunk('authentication/delete-job-role', 
 })
 
 export const deleteEducation = createAsyncThunk('authentication/delete-education-info', async (data, { rejectWithValue }) => {
-    console.log(data);
+    
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/delete-education-info`, encoded , {
             headers: {
@@ -537,9 +527,9 @@ export const deleteEducation = createAsyncThunk('authentication/delete-education
 })
 
 export const deleteCertificate = createAsyncThunk('authentication/delete-certificate-info', async (data, { rejectWithValue }) => {
-    console.log(data);
+    
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/delete-certificate-info`, encoded , {
             headers: {
@@ -556,9 +546,9 @@ export const deleteCertificate = createAsyncThunk('authentication/delete-certifi
 })
 
 export const deleteAdditionalSkill = createAsyncThunk('authentication/delete-additional-skill-info', async (data, { rejectWithValue }) => {
-    console.log(data);
+    
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/delete-additional-skill-info`, encoded , {
             headers: {
@@ -576,7 +566,7 @@ export const deleteAdditionalSkill = createAsyncThunk('authentication/delete-add
 
 export const verifyOTP = createAsyncThunk('authentication/verify-email-mobile-otp', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/verify-email-mobile-otp`, encoded , {
             headers: {
@@ -598,7 +588,7 @@ export const verifyOTP = createAsyncThunk('authentication/verify-email-mobile-ot
 
 export const verifyPayment = createAsyncThunk('authentication/verify-razorpay-payment', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded)
+    
     try {
         const response = await API.post(`/verify-razorpay-payment`, encoded , {
             headers: {

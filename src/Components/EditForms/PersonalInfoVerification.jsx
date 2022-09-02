@@ -41,10 +41,8 @@ export default function PersonalInfoVerification({ type, setType }) {
         event.preventDefault();
         let currentElement = event.target;
         if(event.key === "Backspace" && currentElement.previousElementSibling){
-            console.log("here");
             currentElement.previousElementSibling.focus();
         }else if(currentElement.nextElementSibling && currentElement.value !== "" && currentElement.value){
-            console.log(currentElement.value);
             currentElement.nextElementSibling.focus();
         }
     }

@@ -18,14 +18,12 @@ export default function OTPSignup() {
   const [otp,setOtp] = useState('')
   const [toggleOTP,setToggleOTP] = useState(false)
   const dispatch = useDispatch();
-  console.log(reg_id, navigate,location,message,otp_verified,'all details');
   const handleSubmit = (e)=>{
     e.preventDefault();
     try {
       dispatch(signupOtp({user_id:reg_id,otp})).unwrap()
       setToggleOTP(!toggleOTP)
     } catch (error) {
-        console.log(error)
     }
   }
   useEffect(() => {
@@ -43,9 +41,6 @@ export default function OTPSignup() {
     event.preventDefault();
     dispatch(resendOTP({user_id: reg_id,country_code: location.state.code, mobile_no: location.state.num}))
   }
-  useEffect(() => {
-    console.log(message, "this is message");
-  },[message])
   return (
     <div className="login">
       <div className="col-30 otp-side">

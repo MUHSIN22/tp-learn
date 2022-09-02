@@ -59,7 +59,6 @@ export default function Experience3() {
             try {
                 dispatch(searchDesignation({ auth: token, body: { search_job_title: keywords } })).unwrap()
             } catch (error) {
-                console.log(error)
             }
         },
         [dispatch, token],
@@ -78,7 +77,6 @@ export default function Experience3() {
         });
     }
     const selectHandler = (i,selected,value ) => {
-        console.log(value);
         if(selected.id !== null){
             setForm({ ...form, designation_id: designationlist[i].id })
             setSearch(designationlist[i].job_title_name)
@@ -101,19 +99,16 @@ export default function Experience3() {
         if(form.remote_work!=='yes')  body.remote_work = 'no'
         if(form.hide_salary!=='yes')  body.hide_salary = 'no'
         if(form.current_working!=='yes')  body.current_working = 'no'
-        console.log(form)
         try {
             dispatch(addJobDesignation({auth:token,body,dispatch})).unwrap()
             
         } catch (error) {
-            console.log(error);
         }finally{
             setShowAlert(true);
         }
     }
 
     useEffect(() => {
-        console.log(debouncedSearchState)
         if (debouncedSearchState.length > 1) searchCompanyList(debouncedSearchState)
 
         return () => {
@@ -169,13 +164,9 @@ export default function Experience3() {
         
       }
     }, [lastJob])
-    
-    console.log(errorMessageHandler(message),'error message');
-    console.log(message,'ml error list');
     return (
         <>  
             {endSalaryError &&<Alert error={true} message={endSalaryError} />}
-            {console.log(errorMessageHandler(message, 'error display'))}
             {showAlert &&!loading&&<Alert error={error} message={error ? errorMessageHandler(message) : message} />}
             <h1>Now tell us about all the job roles at which you have worked, starting with the latest one.</h1>
             <div className="form-row">

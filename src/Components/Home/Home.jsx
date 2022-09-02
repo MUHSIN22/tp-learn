@@ -116,7 +116,6 @@ export default function Home() {
     // useEffect(() => {
     //     API.post("/download-sample-file",{user_id: 203})
     //         .then((res) => {
-    //             console.log(res.data.data.message,'blob');
     //             setLink(res.data.data.message)
     //         })
     // },[])

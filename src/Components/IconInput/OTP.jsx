@@ -21,16 +21,13 @@ export default function OTP({setOtp, toggleOTP}) {
        if(e.key=== 'Backspace' && fieldIndex > 0){
          input.previousElementSibling.focus();
        }
-       console.log(fieldIndex==inputs.length-1)
        if(fieldIndex==inputs.length-1){
          let otp = '';
          inputs.forEach((input)=>{
 
            otp+= input.value;
-           console.log(otp)
           //  input.disabled = true
          })
-         console.log('otp',otp)
          setOtp(otp);
        }
 
@@ -47,7 +44,6 @@ export default function OTP({setOtp, toggleOTP}) {
   useEffect(() => {
     var inputs = document.querySelectorAll(".otp input") 
     inputs.forEach((input) => {
-      console.log(input);
       input.value = ""
     })
   },[toggleOTP])

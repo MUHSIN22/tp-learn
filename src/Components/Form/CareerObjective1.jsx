@@ -38,7 +38,6 @@ export default function CareerObjective1() {
         try {
             let uploaded = dispatch(uploadPhotomedia({ auth: token, body: form_Data })).unwrap()
             if(isAdd) dispatch(toggleNewPhotoMedia(true))
-            console.log(form, uploaded, "jkasdjf;ajdsfk jl;asdjfl")
         } catch (error) {
             showAlert(true)
         } finally {
@@ -47,17 +46,14 @@ export default function CareerObjective1() {
     }
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
         });
     }
     useEffect(() => {
-        console.log(photoMedia, newPhotomedia)
         if (!newPhotomedia && photoMedia && photoMedia.length > 0 && form.user_resume_photo_media_id === "") {
             let lastMedia = photoMedia[photoMedia.length - 1]
-            console.log(lastMedia)
             setForm({
                 ...form,
                 title: lastMedia.title,
@@ -89,7 +85,6 @@ export default function CareerObjective1() {
             dispatch(reload())
         }
     }, [reloadFlag, loading])
-    console.log(message, 'messageeeeeeeeee');
     return (
         <>
             <h1 className='text-left'>

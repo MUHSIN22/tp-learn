@@ -37,12 +37,10 @@ export default function Experience2({ }) {
     async function handleSubmit() {
         let company_record_id = companyDetails.company_record_id
         const body = {...form, user_id,company_record_id}
-        console.log(form)
         try {
             await dispatch(addIndustryInfo({auth:token,body,dispatch})).unwrap()
             dispatch(reload())
         } catch (error) {
-            console.log(error);
         }finally{
             setShowAlert(true);
         }

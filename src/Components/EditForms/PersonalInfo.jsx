@@ -71,11 +71,6 @@ export default function PersonalInfo({ data: { data } }) {
     
   }
 
-  useEffect(() => {
-    console.log(error,"this is error");
-    console.log(message,"This is message");
-  },[error,message])
-
   return (
     <>
       {message&& <Alert message={message}/>}

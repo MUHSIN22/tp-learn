@@ -47,14 +47,12 @@ export default function Experience5() {
             try {
                 dispatch(searchSkills({ auth: token, body: { search_skill: keywords } })).unwrap()
             } catch (error) {
-                console.log(error)
             }
         },
         [dispatch, token],
     )
     function searchHandler(e) {
         setSearch(e.target.value)
-        console.log(selected_options);
     }
     const temp = {
         skill_id: '',
@@ -66,13 +64,10 @@ export default function Experience5() {
         temp.skill_name = skillList[i].skill_name
     }
     const handleComplexity = (e) => {
-        console.log(e.target.value)
         temp.skill_complexity = e.target.value
     }
     const handleAddSkill = async () => {
-        console.log(temp.skill_id,search,);
         temp.skill_name = temp.skill_id == '' ? search : temp.skill_name;
-        console.log(temp,'this is temp');
         if(parseInt(temp.skill_complexity) > 100 || temp.skill_complexity < 0){
             dispatch(setResumeError({skill_complexity: ["Skill complexity should be a percentage between 0 to 100"]}))
             setShowAlert(true)
@@ -91,7 +86,6 @@ export default function Experience5() {
         set_Selected_options(newList)
     }
     const handleSuggestion = (value) => {
-        console.log(value)
         setForm({ ...form, role_responsibilities: form.role_responsibilities + value })
     }
     const handleSubmit = (e) => {
@@ -102,10 +96,8 @@ export default function Experience5() {
         body.job_skills = JSON.stringify(selected_options.map((x) => { return { skill_id: x.skill_id, skill_name: x.skill_name, skill_complexity: x.skill_complexity } }))
         body.user_company_job_record_id = lastJob.company_job_record_id
         body.user_company_record_id = lastCompany.company_record_id
-        console.log(body,'this is body');
         try {
             dispatch(addJobSkills({ auth: token, body, dispatch })).unwrap()
-            console.log(form)
         } catch (error) {
             showAlert(true)
         } finally {
@@ -114,14 +106,12 @@ export default function Experience5() {
     }
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
         });
     }
     useEffect(() => {
-        console.log(debouncedSearchState)
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {
@@ -137,7 +127,6 @@ export default function Experience5() {
             }
             dispatch(getRoleSuggestionList({ auth: token, body })).unwrap()
         } catch (e) {
-            console.log(e)
         }
 
         return () => {
@@ -147,7 +136,6 @@ export default function Experience5() {
 
     useEffect(() => {
         if ((lastJob || lastCompany) && form.user_company_record_id === '' && !newRoles) {
-            console.log(typeof lastJob.external_client_desc,lastJob,"this is abc");
             setForm({
                 ...form,
                 role_responsibilities: lastJob.role_responsibilties ? parse(lastJob.role_responsibilties) : "",
@@ -167,7 +155,6 @@ export default function Experience5() {
 
     return (
         <>
-            {console.log(form)}
             {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
             <h1>So far so good! Now it’s time to flaunt your amazing skills.</h1>
             <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />

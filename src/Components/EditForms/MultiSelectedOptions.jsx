@@ -1,9 +1,6 @@
 import React,{useEffect} from 'react'
 import { ReactComponent as Cross } from '../../Assests/icons/cross.svg';
 export default function MultiSelectedOptions({options=[],deleteHandler=()=>{}, value_field='', subValue_field=''}) {
-  useEffect(() => {
-   console.log(options);
-  }, [])
   
   return (
     <div className="flex-wrap align-start justify-start g-1">

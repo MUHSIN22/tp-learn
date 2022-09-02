@@ -5,7 +5,6 @@ import './IconInput.css'
 export default function IconPasswordInput({label, name, handleChange, state,icon, placeholder, width,validation,tooltip}) {
     const [showPass,setShowPass] = useState(false)
     const handleClick= (e)=>{
-        console.log('clicked')
         e.preventDefault();
         setShowPass(!showPass)
     }

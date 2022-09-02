@@ -54,7 +54,6 @@ const  Resume =({newRef,shareOpts,changeLoaderval})=>{
   const bio = useSelector(selectBio);
   const resumeDetails = useSelector(selectResumeDetails);
   let lastCompany = useSelector(selectLastCompany);
-  console.log("=======",lastCompany)
   let lastJob = lastCompany ? lastCompany.job_role[lastCompany.job_role.length -1].designation_name : ""
   let keySkills = useSelector(selectKeySkills);
   const educations = useSelector(selectEducation) || [];
@@ -78,7 +77,6 @@ useEffect(() => {
 
  
 const exect = async (shareOpts) => {
-  console.log("shareOpts",shareOpts);
   const template = document.getElementById('tpcv');
   html2canvas(template,{
     useCORS: true, 
@@ -124,7 +122,6 @@ const exect = async (shareOpts) => {
 
     // }
   } catch (err) {
-    console.log(err)
   }
 
   })
@@ -143,7 +140,6 @@ const exec = () => {
     const pdf = new jsPDF(
       "p", "mm", "a4", true
     );
-    console.log('profile------------------',profile);
     pdf.internal.pageSize.width = componentWidth
     pdf.internal.pageSize.height = componentHeight
     pdf.addImage(imgData, 'JPEG', 0, 0,componentWidth, componentHeight,undefined,'FAST');

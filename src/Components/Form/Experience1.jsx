@@ -37,7 +37,6 @@ export default function Experience1() {
             try {
                 dispatch(searchCompany({ auth: token, body: { search_company: keywords } })).unwrap()
             } catch (error) {
-                console.log(error)
             }
         },
         [dispatch, token],
@@ -55,10 +54,8 @@ export default function Experience1() {
         let body = form
         if (form.company_id.length < 1) {
             body.other_company_name = debouncedSearchState
-            console.log('first');
         }
         if(form.company_name !== "" && form.company_name !== search){
-            console.log("second");
             form.other_company_name = search
             form.company_id = null
         }
@@ -67,7 +64,6 @@ export default function Experience1() {
         try {
             dispatch(addCompany({ auth: token, body,dispatch })).unwrap()
         } catch (error) {
-            console.log(error);
         } finally {
             setShowAlert(true);
         }
@@ -99,7 +95,6 @@ export default function Experience1() {
         }
     }, [message, dispatch])
     useEffect(() => {
-        console.log(lastCompany, form,newJob,'last company');
         if (!newJob&&lastCompany) {
             setForm({
                 ...form,

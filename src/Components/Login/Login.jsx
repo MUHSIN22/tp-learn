@@ -44,25 +44,21 @@ export default function Login() {
         try {
             dispatch(emailLogin(encoded)).unwrap()
         } catch (error) {
-            console.log(error)
         }
     
 
     }
     const handleMobileLogin = async (e) => {
         e.preventDefault();
-        console.log(form)
         let body = form;
         body.country_code = countryCode
         let encoded = new URLSearchParams(Object.entries(body)).toString()
         e.preventDefault();
-        console.log(encoded)
         if (body.mobile_no && body.country_code) {
             try {
                 dispatch(mobileLogin(encoded)).unwrap()
 
             } catch (error) {
-                console.log(error)
             }
         }else{
             dispatch(setError({
@@ -104,7 +100,6 @@ export default function Login() {
 
     useEffect(() => {
         if(error && message){
-            console.log(message);
         }
     },[message])
     

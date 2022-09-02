@@ -110,17 +110,14 @@ function Step6() {
                     is_fresher: form.is_fresher
                 }
             })).unwrap()
-            console.log(form.is_fresher,'is fresher variable value');
             let body = {
                 form_id: 8,
                 user_id: user_id
               }
             if(form.is_fresher === "yes"){
-                console.log("inside fresher");
                 dispatch(changeFormId({auth:token,body})).unwrap()
             }
         } catch (error) {
-            console.log(error)
         }
     }
     function handleChange(evt) {

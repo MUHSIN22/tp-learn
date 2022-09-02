@@ -20,7 +20,6 @@ const toEdit = useSelector(selectToEdit);
 const handleEditForms = (data) => {
   dispatch(changeEditPageDetails(data)).unwrap();
 };
-console.log(overview,cognitive_info,'this is overview');
   return (
     <>
 

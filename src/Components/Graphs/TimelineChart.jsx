@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 export default function TimelineChart({skills}) {
-    console.log(skills,"this is skills info");
     const [state,setState] = useState({
         series: [],
         options: {
@@ -50,7 +49,6 @@ export default function TimelineChart({skills}) {
         let series = [];
         skills.forEach(skill => {
             skill.timeline.forEach(timeline => {
-                console.log(timeline,skill,new Date(moment(timeline.start_date,'DD-MM-YYYY')),timeline.end_date,'skill and timeline');
                 series.push({
                     name: 'Experience',
                     data: [

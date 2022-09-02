@@ -29,7 +29,6 @@ export default function Experience2() {
     const newJob = useSelector(selectNewJob)
 
     function handleChange(evt) {
-        console.log("--------------", buisnessScaleList)
         const value = evt.target.value;
         setForm({
             ...form,
@@ -39,11 +38,9 @@ export default function Experience2() {
     function handleSubmit() {
         let company_record_id = companyDetails.company_record_id
         const body = { ...form, user_id, company_record_id }
-        console.log(form)
         try {
             dispatch(addIndustryInfo({ auth: token, body })).unwrap()
         } catch (error) {
-            console.log(error);
         } finally {
             setShowAlert(true);
         }
@@ -65,7 +62,6 @@ export default function Experience2() {
             if (industryList.length && form.industry_id === '') setForm({ ...form, industry_id: companyDetails.industry_id !== "" ? companyDetails.industry_id : industryList[0].id })
             if (buisnessScaleList.length && form.scale_id === '') setForm({ ...form, scale_id: companyDetails.scale_id !== "" ? companyDetails.scale_id : "" })
         }
-        console.log(buisnessScaleList.length, form.scale_id === '')
         return () => {
 
         }

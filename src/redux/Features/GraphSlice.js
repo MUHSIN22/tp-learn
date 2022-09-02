@@ -53,8 +53,6 @@ export const companyWiseGraph = createAsyncThunk('authentication/companyWiseGrap
             }
         })
 
-        console.log(response.data,'company graph');
-
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -71,8 +69,6 @@ export const companyWiseGraphForShare = createAsyncThunk('authentication/company
                 // 'authorization': `bearer ${data.auth}`
             }
         })
-
-        console.log(response.data,'company graph');
 
         return response.data
     } catch (error) {

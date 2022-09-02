@@ -43,7 +43,6 @@ export default function Certificate1() {
     const [updated,setUpdated] = useState(false);
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -92,7 +91,6 @@ export default function Certificate1() {
               if(data){
                 setUpdated(true);
               }
-              console.log(data,'this is data')
           } catch (error) {
               showAlert(true)
           } finally {
@@ -105,13 +103,11 @@ export default function Certificate1() {
             try {
                 dispatch(searchSkills({ auth: token, body: { search_skill: keywords } })).unwrap()
             } catch (error) {
-                console.log(error)
             }
         },
         [dispatch, token],
     )
     useEffect(() => {
-        console.log(debouncedSearchState)
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {
@@ -121,7 +117,6 @@ export default function Certificate1() {
     useEffect(() => {
       if(!newCertificate&&certificates&&certificates.length>0){
         let lastCertificate= certificates[certificates.length-1]
-        console.log(lastCertificate)
         let skills = lastCertificate.skills_ids&&lastCertificate.skills_ids.split(',').map((id,i)=> {
             return {
                 skill_id: id,
@@ -169,7 +164,6 @@ export default function Certificate1() {
           
         }
       },[reloadFlag,loading])
-      console.log(message,'this is message',error);
     return (
         <>
             <h1>Add any certification courses/trainings you have done</h1>

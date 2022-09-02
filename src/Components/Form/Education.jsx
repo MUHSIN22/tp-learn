@@ -118,7 +118,6 @@ export default function Education() {
         setUpdated(true)
       }
     } catch (error) {
-      console.log(error)
       setShowAlert(true)
     } finally {
       setShowAlert(true)
@@ -142,10 +141,8 @@ export default function Education() {
     return () => { }
   }, [degreeList.length, universityList.length, collageList.length, dispatch, token])
   useEffect(() => {
-    console.log(newEducation)
     if (!newEducation&&education && education.length > 0) {
       let lastEducation = education[education.length - 1]
-      console.log(lastEducation,"this is last education")
       setForm({
         ...form,
         degree_id: lastEducation.degree_id,
@@ -165,7 +162,6 @@ export default function Education() {
       })
       setLocation(lastEducation.location)
     } else {
-      console.log('reset')
           if(updated){
             setForm({
               degree_id: '',

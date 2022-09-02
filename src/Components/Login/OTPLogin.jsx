@@ -21,7 +21,6 @@ export default function OTPLogin() {
     try {
       dispatch(validateOtp({ user_id: auth.user_id, otp })).unwrap()
     } catch (error) {
-      console.log(error)
     }
 
 

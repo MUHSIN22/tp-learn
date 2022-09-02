@@ -87,13 +87,11 @@ export default function PdfGenerator({ bio, resumeDetails }) {
   // https://cv-builder.globaltaxolawgy.com/profile/p1_1658447829.jpeg
   const linkToBlob = async (url) => {
     let blob = await fetch(url).then(r => r.blob());
-    console.log(blob);
     return blob
   }
 
 
   const rolesAndResponsiblities = (text) => {
-    console.log(text, "HTML String", ReactHtmlParser(ReactHtmlParser(text)), ReactDomServer.renderToStaticMarkup(ReactHtmlParser(ReactHtmlParser(text))));
     return ReactDomServer.renderToStaticMarkup(ReactHtmlParser(ReactHtmlParser(text)))
   }
 

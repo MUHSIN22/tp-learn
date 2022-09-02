@@ -28,7 +28,6 @@ const headers = {
 
 export const  registerUser = createAsyncThunk('authentication/registerUser',async(body,{ rejectWithValue })=>{
     let encoded = new URLSearchParams(Object.entries(body)).toString()
-    console.log(encoded);
         let response = null
         try{
              response =await API.post(`/signup`,encoded,{
@@ -68,7 +67,6 @@ export const  createPassword = createAsyncThunk('authentication/createPassword',
 })
 
 export const  emailLogin = createAsyncThunk('authentication/emailLogin',async(body,{ rejectWithValue })=>{
-    console.log('body',body)
     try {
         const response =await API.post(`/email-login`,body,{
             headers: headers
@@ -80,7 +78,6 @@ export const  emailLogin = createAsyncThunk('authentication/emailLogin',async(bo
     }
 })
 export const  mobileLogin = createAsyncThunk('authentication/mobileLogin',async(body,{ rejectWithValue })=>{
-    console.log('body',body)
     try {
         const response =await API.post(`/mobile-login`,body,{
             headers: headers
@@ -93,7 +90,6 @@ export const  mobileLogin = createAsyncThunk('authentication/mobileLogin',async(
 })
 export const  validateOtp = createAsyncThunk('authentication/validateOtp',async(body,{ rejectWithValue })=>{
     let encoded = new URLSearchParams(Object.entries(body)).toString()
-    console.log('body',encoded)
     try {
         const response =await API.post(`/validate-otp`,encoded,{
             headers: headers
@@ -107,7 +103,6 @@ export const  validateOtp = createAsyncThunk('authentication/validateOtp',async(
 
 export const  resendOTP = createAsyncThunk('authentication/resendOTP',async(body,{ rejectWithValue })=>{
     let encoded = new URLSearchParams(Object.entries(body)).toString()
-    console.log('body',encoded)
     try {
         const response =await API.post(`/signup-resend-otp`,encoded,{
             headers: headers
@@ -128,7 +123,6 @@ export const logOut = createAsyncThunk('authentication/logout',async(body,{rejec
 })
 
 export const  changePassword = createAsyncThunk('authentication/changePassword',async(data,{ rejectWithValue })=>{
-    console.log('body',data)
     try {
         const response =await API.post(`/change-password`,data.body,{
             headers: {
@@ -159,7 +153,6 @@ export const authenticationSlice = createSlice({
                 sessionStorage.clear();
         },
         setError : (state,action)=>{
-            console.log('setError:',    action.payload)
             state.error = true;
             state.message= action.payload
         },
@@ -176,7 +169,6 @@ export const authenticationSlice = createSlice({
             state.error = false
             state.message = null
         }).addCase(emailLogin.fulfilled,(state,action)=>{
-            console.log('fullfilled')
             state.loading=false
             state.status = 'succeeded' 
             state.authToken = action.payload.data.token;

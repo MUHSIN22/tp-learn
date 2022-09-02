@@ -60,7 +60,7 @@ export default function Experience3({data}) {
             try {
                 dispatch(searchDesignation({ auth: token, body: { search_job_title: keywords } })).unwrap()
             } catch (error) {
-                console.log(error)
+
             }
         },
         [dispatch, token],
@@ -73,7 +73,6 @@ export default function Experience3({data}) {
         if(evt.target.type == 'checkbox'){
             value = form[evt.target.name] == 'yes' ? 'no' : 'yes';
         }
-        console.log('========',value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -93,18 +92,15 @@ export default function Experience3({data}) {
         if(form.remote_work!=='yes')  body.remote_work = 'no'
         if(form.hide_salary!=='yes')  body.hide_salary = 'no'
         if(form.current_working!=='yes')  body.current_working = 'no'
-        console.log(form)
         try {
             dispatch(addJobDesignation({auth:token,body,dispatch})).unwrap()
         } catch (error) {
-            console.log(error);
         }finally{
             setShowAlert(true);
         }
     }
 
     useEffect(() => {
-        console.log(debouncedSearchState)
         if (debouncedSearchState.length > 1) searchCompanyList(debouncedSearchState)
 
         return () => {

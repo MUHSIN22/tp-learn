@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 
 export default function LineGraph({label,category,x_series, salary,management}) {
-    console.log(salary,management,category,'s and m');
     const [state, setState] = useState({
         options: {
             chart: {
