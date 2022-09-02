@@ -17,7 +17,6 @@ export default function CVBuilder() {
   const details = useSelector(selectResumeDetails)
   const authToken = useSelector(selectAuthToken);
   const user_id = useSelector(selectUser_id)
-  console.log(resumeInfo,details,'this is resue');
   const [progress, setProgress] = useState({
     'Contact Info': { id:1, state: 'complete' },
     'Experience': { id:1, state: 'active' },
@@ -45,7 +44,6 @@ export default function CVBuilder() {
         'Experience': { id:1, state: 'complete' },
       })
     }
-    console.log()
     if (Education) {
       
       setProgress({

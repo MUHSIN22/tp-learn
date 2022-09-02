@@ -96,7 +96,6 @@ export default function Experience3({data}) {
         console.log(form)
         try {
             dispatch(addJobDesignation({auth:token,body,dispatch})).unwrap()
-            
         } catch (error) {
             console.log(error);
         }finally{

@@ -39,7 +39,6 @@ export default function AdditionalSkills2({data}) {
 
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -51,7 +50,6 @@ export default function AdditionalSkills2({data}) {
         body.user_id = user_id
         try {
           dispatch(addHobbies({auth:token,body:{...form,user_id},dispatch})).unwrap()
-         console.log(form)
         } catch (error) {
             showAlert(true)
         }finally{

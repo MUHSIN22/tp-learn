@@ -25,7 +25,7 @@ export default function Memberships() {
     console.log(res);
 
     const option = {
-      key: "rzp_test_B4uZC1xOIWiQLV",
+      key: "uv43t7WR3Bz13u2ETgExw8gN",
       currency: 'INR',
       amount: amount * 100,
       name: "Talent Place",

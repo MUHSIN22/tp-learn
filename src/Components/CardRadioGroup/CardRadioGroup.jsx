@@ -6,14 +6,12 @@ export default function CardRadioGroup({ name, state, setState, option, name_fie
         if (!disabled) {
             let temp = state;
             temp[name] = option[index].id;
-            console.log({ temp })
             setState(temp)
             setCurrent(index)
         }
 
     }
     useEffect(() => {
-        console.log(state,'state is this');
         if (autofill) {
             let i = option.findIndex((element) => element.id == state[name])
             setCurrent(i)

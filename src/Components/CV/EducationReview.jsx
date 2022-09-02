@@ -24,7 +24,6 @@ export default function EducationReview() {
   const education = useSelector(selectEducation);
   const details = useSelector(selectResumeDetails)
   const loading = useSelector(selectResumeLoading);
-  console.log(education,'this is eductaion',details);
   return (
     <>
       {
@@ -72,7 +71,6 @@ function EducationCard({
   upload_degree_file_type,
   skills,
 }) {
-  console.log(course_start_date);
   const dispatch = useDispatch();
   const toEdit = useSelector(selectToEdit);
   const user_id = useSelector(selectUser_id)

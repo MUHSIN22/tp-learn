@@ -29,6 +29,7 @@ import graphAnimation from '../../Assets/Animations/graphAnimation.json'
 import circle from '../../Assets/circle.png'
 import { usePDF } from '@react-pdf/renderer'
 import PdfGenerator from '../Resume2/PdfGenerator'
+import API from '../../API'
 
 let team = [
     {
@@ -60,6 +61,7 @@ export default function Home() {
     const [marginLeft, setMarginLeft] = useState(0);
     const sliderRef = useRef(null);
     const teamSectionRef = useRef(null);
+    const [link,setLink] = useState('')
 
     const defaultOptions = {
         loop: true,
@@ -110,6 +112,14 @@ export default function Home() {
         video.play();
         setPlaying(true)
     }
+
+    // useEffect(() => {
+    //     API.post("/download-sample-file",{user_id: 203})
+    //         .then((res) => {
+    //             console.log(res.data.data.message,'blob');
+    //             setLink(res.data.data.message)
+    //         })
+    // },[])
     return (
         <>
             {/* <Header /> */}

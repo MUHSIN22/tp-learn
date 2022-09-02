@@ -9,7 +9,6 @@ import { selectAuthToken, selectUser_id } from '../../redux/Features/Authenticat
 
 export default function SocialContributionReview() {
     const socialContribution = useSelector(selectSocialContribution)
-    console.log(socialContribution, "Social Contribution");
     return (
         <>
             {

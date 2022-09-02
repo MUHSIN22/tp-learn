@@ -17,7 +17,6 @@ export default function HobbyReview() {
     const handleEditForms = (data) => {
         dispatch(changeEditPageDetails(data)).unwrap();
     };
-    console.log(hobby,"hobby");
     return (
         <>
             {

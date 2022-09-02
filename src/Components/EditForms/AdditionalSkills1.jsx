@@ -27,9 +27,7 @@ export default function AdditionalSkills1({data}) {
     const user_id = useSelector(selectUser_id)
 
     function handleChange(evt) {
-        console.log("---------------eve",evt.target.value)
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -41,7 +39,6 @@ export default function AdditionalSkills1({data}) {
         body.user_id = user_id
         try {
           dispatch(addAdditionalSkills({auth:token,body:{...form,user_id},dispatch})).unwrap()
-         console.log(form)
         } catch (error) {
             showAlert(true)
         }finally{

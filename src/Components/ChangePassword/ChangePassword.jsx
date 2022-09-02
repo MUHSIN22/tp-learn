@@ -37,7 +37,6 @@ export default function ChangePassword() {
             try {
                 dispatch(changePassword({ auth: authToken, body: encoded })).unwrap()
             } catch (error) {
-                console.log(error)
             } finally {
                 dispatch(setError({ noError: ["Password changed successfully"] }))
             }

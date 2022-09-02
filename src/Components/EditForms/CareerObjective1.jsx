@@ -58,7 +58,6 @@ export default function CareerObjective1({ data }) {
     let form_Data = JsonToFormData(body);
     try {
       dispatch(uploadPhotomedia({ auth: token, body: form_Data, dispatch})).unwrap();
-      console.log(form,'this is form 123');
     } catch (error) {
       showAlert(true);
     } finally {
@@ -68,7 +67,6 @@ export default function CareerObjective1({ data }) {
 
   function handleChange(evt) {
     const value = evt.target.value;
-    console.log(value);
     setForm({
       ...form,
       [evt.target.name]: value,

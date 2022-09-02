@@ -69,11 +69,10 @@ export default function Section3Review() {
 
               <span className="divider"></span>
               {companyInfo && companyInfo.length > 0 ? (
-                <CompanyOverview company={companyInfo[index]} />
+                <CompanyOverview company={companyInfo[index]} companyInfo={companyInfo} />
               ) : (
                 <ExperienceLoader />
               )}
-              {console.log(companyInfo, 'This is company info')}
               {companyInfo && companyInfo[index]?.job_role ?
                 (
                   <>
@@ -98,7 +97,7 @@ export default function Section3Review() {
     </>
   );
 }
-function CompanyOverview({ company }) {
+function CompanyOverview({ company, companyInfo }) {
   const user_id = useSelector(selectUser_id);
   const token = useSelector(selectAuthToken);
   // const companyWise = useSelector(selectCompanyWise);
@@ -108,11 +107,8 @@ function CompanyOverview({ company }) {
   const navigate = useNavigate();
   const newJob = useSelector(selectNewJob);
   const handleEditForms = (data) => {
-    console.log(data, "data in handle Edit forms");
     dispatch(changeEditPageDetails(data)).unwrap();
   };
-
-  console.log(company, 'this is company info 123');
   const handleDeleteForms = (data) => {
     dispatch(deleteCompany({ auth: token, body: data, dispatch }));
   }
@@ -131,11 +127,10 @@ function CompanyOverview({ company }) {
       })()
 
     } catch (error) {
-      console.log(error);
     }
 
     return () => { };
-  }, [company.company_record_id, dispatch]);
+  }, [company.company_record_id, dispatch,company]);
 
   return (
     <div className="grid-35-65 company-overview-grid">
@@ -377,7 +372,6 @@ function DesignationOverview(props) {
           skills: job_role.skills,
         }}
       />
-      {console.log(job_role,company_record_id, 'this is index')}
       {job_role.project && (
         <ProjectOverview projects={{ projects: job_role && job_role?.project, company_job_record_id: job_role.company_job_record_id, company_record_id: company_record_id }} />
       )}
@@ -423,7 +417,7 @@ function ResponsibiltiensOverview({ data }) {
             })}
           </div>
         ) : (
-          <RoleLoader />
+          null
         )}
         <div className="role_skills">
           <div className="skills_names">
@@ -440,7 +434,6 @@ function ResponsibiltiensOverview({ data }) {
   );
 }
 function ProjectOverview({ projects: { projects, company_job_record_id, company_record_id } }) {
-  console.log("prof", projects)
   const [index, setIndex] = useState(0);
   let { project_name, client_name, project_skill, job_project_record_id } = projects[index];
   const toEdit = useSelector(selectToEdit);
@@ -456,7 +449,6 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
       dispatch(deleteProject({ auth: token, body: data, dispatch }))
     }
   }
-  console.log(projects, 'this is projects');
   return (
     <>
       {
@@ -466,7 +458,6 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
             <div className="flex-row-between align-center my-2">
               <h3 className="text-left m-0">Projects worked on</h3>
               <div className="flex-row-fit g-1 align-center">
-                {console.log(item.project_name, item, 'this is project')}
                 {toEdit && (
                   <>
                     <div onClick={() => handleEditForms({ job_project_record_id: item.job_project_record_id, project_skill: item.project_skill ? item.project_skill : [], client_name: item.client_name, project_name: item.project_name, company_job_record_id, company_record_id, progress: 5 })}>
@@ -503,7 +494,7 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
               <p>{ }</p>
             </div>
             <span className="divider"></span>
-            <div className="col-100 g-1">
+            <div className="col-100 g-1" style={{marginBottom: "1rem"}}>
               <div className="skill-grid">
                 <h5 className="text-left">Skill Used</h5>
                 <h5 className="text-left">Complexity</h5>

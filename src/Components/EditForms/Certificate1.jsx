@@ -51,7 +51,6 @@ export default function Certificate1({data}) {
 
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -91,7 +90,6 @@ export default function Certificate1({data}) {
         let form_data = JsonToFormData(body)
           try {
               dispatch(addCertification({ auth: token, body:form_data,dispatch })).unwrap()
-              console.log(form)
           } catch (error) {
               showAlert(true)
           } finally {
@@ -104,13 +102,11 @@ export default function Certificate1({data}) {
             try {
                 dispatch(searchSkills({ auth: token, body: { search_skill: keywords } })).unwrap()
             } catch (error) {
-                console.log(error)
             }
         },
         [dispatch, token],
     )
     useEffect(() => {
-        console.log(debouncedSearchState)
         if (debouncedSearchState.length > 1) searchSkillList(debouncedSearchState)
 
         return () => {
@@ -119,7 +115,6 @@ export default function Certificate1({data}) {
     }, [debouncedSearchState, searchSkillList, dispatch])
 
     useEffect(() => {
-        console.log(debouncedSearchState)
         if(skills_ids?.length>0 && skills?.length>0){
             let defaultSkills = skills_ids.map((skill_id,i)=>{
                 let obj = {}

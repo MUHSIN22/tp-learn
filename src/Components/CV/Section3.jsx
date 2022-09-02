@@ -63,7 +63,6 @@ export default function Section3() {
               </div>
 
               <span className="divider"></span>
-              {console.log(companyInfo)}
               {companyInfo && companyInfo.length > 0 ? (
                 <CompanyOverview company={companyInfo[index]} />
               ) : (
@@ -77,7 +76,7 @@ export default function Section3() {
                         <DesignationOverview
                           job_role={{
                             job_role: jobRole || [],
-                            company_record_id: companyInfo[index].company_record_id,
+                            company_record_id: item.company_record_id,
                           }}
                         />
                       ))
@@ -113,8 +112,6 @@ function CompanyOverview({ company }) {
 
       (async () => {
         let response;
-        
-        console.log(window.location.pathname.split('/'),window.location.pathname.split('/').includes('cv-share'),'locatinos');
         if(window.location.pathname.split('/').includes('cv-share')){
           response = await dispatch(
             companyWiseGraphForShare({
@@ -133,7 +130,6 @@ function CompanyOverview({ company }) {
       })()
 
     } catch (error) {
-      console.log(error);
     }
 
     return () => { };
@@ -199,7 +195,6 @@ function CompanyOverview({ company }) {
                 </span>
               </>
             )} {company.company_name}</h5>
-        {console.log(companyWise,"this is company wise")}
         {companyWise && (
           <LineGraph
             salary={companyWise.salary}
@@ -213,7 +208,6 @@ function CompanyOverview({ company }) {
 }
 function DesignationOverview(props) {
   const { job_role, company_record_id } = props.job_role;
-  console.log("ppppppppppp", job_role);
   const [index, setIndex] = useState(0);
   const toEdit = useSelector(selectToEdit);
   const dispatch = useDispatch();
@@ -278,7 +272,6 @@ function DesignationOverview(props) {
             <Location /> <p>{job_role.job_location || ""}</p>
           </div>
         </div>
-        {console.log("----------", job_role.skills)}
         {job_role && job_role?.skills && (
           <div className="col-100 skill-card">
             <h5 className="text-left">Key Skills Used</h5>
@@ -344,7 +337,6 @@ function ResponsibiltiensOverview({ data }) {
   );
 }
 function ProjectOverview({ projects:{projects,company_job_record_id,company_record_id} }) {
-  console.log("prof",projects)
   const [index, setIndex] = useState(0);
   let { project_name, client_name, project_skill ,job_project_record_id} = projects;
   const toEdit = useSelector(selectToEdit);
@@ -370,7 +362,7 @@ function ProjectOverview({ projects:{projects,company_job_record_id,company_reco
         <p>{}</p>
       </div>
       <span className="divider"></span>
-      <div className="col-100 g-1">
+      <div className="col-100 g-1" style={{marginBottom: '1rem'}}>
         <div className="skill-grid">
           <h5 className="text-left">Skill Used</h5>
           <h5 className="text-left">Complexity</h5>

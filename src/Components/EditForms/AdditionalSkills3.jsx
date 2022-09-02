@@ -43,7 +43,6 @@ export default function AdditionalSkills3({data}) {
         let form_Data = JsonToFormData(body)
         try {
             dispatch(addBio({ auth: token, body:form_Data,dispatch })).unwrap()
-            console.log(form)
         } catch (error) {
             showAlert(true)
         } finally {
@@ -59,7 +58,6 @@ export default function AdditionalSkills3({data}) {
             }
             dispatch(getRoleSuggestionList({ auth: token, body })).unwrap()
         } catch (e) {
-            console.log(e)
         }
 
         return () => {

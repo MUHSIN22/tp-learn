@@ -20,7 +20,6 @@ export default function CareerObjective2({data}) {
     const user_id = useSelector(selectUser_id)
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -32,7 +31,6 @@ export default function CareerObjective2({data}) {
         body.user_id = user_id
         try {
             dispatch(uploadCVvideos({ auth: token, body,dispatch })).unwrap()
-            console.log(form)
         } catch (error) {
             showAlert(true)
         } finally {

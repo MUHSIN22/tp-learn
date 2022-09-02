@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../API";
+import { companyWiseGraph, graphDetails } from "./GraphSlice";
 
 const initialState = {
     loading: false,
@@ -136,7 +137,6 @@ export const addJobDesignation = createAsyncThunk('authentication/addJobDesignat
             }
         })
         if(data.dispatch){
-            data.dispatch(reload())
             data.dispatch(changeEditPageDetails({progress: null})).unwrap();
         }
         return response.data

@@ -14,7 +14,6 @@ import SuggestiveInput from '../IconInput/SuggestiveInput';
 import moment  from 'moment'
 import { useNavigate } from 'react-router-dom';
 export default function Education({data}) {
-  console.log("===========================",data)
   let {
     degree_id,
     university_id,
@@ -50,7 +49,6 @@ export default function Education({data}) {
     university_name : university_name || ''
 
   })
-  console.log(data,'this is data');
   const navigate=useNavigate()
   const [file, setFile] = useState(null)
   const error = useSelector(selectResumeError);
@@ -148,9 +146,7 @@ export default function Education({data}) {
   },[])
 
   const getDegreeById = (id) => {
-    console.log(degreeList,id);
     let degree = degreeList.filter((item) => item.id === id );
-    console.log(degree);
     return degree[0] ? degree[0].degree_name : ''
   }
 

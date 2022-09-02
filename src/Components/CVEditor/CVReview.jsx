@@ -68,19 +68,15 @@ export default function CVBuilder() {
   const token = useSelector(selectAuthToken)
   const navigate = useNavigate();
   const [instance, setInstance] = usePDF({ document: <PdfGenerator bio={bio} resumeDetails={resumeDetails} /> })
-
-  console.log(resumeDetails, 'resume details');
   // let loaderState=useSelector(getLoaderstate)
   const handleEdit = (e) => {
     dispatch(changeToEdit(!toEdit)).unwrap();
     dispatch(changeEditPageDetails({}));
     setIsshow(true);
-    console.log(isShow);
   };
   const [loader, setloader] = useState(0);
 
   const changeLoader = (value) => {
-    console.log("data", value, "data");
     setloader(value)
   }
 
@@ -127,7 +123,6 @@ export default function CVBuilder() {
         // }
       })
     } catch (err) {
-      console.log(err);
     }
   }
 
@@ -142,12 +137,10 @@ export default function CVBuilder() {
       alert("Aww Snap! you are offline, failed to load razorpay")
       return
     }
-
-    console.log(res);
     
     // rzp_test_B4uZC1xOIWiQLV         =  test key
     const option = {
-      key: "rzp_live_QP1DKqGVP2iRRl",
+      key: "rzp_live_kiSR34gPWmm3Gc",
       currency: 'INR',
       amount: amount * 100,
       name: "Talent Place",
@@ -221,7 +214,6 @@ export default function CVBuilder() {
                   <PDFDownloadLink document={<PdfGenerator bio={bio} resumeDetails={resumeDetails} />} fileName={`Resume_${resumeDetails.fname}_${resumeDetails.lname}.pdf`}>
                     {({ blob, url, loading, error }) => (
                       <>
-                        {console.log(error, loading, 'This is error and loading')}
                         {loading ? "loading" : <img src={PDF} alt="" />}
                       </>
 
@@ -235,7 +227,6 @@ export default function CVBuilder() {
               {/* <PDFDownloadLink document={<PdfGenerator bio={bio} resumeDetails={resumeDetails} />} fileName={`Resume_${resumeDetails.fname}_${resumeDetails.lname}.pdf`}>
                 {({ blob, url, loading, error }) => (
                   <>
-                    {console.log(error, loading, 'This is error and loading')}
                     {loading ? "loading" : <img src={PDF} alt="" />}
                   </>
 

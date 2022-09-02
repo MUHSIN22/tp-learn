@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom'
 export default function CerificationReview() {
     const loading = useSelector(selectResumeLoading)
     const Cerification = useSelector(selectCertificate) || []
-    console.log(Cerification, "This is certification");
     return (
         <>
             {

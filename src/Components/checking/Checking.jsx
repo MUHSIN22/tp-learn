@@ -21,20 +21,6 @@ export default function Checking() {
     const user_id = useSelector(selectUser_id)
     const downloadlink=useSelector(getDownLoadDetails)
     const loading = useSelector(selectResumeLoading);
-    
-    useEffect(() => {
-        console.log("company", companyInfo);
-        console.log("profile", profile);
-        console.log("bio",bio);
-        console.log('resumeDetails',resumeDetails);
-        console.log("lastjob",lastJob);
-        console.log("key skills",keySkills);
-        console.log("educations",educations);
-        console.log("certificates",certificates);
-        console.log("hobbies",hobbies);
-        console.log("socialLinks",socialLink);
-        console.log("socialContribuition",socialContribution);
-    },[])
   return (
     <div>Checking</div>
   )

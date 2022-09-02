@@ -4,7 +4,7 @@ import IconSelect from '../IconInput/IconSelect'
 import { useDispatch, useSelector } from 'react-redux';
 import { getBuisnessScaleList, getCompanyBasedList, getIndustryList, selectBuisnessScaleList, selectCompanyBasedList, selectIndustryList } from '../../redux/Features/MasterSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
-import { addIndustryInfo, SelectCompanyDetails, selectLastCompany, selectResumeError, selectResumeLoading, selectResumeMessage, selectUserFirstName } from '../../redux/Features/ResumeSlice';
+import { addIndustryInfo, reload, SelectCompanyDetails, selectLastCompany, selectResumeError, selectResumeLoading, selectResumeMessage, selectUserFirstName } from '../../redux/Features/ResumeSlice';
 import Control from './Control';
 import Alert from '../Alert/Alert';
 export default function Experience2({ }) {
@@ -34,12 +34,13 @@ export default function Experience2({ }) {
             [evt.target.name]: value
         });
     }
-    function handleSubmit() {
+    async function handleSubmit() {
         let company_record_id = companyDetails.company_record_id
         const body = {...form, user_id,company_record_id}
         console.log(form)
         try {
-            dispatch(addIndustryInfo({auth:token,body,dispatch})).unwrap()
+            await dispatch(addIndustryInfo({auth:token,body,dispatch})).unwrap()
+            dispatch(reload())
         } catch (error) {
             console.log(error);
         }finally{

@@ -1,9 +1,6 @@
-.CVReview{
+/* .CVReview{
     padding: 0;
-    margin: 0;
-    border: none;
-    box-shadow: none;
-}
+} */
 .cv-share{
     width: 100%;
     padding: 0 2.5%;
@@ -11,6 +8,9 @@
     height: auto;
     overflow: initial;
     display: flex;
+    margin: 0;
+    border: none;
+    box-shadow: none;
 }
 .cv-share-wrapper{
     padding: 2rem;
@@ -23,11 +23,15 @@
 }
 
 @media only screen and (max-width: 500px) {
+    .cv-share{
+        background: #fff;
+    }
     .cv-share-wrapper{
         padding: 0;
         padding-top: 6px;
         background: trasparent;
         border: none;
         box-shadow: none;
+        background: #fff;
     }
 }

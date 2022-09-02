@@ -10,7 +10,6 @@ import { addSocialLinks, selectResumeError, selectResumeLoading, selectResumeMes
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 export default function CareerObjective3({data}) {
-    console.log("=============================================nnkjkff",data)
     const dispatch = useDispatch()
     const [form, setForm] = useState({
         link_facebook:data.facebook || '',
@@ -27,7 +26,6 @@ export default function CareerObjective3({data}) {
     const user_id = useSelector(selectUser_id)
     function handleChange(evt) {
         const value = evt.target.value;
-        console.log(value)
         setForm({
             ...form,
             [evt.target.name]: value
@@ -39,15 +37,12 @@ export default function CareerObjective3({data}) {
         body.user_id = user_id
         try {
             dispatch(addSocialLinks({ auth: token, body,dispatch })).unwrap()
-            console.log(form)
         } catch (error) {
             showAlert(true)
         } finally {
             setShowAlert(true)
         }
     }
-
-    console.log("------djad",data.facebook)
     return (
         <>
             {showAlert && !loading && <Alert error={error} message={error ? 'Failed to update Social Links' : 'Social Links updated'} />}

@@ -9,7 +9,6 @@ export default function Section2() {
   const salaryGraph = useSelector(selectSalaryGraph)
   const timelineGraph = useSelector(selectJObSalaryTimeline)
   const resumeInfo = useSelector(selectResumeInfo)
-  console.log(timelineGraph,salaryGraph,'salary graph is this');
   const createYears = () => {
     let currentYear = new Date().getFullYear();
     let years = []

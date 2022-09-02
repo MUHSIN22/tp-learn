@@ -7,14 +7,12 @@ export default function DragDropInput({file,setFile}) {
     
     const handleDragEnter = e => {
         e.preventDefault();
-        console.log("drag enter");
         setProgress('input-hover')
         e.stopPropagation();
       };
     
       const handleDragLeave = e => {
         e.preventDefault();
-        console.log("drag leave");
         if(!file) setProgress('input-inactive')
       };
     
@@ -26,10 +24,8 @@ export default function DragDropInput({file,setFile}) {
     
       const handleDrop = e => {
         e.preventDefault();
-        console.log("drag drop");
         setProgress('input-drop')
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            console.log(e.dataTransfer.files[0].name)
             setFile(e.dataTransfer.files[0]);
           }
       };
