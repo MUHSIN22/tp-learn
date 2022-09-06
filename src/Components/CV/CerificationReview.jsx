@@ -8,6 +8,7 @@ import { FaPencilAlt, FaPlus } from "react-icons/fa";
 import { AiFillDelete } from 'react-icons/ai'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import { useNavigate } from 'react-router-dom'
+import getFileExtensionFromURI from '../../functionUtils/getFileExtensionFromURI'
 export default function CerificationReview() {
     const loading = useSelector(selectResumeLoading)
     const Cerification = useSelector(selectCertificate) || []
@@ -95,7 +96,18 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
                 </div>
 
             </div>
-            {certificate_file && <img src={certificate_file} alt="" />}
+            {console.log(certificate_file,'this is certificate file')}
+            {certificate_file && (
+                <>
+                    {getFileExtensionFromURI(certificate_file) === "image" ?
+                         <a href={certificate_file} target="_blank">
+                            <img src={certificate_file}  alt="" />
+                         </a>
+                         : 
+                         <a href={certificate_file} target="_blank" style={{color: "blue", display: "flex",justifyContent: "center", alignItems: "center"}}>View File</a>
+                    }
+                </>
+            )}
         </div>
     )
 }

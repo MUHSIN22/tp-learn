@@ -32,6 +32,7 @@ export default function Experience1() {
     const jobNatureList = useSelector(selectJobNatureList)
     const lastCompany = useSelector(selectLastCompany)
     const newJob = useSelector(selectNewJob)
+    const [isNewCompany,setNewCompany] = useState(true)
     const searchCompanyList = useCallback(
         (keywords) => {
             try {
@@ -46,18 +47,26 @@ export default function Experience1() {
         setSearch(e.target.value)
     }
 
+    const companySearchToggler = () => {
+        setNewCompany(true)
+    }
+
     const selectHandler = (i) => {
         setForm({ ...form, company_id: companyList[i].id })
         setSearch(companyList[i].name )
+        setNewCompany(false)
     }
     function handleSubmit() {
         let body = form
+        if(isNewCompany){
+            body.company_id = ""
+        }
         if (form.company_id.length < 1) {
             body.other_company_name = debouncedSearchState
         }
         if(form.company_name !== "" && form.company_name !== search){
             form.other_company_name = search
-            form.company_id = null
+            form.company_id =  ""
         }
         
         body.user_id = user_id
@@ -117,7 +126,20 @@ export default function Experience1() {
             {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
             {!lastCompany && <h1 className='text-left'>Let us start with your most recent stint.</h1>}
             <div className="form-row">
-                <SuggestiveInput value={search} icon={<></>} name={'company_name'} placeholder={'Company / Organization Name'} label='Company Name' width={98} suggestions={companyList} name_field='name' searchHandler={searchHandler} selected={selectHandler} />
+                <SuggestiveInput 
+                    value={search} 
+                    icon={<></>} 
+                    name={'company_name'} 
+                    placeholder={'Company / Organization Name'} 
+                    label='Company Name' 
+                    width={98} 
+                    suggestions={companyList} 
+                    name_field='name' 
+                    searchHandler={(e) => {
+                        searchHandler(e);
+                        companySearchToggler();
+                    }} 
+                    selected={selectHandler} />
             </div>
             <div className="form-row">
                 <CardRadioGroup autofill  label={'Define the nature of your job?'} name={'nature_of_job_id'} state={form} setState={setForm} option={jobNatureList} name_field={'job_name'} />

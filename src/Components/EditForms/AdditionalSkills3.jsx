@@ -65,6 +65,7 @@ export default function AdditionalSkills3({data}) {
         }
     }, [dispatch, job_title_id, token])
 
+
     return (
         <>
             <h1 className='text-left'>Tell us about yourself.</h1>

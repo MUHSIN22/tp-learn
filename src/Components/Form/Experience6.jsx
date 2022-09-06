@@ -47,7 +47,7 @@ export default function Experience6() {
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        body.project_skills = selected_options.map((x) => { return { skill_id: x.skill_id, skill_complexity: x.skill_complexity, skill_desc: x.skill_desc } })
+        body.project_skills = selected_options.map((x) => { return { skill_id: x.skill_id, skill_complexity: x.skill_complexity, skill_desc: x.skill_desc, skill_name: x.skill_name } })
         body.project_skills = JSON.stringify(body.project_skills)
         let formValidation = projectFormValidator();
         if(isAdd){
@@ -76,9 +76,18 @@ export default function Experience6() {
     function searchHandler(e) {
         setSearch(e.target.value)
     }
-    const selectSkillHandler = (i) => {
-        temp.skill_id = skillList[i].id
-        temp.skill_name = skillList[i].skill_name
+    const selectSkillHandler = (i,suggestion,value) => {
+        console.log(value,'this is value');
+        if(suggestion.id){
+            temp.skill_id = skillList[i].id
+            temp.skill_name = skillList[i].skill_name
+        }else{
+            temp.skill_id = null
+            temp.skill_name = value
+        }
+        console.log(temp);
+        console.log(temp);
+        
         setTemporary(temp)
     }
     const handleComplexity = (e) => {
@@ -91,11 +100,13 @@ export default function Experience6() {
     }
     const handleAddSkill = (event) => {
         setAlertInnder(false)
-        if(temp.skill_desc && temp.skill_complexity && temp.skill_id && temp.skill_name){
+        console.log(temp);
+        if(temp.skill_desc && temp.skill_complexity && temp.skill_name){
             setAlertInnder(false)
             set_Selected_options([...selected_options, temp])
             document.getElementById('iconinput-Skills').value = '';
             document.getElementById('iconinput-skill_complexity').value = 0;
+            document.getElementById('iconinput-skill_desc').value = '';
             document.getElementById('iconinput-skill_desc').value = '';
             temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
         }else{
@@ -230,7 +241,7 @@ export default function Experience6() {
                 </div>
                 <MultiSelectedOptions options={selected_options} value_field={'skill_name'} subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />
                 <div className="form-row">
-                    <SuggestiveInput name='Skills' searchHandler={searchHandler} label={`Skill`} placeholder='Select Skills' width={45} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
+                    <SuggestiveInput name='Skills' searchHandler={searchHandler} label={`Skill`} placeholder='Select Skills' value={search} width={45} suggestions={[...skillList,{id:null,skill_name:"Add other skill"}]} name_field={'skill_name'} selected={selectSkillHandler} />
                     <MarkedSlider handleChange={handleComplexity} name={'skill_complexity'} state={form} setState={setForm} min={1} max={10} width={'48%'} label={'Complexity Level'} />
                 </div>
                 <div className="form-row">

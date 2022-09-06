@@ -1,0 +1,16 @@
+.cv-profile-container{
+    display: grid;
+    grid-template-columns: 6rem auto;
+    height: 100vh;
+    transition: all 0.3s ease;
+    grid-template-areas: 'sidebar cv';
+}
+.cv-profile-container--expaned {
+    grid-template-columns: 18rem auto;
+} 
+.cv-profile-container .main-cv-wrapper{
+    grid-area: cv;
+    padding: 3rem;
+    max-height: 100vh;
+    overflow-y: scroll;
+}

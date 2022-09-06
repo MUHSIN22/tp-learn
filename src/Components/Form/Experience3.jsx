@@ -54,6 +54,8 @@ export default function Experience3() {
     const lastJob = useSelector(selectLastJob)
     const newDesignation = useSelector(selectNewDesignation)
     const [endSalaryError,setEndSalaryError] = useState(null)
+    const [isNewDesignation,setNewDesignation] = useState(true)
+
     const searchCompanyList = useCallback(
         (keywords) => {
             try {
@@ -65,6 +67,7 @@ export default function Experience3() {
     )
     function searchHandler(e) {
         setSearch(e.target.value)
+        setNewDesignation(true)
     }
     function handleDesignationForm(evt){
         if(evt.target.name === "current_working"){
@@ -77,13 +80,10 @@ export default function Experience3() {
         });
     }
     const selectHandler = (i,selected,value ) => {
-        if(selected.id !== null){
             setForm({ ...form, designation_id: designationlist[i].id })
             setSearch(designationlist[i].job_title_name)
-        }else{
-            setOtherDesignation(true);
-            setForm({ ...form, other_designation_name: value })
-        }
+            setNewDesignation(false)
+            
     }
     function handleAddDesignation() {
         if(form.end_salary === ''){
@@ -96,9 +96,15 @@ export default function Experience3() {
             setEndSalaryError(false);
         }
         const body = {...form, user_id,location}
+        if(isNewDesignation){
+            body.other_designation_name = debouncedSearchState;
+            body.designation_id = ""
+        }
+        console.log(body);
         if(form.remote_work!=='yes')  body.remote_work = 'no'
         if(form.hide_salary!=='yes')  body.hide_salary = 'no'
         if(form.current_working!=='yes')  body.current_working = 'no'
+        if(form.current_working === "yes") body.end_date = ""
         try {
             dispatch(addJobDesignation({auth:token,body,dispatch})).unwrap()
             
@@ -170,7 +176,7 @@ export default function Experience3() {
             {showAlert &&!loading&&<Alert error={error} message={error ? errorMessageHandler(message) : message} />}
             <h1>Now tell us about all the job roles at which you have worked, starting with the latest one.</h1>
             <div className="form-row">
-                <SuggestiveInput icon={<></>} value={search} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' width={45} suggestions={[...designationlist,{id:null,job_title_name: "Add designation"}]} name_field={'job_title_name'} searchHandler={searchHandler} selected={selectHandler}  />
+                <SuggestiveInput icon={<></>} value={search} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' width={45} suggestions={[...designationlist]} name_field={'job_title_name'} searchHandler={searchHandler} selected={selectHandler}  />
                 <IconSelect value={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' width={45} options={[{id:0,level_name: "Select a level"},...managementLevelList]} name_field={'level_name'} />
             </div>
             <div className="form-row">
@@ -195,10 +201,7 @@ export default function Experience3() {
                 </div>
             </div>
                 <div className="form-row">
-                    {
-                        !isCurrentWorking&&
-                        <IconInput value={form.end_date} name='end_date'  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
-                    }
+                    <IconInput value={form.end_date} name='end_date' isDisabled={(isCurrentWorking || form.current_working === "yes")  ? true : false}  handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM/DD/YYYY' width={40} />
                     <div className="salary-wrapper">
                         <IconInput value={form.end_salary} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package' placeholder='180000' width={100} />
                         <IconSelect value={form.end_salary_currency} name='end_salary_currency'  handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />

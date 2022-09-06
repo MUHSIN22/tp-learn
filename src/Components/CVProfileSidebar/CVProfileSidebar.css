@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;600;700;800&display=swap');
+
+.cv-profile-sidebar{
+    width: 6rem;
+    height: 100vh;
+    background: #f0967c;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 3px 0px 16px rgba(0,0,0,0.1);
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+}
+.cv-profile-sidebar--active{
+    width: 18rem;
+}
+.cv-profile-sidebar .sidebar-toggle-wrapper{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid #fff;
+}
+.cv-profile-sidebar .sidebar-logo{
+    max-width: 10rem;
+    display: none;
+}
+.cv-profile-sidebar--active .sidebar-logo{
+    display: block;
+}
+.cv-profile-sidebar .breadcrump{
+    width: 30px;
+    cursor: pointer;
+}
+.cv-profile-sidebar .breadcrump .line{
+    height: 3px;
+    width: 100%;
+    background: #fff;
+    margin: 5px 0;
+    display: block;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.cv-profile-sidebar .breadcrump--active .line:first-child{
+    transform-origin: top left;
+    transform: rotate(45deg);
+}
+.cv-profile-sidebar .breadcrump--active .line:nth-child(2){
+    transform: translateX(-100%);
+    opacity: 0;
+}
+.cv-profile-sidebar .breadcrump--active .line:last-child{
+    transform-origin: top left;
+    transform: rotate(-45deg) translate(-5px,2px);
+}
+.sidebar-links-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    width: 100%;
+    gap: 0.5rem;
+}
+.sidebar-link{
+    padding: 0.8rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 100%;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+.sidebar-link:hover{
+    font-weight: 600;
+    background: rgba(254,97,60,1);
+    
+}
+.cv-profile-sidebar--active .sidebar-link:hover{
+    background: linear-gradient(90deg, rgba(254,97,60,1) 0%, rgba(0,212,255,0) 100%);
+}
+.sidebar-link-text{
+    display: none;
+}
+.cv-profile-sidebar--active .sidebar-link-text{
+    display: block;
+}
+.sidebar-link-icon{
+    height: 1.5rem;
+}

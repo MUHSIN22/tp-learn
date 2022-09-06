@@ -183,9 +183,6 @@ export default function Experience5() {
                     <SuggestionBox handleSelect={handleSuggestion} suggestions={roleSuggestions} name_field={'role_description'} />
                 </div>
             </div>
-            <div className="form-row">
-                <IconInput value={form.external_client_desc} name='external_client_desc' handleChange={handleChange} label='Have you worked for any external clients? If yes, please mention below:' placeholder='Which clients did you work for' width={100} />
-            </div>
             <Control handleSubmit={handleSubmit} />
         </>
     )

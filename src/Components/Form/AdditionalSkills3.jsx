@@ -4,10 +4,10 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import DragDropInput from '../DragDropInput/DragDropInput'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBio, selectBio, selectFirstJob, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { addBio, selectBio, selectFirstJob, selectLastJob, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage, selectUserInfo } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
-import { getRoleSuggestionList, selectRoleSuggestionList } from '../../redux/Features/MasterSlice';
+import { getRoleSuggestionList, getSummaryList, selectRoleSuggestionList, selectSummarySuggestionList } from '../../redux/Features/MasterSlice';
 import Control from './Control';
 
 export default function AdditionalSkills3() {
@@ -24,10 +24,13 @@ export default function AdditionalSkills3() {
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     const resumeInfo = useSelector(selectResumeInfo)
+    const recordDetails = useSelector(selectUserInfo)
     const firstjob = useSelector(selectFirstJob)
     const job_title_id = firstjob.designation_id
-    const roleSuggestions = useSelector(selectRoleSuggestionList)
+    const summarySuggestions = useSelector(selectSummarySuggestionList)
     const bio = useSelector(selectBio)
+    const lastJob = useSelector(selectLastJob)
+
     const handleSuggestion = (value) => {
         setForm({ ...form, your_bio: form.your_bio + value })
     }
@@ -48,13 +51,14 @@ export default function AdditionalSkills3() {
         }
     }
     useEffect(() => {
+        console.log(recordDetails);
         try {
             const body = {
-                job_title_id: resumeInfo.company[0],
+                job_title_id: lastJob.designation_id,
                 search_role: '',
-                page_no: ''
+                page_no: 12
             }
-            dispatch(getRoleSuggestionList({ auth: token, body })).unwrap().then((res) => {
+            dispatch(getSummaryList({ auth: token, body })).unwrap().then((res) => {
             })
         } catch (e) {
         }
@@ -87,7 +91,7 @@ export default function AdditionalSkills3() {
                             }}
                         />
                     </div>
-                    <SuggestionBox handleSelect={handleSuggestion} suggestions={roleSuggestions} name_field={'role_description'} />
+                    <SuggestionBox handleSelect={handleSuggestion} suggestions={summarySuggestions} name_field={'summery'} />
                 </div>
             </div>
             <div className="form-col align-start g-0-5">

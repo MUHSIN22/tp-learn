@@ -29,7 +29,7 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
       if((secondJobStart-firstJobEnd) > 0){
         
         let noExperience = {
-          company_name:"No experience",
+          company_name:"Career Gap",
           timeline:{
             job_start_date:"19-11-"+firstJobEnd,
             job_end_date:`19-11-${secondJobStart}`
@@ -44,7 +44,7 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
       let lastJobEnd = jobs[startIndex].timeline.job_end_date.split('-')[2]
       if((new Date().getFullYear() - parseInt(lastJobEnd)) > 0){
         let noExperience = {
-          company_name:"No experience",
+          company_name:"Career Gap",
           timeline:{
             job_start_date:"19-11-"+lastJobEnd,
             job_end_date:`19-11-${new Date().getFullYear()}`
@@ -58,7 +58,7 @@ export default function JobTimeline({ jobs = [], skills = [] }) {
     <div id="jobTimeline" className="jobTimeline">
       <div className="job-timeline-wrapper">
         { jobList && jobList[0] && jobList.map((item, index) => (
-          <div className="job" style={{ backgroundColor: (item.company_name === 'No experience' ? "rgba(99,99,99,5.4)" : colors[index]) }}>
+          <div className="job" style={{ backgroundColor: (item.company_name === 'Career Gap' ? "rgba(99,99,99,5.4)" : colors[index]), color: (item.company_name === "Career Gap" ? "#ffffff80" : "#000") }}>
             {item.type}
             <div className="time-bar">
               <span className="time-bar--bar"></span>

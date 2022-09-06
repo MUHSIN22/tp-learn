@@ -35,13 +35,16 @@ import PrivacyPolicy from './Components/Footer Links/PrivacyPolicy/PrivacyPolicy
 import TermsAndConditions from './Components/Footer Links/TermAndConditions/TermsAndConditions';
 import CVShare from './Components/CVShare/CVShare';
 import CVcontainer from './Components/CV/CVcontainer';
+import AboutUs from './Components/AboutUs/AboutUs';
+import CVProfile from './Components/CVProfile/CVProfile';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
-  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password"]
+  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password",'/about-us','/cv-profile']
+  const routeWithouFooter = ['/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password","/login",'/signup','/get-onboard','cv-builder','cv-share','/OTP-signup','/create-password','/cv-profile']
   useEffect(() => {
     if(auth.authToken&&reload){
       try {
@@ -99,9 +102,13 @@ function App() {
        <Route path='/signup' element={<PreventedRoute><Signup/></PreventedRoute>}/>
        <Route path='/OTP-signup' element={<PreventedRoute><OTPSignup/></PreventedRoute>}/>
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
+       <Route path="/about-us" element={<AboutUs />} />
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path='/' element={<Home/>}/>
+       
+       <Route path='/cv-profile' element={<CVProfile />} />
+
        <Route path='/cv-share/:id' element={<CVShare />} />
        <Route path='/check' element={<Checking/>} />
        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
@@ -116,7 +123,7 @@ function App() {
        <Route path='/logout' element={<Logout/> }/>
        <Route path='/change_password' element={<ChangePassword/> }/>
       </Routes>
-      <Footer />
+      {!routeWithouFooter.includes(window.location.pathname) ? <Footer /> : null}
     </div>
   );
 }

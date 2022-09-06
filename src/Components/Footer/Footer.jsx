@@ -6,7 +6,7 @@ import { FaFacebookF, FaInstagramSquare } from 'react-icons/fa'
 import { ImLinkedin2 } from 'react-icons/im'
 import { AiFillYoutube } from 'react-icons/ai'
 import './Footer.css'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Footer() {
     const navigate = useNavigate()
@@ -14,7 +14,9 @@ export default function Footer() {
         <footer className="main-footer">
             <div className="footer-section">
                 <div className="footer-logo">
-                    <img src={logo} alt="" className="footer-log" />
+                    <Link to="/">
+                        <img src={logo} alt="" className="footer-log" />
+                    </Link>
                     <p className="logo-description">
                         A product by <br />
                         Taxolawgy online service pvt. ltd.

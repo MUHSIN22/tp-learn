@@ -138,7 +138,9 @@ export default function Experience1({ data }) {
   }, [debouncedSearchState, searchCompanyList]);
   useEffect(() => {
     if (jobNatureList.length === 0) dispatch(getJobNatureList(token)).unwrap();
-
+    if (industryList.length === 0 ) dispatch(getIndustryList(token)).unwrap();
+    if (buisnessScaleList.length === 0 ) dispatch(getBuisnessScaleList(token)).unwrap();
+    if (companyBasedList.length === 0 ) dispatch(getCompanyBasedList(token)).unwrap();
     return () => {};
   }, [jobNatureList.length, dispatch, token]);
   useEffect(() => {

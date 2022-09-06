@@ -130,7 +130,7 @@ function CompanyOverview({ company, companyInfo }) {
     }
 
     return () => { };
-  }, [company.company_record_id, dispatch,company]);
+  }, [company.company_record_id, dispatch, company]);
 
   return (
     <div className="grid-35-65 company-overview-grid">
@@ -372,6 +372,7 @@ function DesignationOverview(props) {
           skills: job_role.skills,
         }}
       />
+      {console.log(job_role.project,"this is project")}
       {job_role.project && (
         <ProjectOverview projects={{ projects: job_role && job_role?.project, company_job_record_id: job_role.company_job_record_id, company_record_id: company_record_id }} />
       )}
@@ -491,15 +492,19 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
             <div className="flex-wrap align-stretch g-1">
               <ProjectTile project_name={item.project_name} client_name={item.client_name} />
 
-              <p>{ }</p>
+              <p>{console.log(item,'this is item')}</p>
             </div>
             <span className="divider"></span>
-            <div className="col-100 g-1" style={{marginBottom: "1rem"}}>
-              <div className="skill-grid">
-                <h5 className="text-left">Skill Used</h5>
-                <h5 className="text-left">Complexity</h5>
-                <h5 className="text-left">Applicaion</h5>
-              </div>
+            <div className="col-100 g-1" style={{ marginBottom: "1rem" }}>
+              {console.log(item.project_skill, "this is project skill")}
+              {
+                item.project_skill &&
+                <div className="skill-grid">
+                  <h5 className="text-left">Skill Used</h5>
+                  <h5 className="text-left">Complexity</h5>
+                  <h5 className="text-left">Applicaion</h5>
+                </div>
+              }
               {item.project_skill?.map((skill, i) => (
                 <SkillGrid key={i} color={`_${i + 1}`} {...skill} />
               ))}
@@ -546,5 +551,5 @@ function StartEndDate(jobs = []) {
   let start = jobs[0] && jobs[0].job_start_date;
   let end = jobs[jobs.length - 1] && jobs[jobs.length - 1].job_end_date;
 
-  return `${start || "unknown"}-${end || "unknown"}`;
+  return `${start || "unknown"} to ${end || "Presently"}`;
 }

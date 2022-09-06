@@ -411,5 +411,5 @@ function StartEndDate(jobs = []) {
   let start = jobs[0] && jobs[0].job_start_date;
   let end = jobs[jobs.length - 1] && jobs[jobs.length - 1].job_end_date;
 
-  return `${start || "unknown"}-${end || "unknown"}`;
+  return `${start || "unknown"} to ${end || "Presently"}`;
 }
