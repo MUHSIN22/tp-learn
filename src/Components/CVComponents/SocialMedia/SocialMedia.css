@@ -1,0 +1,21 @@
+.social-media-wrapper{
+    display: flex;
+    padding: 1rem 0;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.social-media-wrapper span{
+    color: #000;
+}
+.social-media{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+@media only screen and (max-width: 500px) {
+    .social-media-wrapper{
+        font-size: 0.8rem;
+    }
+}

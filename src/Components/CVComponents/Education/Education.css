@@ -1,0 +1,96 @@
+.education-grid{
+    display: grid;
+    grid-template-columns: 10% auto 20%;
+    grid-template-areas: 'label details file';
+    grid-gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.education-grid:last-child{
+    border: none;
+}
+.education-label-img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    border: 2px solid rgba(0, 0, 0, 0.071);
+    border-radius: 10px;
+    grid-area: label;
+}
+.education-details{
+    grid-area: details;
+}
+.education-file-wrapper{
+    grid-area: file;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.education-file-wrapper img{
+    width: 100%;
+    aspect-ratio: 2/1;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: all 0.1s ease;
+    border: 2px solid rgba(0, 0, 0, 0.071);
+    cursor: pointer;
+}
+.education-file-wrapper img:hover{
+    border-width: 3px;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+.education-skills-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+.btn-education-download{
+    padding: 0.8rem 1rem;
+    font-weight: 500;
+    background: rgba(254,97,60,1);
+    color: #fff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.btn-education-download:hover{
+    background: rgb(222, 66, 31);
+}
+.education-details span{
+    font-size: 1rem;
+    font-weight: 500;
+}
+@media only screen and (max-width: 768px) {
+    .education-grid{
+        grid-template-columns: auto 15rem;
+        grid-template-areas: 'details file';
+    }
+    .education-label-img{
+        display: none;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .education-grid{
+        grid-template-columns: 1fr;
+        grid-template-areas: 'details''file';
+    }
+    .education-label-img{
+        display: none;
+    }
+    .education-other-details{
+        margin: 0;
+        font-size: 0.9rem;
+    }
+    .education-file-wrapper{
+        width: 80%;
+        align-self: center;
+        justify-self: center;
+    }
+    .btn-education-download{
+        padding: 0.8rem ;
+        font-weight: 500;
+        font-size: 0.8rem;
+        background: rgba(254,97,60,1);
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,63 @@
+.company-section{
+    display: grid;
+    grid-template-columns: 20rem auto;
+    gap: 2rem;    
+    grid-template-areas: 'company company''info graph''other other';
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}   
+.company-section:last-child{
+    border: none;
+}
+.company-info-wrapper{
+    grid-area: info;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    grid-auto-rows: max-content;
+}
+.company-info-wrapper .company-info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.company-stats-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.cv-profile-company-name{
+    margin: 0;
+    font-family: var(--font-montserrat);
+    grid-area: company;
+}
+.company-seperator{
+    background: #000;
+}
+.company-other-details{
+    grid-area: other;
+}
+
+@media only screen and (max-width: 768px) {
+    .company-section {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        grid-template-areas: 'company''info''graph''other';
+    }
+    .company-info-wrapper {
+        grid-template-columns: repeat(2,1fr);
+        grid-gap: 0.5rem;
+    }
+    .cv-profile-company-name {
+        text-align: left;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .company-info-wrapper {
+        grid-template-columns: 1fr;
+        grid-gap: 0.5rem;
+        font-size: 0.8rem;
+    }
+    .cv-profile-company-name {
+        font-size: 1rem;
+    }
+}

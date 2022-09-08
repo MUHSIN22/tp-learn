@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Guage({ label,value, color }) {
     return (
-        <div className="col-100 align-center g-0-5">
+        <div className="align-center g-0-5" style={{display: 'flex',flexDirection:"column",alignItems:"center"}}>
             <div className={`guage ${color}`}>
                 <div className="inner">
                     <span>{value}</span>

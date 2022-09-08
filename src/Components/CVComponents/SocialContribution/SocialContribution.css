@@ -1,0 +1,34 @@
+.social-contribution-grid{
+    display: grid;
+    grid-template-columns: 10% auto;
+    grid-gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.social-contribution-grid:last-child{
+    border: none;
+}
+.contribution-img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    border: 2px solid rgba(0,0,0,0.1);
+}
+.social-contribution-grid .cv-profile-title-secondary{
+    margin: 0;
+}
+.social-contribution-grid .other-details{
+    font-weight: 500;
+}
+@media only screen and (max-width: 500px) {
+    .social-contribution-grid{
+        grid-template-columns: 1fr;
+    }
+    .contribution-img{
+        display: none;
+    }
+    .social-contribution-grid p{
+        margin: 0.5rem 0;
+        font-size: 0.8rem;
+    }
+}

@@ -1,0 +1,39 @@
+.responsibilities-grid{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.responsibilities-grid ul{
+    list-style: none;
+    padding-left: 0;
+}
+.responsibilities-grid li{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-weight: 500;
+    padding: 0.5rem 0;
+}
+.responsibilities-grid li span{
+    flex-shrink: 10;
+}
+.resp-skills{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+@media only screen and (max-width: 768px) {
+    .responsibilities-grid{
+        grid-template-columns: 1fr;
+        grid-gap: 1rem;
+    }
+    .resp-skills{
+        justify-content: flex-start;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .responsibilities-grid li{
+        font-size: 0.85rem;
+    }
+}

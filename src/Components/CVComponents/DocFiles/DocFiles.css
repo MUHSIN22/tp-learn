@@ -1,0 +1,38 @@
+.doc-grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    padding-top: 0.5rem;
+}
+.doc-file-wrapper{
+    display: grid;
+    grid-template-columns: 10% auto;
+    grid-gap: 1rem;
+    padding: 0.5rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.doc-file-wrapper:hover{
+    border-color: rgba(0,0,0,0.1);
+}
+.doc-file-wrapper img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+.doc-details h2{
+    margin: 0;
+}
+@media only screen and (max-width: 500px) {
+    .doc-grid{
+        grid-template-columns: 1fr;
+    }
+    .doc-file-wrapper{
+        grid-template-columns: 5rem auto;
+    }
+    .doc-details p{
+        font-size: 0.9rem;
+    }
+}

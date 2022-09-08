@@ -4,6 +4,19 @@
     display: flex;
     max-width: 100%;
     overflow-x: scroll;
+    padding-bottom: 0.5rem;
+}
+.job-timeline-wrapper::-webkit-scrollbar{
+    height: 10px;
+}
+.job-timeline-wrapper::-webkit-scrollbar-track {
+    background: rgba(111, 111, 111, 0.09);
+    border-radius: 20px;
+    border: none;
+}
+.job-timeline-wrapper::-webkit-scrollbar-thumb{
+    border-radius: 20px;
+    background: #fa5c30;
 }
 .jobTimeline .job{
     margin-top: 3rem;
@@ -40,4 +53,20 @@
     flex: 1;
     height: 1.5rem;
     min-width: 2rem;
+}
+@media only screen and (max-width: 500px) {
+    .jobTimeline .job h6 {
+        font-size: 0.8rem;
+        margin: 0;
+    }
+    .jobTimeline .job span {
+        font-size: 0.7rem;
+        margin: 0;
+    }
+    .jobTimeline .time-bar--bar {
+        background: #00dd97;
+        flex: 1 1;
+        height: 1rem;
+        min-width: 1.5rem;
+    }
 }

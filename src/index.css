@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;600;700;800&display=swap');
 
 :root{
   --muted-black: #434552;
@@ -7,7 +8,8 @@
   --green-muted: #DBEAE5;
   --orange-muted: #F0967D;
   --orange-contrast: #EC6138;
-  --font-poppins:  'Playfair Display', serif;;
+  --font-poppins:  'Playfair Display', serif;
+  --font-montserrat: 'Montserrat', sans-serif;
 }
 body {
   margin: 0;
@@ -45,6 +47,64 @@ a{
 .container-padding{
   padding: 1rem 7%;
 }
+
+.cv-profile-container-primary{
+  padding: 0.5rem 2%;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px 20px rgb(0 0 0 / 2%);
+}
+.cv-profile-title-primary{
+  font-size: 2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin: 0;
+  padding: 1rem 0;
+}
+.cv-profile-title-secondary{
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: var(--font-montserrat);
+}
+.cv-profile-container-secondary{
+  padding: 1rem 0;
+}
+.graph-notations-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+.graph-notation{
+  font-size: 0.9rem;
+  font-weight: 600;
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.notation{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+.apexcharts-tooltip{
+  padding: 0.5rem;
+}
+.skill-btn{
+  background: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 100px;
+  border: 2px solid #f6f7f6;
+  color: #fe5353;
+  width: max-content;
+  font-weight: 600;
+}
+.skill-label{
+  background: #fdece8;
+  padding: 0.8rem;
+  border-radius: 8px;
+  width: max-content;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
 @media only screen and (max-width: 1300px) {
   .container-padding{
     padding: 1rem 4%;
@@ -62,5 +122,33 @@ a{
     transition: box-shadow 0.3s ease;
     display: block;
     width: max-content;
+  }
+  .cv-profile-container-primary{
+    padding: 0.5rem;
+    border-radius: 10px;
+  }
+  .cv-profile-title-primary {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+  }
+  .cv-profile-container-secondary {
+    padding: 0.5rem 0;
+  }
+  .cv-profile-title-secondary {
+    font-size: 1rem;
+  }
+  .notation-text{
+    font-size: 0.7rem;
+  }
+  .skill-btn{
+    background: #fff;
+    padding: 0.8rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+  .skill-label{
+    padding: 0.6rem;
+    border-radius: 8px;
+    font-size: 0.7rem;
   }
 }

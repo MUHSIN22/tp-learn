@@ -22,6 +22,7 @@ export default function Experience6() {
         project_name: '',
         client_name: '',
         project_skills: [],
+        project_desc: "",
         user_company_record_id: '',
         user_company_job_record_id: '',
         user_company_job_project_record_id: '',
@@ -184,7 +185,7 @@ export default function Experience6() {
         if (showAlert && !error) {
             document.getElementById('iconinput-project_name').value = ''
             document.getElementById('iconinput-client_name').value = ''
-            document.getElementById('iconinput-role_Responsibilities').value = ''
+            document.getElementById('iconinput-project_desc').value = ''
             document.getElementById('iconinput-Skills').value = ''
             document.getElementById('iconinput-skill_desc').value = ''
             set_Selected_options([])
@@ -237,7 +238,7 @@ export default function Experience6() {
                     <IconInput value={form.client_name} name='client_name' handleChange={handleChange} label='Client Name' placeholder='e.g. ICICI Bank' width={45} />
                 </div>
                 <div className="form-row">
-                    <IconInput value={form.role_Responsibilities} name='role_Responsibilities' label='Project Description' placeholder='Brief description of the project' width={98} />
+                    <IconInput value={form.project_desc} name='project_desc' handleChange={handleChange} label='Project Description' placeholder='Brief description of the project' width={98} />
                 </div>
                 <MultiSelectedOptions options={selected_options} value_field={'skill_name'} subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />
                 <div className="form-row">

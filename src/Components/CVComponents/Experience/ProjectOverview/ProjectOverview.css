@@ -1,0 +1,58 @@
+.project-header-grid{
+    display: grid;
+    grid-template-columns: 1fr max-content 2fr;
+    grid-gap: 0.5rem;
+    grid-template-areas: 'project divider description'
+                         'client divider description';
+    margin-top: 2rem;
+}
+.project-header-grid .project-title{
+    font-family: var(--font-montserrat);
+    font-size: 1rem;
+    grid-area: project;
+    margin: 0;
+    height: max-content;
+}
+.project-client-wrapper{
+    grid-area: client;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+.client-pointer{
+    flex: 1;
+}
+.client-description-divider{
+    width: 2px;
+    height: 100%;
+    background: #000;
+    grid-area: divider;
+}
+.project-description{
+    grid-area: description;
+    align-self: center;
+}
+@media only screen and (max-width: 500px) {
+    .project-header-grid {
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+        grid-template-areas: 'project''client''divider''description';
+        margin-top: 1rem; 
+    }
+    .client-description-divider{
+        width: 100%;
+        height: 2px;
+    }
+    .project-header-grid .project-title{
+        font-size: 0.9rem;
+    }
+    .project-client-wrapper {
+        font-size: 0.8rem;
+    }
+    .project-description{
+        font-size: 0.8rem;
+        font-weight: 500;
+        text-align: justify;
+    }
+}

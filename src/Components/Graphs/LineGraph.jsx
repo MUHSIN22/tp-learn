@@ -6,6 +6,7 @@ export default function LineGraph({label,category,x_series, salary,management}) 
     const [state, setState] = useState({
         options: {
             chart: {
+                width: "100%",
                 type: 'area',
                 toolbar :{
                     show: false
@@ -102,7 +103,7 @@ export default function LineGraph({label,category,x_series, salary,management}) 
                 options={state.options}
                 series={state.series}
                 type="line"
-                width="100%"
+                // width="100%"
                 height={250}
             />
         </div>

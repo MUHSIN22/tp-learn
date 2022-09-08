@@ -9,7 +9,6 @@ export default function ProgressBar({ value, color, hide_percent,label }) {
                     <div className={`progress-fill ${color}`} role="progressbar" style={{ width: value + '%' }} ></div>
                 </div>
             </div>
-
             <span hidden={hide_percent}>{value}%</span>
         </div>
 

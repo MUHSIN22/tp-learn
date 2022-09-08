@@ -88,3 +88,25 @@
 .sidebar-link-icon{
     height: 1.5rem;
 }
+
+@media only screen and (max-width: 1200px) {
+    .cv-profile-sidebar--active{
+        width: 12rem;
+    }
+    .cv-profile-sidebar .sidebar-logo{
+        width: 6rem;
+        height: auto;
+    }
+    .cv-profile-sidebar .sidebar-toggle-wrapper {
+        width: 100%;
+        padding: 1.5rem 1rem;
+    }
+    .sidebar-links-wrapper {
+        padding: 1.5rem 1rem;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .cv-profile-sidebar{
+        display: none;
+    }
+}

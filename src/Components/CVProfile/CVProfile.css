@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;600;700;800&display=swap');
+
 .cv-profile-container{
     display: grid;
     grid-template-columns: 6rem auto;
     height: 100vh;
     transition: all 0.3s ease;
     grid-template-areas: 'sidebar cv';
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
 }
 .cv-profile-container--expaned {
     grid-template-columns: 18rem auto;
@@ -13,4 +17,24 @@
     padding: 3rem;
     max-height: 100vh;
     overflow-y: scroll;
+}
+@media only screen and (max-width: 1400px) {
+    .cv-profile-container .main-cv-wrapper{
+        padding: 1rem;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .cv-profile-container--expaned {
+        grid-template-columns: 12rem auto;
+    } 
+}
+@media only screen and (max-width: 768px) {
+    .cv-profile-container{
+        grid-template-columns: 1fr;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .cv-profile-container .main-cv-wrapper{
+        padding: 0;
+    }
 }

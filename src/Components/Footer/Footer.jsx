@@ -66,9 +66,10 @@ export default function Footer() {
             <div className="footer-section">
                 <h3 className="footer-title">Company</h3>
                 <ul className="footer-links-wrapper">
-                    <li className="footer-link">About Us</li>
+                    <li className="footer-link" onClick={() => navigate('/about-us')}>About Us</li>
                     <li className="footer-link" onClick={() => navigate('/privacy-policy')}>Privacy Policy</li>
                     <li className="footer-link" onClick={() => navigate('/terms-and-conditions')}>Terms and condition</li>
+                    <li className="footer-link" onClick={() => navigate('/pricing')}>Pricing</li>
                     <li className="footer-link">Contact Us</li>
                     <li className="footer-link">Support</li>
                     <li className="footer-link">Media and press</li>

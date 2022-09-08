@@ -37,13 +37,14 @@ import CVShare from './Components/CVShare/CVShare';
 import CVcontainer from './Components/CV/CVcontainer';
 import AboutUs from './Components/AboutUs/AboutUs';
 import CVProfile from './Components/CVProfile/CVProfile';
+import PricingPage from './Components/Pricing Page/PricingPage';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
-  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password",'/about-us','/cv-profile']
+  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password",'/about-us','/cv-profile','/pricing']
   const routeWithouFooter = ['/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password","/login",'/signup','/get-onboard','cv-builder','cv-share','/OTP-signup','/create-password','/cv-profile']
   useEffect(() => {
     if(auth.authToken&&reload){
@@ -103,6 +104,7 @@ function App() {
        <Route path='/OTP-signup' element={<PreventedRoute><OTPSignup/></PreventedRoute>}/>
        <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
        <Route path="/about-us" element={<AboutUs />} />
+       <Route path='/pricing' element={<PricingPage />} />
        <Route path='/cv-builder' element={<CVBuilder/>}/>
        <Route path='/get-onboard' element={<Onboarding/>}/>
        <Route path='/' element={<Home/>}/>

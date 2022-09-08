@@ -13,6 +13,7 @@ import Section3 from '../CV/Section3'
 import Section3Review from '../CV/Section3Review'
 import SocialContributionReview from '../CV/SocialContributionReview'
 import SocialMedia from '../CV/SocialMedia'
+import MainCV from '../MainCv/MainCV'
 import './CVShare.css'
 
 export default function CVShare() {
@@ -36,17 +37,8 @@ export default function CVShare() {
                 <>
                     {
                         userInfo && userInfo.subscription_status === 1 ?
-                            <div className="cv-share CVReview cvcontainer">
-                                <div className="cv-share-wrapper">
-                                    <Section1 />
-                                    <Section2 />
-                                    <Section3 />
-                                    <CerificationReview />
-                                    <EducationReview />
-                                    <HobbyReview />
-                                    <SocialContributionReview />
-                                    <SocialMedia />
-                                </div>
+                            <div className="cv-share-container">
+                                <MainCV />
                             </div>
                             : <Navigate replace to="/" />
                     }

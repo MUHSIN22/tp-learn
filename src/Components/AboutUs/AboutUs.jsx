@@ -1,5 +1,5 @@
 import React from 'react'
-import pdfFile from '../../Assets/Resume_Chanchal_Jain.pdf'
+import pdfFile from '../../Assets/ABOUT US PAGE TALENTPLACE.pdf'
 
 export default function AboutUs() {
   return (
