@@ -372,7 +372,6 @@ function DesignationOverview(props) {
           skills: job_role.skills,
         }}
       />
-      {console.log(job_role.project,"this is project")}
       {job_role.project && (
         <ProjectOverview projects={{ projects: job_role && job_role?.project, company_job_record_id: job_role.company_job_record_id, company_record_id: company_record_id }} />
       )}
@@ -491,12 +490,9 @@ function ProjectOverview({ projects: { projects, company_job_record_id, company_
             <span className="divider"></span>
             <div className="flex-wrap align-stretch g-1">
               <ProjectTile project_name={item.project_name} client_name={item.client_name} />
-
-              <p>{console.log(item,'this is item')}</p>
             </div>
             <span className="divider"></span>
             <div className="col-100 g-1" style={{ marginBottom: "1rem" }}>
-              {console.log(item.project_skill, "this is project skill")}
               {
                 item.project_skill &&
                 <div className="skill-grid">

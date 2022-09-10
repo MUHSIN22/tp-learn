@@ -1,0 +1,21 @@
+.common-input-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+    width: 100%;
+}
+.common-input-wrapper input,
+.common-input-wrapper select,
+.common-input-wrapper textarea{
+    padding: 0.5rem;
+    border-radius: 0;
+    border: 1px solid rgba(0, 0, 0, 0.746);
+    background: #fff;
+    font-family: var(--font-montserrat);
+    resize: none;
+}
+.common-input-wrapper input:disabled{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: 1px solid rgba(0, 0, 0, 0.2);
+}

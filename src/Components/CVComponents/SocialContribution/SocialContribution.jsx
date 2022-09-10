@@ -7,7 +7,6 @@ import './SocialContribution.css'
 
 export default function SocialContribution() {
     const socialContribution = useSelector(selectSocialContribution)
-    console.log(socialContribution, 'this is social Contri');
     return (
         <div className="cv-profile-container-primary">
             <h2 className="cv-profile-title-primary">Social Contributions</h2>

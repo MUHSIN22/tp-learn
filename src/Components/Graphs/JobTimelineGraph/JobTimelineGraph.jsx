@@ -36,11 +36,9 @@ export default function JobTimelineGraph({jobs}) {
                 show: true
             },
             custom: function(opts) {
-                console.log(opts,"this is opts");
               const fromYear = new Date(opts.y1).getFullYear()
               const toYear = new Date(opts.y2).getFullYear()
               const values = opts.ctx.rangeBar.getTooltipValues(opts)
-            console.log(fromYear,toYear,values);
               return (
                 `<div className="job-role-tooltip">
                     ${values.seriesName} ${fromYear}-${toYear}
@@ -52,7 +50,6 @@ export default function JobTimelineGraph({jobs}) {
       })
 
       useEffect(() => {
-        console.log(jobs);
         jobTimelineSeriesCreator()
       },[])
 
@@ -63,7 +60,6 @@ export default function JobTimelineGraph({jobs}) {
             let isInSeries = false;
             for(let j = 0; j< series.length ; j++){
                 if(series[j].name === jobs[i].timeline.job_level_name){
-                    console.log('here',series[j].name, jobs[i].timeline.job_level_name);
                     series[j].data.push({
                         x: jobs[i].company_name,
                         y: [
@@ -91,7 +87,6 @@ export default function JobTimelineGraph({jobs}) {
             }
         }
         setState({...state,series})
-        console.log(series,"this is series");
       }
 
   return (

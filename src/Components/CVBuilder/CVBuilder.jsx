@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Steps from './Steps'
 import './CVBuilder.css'
 import FormContainer from '../Form/FormContainer'
@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { selectBio, selectCertificate, selectEducation, selectFirstCompany, selectFirstJob, selectFormId, selectResumeDetails, selectResumeInfo, selectSocilaLinks, selectUserInfo } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import API from '../../API'
+import MainCV from '../MainCv/MainCV'
 export default function CVBuilder() {
   const first_job = useSelector(selectFirstJob)
   const Education = useSelector(selectEducation)
@@ -16,7 +17,9 @@ export default function CVBuilder() {
   const resumeInfo = useSelector(selectUserInfo)
   const details = useSelector(selectResumeDetails)
   const authToken = useSelector(selectAuthToken);
+  const stepRow = useRef(null)
   const user_id = useSelector(selectUser_id)
+  const [stepRowHeight, setStepRowHeight] = useState(0)
   const [progress, setProgress] = useState({
     'Contact Info': { id:1, state: 'complete' },
     'Experience': { id:1, state: 'active' },
@@ -138,18 +141,24 @@ export default function CVBuilder() {
 
 
 
+  useEffect(() => {
+    setStepRowHeight(stepRow.current.offsetHeight)
+  },[])
+
 
   return (
     <div className="cvbuilder">
-      <div className="step-row">
+      <div className="step-row" ref={stepRow}>
         <span></span>
         {
           Object.keys(progress).map((step, index) => <Steps name={step} {...progress[step]} index={index + 1} />)
         }
       </div>
-      <div className="builder-row">
+      <div className="builder-row" style={{height: `calc(100vh - (${stepRowHeight}px + 7rem))`}}>
         <FormContainer />
-        <CVcontainer />
+        <div className="cv-preview-container" style={{height: `calc(100vh - (${stepRowHeight}px + 7rem))`}}>
+          <MainCV />
+        </div>
       </div>
 
     </div>

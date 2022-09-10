@@ -5,6 +5,12 @@
     grid-template-areas: 'company company''info graph''other other';
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }   
+.cv-preview-container .company-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    grid-template-areas: 'company''info''graph''other';
+}
 .company-section:last-child{
     border: none;
 }

@@ -9,7 +9,6 @@ import moment from 'moment';
 let colors = ["#fe4c1c", "#00dd97", "#008dff"]
 
 export default function DesignationOverview({ jobRole }) {
-    console.log(jobRole, "jobRole");
     return (
         <div className="cv-designation-overview">
             <div className="designation-title-wrapper">

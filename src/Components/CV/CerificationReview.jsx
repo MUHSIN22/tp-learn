@@ -96,7 +96,6 @@ function CerificationCard({ project_name, logo, certificate_start_date, certific
                 </div>
 
             </div>
-            {console.log(certificate_file,'this is certificate file')}
             {certificate_file && (
                 <>
                     {getFileExtensionFromURI(certificate_file) === "image" ?

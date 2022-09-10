@@ -10,6 +10,9 @@
     justify-content: center;
     align-items: center;
 }
+.onboarding .date-row{
+  width: 20rem;
+}
 .onboarding .content{
     width: 50%;
     display: flex;

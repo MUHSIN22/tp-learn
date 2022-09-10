@@ -8,7 +8,6 @@ import getFileExtensionFromURI from '../../../functionUtils/getFileExtensionFrom
 
 export default function Education() {
     const education = useSelector(selectEducation);
-    console.log(education, "education");
     return (
         <div className="cv-profile-container-primary">
             <h2 className="cv-profile-title-primary">Education</h2>

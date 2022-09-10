@@ -13,7 +13,6 @@ import { selectHobbies } from '../../../redux/Features/ResumeSlice'
 export default function Hobbies() {
     const hobbies = useSelector(selectHobbies)
     const { adventure, any_other, entertainment, music, sports, leisure, travel, books } = useSelector(selectHobbies)
-    console.log(hobbies, 'this is hobbies');
     return (
         <div className="cv-profile-container-primary">
             <h2 className="cv-profile-title-primary">Hobbies</h2>

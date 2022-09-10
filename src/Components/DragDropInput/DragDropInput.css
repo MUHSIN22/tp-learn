@@ -1,11 +1,12 @@
 .dragDropInput{
-    width: 92%;
+    width: 100%;
     height: fit-content;
-    padding: 2rem;
-    border: 2px dashed ;
-    border-radius: 1rem;
+    padding: 1rem;
+    border: 3px dashed #2748ce;
+    border-color: #2748ce;
     cursor: pointer;
-    background-color: #F9F8FC;
+    background-color: #2748ce0a;
+    color: #2748ce;
 }
 
 .dragDropInput .sub-header{

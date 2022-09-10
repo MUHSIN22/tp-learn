@@ -24,14 +24,14 @@ export default function CareerTimeline() {
         <div className="cv-career-timeline cv-profile-container-primary">
             <h2 className="cv-profile-title-primary">Career Timeline</h2>
             <div className="career-map-wrapper">
-                {((timelineGraph && timelineGraph.company_info) || timelineGraph.skill_info) && <JobTimeline jobs={timelineGraph.company_info} skills={timelineGraph.skill_info} />}
+                {((timelineGraph && timelineGraph.company_info) && (timelineGraph && timelineGraph.skill_info)) && <JobTimeline jobs={timelineGraph.company_info} skills={timelineGraph.skill_info} />}
             </div>
             <div className="career-map-wrapper">
                 <h3 className="cv-profile-title-secondary">Job Roles</h3>
-                {((timelineGraph && timelineGraph.company_info) || timelineGraph.skill_info) && <JobTimelineGraph jobs={timelineGraph.company_info} skills={timelineGraph.skill_info} />}
+                {((timelineGraph && timelineGraph.company_info) && (timelineGraph && timelineGraph.skill_info)) && <JobTimelineGraph jobs={timelineGraph.company_info} skills={timelineGraph.skill_info} />}
             </div>
             {
-                timelineGraph.skill_info &&
+                timelineGraph && timelineGraph.skill_info &&
                 <div className="career-skill-wrapper cv-profile-container-secondary">
                     <h3 className="cv-profile-title-secondary">Key Skills</h3>
                     {timelineGraph.skill_info && <TimelineChart skills={timelineGraph.skill_info} />}

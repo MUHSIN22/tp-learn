@@ -11,7 +11,7 @@ import SuggestiveInput from '../IconInput/SuggestiveInput';
 import { addJobSkills, resetError, selectLastCompany, selectLastJob, selectNewDesignation, selectNewJob, selectNewRoles, selectResumeError, selectResumeLoading, selectResumeMessage, setResumeError } from '../../redux/Features/ResumeSlice';
 import Control from './Control';
 import Alert from '../Alert/Alert';
-import MultiSelectedOptions from './MultiSelectedOptions';
+import MultiSelectedOptions from '../../Util Components/MultiSelectedOptions';
 import parse from 'html-react-parser';
 const DEBOUNCE_DELAY = 600;
 

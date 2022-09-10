@@ -8,11 +8,8 @@ import getFileExtensionFromURI from '../../../functionUtils/getFileExtensionFrom
 
 export default function Certificates() {
     const certificateData = useSelector(selectCertificate) || [];
-    console.log(certificateData, "this is certificate data");
     const getMonthDifference = (from, to) => {
-        console.log(from, to, "this is dates");
         let monthDiff = moment(to, "dd-mm-yyyy").diff(moment(from, "dd-mm-yyyy"), 'month')
-        console.log(monthDiff, 'this is diff');
         return monthDiff === 0 ? "Less than a month" : `${monthDiff} Months`;
     }
     return (

@@ -1,0 +1,12 @@
+.designation-form-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.designation-instruction{
+    background: #fce7e6;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 600;
+}

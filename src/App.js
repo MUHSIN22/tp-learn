@@ -38,14 +38,16 @@ import CVcontainer from './Components/CV/CVcontainer';
 import AboutUs from './Components/AboutUs/AboutUs';
 import CVProfile from './Components/CVProfile/CVProfile';
 import PricingPage from './Components/Pricing Page/PricingPage';
+import DashboardCv from './Components/DashboardCv/DashboardCv';
+import EditProfilePage from './Components/EditProfilePage/EditProfilePage';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
-  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password",'/about-us','/cv-profile','/pricing']
-  const routeWithouFooter = ['/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password","/login",'/signup','/get-onboard','cv-builder','cv-share','/OTP-signup','/create-password','/cv-profile']
+  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password",'/about-us','/cv-profile','/pricing','/dashboard/cv',"/dashboard/edit"]
+  const routeWithouFooter = ['/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password","/login",'/signup','/get-onboard','cv-builder','cv-share','/OTP-signup','/create-password','/cv-profile',"/dashboard/cv","/dashboard/edit"]
   useEffect(() => {
     if(auth.authToken&&reload){
       try {
@@ -124,6 +126,10 @@ function App() {
        <Route path="*" element={<NotFound/>}/>
        <Route path='/logout' element={<Logout/> }/>
        <Route path='/change_password' element={<ChangePassword/> }/>
+       <Route path='/dashboard' element={<CVProfile />}>
+          <Route path="cv" element={<DashboardCv />} />
+          <Route path='edit' element={<EditProfilePage />} />
+       </Route>
       </Routes>
       {!routeWithouFooter.includes(window.location.pathname) ? <Footer /> : null}
     </div>

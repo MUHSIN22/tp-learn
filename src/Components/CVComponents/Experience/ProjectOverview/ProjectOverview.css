@@ -33,6 +33,21 @@
     grid-area: description;
     align-self: center;
 }
+.project-skills-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+.project-skill-grid{
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-gap: 1rem;
+}
+.project-skill-grid .skill-title{
+    font-size: 1rem;
+}
+.project-skill-grid .skill-application{
+    align-self: center;
+}
 @media only screen and (max-width: 500px) {
     .project-header-grid {
         grid-template-columns: 1fr;
@@ -54,5 +69,15 @@
         font-size: 0.8rem;
         font-weight: 500;
         text-align: justify;
+    }
+    .project-skill-grid{
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .project-skill-grid .skill-application{
+        font-size: 0.8rem;
+    }
+    .project-skill-grid:first-child{
+        display: none;
     }
 }

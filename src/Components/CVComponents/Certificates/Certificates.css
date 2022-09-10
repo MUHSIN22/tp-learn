@@ -9,6 +9,13 @@
 .certificates-grid:last-child{
     border: none;
 }
+.cv-preview-container .certificates-grid{
+    grid-template-columns: 1fr;
+    grid-template-areas: 'details''file';
+}
+.cv-preview-container .certificates-label-img{
+    display: none;
+}
 .certificates-label-img{
     width: 100%;
     aspect-ratio: 1/1;

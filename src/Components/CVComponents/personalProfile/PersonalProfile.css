@@ -5,6 +5,10 @@
     padding-top: 5rem;
     gap: 2rem;
 }
+.cv-preview-container .cv-personal-profile{
+    grid-template-columns: 1fr;
+    grid-template-areas: 'pl''pr';
+}
 .cv-personal-left{
     background-color: #faf7fc;
     grid-area: pl;
@@ -25,6 +29,7 @@
     width: 8rem;
     height: 8rem;
     margin-top: -4rem;
+    border-radius: 50%;
 }
 .cv-personal-left .personal-contact-wrapper{
     display: flex;
@@ -71,6 +76,9 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
 }
+.cv-preview-container .cv-overview-wrapper{
+    grid-template-columns: 1fr;
+}
 .cv-overview-wrapper{
     border-radius: 20px;
     box-shadow: 0px 0px 20px 20px rgba(0,0,0,0.02);
@@ -90,6 +98,15 @@
 }
 .cv-overview-card:last-child{
     border-right: none;
+}
+.cv-preview-container .cv-overview-card{
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 0rem;
+    padding-bottom: 1rem;
+}
+.cv-preview-container .cv-overview-card:last-child{
+    border-bottom: none;
 }
 .cognetive-wrapper{
     display: flex;

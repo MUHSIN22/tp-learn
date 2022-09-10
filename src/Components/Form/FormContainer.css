@@ -1,11 +1,24 @@
 .formContainer{
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 2rem;
     background-color: #fff;
     border-radius: 5px;
     gap: 1rem;
+    height: 100%;
+    overflow-y: scroll;
+}
+.formContainer::-webkit-scrollbar{
+    width: 10px;
+}
+.formContainer::-webkit-scrollbar-thumb{
+    background: rgb(163, 163, 163);
+    border-radius: 15px;
+}
+.formContainer::-webkit-scrollbar-track{
+    background: rgb(230, 230, 230);
+    border-radius: 15px;
 }
 .formContainer h1{
     font-weight: 700;
@@ -51,16 +64,6 @@
 }
 .editor .ck-editor__editable_inline {
     min-height: 50vh;
-}
-
-.suggestions{
-    border-radius: 0.5rem;
-    overflow: hidden;
-    border: #c1c1c1 solid 1px;
-    padding: 2rem 0 0.5rem 0;
-    max-height: 50vh ;
-    position: relative;
-    margin-top: 1.6rem;
 }
 .suggestions .head{
     position: absolute;

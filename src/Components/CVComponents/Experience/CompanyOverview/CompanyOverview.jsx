@@ -9,20 +9,27 @@ import { ReactComponent as BarGraph } from "../../../../Assests/icons/barGraph.s
 import { ReactComponent as Human } from "../../../../Assests/icons/human.svg";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthToken, selectUser_id } from '../../../../redux/Features/AuthenticationSlice';
-import { companyWiseGraph } from '../../../../redux/Features/GraphSlice';
+import { companyWiseGraph, companyWiseGraphForShare } from '../../../../redux/Features/GraphSlice';
 import LineGraph from '../../../Graphs/LineGraph';
 import DesignationOverview from '../DesignationOverview/DesignationOverview';
 import RolesAndResponsibilities from '../roles and responsibilities/RolesAndResponsibilities';
 import ProjectOverview from '../ProjectOverview/ProjectOverview';
+import { useParams } from 'react-router-dom';
 
 export default function CompanyOverview({ company }) {
     const [companyWise, setCompanyWise] = useState(null)
     const dispatch = useDispatch();
     const user_id = useSelector(selectUser_id);
     const token = useSelector(selectAuthToken)
+    const {id} = useParams();
 
     useEffect(() => {
-        getCompanyWise();
+        let location = window.location.pathname.split('/');
+        if(location.includes('cv-share')){
+            getCompanyWiseForShare()
+        }else{
+            getCompanyWise();
+        }
     }, [company])
 
     function StartEndDate(jobs = []) {
@@ -41,6 +48,17 @@ export default function CompanyOverview({ company }) {
         setCompanyWise(response.data.recordDetails.salary_management_graph)
         return null
     }
+
+    const getCompanyWiseForShare = async () => {
+        let response = await dispatch(
+            companyWiseGraphForShare({
+                body: { user_id: id, user_company_record_id: company.company_record_id },
+            })
+        ).unwrap();
+        setCompanyWise(response.data.recordDetails.salary_management_graph)
+        return null
+    }
+
 
     return (
         <section className="company-section cv-profile-container-secondary">
@@ -119,7 +137,6 @@ export default function CompanyOverview({ company }) {
                 {
                     company.job_role && company.job_role.map((jobRole,index) => (
                         <Fragment key={index}>
-                            {console.log(jobRole,"this is jobrole")}
                             <DesignationOverview jobRole={jobRole} />
                             <RolesAndResponsibilities data={jobRole} />
                             {

@@ -68,7 +68,6 @@ export default function PdfGenerator({ bio, resumeDetails }) {
   }, [bio])
 
   const makePoints = (data) => {
-    console.log(data, 'this is roles data');
     let splittedData = data.split("&lt;p&gt;");
     splittedData.forEach((item, index) => {
       splittedData[index] = item.replace("&lt;/p&gt;", "")

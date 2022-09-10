@@ -1,0 +1,16 @@
+.role-skills-container{
+    display: grid;
+    grid-template-columns: auto max-content;
+    grid-gap: 1rem;
+    align-items: end;
+}
+.role-skills-container .skill-and-complexity{
+    display: grid;
+    grid-template-columns: auto 10rem;
+}
+.roles-and-suggestion-grid{
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    grid-gap: 0.5rem;
+    height: 20rem;
+}

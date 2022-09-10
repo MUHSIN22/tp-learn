@@ -10,7 +10,7 @@ import Control from './Control';
 import useDebounce from '../../DebouncedSearch';
 import SuggestiveInput from '../IconInput/SuggestiveInput';
 import Alert from '../Alert/Alert';
-import MultiSelectedOptions from './MultiSelectedOptions';
+import MultiSelectedOptions from '../../Util Components/MultiSelectedOptions';
 import { FaClosedCaptioning } from 'react-icons/fa';
 const DEBOUNCE_DELAY = 600;
 
@@ -78,7 +78,6 @@ export default function Experience6() {
         setSearch(e.target.value)
     }
     const selectSkillHandler = (i,suggestion,value) => {
-        console.log(value,'this is value');
         if(suggestion.id){
             temp.skill_id = skillList[i].id
             temp.skill_name = skillList[i].skill_name
@@ -86,8 +85,6 @@ export default function Experience6() {
             temp.skill_id = null
             temp.skill_name = value
         }
-        console.log(temp);
-        console.log(temp);
         
         setTemporary(temp)
     }
@@ -101,7 +98,6 @@ export default function Experience6() {
     }
     const handleAddSkill = (event) => {
         setAlertInnder(false)
-        console.log(temp);
         if(temp.skill_desc && temp.skill_complexity && temp.skill_name){
             setAlertInnder(false)
             set_Selected_options([...selected_options, temp])

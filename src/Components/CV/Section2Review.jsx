@@ -19,7 +19,6 @@ export default function Section2() {
     return years;
   }
 
-  console.log(timelineGraph,"this is timeline graph");
   return (
     <>
       {

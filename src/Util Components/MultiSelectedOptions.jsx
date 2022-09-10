@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactComponent as Cross } from '../../Assests/icons/cross.svg';
+import { ReactComponent as Cross } from '../Assests/icons/cross.svg';
 export default function MultiSelectedOptions({options=[],deleteHandler=()=>{}, value_field='', subValue_field=''}) {
   return (
     <div className="flex-wrap align-start justify-start g-1">

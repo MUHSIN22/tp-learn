@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addExperience, changeFormId, selectFormId, selectReload, selectResumeDetails, selectResumeError, selectResumeInfo, selectResumeMessage, selectResumeStatus } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
+import DateInput from '../../Util Components/Inputs/DateInput/DateInput';
 export default function Onboarding() {
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
@@ -135,9 +136,9 @@ function Step6() {
             <h5>So tell us, how many years of experience do you hold, whether as a full-time employee, a freelancer or as an entrepreneur? </h5>
            
             {
-                !isFresher&&
-                <div className="form-row">
-                    <IconInput icon={<></>} handleChange={handleChange} type='date' name='job_start_date' placeholder='Years' width={50} label='When did you start your first job'/>
+                <div className="form-row date-row">
+                    <DateInput handleChange={handleChange} isDisabled={isFresher} type='date' name='job_start_date' placeholder='Years' label='When did you start your first job' />
+                    {/* <IconInput icon={<></>} handleChange={handleChange} type='date' name='job_start_date' placeholder='Years' width={50} label='When did you start your first job'/> */}
                 </div>
             }
 

@@ -9,7 +9,6 @@ export default function RolesAndResponsibilities({ data }) {
         let rolesString = parser(data.role_responsibilties)
         rolesString = rolesString.replace(/<\/?[^>]+(>|$)/g, "");
         rolesList = rolesString.split(".")
-        console.log(rolesList);
     }
     return (
         <div className="cv-profile-container-secondary">
@@ -29,7 +28,6 @@ export default function RolesAndResponsibilities({ data }) {
                     </ul>
                 </div>
                 <div className="resp-skills">
-                    {console.log(data.skills,"this is skills")}
                     {
                         data.skills && data.skills[0] &&
                         data.skills.map((skill,index) => (

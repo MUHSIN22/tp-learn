@@ -22,8 +22,6 @@ export default function MainCV() {
   const hobbies = useSelector(selectHobbies)
   const [isSocialLinks,setIsSocialLinks] = useState(false)
   const [isHobbies,setIsHobbies] = useState(false)
-
-  console.log(socialLinks,contributions);
   useEffect(() => {
     setIsSocialLinks(checkAnyoneAvailable(socialLinks))
     setIsHobbies(checkAnyoneAvailable(hobbies))

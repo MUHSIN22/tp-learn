@@ -1,0 +1,9 @@
+.suggestions {
+    overflow-y: scroll;
+    border: #c1c1c1 solid 1px;
+    padding: 2rem 0 0.5rem 0;
+    max-height: 100%;
+    position: relative;
+    width: 100%;
+    margin-top: 1.6rem;
+}

@@ -7,7 +7,7 @@ import { addCertification, nextForm, reload, selectCertificate, selectNewCertifi
 import Control from './Control';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
-import MultiSelectedOptions from './MultiSelectedOptions';
+import MultiSelectedOptions from '../../Util Components/MultiSelectedOptions';
 import { searchSkills, selectSkillList } from '../../redux/Features/MasterSlice';
 import useDebounce from '../../DebouncedSearch';
 import SuggestiveInput from '../IconInput/SuggestiveInput';

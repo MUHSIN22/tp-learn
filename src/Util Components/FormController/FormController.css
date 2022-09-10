@@ -1,0 +1,34 @@
+.form-controller-primary{
+    display: flex;
+    justify-content: space-between;
+}
+.form-controller-primary .btn-controller{
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border: 2px solid #00d99e;
+    background: #fff;
+    border-radius: 5px;
+    color: #00d99e;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.form-controller-primary .btn-next{
+    background: #00d99e;
+    box-shadow: 0px 13px 24px 6px #00d99f4b;
+    color: #fff;
+}
+.form-controller-primary .btn-next:hover{
+    box-shadow: 0px 5px 24px 6px #00d99f4b;
+}
+.form-controller-primary .btn-back:hover{
+    background: #00d99e;
+    color: #fff;
+}
+.form-controller-primary .btn-skip{
+    border: 2px solid rgba(255, 161, 20, 1);
+    color: rgba(255, 161, 20, 1);
+}
+.form-controller-primary .btn-skip:hover{
+    background: rgba(255, 161, 20, 1);
+    color: #fff;
+}

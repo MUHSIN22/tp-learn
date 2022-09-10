@@ -12,6 +12,7 @@ import IconSelect from '../IconInput/IconSelect'
 import SuggestiveInput from '../IconInput/SuggestiveInput'
 import Control from './Control'
 import errorMessageHandler from '../../functionUtils/errorMessageHandler'
+
 const DEBOUNCE_DELAY = 600;
 export default function Experience3() {
     const dispatch = useDispatch()
@@ -100,7 +101,6 @@ export default function Experience3() {
             body.other_designation_name = debouncedSearchState;
             body.designation_id = ""
         }
-        console.log(body);
         if(form.remote_work!=='yes')  body.remote_work = 'no'
         if(form.hide_salary!=='yes')  body.hide_salary = 'no'
         if(form.current_working!=='yes')  body.current_working = 'no'

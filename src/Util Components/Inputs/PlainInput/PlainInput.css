@@ -1,0 +1,14 @@
+.plain-input-wrapper{
+    display: grid;
+    grid-template-columns: auto max-content;
+}
+.plain-input-wrapper .PA{
+    background: #000;
+    color: #fff;
+    padding: 0 0.5rem;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

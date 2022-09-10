@@ -51,7 +51,6 @@ export default function AdditionalSkills3() {
         }
     }
     useEffect(() => {
-        console.log(recordDetails);
         try {
             const body = {
                 job_title_id: lastJob.designation_id,

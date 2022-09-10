@@ -1,0 +1,9 @@
+.edit-profile-page{
+    display: flex;
+    padding: 5rem 3rem;
+    flex-direction: column;
+    grid-area: cv;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}

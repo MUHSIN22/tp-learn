@@ -1,13 +1,16 @@
 .cvbuilder{
+    padding: 0 4%;
     width: 100%;
     padding-top: 6rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #F7F6FA;
+    font-family: var(--font-montserrat);
+    max-height: 100vh;
 }
 .cvbuilder .step-row{
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -15,13 +18,11 @@
     position: relative;
 }
 .cvbuilder .builder-row{
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 2rem;
-    column-gap: 3px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,50%);
+    margin-top: 1rem;
+    height: max-content;
 }
 .cvbuilder .step-row span{
     position: absolute;
@@ -85,7 +86,21 @@
     color: #fff;
     border-color: #fff;
 }
-
+.cvbuilder .cv-preview-container{
+    text-align: left;
+    overflow-y: scroll;
+}
+.cvbuilder .cv-preview-container::-webkit-scrollbar{
+    width: 10px;
+}
+.cvbuilder .cv-preview-container::-webkit-scrollbar-thumb{
+    background: rgb(163, 163, 163);
+    border-radius: 15px;
+}
+.cvbuilder .cv-preview-container::-webkit-scrollbar-track{
+    background: rgb(230, 230, 230);
+    border-radius: 15px;
+}
 @media only screen and (max-width:1024px) {
     .cvbuilder .step{
         width: 100%;

@@ -1,0 +1,37 @@
+.edit-selector-wrapper{
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem;
+    background: #f7f6f7;
+    border-radius: 8px;
+    height: max-content;
+    min-width: 800px;
+}
+.edit-selector-wrapper .icon-wrapper{
+    background: #fff;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+.edit-selector-wrapper img{
+    width: 2.5rem;
+}
+.edit-selector-wrapper .edit-details-wrapper{
+    background: #fff;
+    border-radius: 8px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+.edit-selector-wrapper .edit-content{
+    font-size: 1.2rem;
+    margin: 0;
+}
+.edit-selector-wrapper .btn-edit{
+    background: transparent;
+    color: blue;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+}

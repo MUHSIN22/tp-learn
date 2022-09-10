@@ -4,6 +4,11 @@
     grid-template-areas: 'info skills';
     margin-bottom: 2rem;
 }
+.cv-preview-container .designation-grid{
+    grid-template-columns: 1fr;
+    grid-template-areas: 'info''skills';
+    gap: 1rem;
+}
 .designation-grid .company-info-wrapper{
     grid-area: info;
 }

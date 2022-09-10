@@ -2,6 +2,10 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
 }
+.cv-preview-container .responsibilities-grid{
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+}
 .responsibilities-grid ul{
     list-style: none;
     padding-left: 0;

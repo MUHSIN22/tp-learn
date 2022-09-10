@@ -35,13 +35,10 @@ export default function PersonalProfile() {
         }
         return obj
     }
-
-
-    console.log(contactInfo, bio, firstCompany, profilePic, fname, lname);
     return (
         <div className="cv-personal-profile">
             <div className="cv-personal-left">
-                <img src={avatar} alt="" className="profile-avatar" />
+                <img src={profilePic ? profilePic :  avatar} alt="" className="profile-avatar" />
                 <h6 className="cv-personal-left-header">Personal Information</h6>
                 <div className="personal-contact-wrapper">
                     {
@@ -107,7 +104,6 @@ export default function PersonalProfile() {
                         <div className="cv-overview-card">
                             <h3 className="overview-title">Cognetive Skillset</h3>
                             <div className="cognetive-wrapper">
-                                {console.log(cognitive_info)}
                                 {cognitive_info && cognitive_info.map((cogInfo) => {
                                     color = Math.floor(Math.random() * (4 - 1 + 1) + 1)
                                     return <Guage label={cogInfo.name} value={parseFloat(cogInfo.value)} color={"_" + color} />
