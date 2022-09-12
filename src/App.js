@@ -40,14 +40,16 @@ import CVProfile from './Components/CVProfile/CVProfile';
 import PricingPage from './Components/Pricing Page/PricingPage';
 import DashboardCv from './Components/DashboardCv/DashboardCv';
 import EditProfilePage from './Components/EditProfilePage/EditProfilePage';
+import CareerObjectiveEditor from './Components/EditorForms/CareerObjectiveEditor';
+import EditFormTemplate from './Components/EditFormTemplate/EditFormTemplate';
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
-  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password",'/about-us','/cv-profile','/pricing','/dashboard/cv',"/dashboard/edit"]
-  const routeWithouFooter = ['/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password","/login",'/signup','/get-onboard','cv-builder','cv-share','/OTP-signup','/create-password','/cv-profile',"/dashboard/cv","/dashboard/edit"]
+  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password",'/about-us','/cv-profile','/pricing','/dashboard/cv',"/dashboard/edit",'/dashboard/editor/career-objective']
+  const routeWithouFooter = ['/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password","/login",'/signup','/get-onboard','/cv-builder','/OTP-signup','/create-password','/cv-profile',"/dashboard/cv","/dashboard/edit",'/dashboard/editor/career-objective']
   useEffect(() => {
     if(auth.authToken&&reload){
       try {
@@ -129,6 +131,9 @@ function App() {
        <Route path='/dashboard' element={<CVProfile />}>
           <Route path="cv" element={<DashboardCv />} />
           <Route path='edit' element={<EditProfilePage />} />
+          <Route path="editor" element={<EditFormTemplate />}>
+            <Route path='career-objective' element={<CareerObjectiveEditor />} />
+          </Route>
        </Route>
       </Routes>
       {!routeWithouFooter.includes(window.location.pathname) ? <Footer /> : null}

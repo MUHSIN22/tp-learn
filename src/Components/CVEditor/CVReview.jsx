@@ -40,6 +40,8 @@ import {
   selectResumeDetails,
   uploadResume,
   verifyPayment,
+  downloadCV,
+  selectPDFLink,
 } from "../../redux/Features/ResumeSlice";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -67,6 +69,7 @@ export default function CVBuilder() {
   const user_id = useSelector(selectUser_id)
   const token = useSelector(selectAuthToken)
   const navigate = useNavigate();
+  const PDFLink = useSelector(selectPDFLink)
   const [instance, setInstance] = usePDF({ document: <PdfGenerator bio={bio} resumeDetails={resumeDetails} /> })
   // let loaderState=useSelector(getLoaderstate)
   const handleEdit = (e) => {
@@ -193,6 +196,14 @@ export default function CVBuilder() {
     })
   }
 
+  const downloadPDF = async () => {
+    console.log("this si sjsdklfjal;skdjklasdjlf;kjwdasl");
+    let data = await dispatch(downloadCV({body:{user_id}}))
+    if(data){
+      window.open(PDFLink)
+    }
+  }
+
 
   const floatingButton = (
     <div className="headerButtons">
@@ -211,14 +222,9 @@ export default function CVBuilder() {
             <div className="d-flex justify-between">
               {
                 (resumeDetails.subscription_status && resumeDetails.subscription_status === 1) ?
-                  <PDFDownloadLink document={<PdfGenerator bio={bio} resumeDetails={resumeDetails} />} fileName={`Resume_${resumeDetails.fname}_${resumeDetails.lname}.pdf`}>
-                    {({ blob, url, loading, error }) => (
-                      <>
-                        {loading ? "loading" : <img src={PDF} alt="" />}
-                      </>
-
-                    )}
-                  </PDFDownloadLink>
+                  <span onClick={downloadPDF}>
+                     <img src={PDF} alt=""/>
+                  </span>
                   :
                   <span onClick={() => displayRazorpay(499)}>
                     <img src={PDF} alt="" />

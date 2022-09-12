@@ -19,7 +19,7 @@ let EditList = [
     },
     {
         title: "Career Objective",
-        link: "/career-objective",
+        link: "/dashboard/editor/career-objective",
         icon: CareerObjective
     },
     {

@@ -3,3 +3,8 @@
     flex-direction: column;
     gap: 1rem;
 }
+@media only screen and (max-width: 500px) {
+    .main-form-wrapper{
+        gap: 0.5rem;
+    }
+}

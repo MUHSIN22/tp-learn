@@ -167,9 +167,15 @@ export default function CVBuilder() {
         <button className="visibility-icon-btn" onClick={() => setPreview(!isPreview)}>
           {
             isPreview ?
-              <BsEyeSlashFill />
+              <>
+                  <BsEyeSlashFill />
+                  <span>Hide Preview</span>
+              </>
               :
-              <BsEyeFill />
+              <>
+                <BsEyeFill />
+                <span>Show Preview</span>
+              </>
           }
         </button>
       </div>

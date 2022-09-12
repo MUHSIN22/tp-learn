@@ -1,0 +1,18 @@
+.edit-form-controller{
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+.edit-form-controller .btn{
+    border-radius: 5px;
+    background: transparent;
+    border: 2px solid #fe7253;
+    color: #fe7253;
+    cursor: pointer;
+    width: max-content;
+    padding: 0.7rem 3rem;
+}
+.edit-form-controller .btn-save{
+    background: #fe7253;
+    color: #fff;
+}

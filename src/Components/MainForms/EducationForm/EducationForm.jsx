@@ -12,6 +12,7 @@ import TextArea from '../../../Util Components/Inputs/TextArea/TextArea'
 import Alert from '../../Alert/Alert'
 import DragDropInput from '../../DragDropInput/DragDropInput'
 import './EducationForm.css'
+import { ReactComponent as AddCircle } from '../../../Assests/icons/add-circle.svg';
 
 export default function EducationForm() {
     const dispatch = useDispatch()
@@ -220,6 +221,7 @@ export default function EducationForm() {
                 <label htmlFor="">Upload File</label>
                 <DragDropInput file={file} setFile={setFile} />
             </div>
+            <button onClick={(e) => handleSubmit(e,true)} className="btn-fit transparent g-0-5" style={{marginLeft: "auto"}}><AddCircle width={30} /> Add Another Qualification</button>
             <FormController handleSubmit={(e) => {
                 handleSubmit(e)
                 dispatch(toggleNewEducation(false))

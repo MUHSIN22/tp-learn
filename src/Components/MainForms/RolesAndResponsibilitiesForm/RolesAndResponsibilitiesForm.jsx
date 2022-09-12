@@ -166,16 +166,16 @@ export default function RolesAndResponsibilitiesForm() {
             </div>
             <div className="roles-and-suggestion-grid">
                 <div className="common-input-wrapper">
-                        <label className='text-left' htmlFor="">Roles and Responsibilities</label>
-                        <CKEditor
-                            editor={ClassicEditor}
-                            data={form.role_responsibilities}
-                            config={{ placeholder: 'Keep it brief and to the point' }}
-                            onChange={(event, editor) => {
-                                const data = editor.getData();
-                                setForm({ ...form, role_responsibilities: data })
-                            }}
-                        />
+                    <label className='text-left' htmlFor="">Roles and Responsibilities</label>
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data={form.role_responsibilities}
+                        config={{ placeholder: 'Keep it brief and to the point' }}
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            setForm({ ...form, role_responsibilities: data })
+                        }}
+                    />
                 </div>
                 <SuggestionBox handleSelect={handleSuggestion} suggestions={roleSuggestions} name_field={'role_description'} />
             </div>

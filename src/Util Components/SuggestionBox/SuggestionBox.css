@@ -8,3 +8,8 @@
     margin-top: 1.6rem;
     max-height: 20rem;
 }
+@media only screen and (max-width: 500px) {
+    .suggestions{
+        margin-top: 0;
+    }
+}

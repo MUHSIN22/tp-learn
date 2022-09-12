@@ -29,7 +29,8 @@ const initialState = {
     newAdditionalSkill:false,
     newPhotoMedia:false,
     newProject:false,
-    downLoadDetails: {}
+    downLoadDetails: {},
+    cvPDF: null
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
@@ -59,6 +60,26 @@ export const profileInfo = createAsyncThunk('authentication/profileInfo', async 
             }
         })
 
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const downloadCV = createAsyncThunk('authentication/downloadCV', async (data, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    try {
+        const response = await API.post(`/download-resume-file`, encoded, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -706,6 +727,9 @@ export const resumeSlice = createSlice({
             state.error = action.payload.error
             state.message = action.payload.data.error_message
 
+        }).addCase(downloadCV.fulfilled,(state,action) => {
+            state.status = "succeeded"
+            state.cvPDF = action.payload.data.url
         }).addCase(profileInfo.pending, (state, action) => {
             state.status = 'loading'
         }).addCase(profileInfo.fulfilled, (state, action) => {
@@ -1150,6 +1174,7 @@ export const selectResumeError = (state) => state.resume.error;
 export const selectResumeLoading = (state) => state.resume.loading;
 export const selectFormId = (state) => state.resume.form;
 export const SelectCompanyJobRecordId = (state) => state.resume.company_job_record_id
+export const selectPDFLink = (state) => state.resume.cvPDF
 export const SelectCompanyDetails = (state) => {
     let recordDetails = state.resume.recordDetails || {}
     let resumeInfo = recordDetails.resume_info || {}

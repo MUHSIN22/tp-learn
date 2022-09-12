@@ -111,7 +111,7 @@ a{
 }
 .grid-1-1{
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2,50%);
   grid-gap: 1rem;
 }
 .grid-1-1-1{
@@ -132,6 +132,11 @@ a{
 @media only screen and (max-width: 1300px) {
   .container-padding{
     padding: 1rem 4%;
+  }
+}
+@media only screen and (max-width: 1350px) {
+  .grid-1-1-1{
+    grid-template-columns: 1fr;
   }
 }
 @media only screen and (max-width: 500px) {
@@ -174,5 +179,14 @@ a{
     padding: 0.6rem;
     border-radius: 8px;
     font-size: 0.7rem;
+  }
+  .form-title{
+    font-size: 1rem;
+  }
+  .grid-1-1{
+    grid-template-columns: 95vw;
+  }
+  .ck p{
+    font-size: 0.8rem;
   }
 }

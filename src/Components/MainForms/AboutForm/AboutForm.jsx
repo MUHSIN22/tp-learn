@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice';
 import { getSummaryList, selectSummarySuggestionList } from '../../../redux/Features/MasterSlice';
-import { addBio, selectBio, selectFirstJob, selectLastJob, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage, selectUserInfo } from '../../../redux/Features/ResumeSlice';
+import { addBio, selectBio, selectFirstJob, selectLastJob, selectProfilePic, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage, selectUserInfo } from '../../../redux/Features/ResumeSlice';
 import FormController from '../../../Util Components/FormController/FormController';
 import SuggestionBox from '../../../Util Components/SuggestionBox/SuggestionBox';
+import Alert from '../../Alert/Alert';
 import DragDropInput from '../../DragDropInput/DragDropInput';
 
 export default function AboutForm() {
@@ -29,6 +30,7 @@ export default function AboutForm() {
     const summarySuggestions = useSelector(selectSummarySuggestionList)
     const bio = useSelector(selectBio)
     const lastJob = useSelector(selectLastJob)
+    const profile_pic = useSelector(selectProfilePic)
 
     const handleSuggestion = (value) => {
         setForm({ ...form, your_bio: form.your_bio + value })
@@ -38,7 +40,7 @@ export default function AboutForm() {
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        if (file) body.profile_pic = file
+        if (file && typeof file === "object") body.profile_pic = file
 
         let form_Data = JsonToFormData(body)
         try {
@@ -57,7 +59,7 @@ export default function AboutForm() {
                 page_no: 12
             }
             console.log(lastJob);
-            setFile(lastJob.profile_pic)
+            setFile()
             dispatch(getSummaryList({ auth: token, body })).unwrap().then((res) => {
             })
         } catch (e) {
@@ -69,12 +71,14 @@ export default function AboutForm() {
     }, [dispatch, job_title_id, token])
     useEffect(() => {
         setForm({ ...form, your_bio: bio })
+        setFile(profile_pic)
         return () => {
         }
     }, [])
     return (
         <div className="main-form-wrapper">
             <h2 className="form-title">Tell us about yourself.</h2>
+            {showAlert &&!loading&&<Alert error={error} message={error&&message ? Object.values(message): message} />}
             <div className="grid-1-1">
                 <div className="common-input-wrapper">
                     <label className='text-left' htmlFor="">Professional summary</label>
