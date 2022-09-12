@@ -27,6 +27,10 @@ import CertificateForm from '../MainForms/CertificateForm/CertificateForm';
 import SocialContribution from '../CV/SocialContribution';
 import SocialContributionForm from '../MainForms/SocialContributionForm/SocialContributionForm';
 import RolesAndResponsibilitiesForm from '../MainForms/RolesAndResponsibilitiesForm/RolesAndResponsibilitiesForm';
+import CompanyBasicForm from '../MainForms/CompanyBasicForm/CompanyBasicForm';
+import CompanyScaleForm from '../MainForms/CompanyScaleForm/CompanyScaleForm';
+import ProjectInfoForm from '../MainForms/ProjectInfoForm/ProjectInfoForm';
+import HobbyForm from '../MainForms/HobbyForm/HobbyForm';
 
 
 
@@ -48,13 +52,16 @@ const setProgress = (id)=>{
 }
   return (
     <div className="formContainer">
-      {progress === 1 && <Experience1  />}
-      {progress === 2 && <Experience2  />}
+      {progress === 1 && <CompanyBasicForm />}
+      {/* {progress === 1 && <Experience1  />} */}
+      {progress === 2 && <CompanyScaleForm  />}
+      {/* {progress === 2 && <Experience2  />} */}
       {/* {progress === 3 && <Experience3  />} */}
       {progress === 3 && <DesignationForm />}
       {progress === 4 && <RolesAndResponsibilitiesForm  />}
       {/* {progress === 4 && <Experience5  />} */}
-      {progress === 5 && <Experience6  />}
+      {progress === 5 && <ProjectInfoForm  />}
+      {/* {progress === 5 && <Experience6  />} */}
       {progress === 6 && <Experience7 setProgress={setProgress} />}
       {progress === 7 && <Experience8 setProgress={setProgress}  />}
       {progress === 8 && <Experience9 setProgress={setProgress} />}
@@ -65,7 +72,8 @@ const setProgress = (id)=>{
       {progress === 11 && <Certificate2 setProgress={setProgress} />}
       {progress === 12 && <SocialContributionForm  />}
       {/* {progress === 12 && <AdditionalSkills1  />} */}
-      {progress === 13 && <AdditionalSkills2  />}
+      {progress === 13 && <HobbyForm  />}
+      {/* {progress === 13 && <AdditionalSkills2  />} */}
       {progress === 14 && <AdditionalSkills3  />}
       {progress === 15 && <CareerObjective1  />}
       {progress === 16 && <CareerObjective2  />}

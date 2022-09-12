@@ -7,6 +7,7 @@ import DateInput from '../../../Util Components/Inputs/DateInput/DateInput';
 import PlainInput from '../../../Util Components/Inputs/PlainInput/PlainInput';
 import TextArea from '../../../Util Components/Inputs/TextArea/TextArea';
 import { ReactComponent as AddCircle } from '../../../Assests/icons/add-circle.svg';
+import Alert from '../../Alert/Alert';
 
 export default function SocialContributionForm() {
     const dispatch = useDispatch()
@@ -95,6 +96,7 @@ export default function SocialContributionForm() {
     return (
         <div className="main-form-wrapper">
             <h2 className="form-title">Have you ever volunteered for/contributed to any social cause. If yes, please let us know about it.</h2>
+            {showAlert && !loading && <Alert error={error} message={error&&message ? Object.values(message) : message} />}
             <div className="grid-1-1">
                 <PlainInput value={form.role} name='role' handleChange={handleChange} label='Your role' placeholder='i.e. Volunteer' width={100} />
                 <PlainInput value={form.organization_name} name='organization_name' handleChange={handleChange} label='Organisation name' placeholder='i.e. Goonj' width={100} />
@@ -105,7 +107,7 @@ export default function SocialContributionForm() {
             </div>
             <label className="control control-checkbox">
                 I am currently working here
-                <input name='currently_working' onChange={e => {handleChange(e);setCurrentWorking(!isCurrentWorking)}} value={!isCurrentWorking ? 'yes' : 'no'} checked={form.currently_working===1} type="checkbox" />
+                <input name='currently_working' onChange={e => {handleChange(e);setCurrentWorking(!isCurrentWorking)}} value={!isCurrentWorking ? 'yes' : 'no'} checked={isCurrentWorking} type="checkbox" />
                 <div className="control_indicator"></div>
             </label>
             <TextArea value={form.description} name='description' handleChange={handleChange} label='Please describe your cause in brief' placeholder="e.g. Set up a 'Goonj' kiosk for clothing collection for needy " width={100} rows={8} />

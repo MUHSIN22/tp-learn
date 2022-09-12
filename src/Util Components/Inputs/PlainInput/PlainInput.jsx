@@ -8,7 +8,7 @@ export default function PlainInput({ type="text", id, isSalary, label, name, han
             {
                 isSalary ?
                     <div className="plain-input-wrapper">
-                        <input max={max} id={id ? id : name} disabled={isDisabled} value={value} defaultValue={defaultValue} autoComplete='off' type={type} onChange={handleChange} name={name} placeholder={placeholder}/>
+                        <input max={max} id={"iconinput-"+name} disabled={isDisabled} value={value} defaultValue={defaultValue} autoComplete='off' type={type} onChange={handleChange} name={name} placeholder={placeholder}/>
                         <div className="PA">PA</div>
                     </div>
                     :

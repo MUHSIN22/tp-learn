@@ -25,7 +25,7 @@ export default function CardRadioGroup({ name, state, setState, option, name_fie
     return (
         <div className='col-100 g-1 align-start'>
             <label>{label}</label>
-            <div className="CardRadioGroup">
+            <div className="card-radio-group">
                 {option.map((option, i) => {
                     return <RadioCard key={i} index={i} clickHandler={clickHandler} label={option[name_field]} status={current === i || (state.nature_of_job_id == option.id && name == 'nature_of_job_id') || (state.scale_id == option.id && name == 'scale_id') ? 'active' : 'inactive'} />
                 })
@@ -38,8 +38,8 @@ export default function CardRadioGroup({ name, state, setState, option, name_fie
 function RadioCard({ index, status, clickHandler, label }) {
 
     return (
-        <div className={`radioCard ${status}`} onClick={() => clickHandler(index)}>
-            <div className="radiobtn" >
+        <div className={`radio-card ${status}`} onClick={() => clickHandler(index)}>
+            <div className="radio-btn" >
                 <div className="dot"></div>
             </div>
             <label>{label}</label>

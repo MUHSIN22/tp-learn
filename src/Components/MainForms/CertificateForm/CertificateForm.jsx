@@ -53,23 +53,37 @@ export default function CertificateForm() {
         skill_id: '',
         skill_name: '',
     }
-    const selectSkillHandler = (i) => {
-        temp.skill_id = skillList[i].id
-        temp.skill_name = skillList[i].skill_name
-        set_Selected_options([...selected_options, temp])
+    const selectSkillHandler = (e) => {
+        console.log(skillList);
+        console.log(e);
+        // temp.skill_id = skillList[i].id
+        // temp.skill_name = skillList[i].skill_name
+        // console.log(temp,'this is temp');
+        // set_Selected_options([...selected_options, temp])
     }
     const handleDeleteSkill = (i) => {
         const newList = selected_options.filter((x, index) => index !== i)
         set_Selected_options(newList)
     }
     function searchHandler(e) {
-        setSearch(e.target.value)
+        console.log('here e,e',e);
+        if(e.nativeEvent.inputType === "insertText" || e.nativeEvent.inputType === 'deleteContentBackward'){
+            setSearch(e.target.value)
+        }else{
+            console.log(skillList);
+            let selected = skillList.filter((skill) => skill.skill_name === e.target.value)[0]
+            console.log(e,e.target.value,"selected",selected);
+            temp.skill_id =  selected?.id
+            temp.skill_name = selected.skill_name
+            set_Selected_options([...selected_options, temp])
+        }
+        
     }
 
     async function handleSubmit(e, isAdd) {
         e.preventDefault();
         let body = form
-        if (file) body.certificate_file = file
+        if (file && typeof file === 'object') body.certificate_file = file
 
         body.user_id = user_id
         body.skills_ids = selected_options.map((skill) => {
@@ -88,6 +102,7 @@ export default function CertificateForm() {
             let data = await dispatch(addCertification({ auth: token, body: form_data, setUpdated, dispatch })).unwrap()
             if (isAdd) {
                 dispatch(toggleNewCertificate(true))
+                setFile(false)
             }
             if (data) {
                 setUpdated(true);
@@ -135,6 +150,7 @@ export default function CertificateForm() {
                 is_online: lastCertificate.is_online === 1 ? 'yes' : 'no',
                 certification_record_id: lastCertificate.certificate_record_id,
             })
+            setFile(lastCertificate.certificate_file)
             set_Selected_options(skills)
         } else {
             if (updated) {
@@ -177,6 +193,7 @@ export default function CertificateForm() {
                 <DateInput value={form.certificate_end_date > 7 ? new Date(form.certificate_end_date).getFullYear() + "-" + new Date(form.certificate_end_date).getMonth() : form.certificate_end_date} name='certificate_end_date' handleChange={handleChange} type={'date'} label='Duration (to)*' placeholder='i.e. Duration date' width={50} />
             </div>
             <MultiSelectedOptions options={selected_options} value_field={'skill_name'} deleteHandler={handleDeleteSkill} />
+            {console.log(skillList,'this is skill list')}
             <SuggestionInput name='Skills' searchHandler={searchHandler} label={`Key skills learned*`} placeholder='Skills mastered in this course' width={100} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
             <PlainInput value={form.certificate_project_info} name='certificate_project_info' handleChange={handleChange} label='Projects, if any' placeholder='Tell us how you applied those skills?' width={100} />
             <div className="common-input-wrapper">

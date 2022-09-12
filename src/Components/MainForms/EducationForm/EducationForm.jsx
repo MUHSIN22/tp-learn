@@ -9,6 +9,7 @@ import LocationInput from '../../../Util Components/Inputs/LocationInput/Locatio
 import PlainInput from '../../../Util Components/Inputs/PlainInput/PlainInput'
 import SuggestionInput from '../../../Util Components/Inputs/SuggestionInput/SuggestionInput'
 import TextArea from '../../../Util Components/Inputs/TextArea/TextArea'
+import Alert from '../../Alert/Alert'
 import DragDropInput from '../../DragDropInput/DragDropInput'
 import './EducationForm.css'
 
@@ -103,7 +104,7 @@ export default function EducationForm() {
         let body = form
         body.location = location;
         body.user_id = user_id
-        if (file) body.upload_degree = file
+        if (file && typeof file === "object") body.upload_degree = file
         if (isAdd) {
             body.reload_request = "yes"
         }
@@ -120,7 +121,6 @@ export default function EducationForm() {
             setShowAlert(true)
         } finally {
             setShowAlert(true)
-
         }
     }
 
@@ -157,8 +157,8 @@ export default function EducationForm() {
                 course_extra_activity: lastEducation.course_extra_activity,
                 course_project_info: lastEducation.course_project_info,
                 education_record_id: lastEducation.education_record_id,
-
             })
+            setFile(lastEducation.upload_degree)
             setLocation(lastEducation.location)
         } else {
             if (updated) {
@@ -194,8 +194,8 @@ export default function EducationForm() {
     }, [reloadFlag, loading])
     return (
         <div className="main-form-wrapper">
-            {console.log(form,"this is form")}
             <h2 className="form-title">Now, let's move on to your learning journey so far</h2>
+            {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
             <div className="grid-1-1">
                 <SuggestionInput value={form.other_degree_name} name={'degree_id'} selected={degreeSelectHandler} label='Degree/Qualification*' placeholder={'e.g. BSc Computer Science'} searchHandler={addDegreeHandler} suggestions={degree} name_field={'degree_name'} />
                 <SuggestionInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} searchHandler={addUniversityHandler} suggestions={universities} name_field={'education_name'} />
@@ -210,8 +210,8 @@ export default function EducationForm() {
                 <div className="control_indicator"></div>
             </label>
             <div className="grid-1-1">
-                <DateInput value={form.course_start_date > 7 ? new Date(form.course_start_date).getFullYear() + "-" + new Date(form.course_start_date).getMonth() : form.course_start_date} type={'date'} handleChange={handleChange} name={'course_start_date'} label='Duration (From)*' placeholder={'Bachelor/Honors'} />
-                <DateInput value={form.course_end_date > 7 ? new Date(form.course_end_date).getFullYear() + "-" + new Date(form.course_end_date).getMonth() : form.course_end_date} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} />
+                <DateInput value={form.course_start_date.length > 7 ? new Date(form.course_start_date).getFullYear() + "-" + new Date(form.course_start_date).getMonth() : form.course_start_date} type={'date'} handleChange={handleChange} name={'course_start_date'} label='Duration (From)*' placeholder={'Bachelor/Honors'} />
+                <DateInput value={form.course_end_date.length > 7 ? new Date(form.course_end_date).getFullYear() + "-" + new Date(form.course_end_date).getMonth() : form.course_end_date} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} />
             </div>
             <PlainInput value={form.course_cgpa} name={'course_cgpa'} type="number" handleChange={handleChange} label='CGPA' placeholder={'CGPA'} />
             <TextArea value={form.course_extra_activity} rows={8} name={'course_extra_activity'} handleChange={handleChange} label='Extra-curricular activities' placeholder={'Extra-academic participation'} />

@@ -15,14 +15,13 @@ export default function SuggestionInput({value, id, name,placeholder,label,sugge
   return (
     <div className="suggestion-input-wrapper common-input-wrapper">
         <label htmlFor={name}>{label}</label>
-        <input type="text" ref={suggestionInput} name={name} id={id || name} value={value} autoComplete={false}  list={name+"_list"} placeholder={placeholder} onChange={searchHandler}/>
-        <datalist id={name+"_list"}  onChange={handleSuggestion}>
+        <input type="text" ref={suggestionInput} autoComplete="off" name={name} id={name} value={value}  list={name+"_list"} placeholder={placeholder} onChange={searchHandler} />
+        <datalist id={name+"_list"} onChange={handleSuggestion}>
             <option value="" selected={true}></option>
             {
               suggestions && suggestions[0] &&
               suggestions.map((suggestion,index) => (
-
-                <option value={suggestion[name_field]} key={index}/>
+                <option value={suggestion[name_field]} className={"123"} key={index}/>
               ))
             }
         </datalist>

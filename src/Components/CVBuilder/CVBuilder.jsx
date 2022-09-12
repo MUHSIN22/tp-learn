@@ -8,6 +8,7 @@ import { selectBio, selectCertificate, selectEducation, selectFirstCompany, sele
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import API from '../../API'
 import MainCV from '../MainCv/MainCV'
+import {BsEyeFill,BsEyeSlashFill} from 'react-icons/bs'
 export default function CVBuilder() {
   const first_job = useSelector(selectFirstJob)
   const Education = useSelector(selectEducation)
@@ -20,6 +21,7 @@ export default function CVBuilder() {
   const stepRow = useRef(null)
   const user_id = useSelector(selectUser_id)
   const [stepRowHeight, setStepRowHeight] = useState(0)
+  const [isPreview,setPreview] = useState(false)
   const [progress, setProgress] = useState({
     'Contact Info': { id:1, state: 'complete' },
     'Experience': { id:1, state: 'active' },
@@ -154,11 +156,22 @@ export default function CVBuilder() {
           Object.keys(progress).map((step, index) => <Steps name={step} {...progress[step]} index={index + 1} />)
         }
       </div>
-      <div className="builder-row" style={{height: `calc(100vh - (${stepRowHeight}px + 7rem))`}}>
+      <div className={"builder-row" +(isPreview ? " builder-row--active": "")}style={{height: `calc(100vh - (${stepRowHeight}px + 7rem))`}}>
         <FormContainer />
-        <div className="cv-preview-container" style={{height: `calc(100vh - (${stepRowHeight}px + 7rem))`}}>
-          <MainCV />
-        </div>
+        {
+          isPreview &&
+          <div className="cv-preview-container" style={{height: `calc(100vh - (${stepRowHeight}px + 7rem))`}}>
+            <MainCV />
+          </div>
+        }
+        <button className="visibility-icon-btn" onClick={() => setPreview(!isPreview)}>
+          {
+            isPreview ?
+              <BsEyeSlashFill />
+              :
+              <BsEyeFill />
+          }
+        </button>
       </div>
 
     </div>

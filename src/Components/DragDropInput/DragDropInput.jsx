@@ -49,7 +49,7 @@ export default function DragDropInput({file,setFile}) {
       onChange={handleInputChange}
       onClick = {handleClick}
     >
-      <div className="sub-header">{!file&&<Upload></Upload>}{file?file.name:'Drag & drop file here'}</div>
+      <div className="sub-header">{!file&&<Upload></Upload>}{file?(file.name || "File Uploaded"):'Drag & drop file here'}</div>
       <div className="draggable-container">
         <input type="file" name="" id="fileInput" onChange={handleInputChange} style={{display:'none'}} />
       </div>
