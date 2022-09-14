@@ -1,0 +1,22 @@
+.edit-form-add-btn{
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 1.3rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    border: 2px dashed #2a56d3;
+    color: #2a56d3;
+    background: #2a57d317;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+.edit-form-add-btn .icon{
+    font-size: 2rem;
+}
+.edit-form-add-btn:hover{
+    border-style: solid;
+}

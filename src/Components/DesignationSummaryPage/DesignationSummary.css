@@ -1,0 +1,32 @@
+.designation-summary-page{
+    width: clamp(80%,80%,800px);
+    margin: 0 auto;
+}
+.designation-summary-table{
+    box-shadow: 0px 0px 25px 0px #f0957c32;
+    width: 100%;
+}
+.designation-summary-table th,
+.designation-summary-table td{
+    padding: 0.5rem;
+    border: 0 solid #000;
+    border-right: 1px;
+}
+.designation-summary-table th{
+    background: #f0967c;
+}
+.designation-summary-table td{
+    padding: 1rem 0.5rem;
+}
+.designation-summary-table th:last-child{
+    text-align: center;
+}
+.designation-summary-table td:last-child{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+.designation-summary-table .des-summary-icons{
+    cursor: pointer;
+}

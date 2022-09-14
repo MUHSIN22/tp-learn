@@ -55,11 +55,12 @@ export default function JobTimelineGraph({jobs}) {
 
       const jobTimelineSeriesCreator = () => {
         let series = [];
+        console.log(jobs,'this is jobs');
 
         for(let i=0;i<jobs.length;i++){
             let isInSeries = false;
             for(let j = 0; j< series.length ; j++){
-                if(series[j].name === jobs[i].timeline.job_level_name){
+                if(series[j].name === jobs[i].timeline.designation_name){
                     series[j].data.push({
                         x: jobs[i].company_name,
                         y: [
@@ -72,7 +73,7 @@ export default function JobTimelineGraph({jobs}) {
             }
             if(!isInSeries){
                 let data = {
-                    name: jobs[i].timeline.job_level_name,
+                    name: jobs[i].timeline.designation_name,
                     data: [
                         {
                             x: jobs[i].company_name,

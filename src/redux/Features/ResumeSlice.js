@@ -683,6 +683,10 @@ export const resumeSlice = createSlice({
         reload: (state) => {
             state.reload = true
         },
+        resetResumeStatus : (state) => {
+            state.status = null;
+            state.message = null;
+        },
         resetResume : (state) => {
             state.loading = false;
             state.recordDetails = {};
@@ -729,7 +733,7 @@ export const resumeSlice = createSlice({
 
         }).addCase(downloadCV.fulfilled,(state,action) => {
             state.status = "succeeded"
-            state.cvPDF = action.payload.data.url
+            state.cvPDF = action.payload.data.message
         }).addCase(profileInfo.pending, (state, action) => {
             state.status = 'loading'
         }).addCase(profileInfo.fulfilled, (state, action) => {
@@ -1017,7 +1021,7 @@ export const resumeSlice = createSlice({
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
-            state.message = action.payload.data
+            state.message = action.payload.data.error_message
         })
         .addCase(changePageOn.fulfilled, (state, action) => {
             state.loading = false
@@ -1288,8 +1292,10 @@ export const selectEditPageDetails = (state)=> state.resume.editPageDetails;
 export const getPageOn = (state) => state.resume.pageOn;     
 export const selectToEdit = (state)=> state.resume.toEdit;
 export const getLoaderstate = (state) => state.resume.loaderval;     
-export const getDownLoadDetails = (state)=> state.resume.downLoadDetails
-export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError } = resumeSlice.actions;
+export const getDownLoadDetails = (state)=> state.resume.downLoadDetails;
+export const getResumeUpdateStatus = (state) => state.resume.status;
+export const getResumeMessage = (state) => state.resume.message
+export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
 

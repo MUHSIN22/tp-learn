@@ -11,7 +11,7 @@ import OTPSignup from './Components/Signup/OTPSignup';
 import CreatePassword from './Components/Signup/CreatePassword';
 import PreventedRoute from './PreventedRoute';
 import { useDispatch, useSelector } from 'react-redux';
-import { resumeInfo, selectFormId, selectReload } from './redux/Features/ResumeSlice';
+import { getResumeUpdateStatus, resetResumeStatus, resumeInfo, selectFormId, selectReload } from './redux/Features/ResumeSlice';
 import { resetError, selectAuthentication } from './redux/Features/AuthenticationSlice';
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
@@ -41,100 +41,149 @@ import PricingPage from './Components/Pricing Page/PricingPage';
 import DashboardCv from './Components/DashboardCv/DashboardCv';
 import EditProfilePage from './Components/EditProfilePage/EditProfilePage';
 import CareerObjectiveEditor from './Components/EditorForms/CareerObjectiveEditor';
-import EditFormTemplate from './Components/EditFormTemplate/EditFormTemplate';
+import EditFormTemplate from './Util Components/EditFormTemplate/EditFormTemplate';
+import careerObjectiveIcon from './Assets/edit icons/career objective.png'
+import cognitive from './Assets/edit icons/cognitive.png'
+import experience from './Assets/edit icons/experience.png'
+import CognetiveSkills from './Components/EditorForms/CognetiveSkills/CognetiveSkills';
+import ExperienceFormEditor from './Components/EditorForms/ExperienceFormEditor';
+import DesignationSummaryPage from './Components/DesignationSummaryPage/DesignationSummaryPage';
+import EditSummaryPreview from './Util Components/EditSummaryPreview/EditSummaryPreview';
+
+import { cssTransition, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const dispatch = useDispatch()
   const location = useLocation();
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
-  const routeWithoutNav = ['/','/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password",'/about-us','/cv-profile','/pricing','/dashboard/cv',"/dashboard/edit",'/dashboard/editor/career-objective']
-  const routeWithouFooter = ['/membership',"/MyProfile","/myprofile","/dashboard","/settings","/change_password","/login",'/signup','/get-onboard','/cv-builder','/OTP-signup','/create-password','/cv-profile',"/dashboard/cv","/dashboard/edit",'/dashboard/editor/career-objective']
+  const status = useSelector(getResumeUpdateStatus);
+  const routeWithoutNav = ['/', '/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", '/about-us', '/cv-profile', '/pricing', '/dashboard/cv', "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history","/dashboard/experience-editor"]
+  const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history","/dashboard/experience-editor"]
+  
   useEffect(() => {
-    if(auth.authToken&&reload){
+    if (auth.authToken && reload) {
       try {
-        dispatch(resumeInfo({user_id:auth.user_id,auth:auth.authToken})).unwrap()
+        dispatch(resumeInfo({ user_id: auth.user_id, auth: auth.authToken })).unwrap()
       } catch (error) {
       }
     }
-    if(auth.authToken&&reload){
+    if (auth.authToken && reload) {
       try {
-        dispatch(graphDetails({user_id:auth.user_id,auth:auth.authToken})).unwrap()
+        dispatch(graphDetails({ user_id: auth.user_id, auth: auth.authToken })).unwrap()
       } catch (error) {
       }
     }
-  
+
     return () => {
-      
+
     }
-  }, [auth,form_id,reload,dispatch])
-  
+  }, [auth, form_id, reload, dispatch])
+
   useEffect(() => {
 
-    if(auth.authToken&&!form_id){
+    if (auth.authToken && !form_id) {
       try {
-        dispatch(resumeInfo({user_id:auth.user_id,auth:auth.authToken})).unwrap()
+        dispatch(resumeInfo({ user_id: auth.user_id, auth: auth.authToken })).unwrap()
       } catch (error) {
       }
     }
-    if(auth.authToken&&!form_id){
+    if (auth.authToken && !form_id) {
       try {
-        dispatch(graphDetails({user_id:auth.user_id,auth:auth.authToken})).unwrap()
+        dispatch(graphDetails({ user_id: auth.user_id, auth: auth.authToken })).unwrap()
       } catch (error) {
       }
     }
-  
-  
+
+
     return () => {
     }
-  }, [auth,form_id])
-  
+  }, [auth, form_id])
+
   useEffect(() => {
-      dispatch(resetError())
-    
+    setTimeout(() => {
+      dispatch(resetResumeStatus())
+    },500)
+  },[status])
+
+  useEffect(() => {
+    dispatch(resetError())
+
     return () => {
-      
+
     }
-  }, [location,dispatch])
-  
+  }, [location, dispatch])
+
   return (
     <div className="App">
-      {window.location.pathname ==='/' ? <Header/> : ""}
-      {!routeWithoutNav.includes(window.location.pathname) ? <Navbar/> : ""}
+      {window.location.pathname === '/' ? <Header /> : ""}
+      {!routeWithoutNav.includes(window.location.pathname) ? <Navbar /> : ""}
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss={true}
+        draggable={true}
+        pauseOnHover={true}
+        closeButton={true}
+      />
       <Routes>
-       <Route path='/login' element={<PreventedRoute><Login/></PreventedRoute> }/>
-       <Route path='/OTP-login' element={<PreventedRoute><OTPLogin/></PreventedRoute>}/>
-       <Route path='/signup' element={<PreventedRoute><Signup/></PreventedRoute>}/>
-       <Route path='/OTP-signup' element={<PreventedRoute><OTPSignup/></PreventedRoute>}/>
-       <Route path='/create-password' element={<PreventedRoute><CreatePassword/></PreventedRoute>}/>
-       <Route path="/about-us" element={<AboutUs />} />
-       <Route path='/pricing' element={<PricingPage />} />
-       <Route path='/cv-builder' element={<CVBuilder/>}/>
-       <Route path='/get-onboard' element={<Onboarding/>}/>
-       <Route path='/' element={<Home/>}/>
-       
-       <Route path='/cv-profile' element={<CVProfile />} />
+        <Route path='/login' element={<PreventedRoute><Login /></PreventedRoute>} />
+        <Route path='/OTP-login' element={<PreventedRoute><OTPLogin /></PreventedRoute>} />
+        <Route path='/signup' element={<PreventedRoute><Signup /></PreventedRoute>} />
+        <Route path='/OTP-signup' element={<PreventedRoute><OTPSignup /></PreventedRoute>} />
+        <Route path='/create-password' element={<PreventedRoute><CreatePassword /></PreventedRoute>} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path='/pricing' element={<PricingPage />} />
+        <Route path='/cv-builder' element={<CVBuilder />} />
+        <Route path='/get-onboard' element={<Onboarding />} />
+        <Route path='/' element={<Home />} />
 
-       <Route path='/cv-share/:id' element={<CVShare />} />
-       <Route path='/check' element={<Checking/>} />
-       <Route path='/privacy-policy' element={<PrivacyPolicy />} />
-       <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
-       <Route path="/dashboard" element={<Dashboard/>}/>
-       <Route path='/membership' element={<Membership/>}/>
-       <Route path="/settings" element={<Settings/>}/>
-       <Route path='/MyProfile' element={<CVReview/>}/>
-       <Route path='/dummy' element={<DummyForm/>}/>
-       <Route path='/cs' element={<CognitiveSkills/>}/>
-       <Route path="*" element={<NotFound/>}/>
-       <Route path='/logout' element={<Logout/> }/>
-       <Route path='/change_password' element={<ChangePassword/> }/>
-       <Route path='/dashboard' element={<CVProfile />}>
+        <Route path='/cv-profile' element={<CVProfile />} />
+
+        <Route path='/cv-share/:id' element={<CVShare />} />
+        <Route path='/check' element={<Checking />} />
+        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+        <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path='/membership' element={<Membership />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path='/MyProfile' element={<CVReview />} />
+        <Route path='/dummy' element={<DummyForm />} />
+        <Route path='/cs' element={<CognitiveSkills />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path='/logout' element={<Logout />} />
+        <Route path='/change_password' element={<ChangePassword />} />
+        <Route path='/dashboard' element={<CVProfile />}>
           <Route path="cv" element={<DashboardCv />} />
           <Route path='edit' element={<EditProfilePage />} />
-          <Route path="editor" element={<EditFormTemplate />}>
-            <Route path='career-objective' element={<CareerObjectiveEditor />} />
-          </Route>
-       </Route>
+          <Route path='edit-career-objective' element={
+            <EditFormTemplate title="Career Objective" icon={careerObjectiveIcon}>
+              <CareerObjectiveEditor />
+            </EditFormTemplate>
+          } />
+          <Route path='edit-cognetive-skills' element={
+            <EditFormTemplate title="Cognitive Skills" icon={cognitive}>
+              <CognetiveSkills />
+            </EditFormTemplate>
+          } />
+          <Route path='experience-history' element={
+            <EditFormTemplate title="Experience" icon={experience}>
+              <EditSummaryPreview />
+            </EditFormTemplate>
+          } />
+          <Route path='designation-history' element={
+            <EditFormTemplate title="Experience" icon={experience}>
+              <DesignationSummaryPage />
+            </EditFormTemplate>
+          } />
+          <Route path='experience-editor' element={<ExperienceFormEditor />} />
+        </Route>
       </Routes>
       {!routeWithouFooter.includes(window.location.pathname) ? <Footer /> : null}
     </div>

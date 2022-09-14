@@ -199,8 +199,15 @@ export default function CVBuilder() {
   const downloadPDF = async () => {
     console.log("this si sjsdklfjal;skdjklasdjlf;kjwdasl");
     let data = await dispatch(downloadCV({body:{user_id}}))
+    let link = document.createElement('a')
+    link.download = "resume.pdf";
     if(data){
-      window.open(PDFLink)
+      link.href = PDFLink
+      link.dispatchEvent(new MouseEvent('click',{
+        bubbles: true,
+        cancelable: true,
+        view: window
+      }))
     }
   }
 

@@ -19,17 +19,17 @@ let EditList = [
     },
     {
         title: "Career Objective",
-        link: "/dashboard/editor/career-objective",
+        link: "/dashboard/edit-career-objective",
         icon: CareerObjective
     },
     {
         title: "Cognitive Skills",
-        link: "/cognitive-skills",
+        link: "/dashboard/edit-cognetive-skills",
         icon: cognitive
     },
     {
         title: "Experience",
-        link: "/experience",
+        link: "/dashboard/experience-history",
         icon: experience
     },
     {

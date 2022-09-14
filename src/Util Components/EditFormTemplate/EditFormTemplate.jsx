@@ -1,19 +1,17 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
-import CareerObjective from '../../Assets/edit icons/career objective.png'
 import './EditFormTemplate.css'
 
-export default function EditFormTemplate() {
+export default function EditFormTemplate({children,title,icon}) {
   return (
     <div className="edit-form-template">
       <div className="edit-form-template-header">
         <div className="edit-icon-wrapper">
-          <img src={CareerObjective} alt="" />
+          <img src={icon} alt="" />
         </div>
-        <h1 className="edit-form-template-heading">Career Objective</h1>
+        <h1 className="edit-form-template-heading">{title}</h1>
       </div>
       <div className="edit-form-container">
-        <Outlet />
+        {children}
       </div>
     </div>
   )
