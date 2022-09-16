@@ -1,23 +1,29 @@
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import useDebounce from '../../../DebouncedSearch';
-import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice';
-import { getRoleSuggestionList, searchSkills, selectRoleSuggestionList, selectSkillList } from '../../../redux/Features/MasterSlice';
-import { addJobSkills, selectLastCompany, selectLastJob, selectNewRoles, selectResumeError, selectResumeLoading, selectResumeMessage, setResumeError } from '../../../redux/Features/ResumeSlice';
-import PlainInput from '../../../Util Components/Inputs/PlainInput/PlainInput';
-import SuggestionInput from '../../../Util Components/Inputs/SuggestionInput/SuggestionInput';
-import MultiSelectedOptions from '../../../Util Components/MultiSelectedOptions';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
+import { getRoleSuggestionList, searchSkills, selectRoleSuggestionList, selectSkillList } from '../../redux/Features/MasterSlice';
+import { addJobSkills, SelectCompanyDetails, selectLastCompany, selectLastJob, selectNewRoles, selectResumeError, selectResumeLoading, selectResumeMessage, setResumeError, toggleNewRoles } from '../../redux/Features/ResumeSlice';
+import EditFormController from '../../Util Components/EditFormController/EditFormController';
+import PlainInput from '../../Util Components/Inputs/PlainInput/PlainInput';
+import SuggestionInput from '../../Util Components/Inputs/SuggestionInput/SuggestionInput';
+import MultiSelectedOptions from '../../Util Components/MultiSelectedOptions';
+import SuggestionBox from '../../Util Components/SuggestionBox/SuggestionBox';
 import parse from 'html-react-parser';
-import SuggestionBox from '../../../Util Components/SuggestionBox/SuggestionBox'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import './RolesAndResponsibilitiesForm.css'
-import FormController from '../../../Util Components/FormController/FormController';
-import Alert from '../../Alert/Alert';
+import useDebounce from '../../DebouncedSearch';
+import { changeExperienceForm, selectCompanyForEdit, selectDesignationForEdit } from '../../redux/Features/EditSlice';
+import { useNavigate } from 'react-router-dom';
 
 const DEBOUNCE_DELAY = 600;
 
-export default function RolesAndResponsibilitiesForm() {
+export default function RolesEditForm() {
+    const navigate = useNavigate()
+    const designationID = useSelector(selectDesignationForEdit);
+    const companyID = useSelector(selectCompanyForEdit);
+    const companyDetails = useSelector(SelectCompanyDetails);
+    const [data, setData] = useState({});
     const dispatch = useDispatch()
     const [form, setForm] = useState({
         job_skills: [],
@@ -41,9 +47,10 @@ export default function RolesAndResponsibilitiesForm() {
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
     const lastJob = useSelector(selectLastJob)
     const lastCompany = useSelector(selectLastCompany)
-    const job_title_id = lastJob.designation_id
+    const [job_title_id,setJobTitleID] = useState(data && data.designation_id)
     const newRoles = useSelector(selectNewRoles);
 
+    console.log(job_title_id);
     const searchSkillList = useCallback(
         (keywords) => {
             try {
@@ -90,16 +97,24 @@ export default function RolesAndResponsibilitiesForm() {
     const handleSuggestion = (value) => {
         setForm({ ...form, role_responsibilities: form.role_responsibilities + value })
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let body = form
         body.job_skills = JSON.stringify(body.job_skills)
         body.user_id = user_id
         body.job_skills = JSON.stringify(selected_options.map((x) => { return { skill_id: x.skill_id, skill_name: x.skill_name, skill_complexity: x.skill_complexity } }))
-        body.user_company_job_record_id = lastJob.company_job_record_id
-        body.user_company_record_id = lastCompany.company_record_id
+        if(newRoles){
+            body.user_company_record_id = companyID
+            body.user_company_job_record_id = designationID
+        }
         try {
-            dispatch(addJobSkills({ auth: token, body, dispatch })).unwrap()
+            await dispatch(addJobSkills({ auth: token, body, dispatch })).unwrap()
+            if(newRoles){
+                dispatch(toggleNewRoles(false))
+                dispatch(changeExperienceForm(3))
+            }else{
+                navigate('/dashboard/project-history')
+            }
         } catch (error) {
             showAlert(true)
         } finally {
@@ -123,7 +138,7 @@ export default function RolesAndResponsibilitiesForm() {
     useEffect(() => {
         try {
             const body = {
-                job_title_id: job_title_id,
+                job_title_id: data.designation_id,
                 search_role: '',
                 page_no: ''
             }
@@ -134,34 +149,43 @@ export default function RolesAndResponsibilitiesForm() {
         return () => {
 
         }
-    }, [dispatch, job_title_id, token])
+    }, [dispatch, token, data, designationID,  companyID])
 
     useEffect(() => {
-        if ((lastJob || lastCompany) && form.user_company_record_id === '' && !newRoles) {
+        console.log(data,designationID,'this is data');
+        if (data && !newRoles) {
             setForm({
                 ...form,
-                role_responsibilities: lastJob.role_responsibilties ? parse(lastJob.role_responsibilties) : "",
-                external_client_desc: lastJob.external_client_desc == "undefined" ? "" : lastJob.external_client_desc,
-                user_company_record_id: lastCompany.company_record_id,
-                user_company_job_record_id: lastJob.company_job_record_id,
-                job_title_id
+                role_responsibilities: data.role_responsibilties ? parse(data.role_responsibilties) : "",
+                user_company_record_id: companyID,
+                user_company_job_record_id: designationID,
+                job_title_id: data.designation_id
             })
-            set_Selected_options(lastJob.skills || [])
+            set_Selected_options(data.skills || [])
         }
 
         return () => {
 
         }
-    }, [lastJob, lastCompany, form])
+    }, [data])
+
+    useEffect(() => {
+        let company = companyDetails.filter(company => company.company_record_id === companyID)
+        let jobRole = company[0] && company[0].job_role && company[0].job_role[0] && company[0].job_role.filter(role => role.company_job_record_id === designationID);
+        console.log(jobRole);
+        setData(jobRole ? jobRole[0] : {})
+    },[designationID,companyID])
+
+    console.log(designationID,companyID,data,roleSuggestions);
+
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title">So far so good! Now it’s time to flaunt your amazing skills.</h2>
-            {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
+            {newRoles && <h2 className="form-title">So far so good! Now it’s time to flaunt your amazing skills.</h2>}
             <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />
             <div className="role-skills-container">
                 <div className="skill-and-complexity">
                     <SuggestionInput name='Skills' searchHandler={searchHandler} label='Please enter all the skills you applied' placeholder='Select Skills' id="iconinput-Skills" suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
-                    <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100}  />
+                    <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100} />
                 </div>
                 <button className="btn-add" onClick={handleAddSkill} >Add Skill</button>
             </div>
@@ -180,7 +204,7 @@ export default function RolesAndResponsibilitiesForm() {
                 </div>
                 <SuggestionBox handleSelect={handleSuggestion} suggestions={roleSuggestions} name_field={'role_description'} />
             </div>
-            <FormController handleSubmit={handleSubmit} />
+            <EditFormController isNext handleSubmit={handleSubmit} handlePreviousNavigation={() => dispatch(changeExperienceForm(1))} />
         </div>
     )
 }

@@ -203,6 +203,7 @@ export default function CVBuilder() {
     link.download = "resume.pdf";
     if(data){
       link.href = PDFLink
+      console.log(PDFLink);
       link.dispatchEvent(new MouseEvent('click',{
         bubbles: true,
         cancelable: true,

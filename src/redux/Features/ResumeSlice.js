@@ -8,6 +8,7 @@ const initialState = {
     company_job_record_id: '',
     status: '',
     reload: true,
+    reloadDecider: false,
     error: '',
     message: '',
     form: null,
@@ -96,10 +97,10 @@ export const addExperience = createAsyncThunk('authentication/addExperience', as
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -134,10 +135,10 @@ export const addIndustryInfo = createAsyncThunk('authentication/addIndustryInfo'
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -153,9 +154,9 @@ export const addJobDesignation = createAsyncThunk('authentication/addJobDesignat
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -171,10 +172,10 @@ export const addJobSalary = createAsyncThunk('authentication/addJobSalary', asyn
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -190,10 +191,10 @@ export const addJobSkills = createAsyncThunk('authentication/addJobSkills', asyn
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -209,10 +210,10 @@ export const addProject = createAsyncThunk('authentication/addProject', async (d
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -228,10 +229,10 @@ export const addEducation = createAsyncThunk('authentication/addEducation', asyn
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -247,10 +248,10 @@ export const addCertification = createAsyncThunk('authentication/addCertificatio
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -266,10 +267,10 @@ export const addAdditionalSkills = createAsyncThunk('authentication/addAdditiona
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -286,10 +287,10 @@ export const addHobbies = createAsyncThunk('authentication/add-hobbies', async (
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -305,10 +306,10 @@ export const addBio = createAsyncThunk('authentication/addBio', async (data, { r
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -324,10 +325,10 @@ export const uploadPhotomedia = createAsyncThunk('authentication/uploadPhotomedi
                 'authorization': `bearer ${data.auth}`
             }
         })
-        if(data.dispatch){
-            data.dispatch(reload())
-            data.dispatch(changeEditPageDetails({progress: null})).unwrap();
-        }
+        // if(data.dispatch){
+        //     data.dispatch(reload())
+        //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
+        // }
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -446,7 +447,7 @@ export const updateProfileInfo = createAsyncThunk('authentication/updateProfileI
                 'authorization': `bearer ${data.auth}`
             }
         })
-        data.dispatch(reload())
+        // data.dispatch(reload())
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -483,7 +484,7 @@ export const deleteCompany = createAsyncThunk('authentication/delete-company', a
                 'authorization': `bearer ${data.auth}`
             }
         })
-        data.dispatch(reload());
+        // data.dispatch(reload());
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -502,7 +503,7 @@ export const deleteProject = createAsyncThunk('authentication/delete-project', a
                 'authorization': `bearer ${data.auth}`
             }
         })
-        data.dispatch(reload());
+        // data.dispatch(reload());
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -521,7 +522,7 @@ export const deleteJobRole = createAsyncThunk('authentication/delete-job-role', 
                 'authorization': `bearer ${data.auth}`
             }
         })
-        data.dispatch(reload());
+        // data.dispatch(reload());
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -540,7 +541,7 @@ export const deleteEducation = createAsyncThunk('authentication/delete-education
                 'authorization': `bearer ${data.auth}`
             }
         })
-        data.dispatch(reload());
+        // data.dispatch(reload());
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -559,7 +560,7 @@ export const deleteCertificate = createAsyncThunk('authentication/delete-certifi
                 'authorization': `bearer ${data.auth}`
             }
         })
-        data.dispatch(reload());
+        // data.dispatch(reload());
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -578,7 +579,7 @@ export const deleteAdditionalSkill = createAsyncThunk('authentication/delete-add
                 'authorization': `bearer ${data.auth}`
             }
         })
-        data.dispatch(reload());
+        // data.dispatch(reload());
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -618,7 +619,7 @@ export const verifyPayment = createAsyncThunk('authentication/verify-razorpay-pa
                 'authorization': `bearer ${data.auth}`
             }
         })
-        data.dispatch(reload())
+        // data.dispatch(reload())
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -637,11 +638,17 @@ export const resumeSlice = createSlice({
     name: 'resume',
     initialState,
     reducers: {
-        toggleNewJob: (state)=>{
-            state.newJob = !state.newJob
+        toggleNewJob: (state,action)=>{
+            state.newJob = (action.payload !== null || action.payload !== undefined) ? action.payload : !state.newJob
         },
-        toggleNewDesignation: (state)=>{
-            state.newDesignation = !state.newDesignation
+        toggleNewDesignation: (state,action)=>{
+            state.newDesignation = (action.payload !== null || action.payload !== undefined) ? action.payload : !state.newDesignation 
+        },
+        toggleNewRoles : (state,action) => {
+            state.newRoles = (action.payload !== null || action.payload !== undefined) ? action.payload : !state.newRoles;
+        },
+        toggleNewProject:(state,action)=>{
+            state.newProject = action.payload
         },
         setResumeError: (state,action) => {
             state.error = true
@@ -650,9 +657,6 @@ export const resumeSlice = createSlice({
         resetError : (state,action) => {
             state.error = false
             state.message = null
-        },
-        toggleNewRoles : (state) => {
-            state.newRoles = !state.newRoles;
         },
         toggleNewEducation: (state,action)=>{
             state.newEducation = action.payload
@@ -665,9 +669,6 @@ export const resumeSlice = createSlice({
         },
         toggleNewPhotoMedia: (state,action)=>{
             state.newPhotoMedia = action.payload
-        },
-        toggleNewProject:(state,action)=>{
-            state.newProject = action.payload
         },
         nextForm: (state) => {
             if (state.form < 18) state.form += 1;
@@ -686,6 +687,9 @@ export const resumeSlice = createSlice({
         resetResumeStatus : (state) => {
             state.status = null;
             state.message = null;
+        },
+        setReloadDecider : (state,action) => {
+            state.reloadDecider = action.payload;
         },
         resetResume : (state) => {
             state.loading = false;
@@ -1099,11 +1103,13 @@ export const resumeSlice = createSlice({
         })
         .addCase(deleteCompany.fulfilled,(state,action) => {
             state.loading = false
+            state.status = "succeeded"
             state.message = action.payload.data.message
         })
         .addCase(deleteCompany.rejected,(state,action) => {
             state.loading = false
             state.message = action.payload.data.message
+            state.status = "Rejected"
             state.error = true;
         })
         .addCase(deleteProject.pending,(state,action) => {
@@ -1111,10 +1117,12 @@ export const resumeSlice = createSlice({
         })
         .addCase(deleteProject.fulfilled,(state,action) => {
             state.loading = false
+            state.status = "succeeded"
             state.message = action.payload.data.message
         })
         .addCase(deleteProject.rejected,(state,action) => {
             state.loading = false
+            state.status = "Rejected"
             state.message = action.payload.data.message
             state.error = true;
         })
@@ -1123,11 +1131,13 @@ export const resumeSlice = createSlice({
         })
         .addCase(deleteJobRole.fulfilled,(state,action) => {
             state.loading = false
+            state.status = "succeeded"
             state.message = action.payload.data.message
         })
         .addCase(deleteJobRole.rejected,(state,action) => {
             state.loading = false
-            state.message = action.payload.data.message
+            state.status = "Rejected"
+            state.message = action.payload.data.error_message
             state.error = true;
         })
         .addCase(deleteEducation.pending,(state,action) => {
@@ -1295,7 +1305,8 @@ export const getLoaderstate = (state) => state.resume.loaderval;
 export const getDownLoadDetails = (state)=> state.resume.downLoadDetails;
 export const getResumeUpdateStatus = (state) => state.resume.status;
 export const getResumeMessage = (state) => state.resume.message
-export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus } = resumeSlice.actions;
+export const getReloadDecider = (state) => state.resume.reloadDecider
+export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus, setReloadDecider } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
 

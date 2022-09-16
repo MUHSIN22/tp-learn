@@ -15,7 +15,7 @@ export default function SuggestionInput({value, id, name,placeholder,label,sugge
   return (
     <div className="suggestion-input-wrapper common-input-wrapper">
         <label htmlFor={name}>{label}</label>
-        <input type="text" ref={suggestionInput} autoComplete="off" name={name} id={name} value={value}  list={name+"_list"} placeholder={placeholder} onChange={searchHandler} />
+        <input type="text" ref={suggestionInput} autoComplete="off" name={name} id={"iconinput-"+name} value={value}  list={name+"_list"} placeholder={placeholder} onChange={searchHandler} />
         <datalist id={name+"_list"} onChange={handleSuggestion}>
             <option value="" selected={true}></option>
             {

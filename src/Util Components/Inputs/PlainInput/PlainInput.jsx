@@ -12,7 +12,7 @@ export default function PlainInput({ type="text", id, isSalary, label, name, han
                         <div className="PA">PA</div>
                     </div>
                     :
-                    <input max={max} id={name} disabled={isDisabled} value={value} autoComplete='off' type={type} onChange={handleChange} name={name} placeholder={placeholder} />
+                    <input max={max} id={"iconinput-"+name} disabled={isDisabled} value={value} autoComplete='off' type={type} onChange={handleChange} name={name} placeholder={placeholder} />
             }
         </div>
     )

@@ -3,9 +3,10 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { getRoleSuggestionList, selectRoleSuggestionList } from '../../redux/Features/MasterSlice';
-import { addBio, selectBio, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { addBio, reload, selectBio, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
 import EditFormController from '../../Util Components/EditFormController/EditFormController';
 import SuggestionBox from '../../Util Components/SuggestionBox/SuggestionBox';
 
@@ -41,7 +42,11 @@ export default function CareerObjectiveEditor() {
         }
         let form_Data = JsonToFormData(body)
         try {
-            let data = dispatch(addBio({ auth: token, body: form_Data, dispatch })).unwrap()
+            dispatch(addBio({ auth: token, body: form_Data, dispatch })).then((res) => {
+                if(res){
+                    dispatch(reload());
+                }
+            })
         } catch (error) {
             showAlert(true)
         } finally {

@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import useDebounce from '../../DebouncedSearch';
 import { resetError, selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
-import { selectCompanyForEdit, selectFormProgress } from '../../redux/Features/EditSlice';
+import { addCompanyForEdit, changeExperienceForm, selectCompanyForEdit, selectFormProgress } from '../../redux/Features/EditSlice';
 import { getBuisnessScaleList, getCompanyBasedList, getIndustryList, getJobNatureList, searchCompany, selectBuisnessScaleList, selectCompanyBasedList, selectCompanyList, selectIndustryList, selectJobNatureList } from '../../redux/Features/MasterSlice';
-import { addCompany, addIndustryInfo, selectLastCompany, selectResumeError, selectResumeLoading, selectResumeMessage, selectUserFirstName } from '../../redux/Features/ResumeSlice';
+import { addCompany, addIndustryInfo, reload, SelectCompanyDetails, selectLastCompany, selectNewEducation, selectNewJob, selectResumeError, selectResumeLoading, selectResumeMessage, selectUserFirstName, setReloadDecider } from '../../redux/Features/ResumeSlice';
 import EditFormController from '../../Util Components/EditFormController/EditFormController';
 import SelectInput from '../../Util Components/Inputs/SelectInput/SelectInput';
 import SuggestionInput from '../../Util Components/Inputs/SuggestionInput/SuggestionInput';
@@ -14,19 +15,23 @@ import CardRadioGroup from '../CardRadioGroup/CardRadioGroup';
 const DEBOUNCE_DELAY = 600;
 
 export default function CompanyBasicFormEditor() {
-    const companyDetails = useSelector(selectCompanyForEdit)
-    console.log(companyDetails,'company details');
+    const company = useSelector(SelectCompanyDetails)
+    const companyID = useSelector(selectCompanyForEdit)
+    const [companyDetails, setCompanyDetails] = useState(company.filter((company) => company.company_record_id === companyID)[0] ? company.filter((company) => company.company_record_id === companyID)[0] : {})
+    const navigate = useNavigate()
     const dispatch = useDispatch();
+    console.log(companyDetails);
+    console.log(companyDetails);
     const [form, setForm] = useState({
         user_id: "",
-        nature_of_job_id: companyDetails.nature_of_job_id || "",
-        company_id: companyDetails.company_id || "",
-        other_company_name: companyDetails.company_name || "",
-        user_company_record_id: companyDetails.company_record_id || "",
-        company_name: companyDetails.company_name || "",
-        industry_id: companyDetails.industry_id || "",
-        scale_id: companyDetails.scale_id || "",
-        type_of_company: companyDetails.type_of_company_id || 1,
+        nature_of_job_id:  "",
+        company_id: "",
+        other_company_name: "",
+        user_company_record_id: "",
+        company_name: "",
+        industry_id: "",
+        scale_id: "",
+        type_of_company: 1,
     });
     const [search, setSearch] = useState("");
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
@@ -43,7 +48,8 @@ export default function CompanyBasicFormEditor() {
     const buisnessScaleList = useSelector(selectBuisnessScaleList)
     const companyBasedList = useSelector(selectCompanyBasedList);
     const loading = useSelector(selectResumeLoading);
-
+    const newEducation = useSelector(selectNewEducation)
+    const newJob = useSelector(selectNewJob)
     const searchCompanyList = useCallback(
         (keywords) => {
             try {
@@ -92,6 +98,7 @@ export default function CompanyBasicFormEditor() {
             industry_id: form.industry_id,
             scale_id: form.scale_id,
             type_of_company: form.type_of_company,
+            type_of_company_id: form.type_of_company_id,
             user_id,
             company_record_id: form.user_company_record_id,
         };
@@ -101,8 +108,20 @@ export default function CompanyBasicFormEditor() {
         }
         body.user_id = user_id;
         try {
-            dispatch(addCompany({ auth: token, body, dispatch })).unwrap();
-            dispatch(addIndustryInfo({ auth: token, body: body2, dispatch })).unwrap()
+
+            let updatedCompany = await dispatch(addCompany({ auth: token, body, dispatch })).unwrap();
+            console.log(updatedCompany);
+            if(newJob){
+                body2.company_record_id = updatedCompany.data.company_record_id
+                dispatch(addCompanyForEdit(updatedCompany.data.company_record_id))
+            }
+            dispatch(setReloadDecider(true))
+            await dispatch(addIndustryInfo({ auth: token, body: body2, dispatch })).unwrap()
+            if(!newJob){
+                navigate('/dashboard/designation-history')
+            }else{
+                dispatch(changeExperienceForm(1))
+            }
         } catch (error) {
         } finally {
             setShowAlert(true);
@@ -121,7 +140,26 @@ export default function CompanyBasicFormEditor() {
         if (buisnessScaleList.length === 0) dispatch(getBuisnessScaleList(token)).unwrap();
         if (companyBasedList.length === 0) dispatch(getCompanyBasedList(token)).unwrap();
         return () => { };
-    }, [jobNatureList.length, dispatch, token]);
+    }, [jobNatureList.length, dispatch, token,industryList,buisnessScaleList,companyBasedList]);
+
+    useEffect(() => {
+        console.log(newJob);
+        if(!newJob){
+            setForm({
+                user_id: "",
+                nature_of_job_id: companyDetails.nature_of_job_id || "",
+                company_id: companyDetails.company_id || "",
+                other_company_name: companyDetails.company_name || "",
+                user_company_record_id: companyDetails.company_record_id || "",
+                company_name: companyDetails.company_name || "",
+                industry_id: companyDetails.industry_id || "",
+                scale_id: companyDetails.scale_id || "",
+                type_of_company: companyDetails.type_of_company_id || 1,
+            });
+            setSearch(companyDetails.company_name)
+        }
+    }, [companyDetails])
+
     useEffect(() => {
         if (message === "Company Added") {
         }
@@ -131,7 +169,7 @@ export default function CompanyBasicFormEditor() {
     }, [message, dispatch, form]);
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title">Let's start with you most recent stint.</h2>
+            {newJob && <h2 className="form-title">Let's start with you most recent stint.</h2>}
             <SuggestionInput
                 name={"company_name"}
                 placeholder={"Company / Organization Name"}
@@ -141,10 +179,11 @@ export default function CompanyBasicFormEditor() {
                 name_field="name"
                 searchHandler={searchHandler}
                 selected={selectHandler}
-                value={form.company_name}
-                defaultValue={form.company_name}
+                value={search}
+            // defaultValue={form.company_name}
             />
             <CardRadioGroup
+                autofill
                 label={"Define the nature of your job?"}
                 name={"nature_of_job_id"}
                 state={form}
@@ -161,8 +200,10 @@ export default function CompanyBasicFormEditor() {
                 options={industryList}
                 name_field={"industry_name"}
                 defaultValue={form.industry_id}
+                value={form.industry_id}
             />
             <CardRadioGroup
+                autofill
                 label="Define the scale of buisness?"
                 name={"scale_id"}
                 state={form}
@@ -178,8 +219,9 @@ export default function CompanyBasicFormEditor() {
                 options={companyBasedList}
                 name_field={"company_based_name"}
                 defaultValue={form.type_of_company}
+                value={form.type_of_company}
             />
-            <EditFormController handleSubmit={handleSubmit} />
+            <EditFormController handleSubmit={handleSubmit} isNext handlePreviousNavigation={() => navigate('/dashboard/experience-history')} />
         </div>
     )
 }

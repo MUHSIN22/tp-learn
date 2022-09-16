@@ -1,4 +1,3 @@
-
 import './App.css';
 import Login from './Components/Login/Login';
 import { Route, Router, Routes, useLocation } from 'react-router-dom';
@@ -11,7 +10,7 @@ import OTPSignup from './Components/Signup/OTPSignup';
 import CreatePassword from './Components/Signup/CreatePassword';
 import PreventedRoute from './PreventedRoute';
 import { useDispatch, useSelector } from 'react-redux';
-import { getResumeUpdateStatus, resetResumeStatus, resumeInfo, selectFormId, selectReload } from './redux/Features/ResumeSlice';
+import { getReloadDecider, getResumeMessage, getResumeUpdateStatus, reload as reloadState, resetResumeStatus, resumeInfo, selectFormId, selectReload, selectResumeStatus, setReloadDecider } from './redux/Features/ResumeSlice';
 import { resetError, selectAuthentication } from './redux/Features/AuthenticationSlice';
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
@@ -45,13 +44,18 @@ import EditFormTemplate from './Util Components/EditFormTemplate/EditFormTemplat
 import careerObjectiveIcon from './Assets/edit icons/career objective.png'
 import cognitive from './Assets/edit icons/cognitive.png'
 import experience from './Assets/edit icons/experience.png'
+import education from './Assets/edit icons/education.png'
 import CognetiveSkills from './Components/EditorForms/CognetiveSkills/CognetiveSkills';
 import ExperienceFormEditor from './Components/EditorForms/ExperienceFormEditor';
 import DesignationSummaryPage from './Components/DesignationSummaryPage/DesignationSummaryPage';
-import EditSummaryPreview from './Util Components/EditSummaryPreview/EditSummaryPreview';
+import EditSummaryPreview from './Components/ExperienceSummaryPreview/ExperienceSummaryPreview';
 
-import { cssTransition, ToastContainer } from 'react-toastify';
+import { cssTransition, toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ObjectToArray from './functionUtils/ObjectToArray';
+import ProjectSummaryPage from './Components/ProjectSummaryPage/ProjectSummaryPage';
+import EducatiomSummaryReview from './Components/EducationSummaryReview/EducatiomSummaryReview';
+import EducationEditorForm from './Components/EditorForms/EducationEditorForm';
 
 function App() {
   const dispatch = useDispatch()
@@ -59,10 +63,13 @@ function App() {
   const auth = useSelector(selectAuthentication)
   const form_id = useSelector(selectFormId)
   const reload = useSelector(selectReload)
+  const resumeStatus = useSelector(selectResumeStatus);
   const status = useSelector(getResumeUpdateStatus);
-  const routeWithoutNav = ['/', '/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", '/about-us', '/cv-profile', '/pricing', '/dashboard/cv', "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history","/dashboard/experience-editor"]
-  const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history","/dashboard/experience-editor"]
-  
+  const routeWithoutNav = ['/', '/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", '/about-us', '/cv-profile', '/pricing', '/dashboard/cv', "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor']
+  const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor']
+  const message = useSelector(getResumeMessage);
+  const reloadDecider = useSelector(getReloadDecider)
+
   useEffect(() => {
     if (auth.authToken && reload) {
       try {
@@ -105,8 +112,25 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       dispatch(resetResumeStatus())
-    },500)
-  },[status])
+    }, 500)
+  }, [status])
+
+  useEffect(() => {
+    if (status === "Rejected") {
+      ObjectToArray(message).forEach(item => {
+        toast.error(item)
+      })
+    } else if (status === "succeeded") {
+      toast.success(message , { toastId: 1 })
+      console.log(reloadDecider,'reload');
+      if(reloadDecider){
+        dispatch(reloadState())
+        dispatch(setReloadDecider(false))
+      }
+    }
+  }, [status])
+
+
 
   useEffect(() => {
     dispatch(resetError())
@@ -120,7 +144,7 @@ function App() {
     <div className="App">
       {window.location.pathname === '/' ? <Header /> : ""}
       {!routeWithoutNav.includes(window.location.pathname) ? <Navbar /> : ""}
-      <ToastContainer 
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={true}
@@ -177,12 +201,23 @@ function App() {
               <EditSummaryPreview />
             </EditFormTemplate>
           } />
+          <Route path='education-history' element={
+            <EditFormTemplate title="Education" icon={education}>
+              <EducatiomSummaryReview />
+            </EditFormTemplate>
+          } />
           <Route path='designation-history' element={
             <EditFormTemplate title="Experience" icon={experience}>
               <DesignationSummaryPage />
             </EditFormTemplate>
           } />
+          <Route path='project-history' element={
+            <EditFormTemplate title="Experience" icon={experience}>
+              <ProjectSummaryPage />
+            </EditFormTemplate>
+          } />
           <Route path='experience-editor' element={<ExperienceFormEditor />} />
+          <Route path="education-editor" element={<EducationEditorForm />} />
         </Route>
       </Routes>
       {!routeWithouFooter.includes(window.location.pathname) ? <Footer /> : null}

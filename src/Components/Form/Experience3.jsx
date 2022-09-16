@@ -114,6 +114,7 @@ export default function Experience3() {
         }
     }
 
+    
     useEffect(() => {
         if (debouncedSearchState.length > 1) searchCompanyList(debouncedSearchState)
 

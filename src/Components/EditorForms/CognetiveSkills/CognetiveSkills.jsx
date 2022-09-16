@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ObjectToArray from '../../../functionUtils/ObjectToArray'
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice'
@@ -11,6 +12,7 @@ import './CognetiveSkills.css'
 
 export default function CognetiveSkills() {
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const [isStatusChecked, setStatusChecked] = useState(false);
     const [form, setForm] = useState({
         communication: "",
@@ -109,15 +111,7 @@ export default function CognetiveSkills() {
         setStatusChecked(true)
     }, [])
 
-    useEffect(() => {
-        if(status === "Rejected"){
-            ObjectToArray(message).forEach(item => {
-                toast.error(item)
-            })
-        }else if(status === "succeeded"){
-            toast.success("Updated Successfully!")
-        }
-    },[status])
+    
 
     const checkEnabled = (key) => {
         let enabledCount = 0;
@@ -162,7 +156,7 @@ export default function CognetiveSkills() {
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('presentation_skills')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'presentation_skills'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Presentation skills </span></>} />
                 </div>
             }
-            <EditFormController handleSubmit={handleCognitiveSkills} />
+            <EditFormController handleSubmit={handleCognitiveSkills} handlePreviousNavigation={() => navigate('/dashboard/edit')} />
         </div>
     )
 }

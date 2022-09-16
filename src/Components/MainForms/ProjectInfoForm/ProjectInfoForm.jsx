@@ -116,8 +116,6 @@ export default function ProjectInfoForm() {
                 return false;
             }
         }
-
-
     }
 
     const projectFormValidator = () => {
@@ -233,7 +231,7 @@ export default function ProjectInfoForm() {
             <MultiSelectedOptions options={selected_options} value_field={'skill_name'} subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />
             <div className="grid-1-1">
                 <SuggestionInput name='Skills' searchHandler={searchHandler} label={`Skill`} placeholder='Select Skills' value={search}  suggestions={[...skillList]} name_field={'skill_name'} selected={selectSkillHandler} />
-                <MarkedSlider handleChange={handleComplexity} name={'skill_complexity'}  state={form} setState={setForm} min={1} max={10} width={'100%'} label={'Complexity Level'} />
+                <MarkedSlider handleChange={handleComplexity} value={temp.skill_complexity} name={'skill_complexity'}  state={form} setState={setForm} min={1} max={10} width={'100%'} label={'Complexity Level'} />
             </div>
             <PlainInput handleChange={handleSkill_desc} name='skill_desc' id="iconinput-skill_desc" label='Application of skills + Outcome' placeholder='Mention how you used the skills in the project'/>
             <button className='btn-fit small' onClick={handleAddSkill}>+ Add Skill</button>

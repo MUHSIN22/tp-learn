@@ -34,7 +34,7 @@ let EditList = [
     },
     {
         title: "Education",
-        link: "/education",
+        link: "/dashboard/education-history",
         icon: education
     },
     {

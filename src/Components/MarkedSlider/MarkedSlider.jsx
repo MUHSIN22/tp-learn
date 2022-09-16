@@ -20,7 +20,7 @@ export default function MarkedSlider({min,max,value,name,state,setState,width,la
             }
             {label}
         </label>
-        <input id={`iconinput-${name}`} class="slider" name={name} onChange={changeHandler} type="range" min={min} max={max} value={disabled ? 6 : value[name] || 6 } defaultValue={disabled ? 6 : value} disabled={disabled}></input>
+        <input id={`iconinput-${name}`} class="slider" name={name} onChange={changeHandler} type="range" min={min} max={max} value={isCognetive && (disabled ? 6 : value[name] || 6) } defaultValue={isCognetive && (disabled && isCognetive? 6 : value)} disabled={disabled}></input>
         <div className="range">
             {
                 range.map(x=><span>{x}</span>)

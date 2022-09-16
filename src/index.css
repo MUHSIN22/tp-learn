@@ -111,7 +111,7 @@ a{
 }
 .grid-1-1{
   display: grid;
-  grid-template-columns: repeat(2,50%);
+  grid-template-columns: repeat(2,calc(50% - 0.5rem));
   grid-gap: 1rem;
 }
 .grid-1-1-1{
