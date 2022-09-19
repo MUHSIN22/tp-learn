@@ -14,7 +14,7 @@ import voluntary from '../../Assets/edit icons/voluntary.png'
 let EditList = [
     {
         title: "Personal Details",
-        link: "/personal-profile",
+        link: "/dashboard/personal-info-editor",
         icon: PersonalIcon
     },
     {
@@ -44,17 +44,17 @@ let EditList = [
     },
     {
         title: "Certification",
-        link: "/certification",
+        link: "/dashboard/certificate-history",
         icon: certification
     },
     {
         title: "Voluntary Roles",
-        link: "/voluntary-roles",
+        link: "/dashboard/contribution-history",
         icon: voluntary
     },
     {
-        title: "Hobbies",
-        link: "/hobbies",
+        title: "Hobbies & Languages known",
+        link: "/dashboard/hobbies-editor",
         icon: hobbies
     }
 ]

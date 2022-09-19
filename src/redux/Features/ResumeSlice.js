@@ -1054,6 +1054,7 @@ export const resumeSlice = createSlice({
             state.message = "Deleted successfully!";
             state.loading = false;
             state.error = false;
+            state.status = "succeeded"
         })
         .addCase(deleteAdditionalSkill.pending, (state,action) => {
             state.loading = true;
@@ -1061,7 +1062,8 @@ export const resumeSlice = createSlice({
         .addCase(deleteAdditionalSkill.rejected, (state,action) => {
             state.loading = false;
             state.error = true;
-            state.message = "Something went wrong in deletion! Try again"
+            state.status = 'Rejected'
+            state.message = action.payload.data.error_message
         })
         .addCase(updateProfileInfo.pending,(state,acton) => {
             state.loading = true;
@@ -1070,12 +1072,14 @@ export const resumeSlice = createSlice({
         })
         .addCase(updateProfileInfo.fulfilled, (state,action) => {
             state.loading = false;
+            state.status = "succeeded"
             state.profileInfo = action.payload.data;
             state.message = action.payload.data.message
         })
         .addCase(updateProfileInfo.rejected, (state,action) => {
             state.loading = false;
             state.profileInfo = {};
+            state.status = "Rejected"
             state.message = "Something went wrong in updatio! Try again"
         })
         .addCase(sendVerificationCode.rejected,(state,action) => {
@@ -1085,16 +1089,19 @@ export const resumeSlice = createSlice({
         })
         .addCase(verifyOTP.rejected,(state,action) => {
             state.loading = false
+            state.status = 'Rejected'
             state.message = action.payload.data.message
             state.error = true
         })
         .addCase(sendVerificationCode.fulfilled,(state,action) => {
             state.loading = false
+            state.status = "succeeded"
             state.message = action.payload.data.message
             state.error = false
         })
         .addCase(verifyOTP.fulfilled,(state,action) => {
             state.loading = false
+            state.status = 'succeeded'
             state.message = action.payload.data.message
             state.error = false
         })
@@ -1145,10 +1152,12 @@ export const resumeSlice = createSlice({
         })
         .addCase(deleteEducation.fulfilled,(state,action) => {
             state.loading = false
+            state.status = "succeeded"
             state.message = action.payload.data.message
         })
         .addCase(deleteEducation.rejected,(state,action) => {
             state.loading = false
+            state.status = "Rejected"
             state.message = action.payload.data.message
             state.error = true;
         })
@@ -1157,10 +1166,12 @@ export const resumeSlice = createSlice({
         })
         .addCase(deleteCertificate.fulfilled,(state,action) => {
             state.loading = false
+            state.status = "succeeded"
             state.message = action.payload.data.message
         })
         .addCase(deleteCertificate.rejected,(state,action) => {
             state.loading = false
+            state.status = 'Rejected'
             state.message = action.payload.data.message
             state.error = true;
         })
@@ -1306,6 +1317,7 @@ export const getDownLoadDetails = (state)=> state.resume.downLoadDetails;
 export const getResumeUpdateStatus = (state) => state.resume.status;
 export const getResumeMessage = (state) => state.resume.message
 export const getReloadDecider = (state) => state.resume.reloadDecider
+export const getLanguageInfo = (state) => state.resume.recordDetails.resume_info.language_info
 export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus, setReloadDecider } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

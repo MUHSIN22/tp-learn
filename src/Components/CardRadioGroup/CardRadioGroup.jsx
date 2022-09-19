@@ -34,6 +34,10 @@ export default function CardRadioGroup({ name, state, setState, option, name_fie
         console.log(i);
         setCurrent(i)
     },[])
+
+    useEffect(() => {
+        setList(option)
+    },[option])
     return (
         <div className='col-100 g-1 align-start'>
             <label>{label}</label>

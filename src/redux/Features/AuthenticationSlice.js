@@ -113,15 +113,6 @@ export const  resendOTP = createAsyncThunk('authentication/resendOTP',async(body
     }
 })
 
-
-export const logOut = createAsyncThunk('authentication/logout',async(body,{rejectWithValue})=>{
-    try{
-        return {};
-    } catch(error){
-        return rejectWithValue(error.response.data);
-    }
-})
-
 export const  changePassword = createAsyncThunk('authentication/changePassword',async(data,{ rejectWithValue })=>{
     try {
         const response =await API.post(`/change-password`,data.body,{
@@ -253,14 +244,6 @@ export const authenticationSlice = createSlice({
             state.message = action.payload.data
 
 
-        })
-        .addCase(logOut.pending, (state,action)=>{
-            state.status = 'loading'
-        }).addCase(logOut.fulfilled, (state, action) => {
-            state.loading = false
-            state = action    
-        }).addCase(logOut.rejected, (state, action) => {
-            state.loading = false
         }).addCase(changePassword.pending, (state,action)=>{
             state.status = 'loading'
         }).addCase(changePassword.fulfilled,(state,action)=>{

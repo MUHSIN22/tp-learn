@@ -14,18 +14,7 @@ export default function RolesAndResponsibilities({ data }) {
         <div className="cv-profile-container-secondary">
             <h2 className="cv-profile-title-secondary">Roles and Responsiblities</h2>
             <div className="responsibilities-grid">
-                <div className="responsibilities">
-                    <ul>
-                        {
-                            rolesList && rolesList[0] &&
-                            rolesList.map((role, index) => (
-                                <li key={index}>
-                                    <TickCircle />
-                                    <span>{role}</span>
-                                </li>
-                            ))
-                        }
-                    </ul>
+                <div className="responsibilities" dangerouslySetInnerHTML={{__html:parser(data.role_responsibilties)}}>
                 </div>
                 <div className="resp-skills">
                     {

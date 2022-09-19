@@ -20,6 +20,7 @@ const initialState = {
     universityList: [],
     collageList: [],
     currencyList: [],
+    languageList: [],
     status: '',
     error: '',
     sidebarval: 1
@@ -32,6 +33,16 @@ export const getCountryCodeList = createAsyncThunk('authentication/getCountryCod
         return rejectWithValue(error.response.data);
     }
 })
+
+export const getLanguageList = createAsyncThunk('authentication/getLanguageList', async (data, {rejectWithValue}) => {
+    try{
+        const response = await API.get('/getLanguageList')
+        return response.data
+    } catch (error){
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const getGenderList = createAsyncThunk('authentication/getGenderList', async (data, { rejectWithValue }) => {
     try {
         const response = await API.get('/getGenderList')
@@ -304,6 +315,17 @@ export const masterSlice = createSlice({
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
+        }).addCase(getLanguageList.pending, (state, action) => {
+            state.loading = true
+            state.status = 'loading'
+        }).addCase(getLanguageList.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.languageList = action.payload.data.recordDetails
+        }).addCase(getLanguageList.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'Rejected'
+            state.error = action.payload.error
         }).addCase(getGenderList.pending, (state, action) => {
             state.loading = true
             state.status = 'loading'
@@ -511,6 +533,7 @@ export const masterSlice = createSlice({
 
 
 export const selectCountryCodes = (state) => state.masters.countryCodes;
+export const selectLanguages = (state) => state.masters.languageList;
 export const selectGenderList = (state) => state.masters.genderList;
 export const selectCompanyList = (state) => state.masters.companyList;
 export const selectJobNatureList = (state) => state.masters.jobNatureList;

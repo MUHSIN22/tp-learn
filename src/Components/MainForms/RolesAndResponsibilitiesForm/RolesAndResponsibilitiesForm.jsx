@@ -156,7 +156,6 @@ export default function RolesAndResponsibilitiesForm() {
     return (
         <div className="main-form-wrapper">
             <h2 className="form-title">So far so good! Now it’s time to flaunt your amazing skills.</h2>
-            {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
             <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />
             <div className="role-skills-container">
                 <div className="skill-and-complexity">

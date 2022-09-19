@@ -66,7 +66,7 @@ export default function CVBuilder() {
         Certifications: { id: 10, state: 'complete' },
       })
     }
-    if (bio.length>0) {
+    if (bio && bio.length>0) {
       setProgress({
         ...progress,
         Experience: { id:1, state: 'complete' },

@@ -186,7 +186,14 @@ a{
   .grid-1-1{
     grid-template-columns: 95vw;
   }
+  /* .edit-form-template .grid-1-1{
+    grid-template-columns: 100%;
+  } */
   .ck p{
     font-size: 0.8rem;
+  }
+  .edit-form-template .formContainer{
+    width: auto !important;
+    padding: 0 !important;
   }
 }

@@ -1,0 +1,108 @@
+.membership-selection-card{
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid #e6e7e6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    padding-top: 3rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.membership-selection-card--active{
+    background: linear-gradient(180deg, rgba(241,112,77,1) 0%, rgba(240,148,123,1) 100%);
+    border-color: transparent;
+    color: #fff;
+    transform: scale(1.05);
+}
+/* #fbfbfa */
+.membership-selection-card .plan-name{
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.membership-selection-card .plan-description{
+    text-align: center;
+}
+.membership-selection-card .plan-includes{
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    margin: 0;
+}
+.membership-selection-card li{
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+.membership-selection-card .tick-wrapper{
+    width: 1rem;
+    height: 1rem;
+    background: #2ec78c;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.membership-selection-card .plan-includes span{
+    flex-shrink: 10;
+}
+.membership-selection-card .special-label{
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: #00059c;
+    color: #fff;
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    border-radius: 50px 0 0 50px;
+}
+.membership-selection-card .discount-label{
+    color: #fff;
+    background: #ef6338;
+    width: 10rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: center;
+    transform: translateX(-43%) rotate(-45deg) translateY(2.5rem);
+}
+.membership-selection-card--active .discount-label{
+    background: #fff;
+    color: #f0977c;
+}
+.membership-selection-card .discount-label small{
+    font-size: 1rem;
+}
+.membership-selection-card--active .btn-buy{
+    background: #f0977c;
+    border-color: #fff;
+}
+.list-title{
+    text-align: left;
+    width: 100%;
+}
+.btn-buy{
+    background: #f0977c;
+    border: 2px solid #ef6338;
+    padding: 0.8rem 1rem;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+.btn-buy big{
+    font-weight: 600;
+}
+.manage-plan-btn{
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}

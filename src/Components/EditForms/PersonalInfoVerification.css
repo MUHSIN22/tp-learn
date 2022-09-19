@@ -50,3 +50,31 @@
 .personal-info-verification-wrapper button:hover{
     box-shadow: 0px 1px 10px #ff907789;
 }
+@media only screen and (max-width: 500px) {
+    .personal-info-verification-wrapper .title{
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .personal-info-verification-wrapper .otp-field {
+        width: 2rem;
+        aspect-ratio: 1/1;
+        box-shadow: 0px 0px 50px #ff907746;
+        border-radius: 7px;
+        font-weight: 700;
+        font-size: 1rem;
+        margin: 0 0.5rem;
+        outline: none;
+    }
+    .personal-info-verification-wrapper .otp-wrapper {
+        margin-left: 0;
+        flex-direction: column;
+    }
+    .personal-info-verification-wrapper .otp-wrapper label {
+        font-size: 1.2rem;
+        border-bottom: 0;
+        margin-bottom: 1rem;
+    }
+    .personal-info-verification-wrapper .verify-input-wrapper {
+        width: 100%;
+    }
+}

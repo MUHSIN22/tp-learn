@@ -50,11 +50,25 @@
 }
 @media only screen and (max-width: 768px) {
     .cv-profile-container{
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
+        grid-template-areas: 'cv';
+        min-height: 100vh;
+        height: auto;
     }
 }
 @media only screen and (max-width: 500px) {
+    .cv-profile-container{
+        padding-top: 4rem;
+    }
     .cv-profile-container .main-cv-wrapper{
         padding: 0;
+    }
+    .profile-share-and-edit-wrapper {
+        gap: 2rem;
+        padding: 0.5rem;
+        font-size: 1.4rem;
+        width: 90%;
+        margin: 1.5rem auto;
+        justify-content: space-around;
     }
 }

@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
-import { addEducationForEdit } from '../../redux/Features/EditSlice';
-import { deleteEducation, SelectCompanyDetails, selectEducation, setReloadDecider, toggleNewEducation } from '../../redux/Features/ResumeSlice';
+import { addCertificateForEdit } from '../../redux/Features/EditSlice';
+import { deleteCertificate, selectCertificate, selectEducation, setReloadDecider, toggleNewCertificate } from '../../redux/Features/ResumeSlice';
 import EditFormAddButton from '../../Util Components/EditFormAddButton/EditFormAddButton';
 import EditFormController from '../../Util Components/EditFormController/EditFormController';
 import EditSwappableComponent from '../../Util Components/EditSwappableComponent/EditSwappableComponent';
 
-export default function EducatiomSummaryReview() {
-    const education = useSelector(selectEducation)
+export default function CertificateSummaryPreview() {
+    const certifications = useSelector(selectCertificate);
     const [list,setList] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -33,28 +33,28 @@ export default function EducatiomSummaryReview() {
         return result;
     };
 
-    const editEducationInfo = (item) => {
-        dispatch(addEducationForEdit(item.education_record_id))
-        navigate('/dashboard/education-editor')
+    const editCertificateInfo = (item) => {
+        dispatch(addCertificateForEdit(item.certificate_record_id))
+        navigate('/dashboard/certificate-editor')
     }
 
-    const deleteEducationInfo = (item) => {
+    const deleteCertificateInfo = (item) => {
         let confirm = window.confirm("Are you sure to delete the education?")
         if(confirm){
             dispatch(setReloadDecider(true));
-            dispatch(deleteEducation({auth: token , body: {user_id,education_record_id: item.education_record_id}}))
+            dispatch(deleteCertificate({auth: token , body: {user_id,certificate_record_id: item.certificate_record_id}}))
         }
     }
 
-    const addNewEducation = () => {
-        dispatch(toggleNewEducation(true))
-        navigate('/dashboard/education-editor')
+    const addNewCertificate = () => {
+        dispatch(toggleNewCertificate(true))
+        navigate('/dashboard/certificate-editor')
     }
 
     useEffect(() => {
-        dispatch(toggleNewEducation(false))
-        setList(education)
-    },[education])
+        dispatch(toggleNewCertificate(false))
+        setList(certifications)
+    },[certifications])
       
     return (
         <div className="edit-summary-preview-wrapper">
@@ -69,9 +69,9 @@ export default function EducatiomSummaryReview() {
                                         id={index + 1} 
                                         key={index} 
                                         item={item} 
-                                        data={{title: item.collage_name,location: item.location ,fromDate: item.course_start_date, toDate: item.course_end_date}}
-                                        editItem={editEducationInfo}
-                                        deleteItem={deleteEducationInfo}
+                                        data={{title: item.project_name,location: item.institute_name ,fromDate: item.certificate_start_date, toDate: item.certificate_end_date}}
+                                        editItem={editCertificateInfo}
+                                        deleteItem={deleteCertificateInfo}
                                     />
                                 ))
                             }
@@ -79,7 +79,7 @@ export default function EducatiomSummaryReview() {
                     )}
                 </Droppable>
             </DragDropContext>
-            <EditFormAddButton title="Add another education" addingHandler={addNewEducation} />
+            <EditFormAddButton title="Add another Certificate" addingHandler={addNewCertificate} />
             <EditFormController handlePreviousNavigation={() => navigate('/dashboard/edit')}/>
         </div>
     )

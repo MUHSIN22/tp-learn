@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice'
 import { getCollageList, getDegreeList, getUniversityList, selectCollageList, selectDegreeList, selectUniversityList } from '../../../redux/Features/MasterSlice'
-import { addEducation, reload, selectEducation, selectNewEducation, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewEducation } from '../../../redux/Features/ResumeSlice'
+import { addEducation, reload, selectEducation, selectNewEducation, selectResumeError, selectResumeLoading, selectResumeMessage, setReloadDecider, toggleNewEducation } from '../../../redux/Features/ResumeSlice'
 import FormController from '../../../Util Components/FormController/FormController'
 import DateInput from '../../../Util Components/Inputs/DateInput/DateInput'
 import LocationInput from '../../../Util Components/Inputs/LocationInput/LocationInput'
@@ -111,6 +111,7 @@ export default function EducationForm() {
         }
         body = JsonToFormData(body)
         try {
+            dispatch(setReloadDecider(true))
             let data = await dispatch(addEducation({ auth: token, body, dispatch })).unwrap()
             if (isAdd) {
                 dispatch(toggleNewEducation(true))
@@ -179,8 +180,10 @@ export default function EducationForm() {
                     education_record_id: '',
 
                 })
+                setLocation('')
                 setUpdated(false);
             }
+            setLocation('')
         }
 
         return () => {
@@ -196,7 +199,6 @@ export default function EducationForm() {
     return (
         <div className="main-form-wrapper">
             <h2 className="form-title">Now, let's move on to your learning journey so far</h2>
-            {showAlert && !loading && <Alert error={error} message={error ? Object.values(message) : message} />}
             <div className="grid-1-1">
                 <SuggestionInput value={form.other_degree_name} name={'degree_id'} selected={degreeSelectHandler} label='Degree/Qualification*' placeholder={'e.g. BSc Computer Science'} searchHandler={addDegreeHandler} suggestions={degree} name_field={'degree_name'} />
                 <SuggestionInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} searchHandler={addUniversityHandler} suggestions={universities} name_field={'education_name'} />

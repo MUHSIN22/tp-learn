@@ -5,32 +5,47 @@ const initialState = {
     editCompany: null,
     editDesignationID: null,
     editProjectID: null,
-    formProgress : 0
+    formProgress : 0,
+    editEducationID: null,
+    editCertificateID : null,
+    editContributionID: null
 }
 
 export const editSlice = createSlice({
     name: "editUtils",
     initialState,
     reducers: {
-        addCompanyForEdit: (state,payload) => {
-            state.editCompany =  payload.payload
+        addCompanyForEdit: (state,action) => {
+            state.editCompany =  action.payload
         },
-        addDesignationForEdit: (state,payload) => {
-            state.editDesignationID = payload.payload
+        addDesignationForEdit: (state,action) => {
+            state.editDesignationID = action.payload
         },
-        addProjectForEdit : (state, payload) => {
-            state.editProjectID = payload.payload
+        addProjectForEdit : (state, action) => {
+            state.editProjectID = action.payload
         },
-        changeExperienceForm : (state,payload) => {
-            state.formProgress = payload.payload
+        addEducationForEdit : (state,action) => {
+            state.editEducationID = action.payload
+        },
+        addCertificateForEdit : (state,action) => {
+            state.editCertificateID = action.payload
+        },
+        addContributionForEdit : (state,action) => {
+            state.editContributionID = action.payload
+        },
+        changeExperienceForm : (state,action) => {
+            state.formProgress = action.payload
         }
     }
 })
 
-export const {addCompanyForEdit, addDesignationForEdit, changeExperienceForm, addProjectForEdit} = editSlice.actions
-export const selectCompanyForEdit = (state) => state.editDetails.editCompany
-export const selectDesignationForEdit = (state) => state.editDetails.editDesignationID
-export const selectFormProgress = (state) => state.editDetails.formProgress
-export const getEditProjectID = (state) => state.editDetails.editProjectID
+export const {addCompanyForEdit, addDesignationForEdit, addEducationForEdit, changeExperienceForm, addProjectForEdit, addCertificateForEdit, addContributionForEdit} = editSlice.actions;
+export const selectCompanyForEdit = (state) => state.editDetails.editCompany;
+export const selectDesignationForEdit = (state) => state.editDetails.editDesignationID;
+export const selectFormProgress = (state) => state.editDetails.formProgress;
+export const getEditProjectID = (state) => state.editDetails.editProjectID;
+export const getEducationID = (state) => state.editDetails.editEducationID;
+export const getCertificateID = (state) => state.editDetails.editCertificateID;
+export const getContributionID = (state) => state.editDetails.editContributionID;
 
 export default editSlice.reducer;

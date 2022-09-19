@@ -26,14 +26,14 @@ export default function DesignationSummaryPage() {
 
     const deleteJobRoleInfo = (jobID) => {
         let confirm = window.confirm('Are you sure to delete the designation?')
-        if(confirm){
+        if (confirm) {
             dispatch(setReloadDecider(true))
-            dispatch(deleteJobRole({auth:token,body:{user_id,company_job_record_id:jobID}}))
+            dispatch(deleteJobRole({ auth: token, body: { user_id, company_job_record_id: jobID } }))
         }
-        
+
 
     }
-    
+
     const addNewJobRoleInfo = () => {
         dispatch(toggleNewDesignation(true))
         dispatch(toggleNewRoles(true))
@@ -46,46 +46,48 @@ export default function DesignationSummaryPage() {
         dispatch(toggleNewDesignation(false))
         dispatch(toggleNewRoles(false))
         dispatch(toggleNewProject(false))
-    },[])
+    }, [])
 
     useEffect(() => {
         setCompanyDetails(company.filter((company) => company.company_record_id === companyID)[0] ? company.filter((company) => company.company_record_id === companyID)[0] : {})
-    },[company])
+    }, [company])
 
     useEffect(() => {
-        if(!(companyDetails.job_role && companyDetails?.job_role[0])){
+        if (!(companyDetails.job_role && companyDetails?.job_role[0])) {
             dispatch(changeExperienceForm(1));
             navigate('/dashboard/experience-editor')
         }
-    },[])
+    }, [])
     return (
         <div className="designation-summary-page">
             <h2 className="form-title">Designation History</h2>
-            <table className="designation-summary-table" cellPadding={0} cellSpacing={0}>
-                <thead>
-                    <th>SI No.</th>
-                    <th>Designation</th>
-                    <th>Time Period</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    {
-                        (companyDetails.job_role && companyDetails?.job_role[0]) &&
-                        companyDetails?.job_role.map((role, index) => (
-                            <tr key={index}>
-                                {console.log(role,'this is role')}
-                                <td>{index + 1}</td>
-                                <td>{role.designation_name}</td>
-                                <td>{new Date(role.job_start_date).getFullYear()}-{role.job_end_date ? new Date(role.job_end_date).getFullYear() : "Current"}</td>
-                                <td>
-                                    <MdEdit className='des-summary-icons' onClick={() => handleEdit(role.company_job_record_id)} />
-                                    <MdDelete className='des-summary-icons' onClick={() => deleteJobRoleInfo(role.company_job_record_id)} />
-                                </td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+            <div className="summary-table-container">
+                <table className="designation-summary-table" cellPadding={0} cellSpacing={0}>
+                    <thead>
+                        <th>SI No.</th>
+                        <th>Designation</th>
+                        <th>Time Period</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        {
+                            (companyDetails.job_role && companyDetails?.job_role[0]) &&
+                            companyDetails?.job_role.map((role, index) => (
+                                <tr key={index}>
+                                    {console.log(role, 'this is role')}
+                                    <td>{index + 1}</td>
+                                    <td>{role.designation_name}</td>
+                                    <td>{new Date(role.job_start_date).getFullYear()}-{role.job_end_date ? new Date(role.job_end_date).getFullYear() : "Current"}</td>
+                                    <td>
+                                        <MdEdit className='des-summary-icons' onClick={() => handleEdit(role.company_job_record_id)} />
+                                        <MdDelete className='des-summary-icons' onClick={() => deleteJobRoleInfo(role.company_job_record_id)} />
+                                    </td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
             <EditFormAddButton title="Add another designation" addingHandler={addNewJobRoleInfo} />
         </div>
     )

@@ -17,3 +17,9 @@
     background: #fe7253;
     color: #fff;
 }
+
+@media only screen and (max-width: 500px) {
+    .edit-form-controller .btn{
+        padding: 0.7rem 2rem;
+    }
+}

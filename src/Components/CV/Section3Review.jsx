@@ -405,8 +405,8 @@ function ResponsibiltiensOverview({ data }) {
       <span className="divider"></span>
       <div className="grid-67-33 company-overview-grid">
         {data && data.role_responsibilties ? (
-          <div className="role col-50 g-0-5 text-left g-2">
-            {rolesList && rolesList.map((role) => {
+          <div className="role col-50 g-0-5 text-left g-2" dangerouslySetInnerHTML={{"__html":parser(data.role_responsibilties)}}>
+            {/* {rolesList && rolesList.map((role) => {
               if (role !== '&nbsp;' && role != '') {
                 return <div className="flex-row-fit g-1"><TickCircle className="role-tick-icon" />
                   <div className="role-wrapper">
@@ -414,7 +414,7 @@ function ResponsibiltiensOverview({ data }) {
                   </div>
                 </div>
               }
-            })}
+            })} */}
           </div>
         ) : (
           null

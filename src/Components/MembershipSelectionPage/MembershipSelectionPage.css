@@ -1,0 +1,33 @@
+.membership-cv-container{
+    grid-area: cv;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+.membership-cv-container h3,
+.membership-cv-container h1,
+.membership-cv-container h2,
+.membership-cv-container p{
+    margin: 0;
+    font-family: var(--font-monserrat);
+}
+.membership-btn-header{
+    padding: 0.8rem;
+    border-radius: 8px;
+    color: #fff;
+    background: #f0977c;
+    font-weight: 500;
+}
+.membership-description{
+    max-width: 30rem;
+    text-align: center;
+    line-height: 1.8;
+}
+.membership-cards-wrapper{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 2rem;
+    max-width: 1100px;
+}

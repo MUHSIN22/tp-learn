@@ -22,3 +22,27 @@
 .edit-form-template-heading{
     font-family: var(--font-montserrat);
 }
+@media only screen and (max-width: 768px) {
+    .edit-form-template-header {
+        grid-template-columns: 3rem auto;
+        grid-gap: 1rem;
+        align-items: center;
+    }
+    .edit-form-template .edit-icon-wrapper {
+        padding: 1rem;
+        height: max-content;
+    }
+    .edit-form-template-heading {
+        font-size: 1.5rem;
+    }
+    .edit-form-template {
+        padding: 2rem 0.5rem;
+        gap: 1rem;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .edit-form-template-heading {
+        font-size: 1.2rem;
+    }
+}

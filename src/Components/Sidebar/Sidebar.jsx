@@ -246,10 +246,8 @@ function Sidebar(props) {
             </span>
                     </div>
                         
-                                   
-
+                          
                       </Tippy>
-                      
                         </>
                       
                       

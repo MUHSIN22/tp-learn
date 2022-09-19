@@ -15,7 +15,7 @@ export default function Experience8({setProgress}) {
             <div className="col-20">
                 <button className='btn secondary' onClick={()=>{
                   setProgress(0)
-                  dispatch(toggleNewJob())
+                  dispatch(toggleNewJob(true))
                   // dispatch(changeFormId({auth:token,body:{form_id: 0, user_id}}))
                   }}>Yes</button>
             </div>

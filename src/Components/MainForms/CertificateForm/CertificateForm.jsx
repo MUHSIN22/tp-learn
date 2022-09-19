@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import useDebounce from '../../../DebouncedSearch';
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice';
 import { searchSkills, selectSkillList } from '../../../redux/Features/MasterSlice';
-import { addCertification, reload, selectCertificate, selectNewCertificate, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewCertificate } from '../../../redux/Features/ResumeSlice';
+import { addCertification, reload, selectCertificate, selectNewCertificate, selectResumeError, selectResumeLoading, selectResumeMessage, setReloadDecider, toggleNewCertificate } from '../../../redux/Features/ResumeSlice';
 import DateInput from '../../../Util Components/Inputs/DateInput/DateInput';
 import PlainInput from '../../../Util Components/Inputs/PlainInput/PlainInput';
 import SuggestionInput from '../../../Util Components/Inputs/SuggestionInput/SuggestionInput';
@@ -99,6 +99,7 @@ export default function CertificateForm() {
 
         let form_data = JsonToFormData(body)
         try {
+            dispatch(setReloadDecider(true))
             let data = await dispatch(addCertification({ auth: token, body: form_data, setUpdated, dispatch })).unwrap()
             if (isAdd) {
                 dispatch(toggleNewCertificate(true))
@@ -173,14 +174,7 @@ export default function CertificateForm() {
 
         }
     }, [newCertificate, certificates, loading, updated])
-    useEffect(() => {
 
-        if (reloadFlag && !loading) {
-            setReloadFlag(false)
-            dispatch(reload())
-
-        }
-    }, [reloadFlag, loading])
     return (
         <div className="main-form-wrapper">
             <h2 className="form-title">Add any certification courses/trainings you have done</h2>
@@ -193,7 +187,6 @@ export default function CertificateForm() {
                 <DateInput value={form.certificate_end_date > 7 ? new Date(form.certificate_end_date).getFullYear() + "-" + new Date(form.certificate_end_date).getMonth() : form.certificate_end_date} name='certificate_end_date' handleChange={handleChange} type={'date'} label='Duration (to)*' placeholder='i.e. Duration date' width={50} />
             </div>
             <MultiSelectedOptions options={selected_options} value_field={'skill_name'} deleteHandler={handleDeleteSkill} />
-            {console.log(skillList,'this is skill list')}
             <SuggestionInput name='Skills' searchHandler={searchHandler} label={`Key skills learned*`} placeholder='Skills mastered in this course' width={100} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
             <PlainInput value={form.certificate_project_info} name='certificate_project_info' handleChange={handleChange} label='Projects, if any' placeholder='Tell us how you applied those skills?' width={100} />
             <div className="common-input-wrapper">

@@ -3,3 +3,10 @@
     grid-template-columns: repeat(3,1fr);
     grid-gap: 3rem;
 }
+
+@media only screen and (max-width: 500px) {
+    .cognetive-edit-grid{
+        grid-template-columns: 1fr;
+        grid-gap: 2rem;
+    }
+}

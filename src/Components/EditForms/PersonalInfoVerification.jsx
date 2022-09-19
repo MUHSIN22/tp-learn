@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
-import { reload, sendVerificationCode, verifyOTP } from '../../redux/Features/ResumeSlice';
+import { reload, sendVerificationCode, setReloadDecider, verifyOTP } from '../../redux/Features/ResumeSlice';
 import PersonalInfoInput from '../PersonalInfoInput/PersonalInfoInput'
 import './PersonalInfoVerification.css'
 
@@ -10,6 +11,7 @@ export default function PersonalInfoVerification({ type, setType }) {
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     const [otpStatus,setOtpStatus] = useState(null);
+    const navigate = useNavigate();
     useEffect(() => {
         let fields = document.querySelectorAll(".otp-field")
         fields.forEach(field => {
@@ -47,7 +49,7 @@ export default function PersonalInfoVerification({ type, setType }) {
         }
     }
 
-    const handleOTPVerification = (event) => {
+    const handleOTPVerification = async (event) => {
         event.preventDefault();
         let fields = document.querySelectorAll(".otp-field")
         let otp = ""
@@ -59,7 +61,8 @@ export default function PersonalInfoVerification({ type, setType }) {
             return
         }
         if(type === "email"){
-            dispatch(verifyOTP({
+            dispatch(setReloadDecider(true))
+            await dispatch(verifyOTP({
                 auth: token,
                 body:{
                     user_id,
@@ -70,10 +73,12 @@ export default function PersonalInfoVerification({ type, setType }) {
             }));
             if(type !== "mobile" && localStorage.getItem('mobile')){
                 setType("mobile");
+            }else{
+                navigate('/dashboard/edit')
             }
-            dispatch(reload())
         }else{
-            dispatch(verifyOTP({
+            dispatch(setReloadDecider(true))
+            await dispatch(verifyOTP({
                 auth: token,
                 body: {
                     user_id,
@@ -82,9 +87,8 @@ export default function PersonalInfoVerification({ type, setType }) {
                     otp_number: otp
                 }
             }));
+            navigate('/dashboard/edit')
         }
-        dispatch(reload())
-       
     }
 
     return (

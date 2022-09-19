@@ -4,13 +4,15 @@ import PersonalInfoInput from '../PersonalInfoInput/PersonalInfoInput';
 import moment from 'moment';
 import PersonalInfoVerification from './PersonalInfoVerification';
 import { useDispatch, useSelector } from 'react-redux';
-import { reload, selectResumeError, selectResumeMessage, updateProfileInfo } from '../../redux/Features/ResumeSlice';
+import { reload, selectResumeDetails, selectResumeError, selectResumeMessage, setReloadDecider, updateProfileInfo } from '../../redux/Features/ResumeSlice';
 import { selectAuthToken } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import profile from '../../Assets/avatar.png'
+import { useNavigate } from 'react-router-dom';
 
-export default function PersonalInfo({ data: { data } }) {
+export default function PersonalInfo() {
   const dispatch = useDispatch();
+  const data = useSelector(selectResumeDetails)
   const token = useSelector(selectAuthToken)
   const currentEmail = data.email, currentContact = data.contact;
   const [profilePic, setProfilePic] = useState(data.resume_info.profile_pic || profile)
@@ -21,6 +23,7 @@ export default function PersonalInfo({ data: { data } }) {
   const [isVerification, setVerification] = useState(null)
   const error = useSelector(selectResumeError);
   const message = useSelector(selectResumeMessage);
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     user_id: data.user_id,
@@ -44,7 +47,7 @@ export default function PersonalInfo({ data: { data } }) {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
 
-  const personalFormSubmit = (event) => {
+  const personalFormSubmit = async (event) => {
     event.preventDefault();
     let body = form;
     let formData = new FormData();
@@ -54,7 +57,8 @@ export default function PersonalInfo({ data: { data } }) {
     Object.keys(body).forEach((item) => {
       formData.append(item, body[item]);
     })
-    dispatch(updateProfileInfo({auth: token, body: formData, dispatch}))
+    dispatch(setReloadDecider(true))
+    await dispatch(updateProfileInfo({auth: token, body: formData, dispatch}))
     
     if (currentEmail !== form.email) {
       localStorage.setItem("email",form.email);
@@ -67,17 +71,17 @@ export default function PersonalInfo({ data: { data } }) {
       localStorage.setItem("mobile",form.contact);
       setVerification('mobile')
       return
+    }else{
+      navigate('/dashboard/edit')
     }
     
   }
 
   return (
     <>
-      {message&& <Alert message={message}/>}
       {
         !isVerification ?
           <form className="personal-info-edit" onSubmit={personalFormSubmit}>
-            <h1 className="title">Edit Information</h1>
             <img src={profilePic} className='profile-image' alt="" />
             <label htmlFor="image-upload" className="btn-upload-image">
               <span>Edit Profile Image</span>

@@ -1,0 +1,5 @@
+@media only screen and (max-width: 1450px) and (min-width:500px){
+    .congnitive-add-form .cognetive-edit-grid{
+        grid-template-columns: repeat(2,1fr);
+    }
+}

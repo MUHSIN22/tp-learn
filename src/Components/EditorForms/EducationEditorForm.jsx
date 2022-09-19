@@ -3,7 +3,7 @@ import EditFormTemplate from '../../Util Components/EditFormTemplate/EditFormTem
 import educationIcon from '../../Assets/edit icons/education.png'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { addEducation, reload, selectEducation, selectNewEducation, selectResumeError, selectResumeLoading, selectResumeMessage, toggleNewEducation } from '../../redux/Features/ResumeSlice'
+import { addEducation, reload, selectEducation, selectNewEducation, selectResumeError, selectResumeLoading, selectResumeMessage, setReloadDecider, toggleNewEducation } from '../../redux/Features/ResumeSlice'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import { getCollageList, getDegreeList, getUniversityList, selectCollageList, selectDegreeList, selectUniversityList } from '../../redux/Features/MasterSlice'
 import SuggestionInput from '../../Util Components/Inputs/SuggestionInput/SuggestionInput'
@@ -14,9 +14,13 @@ import TextArea from '../../Util Components/Inputs/TextArea/TextArea'
 import DragDropInput from '../DragDropInput/DragDropInput'
 import EditFormController from '../../Util Components/EditFormController/EditFormController'
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
+import { useNavigate } from 'react-router-dom'
+import { getEducationID } from '../../redux/Features/EditSlice'
 
 export default function EducationEditorForm() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const educationDetails = useSelector(selectEducation);
     const [location, setLocation] = useState('')
     const [form, setForm] = useState({
         degree_id: '',
@@ -52,6 +56,8 @@ export default function EducationEditorForm() {
     const [colleges, setColleges] = useState(collageList);
     const [degree, setDegree] = useState(degreeList);
     const [updated, setUpdated] = useState(false);
+    const educationID = useSelector(getEducationID)
+
     function handleChange(evt) {
         const value = evt.target.value;
 
@@ -112,10 +118,9 @@ export default function EducationEditorForm() {
         }
         body = JsonToFormData(body)
         try {
+            dispatch(setReloadDecider(true))
             let data = await dispatch(addEducation({ auth: token, body, dispatch })).unwrap()
-            if (isAdd) {
-                dispatch(toggleNewEducation(true))
-            }
+            navigate('/dashboard/education-history')
             if (data) {
                 setUpdated(true)
             }
@@ -141,9 +146,58 @@ export default function EducationEditorForm() {
 
         return () => { }
     }, [degreeList.length, universityList.length, collageList.length, dispatch, token])
+    
+    // useEffect(() => {
+    //     if (!newEducation && education && education.length > 0) {
+    //         let lastEducation = education[education.length - 1]
+    //         setForm({
+    //             ...form,
+    //             degree_id: lastEducation.degree_id,
+    //             university_id: lastEducation.university_id,
+    //             other_degree_name: lastEducation.other_degree_name || lastEducation.degree_name,
+    //             other_university_name: lastEducation.university_name,
+    //             collage_id: lastEducation.collage_id,
+    //             other_collage_name: lastEducation.collage_name,
+    //             location: lastEducation.location,
+    //             course_start_date: lastEducation.course_start_date.split("-").reverse().join("-"),
+    //             course_end_date: lastEducation.course_end_date.split("-").reverse().join("-"),
+    //             course_cgpa: lastEducation.course_cgpa,
+    //             course_extra_activity: lastEducation.course_extra_activity,
+    //             course_project_info: lastEducation.course_project_info,
+    //             education_record_id: lastEducation.education_record_id,
+    //         })
+    //         setFile(lastEducation.upload_degree)
+    //         setLocation(lastEducation.location)
+    //     } else {
+    //         if (updated) {
+    //             setForm({
+    //                 degree_id: '',
+    //                 university_id: '',
+    //                 other_degree_name: '',
+    //                 other_university_name: [],
+    //                 collage_id: '',
+    //                 other_collage_name: '',
+    //                 location: '',
+    //                 course_start_date: '',
+    //                 course_end_date: '',
+    //                 course_cgpa: '',
+    //                 course_extra_activity: '',
+    //                 course_project_info: '',
+    //                 education_record_id: '',
+
+    //             })
+    //             setUpdated(false);
+    //         }
+    //     }
+
+    //     return () => {
+
+    //     }
+    // }, [newEducation, education, loading])
+
     useEffect(() => {
-        if (!newEducation && education && education.length > 0) {
-            let lastEducation = education[education.length - 1]
+        if(!newEducation){
+            let lastEducation = educationDetails.filter(education => education.education_record_id === educationID)[0]
             setForm({
                 ...form,
                 degree_id: lastEducation.degree_id,
@@ -160,34 +214,12 @@ export default function EducationEditorForm() {
                 course_project_info: lastEducation.course_project_info,
                 education_record_id: lastEducation.education_record_id,
             })
+            console.log(lastEducation);
             setFile(lastEducation.upload_degree)
             setLocation(lastEducation.location)
-        } else {
-            if (updated) {
-                setForm({
-                    degree_id: '',
-                    university_id: '',
-                    other_degree_name: '',
-                    other_university_name: [],
-                    collage_id: '',
-                    other_collage_name: '',
-                    location: '',
-                    course_start_date: '',
-                    course_end_date: '',
-                    course_cgpa: '',
-                    course_extra_activity: '',
-                    course_project_info: '',
-                    education_record_id: '',
-
-                })
-                setUpdated(false);
-            }
         }
+    },[educationDetails,educationID])
 
-        return () => {
-
-        }
-    }, [newEducation, education, loading])
     useEffect(() => {
 
         if (reloadFlag && !loading) {
@@ -197,7 +229,7 @@ export default function EducationEditorForm() {
     return (
         <EditFormTemplate title="Education" icon={educationIcon}>
             <div className="main-form-wrapper">
-                <h2 className="form-title">Now, let's move on to your learning journey so far</h2>
+                {newEducation && <h2 className="form-title">Now, let's move on to your learning journey so far</h2>}
                 <div className="grid-1-1">
                     <SuggestionInput value={form.other_degree_name} name={'degree_id'} selected={degreeSelectHandler} label='Degree/Qualification*' placeholder={'e.g. BSc Computer Science'} searchHandler={addDegreeHandler} suggestions={degree} name_field={'degree_name'} />
                     <SuggestionInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} searchHandler={addUniversityHandler} suggestions={universities} name_field={'education_name'} />
@@ -222,12 +254,10 @@ export default function EducationEditorForm() {
                     <label htmlFor="">Upload File</label>
                     <DragDropInput file={file} setFile={setFile} />
                 </div>
-                <button onClick={(e) => handleSubmit(e, true)} className="btn-fit transparent g-0-5" style={{ marginLeft: "auto" }}><AddCircle width={30} /> Add Another Qualification</button>
+                {/* <button onClick={(e) => handleSubmit(e, true)} className="btn-fit transparent g-0-5" style={{ marginLeft: "auto" }}><AddCircle width={30} /> Add Another Qualification</button> */}
                 <EditFormController handleSubmit={(e) => {
                     handleSubmit(e)
-                    dispatch(toggleNewEducation(false))
-                    setReloadFlag(true)
-                }} />
+                }} handlePreviousNavigation={() => navigate('/dashboard/education-history')} />
             </div>
         </EditFormTemplate>
     )

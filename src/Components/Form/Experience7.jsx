@@ -16,9 +16,9 @@ export default function Experience7({setProgress}) {
             <div className="col-20">
                 <button className='btn secondary' onClick={()=>{
                   setProgress(2)
-                  dispatch(toggleNewDesignation())
+                  dispatch(toggleNewDesignation(true))
                   dispatch(toggleNewProject(true))
-                  dispatch(toggleNewRoles())
+                  dispatch(toggleNewRoles(true))
                   // dispatch(changeFormId({auth:token,body:{form_id: 2, user_id}}))
                   }} disabled={loading}>Yes</button>
             </div>

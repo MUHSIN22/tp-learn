@@ -99,11 +99,9 @@ export default function ProjectInfoForm() {
             console.log(temp,'this is skill');
             setAlertInnder(false)
             set_Selected_options([...selected_options, temp])
-            console.log(document.getElementById('Skills').value,document.getElementById('Skills'));
-            document.getElementById('Skills').value = '';
-            console.log(document.getElementById('Skills').value,document.getElementById('Skills'));
+            document.getElementById('iconinput-Skills').value = '';
             document.getElementById('iconinput-skill_complexity').value = 0;
-            document.getElementById('skill_desc').value = '';
+            document.getElementById('iconinput-skill_desc').value = '';
             temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
         } else {
             if (temp.skill_desc.length <= 0) {
@@ -176,11 +174,11 @@ export default function ProjectInfoForm() {
     }, [lastCompany, lastJob, form])
     useEffect(() => {
         if (showAlert && !error) {
-            document.getElementById('project_name').value = ''
-            document.getElementById('client_name').value = ''
-            document.getElementById('project_desc').value = ''
-            document.getElementById('Skills').value = ''
-            document.getElementById('skill_desc').value = ''
+            document.getElementById('iconinput-project_name').value = ''
+            document.getElementById('iconinput-client_name').value = ''
+            document.getElementById('iconinput-project_desc').value = ''
+            document.getElementById('iconinput-Skills').value = ''
+            document.getElementById('iconinput-skill_desc').value = ''
             set_Selected_options([])
         }
     }, [showAlert, error])

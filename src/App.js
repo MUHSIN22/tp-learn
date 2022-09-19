@@ -45,6 +45,9 @@ import careerObjectiveIcon from './Assets/edit icons/career objective.png'
 import cognitive from './Assets/edit icons/cognitive.png'
 import experience from './Assets/edit icons/experience.png'
 import education from './Assets/edit icons/education.png'
+import certificate from './Assets/edit icons/certification.png'
+import voluntaryIcon from './Assets/edit icons/voluntary.png'
+
 import CognetiveSkills from './Components/EditorForms/CognetiveSkills/CognetiveSkills';
 import ExperienceFormEditor from './Components/EditorForms/ExperienceFormEditor';
 import DesignationSummaryPage from './Components/DesignationSummaryPage/DesignationSummaryPage';
@@ -56,6 +59,13 @@ import ObjectToArray from './functionUtils/ObjectToArray';
 import ProjectSummaryPage from './Components/ProjectSummaryPage/ProjectSummaryPage';
 import EducatiomSummaryReview from './Components/EducationSummaryReview/EducatiomSummaryReview';
 import EducationEditorForm from './Components/EditorForms/EducationEditorForm';
+import CertificateSummaryPreview from './Components/CertificateSummaryPreview/CertificateSummaryPreview';
+import CertificateEditorForms from './Components/EditorForms/CertificateEditorForms';
+import VoluntarySummaryPreview from './Components/VoluntarySummaryPreview/VoluntarySummaryPreview';
+import ContributionEditForm from './Components/EditorForms/ContributionEditForm';
+import PersonalInfoEditor from './Components/EditorForms/PersonalInfoEditor';
+import HobbiesEditorForm from './Components/EditorForms/HobbiesEditorForm';
+import MembershipSelectionPage from './Components/MembershipSelectionPage/MembershipSelectionPage';
 
 function App() {
   const dispatch = useDispatch()
@@ -65,8 +75,8 @@ function App() {
   const reload = useSelector(selectReload)
   const resumeStatus = useSelector(selectResumeStatus);
   const status = useSelector(getResumeUpdateStatus);
-  const routeWithoutNav = ['/', '/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", '/about-us', '/cv-profile', '/pricing', '/dashboard/cv', "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor']
-  const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor']
+  const routeWithoutNav = ['/', '/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", '/about-us', '/cv-profile', '/pricing', '/dashboard/cv', "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans"]
+  const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans"]
   const message = useSelector(getResumeMessage);
   const reloadDecider = useSelector(getReloadDecider)
 
@@ -186,6 +196,7 @@ function App() {
         <Route path='/dashboard' element={<CVProfile />}>
           <Route path="cv" element={<DashboardCv />} />
           <Route path='edit' element={<EditProfilePage />} />
+          <Route path='plans' element={<MembershipSelectionPage />} />
           <Route path='edit-career-objective' element={
             <EditFormTemplate title="Career Objective" icon={careerObjectiveIcon}>
               <CareerObjectiveEditor />
@@ -206,6 +217,11 @@ function App() {
               <EducatiomSummaryReview />
             </EditFormTemplate>
           } />
+          <Route path='certificate-history' element={
+            <EditFormTemplate title="Certification Courses" icon={certificate}>
+              <CertificateSummaryPreview />
+            </EditFormTemplate>
+          } />
           <Route path='designation-history' element={
             <EditFormTemplate title="Experience" icon={experience}>
               <DesignationSummaryPage />
@@ -216,8 +232,17 @@ function App() {
               <ProjectSummaryPage />
             </EditFormTemplate>
           } />
+          <Route path='contribution-history' element={
+            <EditFormTemplate title="Voluntary Roles" icon={voluntaryIcon}>
+              <VoluntarySummaryPreview />
+            </EditFormTemplate>
+          } />
           <Route path='experience-editor' element={<ExperienceFormEditor />} />
           <Route path="education-editor" element={<EducationEditorForm />} />
+          <Route path="certificate-editor" element={<CertificateEditorForms />} />
+          <Route path="contribution-editor" element={<ContributionEditForm />} />
+          <Route path="personal-info-editor" element={<PersonalInfoEditor />} />
+          <Route path="hobbies-editor" element={<HobbiesEditorForm />} />
         </Route>
       </Routes>
       {!routeWithouFooter.includes(window.location.pathname) ? <Footer /> : null}

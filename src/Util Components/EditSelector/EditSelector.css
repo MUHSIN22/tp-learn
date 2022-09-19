@@ -35,3 +35,19 @@
     font-size: 1.1rem;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 768px) {
+    .edit-selector-wrapper{
+        min-width: auto;
+        width: 100%;
+    }
+    .edit-selector-wrapper .edit-content{
+        font-size: 1rem;
+        margin: 0;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .edit-selector-wrapper .icon-wrapper{
+        display: none;
+    }
+}

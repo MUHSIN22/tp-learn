@@ -26,7 +26,8 @@
     color: #1C1B2C;
     font-size: 1.6rem;
 }
-.formContainer label{
+.formContainer label,
+.main-form-wrapper label{
     font-family: poppins;
     font-weight: 600;
     font-size: 0.8rem;
@@ -175,7 +176,20 @@
     .designation-form .form-row:last-child{
         flex-direction: row !important;
     }
-    .formContainer label{
+    .formContainer label,
+    .main-form-wrapper label{
         font-size: 0.75rem;
+    }
+    .option-card p {
+        font-size: 0.7rem;
+    }
+    .option-card {
+        padding:0.5rem;
+        gap: 0.6rem;
+        border-radius: 10px;
+        border: solid 2px  #14B47D;
+    }
+    .btn-fit svg {
+        height: max-content;
     }
 }

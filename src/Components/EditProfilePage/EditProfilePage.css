@@ -7,3 +7,14 @@
     justify-content: center;
     gap: 1rem;
 }
+@media only screen and (max-width: 768px) {
+    .edit-profile-page{
+        padding: 2rem;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .edit-profile-page{
+        padding: 2rem 1rem;
+        gap: 0.5rem;
+    }
+}

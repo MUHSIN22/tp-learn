@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
-import { addEducationForEdit } from '../../redux/Features/EditSlice';
-import { deleteEducation, SelectCompanyDetails, selectEducation, setReloadDecider, toggleNewEducation } from '../../redux/Features/ResumeSlice';
+import { addCertificateForEdit, addContributionForEdit } from '../../redux/Features/EditSlice';
+import { deleteAdditionalSkill, deleteCertificate, selectCertificate, selectEducation, selectSocialContribution, setReloadDecider, toggleNewAdditionalSkills, toggleNewCertificate } from '../../redux/Features/ResumeSlice';
 import EditFormAddButton from '../../Util Components/EditFormAddButton/EditFormAddButton';
 import EditFormController from '../../Util Components/EditFormController/EditFormController';
 import EditSwappableComponent from '../../Util Components/EditSwappableComponent/EditSwappableComponent';
 
-export default function EducatiomSummaryReview() {
-    const education = useSelector(selectEducation)
+export default function VoluntarySummaryPreview() {
+    const contributions = useSelector(selectSocialContribution);
     const [list,setList] = useState([])
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -33,33 +33,33 @@ export default function EducatiomSummaryReview() {
         return result;
     };
 
-    const editEducationInfo = (item) => {
-        dispatch(addEducationForEdit(item.education_record_id))
-        navigate('/dashboard/education-editor')
+    const editVoluntaryInfo = (item) => {
+        dispatch(addContributionForEdit(item.additional_skill_record_id))
+        navigate('/dashboard/contribution-editor')
     }
 
-    const deleteEducationInfo = (item) => {
+    const deleteVoluntaryInfo = (item) => {
         let confirm = window.confirm("Are you sure to delete the education?")
         if(confirm){
             dispatch(setReloadDecider(true));
-            dispatch(deleteEducation({auth: token , body: {user_id,education_record_id: item.education_record_id}}))
+            dispatch(deleteAdditionalSkill({auth: token , body: {user_id,additional_skill_record_id: item.additional_skill_record_id}}))
         }
     }
 
-    const addNewEducation = () => {
-        dispatch(toggleNewEducation(true))
-        navigate('/dashboard/education-editor')
+    const addNewRole = () => {
+        dispatch(toggleNewAdditionalSkills(true))
+        navigate('/dashboard/contribution-editor')
     }
 
     useEffect(() => {
-        dispatch(toggleNewEducation(false))
-        setList(education)
-    },[education])
+        dispatch(toggleNewAdditionalSkills(false))
+        setList(contributions)
+    },[contributions])
       
     return (
         <div className="edit-summary-preview-wrapper">
             <DragDropContext onDragEnd={onDragEnd}>
-                <h2 className="form-title">Education History</h2>
+                <h2 className="form-title">Voluntary Roles History</h2>
                 <Droppable droppableId='droppable'>
                     {(provided, snapshot) => (
                         <div className='draggable-container' ref={provided.innerRef} {...provided.droppableProps} >
@@ -69,9 +69,9 @@ export default function EducatiomSummaryReview() {
                                         id={index + 1} 
                                         key={index} 
                                         item={item} 
-                                        data={{title: item.collage_name,location: item.location ,fromDate: item.course_start_date, toDate: item.course_end_date}}
-                                        editItem={editEducationInfo}
-                                        deleteItem={deleteEducationInfo}
+                                        data={{title: item.role,location: item.organization_name ,fromDate: item.from_duration, toDate: item.to_duration !== "" ? item.to_duration : "Current"}}
+                                        editItem={editVoluntaryInfo}
+                                        deleteItem={deleteVoluntaryInfo}
                                     />
                                 ))
                             }
@@ -79,7 +79,7 @@ export default function EducatiomSummaryReview() {
                     )}
                 </Droppable>
             </DragDropContext>
-            <EditFormAddButton title="Add another education" addingHandler={addNewEducation} />
+            <EditFormAddButton title="Add another Voluntary Role" addingHandler={addNewRole} />
             <EditFormController handlePreviousNavigation={() => navigate('/dashboard/edit')}/>
         </div>
     )

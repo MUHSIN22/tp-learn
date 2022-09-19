@@ -1,18 +1,15 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import ObjectToArray from '../../../functionUtils/ObjectToArray'
-import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice'
-import { selectCognitive_info } from '../../../redux/Features/GraphSlice'
-import { addCognitiveSkills, getResumeMessage, getResumeUpdateStatus, reload, selectResumeError, selectResumeLoading } from '../../../redux/Features/ResumeSlice'
-import EditFormController from '../../../Util Components/EditFormController/EditFormController'
-import MarkedSlider from '../../MarkedSlider/MarkedSlider'
-import './CognetiveSkills.css'
+import React, { useLayoutEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice';
+import { selectCognitive_info } from '../../../redux/Features/GraphSlice';
+import { addCognitiveSkills, getResumeMessage, getResumeUpdateStatus, reload, selectResumeError, selectResumeLoading, setReloadDecider } from '../../../redux/Features/ResumeSlice';
+import FormController from '../../../Util Components/FormController/FormController';
+import MarkedSlider from '../../MarkedSlider/MarkedSlider';
+import './CognitiveSkillsForm.css'
 
-export default function CognetiveSkills() {
+export default function CognitiveSkiilsForm() {
     const dispatch = useDispatch()
-    const navigate = useNavigate();
     const [isStatusChecked, setStatusChecked] = useState(false);
     const [form, setForm] = useState({
         communication: "",
@@ -63,6 +60,7 @@ export default function CognetiveSkills() {
         console.log(body);
         try {
             console.log('here outside');
+            dispatch(setReloadDecider(true))
             dispatch(addCognitiveSkills({ auth: token, body: { ...form,user_id }, dispatch })).then((res => {
                 if(res.payload.data){
                     dispatch(reload())
@@ -133,12 +131,12 @@ export default function CognetiveSkills() {
 
     }
     return (
-        <div className="main-form-wrapper">
+        <div className="main-form-wrapper congnitive-add-form">
+            <h2 className="form-title">Now, tell us how do you rank yourself in these Cognitive Skills</h2>
             <p className="form-mandatory">Select only 6 skills that best suites your personality</p>
             {
                 isStatusChecked &&
                 <div className="cognetive-edit-grid">
-                    {console.log(checkEnabled("communication"))}
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('communication')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'communication'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Communication </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('teamwork')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'teamwork'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Teamwork </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('leadership')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'leadership'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Leadership </span></>} />
@@ -155,7 +153,7 @@ export default function CognetiveSkills() {
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('presentation_skills')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'presentation_skills'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Presentation skills </span></>} />
                 </div>
             }
-            <EditFormController handleSubmit={handleCognitiveSkills} handlePreviousNavigation={() => navigate('/dashboard/edit')} />
+            <FormController handleSubmit={handleCognitiveSkills}  />
         </div>
     )
 }

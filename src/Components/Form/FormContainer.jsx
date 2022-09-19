@@ -32,6 +32,7 @@ import CompanyScaleForm from '../MainForms/CompanyScaleForm/CompanyScaleForm';
 import ProjectInfoForm from '../MainForms/ProjectInfoForm/ProjectInfoForm';
 import HobbyForm from '../MainForms/HobbyForm/HobbyForm';
 import AboutForm from '../MainForms/AboutForm/AboutForm';
+import CognitiveSkiilsForm from '../MainForms/CognetiveForms/CognitiveSkiilsForm';
 
 
 
@@ -80,7 +81,8 @@ const setProgress = (id)=>{
       {progress === 15 && <CareerObjective1  />}
       {progress === 16 && <CareerObjective2  />}
       {progress === 18 && <CareerObjective3  />}
-      {progress === 17 && <CognitiveSkills />} 
+      {progress === 17 && <CognitiveSkiilsForm />} 
+      {/* {progress === 17 && <CognitiveSkills />}  */}
     </div>
   )
 }

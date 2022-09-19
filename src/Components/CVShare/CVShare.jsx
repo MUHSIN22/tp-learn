@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 import { companyWiseGraphForShare, graphDetails, graphDetailsForShare } from '../../redux/Features/GraphSlice'
@@ -21,6 +22,7 @@ export default function CVShare() {
     const dispatch = useDispatch();
     const userInfo = useSelector(selectResumeDetails)
     const [fetched, setFetched] = useState(false)
+    console.log(userInfo,'user ifo');
     useEffect(() => {
         const fetch = async () => {
             await dispatch(profileInfo({ user_id: id }))
@@ -32,6 +34,12 @@ export default function CVShare() {
     }, [])
     return (
         <>
+            <Helmet>
+                <title>{userInfo.fname}</title>
+                <meta property="og:image" content={userInfo.resume_info.profile_pic}/>  
+                <meta property="og:title" content={userInfo.fname}/>  
+                <meta property="og:description" content="Your description."/>  
+            </Helmet>
             {
                 fetched &&
                 <>

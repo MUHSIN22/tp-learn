@@ -19,3 +19,15 @@
 .personal-info-input-wrapper .edit-icon{
     cursor: pointer;
 }
+
+@media only screen and (max-width: 500px) {
+    .personal-info-input-wrapper {
+        width: 100%;
+        padding: 0.5rem 0;
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+    .personal-info-input-wrapper input {
+        font-size: 0.9rem;
+    }
+}

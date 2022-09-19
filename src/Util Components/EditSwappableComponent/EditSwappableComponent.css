@@ -71,3 +71,66 @@
     padding: 0.5rem;
     cursor: pointer;
 }
+@media only screen and (max-width: 768px) {
+    .edit-card-title {
+        font-size: 1.1rem;
+    }
+    .edit-form-add-btn {
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .edit-form-add-btn {
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+    }
+    .edit-form-add-btn .icon {
+        font-size: 1.3rem;
+    }
+    .edit-swappable-component {
+        display: grid;
+        grid-template-columns: 3rem auto;
+        grid-template-areas: 'position edit''content content';
+        grid-gap: 0.5rem;
+    }
+    .card-position{
+        grid-area: position;
+    }
+    .edit-card-content-wrapper{
+        grid-area: content;
+    }
+    .edit-action-wrapper{
+        grid-area: edit;
+    }
+    .edit-swappable-component .card-position {
+        width: 2rem;
+        height: 2rem;
+        transform: rotate(0) translateX(0);
+        display: flex;
+        justify-content: flex-end;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0 0 10px 0;
+        font-size: 0.8rem;
+    }
+    .edit-swappable-component .card-position-number {
+        transform: none;
+    }
+    .edit-action-wrapper {
+        justify-content: flex-end;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    .edit-card-title {
+        font-size: 0.9rem;
+        margin: 0;
+        padding: 0 0.5rem;
+    }
+    .edit-card-description{
+        padding: 0 0.5rem;
+        font-size: 0.7rem;
+    }
+}

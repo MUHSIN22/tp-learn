@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice';
-import { getLanguageList, selectLanguages, selectSkillList } from '../../../redux/Features/MasterSlice';
-import { addHobbies, getLanguageInfo, selectHobbies, selectResumeError, selectResumeLoading, selectResumeMessage, setResumeError } from '../../../redux/Features/ResumeSlice';
-import FormController from '../../../Util Components/FormController/FormController';
-import PlainInput from '../../../Util Components/Inputs/PlainInput/PlainInput'
-import SuggestionInput from '../../../Util Components/Inputs/SuggestionInput/SuggestionInput';
-import Alert from '../../Alert/Alert';
-import MultiSelectedOptions from '../../EditForms/MultiSelectedOptions';
+import EditFormTemplate from '../../Util Components/EditFormTemplate/EditFormTemplate'
+import hobbiesIcon from '../../Assets/edit icons/hobbies.png'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { addHobbies, getLanguageInfo, selectHobbies, selectResumeError, selectResumeLoading, selectResumeMessage, setReloadDecider, setResumeError } from '../../redux/Features/ResumeSlice'
+import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
+import EditFormController from '../../Util Components/EditFormController/EditFormController'
+import PlainInput from '../../Util Components/Inputs/PlainInput/PlainInput'
+import { useNavigate } from 'react-router-dom'
+import { getLanguageList, selectLanguages } from '../../redux/Features/MasterSlice'
+import MultiSelectedOptions from '../EditForms/MultiSelectedOptions'
+import SuggestionInput from '../../Util Components/Inputs/SuggestionInput/SuggestionInput'
+
 let temp = {
     language_id: '',
     language_name: '',
     language_comlexity: ''
 }
-export default function HobbyForm() {
+
+export default function HobbiesEditorForm() {
     const dispatch = useDispatch()
-    const [selected_options,set_Selected_options] = useState([])
+    const navigate = useNavigate();
+    const [selected_options, set_Selected_options] = useState([])
     const languageInfo = useSelector(getLanguageInfo);
     const [form, setForm] = useState({
         entertainment: '',
@@ -45,7 +51,7 @@ export default function HobbyForm() {
             [evt.target.name]: value
         });
     }
-    
+
     function searchHandler(e) {
         if (e.nativeEvent.inputType === "insertText" || e.nativeEvent.inputType === 'deleteContentBackward') {
             setSearch(e.target.value)
@@ -115,54 +121,52 @@ export default function HobbyForm() {
 
     useEffect(() => {
         if (hobbies) {
-            console.log(hobbies,languageInfo,'this is hobbies');
+            console.log(hobbies, languageInfo, 'this is hobbies');
             setForm({ ...hobbies })
             set_Selected_options(languageInfo)
         }
-    }, [hobbies,languageInfo])
+    }, [hobbies, languageInfo])
 
     useEffect(() => {
         dispatch(getLanguageList()).unwrap()
-    },[])
+    }, [])
 
     useEffect(() => {
         setLanguageList(languages)
-    },[])
-    console.log();
+    }, [])
     return (
-        <div className="main-form-wrapper">
-            <h2 className="form-title">We are eager to know you more. Please tell us about your hobbies, interests & passions in life.</h2>
-            {showAlert &&!loading&&<Alert error={error} message={error&&message ? Object.values(message): message} />}
-            <PlainInput value={form.entertainment} name='entertainment' handleChange={handleChange} label='Entertainment' placeholder='e.g. Period dramas, Nat Geo, BBC History, etc. ' />
-            <PlainInput value={form.music} name='music' handleChange={handleChange} label='Music' placeholder='e.g. Indi Pop, Ed Sheeran, Prateek Kuhad, etc. ' />
-            <PlainInput value={form.sports} name='sports' handleChange={handleChange} label='Sports' placeholder='e.g. Football, Cricket, Tennis, etc.' />
-            <PlainInput value={form.leisure} name='leisure' handleChange={handleChange} label='Leisure' placeholder='e.g. Gardening, Beach walk, etc' />
-            <PlainInput value={form.adventure} name='adventure' handleChange={handleChange} label='Adventure' placeholder='e.g. Hiking, Camping, River Rafting, etc.' />
-            <PlainInput value={form.travel} name='travel' handleChange={handleChange} label='Travel' placeholder='e.g. places explored' />
-            <PlainInput value={form.books} name='books' handleChange={handleChange} label='Books' placeholder='e.g. Ogilvy on Advertising, Copywriting Secrets, etc.' />
-            <PlainInput value={form.any_other} name='any_other' handleChange={handleChange} label='Any other' placeholder='Other Hobbies' />
-            
-            <MultiSelectedOptions options={selected_options} value_field='language_name' subValue_field='language_comlexity' deleteHandler={handleDeleteSkill} />
-            
-            <div className="role-skills-container">
-                <div className="skill-and-complexity">
-                    <SuggestionInput name='Skills' searchHandler={searchHandler} label='Please enter all the languages you know' placeholder='Search for languages' id="iconinput-Skills" suggestions={languageList} name_field={'language_name'}  />
-                    <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100}  />
+        <EditFormTemplate title="Hobbies & Languages Known" icon={hobbiesIcon} >
+            <div className="main-form-wrapper">
+                <PlainInput value={form.entertainment} name='entertainment' handleChange={handleChange} label='Entertainment' placeholder='e.g. Period dramas, Nat Geo, BBC History, etc. ' />
+                <PlainInput value={form.music} name='music' handleChange={handleChange} label='Music' placeholder='e.g. Indi Pop, Ed Sheeran, Prateek Kuhad, etc. ' />
+                <PlainInput value={form.sports} name='sports' handleChange={handleChange} label='Sports' placeholder='e.g. Football, Cricket, Tennis, etc.' />
+                <PlainInput value={form.leisure} name='leisure' handleChange={handleChange} label='Leisure' placeholder='e.g. Gardening, Beach walk, etc' />
+                <PlainInput value={form.adventure} name='adventure' handleChange={handleChange} label='Adventure' placeholder='e.g. Hiking, Camping, River Rafting, etc.' />
+                <PlainInput value={form.travel} name='travel' handleChange={handleChange} label='Travel' placeholder='e.g. places explored' />
+                <PlainInput value={form.books} name='books' handleChange={handleChange} label='Books' placeholder='e.g. Ogilvy on Advertising, Copywriting Secrets, etc.' />
+                <PlainInput value={form.any_other} name='any_other' handleChange={handleChange} label='Any other' placeholder='Other Hobbies' />
+
+                <MultiSelectedOptions options={selected_options} value_field='language_name' subValue_field='language_comlexity' deleteHandler={handleDeleteSkill} />
+
+                <div className="role-skills-container">
+                    <div className="skill-and-complexity">
+                        <SuggestionInput name='Skills' searchHandler={searchHandler} label='Please enter all the languages you know' placeholder='Search for languages' id="iconinput-Skills" suggestions={languageList} name_field={'language_name'} />
+                        <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100} />
+                    </div>
+                    <button className="btn-add" onClick={handleAddSkill} >Add Skill</button>
                 </div>
-                <button className="btn-add" onClick={handleAddSkill} >Add Skill</button>
+
+                <EditFormController handleSubmit={handleSubmit} isSkip={true} handlePreviousNavigation={() => navigate('/dashboard/edit')} />
             </div>
-            
-            <FormController handleSubmit={handleSubmit} isSkip={true} />
-        </div>
+        </EditFormTemplate>
     )
 }
 
-
-const JsonToFormData=  (json={}) => {
+const JsonToFormData = (json = {}) => {
     var form_data = new FormData();
     for (var key in json) {
-      form_data.append(key, json[key]);
+        form_data.append(key, json[key]);
     }
-  
+
     return form_data
-  }
+}
