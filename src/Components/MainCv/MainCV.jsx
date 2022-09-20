@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { SelectDocuments, selectHobbies, selectSocialContribution, selectSocilaLinks, selectVideo } from '../../redux/Features/ResumeSlice'
+import { selectCertificate, SelectDocuments, selectHobbies, selectSocialContribution, selectSocilaLinks, selectVideo } from '../../redux/Features/ResumeSlice'
 import CareerTimeline from '../CVComponents/career timeline/CareerTimeline'
 import Certificates from '../CVComponents/Certificates/Certificates'
 import DocFiles from '../CVComponents/DocFiles/DocFiles'
@@ -20,6 +20,8 @@ export default function MainCV() {
   const videoFiles = useSelector(selectVideo)
   const documents = useSelector(SelectDocuments)
   const hobbies = useSelector(selectHobbies)
+  const certificates = useSelector(selectCertificate)
+
   const [isSocialLinks,setIsSocialLinks] = useState(false)
   const [isHobbies,setIsHobbies] = useState(false)
   useEffect(() => {
@@ -39,7 +41,10 @@ export default function MainCV() {
       <PersonalProfile />
       <CareerTimeline />
       <Experience />
-      <Certificates />
+      {
+        certificates &&
+        <Certificates />
+      }
       <Education />
       {
         isHobbies &&

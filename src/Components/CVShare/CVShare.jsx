@@ -36,7 +36,7 @@ export default function CVShare() {
         <>
             <Helmet>
                 <title>{userInfo.fname}</title>
-                <meta property="og:image" content={userInfo.resume_info.profile_pic}/>  
+                <meta property="og:image" content={userInfo.resume_info && userInfo.resume_info.profile_pic}/>  
                 <meta property="og:title" content={userInfo.fname}/>  
                 <meta property="og:description" content="Your description."/>  
             </Helmet>
