@@ -16,6 +16,7 @@ import EditFormController from '../../Util Components/EditFormController/EditFor
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { useNavigate } from 'react-router-dom'
 import { getEducationID } from '../../redux/Features/EditSlice'
+import dateConverter from '../../functionUtils/dateConverter'
 
 export default function EducationEditorForm() {
     const dispatch = useDispatch()
@@ -244,8 +245,8 @@ export default function EducationEditorForm() {
                     <div className="control_indicator"></div>
                 </label>
                 <div className="grid-1-1">
-                    <DateInput value={form.course_start_date.length > 7 ? new Date(form.course_start_date).getFullYear() + "-" + new Date(form.course_start_date).getMonth() : form.course_start_date} type={'date'} handleChange={handleChange} name={'course_start_date'} label='Duration (From)*' placeholder={'Bachelor/Honors'} />
-                    <DateInput value={form.course_end_date.length > 7 ? new Date(form.course_end_date).getFullYear() + "-" + new Date(form.course_end_date).getMonth() : form.course_end_date} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} />
+                    <DateInput value={dateConverter(form.course_start_date)} type={'date'} handleChange={handleChange} name={'course_start_date'} label='Duration (From)*' placeholder={'Bachelor/Honors'} />
+                    <DateInput value={dateConverter(form.course_end_date)} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} />
                 </div>
                 <PlainInput value={form.course_cgpa} name={'course_cgpa'} type="number" handleChange={handleChange} label='CGPA' placeholder={'CGPA'} />
                 <TextArea value={form.course_extra_activity} rows={8} name={'course_extra_activity'} handleChange={handleChange} label='Extra-curricular activities' placeholder={'Extra-academic participation'} />

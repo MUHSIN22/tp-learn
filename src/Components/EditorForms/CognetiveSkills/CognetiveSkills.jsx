@@ -19,7 +19,7 @@ export default function CognetiveSkills() {
         teamwork: "",
         leadership: "",
         flexibility_adaptability: "",
-        problem_solving: "",
+        probleam_solving: "",
         handling_pressure: "",
         analytical_skills: "",
         creativity: "",
@@ -35,7 +35,7 @@ export default function CognetiveSkills() {
         teamwork: false,
         leadership: false,
         flexibility_adaptability: false,
-        problem_solving: false,
+        probleam_solving: false,
         handling_pressure: false,
         analytical_skills: false,
         creativity: false,
@@ -143,7 +143,7 @@ export default function CognetiveSkills() {
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('teamwork')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'teamwork'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Teamwork </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('leadership')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'leadership'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Leadership </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('flexibility_adaptability')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'flexibility_adaptability'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Flexibility/adaptability </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('problem_solving')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'problem_solving'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Problem-solving </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('probleam_solving')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'probleam_solving'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Problem-solving </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('handling_pressure')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'handling_pressure'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Handling pressure </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('analytical_skills')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'analytical_skills'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Analytical skills </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('creativity')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'creativity'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Creativity </span></>} />

@@ -1,0 +1,31 @@
+.portfolio-link-input{
+    display: grid;
+    grid-template-columns: auto 10rem;
+    gap: 1rem;
+}
+.portfolio-link-input .btn-add{
+    height: 2.2rem;
+    align-self: flex-end;
+    border-radius: 5px;
+    display: grid;
+    font-size: 1rem;
+    place-items: center;
+
+}
+.clear-all-selection-btn{
+    font-weight: 600;
+    width: 100%;
+    text-align: right;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.form-title{
+    margin: 0;
+}
+.form-subtitle{
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+}

@@ -19,8 +19,14 @@ export default function Education() {
                         <div className="certificate-details">
                             <h3 className="cv-profile-title-secondary">{item.degree_name}</h3>
                             <p className="certificate-other-details">{item.collage_name} | {moment(item.course_start_date,"dd-mm-yyyy").format('MMM yyyy')} - {moment(item.course_end_date,"dd-mm-yyyy").format("MMM YYYY")}</p>
-                            <p className="certificate-other-details">Extra Curricular Activities: {item.course_extra_activity}</p>
-                            <p className="certificate-other-details">Projects: {item.course_project_info}</p>
+                            {
+                                item.course_extra_activity.length > 0 &&
+                                <p className="certificate-other-details">Extra Curricular Activities: {item.course_extra_activity}</p>
+                            }
+                            {
+                                item.course_project_info.length > 0 &&
+                                <p className="certificate-other-details">Projects: {item.course_project_info}</p>
+                            }
                         </div>
                         {
                             item.upload_degree &&

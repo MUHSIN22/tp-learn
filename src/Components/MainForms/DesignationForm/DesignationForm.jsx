@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import useDebounce from '../../../DebouncedSearch'
+import dateConverter from '../../../functionUtils/dateConverter'
 import errorMessageHandler from '../../../functionUtils/errorMessageHandler'
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice'
 import { getCurrencyList, getFunctionalAreaList, getLevelList, searchDesignation, selectCurrencylist, selectDesignationList, selectFunctionalAreaList, selectManagementLevelList } from '../../../redux/Features/MasterSlice'
@@ -182,15 +183,6 @@ export default function DesignationForm() {
         }
     }, [lastJob])
 
-
-    // useEffect(() => {
-    //     console.log(form.start_salary.replace(commaSeparatorRegex,','));
-    //     setForm({
-    //         ...form, 
-    //         end_salary: form.end_salary.replace(commaSeparatorRegex,','),
-    //         start_salary: form.start_salary.replace(commaSeparatorRegex,',')
-    //     })
-    // },[form.start_salary, form.end_salary])
     return (
         <div className="designation-form-wrapper">
             <h2 className="form-title">Now tell us about all the job roles at which you have worked starting with the latest one.</h2>
@@ -213,13 +205,14 @@ export default function DesignationForm() {
                 <div className="control_indicator"></div>
             </label>
             <div className="grid-1-1-1">
-                <DateInput value={form.start_date.length !== 7 ? new Date(form.start_date).getFullYear() + "-" + new Date(form.start_date).getMonth() : form.start_date} defaultValue={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='When did you start' placeholder='MM YYYY' />
+                {/* {dateConverter(form.start_date)} */}
+                <DateInput value={dateConverter(form.start_date)} defaultValue={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='When did you start' placeholder='MM YYYY' />
                 {console.log(form.start_salary)}
                 <PlainInput isSalary={true} type="text" value={form.start_salary && (form.start_salary).toString().replace(commaSeparatorRegex,',')} name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='120000' />
                 <SelectInput value={form.start_salary_currency} name='start_salary_currency' handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' />
             </div>
             <div className="grid-1-1-1">
-                <DateInput value={form.end_date.length !== 7 ? new Date(form.end_date).getFullYear() + "-" + new Date(form.end_date).getMonth() : form.end_date} name='end_date' isDisabled={(isCurrentWorking || form.current_working === "yes") ? true : false} handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM YYYY' />
+                <DateInput value={dateConverter(form.end_date)} name='end_date' isDisabled={(isCurrentWorking || form.current_working === "yes") ? true : false} handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM YYYY' />
                 <PlainInput isSalary={true} type="text" value={form.end_salary && (form.end_salary).toString().replace(commaSeparatorRegex,',')} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package' placeholder='180000' />
                 <SelectInput value={form.end_salary_currency} name='end_salary_currency' handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
             </div>

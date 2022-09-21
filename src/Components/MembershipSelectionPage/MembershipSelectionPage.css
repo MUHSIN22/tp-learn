@@ -31,3 +31,30 @@
     grid-gap: 2rem;
     max-width: 1100px;
 }
+@media only screen and (max-width: 768px) {
+    .membership-cv-container{
+        padding: 2rem;
+        padding-top: 5rem;
+        gap: 1rem;
+    }
+    .membership-cards-wrapper{
+        grid-template-columns: 1fr;
+    }
+    .membership-main-header{
+        font-size: 1.3rem;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .membership-cv-container{
+        padding: 1rem;
+        padding-top: 1rem;
+    }
+    .membership-btn-header {
+        font-size: 1rem;
+    }
+    .membership-description {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+}

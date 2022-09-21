@@ -19,7 +19,7 @@ export default function ProjectOverview({ projects }) {
                                 <p className="client">{project.client_name}</p>
                             </div>
                             <span className="client-description-divider"></span>
-                            <p className="project-description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat ducimus sequi optio quod voluptas ad numquam rem hic assumenda ea, deleniti nemo exercitationem consequuntur, porro placeat, esse corrupti ullam facilis.</p>
+                            <p className="project-description">{project.project_desc}</p>
                         </div>
                         {
                             project.project_skill && project.project_skill[0] &&
@@ -33,7 +33,7 @@ export default function ProjectOverview({ projects }) {
                                     project.project_skill.map((skill, skillIndex) => (
                                         <div className="project-skill-grid">
                                             <p className="skill-btn">{skill.skill_name}</p>
-                                            <ProgressBar percent={(skill.skill_complexity / 10) * 100} color={colors[0]} />
+                                            <ProgressBar percent={(skill.skill_complexity / 10) * 100} color={colors[skillIndex>5 ? skillIndex%5 : skillIndex]} />
                                             <p className="skill-application">{skill.skill_desc}</p>
                                         </div>
                                     ))

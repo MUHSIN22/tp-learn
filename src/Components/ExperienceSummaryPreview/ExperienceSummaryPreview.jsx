@@ -80,7 +80,7 @@ export default function ExperienceSummaryPreview() {
                                         id={index + 1} 
                                         key={index} 
                                         item={item} 
-                                        data={{title: item.company_name,location: item.job_role && item.job_role[0] && item.job_role[0].job_location,fromDate: item.job_role && item.job_role[0] && item?.job_role[0].job_start_date, toDate: item.job_role && item.job_role[0] && item?.job_role[0].job_end_date,description: item.job_role && item.job_role[0] && item.job_role[0].role_responsibilties}}
+                                        data={{title: item.company_name,location: item.job_role && item.job_role[0] && item.job_role[0].job_location,fromDate: item.job_role && item.job_role[0] && item?.job_role[0].job_start_date, toDate: item.job_role && item.job_role[0] && item?.job_role[0].job_end_date,description: item.job_role && item.job_role[0] && item.job_role[0].role_responsibilties, experienceDetails: item.job_role }}
                                         deleteItem={deleteCompanyInfo}
                                         editItem={editCompanyInfo}
                                     />

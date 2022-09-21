@@ -66,6 +66,7 @@ import ContributionEditForm from './Components/EditorForms/ContributionEditForm'
 import PersonalInfoEditor from './Components/EditorForms/PersonalInfoEditor';
 import HobbiesEditorForm from './Components/EditorForms/HobbiesEditorForm';
 import MembershipSelectionPage from './Components/MembershipSelectionPage/MembershipSelectionPage';
+import ZohoMembershipPage from './Components/ZohoMembershipPage/ZohoMembershipPage';
 
 function App() {
   const dispatch = useDispatch()
@@ -193,6 +194,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path='/logout' element={<Logout />} />
         <Route path='/change_password' element={<ChangePassword />} />
+        <Route path="/membership" element={<ZohoMembershipPage />} />
         <Route path='/dashboard' element={<CVProfile />}>
           <Route path="cv" element={<DashboardCv />} />
           <Route path='edit' element={<EditProfilePage />} />

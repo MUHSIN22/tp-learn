@@ -19,7 +19,7 @@ export default function SocialContribution() {
                             <h2 className="cv-profile-title-secondary">{contribution.organization_name}</h2>
                             <p className="other-details">{contribution.role}</p>
                             <p className="other-details">{moment(contribution.from_duration,"dd-mm-yyyy").format("MMM yyyy")} to {moment(contribution.to_duration,'dd-mm-yyyy').format("MMM yyyy") !== "Invalid date" ? moment(contribution.to_duration,'dd-mm-yyyy').format("MMM yyyy") : "Present"}</p>
-                            <p className="contribution-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione fugit soluta error labore eaque aliquam rem modi aliquid ipsam. At hic repellat corrupti veritatis quia ad quam reprehenderit earum, quis neque molestias! Veniam corrupti, sit dicta ex tenetur fugit repellendus!</p>
+                            <p className="contribution-description">{contribution.description}</p>
                         </div>
                     </div>
                 ))

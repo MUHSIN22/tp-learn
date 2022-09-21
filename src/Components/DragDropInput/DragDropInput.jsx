@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './DragDropInput.css'
 import { ReactComponent as Upload } from '../../Assests/icons/upload.svg';
-export default function DragDropInput({file,setFile}) {
+import FormController from '../../Util Components/FormController/FormController';
+export default function DragDropInput({file,setFile,multiple}) {
 
     const [progress, setProgress] = useState('input-inactive')
     
@@ -32,8 +33,12 @@ export default function DragDropInput({file,setFile}) {
     
       const handleInputChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
+          if(e.target.files.length > 1) {
+            setFile([...file,...e.target.files])
+          }else{
             setFile(e.target.files[0]);
           }
+        }
       };
       const handleClick =(e)=>{
           document.getElementById('fileInput').click()
@@ -49,9 +54,9 @@ export default function DragDropInput({file,setFile}) {
       onChange={handleInputChange}
       onClick = {handleClick}
     >
-      <div className="sub-header">{!file&&<Upload></Upload>}{file?(file.name || "File Uploaded"):'Drag & drop file here'}</div>
+      <div className="sub-header">{!file&&<Upload></Upload>}{file?((typeof file === 'object' && file.length > 0) ? `${file.length} files uploaded` :  file.name || 'Drag & drop file here'):'Drag & drop file here'}</div>
       <div className="draggable-container">
-        <input type="file" name="" id="fileInput" onChange={handleInputChange} style={{display:'none'}} />
+        <input type="file" multiple={multiple} name="" id="fileInput" onChange={handleInputChange} style={{display:'none'}} />
       </div>
     </div>
   )

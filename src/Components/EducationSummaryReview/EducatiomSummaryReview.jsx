@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
-import { addEducationForEdit } from '../../redux/Features/EditSlice';
+import { addEducationForEdit, changeExperienceForm } from '../../redux/Features/EditSlice';
 import { deleteEducation, SelectCompanyDetails, selectEducation, setReloadDecider, toggleNewEducation } from '../../redux/Features/ResumeSlice';
 import EditFormAddButton from '../../Util Components/EditFormAddButton/EditFormAddButton';
 import EditFormController from '../../Util Components/EditFormController/EditFormController';
@@ -53,6 +53,7 @@ export default function EducatiomSummaryReview() {
 
     useEffect(() => {
         dispatch(toggleNewEducation(false))
+        dispatch(changeExperienceForm(0))
         setList(education)
     },[education])
       

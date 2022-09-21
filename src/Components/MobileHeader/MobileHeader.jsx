@@ -42,9 +42,9 @@ export default function MobileHeader() {
             </ul>
             <nav className="mobile-nav-menu" ref={navOptionsRef}>
                 <ul className="menu-list">
-                    <li className="expandable" onClick={() => setExpansion(!isExpanded)}>
-                        <span>My Profile {isExpanded?"-":"+"}</span>
-                        {
+                    <li className="expandable" onClick={() => navigate('/dashboard/cv')}>
+                        <span>My Profile {/*{isExpanded?"-":"+"}*/}</span>
+                        {/* {
                             isExpanded&&
                             <ul className="expand-list">
                             {
@@ -56,7 +56,7 @@ export default function MobileHeader() {
                                 })
                             }
                             </ul>
-                        }
+                        } */}
                     </li>
                     <li className="link" onClick={hideMenu}>
                         <Link to="/membership">Membership</Link>

@@ -106,3 +106,19 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 500px) {
+    .membership-selection-card .plan-name {
+        font-size: 1rem;
+    }
+    .membership-selection-card .plan-price{
+        font-size: 1rem;
+    }
+    .membership-selection-card p,
+    .membership-selection-card li{
+        font-size: 0.9rem;
+    }
+    .btn-buy {
+        font-size: 0.9rem;
+    }
+}

@@ -22,7 +22,7 @@ export default function CognitiveSkills({data}) {
         teamwork:"",
         leadership:"",
         flexibility_adaptability:"",
-        problem_solving:"",
+        probleam_solving:"",
         handling_pressure:"",
         analytical_skills:"",
         creativity:"",
@@ -38,7 +38,7 @@ export default function CognitiveSkills({data}) {
         teamwork: false,
         leadership: false,
         flexibility_adaptability: false,
-        problem_solving: false,
+        probleam_solving: false,
         handling_pressure: false,
         analytical_skills: false,
         creativity: false,
@@ -141,7 +141,7 @@ export default function CognitiveSkills({data}) {
                         <MarkedSlider disabled={checkEnabled('flexibility_adaptability')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'flexibility_adaptability'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span>  &nbsp; &nbsp;Flexibility/adaptability </span></>} />
                     </div>
                     <div className='mt-2'>
-                        <MarkedSlider disabled={checkEnabled('problem_solving')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'problem_solving'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span>  &nbsp; &nbsp;Problem-solving </span></>} />
+                        <MarkedSlider disabled={checkEnabled('probleam_solving')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'probleam_solving'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span>  &nbsp; &nbsp;Problem-solving </span></>} />
                     </div>
                     <div className='mt-2'>
                         <MarkedSlider disabled={checkEnabled('handling_pressure')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'handling_pressure'} state={form} setState={setForm} min={1} max={10} width={'85%'} label={<><span>  &nbsp; &nbsp;Handling pressure </span></>} />

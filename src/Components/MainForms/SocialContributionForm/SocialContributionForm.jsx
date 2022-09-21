@@ -8,6 +8,7 @@ import PlainInput from '../../../Util Components/Inputs/PlainInput/PlainInput';
 import TextArea from '../../../Util Components/Inputs/TextArea/TextArea';
 import { ReactComponent as AddCircle } from '../../../Assests/icons/add-circle.svg';
 import Alert from '../../Alert/Alert';
+import dateConverter from '../../../functionUtils/dateConverter';
 
 export default function SocialContributionForm() {
     const dispatch = useDispatch()
@@ -102,8 +103,8 @@ export default function SocialContributionForm() {
                 <PlainInput value={form.organization_name} name='organization_name' handleChange={handleChange} label='Organisation name' placeholder='i.e. Goonj' width={100} />
             </div>
             <div className="grid-1-1">
-                <DateInput value={form.from_duration > 7 ? new Date(form.from_duration).getFullYear() + "-" + new Date(form.from_duration).getMonth() : form.from_duration} name='from_duration' handleChange={handleChange} type={'date'} label='Duration (From)' placeholder='i.e. Duration date' />
-                <DateInput value={form.to_duration > 7 ? new Date(form.to_duration).getFullYear() + "-" + new Date(form.to_duration).getMonth(): form.to_duration} isDisabled={isCurrentWorking} name='to_duration' handleChange={handleChange} type={'date'} label='Duration (to)' placeholder='i.e. Duration date' />
+                <DateInput value={dateConverter(form.from_duration)} name='from_duration' handleChange={handleChange} type={'date'} label='Duration (From)' placeholder='i.e. Duration date' />
+                <DateInput value={dateConverter(form.to_duration)} isDisabled={isCurrentWorking} name='to_duration' handleChange={handleChange} type={'date'} label='Duration (to)' placeholder='i.e. Duration date' />
             </div>
             <label className="control control-checkbox">
                 I am currently working here

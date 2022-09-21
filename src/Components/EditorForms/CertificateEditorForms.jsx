@@ -16,6 +16,7 @@ import EditFormController from '../../Util Components/EditFormController/EditFor
 import { ReactComponent as AddCircle } from '../../Assests/icons/add-circle.svg';
 import { getCertificateID } from '../../redux/Features/EditSlice';
 import { useNavigate } from 'react-router-dom';
+import dateConverter from '../../functionUtils/dateConverter';
 
 const DEBOUNCE_DELAY = 600;
 
@@ -227,8 +228,8 @@ export default function CertificateEditorForms() {
                     <PlainInput value={form.institute_name} name='institute_name' handleChange={handleChange} label='Institution*' placeholder='Udemy' />
                 </div>
                 <div className="grid-1-1">
-                    <DateInput value={form.certificate_start_date > 7 ? new Date(form.certificate_start_date).getFullYear() + "-" + new Date(form.certificate_start_date).getMonth() : form.certificate_start_date} name='certificate_start_date' handleChange={handleChange} type={'date'} label='Duration (From)*' placeholder='i.e. Duration date' width={50} />
-                    <DateInput value={form.certificate_end_date > 7 ? new Date(form.certificate_end_date).getFullYear() + "-" + new Date(form.certificate_end_date).getMonth() : form.certificate_end_date} name='certificate_end_date' handleChange={handleChange} type={'date'} label='Duration (to)*' placeholder='i.e. Duration date' width={50} />
+                    <DateInput value={dateConverter(form.certificate_start_date)} name='certificate_start_date' handleChange={handleChange} type={'date'} label='Duration (From)*' placeholder='i.e. Duration date' width={50} />
+                    <DateInput value={dateConverter(form.certificate_end_date)} name='certificate_end_date' handleChange={handleChange} type={'date'} label='Duration (to)*' placeholder='i.e. Duration date' width={50} />
                 </div>
                 <MultiSelectedOptions options={selected_options} value_field={'skill_name'} deleteHandler={handleDeleteSkill} />
                 <SuggestionInput name='Skills' searchHandler={searchHandler} label={`Key skills learned*`} placeholder='Skills mastered in this course' width={100} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />

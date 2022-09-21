@@ -1,5 +1,5 @@
 import React from 'react'
-import { BsDownload } from 'react-icons/bs'
+import { BsDownload, BsFacebook, BsLinkedin } from 'react-icons/bs'
 import { FiEdit, FiShare2 } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -8,6 +8,10 @@ import getPayment from '../../Razorpay/getPayment'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import { downloadCV, selectResumeDetails } from '../../redux/Features/ResumeSlice'
 import MainCV from '../MainCv/MainCV'
+import {MdContentCopy} from 'react-icons/md'
+import {IoLogoWhatsapp} from 'react-icons/io'
+import './DashboardCV.css'
+import shareResume from '../../Razorpay/shareResume'
 
 export default function DashboardCv() {
     const navigate = useNavigate();
@@ -16,6 +20,7 @@ export default function DashboardCv() {
     const token = useSelector(selectAuthToken)
     const resumeDetails = useSelector(selectResumeDetails)
 
+    console.log(resumeDetails);
     const downloadCVPDF = async () => {
         if ((resumeDetails.subscription_status && resumeDetails.subscription_status === 1)) {
             let downloadTag = document.createElement('a')
@@ -47,6 +52,12 @@ export default function DashboardCv() {
                 </div>
                 <div className="profile-icon-wrapper">
                     <FiShare2 />
+                    <div className="profile-share-tooltip">
+                        <IoLogoWhatsapp onClick={() => shareResume("whatsapp",user_id)} className='tooltip-icon wp-icon'/>
+                        <BsFacebook onClick={() => shareResume("facebook",user_id)} className='tooltip-icon fb-icon'/>
+                        <BsLinkedin onClick={() => shareResume("linkedin",user_id,resumeDetails.fname+" "+resumeDetails.lname)}className='tooltip-icon in-icon'/>
+                        <MdContentCopy onClick={() => shareResume("copy",user_id)} className='tooltip-icon cp-icon'/>
+                    </div>
                 </div>
             </div>
             <MainCV />

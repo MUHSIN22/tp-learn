@@ -1,0 +1,52 @@
+.profile-icon-wrapper{
+    position: relative;
+}
+.profile-share-tooltip{
+    display: flex;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    right: -1rem;
+    transform: translate(0,100%);
+    color: #000;
+    padding: 0.5rem;
+    gap: 1rem;
+    border-radius: 6px;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    display: none;
+}
+.profile-share-tooltip::after{
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    background: #fff;
+    position: absolute;
+    right: 1rem;
+    top: 0;
+    transform: rotate(-45deg) translateY(-25%);
+    z-index: 1;
+
+}
+.profile-share-tooltip .tooltip-icon{
+    transition: all 0.1s ease;
+    z-index: 2;
+}
+.profile-share-tooltip .tooltip-icon:hover{
+    transform: scale(1.2);
+}
+.profile-icon-wrapper:last-child:hover .profile-share-tooltip{
+    display: flex;
+}
+.wp-icon{
+    color: #25D366;
+}
+.fb-icon{
+    color: #4755b3;
+}
+.in-icon{
+    color: #006db9;
+}
+.cp-icon{
+    color: #fa8e76;
+}
