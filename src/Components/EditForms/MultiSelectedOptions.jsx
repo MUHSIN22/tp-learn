@@ -4,7 +4,7 @@ export default function MultiSelectedOptions({options=[],deleteHandler=()=>{}, v
   
   return (
     <div className="flex-wrap align-start justify-start g-1">
-        {options.map((x,i)=><Card key={i} value={x[value_field]} subValue={x[subValue_field]} id={i} deleteHandler={deleteHandler} />)}
+        {options && options.map((x,i)=><Card key={i} value={x[value_field]} subValue={x[subValue_field]} id={i} deleteHandler={deleteHandler} />)}
     </div>
   )
 }

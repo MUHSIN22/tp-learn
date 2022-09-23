@@ -44,12 +44,9 @@ export default function ChangePassword() {
     }
 
     return (
-        <>
+        <div className='change-password-container'>
             <MobileHeader />
             <div className="flex-row-start">
-                <div className="col-fit sidebar-wrapper">
-                    <Sidebar />
-                </div>
                 <div className="login col-100 align-center" style={{ backgroundColor: "rgb(228 228 228)" }}>
                     <div className="changePassworDiv container col-40">
                         {message && !loading && <Alert error={error} message={error ? (Object.values(message)[0][0] ? Object.values(message)[0] : Object.values(message)[1]) : message} />}
@@ -72,7 +69,7 @@ export default function ChangePassword() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -43,6 +43,7 @@ export default function DragDropInput({file,setFile,multiple}) {
       const handleClick =(e)=>{
           document.getElementById('fileInput').click()
       }
+      console.log('file',file);
     
   return (
     <div
@@ -54,7 +55,7 @@ export default function DragDropInput({file,setFile,multiple}) {
       onChange={handleInputChange}
       onClick = {handleClick}
     >
-      <div className="sub-header">{!file&&<Upload></Upload>}{file?((typeof file === 'object' && file.length > 0) ? `${file.length} files uploaded` :  file.name || 'Drag & drop file here'):'Drag & drop file here'}</div>
+      <div className="sub-header">{!file&&<Upload></Upload>}{file?((typeof file === 'object' && file.length > 0) ? `${file.length} files uploaded` :  file.name || ((typeof file === "string" && file.length > 0) ? "File Uploaded" :'Drag & drop file here')):'Drag & drop file here'}</div>
       <div className="draggable-container">
         <input type="file" multiple={multiple} name="" id="fileInput" onChange={handleInputChange} style={{display:'none'}} />
       </div>

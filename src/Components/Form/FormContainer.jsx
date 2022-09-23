@@ -34,6 +34,7 @@ import HobbyForm from '../MainForms/HobbyForm/HobbyForm';
 import AboutForm from '../MainForms/AboutForm/AboutForm';
 import CognitiveSkiilsForm from '../MainForms/CognetiveForms/CognitiveSkiilsForm';
 import PortfolioForm from '../MainForms/PortfolioForm/PortfolioForm';
+import SocialMediaForm from '../MainForms/SocialMediaForm/SocialMediaForm';
 
 
 
@@ -79,10 +80,11 @@ const setProgress = (id)=>{
       {/* {progress === 13 && <AdditionalSkills2  />} */}
       {progress === 14 && <AboutForm  />}
       {/* {progress === 14 && <AdditionalSkills3  />} */}
-      {progress === 15 && <CareerObjective1  />}
-      {/* {progress === 15 && <PortfolioForm  />} */}
+      {/* {progress === 15 && <CareerObjective1  />} */}
+      {progress === 15 && <PortfolioForm  />}
       {progress === 16 && <CareerObjective2  />}
-      {progress === 18 && <CareerObjective3  />}
+      {progress === 18 && <SocialMediaForm  />}
+      {/* {progress === 18 && <CareerObjective3  />} */}
       {progress === 17 && <CognitiveSkiilsForm />} 
       {/* {progress === 17 && <CognitiveSkills />}  */}
     </div>

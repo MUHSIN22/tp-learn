@@ -1,0 +1,8 @@
+.btn-skip{
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 2rem;
+    width: 10rem;
+    box-shadow: none;
+    cursor: pointer;
+}

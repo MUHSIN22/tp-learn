@@ -1,6 +1,5 @@
 .doc-grid{
     display: grid;
-    grid-template-columns: repeat(2,1fr);
     padding-top: 0.5rem;
 }
 .doc-file-wrapper{
@@ -12,9 +11,7 @@
     transition: all 0.3s ease;
     border-radius: 10px;
     cursor: pointer;
-}
-.doc-file-wrapper:hover{
-    border-color: rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 .doc-file-wrapper img{
     width: 100%;
@@ -25,14 +22,38 @@
 .doc-details h2{
     margin: 0;
 }
+.doc-file-link{
+    color: #000;
+    text-decoration: underline;
+    font-weight: 500;
+}
+.files-or-links{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
 @media only screen and (max-width: 500px) {
     .doc-grid{
         grid-template-columns: 1fr;
     }
+    .doc-file-wrapper .contribution-label{
+        display: none;
+    }
     .doc-file-wrapper{
-        grid-template-columns: 5rem auto;
+        grid-template-columns: 1fr;
     }
     .doc-details p{
+        font-size: 0.9rem;
+    }
+    .files-or-links{
+        gap: 0.5rem;
+    }
+    .files-or-links a{
+        font-size: 0.85rem;
+    }
+    .files-or-links strong{
         font-size: 0.9rem;
     }
 }

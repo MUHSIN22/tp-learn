@@ -6,10 +6,11 @@ export default function SelectInput({name, disabled, label, value, handleChange,
         <label htmlFor={name}>{label}</label>
         <select id={name} disabled={disabled} onChange={handleChange} value={value} name={name} defaultValue={defaultValue}>
             <option value="abc" hidden selected={true}>Select One</option>
+            {console.log(options,"options")}
             {
               options&&options[0] &&
               options.map((option,index) => (
-                <option value={option.id} key={index}>{option[name_field]}</option>
+                <option value={name_field ? option.id : option} key={index}>{name_field ? option[name_field] : option}</option>
               ))
             }
         </select>

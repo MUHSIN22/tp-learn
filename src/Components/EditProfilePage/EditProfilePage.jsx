@@ -39,7 +39,7 @@ let EditList = [
     },
     {
         title: "Portfolio",
-        link: "/portfolio",
+        link: "/dashboard/portfolio-history",
         icon: portfolio
     },
     {

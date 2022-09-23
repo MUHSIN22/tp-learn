@@ -58,7 +58,7 @@ export default function CVProfileSidebar() {
                     <img src={membership} alt="" className="sidebar-link-icon" />
                     <span className='sidebar-link-text'>Membership</span>
                 </NavLink>
-                <NavLink to="/" className="sidebar-link">
+                <NavLink to="/dashboard/settings" className="sidebar-link">
                     <img src={settings} alt="" className="sidebar-link-icon" />
                     <span className='sidebar-link-text'>Settings</span>
                 </NavLink>

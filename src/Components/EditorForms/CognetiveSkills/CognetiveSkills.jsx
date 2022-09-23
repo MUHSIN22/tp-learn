@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import ObjectToArray from '../../../functionUtils/ObjectToArray'
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice'
 import { selectCognitive_info } from '../../../redux/Features/GraphSlice'
-import { addCognitiveSkills, getResumeMessage, getResumeUpdateStatus, reload, selectResumeError, selectResumeLoading } from '../../../redux/Features/ResumeSlice'
+import { addCognitiveSkills, getResumeMessage, getResumeUpdateStatus, reload, selectResumeError, selectResumeLoading, setReloadDecider } from '../../../redux/Features/ResumeSlice'
 import EditFormController from '../../../Util Components/EditFormController/EditFormController'
 import MarkedSlider from '../../MarkedSlider/MarkedSlider'
 import './CognetiveSkills.css'
@@ -60,14 +60,10 @@ export default function CognetiveSkills() {
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        console.log(body);
         try {
-            console.log('here outside');
-            dispatch(addCognitiveSkills({ auth: token, body: { ...form,user_id }, dispatch })).then((res => {
-                if(res.payload.data){
-                    dispatch(reload())
-                }
-            }))
+            dispatch(setReloadDecider(true));
+            await dispatch(addCognitiveSkills({ auth: token, body: { ...form,user_id }, dispatch }))
+            navigate('/dashboard/edit')
             
         } catch (error) {
             showAlert(true)

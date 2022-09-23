@@ -14,7 +14,7 @@ export const SidebarData = [
     {
         title : "My Profile",
         icon : <FaUserAlt/>,
-        link : "/MyProfile"
+        link : "/dashboard/cv"
     },
     // {
     //     title : "Assessments",

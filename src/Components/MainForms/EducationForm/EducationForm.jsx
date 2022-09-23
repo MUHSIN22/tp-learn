@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice'
-import { getCollageList, getDegreeList, getUniversityList, selectCollageList, selectDegreeList, selectUniversityList } from '../../../redux/Features/MasterSlice'
+import { getDegreeList, getUniversityList, selectDegreeList, selectUniversityList } from '../../../redux/Features/MasterSlice'
 import { addEducation, reload, selectEducation, selectNewEducation, selectResumeError, selectResumeLoading, selectResumeMessage, setReloadDecider, toggleNewEducation } from '../../../redux/Features/ResumeSlice'
 import FormController from '../../../Util Components/FormController/FormController'
 import DateInput from '../../../Util Components/Inputs/DateInput/DateInput'
@@ -23,8 +23,6 @@ export default function EducationForm() {
         other_degree_name: '',
         university_id: '',
         other_university_name: [],
-        collage_id: '',
-        other_collage_name: '',
         location: '',
         course_start_date: '',
         course_end_date: '',
@@ -45,11 +43,9 @@ export default function EducationForm() {
     const token = useSelector(selectAuthToken)
     const degreeList = useSelector(selectDegreeList)
     const universityList = useSelector(selectUniversityList);
-    const collageList = useSelector(selectCollageList);
     const newEducation = useSelector(selectNewEducation);
     const [reloadFlag, setReloadFlag] = useState(false)
     const [universities, setUniversities] = useState(universityList)
-    const [colleges, setColleges] = useState(collageList);
     const [degree, setDegree] = useState(degreeList);
     const [updated, setUpdated] = useState(false);
     function handleChange(evt) {
@@ -68,9 +64,7 @@ export default function EducationForm() {
     const degreeSelectHandler = (i) => {
         setForm({ ...form, degree_id: degree[i].id, other_degree_name: degree[i].degree_name })
     }
-    const CollageSelectHandler = (i) => {
-        setForm({ ...form, collage_id: colleges[i].id, other_collage_name: colleges[i].education_name })
-    }
+
 
     const addUniversityHandler = (e) => {
         setForm({ ...form, university_id: '', other_university_name: e.target.value })
@@ -92,15 +86,6 @@ export default function EducationForm() {
         setDegree(ul);
     }
 
-    const addCollageHandler = (e) => {
-        setForm({ ...form, collage_id: '', other_collage_name: e.target.value })
-        let cl = collageList;
-        cl = cl.filter((item) => {
-            let regex = new RegExp(`^${e.target.value}`, "gi");
-            return item.education_name.match(regex);
-        })
-        setColleges(cl);
-    }
     async function handleSubmit(e, isAdd) {
         e.preventDefault();
         let body = form
@@ -130,18 +115,13 @@ export default function EducationForm() {
     useEffect(() => {
         dispatch(getDegreeList(token)).unwrap()
         dispatch(getUniversityList(token)).unwrap()
-        dispatch(getCollageList(token)).unwrap()
     }, [])
 
     useEffect(() => {
-
         if (degreeList.length === 0) dispatch(getDegreeList(token)).unwrap()
         if (universityList.length === 0) dispatch(getUniversityList(token)).unwrap()
-        if (collageList.length === 0) dispatch(getCollageList(token)).unwrap()
-
-
         return () => { }
-    }, [degreeList.length, universityList.length, collageList.length, dispatch, token])
+    }, [degreeList.length, universityList.length, dispatch, token])
     useEffect(() => {
         if (!newEducation && education && education.length > 0) {
             let lastEducation = education[education.length - 1]
@@ -151,8 +131,6 @@ export default function EducationForm() {
                 university_id: lastEducation.university_id,
                 other_degree_name: lastEducation.other_degree_name || lastEducation.degree_name,
                 other_university_name: lastEducation.university_name,
-                collage_id: lastEducation.collage_id,
-                other_collage_name: lastEducation.collage_name,
                 location: lastEducation.location,
                 course_start_date: lastEducation.course_start_date.split("-").reverse().join("-"),
                 course_end_date: lastEducation.course_end_date.split("-").reverse().join("-"),
@@ -170,8 +148,6 @@ export default function EducationForm() {
                     university_id: '',
                     other_degree_name: '',
                     other_university_name: [],
-                    collage_id: '',
-                    other_collage_name: '',
                     location: '',
                     course_start_date: '',
                     course_end_date: '',
@@ -200,12 +176,9 @@ export default function EducationForm() {
     return (
         <div className="main-form-wrapper">
             <h2 className="form-title">Now, let's move on to your learning journey so far</h2>
+            <SuggestionInput value={form.other_degree_name} name={'degree_id'} selected={degreeSelectHandler} label='Degree/Qualification*' placeholder={'e.g. BSc Computer Science'} searchHandler={addDegreeHandler} suggestions={degree} name_field={'degree_name'} />
             <div className="grid-1-1">
-                <SuggestionInput value={form.other_degree_name} name={'degree_id'} selected={degreeSelectHandler} label='Degree/Qualification*' placeholder={'e.g. BSc Computer Science'} searchHandler={addDegreeHandler} suggestions={degree} name_field={'degree_name'} />
                 <SuggestionInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} searchHandler={addUniversityHandler} suggestions={universities} name_field={'education_name'} />
-            </div>
-            <div className="grid-1-1">
-                <SuggestionInput value={form.other_collage_name} name={'collage_id'} selected={CollageSelectHandler} label='College*' placeholder={'e.g. Bharti College'} searchHandler={addCollageHandler} suggestions={colleges} name_field='education_name' />
                 <LocationInput value={form.location} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="eg. New Delhi" validation={message && message.address} />
             </div>
             <label className="control control-checkbox">

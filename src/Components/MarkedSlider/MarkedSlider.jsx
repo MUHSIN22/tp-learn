@@ -16,7 +16,7 @@ export default function MarkedSlider({min,max,value,name,state,setState,width,la
         <label htmlFor="">
             {
                 isCognetive &&
-                <span><input type="checkbox" onChange={event => handleEnabling(event)}  name={name} checked={status[name]} className="checkbox" /></span>
+                <span><input type="checkbox" disabled={disabled}  onChange={event => handleEnabling(event)}  name={name} checked={status[name]} className="checkbox" /></span>
             }
             {label}
         </label>

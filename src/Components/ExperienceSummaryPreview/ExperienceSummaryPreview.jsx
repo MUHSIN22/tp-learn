@@ -50,6 +50,7 @@ export default function ExperienceSummaryPreview() {
         dispatch(toggleNewDesignation(false))
         dispatch(toggleNewRoles(false))
         dispatch(toggleNewProject(false))
+        dispatch(changeExperienceForm(0));
         setList(companies)
     },[])
 
@@ -63,6 +64,7 @@ export default function ExperienceSummaryPreview() {
     }
     
     const editCompanyInfo = (item) => {
+        dispatch(changeExperienceForm(0));
         dispatch(addCompanyForEdit(item.company_record_id))
         navigate('/dashboard/experience-editor')
     }

@@ -15,7 +15,7 @@ export default function Navbar(props) {
   let navigate = useNavigate();
   const auth = useSelector(selectAuthentication)
   const rendertomyprofile=()=>{
-    navigate('/MyProfile')
+    navigate('/dashboard/cv')
   }
  
   

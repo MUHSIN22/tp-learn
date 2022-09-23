@@ -7,6 +7,7 @@ import { selectAuthToken, selectUser_id } from '../../redux/Features/Authenticat
 import { addDesignationForEdit, addProjectForEdit, changeExperienceForm, selectCompanyForEdit, selectDesignationForEdit } from '../../redux/Features/EditSlice';
 import { deleteProject, SelectCompanyDetails, setReloadDecider, toggleNewProject } from '../../redux/Features/ResumeSlice';
 import EditFormAddButton from '../../Util Components/EditFormAddButton/EditFormAddButton';
+import './ProjectSummaryPage.css'
 
 export default function ProjectSummaryPage() {
     const dispatch = useDispatch();
@@ -73,6 +74,7 @@ export default function ProjectSummaryPage() {
                 </tbody>
             </table>
             <EditFormAddButton title="Add another project" addingHandler={addNewProjectInfo} />
+            <button className="btn btn-skip" onClick={() => navigate('/dashboard/edit')}>Skip</button>
         </div>
     )
 }

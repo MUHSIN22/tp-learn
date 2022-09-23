@@ -26,7 +26,7 @@ export default function EditSwappableComponent({ id, data, item, fieldNames, del
                         <h2 className="edit-card-title">{data.title} <span>| {data.location} | {data.fromDate} - {data.toDate}</span></h2>
                         {/* <p className="edit-card-description" dangerouslySetInnerHTML={{__html: parser(data.description ? data.description : "")}}></p> */}
                         {
-                            (data.experienceDetails[0] && isDropdown) &&
+                            (data.experienceDetails && data.experienceDetails[0] && isDropdown) &&
                             <div className="swap-card-expand">
                                 <h4>Goto:</h4>
                                 <ul>
@@ -70,7 +70,10 @@ export default function EditSwappableComponent({ id, data, item, fieldNames, del
                     <div className="edit-action-wrapper">
                         <MdEdit className='edit-card-icons' onClick={() => editItem(item)} />
                         <MdDelete className='edit-card-icons' onClick={() => deleteItem(item)} />
-                        <AiFillCaretDown className={'edit-card-icons ' + (isDropdown ? "dropdown--active" : "")} onClick={() => setDropdown(!isDropdown)} />
+                        {
+                            (data.experienceDetails && data.experienceDetails[0]) &&
+                            <AiFillCaretDown className={'edit-card-icons ' + (isDropdown ? "dropdown--active" : "")} onClick={() => setDropdown(!isDropdown)} />
+                        }
                     </div>
                 </div>
             )}

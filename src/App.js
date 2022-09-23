@@ -47,6 +47,7 @@ import experience from './Assets/edit icons/experience.png'
 import education from './Assets/edit icons/education.png'
 import certificate from './Assets/edit icons/certification.png'
 import voluntaryIcon from './Assets/edit icons/voluntary.png'
+import portfolioIcon from './Assets/edit icons/portfolio.png'
 
 import CognetiveSkills from './Components/EditorForms/CognetiveSkills/CognetiveSkills';
 import ExperienceFormEditor from './Components/EditorForms/ExperienceFormEditor';
@@ -67,6 +68,8 @@ import PersonalInfoEditor from './Components/EditorForms/PersonalInfoEditor';
 import HobbiesEditorForm from './Components/EditorForms/HobbiesEditorForm';
 import MembershipSelectionPage from './Components/MembershipSelectionPage/MembershipSelectionPage';
 import ZohoMembershipPage from './Components/ZohoMembershipPage/ZohoMembershipPage';
+import PortfolioEditorPage from './Components/EditorForms/PortfolioEditorPage';
+import PortfolioSummary from './Components/PortfolioSummary/PortfolioSummary';
 
 function App() {
   const dispatch = useDispatch()
@@ -76,8 +79,8 @@ function App() {
   const reload = useSelector(selectReload)
   const resumeStatus = useSelector(selectResumeStatus);
   const status = useSelector(getResumeUpdateStatus);
-  const routeWithoutNav = ['/', '/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", '/about-us', '/cv-profile', '/pricing', '/dashboard/cv', "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans"]
-  const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans"]
+  const routeWithoutNav = ['/', '/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", '/about-us', '/cv-profile', '/pricing', '/dashboard/cv', "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans",'/dashboard/settings','/dashboard/change_password','/dashboard/portfolio-editor','/dashboard/portfolio-history']
+  const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans",'/dashboard/settings','/dashboard/change_password','/dashboard/portfolio-editor','/dashboard/portfolio-history']
   const message = useSelector(getResumeMessage);
   const reloadDecider = useSelector(getReloadDecider)
 
@@ -193,12 +196,13 @@ function App() {
         <Route path='/cs' element={<CognitiveSkills />} />
         <Route path="*" element={<NotFound />} />
         <Route path='/logout' element={<Logout />} />
-        <Route path='/change_password' element={<ChangePassword />} />
         <Route path="/membership" element={<ZohoMembershipPage />} />
         <Route path='/dashboard' element={<CVProfile />}>
           <Route path="cv" element={<DashboardCv />} />
           <Route path='edit' element={<EditProfilePage />} />
           <Route path='plans' element={<MembershipSelectionPage />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path='change_password' element={<ChangePassword />} />
           <Route path='edit-career-objective' element={
             <EditFormTemplate title="Career Objective" icon={careerObjectiveIcon}>
               <CareerObjectiveEditor />
@@ -239,12 +243,18 @@ function App() {
               <VoluntarySummaryPreview />
             </EditFormTemplate>
           } />
+          <Route path='portfolio-history' element={
+            <EditFormTemplate title="Portfolio" icon={portfolioIcon}>
+              <PortfolioSummary />
+            </EditFormTemplate>
+          } />
           <Route path='experience-editor' element={<ExperienceFormEditor />} />
           <Route path="education-editor" element={<EducationEditorForm />} />
           <Route path="certificate-editor" element={<CertificateEditorForms />} />
           <Route path="contribution-editor" element={<ContributionEditForm />} />
           <Route path="personal-info-editor" element={<PersonalInfoEditor />} />
           <Route path="hobbies-editor" element={<HobbiesEditorForm />} />
+          <Route path="portfolio-editor" element={<PortfolioEditorPage />} />
         </Route>
       </Routes>
       {!routeWithouFooter.includes(window.location.pathname) ? <Footer /> : null}

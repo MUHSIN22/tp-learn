@@ -31,6 +31,7 @@ const initialState = {
     newPhotoMedia:false,
     newProject:false,
     downLoadDetails: {},
+    newPortfolio: false,
     cvPDF: null
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
@@ -368,8 +369,9 @@ export const uploadResume = createAsyncThunk('authentication/uploadedResumeurl',
     }
 })
 export const addSocialLinks = createAsyncThunk('authentication/addSocialLinks', async (data, { rejectWithValue }) => {
+    console.log(data);
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    
+    console.log(encoded);
     try {
         const response = await API.post(`/add-social-links`, encoded, {
             headers: {
@@ -566,7 +568,24 @@ export const deleteCertificate = createAsyncThunk('authentication/delete-certifi
         return rejectWithValue(error.response.data);
     }
 })
-
+export const deletePortfolio = createAsyncThunk('authentication/delete-portfolio-info', async (data, { rejectWithValue }) => {
+    
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    
+    try {
+        const response = await API.post(`/delete-photo-media-info`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        // data.dispatch(reload());
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
 export const deleteAdditionalSkill = createAsyncThunk('authentication/delete-additional-skill-info', async (data, { rejectWithValue }) => {
     
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
@@ -1064,6 +1083,20 @@ export const resumeSlice = createSlice({
             state.error = true;
             state.status = 'Rejected'
             state.message = action.payload.data.error_message
+        }).addCase(deletePortfolio.fulfilled, (state, action) => {
+            state.message = "Deleted successfully!";
+            state.loading = false;
+            state.error = false;
+            state.status = "succeeded"
+        })
+        .addCase(deletePortfolio.pending, (state,action) => {
+            state.loading = true;
+        })
+        .addCase(deletePortfolio.rejected, (state,action) => {
+            state.loading = false;
+            state.error = true;
+            state.status = 'Rejected'
+            state.message = action.payload.data.error_message
         })
         .addCase(updateProfileInfo.pending,(state,acton) => {
             state.loading = true;
@@ -1297,7 +1330,8 @@ export const selectSocilaLinks = (state) => {
         twitter: record.link_twitter,
         instagram: record.link_instagram,
         linkedin: record.link_linkedin,
-        other: record.link_other
+        other: record.link_other,
+        self_declaration: record.self_declaration
     }
 }
 export const selectNewJob = (state)=> state.resume.newJob

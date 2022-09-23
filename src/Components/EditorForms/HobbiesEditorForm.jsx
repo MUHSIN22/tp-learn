@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { getLanguageList, selectLanguages } from '../../redux/Features/MasterSlice'
 import MultiSelectedOptions from '../EditForms/MultiSelectedOptions'
 import SuggestionInput from '../../Util Components/Inputs/SuggestionInput/SuggestionInput'
+import SelectInput from '../../Util Components/Inputs/SelectInput/SelectInput'
 
 let temp = {
     language_id: '',
@@ -33,6 +34,7 @@ export default function HobbiesEditorForm() {
         books: '',
         any_other: ''
     })
+    const expertiseList = ["Beginner","Intermediate","Advanced"]
     const error = useSelector(selectResumeError);
     const message = useSelector(selectResumeMessage);
     const loading = useSelector(selectResumeLoading);
@@ -72,13 +74,13 @@ export default function HobbiesEditorForm() {
             dispatch(setResumeError({ language_comlexity: ["Skill complexity should be a percentage between 0 to 100"] }))
             setShowAlert(true)
             document.getElementById('iconinput-Skills').value = '';
-            document.getElementById('iconinput-complexity').value = '';
+            // document.getElementById('iconinput-complexity').value = '';
             return true;
         }
         if ((temp.language_id !== "" || temp.language_name !== "") && temp.language_comlexity !== "") {
             set_Selected_options([...selected_options, temp])
             document.getElementById('iconinput-Skills').value = '';
-            document.getElementById('iconinput-complexity').value = '';
+            // document.getElementById('iconinput-complexity').value = '';
             temp = {
                 language_id: '',
                 language_name: '',
@@ -151,9 +153,10 @@ export default function HobbiesEditorForm() {
                 <div className="role-skills-container">
                     <div className="skill-and-complexity">
                         <SuggestionInput name='Skills' searchHandler={searchHandler} label='Please enter all the languages you know' placeholder='Search for languages' id="iconinput-Skills" suggestions={languageList} name_field={'language_name'} />
-                        <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100} />
+                        {/* <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100} /> */}
+                        <SelectInput name='complexity' handleChange={handleComplexity} options={expertiseList} label='Expertise level' id="iconinput-complexity"/>
                     </div>
-                    <button className="btn-add" onClick={handleAddSkill} >Add Skill</button>
+                    <button className="btn-add" onClick={handleAddSkill} >Add Language</button>
                 </div>
 
                 <EditFormController handleSubmit={handleSubmit} isSkip={true} handlePreviousNavigation={() => navigate('/dashboard/edit')} />

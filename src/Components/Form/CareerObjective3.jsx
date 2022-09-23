@@ -46,7 +46,7 @@ export default function CareerObjective3() {
         if(checked){
             try {
                 dispatch(addSocialLinks({ auth: token, body })).unwrap()
-                navigate('/MyProfile')
+                navigate('/dashboard/cv')
             } catch (error) {
                 showAlert(true)
             } finally {
@@ -98,7 +98,7 @@ export default function CareerObjective3() {
             </div>
             <div className="flex-row-end g-1" style={{width: '100%',display:"flex",justifyContent:"center"}}>
                 <div className="col-30">
-                    <button onClick={()=>navigate('/MyProfile',{state:{page:"/dashboard"}})} className='btn'>Review</button>
+                    <button onClick={()=>navigate('/dashboard/cv',{state:{page:"/dashboard"}})} className='btn'>Review</button>
                 </div>
                 <div className="col-30">
                     <button onClick={handleSubmit} className='btn primary'>Submit</button>

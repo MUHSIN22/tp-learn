@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { getRoleSuggestionList, selectRoleSuggestionList } from '../../redux/Features/MasterSlice';
-import { addBio, reload, selectBio, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage } from '../../redux/Features/ResumeSlice';
+import { addBio, reload, selectBio, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage, setReloadDecider } from '../../redux/Features/ResumeSlice';
 import EditFormController from '../../Util Components/EditFormController/EditFormController';
 import SuggestionBox from '../../Util Components/SuggestionBox/SuggestionBox';
 
@@ -32,7 +32,7 @@ export default function CareerObjectiveEditor() {
         setForm({ ...form, your_bio: form.your_bio + value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let body = form
         body.user_id = user_id
@@ -42,10 +42,12 @@ export default function CareerObjectiveEditor() {
         }
         let form_Data = JsonToFormData(body)
         try {
-            dispatch(addBio({ auth: token, body: form_Data, dispatch })).then((res) => {
-                if(res){
-                    dispatch(reload());
-                }
+            dispatch(setReloadDecider(true));
+            await dispatch(addBio({ auth: token, body: form_Data, dispatch })).then((res) => {
+            navigate('/dashboard/edit')
+                // if(res){
+                //     dispatch(reload());
+                // }
             })
         } catch (error) {
             showAlert(true)

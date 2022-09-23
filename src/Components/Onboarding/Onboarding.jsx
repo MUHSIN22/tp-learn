@@ -26,7 +26,7 @@ export default function Onboarding() {
    const form_id = useSelector(selectFormId)
    useEffect(() => {
      if(form_id === 17){
-        navigate('/MyProfile')
+        navigate('/dashboard/cv')
         return
      }
      if(form_id!==""&&form_id!==null) navigate('/cv-builder')

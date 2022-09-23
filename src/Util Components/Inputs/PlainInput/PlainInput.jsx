@@ -1,7 +1,7 @@
 import React from 'react'
 import './PlainInput.css'
 
-export default function PlainInput({ type="text", id, isSalary, label, name, handleChange,placeholder,validation,defaultValue,max,isDisabled, value }) {
+export default function PlainInput({ isIconLabel, labelIcon, type="text", id, isSalary, label, name, handleChange,placeholder,validation,defaultValue,max,isDisabled, value }) {
     return (
         <div className="common-input-wrapper">
             <label htmlFor={name}>{label}</label>
