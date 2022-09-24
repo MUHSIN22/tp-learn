@@ -4,6 +4,7 @@ import masterReducer from './Features/MasterSlice'
 import resumeReducer from './Features/ResumeSlice'
 import graphReducer from './Features/GraphSlice'
 import editReducer from './Features/EditSlice'
+import paymentReducer from './Features/PaymentSlice'
 import { combineReducers } from "redux";
 
 import {
@@ -22,14 +23,15 @@ import storageSession from 'redux-persist/lib/storage/session'
 const persistConfig = {
     key: 'authentication',
     storage: storageSession,
-    blacklist: [masterReducer,resumeReducer,graphReducer,editReducer]
+    blacklist: [masterReducer,resumeReducer,graphReducer,editReducer,paymentReducer]
 }
 const reducers = combineReducers({
     authentication: authenticationReducer,
     masters: masterReducer,
     resume: resumeReducer,
     graphs: graphReducer,
-    editDetails: editReducer
+    editDetails: editReducer,
+    paymentDetails: paymentReducer
 });
 const persistedReducer = persistReducer(persistConfig, reducers)
 

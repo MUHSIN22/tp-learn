@@ -12,6 +12,7 @@ import {MdContentCopy} from 'react-icons/md'
 import {IoLogoWhatsapp} from 'react-icons/io'
 import './DashboardCV.css'
 import shareResume from '../../Razorpay/shareResume'
+import { getPaymentStatus } from '../../redux/Features/PaymentSlice'
 
 export default function DashboardCv() {
     const navigate = useNavigate();
@@ -19,10 +20,10 @@ export default function DashboardCv() {
     const dispatch = useDispatch();
     const token = useSelector(selectAuthToken)
     const resumeDetails = useSelector(selectResumeDetails)
+    const paymentStatus = useSelector(getPaymentStatus);
 
-    console.log(resumeDetails);
     const downloadCVPDF = async () => {
-        if ((resumeDetails.subscription_status && resumeDetails.subscription_status === 1)) {
+        if ((paymentStatus)) {
             let downloadTag = document.createElement('a')
             downloadTag.download = "resume.pdf"
             let CVData = await dispatch(downloadCV({ auth: token, body: { user_id } }))
@@ -35,9 +36,17 @@ export default function DashboardCv() {
                 view: window
             }))
         } else {
-            getPayment(499,null,dispatch,user_id,token);
+            navigate('/dashboard/plans')
         }
 
+    }
+    
+    const share = async (media,user_id) => {
+        if(paymentStatus){
+            shareResume(media,user_id)
+        }else{
+            navigate('/dashboard/plans')
+        }
     }
 
 
@@ -53,10 +62,10 @@ export default function DashboardCv() {
                 <div className="profile-icon-wrapper">
                     <FiShare2 />
                     <div className="profile-share-tooltip">
-                        <IoLogoWhatsapp onClick={() => shareResume("whatsapp",user_id)} className='tooltip-icon wp-icon'/>
-                        <BsFacebook onClick={() => shareResume("facebook",user_id)} className='tooltip-icon fb-icon'/>
-                        <BsLinkedin onClick={() => shareResume("linkedin",user_id,resumeDetails.fname+" "+resumeDetails.lname)}className='tooltip-icon in-icon'/>
-                        <MdContentCopy onClick={() => shareResume("copy",user_id)} className='tooltip-icon cp-icon'/>
+                        <IoLogoWhatsapp onClick={() => share("whatsapp",user_id)} className='tooltip-icon wp-icon'/>
+                        <BsFacebook onClick={() => share("facebook",user_id)} className='tooltip-icon fb-icon'/>
+                        <BsLinkedin onClick={() => share("linkedin",user_id,resumeDetails.fname+" "+resumeDetails.lname)}className='tooltip-icon in-icon'/>
+                        <MdContentCopy onClick={() => share("copy",user_id)} className='tooltip-icon cp-icon'/>
                     </div>
                 </div>
             </div>

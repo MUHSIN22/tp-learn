@@ -3,7 +3,7 @@ import './MembershipSelectionCard.css'
 import { TiTick } from 'react-icons/ti'
 import { useRef } from 'react'
 
-export default function MembershipSelectionCard({ data }) {
+export default function MembershipSelectionCard({ data,planCode }) {
     const cardRef = useRef();
     const handleMemberCardClick = (event) => {
         let activeCard = document.querySelector(".membership-selection-card--active")
@@ -13,8 +13,8 @@ export default function MembershipSelectionCard({ data }) {
         cardRef.current.classList.add("membership-selection-card--active")
     }
     return (
-        <div className={"membership-selection-card"+(data.isCurrent ? " membership-selection-card--active" : "")} ref={cardRef} onClick={handleMemberCardClick}>
-            {data.isCurrent && <span className="special-label">Current Plan</span>}
+        <div className={"membership-selection-card"+(data.planCode === planCode ? " membership-selection-card--active" : "")} ref={cardRef} onClick={handleMemberCardClick}>
+            {data.planCode === planCode && <span className="special-label">Current Plan</span>}
             {
                 data.planDiscount ?
                 <span className="discount-label">{data.planDiscount}% <small>OFF</small></span>
@@ -25,7 +25,7 @@ export default function MembershipSelectionCard({ data }) {
             <p className="plan-description">{data.planDescription}</p>
             {
                 data.planName !== 'STARTER' &&
-                <button className="btn-buy"><strong>{data.isCurrent ? "Renew" : "Buy"} Now</strong> for <big>1200/</big>yr</button>
+                <button className="btn-buy" onClick={() => window.open(data.paymentURL)}><strong>{data.planCode === planCode ? "Renew" : "Buy"} Now</strong> for <big>{data.planPrice}</big></button>
             }
             {
                 data.planName === "STANDARD" ? 
@@ -49,7 +49,7 @@ export default function MembershipSelectionCard({ data }) {
                 }
             </ul>
             {
-                data.isCurrent &&
+                data.planCode === planCode &&
                 <p className="manage-plan-btn">Cancel Plan</p>
             }
         </div>
