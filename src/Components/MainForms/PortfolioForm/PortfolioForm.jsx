@@ -92,18 +92,28 @@ export default function PortfolioForm() {
         }
       },[portfolio])
 
+      const deleteFiles = (i) => {
+        let newFiles = files.filter((file,index) => index !== i)
+        setFiles(newFiles);
+    }
+
+    const deleteLinks = (i) => {
+        let newLinks = links.filter((link,index) => index !== i)
+        setLinks(newLinks);
+    }
+
     return (
         <div className="main-form-wrapper">
             <h2 className="form-title">Add your Portfolio</h2>
             <p className='form-subtitle'>You can add upto 5 projects</p>
             <PlainInput name='portfolio_title' value={form.portfolio_title} label="Title" placeholder="My personal portfolio" handleChange={(e) => setForm({...form,[e.target.name]: e.target.value})}/>
             <TextArea name='portfolio_desc' value={form.portfolio_desc} label='Description' placeholder="My personal portfolio" handleChange={(e) => setForm({...form,[e.target.name]: e.target.value})} />
-            <MultiSelectedOptions options={files} value_field="name" />
+            <MultiSelectedOptions options={files} deleteHandler={deleteFiles} value_field={(files[0] && files[0].fileType) ? "fileType" :"name"} />
             <div className="common-input-wrapper">
                 <label htmlFor="">Share Documents (You can share multiple documents)</label>
                 <DragDropInput multiple file={files} setFile={setFiles} />
             </div>
-            <MultiSelectedOptions options={links} />
+            <MultiSelectedOptions options={links} deleteHandler={deleteLinks} />
             <div className="portfolio-link-input">
                 <PlainInput name='portfolio_link' value={enteredLink} label="Portfolio Link" placeholder='https://www.johndoe.me' handleChange={handleLinkChange} />
                 <button className="btn btn-add" onClick={handleAddLink}>Add Link</button>

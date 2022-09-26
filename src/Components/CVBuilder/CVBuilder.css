@@ -30,14 +30,14 @@
 .cvbuilder .builder-row--active{
     grid-template-columns: repeat(2,calc(50vw - 5%));
 }
-.cvbuilder .step-row span{
+/* .cvbuilder .step-row span{
     position: absolute;
     width: 90%;
     height: 2px;
     background-color: #DCDAE1;
     margin: auto 0;
     z-index: 0;
-}
+} */
 .cvbuilder .step{
     border-radius: 5rem;
     padding: 0.3rem 2rem 0.3rem 0.3rem;

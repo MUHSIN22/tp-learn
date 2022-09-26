@@ -1352,6 +1352,32 @@ export const getResumeUpdateStatus = (state) => state.resume.status;
 export const getResumeMessage = (state) => state.resume.message
 export const getReloadDecider = (state) => state.resume.reloadDecider
 export const getLanguageInfo = (state) => state.resume.recordDetails.resume_info.language_info
+export const getExperienceProgress = (state) => {
+    let {company_basic_form,company_scale_form,designation_form,role_form,project_form} = state.resume.recordDetails.resume_info
+    return {company_basic_form,company_scale_form,designation_form,role_form,project_form}
+}
+export const getOtherFormProgress = (state) => {
+    let {
+        education_form,
+        certificate_form,
+        voluntary_form,
+        portfolio_form,
+        hobby_form,
+        career_objective_form,
+        cognitive_form,
+        social_media_form
+    } = state.resume.recordDetails.resume_info
+    return {
+        education_form,
+        certificate_form,
+        voluntary_form,
+        portfolio_form,
+        hobby_form,
+        career_objective_form,
+        cognitive_form,
+        social_media_form
+    }
+}
 export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus, setReloadDecider } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

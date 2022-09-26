@@ -82,10 +82,10 @@ const setProgress = (id)=>{
       {/* {progress === 14 && <AdditionalSkills3  />} */}
       {/* {progress === 15 && <CareerObjective1  />} */}
       {progress === 15 && <PortfolioForm  />}
-      {progress === 16 && <CareerObjective2  />}
-      {progress === 18 && <SocialMediaForm  />}
+      {/* {progress === 16 && <CareerObjective2  />} */}
+      {progress === 17 && <SocialMediaForm  />}
       {/* {progress === 18 && <CareerObjective3  />} */}
-      {progress === 17 && <CognitiveSkiilsForm />} 
+      {progress === 16 && <CognitiveSkiilsForm />} 
       {/* {progress === 17 && <CognitiveSkills />}  */}
     </div>
   )

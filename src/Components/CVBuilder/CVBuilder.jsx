@@ -9,6 +9,7 @@ import { selectAuthToken, selectUser_id } from '../../redux/Features/Authenticat
 import API from '../../API'
 import MainCV from '../MainCv/MainCV'
 import {BsEyeFill,BsEyeSlashFill} from 'react-icons/bs'
+import FormProgress from './FormProgress'
 export default function CVBuilder() {
   const first_job = useSelector(selectFirstJob)
   const Education = useSelector(selectEducation)
@@ -150,11 +151,14 @@ export default function CVBuilder() {
 
   return (
     <div className="cvbuilder">
-      <div className="step-row" ref={stepRow}>
+      {/* <div className="step-row" ref={stepRow}>
         <span></span>
         {
           Object.keys(progress).map((step, index) => <Steps name={step} {...progress[step]} index={index + 1} />)
         }
+      </div> */}
+      <div className='step-row' ref={stepRow}>
+        <FormProgress />
       </div>
       <div className={"builder-row" +(isPreview ? " builder-row--active": "")}style={{height: `calc(100vh - (${stepRowHeight}px + 7rem))`}}>
         <FormContainer />
