@@ -193,7 +193,7 @@ export default function DesignationForm() {
                 <SelectInput value={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' options={[...managementLevelList]} name_field={'level_name'} />
             </div>
             <div className="grid-1-1">
-                <LocationInput value={form.location} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={45} validation={message && message.address} />
+                <LocationInput value={location} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={45} validation={message && message.address} />
                 <SelectInput value={form.functional_area_id} name='functional_area_id' handleChange={handleDesignationForm} label='Functional Area' placeholder='i.e. CXO Level' width={45} options={[...functionalAreaList]} name_field='functional_area_name' />
             </div>
             <label className="control control-checkbox">
