@@ -60,7 +60,7 @@ export default function PortfolioForm() {
         formData.append(`file_count`,files.length);
         try{
             dispatch(setReloadDecider(true))
-            await dispatch(uploadPhotomedia({auth:Token,body: formData}))
+            await dispatch(uploadPhotomedia({auth,body: formData}))
             setForm({portfolio_title:"",portfolio_desc:""})
             setFiles([])
             setLinks([])
