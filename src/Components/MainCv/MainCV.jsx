@@ -58,10 +58,10 @@ export default function MainCV() {
         documents && documents[0] &&
         <DocFiles />
       }
-      {
+      {/* {
         videoFiles &&
         <VideoFiles />
-      }
+      } */}
       {
         isSocialLinks && 
         <SocialMedia />

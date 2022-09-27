@@ -70,6 +70,7 @@ import MembershipSelectionPage from './Components/MembershipSelectionPage/Member
 import ZohoMembershipPage from './Components/ZohoMembershipPage/ZohoMembershipPage';
 import PortfolioEditorPage from './Components/EditorForms/PortfolioEditorPage';
 import PortfolioSummary from './Components/PortfolioSummary/PortfolioSummary';
+import Referral from './Components/Referral/Referral';
 
 function App() {
   const dispatch = useDispatch()
@@ -79,8 +80,8 @@ function App() {
   const reload = useSelector(selectReload)
   const resumeStatus = useSelector(selectResumeStatus);
   const status = useSelector(getResumeUpdateStatus);
-  const routeWithoutNav = ['/', '/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", '/about-us', '/cv-profile', '/pricing', '/dashboard/cv', "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans",'/dashboard/settings','/dashboard/change_password','/dashboard/portfolio-editor','/dashboard/portfolio-history']
-  const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans",'/dashboard/settings','/dashboard/change_password','/dashboard/portfolio-editor','/dashboard/portfolio-history']
+  const routeWithoutNav = ['/', '/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", '/about-us', '/cv-profile', '/pricing', '/dashboard/cv', "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans",'/dashboard/settings','/dashboard/change_password','/dashboard/portfolio-editor','/dashboard/portfolio-history','/dashboard/referal']
+  const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans",'/dashboard/settings','/dashboard/change_password','/dashboard/portfolio-editor','/dashboard/portfolio-history','/dashboard/referal']
   const message = useSelector(getResumeMessage);
   const reloadDecider = useSelector(getReloadDecider)
 
@@ -198,6 +199,7 @@ function App() {
         <Route path='/logout' element={<Logout />} />
         <Route path="/membership" element={<ZohoMembershipPage />} />
         <Route path='/dashboard' element={<CVProfile />}>
+          <Route path='referal' element={<Referral />} />
           <Route path="cv" element={<DashboardCv />} />
           <Route path='edit' element={<EditProfilePage />} />
           <Route path='plans' element={<MembershipSelectionPage />} />

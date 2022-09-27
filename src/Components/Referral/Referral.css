@@ -1,0 +1,99 @@
+.referal-page-container{
+    grid-area: cv;
+}
+.referal-landing{
+    background-image: url('../../Assets/referal/bg.png');
+    width: 100%;
+    min-height: 20rem;
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 100000px 10px rgba(0,0,0,0.8);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+}
+.referal-landing h1{
+    font-family: var(--font-monserrate);
+    margin: 0;
+}
+.referal-landing p{
+    margin: 0;
+}
+.btn-invite{
+    background: #fe8f76;
+    font-weight: 600;
+    padding: 0.5rem 2rem;
+    border-radius: 50px;
+    width: max-content;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.referal-section-heading{
+    color: #554c60;
+    font-weight: 800;
+    font-family: var(--font-monserrate);
+    text-align: center;
+}
+.steps-wrapper{
+    max-width: 800px;
+    margin: auto;
+    display: flex;
+    gap: 2rem;
+}
+.step-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+.step-card-text{
+    margin-top: auto;
+}
+.section-condition{
+    max-width: 800px;
+    text-align: center;
+    margin: 2rem auto;
+}
+.section-condition a{
+    color: blue;
+}
+
+@media only screen and (max-width: 768px) {
+    .referal-landing{
+        padding: 1rem;
+    }
+    .step-section{
+        padding: 1rem;
+    }
+    .section-condition{
+        padding: 1rem;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .referal-title{
+        font-size: 1.3rem;
+    }
+    .referal-description{
+        font-size: 0.9rem;
+    }
+    .steps-wrapper{
+        flex-direction: column;
+    }
+    .step-card-text{
+        font-size: 0.9rem;
+    }
+    .condition-text{
+        font-size: 0.9rem;
+    }
+    .referal-section-heading{
+        font-size: 1.2rem;
+    }
+    .section-condition{
+        margin: 1rem 0;
+    }
+}

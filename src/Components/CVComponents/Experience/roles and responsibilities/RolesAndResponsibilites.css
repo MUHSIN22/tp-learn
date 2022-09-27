@@ -6,15 +6,16 @@
     grid-template-columns: 1fr;
     grid-gap: 1rem;
 }
-.responsibilities-grid ul{
+/* .responsibilities-grid ul{
     padding-left: 0;
-}
+} */
 .responsibilities-grid li{
     display: flex;
     gap: 0.5rem;
     align-items: center;
     font-weight: 500;
     padding: 0.5rem 0;
+    display: list-item;
 }
 .responsibilities-grid li span{
     flex-shrink: 10;
