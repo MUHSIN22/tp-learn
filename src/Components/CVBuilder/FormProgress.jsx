@@ -69,7 +69,7 @@ export default function FormProgress() {
                     }
                     <p className="progress-title">Education</p>
                 </span>
-                <span className={"progress-part "+([9,10].includes(currentFormID) ? "progress-part--active" : "")} onClick={() => changeForm(9)} >
+                <span className={"progress-part "+(currentFormID === 9 ? "progress-part--active" : "")} onClick={() => changeForm(9)} >
                     {
                         otherForms.certificate_form === 1 &&
                         <div className="progress-inside-progress">
@@ -77,7 +77,7 @@ export default function FormProgress() {
                     }
                     <p className="progress-title">Certification</p>
                 </span>
-                <span className={"progress-part "+(currentFormID === 11 ? "progress-part--active" : "")} onClick={() => changeForm(11)} >
+                <span className={"progress-part "+(currentFormID === 10 ? "progress-part--active" : "")} onClick={() => changeForm(10)} >
                     {
                         otherForms.voluntary_form === 1 &&
                         <div className="progress-inside-progress">
@@ -85,7 +85,7 @@ export default function FormProgress() {
                     }
                     <p className="progress-title">Voluntary Roles</p>
                 </span>
-                <span className={"progress-part "+(currentFormID === 12 ? "progress-part--active" : "")} onClick={() => changeForm(12)} >
+                <span className={"progress-part "+(currentFormID === 11 ? "progress-part--active" : "")} onClick={() => changeForm(11)} >
                     {
                         otherForms.hobby_form === 1 &&
                         <div className="progress-inside-progress">
@@ -93,7 +93,7 @@ export default function FormProgress() {
                     }
                     <p className="progress-title">Hobby & Languanges</p>
                 </span>
-                <span className={"progress-part "+(currentFormID === 13 ? "progress-part--active" : "")} onClick={() => changeForm(13)} >
+                <span className={"progress-part "+(currentFormID === 12 ? "progress-part--active" : "")} onClick={() => changeForm(12)} >
                     {
                         otherForms.career_objective_form === 1 &&
                         <div className="progress-inside-progress">
@@ -101,7 +101,7 @@ export default function FormProgress() {
                     }
                     <p className="progress-title">Career Objective</p>
                 </span>
-                <span className={"progress-part "+(currentFormID === 14 ? "progress-part--active" : "")} onClick={() => changeForm(14)} >
+                <span className={"progress-part "+(currentFormID === 13 ? "progress-part--active" : "")} onClick={() => changeForm(13)} >
                     {
                         otherForms.portfolio_form === 1 &&
                         <div className="progress-inside-progress">
@@ -109,7 +109,7 @@ export default function FormProgress() {
                     }
                     <p className="progress-title">Portfolio</p>
                 </span>
-                <span className={"progress-part "+(currentFormID === 15 ? "progress-part--active" : "")} onClick={() => changeForm(15)} >
+                <span className={"progress-part "+(currentFormID === 14 ? "progress-part--active" : "")} onClick={() => changeForm(14)} >
                     {
                         otherForms.cognitive_form === 1 &&
                         <div className="progress-inside-progress">
@@ -117,7 +117,7 @@ export default function FormProgress() {
                     }
                     <p className="progress-title">Cognitive Skills</p>
                 </span>
-                <span className={"progress-part "+(currentFormID === 16 ? "progress-part--active" : "")} onClick={() => changeForm(16)} >
+                <span className={"progress-part "+(currentFormID === 15 ? "progress-part--active" : "")} onClick={() => changeForm(15)} >
                     {
                         otherForms.social_media_form === 1 &&
                         <div className="progress-inside-progress">

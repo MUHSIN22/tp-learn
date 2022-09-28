@@ -73,19 +73,19 @@ const setProgress = (id)=>{
       {/* {progress === 9 && <Education  />} */}
       {progress === 10 && <CertificateForm  />}
       {/* {progress === 10 && <Certificate1  />} */}
-      {progress === 11 && <Certificate2 setProgress={setProgress} />}
-      {progress === 12 && <SocialContributionForm  />}
+      {/* {progress === 11 && <Certificate2 setProgress={setProgress} />} */}
+      {progress === 11 && <SocialContributionForm  />}
       {/* {progress === 12 && <AdditionalSkills1  />} */}
-      {progress === 13 && <HobbyForm  />}
+      {progress === 12 && <HobbyForm  />}
       {/* {progress === 13 && <AdditionalSkills2  />} */}
-      {progress === 14 && <AboutForm  />}
+      {progress === 13 && <AboutForm  />}
       {/* {progress === 14 && <AdditionalSkills3  />} */}
       {/* {progress === 15 && <CareerObjective1  />} */}
-      {progress === 15 && <PortfolioForm  />}
+      {progress === 14 && <PortfolioForm  />}
       {/* {progress === 16 && <CareerObjective2  />} */}
-      {progress === 17 && <SocialMediaForm  />}
+      {progress === 16 && <SocialMediaForm  />}
       {/* {progress === 18 && <CareerObjective3  />} */}
-      {progress === 16 && <CognitiveSkiilsForm />} 
+      {progress === 15 && <CognitiveSkiilsForm />} 
       {/* {progress === 17 && <CognitiveSkills />}  */}
     </div>
   )
