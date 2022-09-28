@@ -51,6 +51,15 @@
     font-size: 0.8rem;
     z-index: 1;
 }
+/* .cv-form-progress-container .progress-part--active .progress-title{
+    border-color: #00d99e;
+    color: #00d99e;
+    background: #00d99f04;
+}
+.cv-form-progress-container .progress-part--active .progress-title::after{
+    border-color: #00d99e;
+    background: #00d99f04;
+} */
 .cv-form-progress-container .progress-title::after{
     width: 10px;
     height: 10px;

@@ -42,11 +42,11 @@ export default function CareerTimeline() {
                     <h3 className="cv-profile-title-secondary">Salary & Management Graph</h3>
                     <div className="graph-notations-wrapper">
                         <div className="graph-notation">
-                            <div className="notation" style={{background:'#24e3a7'}}></div>
+                            <div className="notation" style={{background: '#f8633e'}}></div>
                             <p className="notation-text" >Salary</p>
                         </div>
                         <div className="graph-notation" >
-                            <div className="notation" style={{background: '#f8633e'}}></div>
+                            <div className="notation" style={{background: '#24e3a7' }}></div>
                             <p className="notation-text">Management</p>
                         </div>
                     </div>

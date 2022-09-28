@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { addCertificateForEdit, addContributionForEdit } from '../../redux/Features/EditSlice';
-import { deleteAdditionalSkill, deleteCertificate, selectCertificate, selectEducation, selectSocialContribution, setReloadDecider, toggleNewAdditionalSkills, toggleNewCertificate } from '../../redux/Features/ResumeSlice';
+import { deleteAdditionalSkill, deleteCertificate, selectCertificate, selectEducation, selectSocialContribution, setReloadDecider, toggleNewAdditionalSkills, toggleNewCertificate, updateTheSequence } from '../../redux/Features/ResumeSlice';
 import EditFormAddButton from '../../Util Components/EditFormAddButton/EditFormAddButton';
 import EditFormController from '../../Util Components/EditFormController/EditFormController';
 import EditSwappableComponent from '../../Util Components/EditSwappableComponent/EditSwappableComponent';
@@ -51,6 +51,22 @@ export default function VoluntarySummaryPreview() {
         navigate('/dashboard/contribution-editor')
     }
 
+    const submitPosition = () => {
+        let newList = [];
+        if(list && list[0]){
+            for(let i=0;i<list.length;i++){
+                newList.push({
+                    record_id: list[i].additional_skill_record_id,
+                    record_sequence: i+1
+                })
+            }
+        }
+        if(newList[0]){
+            dispatch(setReloadDecider(true))
+            dispatch(updateTheSequence({auth:token,body:{user_id,module_name: "additional_skill",sequence_info:JSON.stringify(newList)}}));
+        }
+    }
+
     useEffect(() => {
         dispatch(toggleNewAdditionalSkills(false))
         setList(contributions)
@@ -80,7 +96,7 @@ export default function VoluntarySummaryPreview() {
                 </Droppable>
             </DragDropContext>
             <EditFormAddButton title="Add another Voluntary Role" addingHandler={addNewRole} />
-            <EditFormController handlePreviousNavigation={() => navigate('/dashboard/edit')}/>
+            <EditFormController handlePreviousNavigation={() => navigate('/dashboard/edit')} handleSubmit={submitPosition}/>
         </div>
     )
 }

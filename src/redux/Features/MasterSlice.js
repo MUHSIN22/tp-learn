@@ -551,4 +551,5 @@ export const selectCollageList = (state) => state.masters.collageList;
 export const selectCompanyBasedList = (state) => state.masters.companyBasedList;
 export const selectCurrencylist = (state) => state.masters.currencyList;
 export const selectSidebarValue = (state) => state.masters.sidebarval;
+
 export default masterSlice.reducer;

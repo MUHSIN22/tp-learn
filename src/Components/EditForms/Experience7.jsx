@@ -6,7 +6,7 @@ export default function Experience7({setProgress}) {
   const dispatch = useDispatch()
   return (
     <>
-        <h1>Do you want to add another job roles in this company?</h1>
+        <h1>Do you want to add another job role in this organization?</h1>
         <div className="flex-row-start g-1">
             <div className="col-20">
                 <button className='btn secondary' onClick={()=>setProgress(0)}>Yes</button>

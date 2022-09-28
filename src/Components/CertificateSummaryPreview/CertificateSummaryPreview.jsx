@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { addCertificateForEdit } from '../../redux/Features/EditSlice';
-import { deleteCertificate, selectCertificate, selectEducation, setReloadDecider, toggleNewCertificate } from '../../redux/Features/ResumeSlice';
+import { deleteCertificate, selectCertificate, selectEducation, setReloadDecider, toggleNewCertificate, updateTheSequence } from '../../redux/Features/ResumeSlice';
 import EditFormAddButton from '../../Util Components/EditFormAddButton/EditFormAddButton';
 import EditFormController from '../../Util Components/EditFormController/EditFormController';
 import EditSwappableComponent from '../../Util Components/EditSwappableComponent/EditSwappableComponent';
@@ -51,6 +51,23 @@ export default function CertificateSummaryPreview() {
         navigate('/dashboard/certificate-editor')
     }
 
+    const changeTheSequence = () => {
+        let newList = []
+        console.log(list);
+        if(list && list[0]){
+            for(let i=0;i<list.length;i++){
+                newList.push({
+                    record_id: list[i].certificate_record_id,
+                    record_sequence: i+1
+                })
+            }
+        }
+        if(newList[0]){
+            dispatch(setReloadDecider(true))
+            dispatch(updateTheSequence({auth:token,body:{user_id,module_name: "certificate",sequence_info:JSON.stringify(newList)}}));
+        }
+    }
+
     useEffect(() => {
         dispatch(toggleNewCertificate(false))
         setList(certifications)
@@ -59,7 +76,7 @@ export default function CertificateSummaryPreview() {
     return (
         <div className="edit-summary-preview-wrapper">
             <DragDropContext onDragEnd={onDragEnd}>
-                <h2 className="form-title">Education History</h2>
+                <h2 className="form-title">Certification History</h2>
                 <Droppable droppableId='droppable'>
                     {(provided, snapshot) => (
                         <div className='draggable-container' ref={provided.innerRef} {...provided.droppableProps} >
@@ -80,7 +97,7 @@ export default function CertificateSummaryPreview() {
                 </Droppable>
             </DragDropContext>
             <EditFormAddButton title="Add another Certificate" addingHandler={addNewCertificate} />
-            <EditFormController handlePreviousNavigation={() => navigate('/dashboard/edit')}/>
+            <EditFormController handlePreviousNavigation={() => navigate('/dashboard/edit')} handleSubmit={changeTheSequence} />
         </div>
     )
 }

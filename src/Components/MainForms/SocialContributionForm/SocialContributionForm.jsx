@@ -96,7 +96,7 @@ export default function SocialContributionForm() {
     }, [reloadFlag, loading])
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title">Have you ever volunteered for/contributed to any social cause. If yes, please let us know about it.</h2>
+            <h2 className="form-title">Your contribution to social causes</h2>
             {showAlert && !loading && <Alert error={error} message={error&&message ? Object.values(message) : message} />}
             <div className="grid-1-1">
                 <PlainInput value={form.role} name='role' handleChange={handleChange} label='Your role' placeholder='i.e. Volunteer' width={100} />

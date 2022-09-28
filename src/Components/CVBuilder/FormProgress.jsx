@@ -81,17 +81,17 @@ export default function FormProgress() {
                     {
                         otherForms.voluntary_form === 1 &&
                         <div className="progress-inside-progress">
-                            <p className="progress-title">Voluntary Roles</p>
                         </div>
                     }
+                    <p className="progress-title">Voluntary Roles</p>
                 </span>
                 <span className={"progress-part "+(currentFormID === 12 ? "progress-part--active" : "")} onClick={() => changeForm(12)} >
                     {
                         otherForms.hobby_form === 1 &&
                         <div className="progress-inside-progress">
-                            <p className="progress-title">Hobby & Languanges</p>
                         </div>
                     }
+                    <p className="progress-title">Hobby & Languanges</p>
                 </span>
                 <span className={"progress-part "+(currentFormID === 13 ? "progress-part--active" : "")} onClick={() => changeForm(13)} >
                     {

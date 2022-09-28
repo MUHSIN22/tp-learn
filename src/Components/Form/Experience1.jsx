@@ -142,7 +142,7 @@ export default function Experience1() {
                     selected={selectHandler} />
             </div>
             <div className="form-row">
-                <CardRadioGroup autofill  label={'Define the nature of your job?'} name={'nature_of_job_id'} state={form} setState={setForm} option={jobNatureList} name_field={'job_name'} />
+                <CardRadioGroup autofill  label={'Select the nature of your job?'} name={'nature_of_job_id'} state={form} setState={setForm} option={jobNatureList} name_field={'job_name'} />
             </div>
 
             <span className='divider'></span>

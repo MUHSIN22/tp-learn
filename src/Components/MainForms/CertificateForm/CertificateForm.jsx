@@ -150,7 +150,7 @@ export default function CertificateForm() {
                 certificate_end_date: lastCertificate.certificate_end_date.split("-").reverse().join("-"),
                 certificate_project_info: lastCertificate.project_name,
                 is_online: lastCertificate.is_online === 1 ? 'yes' : 'no',
-                certification_record_id: lastCertificate.certificate_record_id,
+                certificate_record_id: lastCertificate.certificate_record_id,
             })
             setFile(lastCertificate.certificate_file)
             set_Selected_options(skills)
@@ -178,7 +178,7 @@ export default function CertificateForm() {
 
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title">Add any certification courses/trainings you have done</h2>
+            <h2 className="form-title">Skill Certification courses / trainings</h2>
             <div className="grid-1-1">
                 <PlainInput value={form.project_name} name='project_name' handleChange={handleChange} label='Name of the program*' placeholder='e.g. Digital Marketing Associate' />
                 <PlainInput value={form.institute_name} name='institute_name' handleChange={handleChange} label='Institution*' placeholder='Udemy' />
@@ -191,7 +191,7 @@ export default function CertificateForm() {
             <SuggestionInput name='Skills' searchHandler={searchHandler} label={`Key skills learned*`} placeholder='Skills mastered in this course' width={100} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
             <PlainInput value={form.certificate_project_info} name='certificate_project_info' handleChange={handleChange} label='Projects, if any' placeholder='Tell us how you applied those skills?' width={100} />
             <div className="common-input-wrapper">
-                <label htmlFor="">Upload Degree</label>
+                <label htmlFor="">Upload Certificate</label>
                 <DragDropInput file={file} setFile={setFile} />
             </div>
             <div className="flex-row-end">

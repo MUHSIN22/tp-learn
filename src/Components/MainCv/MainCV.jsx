@@ -63,7 +63,7 @@ export default function MainCV() {
         <VideoFiles />
       } */}
       {
-        isSocialLinks && 
+        (socialLinks.facebook !== "" || socialLinks.instagram !== "" || socialLinks.linkedin !== "" || socialLinks.other !== "" || socialLinks.twitter !== "") && 
         <SocialMedia />
       }
     </div>

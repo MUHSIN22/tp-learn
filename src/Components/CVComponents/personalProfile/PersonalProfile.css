@@ -30,6 +30,7 @@
     height: 8rem;
     margin-top: -4rem;
     border-radius: 50%;
+    object-fit: cover;
 }
 .cv-personal-left .personal-contact-wrapper{
     display: flex;

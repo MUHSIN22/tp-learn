@@ -6,13 +6,14 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import getPayment from '../../Razorpay/getPayment'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
-import { downloadCV, selectResumeDetails } from '../../redux/Features/ResumeSlice'
+import { changePlanPopup, downloadCV, getPlanPopup, selectResumeDetails } from '../../redux/Features/ResumeSlice'
 import MainCV from '../MainCv/MainCV'
 import {MdContentCopy} from 'react-icons/md'
 import {IoLogoWhatsapp} from 'react-icons/io'
 import './DashboardCV.css'
 import shareResume from '../../Razorpay/shareResume'
 import { getPaymentStatus } from '../../redux/Features/PaymentSlice'
+import PlanActionPopup from '../PlanActionPopup/PlanActionPopup'
 
 export default function DashboardCv() {
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function DashboardCv() {
     const token = useSelector(selectAuthToken)
     const resumeDetails = useSelector(selectResumeDetails)
     const paymentStatus = useSelector(getPaymentStatus);
+    const isPlanPopup = useSelector(getPlanPopup);
 
     const downloadCVPDF = async () => {
         if ((paymentStatus)) {
@@ -36,7 +38,7 @@ export default function DashboardCv() {
                 view: window
             }))
         } else {
-            navigate('/dashboard/plans')
+            dispatch(changePlanPopup(true))
         }
 
     }
@@ -45,13 +47,17 @@ export default function DashboardCv() {
         if(paymentStatus){
             shareResume(media,user_id)
         }else{
-            navigate('/dashboard/plans')
+            dispatch(changePlanPopup(true))
         }
     }
 
 
     return (
         <div className="main-cv-wrapper">
+            {
+                isPlanPopup &&
+                <PlanActionPopup />
+            }
             <div className="profile-share-and-edit-wrapper">
                 <div className="profile-icon-wrapper" onClick={() => navigate('/dashboard/edit')}>
                     <FiEdit />

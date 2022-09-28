@@ -133,7 +133,7 @@ function Step6() {
     return (
         <>
         <div className="step">
-            <h5>So tell us, how many years of experience do you hold, whether as a full-time employee, a freelancer or as an entrepreneur? </h5>
+            <h5>Tell us about your EXPERIENCE </h5>
            
             {
                 <div className="form-row date-row">

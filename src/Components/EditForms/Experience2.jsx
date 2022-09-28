@@ -71,7 +71,7 @@ export default function Experience2({ }) {
                 <IconSelect name={'industry_id'} label={'Select the industry'} field={'industry_size'} state={form} handleChange={handleChange}  options={industryList} name_field={'industry_name'} defaultValue={'Information Technology'} />
             </div>
             <div className="form-row">
-                <CardRadioGroup label='Define the scale of buisness?' name={'scale_id'} state={form} setState={setForm}  option={buisnessScaleList} name_field={'scale_of_business_name'} />
+                <CardRadioGroup label='Select the scale of buisness?' name={'scale_id'} state={form} setState={setForm}  option={buisnessScaleList} name_field={'scale_of_business_name'} />
             </div>
             <div className="form-row">
                 <IconSelect placeholder={'Slsls'} name={'type_of_company'} label={'Product / Service based'} field={'industry_size'} handleChange={handleChange}  options={companyBasedList} name_field={'company_based_name'} defaultValue={'Information Technology'} />

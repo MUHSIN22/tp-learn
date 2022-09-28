@@ -1,0 +1,11 @@
+input[type="month"]::before{
+    content: 'Month & Year';
+    color: #aaa;
+    width: 100%;
+}
+input[type="month"]:active::before,
+input[type="month"]:focus::before,
+input[type="month"]:valid::before{
+    width: 0;
+    content: '';
+}

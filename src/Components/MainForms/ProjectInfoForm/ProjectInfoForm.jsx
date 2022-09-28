@@ -220,7 +220,7 @@ export default function ProjectInfoForm() {
     }, [reloadFlag, loading])
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title">Now the most amazing part! If you have worked on any projects in this job role, please mention the skills you specifically used, how you applied them and its complexity level.</h2>
+            <h2 className="form-title">Details of Projects in this Job role.</h2>
             <div className="grid-1-1">
                 <PlainInput value={form.project_name} name='project_name' handleChange={handleChange} label='Project Name' placeholder='Name of the project.' />
                 <PlainInput value={form.client_name} name='client_name' handleChange={handleChange} label='Client Name' placeholder='e.g. ICICI Bank' />
@@ -228,10 +228,10 @@ export default function ProjectInfoForm() {
             <PlainInput value={form.project_desc} name='project_desc' handleChange={handleChange} label='Project Description' placeholder='Brief description of the project' />
             <MultiSelectedOptions options={selected_options} value_field={'skill_name'} subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />
             <div className="grid-1-1">
-                <SuggestionInput name='Skills' searchHandler={searchHandler} label={`Skill`} placeholder='Select Skills' value={search}  suggestions={[...skillList]} name_field={'skill_name'} selected={selectSkillHandler} />
+                <SuggestionInput name='Skills' searchHandler={searchHandler} label={`Skills used in this project`} placeholder='Select Skills' value={search}  suggestions={[...skillList]} name_field={'skill_name'} selected={selectSkillHandler} />
                 <MarkedSlider handleChange={handleComplexity} value={temp.skill_complexity} name={'skill_complexity'}  state={form} setState={setForm} min={1} max={10} width={'100%'} label={'Complexity Level'} />
             </div>
-            <PlainInput handleChange={handleSkill_desc} name='skill_desc' id="iconinput-skill_desc" label='Application of skills + Outcome' placeholder='Mention how you used the skills in the project'/>
+            <PlainInput handleChange={handleSkill_desc} name='skill_desc' id="iconinput-skill_desc" label='Skill application and outcomes' placeholder='Mention how you used the skills in the project'/>
             <button className='btn-fit small' onClick={handleAddSkill}>+ Add Skill</button>
             <button className="btn-fit transparent g-0-5" style={{marginLeft: "auto"}} onClick={(e) => handleAddProject(e,true)}><AddCircle width={30} /> Add another Project</button>
             <FormController handleSubmit={(e) => {

@@ -133,8 +133,17 @@ export default function HobbyForm() {
     console.log();
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title">We are eager to know you more. Please tell us about your hobbies, interests & passions in life.</h2>
-            {showAlert &&!loading&&<Alert error={error} message={error&&message ? Object.values(message): message} />}
+            <h2 className='form-title'>Languages</h2>
+            <MultiSelectedOptions options={selected_options} value_field='language_name' subValue_field='language_comlexity' deleteHandler={handleDeleteSkill} />
+            <div className="role-skills-container">
+                <div className="skill-and-complexity">
+                    <SuggestionInput name='Skills' searchHandler={searchHandler} label='Please select all the languages you know' placeholder='Search for languages' id="iconinput-Skills" suggestions={languageList} name_field={'language_name'}  />
+                    {/* <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100}  /> */}
+                    <SelectInput name='complexity' handleChange={handleComplexity} options={expertiseList} label='Proficiency' id="iconinput-complexity"/>
+                </div>
+                <button className="btn-add" onClick={handleAddSkill} >Add Language</button>
+            </div>
+            <h2 className='form-title' >Hobbies</h2>
             <PlainInput value={form.entertainment} name='entertainment' handleChange={handleChange} label='Entertainment' placeholder='e.g. Period dramas, Nat Geo, BBC History, etc. ' />
             <PlainInput value={form.music} name='music' handleChange={handleChange} label='Music' placeholder='e.g. Indi Pop, Ed Sheeran, Prateek Kuhad, etc. ' />
             <PlainInput value={form.sports} name='sports' handleChange={handleChange} label='Sports' placeholder='e.g. Football, Cricket, Tennis, etc.' />
@@ -143,19 +152,6 @@ export default function HobbyForm() {
             <PlainInput value={form.travel} name='travel' handleChange={handleChange} label='Travel' placeholder='e.g. places explored' />
             <PlainInput value={form.books} name='books' handleChange={handleChange} label='Books' placeholder='e.g. Ogilvy on Advertising, Copywriting Secrets, etc.' />
             <PlainInput value={form.any_other} name='any_other' handleChange={handleChange} label='Any other' placeholder='Other Hobbies' />
-            
-            <MultiSelectedOptions options={selected_options} value_field='language_name' subValue_field='language_comlexity' deleteHandler={handleDeleteSkill} />
-            
-            <div className="role-skills-container">
-                <div className="skill-and-complexity">
-                    <SuggestionInput name='Skills' searchHandler={searchHandler} label='Please enter all the languages you know' placeholder='Search for languages' id="iconinput-Skills" suggestions={languageList} name_field={'language_name'}  />
-                    {/* <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100}  /> */}
-                    {console.log(expertiseList,'this is expertise')}
-                    <SelectInput name='complexity' handleChange={handleComplexity} options={expertiseList} label='Expertise level' id="iconinput-complexity"/>
-                </div>
-                <button className="btn-add" onClick={handleAddSkill} >Add Language</button>
-            </div>
-            
             <FormController handleSubmit={handleSubmit} isSkip={true} />
         </div>
     )

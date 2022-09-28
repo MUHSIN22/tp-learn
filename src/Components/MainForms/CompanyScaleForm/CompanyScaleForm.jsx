@@ -70,9 +70,9 @@ export default function CompanyScaleForm() {
     return (
         <div className="main-form-wrapper">
             <h2 className="form-title">Great going, <span className="form-highliter">{firstName}</span></h2>
-            <SelectInput value={form.industry_id} disabled={companyDetails.industry_id !== ""} name={'industry_id'} label={'Select the industry'} field={'industry_size'} state={form} handleChange={handleChange} options={industryList} name_field={'industry_name'} defaultValue={'Information Technology'} />
-            <CardRadioGroup autofill={companyDetails.scale_id !== ""} label='Define the scale of buisness?' name={'scale_id'} state={form} setState={setForm} option={buisnessScaleList} name_field={'scale_of_business_name'} disabled={companyDetails.scale_id !== ""} />
-            <SelectInput value={form.type_of_company} disabled={companyDetails.type_of_company_id !== ""} placeholder={'Slsls'} name={'type_of_company'} label={'Product / Service based'} field={'industry_size'} handleChange={handleChange} options={companyBasedList} name_field={'company_based_name'} defaultValue={'Information Technology'} />
+            <SelectInput value={form.industry_id} disabled={companyDetails.industry_id !== ""} name={'industry_id'} label={'Select the industry most appropriate to your experience'} field={'industry_size'} state={form} handleChange={handleChange} options={industryList} name_field={'industry_name'} defaultValue={'Information Technology'} />
+            <CardRadioGroup autofill={companyDetails.scale_id !== ""} label='Select the nature of the organization' name={'scale_id'} state={form} setState={setForm} option={buisnessScaleList} name_field={'scale_of_business_name'} disabled={companyDetails.scale_id !== ""} />
+            <SelectInput value={form.type_of_company} disabled={companyDetails.type_of_company_id !== ""} placeholder={'Slsls'} name={'type_of_company'} label={'Is it a Product or Service based organization?'} field={'industry_size'} handleChange={handleChange} options={companyBasedList} name_field={'company_based_name'} defaultValue={'Information Technology'} />
             <FormController handleSubmit={handleSubmit} />
         </div>
     )

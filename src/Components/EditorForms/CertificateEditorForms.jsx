@@ -221,7 +221,7 @@ export default function CertificateEditorForms() {
     return (
         <EditFormTemplate title="Certification Courses" icon={certificate}>
             <div className="main-form-wrapper">
-                <h2 className="form-title">Add any certification courses/trainings you have done</h2>
+                <h2 className="form-title">Skill Certification courses / trainings</h2>
                 <div className="grid-1-1">
                     {console.log(form)}  
                     <PlainInput value={form.project_name} name='project_name' handleChange={handleChange} label='Name of the program*' placeholder='e.g. Digital Marketing Associate' />
@@ -235,7 +235,7 @@ export default function CertificateEditorForms() {
                 <SuggestionInput name='Skills' searchHandler={searchHandler} label={`Key skills learned*`} placeholder='Skills mastered in this course' width={100} suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
                 <PlainInput value={form.certificate_project_info} name='certificate_project_info' handleChange={handleChange} label='Projects, if any' placeholder='Tell us how you applied those skills?' width={100} />
                 <div className="common-input-wrapper">
-                    <label htmlFor="">Upload Degree</label>
+                    <label htmlFor="">Upload Certificate</label>
                     <DragDropInput file={file} setFile={setFile} />
                 </div>
                 {/* <div className="flex-row-end">

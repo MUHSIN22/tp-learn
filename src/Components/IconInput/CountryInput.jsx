@@ -7,7 +7,7 @@ export default function CountryInput({setCountryCode}) {
     const countryCode = useSelector(selectCountryCodes)
     const [countryCodeList, setCountryCodeList] = useState();
     const [dialCode, setDialCode] = useState("+91");
-    const [flag, setFlag] = useState("🇮🇳")
+    const [flag, setFlag] = useState("IN")
     const [isSearching, setSearching] = useState(false);
     const [searchText, setSearchText] = useState('+91')
 

@@ -184,8 +184,8 @@ export default function RolesEditForm() {
             <MultiSelectedOptions options={selected_options} value_field='skill_name' subValue_field='skill_complexity' deleteHandler={handleDeleteSkill} />
             <div className="role-skills-container">
                 <div className="skill-and-complexity">
-                    <SuggestionInput name='Skills' searchHandler={searchHandler} label='Please enter all the skills you applied' placeholder='Select Skills' id="iconinput-Skills" suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
-                    <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100} />
+                    <SuggestionInput name='Skills' searchHandler={searchHandler} label='Select all the skills you have used in this Job role' placeholder='Select Skills' id="iconinput-Skills" suggestions={skillList} name_field={'skill_name'} selected={selectSkillHandler} />
+                    <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise (Out of 100)' placeholder='60' type='number' id="iconinput-complexity" max={100} />
                 </div>
                 <button className="btn-add" onClick={handleAddSkill} >Add Skill</button>
             </div>

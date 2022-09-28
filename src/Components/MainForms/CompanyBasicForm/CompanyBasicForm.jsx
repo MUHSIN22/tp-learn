@@ -122,7 +122,7 @@ export default function CompanyBasicForm() {
     }, [newJob, lastCompany])
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title">Let's start with you most recent stint.</h2>
+            <h2 className="form-title">Let's start with your latest Job.</h2>
             <SuggestionInput
                 value={search}
                 name={'company_name'}
@@ -137,7 +137,7 @@ export default function CompanyBasicForm() {
                 }}
                 selected={selectHandler}
             />
-            <CardRadioGroup autofill  label={'Define the nature of your job?'} name={'nature_of_job_id'} state={form} setState={setForm} option={jobNatureList} name_field={'job_name'} />
+            <CardRadioGroup autofill  label={'Select the nature of your job?'} name={'nature_of_job_id'} state={form} setState={setForm} option={jobNatureList} name_field={'job_name'} />
             <FormController handleSubmit={handleSubmit}/>
         </div>
     )

@@ -10,7 +10,7 @@ export default function Experience9({setProgress}) {
     <>
     <div className='col-100 align-start'>
         <h1>Wow, {info.name}! We had no idea you were this talented. </h1>
-        <p className='text-left'>Gone are the days when there was an age to learn and then the age to earn. Now is the time for continuous learning. </p>
+        <p className='text-left'>Now, let's capture your formal education and any skill certification programs that you have done or are pursuing right now!</p>
         <span className="crumbs-red">
              Earn as you learn 
         </span>

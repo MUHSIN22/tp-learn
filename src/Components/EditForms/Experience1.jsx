@@ -180,7 +180,7 @@ export default function Experience1({ data }) {
       </div>
       <div className="form-row">
         <CardRadioGroup
-          label={"Define the nature of your job?"}
+          label={"Select the nature of your job?"}
           name={"nature_of_job_id"}
           state={form}
           setState={setForm}
@@ -203,7 +203,7 @@ export default function Experience1({ data }) {
       </div>
       <div className="form-row">
         <CardRadioGroup
-          label="Define the scale of buisness?"
+          label="Select the scale of buisness?"
           name={"scale_id"}
           state={form}
           setState={setForm}

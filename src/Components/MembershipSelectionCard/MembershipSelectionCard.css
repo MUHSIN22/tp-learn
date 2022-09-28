@@ -9,7 +9,6 @@
     position: relative;
     padding-top: 3rem;
     overflow: hidden;
-    cursor: pointer;
     transition: all 0.3s ease;
 }
 .membership-selection-card--active{
@@ -97,6 +96,11 @@
     color: #fff;
     border-radius: 8px;
     font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-buy:hover{
+    transform: scale(1.1);
 }
 .btn-buy big{
     font-weight: 600;

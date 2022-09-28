@@ -169,7 +169,7 @@ export default function CompanyBasicFormEditor() {
     }, [message, dispatch, form]);
     return (
         <div className="main-form-wrapper">
-            {newJob && <h2 className="form-title">Let's start with you most recent stint.</h2>}
+            {newJob && <h2 className="form-title">Let's start with your latest Job.</h2>}
             <SuggestionInput
                 name={"company_name"}
                 placeholder={"Company / Organization Name"}
@@ -184,7 +184,7 @@ export default function CompanyBasicFormEditor() {
             />
             <CardRadioGroup
                 autofill
-                label={"Define the nature of your job?"}
+                label={"Select the nature of your job?"}
                 name={"nature_of_job_id"}
                 state={form}
                 setState={setForm}
@@ -193,7 +193,7 @@ export default function CompanyBasicFormEditor() {
             />
             <SelectInput
                 name={"industry_id"}
-                label={"Select the industry"}
+                label={"Select the industry most appropriate to your experience"}
                 field={"industry_size"}
                 state={form}
                 handleChange={handleChange}
@@ -204,7 +204,7 @@ export default function CompanyBasicFormEditor() {
             />
             <CardRadioGroup
                 autofill
-                label="Define the scale of buisness?"
+                label="Select the nature of the organization"
                 name={"scale_id"}
                 state={form}
                 setState={setForm}
@@ -213,7 +213,7 @@ export default function CompanyBasicFormEditor() {
             />
             <SelectInput
                 name={"type_of_company"}
-                label={"Product / Service based"}
+                label={"Is it a Product or Service based organization?"}
                 field={"industry_size"}
                 handleChange={handleChange}
                 options={companyBasedList}

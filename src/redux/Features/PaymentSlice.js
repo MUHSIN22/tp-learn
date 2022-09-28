@@ -9,7 +9,8 @@ const initialState = {
     subscription_start_date: null,
     subscription_end_date: null,
     planDetails : null,
-    paymentDetails: {}
+    paymentDetails: {},
+    isPaymentIniated: false
 }
 
 export const getPlanDetails = createAsyncThunk('authentication/get-plan-details', async (data, { rejectWithValue }) => {
@@ -46,7 +47,9 @@ export const paymentSlice = createSlice({
     name: 'payment',
     initialState,
     reducers:{
-
+        changePaymentInitiated : (state,action) => {
+            state.isPaymentIniated = action.payload
+        }
     },
     extraReducers(builder){
         builder
@@ -64,5 +67,9 @@ export const getPaymentStatus = (state) => {
     console.log(state.paymentDetails.paymentDetails);
     return status === "live";
 }
+
+export const {changePaymentInitiated} = paymentSlice.actions;
+
+export const getPaymentInitiated = (state) => state.paymentDetails.isPaymentIniated
 export const getPaidPlanCode = (state) => state.paymentDetails.paymentDetails.plan_code
 export default paymentSlice.reducer;

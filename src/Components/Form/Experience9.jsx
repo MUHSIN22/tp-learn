@@ -10,15 +10,15 @@ export default function Experience9({setProgress}) {
     <>
     <div className='col-100 align-start'>
         <h1>Wow, {info.name}! We had no idea you were this talented. </h1>
-        <p className='text-left'>Gone are the days when there was an age to learn and then the age to earn. Now is the time for continuous learning. </p>
-        <span className="crumbs-red">
+        <p className='text-left'><b>Now, let's capture your formal education and any skill certification programs that you have done or are pursuing right now!</b></p>
+        {/* <span className="crumbs-red">
              Earn as you learn 
         </span>
         <p className='text-left'>Talentplace has some amazing internship & freelancing opportunities for students.</p>
         <span className="crumbs-green">
             Learn as you earn 
         </span>
-        <p className='text-left'>We also have huge number of skill learning modules to keep you up to date with industry demands.</p>
+        <p className='text-left'>We also have huge number of skill learning modules to keep you up to date with industry demands.</p> */}
     </div>
     <Control handleSubmit={()=>dispatch(setProgress(8))} />
     </>

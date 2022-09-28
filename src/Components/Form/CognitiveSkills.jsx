@@ -140,8 +140,8 @@ export default function CognitiveSkills({ }) {
     }
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title">Now, tell us how do you rank yourself in these Cognitive Skills</h2>
-            <p className="form-mandatory">Select only 6 skills that best suites your personality</p>
+            <h2 className="form-title">Choose your top six Cognitive Skills</h2>
+            <p className="form-mandatory" style={{textAlign: 'left'}}>and rank yourself on the scale of 1 to 10</p>
             {
                 isStatusChecked &&
                 <div className="cognetive-edit-grid">

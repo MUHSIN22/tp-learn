@@ -71,6 +71,8 @@ import ZohoMembershipPage from './Components/ZohoMembershipPage/ZohoMembershipPa
 import PortfolioEditorPage from './Components/EditorForms/PortfolioEditorPage';
 import PortfolioSummary from './Components/PortfolioSummary/PortfolioSummary';
 import Referral from './Components/Referral/Referral';
+import { getPaymentInitiated } from './redux/Features/PaymentSlice';
+import PaymentRefreshPopup from './Components/PaymentRefreshPopup/PaymentRefreshPopup';
 
 function App() {
   const dispatch = useDispatch()
@@ -84,6 +86,7 @@ function App() {
   const routeWithouFooter = ['/membership', "/MyProfile", "/myprofile", "/dashboard", "/settings", "/change_password", "/login", '/signup', '/get-onboard', '/cv-builder', '/OTP-signup', '/create-password', '/cv-profile', "/dashboard/cv", "/dashboard/edit", "/dashboard/edit-career-objective", "/dashboard/edit-cognetive-skills", "/dashboard/experience-history", "/dashboard/designation-history", "/dashboard/experience-editor",'/dashboard/project-history','/dashboard/education-history','/dashboard/education-editor','/dashboard/certificate-history','/dashboard/certificate-editor','/dashboard/contribution-history','/dashboard/contribution-editor','/dashboard/personal-info-editor','/dashboard/hobbies-editor',"/dashboard/plans",'/dashboard/settings','/dashboard/change_password','/dashboard/portfolio-editor','/dashboard/portfolio-history','/dashboard/referal']
   const message = useSelector(getResumeMessage);
   const reloadDecider = useSelector(getReloadDecider)
+  const isPaymentIniated = useSelector(getPaymentInitiated)
 
   useEffect(() => {
     if (auth.authToken && reload) {
@@ -136,8 +139,9 @@ function App() {
         toast.error(item)
       })
     } else if (status === "succeeded") {
-      toast.success(message , { toastId: 1 })
-      console.log(reloadDecider,'reload');
+      if(message !== "Form Id Updated Successfully."){
+        toast.success(message , { toastId: 1 })
+      }
       if(reloadDecider){
         dispatch(reloadState())
         dispatch(setReloadDecider(false))
@@ -171,6 +175,11 @@ function App() {
         pauseOnHover={true}
         closeButton={true}
       />
+      
+      {
+        isPaymentIniated &&
+        <PaymentRefreshPopup />
+      }
       <Routes>
         <Route path='/login' element={<PreventedRoute><Login /></PreventedRoute>} />
         <Route path='/OTP-login' element={<PreventedRoute><OTPLogin /></PreventedRoute>} />

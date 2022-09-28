@@ -79,16 +79,16 @@ export default function SocialMediaForm() {
     // }
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title"><span>Voila!</span> Take a moment to clap for yourself a little since you made it this far. Here, share your social media links and move on to the last step.</h2>
-            <PlainInput type="text" value={form.link_facebook} name='link_facebook' isIconLabel labelIcon={<BsFacebook />} handleChange={handleInputChange} label={"Facebook"} placeholder='Link to your facebook account' />
+            <h2 className="form-title">Add your social media links</h2>
+            <PlainInput type="text" value={form.link_linkedin} name='link_linkedin' isIconLabel labelIcon={<BsFacebook />} handleChange={handleInputChange} label={"Linkedin"} placeholder='Link to your linkedin account' />
             <PlainInput type="text" value={form.link_twitter} name='link_twitter' isIconLabel labelIcon={<BsFacebook />} handleChange={handleInputChange} label={"Twitter"} placeholder='Link to your twitter account' />
             <PlainInput type="text" value={form.link_instagram} name='link_instagram' isIconLabel labelIcon={<BsFacebook />} handleChange={handleInputChange} label={"Instagram"} placeholder='Link to your instagram account' />
-            <PlainInput type="text" value={form.link_linkedin} name='link_linkedin' isIconLabel labelIcon={<BsFacebook />} handleChange={handleInputChange} label={"Linkedin"} placeholder='Link to your linkedin account' />
+            <PlainInput type="text" value={form.link_facebook} name='link_facebook' isIconLabel labelIcon={<BsFacebook />} handleChange={handleInputChange} label={"Facebook"} placeholder='Link to your facebook account' />
+            <PlainInput type="text" value={form.link_other} name='link_other' isIconLabel labelIcon={<BsFacebook />} handleChange={handleInputChange} label={"Any other"} placeholder='Comma separated links' />
             <div className="declaration-wrapper">
                 <h4>Self Declaration</h4>
-                <p>I hereby declare that the above particulars of facts and information stated are true, correct and complete to the best of my belief and knowledge.</p>
                 <label className="control control-checkbox">
-                    I agree terms and condition
+                I hereby declare that the above particulars of facts and information stated are true, correct and complete to the best of my belief and knowledge.
                     <input type="checkbox" value={isChecked} checked={isChecked} onChange={event => setChecked(event.target.checked)} />
                     <div className="control_indicator"></div>
                 </label>

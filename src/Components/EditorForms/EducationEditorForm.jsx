@@ -230,14 +230,11 @@ export default function EducationEditorForm() {
     return (
         <EditFormTemplate title="Education" icon={educationIcon}>
             <div className="main-form-wrapper">
-                {newEducation && <h2 className="form-title">Now, let's move on to your learning journey so far</h2>}
+                {newEducation && <h2 className="form-title">Formal education details</h2>}
+                <SuggestionInput value={form.other_degree_name} name={'degree_id'} selected={degreeSelectHandler} label='Degree/Qualification*' placeholder={'e.g. BSc Computer Science'} searchHandler={addDegreeHandler} suggestions={degree} name_field={'degree_name'} />
                 <div className="grid-1-1">
-                    <SuggestionInput value={form.other_degree_name} name={'degree_id'} selected={degreeSelectHandler} label='Degree/Qualification*' placeholder={'e.g. BSc Computer Science'} searchHandler={addDegreeHandler} suggestions={degree} name_field={'degree_name'} />
-                    <SuggestionInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} searchHandler={addUniversityHandler} suggestions={universities} name_field={'education_name'} />
-                </div>
-                <div className="grid-1-1">
-                    <SuggestionInput value={form.other_collage_name} name={'collage_id'} selected={CollageSelectHandler} label='College*' placeholder={'e.g. Bharti College'} searchHandler={addCollageHandler} suggestions={colleges} name_field='education_name' />
-                    <LocationInput value={form.location} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="eg. New Delhi" validation={message && message.address} />
+                <SuggestionInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} searchHandler={addUniversityHandler} suggestions={universities} name_field={'education_name'} />
+                    <LocationInput value={form.location} form={location} setForm={setLocation} name="address" type='text' label="Location*" placeholder="eg. New Delhi" validation={message && message.address} />
                 </div>
                 <label className="control control-checkbox">
                     Online Course
@@ -252,7 +249,7 @@ export default function EducationEditorForm() {
                 <TextArea value={form.course_extra_activity} rows={8} name={'course_extra_activity'} handleChange={handleChange} label='Extra-curricular activities' placeholder={'Extra-academic participation'} />
                 <PlainInput value={form.course_project_info} name={'course_project_info'} handleChange={handleChange} label='Projects, if any' placeholder={'Academic projects undertaken'} />
                 <div className="common-input-wrapper">
-                    <label htmlFor="">Upload File</label>
+                    <label htmlFor="">Upload Qualification certificate</label>
                     <DragDropInput file={file} setFile={setFile} />
                 </div>
                 {/* <button onClick={(e) => handleSubmit(e, true)} className="btn-fit transparent g-0-5" style={{ marginLeft: "auto" }}><AddCircle width={30} /> Add Another Qualification</button> */}

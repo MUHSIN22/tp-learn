@@ -116,7 +116,7 @@ export default function ContributionEditForm() {
     return (
         <EditFormTemplate title="Voluntary Roles" icon={contribution}>
             <div className="main-form-wrapper">
-                <h2 className="form-title">Have you ever volunteered for/contributed to any social cause. If yes, please let us know about it.</h2>
+                <h2 className="form-title">Your contribution to social causes</h2>
                 <div className="grid-1-1">
                     <PlainInput value={form.role} name='role' handleChange={handleChange} label='Your role' placeholder='i.e. Volunteer' width={100} />
                     <PlainInput value={form.organization_name} name='organization_name' handleChange={handleChange} label='Organisation name' placeholder='i.e. Goonj' width={100} />

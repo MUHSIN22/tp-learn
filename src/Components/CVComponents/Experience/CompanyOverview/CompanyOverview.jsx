@@ -21,13 +21,13 @@ export default function CompanyOverview({ company }) {
     const dispatch = useDispatch();
     const user_id = useSelector(selectUser_id);
     const token = useSelector(selectAuthToken)
-    const {id} = useParams();
+    const { id } = useParams();
 
     useEffect(() => {
         let location = window.location.pathname.split('/');
-        if(location.includes('cv-share')){
+        if (location.includes('cv-share')) {
             getCompanyWiseForShare()
-        }else{
+        } else {
             getCompanyWise();
         }
     }, [company])
@@ -124,6 +124,16 @@ export default function CompanyOverview({ company }) {
                 }
             </div>
             <div className="company-stats-wrapper">
+                <div className="graph-notations-wrapper" style={{paddingRight: "1rem"}}>
+                    <div className="graph-notation">
+                        <div className="notation" style={{ background: '#f8633e' }}></div>
+                        <p className="notation-text" >Salary</p>
+                    </div>
+                    <div className="graph-notation" >
+                        <div className="notation" style={{ background: '#24e3a7' }}></div>
+                        <p className="notation-text">Management</p>
+                    </div>
+                </div>
                 {
                     companyWise &&
                     <LineGraph
@@ -135,7 +145,7 @@ export default function CompanyOverview({ company }) {
             </div>
             <div className="company-other-details">
                 {
-                    company.job_role && company.job_role.map((jobRole,index) => (
+                    company.job_role && company.job_role.map((jobRole, index) => (
                         <Fragment key={index}>
                             <DesignationOverview jobRole={jobRole} />
                             <RolesAndResponsibilities data={jobRole} />

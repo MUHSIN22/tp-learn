@@ -33,7 +33,7 @@ export default function DragDropInput({file,setFile,multiple}) {
     
       const handleInputChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
-          if(e.target.files.length > 1) {
+          if(multiple) {
             setFile([...file,...e.target.files])
           }else{
             setFile(e.target.files[0]);

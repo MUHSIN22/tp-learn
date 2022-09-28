@@ -1,0 +1,59 @@
+.plan-action-popup{
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100000;
+}
+.plan-action-popup-container{
+    padding: 3rem;
+    border-radius: 20px;
+    width: 600px;
+    background: #f8f4fb;
+    color: #2e2e2e;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+}
+.plan-action-popup h2{
+    text-align: center;
+}
+.btn-view-plan{
+    padding: 0.8rem 2rem;
+    border-radius: 7px;
+    background: #ff8e74;
+    width: max-content;
+    margin: auto;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.plan-popup-close{
+    font-size: 2rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    color: #ff8e74;
+}
+
+@media only screen and (max-width: 500px) {
+    .plan-action-popup-container{
+        width: 95%;
+        padding: 1rem;
+        padding-top: 3rem;
+    }
+    .plan-popup-close{
+        font-size: 1.5rem;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+}

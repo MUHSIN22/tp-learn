@@ -108,10 +108,10 @@ export default function PortfolioEditorPage() {
     return (
         <EditFormTemplate title="Portfolio" icon={portfolioIcon}>
             <div className="main-form-wrapper">
-                <h2 className="form-title">Add your Portfolio</h2>
+                <h2 className="form-title">Showcase your Portfolio</h2>
                 <p className='form-subtitle'>You can add upto 5 projects</p>
-                <PlainInput name='portfolio_title' value={form.portfolio_title} label="Title" placeholder="My personal portfolio" handleChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })} />
-                <TextArea name='portfolio_desc' value={form.portfolio_desc} label='Description' placeholder="My personal portfolio" handleChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })} />
+                <PlainInput name='portfolio_title' value={form.portfolio_title} label="Title" placeholder="Project name" handleChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })} />
+                <TextArea name='portfolio_desc' value={form.portfolio_desc} label='Description' placeholder="Project description" handleChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })} />
                 <MultiSelectedOptions options={files} deleteHandler={deleteFiles} value_field={(files[0] && files[0].fileType) ? "fileType" :"name"} />
                 <div className="common-input-wrapper">
                     <label htmlFor="">Share Documents (You can share multiple documents)</label>
@@ -119,7 +119,7 @@ export default function PortfolioEditorPage() {
                 </div>
                 <MultiSelectedOptions options={links} deleteHandler={deleteLinks}/>
                 <div className="portfolio-link-input">
-                    <PlainInput name='portfolio_link' value={enteredLink} label="Portfolio Link" placeholder='https://www.johndoe.me' handleChange={handleLinkChange} />
+                    <PlainInput name='portfolio_link' value={enteredLink} label="Portfolio Link (Personal website,Github,Behance,etc...)" placeholder='https://www.johndoe.me' handleChange={handleLinkChange} />
                     <button className="btn btn-add" onClick={handleAddLink}>Add Link</button>
                 </div>
                 {/* <button onClick={(e) => handleSubmit(e, true)} className="btn-fit transparent g-0-5" style={{ marginLeft: "auto" }}><AddCircle width={30} /> Add Another Qualification</button> */}

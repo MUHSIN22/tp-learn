@@ -5,7 +5,7 @@ import dateConverter from '../../../functionUtils/dateConverter'
 import errorMessageHandler from '../../../functionUtils/errorMessageHandler'
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice'
 import { getCurrencyList, getFunctionalAreaList, getLevelList, searchDesignation, selectCurrencylist, selectDesignationList, selectFunctionalAreaList, selectManagementLevelList } from '../../../redux/Features/MasterSlice'
-import { addJobDesignation, selectLastCompany, selectLastJob, selectNewDesignation, selectResumeError, selectResumeLoading, selectResumeMessage } from '../../../redux/Features/ResumeSlice'
+import { addJobDesignation, selectLastCompany, selectLastJob, selectNewDesignation, selectResumeError, selectResumeLoading, selectResumeMessage, setReloadDecider } from '../../../redux/Features/ResumeSlice'
 import FormController from '../../../Util Components/FormController/FormController'
 import Checkbox from '../../../Util Components/Inputs/Checkbox/Checkbox'
 import DateInput from '../../../Util Components/Inputs/DateInput/DateInput'
@@ -118,8 +118,8 @@ export default function DesignationForm() {
         if (form.current_working === "yes") body.end_date = ""
 
         try {
+            dispatch(setReloadDecider(true));
             dispatch(addJobDesignation({ auth: token, body, dispatch })).unwrap()
-
         } catch (error) {
         } finally {
             setShowAlert(true);
@@ -185,12 +185,10 @@ export default function DesignationForm() {
 
     return (
         <div className="designation-form-wrapper">
-            <h2 className="form-title">Now tell us about all the job roles at which you have worked starting with the latest one.</h2>
-            {endSalaryError &&<Alert error={true} message={endSalaryError} />}
-            {showAlert &&!loading&&<Alert error={error} message={error ? errorMessageHandler(message) : message} />}
+            <h2 className="form-title">Now tell us about all the job roles at which you have worked in this organization {!newDesignation ? "starting with the latest one." : ""}</h2>
             <div className="grid-1-1">
-                <SuggestionInput value={search} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' suggestions={[...designationlist]} searchHandler={searchHandler} selected={selectHandler} name_field="job_title_name" />
-                <SelectInput value={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' options={[...managementLevelList]} name_field={'level_name'} />
+                <SuggestionInput value={search} name={'designation_id'} placeholder={'Your job title'} label='Designation' suggestions={[...designationlist]} searchHandler={searchHandler} selected={selectHandler} name_field="job_title_name" />
+                <SelectInput value={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Management level' placeholder='Your seniority level' options={[...managementLevelList]} name_field={'level_name'} />
             </div>
             <div className="grid-1-1">
                 <LocationInput value={location} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={45} validation={message && message.address} />
@@ -206,15 +204,15 @@ export default function DesignationForm() {
             </label>
             <div className="grid-1-1-1">
                 {/* {dateConverter(form.start_date)} */}
-                <DateInput value={dateConverter(form.start_date)} defaultValue={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='When did you start' placeholder='MM YYYY' />
+                <DateInput value={dateConverter(form.start_date)} defaultValue={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='Start of this Job role' placeholder='MM YYYY' />
                 {console.log(form.start_salary)}
-                <PlainInput isSalary={true} type="text" value={form.start_salary && (form.start_salary).toString().replace(commaSeparatorRegex,',')} name='start_salary'  handleChange={handleDesignationForm} label='Your starting package' placeholder='120000' />
-                <SelectInput value={form.start_salary_currency} name='start_salary_currency' handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' />
+                <PlainInput isSalary={true} type="text" value={form.start_salary && (form.start_salary).toString().replace(commaSeparatorRegex,',')} name='start_salary'  handleChange={handleDesignationForm} label='Starting Salary in this Job role (Numbers only)' placeholder='120000' />
+                <SelectInput value={form.start_salary_currency} name='start_salary_currency' handleChange={handleDesignationForm} label='Currency(same for the entire career profile)' options={currencyList} name_field='currency_name' />
             </div>
             <div className="grid-1-1-1">
-                <DateInput value={dateConverter(form.end_date)} name='end_date' isDisabled={(isCurrentWorking || form.current_working === "yes") ? true : false} handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM YYYY' />
-                <PlainInput isSalary={true} type="text" value={form.end_salary && (form.end_salary).toString().replace(commaSeparatorRegex,',')} name='end_salary'  handleChange={handleDesignationForm} label='Last drawn package' placeholder='180000' />
-                <SelectInput value={form.end_salary_currency} name='end_salary_currency' handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
+                <DateInput value={dateConverter(form.end_date)} name='end_date' isDisabled={(isCurrentWorking || form.current_working === "yes") ? true : false} handleChange={handleDesignationForm} type='date' label='End of this Job role' placeholder='MM YYYY' />
+                <PlainInput isSalary={true} type="text" value={form.end_salary && (form.end_salary).toString().replace(commaSeparatorRegex,',')} name='end_salary'  handleChange={handleDesignationForm} label='End Salary in this Job role (Numbers only)' placeholder='180000' />
+                <SelectInput value={form.end_salary_currency} name='end_salary_currency' handleChange={handleDesignationForm} label='Currency(same for the entire career profile)' options={currencyList} name_field='currency_name' width={100} />
             </div>
             <label className="control control-checkbox">
                 I am currently working in this job role
@@ -222,16 +220,13 @@ export default function DesignationForm() {
                 <div className="control_indicator"></div>
             </label>
             <label className="control control-checkbox">
-                Hide my salary
+                Hide my salary (Check this box to hide salary in your resume. It will be used for analytical purpose only)
                 <input name='hide_salary' value={!isHideSalary ? 'yes' : "no"} onChange={(event) => {
                     handleDesignationForm(event);
                     setHideSalary(!isHideSalary);
                 }} type="checkbox" checked={form.hide_salary === 'yes'} />
                 <div className="control_indicator"></div>
             </label>
-            <p className="designation-instruction">
-                Check the box to hide salary from others. It is only for analytic and predict your future salary.
-            </p>
             <FormController handleSubmit={handleAddDesignation}/>
         </div>
     )

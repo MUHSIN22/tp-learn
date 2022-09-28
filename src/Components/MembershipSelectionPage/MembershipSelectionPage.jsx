@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
-import { getPaidPlanCode, getPaymentDetails, getPlanDetails } from '../../redux/Features/PaymentSlice'
+import { changePaymentInitiated, getPaidPlanCode, getPaymentDetails, getPaymentInitiated, getPlanDetails } from '../../redux/Features/PaymentSlice'
 import MembershipSelectionCard from '../MembershipSelectionCard/MembershipSelectionCard'
 import './MembershipSelectionPage.css'
 
@@ -30,6 +30,7 @@ let standard = {
     planDiscount: '50',
     planDescription: "Download and share online to attract high paying jobs",
     planCode: 'STD',
+    coupenCode: "STD50",
     planIncludes: [
         "Download ATS friendly resume in PDF format",
         "Select from multiple PDF formats",
@@ -45,6 +46,7 @@ let professional = {
     planDiscount: '30',
     planDescription: "Learn and do every thing to make success a habit",
     planCode: 'PRO',
+    coupenCode: 'PRO30',
     planIncludes: [
         'Membership of "Talentplace professional network"',
         "Access to our podcast, and webinars on career development",
@@ -60,9 +62,11 @@ export default function MembershipSelectionPage() {
     const user_id = useSelector(selectUser_id)
     const token = useSelector(selectAuthToken)
     const planCode = useSelector(getPaidPlanCode);
+    const isPaymentInitiated = useSelector(getPaymentInitiated)
     useEffect(() => {
         dispatch(getPaymentDetails({auth: token,body:{user_id}}));
     },[])
+    
   return (
     <div className="membership-cv-container">
         <h3 className="membership-btn-header">Talentplace Career Profile</h3>

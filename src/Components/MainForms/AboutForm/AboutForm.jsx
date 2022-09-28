@@ -77,11 +77,11 @@ export default function AboutForm() {
     }, [])
     return (
         <div className="main-form-wrapper">
-            <h2 className="form-title">Tell us about yourself.</h2>
+            <h2 className="form-title">Professional Summary</h2>
             {showAlert &&!loading&&<Alert error={error} message={error&&message ? Object.values(message): message} />}
             <div className="grid-1-1">
                 <div className="common-input-wrapper">
-                    <label className='text-left' htmlFor="">Professional summary</label>
+                    <label className='text-left' htmlFor="">Mention your unique skillset, professional experience and accomplishments in brief</label>
                     <CKEditor
                         editor={ClassicEditor}
                         data={form.your_bio}

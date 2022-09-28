@@ -32,7 +32,8 @@ const initialState = {
     newProject:false,
     downLoadDetails: {},
     newPortfolio: false,
-    cvPDF: null
+    cvPDF: null,
+    isPlanPopup: false
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
@@ -82,6 +83,22 @@ export const downloadCV = createAsyncThunk('authentication/downloadCV', async (d
         //     data.dispatch(reload())
         //     data.dispatch(changeEditPageDetails({progress: null})).unwrap();
         // }
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const updateTheSequence = createAsyncThunk('authentication/update-sequence', async (data, { rejectWithValue }) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    try {
+        const response = await API.post(`/update-sequence`, encoded, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
         return response.data
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -657,6 +674,9 @@ export const resumeSlice = createSlice({
     name: 'resume',
     initialState,
     reducers: {
+        changePlanPopup: (state,action) => {
+            state.isPlanPopup = action.payload;
+        },
         toggleNewJob: (state,action)=>{
             state.newJob = (action.payload !== null || action.payload !== undefined) ? action.payload : !state.newJob
         },
@@ -940,8 +960,20 @@ export const resumeSlice = createSlice({
             state.status = 'Rejected'
             state.error = action.payload.error
             state.message = action.payload.message
-
-
+        }).addCase(updateTheSequence.pending, (state, action) => {
+            state.loading = true
+            state.status = 'loading'
+            state.error = false
+        }).addCase(updateTheSequence.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.message =action.payload.data.message
+            state.reload = true
+        }).addCase(updateTheSequence.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'Rejected'
+            state.error = action.payload.error
+            state.message = action.payload.message
         }).addCase(addBio.pending, (state, action) => {
             state.loading = true
             state.status = 'loading'
@@ -1352,6 +1384,7 @@ export const getResumeUpdateStatus = (state) => state.resume.status;
 export const getResumeMessage = (state) => state.resume.message
 export const getReloadDecider = (state) => state.resume.reloadDecider
 export const getLanguageInfo = (state) => state.resume.recordDetails.resume_info.language_info
+export const getPlanPopup = (state) => state.resume.isPlanPopup
 export const getExperienceProgress = (state) => {
     let {company_basic_form,company_scale_form,designation_form,role_form,project_form} = state.resume.recordDetails.resume_info
     return {company_basic_form,company_scale_form,designation_form,role_form,project_form}
@@ -1378,7 +1411,7 @@ export const getOtherFormProgress = (state) => {
         social_media_form
     }
 }
-export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus, setReloadDecider } = resumeSlice.actions;
+export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus, setReloadDecider, changePlanPopup } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
 

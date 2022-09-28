@@ -3,6 +3,7 @@ import { ReactComponent as Cross } from '../Assests/icons/cross.svg';
 export default function MultiSelectedOptions({options=[],deleteHandler=()=>{}, value_field='', subValue_field=''}) {
   return (
     <div className="flex-wrap align-start justify-start g-1">
+        {console.log(options,'this is options')}
         {options && options.map((x,i)=><Card key={i} value={typeof x === "object" ? x[value_field] : x} subValue={x[subValue_field]} id={i} deleteHandler={deleteHandler} />)}
     </div>
   )

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import { addCompanyForEdit, changeExperienceForm } from '../../redux/Features/EditSlice'
-import { deleteCompany, SelectCompanyDetails, setReloadDecider, toggleNewDesignation, toggleNewJob, toggleNewProject, toggleNewRoles } from '../../redux/Features/ResumeSlice'
+import { deleteCompany, SelectCompanyDetails, setReloadDecider, toggleNewDesignation, toggleNewJob, toggleNewProject, toggleNewRoles, updateTheSequence } from '../../redux/Features/ResumeSlice'
 import EditFormAddButton from '../../Util Components/EditFormAddButton/EditFormAddButton'
 import EditFormController from '../../Util Components/EditFormController/EditFormController'
 import EditSwappableComponent from '../../Util Components/EditSwappableComponent/EditSwappableComponent'
@@ -25,7 +25,7 @@ export default function ExperienceSummaryPreview() {
         console.log(result,"this is result");
         console.log(list);
         let res = reorder(list,result.source.index,result.destination.index)
-        console.log(res);
+        console.log(res, 'reordered');
         setList(res);
     }
 
@@ -68,6 +68,22 @@ export default function ExperienceSummaryPreview() {
         dispatch(addCompanyForEdit(item.company_record_id))
         navigate('/dashboard/experience-editor')
     }
+
+    const submitPosition = () => {
+        let newList = [];
+        if(list && list[0]){
+            for(let i=0;i<list.length;i++){
+                newList.push({
+                    record_id: list[i].company_record_id,
+                    record_sequence: i+1
+                })
+            }
+        }
+        if(newList[0]){
+            dispatch(setReloadDecider(true))
+            dispatch(updateTheSequence({auth:token,body:{user_id,module_name: "company",sequence_info:JSON.stringify(newList)}}));
+        }
+    }
       
     return (
         <div className="edit-summary-preview-wrapper">
@@ -93,7 +109,7 @@ export default function ExperienceSummaryPreview() {
                 </Droppable>
             </DragDropContext>
             <EditFormAddButton title="Add another position" addingHandler={addNewPosition} />
-            <EditFormController handlePreviousNavigation={() => navigate('/dashboard/edit')}/>
+            <EditFormController handlePreviousNavigation={() => navigate('/dashboard/edit')} handleSubmit={submitPosition}/>
         </div>
     )
 }

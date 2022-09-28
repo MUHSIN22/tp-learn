@@ -195,10 +195,10 @@ export default function DesignationEditForm() {
 
     return (
         <div className="main-form-wrapper">
-            {newDesignation && <h2 className="form-title">Now tell us about all the job roles at which you have worked starting with the latest one.</h2>}
+            {newDesignation && <h2 className="form-title">Now tell us about all the job roles at which you have worked in this organization </h2>}
             <div className="grid-1-1">
-                <SuggestionInput value={search} name={'designation_id'} placeholder={'Your job title'} label='Your Designation' suggestions={[...designationlist]} searchHandler={searchHandler} selected={selectHandler} name_field="job_title_name" />
-                <SelectInput value={form.level_id} defaultValue={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Define your management level' placeholder='Your seniority level' options={[...managementLevelList]} name_field={'level_name'} />
+                <SuggestionInput value={search} name={'designation_id'} placeholder={'Your job title'} label='Designation' suggestions={[...designationlist]} searchHandler={searchHandler} selected={selectHandler} name_field="job_title_name" />
+                <SelectInput value={form.level_id} defaultValue={form.level_id} name='level_id' handleChange={handleDesignationForm} label='Management level' placeholder='Your seniority level' options={[...managementLevelList]} name_field={'level_name'} />
             </div>
             <div className="grid-1-1">
                 <LocationInput value={form.location} form={location} setForm={setLocation} name="address" type='text' label="Location" placeholder="Bangalore" width={45} validation={message && message.address} />
@@ -213,14 +213,14 @@ export default function DesignationEditForm() {
                 <div className="control_indicator"></div>
             </label>
             <div className="grid-1-1-1">
-                <DateInput value={dateConverter(form.start_date)} defaultValue={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='When did you start' placeholder='MM YYYY' />
-                <PlainInput isSalary={true} type="text" value={form.start_salary && (form.start_salary).toString().replace(commaSeparatorRegex, ',')} name='start_salary' handleChange={handleDesignationForm} label='Your starting package' placeholder='120000' />
-                <SelectInput value={form.start_salary_currency} name='start_salary_currency' handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' />
+                <DateInput value={dateConverter(form.start_date)} defaultValue={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='Start of this Job role' placeholder='MM YYYY' />
+                <PlainInput isSalary={true} type="text" value={form.start_salary && (form.start_salary).toString().replace(commaSeparatorRegex, ',')} name='start_salary' handleChange={handleDesignationForm} label='Starting Salary in this Job role (Numbers only)' placeholder='120000' />
+                <SelectInput value={form.start_salary_currency} name='start_salary_currency' handleChange={handleDesignationForm} label='Currency(same for the entire career profile)' options={currencyList} name_field='currency_name' />
             </div>
             <div className="grid-1-1-1">
-                <DateInput value={dateConverter(form.end_date)} name='end_date' isDisabled={(isCurrentWorking || (form.current_working && form.current_working === "yes") ) ? true : false} handleChange={handleDesignationForm} type='date' label='Last date of this role' placeholder='MM YYYY' />
-                <PlainInput isSalary={true} type="text" value={form.end_salary && (form.end_salary).toString().replace(commaSeparatorRegex, ',')} name='end_salary' handleChange={handleDesignationForm} label='Last drawn package' placeholder='180000' />
-                <SelectInput value={form.end_salary_currency} name='end_salary_currency' handleChange={handleDesignationForm} label='Currency' options={currencyList} name_field='currency_name' width={100} />
+                <DateInput value={dateConverter(form.end_date)} name='end_date' isDisabled={(isCurrentWorking || (form.current_working && form.current_working === "yes") ) ? true : false} handleChange={handleDesignationForm} type='date' label='End of this Job role' placeholder='MM YYYY' />
+                <PlainInput isSalary={true} type="text" value={form.end_salary && (form.end_salary).toString().replace(commaSeparatorRegex, ',')} name='end_salary' handleChange={handleDesignationForm} label='End Salary in this Job role (Numbers only)' placeholder='180000' />
+                <SelectInput value={form.end_salary_currency} name='end_salary_currency' handleChange={handleDesignationForm} label='Currency(same for the entire career profile)' options={currencyList} name_field='currency_name' width={100} />
             </div>
             <label className="control control-checkbox">
                 I am currently working in this job role
@@ -228,16 +228,13 @@ export default function DesignationEditForm() {
                 <div className="control_indicator"></div>
             </label>
             <label className="control control-checkbox">
-                Hide my salary
+                Hide my salary (Check this box to hide salary in your resume. It will be used for analytical purpose only)
                 <input name='hide_salary' value={!isHideSalary ? 'yes' : "no"} onChange={(event) => {
                     handleDesignationForm(event);
                     setHideSalary(!isHideSalary);
                 }} type="checkbox" checked={form.hide_salary === 'yes'} />
                 <div className="control_indicator"></div>
             </label>
-            <p className="designation-instruction">
-                Check the box to hide salary from others. It is only for analytic and predict your future salary.
-            </p>
             <EditFormController isNext handleSubmit={handleAddDesignation} handlePreviousNavigation={() => dispatch(changeExperienceForm(0))} />
         </div>
     )
