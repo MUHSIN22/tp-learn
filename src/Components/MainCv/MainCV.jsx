@@ -26,15 +26,19 @@ export default function MainCV() {
   const [isHobbies,setIsHobbies] = useState(false)
   useEffect(() => {
     setIsSocialLinks(checkAnyoneAvailable(socialLinks))
+    console.log(checkAnyoneAvailable(hobbies));
     setIsHobbies(checkAnyoneAvailable(hobbies))
   },[socialLinks])
   
   const checkAnyoneAvailable = (data) => {
-    Object.values(data).forEach((item) => {
+    let ar = Object.values(data)
+    for(let i=0;i<ar.length;i++){
+      let item = ar[i];
       if(item !== "" && item !== "undefined"){
+        console.log('available');
         return true;
       }
-    })
+    }
   }
   return (
     <div className="main-cv-container">

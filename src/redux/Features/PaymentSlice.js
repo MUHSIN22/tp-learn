@@ -15,7 +15,6 @@ const initialState = {
 
 export const getPlanDetails = createAsyncThunk('authentication/get-plan-details', async (data, { rejectWithValue }) => {
     // let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    
     try {
         const response = await axios.get(`https://cv-builder.talentplace.ai/api/v1/zoho/plans`)
         console.log(response,'this is response');
@@ -43,6 +42,25 @@ export const getPaymentDetails = createAsyncThunk('payment/get-payment-details',
     }
 })
 
+export const createSubscription = createAsyncThunk('payment/create-subscription',async (data,{rejectWithValue}) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    
+    try {
+        const response = await API.post(`https://cv-builder.talentplace.ai/api/v1/zoho/hostedpages/newsubscription`, data.body , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        console.log(response.data,'this is data');
+        return response.data
+    } catch (error) {
+        console.log(error,'this is err');
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const paymentSlice = createSlice({
     name: 'payment',
     initialState,
@@ -59,6 +77,10 @@ export const paymentSlice = createSlice({
         .addCase(getPaymentDetails.fulfilled,(state,action) => {
             state.paymentDetails = action.payload.data.subscriptions[0]
         })
+        .addCase(createSubscription.fulfilled,(state,action) => {
+            // state.planDetails = action.payload.data.
+            state.planDetails = action.payload.data.hostedpage.url;
+        })
     }
 })
 
@@ -72,4 +94,5 @@ export const {changePaymentInitiated} = paymentSlice.actions;
 
 export const getPaymentInitiated = (state) => state.paymentDetails.isPaymentIniated
 export const getPaidPlanCode = (state) => state.paymentDetails.paymentDetails.plan_code
+export const selectPlanDetails = (state) => state.paymentDetails.planDetails
 export default paymentSlice.reducer;

@@ -83,7 +83,7 @@ export default function FormProgress() {
                         <div className="progress-inside-progress">
                         </div>
                     }
-                    <p className="progress-title">Voluntary Roles</p>
+                    <p className="progress-title">Social Contributions</p>
                 </span>
                 <span className={"progress-part "+(currentFormID === 11 ? "progress-part--active" : "")} onClick={() => changeForm(11)} >
                     {

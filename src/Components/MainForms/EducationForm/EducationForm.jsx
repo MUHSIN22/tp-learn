@@ -48,6 +48,8 @@ export default function EducationForm() {
     const [universities, setUniversities] = useState(universityList)
     const [degree, setDegree] = useState(degreeList);
     const [updated, setUpdated] = useState(false);
+    const [isPursuing,setPursuing] = useState(false)
+
     function handleChange(evt) {
         const value = evt.target.value;
 
@@ -95,6 +97,7 @@ export default function EducationForm() {
         if (isAdd) {
             body.reload_request = "yes"
         }
+        body.currently_study = isPursuing ? 1 : 0;
         body = JsonToFormData(body)
         try {
             dispatch(setReloadDecider(true))
@@ -139,6 +142,7 @@ export default function EducationForm() {
                 course_project_info: lastEducation.course_project_info,
                 education_record_id: lastEducation.education_record_id,
             })
+            setPursuing(lastEducation.currently_study)
             setFile(lastEducation.upload_degree)
             setLocation(lastEducation.location)
         } else {
@@ -188,8 +192,13 @@ export default function EducationForm() {
             </label>
             <div className="grid-1-1">
                 <DateInput value={dateConverter(form.course_start_date)} type={'date'} handleChange={handleChange} name={'course_start_date'} label='Duration (From)*' placeholder={'Bachelor/Honors'} />
-                <DateInput value={dateConverter(form.course_end_date)} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} />
+                <DateInput value={dateConverter(form.course_end_date)} isDisabled={isPursuing} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} />
             </div>
+            <label className="control control-checkbox">
+                I am currently pursuing this course
+                <input name='current_working' value={isPursuing} onChange={() => setPursuing(!isPursuing)} type="checkbox" checked={isPursuing} />
+                <div className="control_indicator"></div>
+            </label>
             <PlainInput value={form.course_cgpa} name={'course_cgpa'} type="number" handleChange={handleChange} label='CGPA' placeholder={'CGPA'} />
             <TextArea value={form.course_extra_activity} rows={8} name={'course_extra_activity'} handleChange={handleChange} label='Extra-curricular activities' placeholder={'Extra-academic participation'} />
             <PlainInput value={form.course_project_info} name={'course_project_info'} handleChange={handleChange} label='Projects, if any' placeholder={'Academic projects undertaken'} />

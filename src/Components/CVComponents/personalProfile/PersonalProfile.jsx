@@ -102,7 +102,7 @@ export default function PersonalProfile() {
                     {
                         (cognitive_info && cognitive_info.length > 0) &&
                         <div className="cv-overview-card">
-                            <h3 className="overview-title">Cognetive Skillset</h3>
+                            <h3 className="overview-title">Cognitive Skillset</h3>
                             <div className="cognetive-wrapper">
                                 {cognitive_info && cognitive_info.map((cogInfo) => {
                                     color = Math.floor(Math.random() * (4 - 1 + 1) + 1)

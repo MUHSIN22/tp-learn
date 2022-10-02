@@ -58,6 +58,7 @@ export default function EducationEditorForm() {
     const [degree, setDegree] = useState(degreeList);
     const [updated, setUpdated] = useState(false);
     const educationID = useSelector(getEducationID)
+    const [isPursuing,setPursuing] = useState(false)
 
     function handleChange(evt) {
         const value = evt.target.value;
@@ -117,6 +118,7 @@ export default function EducationEditorForm() {
         if (isAdd) {
             body.reload_request = "yes"
         }
+        body.currently_study = isPursuing ? 1 : 0;
         body = JsonToFormData(body)
         try {
             dispatch(setReloadDecider(true))
@@ -147,57 +149,11 @@ export default function EducationEditorForm() {
 
         return () => { }
     }, [degreeList.length, universityList.length, collageList.length, dispatch, token])
+
     
-    // useEffect(() => {
-    //     if (!newEducation && education && education.length > 0) {
-    //         let lastEducation = education[education.length - 1]
-    //         setForm({
-    //             ...form,
-    //             degree_id: lastEducation.degree_id,
-    //             university_id: lastEducation.university_id,
-    //             other_degree_name: lastEducation.other_degree_name || lastEducation.degree_name,
-    //             other_university_name: lastEducation.university_name,
-    //             collage_id: lastEducation.collage_id,
-    //             other_collage_name: lastEducation.collage_name,
-    //             location: lastEducation.location,
-    //             course_start_date: lastEducation.course_start_date.split("-").reverse().join("-"),
-    //             course_end_date: lastEducation.course_end_date.split("-").reverse().join("-"),
-    //             course_cgpa: lastEducation.course_cgpa,
-    //             course_extra_activity: lastEducation.course_extra_activity,
-    //             course_project_info: lastEducation.course_project_info,
-    //             education_record_id: lastEducation.education_record_id,
-    //         })
-    //         setFile(lastEducation.upload_degree)
-    //         setLocation(lastEducation.location)
-    //     } else {
-    //         if (updated) {
-    //             setForm({
-    //                 degree_id: '',
-    //                 university_id: '',
-    //                 other_degree_name: '',
-    //                 other_university_name: [],
-    //                 collage_id: '',
-    //                 other_collage_name: '',
-    //                 location: '',
-    //                 course_start_date: '',
-    //                 course_end_date: '',
-    //                 course_cgpa: '',
-    //                 course_extra_activity: '',
-    //                 course_project_info: '',
-    //                 education_record_id: '',
-
-    //             })
-    //             setUpdated(false);
-    //         }
-    //     }
-
-    //     return () => {
-
-    //     }
-    // }, [newEducation, education, loading])
 
     useEffect(() => {
-        if(!newEducation){
+        if (!newEducation) {
             let lastEducation = educationDetails.filter(education => education.education_record_id === educationID)[0]
             setForm({
                 ...form,
@@ -215,11 +171,11 @@ export default function EducationEditorForm() {
                 course_project_info: lastEducation.course_project_info,
                 education_record_id: lastEducation.education_record_id,
             })
-            console.log(lastEducation);
             setFile(lastEducation.upload_degree)
             setLocation(lastEducation.location)
+            setPursuing(lastEducation.currently_study)
         }
-    },[educationDetails,educationID])
+    }, [educationDetails, educationID])
 
     useEffect(() => {
 
@@ -233,7 +189,7 @@ export default function EducationEditorForm() {
                 {newEducation && <h2 className="form-title">Formal education details</h2>}
                 <SuggestionInput value={form.other_degree_name} name={'degree_id'} selected={degreeSelectHandler} label='Degree/Qualification*' placeholder={'e.g. BSc Computer Science'} searchHandler={addDegreeHandler} suggestions={degree} name_field={'degree_name'} />
                 <div className="grid-1-1">
-                <SuggestionInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} searchHandler={addUniversityHandler} suggestions={universities} name_field={'education_name'} />
+                    <SuggestionInput value={form.other_university_name} name={'university_id'} selected={UniversitySelectHandler} label='University/Institution*' placeholder={'e.g. University of Delhi'} searchHandler={addUniversityHandler} suggestions={universities} name_field={'education_name'} />
                     <LocationInput value={form.location} form={location} setForm={setLocation} name="address" type='text' label="Location*" placeholder="eg. New Delhi" validation={message && message.address} />
                 </div>
                 <label className="control control-checkbox">
@@ -243,8 +199,13 @@ export default function EducationEditorForm() {
                 </label>
                 <div className="grid-1-1">
                     <DateInput value={dateConverter(form.course_start_date)} type={'date'} handleChange={handleChange} name={'course_start_date'} label='Duration (From)*' placeholder={'Bachelor/Honors'} />
-                    <DateInput value={dateConverter(form.course_end_date)} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} />
+                    <DateInput value={dateConverter(form.course_end_date)} isDisabled={isPursuing} type={'date'} handleChange={handleChange} name={'course_end_date'} label='Duration (to)*' placeholder={'i.e. University name'} />
                 </div>
+                <label className="control control-checkbox">
+                    I am currently pursuing this course
+                    <input name='current_working' value={isPursuing} onChange={() => setPursuing(!isPursuing)} type="checkbox" checked={isPursuing} />
+                    <div className="control_indicator"></div>
+                </label>
                 <PlainInput value={form.course_cgpa} name={'course_cgpa'} type="number" handleChange={handleChange} label='CGPA' placeholder={'CGPA'} />
                 <TextArea value={form.course_extra_activity} rows={8} name={'course_extra_activity'} handleChange={handleChange} label='Extra-curricular activities' placeholder={'Extra-academic participation'} />
                 <PlainInput value={form.course_project_info} name={'course_project_info'} handleChange={handleChange} label='Projects, if any' placeholder={'Academic projects undertaken'} />

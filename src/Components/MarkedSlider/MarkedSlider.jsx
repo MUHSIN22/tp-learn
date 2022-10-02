@@ -9,7 +9,7 @@ export default function MarkedSlider({min,max,value,name,state,setState,width,la
         handleChange(e);
         const value = state;
         value[name] = e.target.value
-        setState(value)
+        if(setState) setState(value)
     }
   return (
     <div className={"markedSlider g-0-5"+(disabled?" markedSlider--disabled" : '')} style={{width:width}}>

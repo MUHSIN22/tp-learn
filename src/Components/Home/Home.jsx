@@ -30,6 +30,7 @@ import circle from '../../Assets/circle.png'
 import { usePDF } from '@react-pdf/renderer'
 import PdfGenerator from '../Resume2/PdfGenerator'
 import API from '../../API'
+import { generateToken } from '../../ZOHO/zohoInstance'
 
 let team = [
     {
@@ -84,6 +85,11 @@ export default function Home() {
         setSlideWidth(sliderRef.current.offsetWidth);
     }, [])
 
+
+    useEffect(() => {
+        console.log("zoho instanace");
+        generateToken()
+    },[])
     const navigateSlider = (direction) => {
         teamSectionRef.current.classList.add("team-section-animation");
         setTimeout(() => {

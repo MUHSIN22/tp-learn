@@ -9,7 +9,8 @@
 .CVReview .personal-info-input-wrapper label{
     font-size: 1.2rem;
 }
-.personal-info-input-wrapper input{
+.personal-info-input-wrapper input,
+.personal-info-input-wrapper select{
     background: transparent;
     outline: none;
     border: none;

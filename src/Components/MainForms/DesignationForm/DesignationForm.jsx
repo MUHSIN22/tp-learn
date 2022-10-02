@@ -4,7 +4,7 @@ import useDebounce from '../../../DebouncedSearch'
 import dateConverter from '../../../functionUtils/dateConverter'
 import errorMessageHandler from '../../../functionUtils/errorMessageHandler'
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice'
-import { getCurrencyList, getFunctionalAreaList, getLevelList, searchDesignation, selectCurrencylist, selectDesignationList, selectFunctionalAreaList, selectManagementLevelList } from '../../../redux/Features/MasterSlice'
+import { getFunctionalAreaList, getLevelList, searchDesignation, selectDesignationList, selectFunctionalAreaList, selectManagementLevelList } from '../../../redux/Features/MasterSlice'
 import { addJobDesignation, selectLastCompany, selectLastJob, selectNewDesignation, selectResumeError, selectResumeLoading, selectResumeMessage, setReloadDecider } from '../../../redux/Features/ResumeSlice'
 import FormController from '../../../Util Components/FormController/FormController'
 import Checkbox from '../../../Util Components/Inputs/Checkbox/Checkbox'
@@ -34,10 +34,7 @@ export default function DesignationForm() {
         start_salary: '',
         end_date: '',
         end_salary: '',
-        start_salary_currency: '7',
-        end_salary_currency: '7',
         current_working: 'no',
-        hide_salary: 'no',
     })
     const [isCurrentWorking, setCurrentWorking] = useState(false)
     const [isRemoteWorking, setRemoteWorking] = useState(false);
@@ -53,7 +50,6 @@ export default function DesignationForm() {
     const designationlist = useSelector(selectDesignationList);
     const managementLevelList = useSelector(selectManagementLevelList);
     const functionalAreaList = useSelector(selectFunctionalAreaList);
-    const currencyList = useSelector(selectCurrencylist);
     const lastCompany = useSelector(selectLastCompany)
     const [search, setSearch] = useState('')
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
@@ -113,7 +109,6 @@ export default function DesignationForm() {
             body.designation_id = ""
         }
         if (form.remote_work !== 'yes') body.remote_work = 'no'
-        if (form.hide_salary !== 'yes') body.hide_salary = 'no'
         if (form.current_working !== 'yes') body.current_working = 'no'
         if (form.current_working === "yes") body.end_date = ""
 
@@ -137,16 +132,11 @@ export default function DesignationForm() {
     useEffect(() => {
         if (managementLevelList.length === 0) dispatch(getLevelList(token)).unwrap()
         if (functionalAreaList.length === 0) dispatch(getFunctionalAreaList(token)).unwrap()
-        if (currencyList.length === 0) dispatch(getCurrencyList(token)).unwrap()
 
         return () => {
 
         }
-    }, [managementLevelList.length, functionalAreaList.length, currencyList.length, dispatch, token])
-
-    useEffect(() => {
-        if (currencyList.length > 0 && (form.start_salary_currency === '' || form.end_salary_currency === '')) setForm({ ...form, start_salary_currency: currencyList[0].id, end_salary_currency: currencyList[0].id })
-    }, [currencyList])
+    }, [managementLevelList.length, functionalAreaList.length, dispatch, token])
 
     useEffect(() => {
 
@@ -162,10 +152,7 @@ export default function DesignationForm() {
                 start_salary: lastJob.job_start_salary,
                 end_date: lastJob.job_end_date && lastJob.job_end_date.split("-").reverse().join("-"),
                 end_salary: lastJob.job_end_salary,
-                start_salary_currency: lastJob.start_salary_currency,
-                end_salary_currency: lastJob.end_salary_currency,
                 current_working: lastJob.current_working ? 'yes' : 'no',
-                hide_salary: lastJob.hide_salary ? 'yes' : 'no',
                 user_company_job_record_id: lastJob.company_job_record_id,
                 user_company_record_id: lastCompany.company_record_id
             })
@@ -202,31 +189,30 @@ export default function DesignationForm() {
                 }} type="checkbox" checked={form.remote_work === 'yes'} />
                 <div className="control_indicator"></div>
             </label>
-            <div className="grid-1-1-1">
+            <div className="grid-1-1">
                 {/* {dateConverter(form.start_date)} */}
                 <DateInput value={dateConverter(form.start_date)} defaultValue={form.start_date} name='start_date' handleChange={handleDesignationForm} type='date' label='Start of this Job role' placeholder='MM YYYY' />
-                {console.log(form.start_salary)}
                 <PlainInput isSalary={true} type="text" value={form.start_salary && (form.start_salary).toString().replace(commaSeparatorRegex,',')} name='start_salary'  handleChange={handleDesignationForm} label='Starting Salary in this Job role (Numbers only)' placeholder='120000' />
-                <SelectInput value={form.start_salary_currency} name='start_salary_currency' handleChange={handleDesignationForm} label='Currency(same for the entire career profile)' options={currencyList} name_field='currency_name' />
+                {/* <SelectInput value={form.start_salary_currency} name='start_salary_currency' handleChange={handleDesignationForm} label='Currency(same for the entire career profile)' options={currencyList} name_field='currency_name' /> */}
             </div>
-            <div className="grid-1-1-1">
+            <div className="grid-1-1">
                 <DateInput value={dateConverter(form.end_date)} name='end_date' isDisabled={(isCurrentWorking || form.current_working === "yes") ? true : false} handleChange={handleDesignationForm} type='date' label='End of this Job role' placeholder='MM YYYY' />
                 <PlainInput isSalary={true} type="text" value={form.end_salary && (form.end_salary).toString().replace(commaSeparatorRegex,',')} name='end_salary'  handleChange={handleDesignationForm} label='End Salary in this Job role (Numbers only)' placeholder='180000' />
-                <SelectInput value={form.end_salary_currency} name='end_salary_currency' handleChange={handleDesignationForm} label='Currency(same for the entire career profile)' options={currencyList} name_field='currency_name' width={100} />
+                {/* <SelectInput value={form.end_salary_currency} name='end_salary_currency' handleChange={handleDesignationForm} label='Currency(same for the entire career profile)' options={currencyList} name_field='currency_name' width={100} /> */}
             </div>
             <label className="control control-checkbox">
                 I am currently working in this job role
                 <input name='current_working' value={!isCurrentWorking ? 'yes' : "no"} onChange={handleDesignationForm} type="checkbox" checked={form.current_working === 'yes'} />
                 <div className="control_indicator"></div>
             </label>
-            <label className="control control-checkbox">
+            {/* <label className="control control-checkbox">
                 Hide my salary (Check this box to hide salary in your resume. It will be used for analytical purpose only)
                 <input name='hide_salary' value={!isHideSalary ? 'yes' : "no"} onChange={(event) => {
                     handleDesignationForm(event);
                     setHideSalary(!isHideSalary);
                 }} type="checkbox" checked={form.hide_salary === 'yes'} />
                 <div className="control_indicator"></div>
-            </label>
+            </label> */}
             <FormController handleSubmit={handleAddDesignation}/>
         </div>
     )

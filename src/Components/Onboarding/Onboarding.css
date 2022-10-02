@@ -11,7 +11,8 @@
     align-items: center;
 }
 .onboarding .date-row{
-  width: 20rem;
+  width: 25rem;
+  margin: 1rem 0;
 }
 .onboarding .content{
     width: 50%;

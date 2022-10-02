@@ -29,8 +29,8 @@ let standard = {
     planPrice: "1,200/ yr",
     planDiscount: '50',
     planDescription: "Download and share online to attract high paying jobs",
-    planCode: 'STD',
-    coupenCode: "STD50",
+    planCode: 'STAND',
+    coupenCode: "STAND50",
     planIncludes: [
         "Download ATS friendly resume in PDF format",
         "Select from multiple PDF formats",

@@ -33,7 +33,8 @@ const initialState = {
     downLoadDetails: {},
     newPortfolio: false,
     cvPDF: null,
-    isPlanPopup: false
+    isPlanPopup: false,
+    isCVHiddenForm: false
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
@@ -730,6 +731,9 @@ export const resumeSlice = createSlice({
         setReloadDecider : (state,action) => {
             state.reloadDecider = action.payload;
         },
+        changeCVHiddenStatus : (state,action) => {
+            state.isCVHiddenForm = action.payload
+        },
         resetResume : (state) => {
             state.loading = false;
             state.recordDetails = {};
@@ -1385,6 +1389,7 @@ export const getResumeMessage = (state) => state.resume.message
 export const getReloadDecider = (state) => state.resume.reloadDecider
 export const getLanguageInfo = (state) => state.resume.recordDetails.resume_info.language_info
 export const getPlanPopup = (state) => state.resume.isPlanPopup
+export const getCVHiddenStatus = (state) => state.resume.isCVHiddenForm
 export const getExperienceProgress = (state) => {
     let {company_basic_form,company_scale_form,designation_form,role_form,project_form} = state.resume.recordDetails.resume_info
     return {company_basic_form,company_scale_form,designation_form,role_form,project_form}
@@ -1411,7 +1416,7 @@ export const getOtherFormProgress = (state) => {
         social_media_form
     }
 }
-export const { nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus, setReloadDecider, changePlanPopup } = resumeSlice.actions;
+export const { changeCVHiddenStatus ,nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus, setReloadDecider, changePlanPopup } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
 

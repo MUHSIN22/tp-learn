@@ -9,6 +9,8 @@ import { selectAuthToken } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import profile from '../../Assets/avatar.png'
 import { useNavigate } from 'react-router-dom';
+import dateConverter from '../../functionUtils/dateConverter';
+import { getCurrencyList, getGenderList, selectCurrencylist, selectGenderList } from '../../redux/Features/MasterSlice';
 
 export default function PersonalInfo() {
   const dispatch = useDispatch();
@@ -24,6 +26,8 @@ export default function PersonalInfo() {
   const error = useSelector(selectResumeError);
   const message = useSelector(selectResumeMessage);
   const navigate = useNavigate();
+  const currencyList = useSelector(selectCurrencylist)
+  const genderList = useSelector(selectGenderList)
 
   const [form, setForm] = useState({
     user_id: data.user_id,
@@ -31,6 +35,7 @@ export default function PersonalInfo() {
     last_name: data.lname,
     email: data.email,
     contact: data.contact,
+    gender: data.gender_id,
     dob: (() => {
       let splittedDate = data.dob.split('-');
       return splittedDate[2] + "-" + splittedDate[1] + "-" + splittedDate[0]
@@ -77,6 +82,11 @@ export default function PersonalInfo() {
     
   }
 
+  useEffect(() => {
+    dispatch(getCurrencyList({auth:token}))
+    dispatch(getGenderList({auth:token}))
+  },[])
+
   return (
     <>
       {
@@ -90,9 +100,13 @@ export default function PersonalInfo() {
             <div className="inputs-grid">
               <PersonalInfoInput type="text" name="first_name" label="First Name" value={form.first_name} onChange={handleFormChange} />
               <PersonalInfoInput type="text" name="last_name" label="Last Name" value={form.last_name} onChange={handleFormChange} />
+              <PersonalInfoInput type="text" isSelect label="Gender" value={form.gender} name='gender' handleChange={(e) => setForm({...form,gender: e.target.value}) } options={genderList} name_field='gender_name'/>
+              <PersonalInfoInput type="text" name="headline" label="Headline" value={form.headline} onChange={handleFormChange} />
+              <PersonalInfoInput type="text" isSelect label="Currency" value={form.currency_id} name='currency_id' handleChange={(e) => setForm({...form,currency_id: e.target.value}) } options={currencyList} name_field='currency_name'/>
+              <PersonalInfoInput type="month" name="start_date" label="Experience Start Date:" value={dateConverter(form.start_date)} onChange={handleFormChange} />
               <PersonalInfoInput type="email" isNonEditable={!isEmailEditable && true} name="email" label="Email" value={form.email} onChange={handleFormChange} setEditable={setEmailEditable} />
               <PersonalInfoInput type="date" name="dob" label="DOB" value={form.dob} onChange={handleFormChange} />
-              <PersonalInfoInput type="text" isNonEditable={!isMobileEditable && true} name="contact" label="Mobile No" value={form.contact} onChange={handleFormChange} setEditable={setMobileEditable} />
+              <PersonalInfoInput type="text"  isNonEditable={!isMobileEditable && true} name="contact" label="Mobile No" value={form.contact} onChange={handleFormChange} setEditable={setMobileEditable} />
               <PersonalInfoInput type="location" name="address" label="Location" value={address} onChange={handleFormChange} setAddress={setAddress} />
             </div>
             <button type='submit'>Update</button>

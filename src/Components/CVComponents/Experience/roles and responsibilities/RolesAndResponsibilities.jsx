@@ -14,8 +14,11 @@ export default function RolesAndResponsibilities({ data }) {
         <div className="cv-profile-container-secondary">
             <h2 className="cv-profile-title-secondary">Roles and Responsiblities</h2>
             <div className="responsibilities-grid">
-                <div className="responsibilities" dangerouslySetInnerHTML={{__html:parser(data.role_responsibilties)}}>
-                </div>
+                {
+                    data.role_responsibilties &&
+                    <div className="responsibilities" dangerouslySetInnerHTML={{__html:parser(data.role_responsibilties)}}>
+                    </div>
+                }
                 <div className="resp-skills">
                     {
                         data.skills && data.skills[0] &&

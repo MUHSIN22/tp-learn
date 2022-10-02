@@ -1,0 +1,39 @@
+.cv-hidden-form{
+    grid-area: cv;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.cv-hidden-form h2.form-title{
+    margin-bottom: 2rem;
+}
+.hide-container{
+    padding: 1rem;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.hide-header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 0.5rem;
+}
+.hidden-form-btns{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+.hidden-form-btns .btn{
+    border-radius: 8px;
+    width: max-content;
+    padding: 0.8rem 2rem;
+}
+.btn-proceed{
+    background: #00d99e;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}

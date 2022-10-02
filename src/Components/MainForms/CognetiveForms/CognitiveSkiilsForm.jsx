@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice';
@@ -74,12 +74,17 @@ export default function CognitiveSkiilsForm() {
         }
     }
 
+    useEffect(() => {
+        console.log(form,'this is form');
+    },[form])
+
     const handleComplexity = (evt) => {
         const value = evt.target.value;
         setForm({
             ...form,
             [evt.target.name]: value
         });
+        console.log(evt.target.name);
         if (!selected_options.includes(evt.target.name)) {
             set_Selected_options([...selected_options, evt.target.name])
         }
@@ -137,20 +142,20 @@ export default function CognitiveSkiilsForm() {
             {
                 isStatusChecked &&
                 <div className="cognetive-edit-grid">
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('communication')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'communication'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Communication </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('teamwork')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'teamwork'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Teamwork </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('leadership')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'leadership'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Leadership </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('flexibility_adaptability')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'flexibility_adaptability'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Flexibility/adaptability </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('probleam_solving')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'probleam_solving'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Problem-solving </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('handling_pressure')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'handling_pressure'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Handling pressure </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('analytical_skills')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'analytical_skills'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Analytical skills </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('creativity')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'creativity'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Creativity </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('time_management')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'time_management'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Time Management </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('negotiating')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'negotiating'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Negotiating </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('strategic_planning')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'strategic_planning'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Strategic Planning </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('handling_feedback')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'handling_feedback'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Handling Feedback </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('decision_making')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'decision_making'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Decision-making </span></>} />
-                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('presentation_skills')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'presentation_skills'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Presentation skills </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('communication')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'communication'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Communication </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('teamwork')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'teamwork'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Teamwork </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('leadership')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'leadership'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Leadership </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('flexibility_adaptability')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'flexibility_adaptability'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Flexibility/adaptability </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('probleam_solving')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'probleam_solving'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Problem-solving </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('handling_pressure')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'handling_pressure'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Handling pressure </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('analytical_skills')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'analytical_skills'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Analytical skills </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('creativity')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'creativity'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Creativity </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('time_management')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'time_management'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Time Management </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('negotiating')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'negotiating'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Negotiating </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('strategic_planning')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'strategic_planning'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Strategic Planning </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('handling_feedback')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'handling_feedback'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Handling Feedback </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('decision_making')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'decision_making'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Decision-making </span></>} />
+                    <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('presentation_skills')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'presentation_skills'} state={form}  min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Presentation skills </span></>} />
                 </div>
             }
             <FormController handleSubmit={handleCognitiveSkills}  />

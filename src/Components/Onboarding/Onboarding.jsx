@@ -9,6 +9,9 @@ import { addExperience, changeFormId, selectFormId, selectReload, selectResumeDe
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import Alert from '../Alert/Alert';
 import DateInput from '../../Util Components/Inputs/DateInput/DateInput';
+import { getCurrencyList, selectCurrencylist } from '../../redux/Features/MasterSlice';
+import SelectInput from '../../Util Components/Inputs/SelectInput/SelectInput';
+import PlainInput from '../../Util Components/Inputs/PlainInput/PlainInput';
 export default function Onboarding() {
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
@@ -97,18 +100,25 @@ function Step6() {
     const [form, setForm] = useState({
         job_start_date: '',
         is_fresher:'no',
+        currency_id: '',
+        heading: ""
+
     });
     const [isFresher,setFresher] = useState(false);
     const dispatch = useDispatch();
     const token = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
+    const currencyList = useSelector(selectCurrencylist)
+
     function handleSUbmit(){
         try {
             dispatch(addExperience({
                 auth:token,body:{
                     user_id,
                     job_start_date: form.job_start_date,
-                    is_fresher: form.is_fresher
+                    is_fresher: form.is_fresher,
+                    currency_id: form.currency_id,
+                    heading: form.heading
                 }
             })).unwrap()
             let body = {
@@ -130,19 +140,24 @@ function Step6() {
         });
     }
     
+
+    useEffect(() => {
+        dispatch(getCurrencyList())
+    },[])
+
     return (
         <>
         <div className="step">
             <h5>Tell us about your EXPERIENCE </h5>
-           
-            {
-                <div className="form-row date-row">
-                    <DateInput handleChange={handleChange} isDisabled={isFresher} type='date' name='job_start_date' placeholder='Years' label='When did you start your first job' />
-                    {/* <IconInput icon={<></>} handleChange={handleChange} type='date' name='job_start_date' placeholder='Years' width={50} label='When did you start your first job'/> */}
-                </div>
-            }
-
-           
+            <div className="form-row date-row">
+                <DateInput handleChange={handleChange} isDisabled={isFresher} type='date' name='job_start_date' placeholder='Years' label='When did you start your first job' />
+            </div>
+            <div className="form-row date-row">
+                <SelectInput value={form.currency_id} name='currency_id' disabled={isFresher} handleChange={(e) => setForm({...form,currency_id: e.target.value}) } label="Preffered Currency for the entire career profile" options={currencyList} name_field='currency_name' />
+            </div>
+            <div className="form-row date-row">
+                <PlainInput value={form.heading} name='heading' disabled={isFresher} handleChange={(e) => setForm({...form,heading: e.target.value}) } label="Preffered Currency for the entire career profile"/>
+            </div>
             <div className="control-group">
                 <label className="control control-checkbox">
                     I am a fresher 
