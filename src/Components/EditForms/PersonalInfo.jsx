@@ -35,13 +35,18 @@ export default function PersonalInfo() {
     last_name: data.lname,
     email: data.email,
     contact: data.contact,
-    gender: data.gender_id,
+    gender: data.gender,
+    heading: data.heading,
+    currency_id: data.currency_id,
+    job_start_date: data?.resume_info.job_start_date,
     dob: (() => {
       let splittedDate = data.dob.split('-');
       return splittedDate[2] + "-" + splittedDate[1] + "-" + splittedDate[0]
     })(),
     address: data.address
   })
+
+  console.log(data,'this is data');
 
   const handleProfileChange = (event) => {
     setProfilePic(URL.createObjectURL(event.target.files[0]))
@@ -101,9 +106,9 @@ export default function PersonalInfo() {
               <PersonalInfoInput type="text" name="first_name" label="First Name" value={form.first_name} onChange={handleFormChange} />
               <PersonalInfoInput type="text" name="last_name" label="Last Name" value={form.last_name} onChange={handleFormChange} />
               <PersonalInfoInput type="text" isSelect label="Gender" value={form.gender} name='gender' handleChange={(e) => setForm({...form,gender: e.target.value}) } options={genderList} name_field='gender_name'/>
-              <PersonalInfoInput type="text" name="headline" label="Headline" value={form.headline} onChange={handleFormChange} />
+              <PersonalInfoInput type="text" name="heading" label="Headline" value={form.heading} onChange={handleFormChange} />
               <PersonalInfoInput type="text" isSelect label="Currency" value={form.currency_id} name='currency_id' handleChange={(e) => setForm({...form,currency_id: e.target.value}) } options={currencyList} name_field='currency_name'/>
-              <PersonalInfoInput type="month" name="start_date" label="Experience Start Date:" value={dateConverter(form.start_date)} onChange={handleFormChange} />
+              <PersonalInfoInput type="month" name="job_start_date" label="Experience Start Date:" value={dateConverter(form.job_start_date)} onChange={handleFormChange} />
               <PersonalInfoInput type="email" isNonEditable={!isEmailEditable && true} name="email" label="Email" value={form.email} onChange={handleFormChange} setEditable={setEmailEditable} />
               <PersonalInfoInput type="date" name="dob" label="DOB" value={form.dob} onChange={handleFormChange} />
               <PersonalInfoInput type="text"  isNonEditable={!isMobileEditable && true} name="contact" label="Mobile No" value={form.contact} onChange={handleFormChange} setEditable={setMobileEditable} />

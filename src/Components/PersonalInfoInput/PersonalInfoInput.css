@@ -28,7 +28,8 @@
         gap: 1rem;
         font-size: 0.9rem;
     }
-    .personal-info-input-wrapper input {
+    .personal-info-input-wrapper input,
+    .personal-info-input-wrapper select {
         font-size: 0.9rem;
     }
 }
