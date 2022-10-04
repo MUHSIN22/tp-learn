@@ -34,7 +34,8 @@ const initialState = {
     newPortfolio: false,
     cvPDF: null,
     isPlanPopup: false,
-    isCVHiddenForm: false
+    isCVHiddenForm: false,
+    downloadMedia: false,
 }
 export const resumeInfo = createAsyncThunk('authentication/resumeInfo', async (body, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries({ user_id: body.user_id })).toString()
@@ -623,6 +624,26 @@ export const deleteAdditionalSkill = createAsyncThunk('authentication/delete-add
     }
 })
 
+
+export const manageResumeData = createAsyncThunk('authentication/manage-resume-data', async (data, { rejectWithValue }) => {
+    
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    
+    try {
+        const response = await API.post(`/manage-resume-data`, encoded , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        // data.dispatch(reload());
+        return response.data
+    } catch (error) {
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const verifyOTP = createAsyncThunk('authentication/verify-email-mobile-otp', async (data, { rejectWithValue }) => {
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     
@@ -734,6 +755,9 @@ export const resumeSlice = createSlice({
         changeCVHiddenStatus : (state,action) => {
             state.isCVHiddenForm = action.payload
         },
+        changeDownloading : (state,action) => {
+            state.downloadMedia = action.payload
+        },
         resetResume : (state) => {
             state.loading = false;
             state.recordDetails = {};
@@ -773,6 +797,17 @@ export const resumeSlice = createSlice({
             state.form = action.payload.data.recordDetails.form
             state.reload = false
         }).addCase(resumeInfo.rejected, (state, action) => {
+            state.loading = false
+            state.status = 'Rejected'
+            state.error = action.payload.error
+            state.message = action.payload.data.error_message
+
+        }).addCase(manageResumeData.fulfilled, (state, action) => {
+            state.loading = false
+            state.status = 'succeeded'
+            state.message = action.payload.data.message
+            state.reload = false
+        }).addCase(manageResumeData.rejected, (state, action) => {
             state.loading = false
             state.status = 'Rejected'
             state.error = action.payload.error
@@ -1416,7 +1451,9 @@ export const getOtherFormProgress = (state) => {
         social_media_form
     }
 }
-export const { changeCVHiddenStatus ,nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus, setReloadDecider, changePlanPopup } = resumeSlice.actions;
+
+export const getDownloadMedia = (state) => state.resume.downloadMedia
+export const { changeCVHiddenStatus, changeDownloading ,nextForm, prevForm, setForm, reload, toggleNewJob,toggleNewDesignation,toggleNewEducation,toggleNewCertificate,toggleNewAdditionalSkills,toggleNewPhotoMedia,toggleNewProject, resetResume, toggleNewRoles, setResumeError, resetError, resetResumeStatus, setReloadDecider, changePlanPopup } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
 

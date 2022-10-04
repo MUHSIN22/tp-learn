@@ -93,6 +93,6 @@ export const getPaymentStatus = (state) => {
 export const {changePaymentInitiated} = paymentSlice.actions;
 
 export const getPaymentInitiated = (state) => state.paymentDetails.isPaymentIniated
-export const getPaidPlanCode = (state) => state.paymentDetails.paymentDetails.plan_code
+export const getPaidPlanCode = (state) => state.paymentDetails?.paymentDetails?.plan_code
 export const selectPlanDetails = (state) => state.paymentDetails.planDetails
 export default paymentSlice.reducer;

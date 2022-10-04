@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { selectResumeDetails } from '../../redux/Features/ResumeSlice'
+import shareResume from '../../Razorpay/shareResume'
+import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
+import { changeDownloading, downloadCV, getDownloadMedia, manageResumeData, selectResumeDetails, setReloadDecider } from '../../redux/Features/ResumeSlice'
 import HidingCheckbox from '../../Util Components/HidingCheckbox/HidingCheckbox'
 import './CVHiddenForm.css'
 
@@ -16,6 +19,10 @@ export default function CVHiddenForm() {
   const [languages,setLanguages] = useState([])
   const [hobbies,setHobbies] = useState({})
   const [socialMedia,setSocialMedia] = useState({})
+  const downloadMedia = useSelector(getDownloadMedia);
+  const dispatch = useDispatch();
+  const token = useSelector(selectAuthToken)
+  const user_id = useSelector(selectUser_id)
 
 
   const changeAllVisibility = (event,setter,data,field_name) => {
@@ -78,7 +85,7 @@ export default function CVHiddenForm() {
   },[resume_info])
 
 
-  const handleHiddenFormSubmission = (event) => {
+  const handleHiddenFormSubmission = async (event) => {
     event.preventDefault()
     let body = {
       personal_info,
@@ -91,8 +98,34 @@ export default function CVHiddenForm() {
       hobbies: hobbies,
       socialMedia: socialMedia
     }
-    console.log(body);
+    dispatch(setReloadDecider(true));
+    await dispatch(manageResumeData({body:{user_id, resume_data: JSON.stringify(body)}}))
+    await downloadOrShare()
+    dispatch(changeDownloading(false));
   }
+
+  const downloadOrShare = () => {
+    if(downloadMedia === "download"){
+      downloadResume();
+    }else if(downloadMedia){
+      shareResume(downloadMedia, user_id)
+    }
+  }
+
+  const downloadResume = async () => {
+    let downloadTag = document.createElement('a')
+      downloadTag.download = "resume.pdf"
+      let CVData = await dispatch(downloadCV({ auth: token, body: { user_id } }))
+      if (CVData) {
+          downloadTag.href = CVData.payload.data.message;
+      }
+      downloadTag.dispatchEvent(new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+      }))
+  }
+
 
   const checkAllHobbies = (event) => {
     let hobbiesAr = Object.keys(hobbies)

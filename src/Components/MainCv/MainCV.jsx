@@ -8,6 +8,7 @@ import DocFiles from '../CVComponents/DocFiles/DocFiles'
 import Education from '../CVComponents/Education/Education'
 import Experience from '../CVComponents/Experience/Experience'
 import Hobbies from '../CVComponents/Hobbies/Hobbies'
+import LanguageSection from '../CVComponents/LanguageSection/LanguageSection'
 import PersonalProfile from '../CVComponents/personalProfile/PersonalProfile'
 import SocialContribution from '../CVComponents/SocialContribution/SocialContribution'
 import SocialMedia from '../CVComponents/SocialMedia/SocialMedia'
@@ -50,10 +51,16 @@ export default function MainCV() {
         <Certificates />
       }
       <Education />
-      {
-        isHobbies &&
-        <Hobbies />
-      }
+      <div className="grid-1-1">
+        {
+          isHobbies &&
+          <Hobbies />
+        }
+        {
+          <LanguageSection />
+        }
+      </div>
+      
       {
         contributions && contributions[0] &&
         <SocialContribution />

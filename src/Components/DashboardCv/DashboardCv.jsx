@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import getPayment from '../../Razorpay/getPayment'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
-import { changePlanPopup, downloadCV, getPlanPopup, selectResumeDetails } from '../../redux/Features/ResumeSlice'
+import { changeDownloading, changePlanPopup, downloadCV, getDownloadMedia, getPlanPopup, selectResumeDetails } from '../../redux/Features/ResumeSlice'
 import MainCV from '../MainCv/MainCV'
 import { MdContentCopy } from 'react-icons/md'
 import { IoLogoWhatsapp } from 'react-icons/io'
@@ -25,33 +25,25 @@ export default function DashboardCv() {
     const paymentStatus = useSelector(getPaymentStatus);
     const isPlanPopup = useSelector(getPlanPopup);
     const [isShare, setShare] = useState(false)
+    const downloadMedia = useSelector(getDownloadMedia)
 
     const downloadCVPDF = async () => {
         if ((paymentStatus)) {
-            let downloadTag = document.createElement('a')
-            downloadTag.download = "resume.pdf"
-            let CVData = await dispatch(downloadCV({ auth: token, body: { user_id } }))
-            if (CVData) {
-                downloadTag.href = CVData.payload.data.message;
-            }
-            downloadTag.dispatchEvent(new MouseEvent('click', {
-                bubbles: true,
-                cancelable: true,
-                view: window
-            }))
+            dispatch(changeDownloading('download'))
         } else {
             dispatch(changePlanPopup(true))
         }
-
     }
 
     const share = async (media, user_id) => {
         if (paymentStatus) {
-            shareResume(media, user_id)
+            dispatch(changeDownloading(media))
         } else {
             dispatch(changePlanPopup(true))
         }
     }
+
+    console.log(downloadMedia,'this is download media');
 
 
     return (
@@ -61,7 +53,7 @@ export default function DashboardCv() {
                 <PlanActionPopup />
             }
             {
-                isShare ?
+                downloadMedia ?
                     <CVHiddenForm />
                     :
                     <>
