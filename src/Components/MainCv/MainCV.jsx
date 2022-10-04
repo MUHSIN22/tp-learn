@@ -56,9 +56,9 @@ export default function MainCV() {
           isHobbies &&
           <Hobbies />
         }
-        {
+        {/* {
           <LanguageSection />
-        }
+        } */}
       </div>
       
       {
