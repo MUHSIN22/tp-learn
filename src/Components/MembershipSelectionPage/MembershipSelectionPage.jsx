@@ -45,7 +45,7 @@ let professional = {
     planPrice: "2,400/ yr",
     planDiscount: '30',
     planDescription: "Learn and do every thing to make success a habit",
-    planCode: 'PRO',
+    planCode: 'talentplace-pro',
     coupenCode: 'PRO30',
     planIncludes: [
         'Membership of "Talentplace professional network"',

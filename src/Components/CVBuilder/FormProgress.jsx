@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { BsArrowLeftCircleFill, BsFillArrowRightCircleFill } from 'react-icons/bs'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
 import { changeFormId, getExperienceProgress, getOtherFormProgress, selectFormId, setReloadDecider } from '../../redux/Features/ResumeSlice'
 import './FormProgress.css'
@@ -16,7 +17,7 @@ export default function FormProgress() {
     const auth = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     const currentFormID = useSelector(selectFormId)
-    console.log(experienceDetails);
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (experienceDetails) {
@@ -30,6 +31,29 @@ export default function FormProgress() {
             setExperienceProgress((progress / 5) * 100)
         }
     }, [experienceDetails])
+
+    useEffect(() => {
+        let formStatus = redirectIfAllFilled();
+        console.log(formStatus);
+        if(formStatus){
+            navigate('/dashboard/cv')
+        }
+    },[])
+
+    const redirectIfAllFilled = () => {
+        let formsStatus = {
+            ...experienceDetails,
+            ...otherForms
+        }
+        let statusArray = Object.values(formsStatus);
+        for(let i=0;i<statusArray.length;i++){
+            let item = statusArray[i];
+            if(item === 0){
+                return false;
+            }
+        }
+        return true;
+    }
     
     const selectExperience = () => {
         let data = Object.values(experienceDetails);

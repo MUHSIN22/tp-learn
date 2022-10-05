@@ -61,6 +61,43 @@ export const createSubscription = createAsyncThunk('payment/create-subscription'
     }
 })
 
+export const cancelSubscription = createAsyncThunk('payment/cancel-subscription',async (data,{rejectWithValue}) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    
+    try {
+        const response = await API.post(`https://cv-builder.talentplace.ai/api/v1/zoho/cancelUserSubscription`, data.body , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        console.log(response.data,'this is data');
+        return response.data
+    } catch (error) {
+        console.log(error,'this is err');
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const updateSubscription = createAsyncThunk('payment/update-subscription',async (data,{rejectWithValue}) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    
+    try {
+        const response = await API.post(`https://cv-builder.talentplace.ai/api/v1/zoho/hostedpages/updatesubscription`, data.body , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        return response.data
+    } catch (error) {
+        console.log(error,'this is err');
+        return rejectWithValue(error.response.data);
+    }
+})
+
 export const paymentSlice = createSlice({
     name: 'payment',
     initialState,
@@ -81,6 +118,12 @@ export const paymentSlice = createSlice({
             // state.planDetails = action.payload.data.
             state.planDetails = action.payload.data.hostedpage.url;
         })
+        .addCase(cancelSubscription.fulfilled,(state,action) => {
+            state.planDetails = action.payload.data.plans
+        })
+        .addCase(updateSubscription.fulfilled,(state,action) => {
+            state.planDetails = action.payload.data.plans
+        })
     }
 })
 
@@ -95,4 +138,5 @@ export const {changePaymentInitiated} = paymentSlice.actions;
 export const getPaymentInitiated = (state) => state.paymentDetails.isPaymentIniated
 export const getPaidPlanCode = (state) => state.paymentDetails?.paymentDetails?.plan_code
 export const selectPlanDetails = (state) => state.paymentDetails.planDetails
+export const selectSubscriptionDetails = (state) => state.paymentDetails?.paymentDetails
 export default paymentSlice.reducer;
