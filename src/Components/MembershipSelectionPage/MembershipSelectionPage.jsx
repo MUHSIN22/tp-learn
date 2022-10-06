@@ -29,7 +29,7 @@ let standard = {
     planPrice: "1,200/ yr",
     planDiscount: '50',
     planDescription: "Download and share online to attract high paying jobs",
-    planCode: 'STD',
+    planCode: 'STAND',
     coupenCode: "STAND50",
     planIncludes: [
         "Download ATS friendly resume in PDF format",
@@ -45,7 +45,7 @@ let professional = {
     planPrice: "2,400/ yr",
     planDiscount: '30',
     planDescription: "Learn and do every thing to make success a habit",
-    planCode: 'talentplace-pro',
+    planCode: 'PRO',
     coupenCode: 'PRO30',
     planIncludes: [
         'Membership of "Talentplace professional network"',
