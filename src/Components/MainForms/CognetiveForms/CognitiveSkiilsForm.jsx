@@ -132,6 +132,8 @@ export default function CognitiveSkiilsForm() {
         setInputStatus({ ...inputStatus, [currentElem.name]: currentElem.checked });
         if (!currentElem.checked) {
             setForm({ ...form, [currentElem.name]: "" });
+        }else{
+            setForm({ ...form, [currentElem.name]: "6" });
         }
 
     }
