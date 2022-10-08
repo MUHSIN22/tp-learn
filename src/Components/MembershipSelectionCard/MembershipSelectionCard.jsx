@@ -32,7 +32,7 @@ export default function MembershipSelectionCard({ data,planCode }) {
     }
 
     const handlePayment = async () => {
-        const {name, email} = user_info;
+        const {name, email, country_code, contact} = user_info;
         let urlData;
         let formData = new FormData()
         if(isUpgrade){
@@ -42,6 +42,7 @@ export default function MembershipSelectionCard({ data,planCode }) {
         }else{
             formData.append('display_name',name)
             formData.append('email',email)
+            formData.append('mobile',country_code+contact)
             formData.append('plan_code',data.planCode)
             if(isCurrent) formData.append('customer_id',paymentDetails.customer_id)
             urlData = await dispatch(createSubscription({body:formData}));
@@ -85,6 +86,12 @@ export default function MembershipSelectionCard({ data,planCode }) {
                 <button className="btn-buy" onClick={() => handlePayment(data.paymentURL)}><strong>{isCurrent ? "Renew" : "Buy"} Now</strong> for <big>{data.planPrice}</big></button>
             }
             {
+                (data.planCode === "STAND" ) &&
+                <p className="">
+                    Use '{data.coupenCode}' as coupon code on checkout page to avail {data.planDiscount}% off.
+                </p>
+            }
+            {
                 data.planName === "STANDARD" ? 
                     <p className="list-title">Starter plus:</p> 
                     : 
@@ -106,7 +113,7 @@ export default function MembershipSelectionCard({ data,planCode }) {
                 }
             </ul>
             {
-                (data.coupenCode && data.coupenCode !== "") &&
+                (data.coupenCode && data.coupenCode !== "" && data.planCode !== "STAND") &&
                 <p className="">
                     <b >Limited Period offer </b> <br />
                     Use '{data.coupenCode}' Coupon code to avail {data.planDiscount}% off

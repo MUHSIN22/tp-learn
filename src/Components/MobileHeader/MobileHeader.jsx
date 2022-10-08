@@ -59,10 +59,10 @@ export default function MobileHeader() {
                         } */}
                     </li>
                     <li className="link" onClick={hideMenu}>
-                        <Link to="/membership">Membership</Link>
+                        <Link to="/dashboard/plans">Membership</Link>
                     </li>
                     <li className="link" onClick={hideMenu}>
-                        <Link to="/settings">Settings</Link>
+                        <Link to="/dashboard/settings">Settings</Link>
                     </li>
                     <li onClick={logout}>Logout</li>
                 </ul>

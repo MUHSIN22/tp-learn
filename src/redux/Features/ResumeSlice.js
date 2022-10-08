@@ -1422,7 +1422,7 @@ export const getDownLoadDetails = (state)=> state.resume.downLoadDetails;
 export const getResumeUpdateStatus = (state) => state.resume.status;
 export const getResumeMessage = (state) => state.resume.message
 export const getReloadDecider = (state) => state.resume.reloadDecider
-export const getLanguageInfo = (state) => state.resume.recordDetails.resume_info.language_info
+export const getLanguageInfo = (state) => state.resume.recordDetails?.resume_info?.language_info
 export const getPlanPopup = (state) => state.resume.isPlanPopup
 export const getCVHiddenStatus = (state) => state.resume.isCVHiddenForm
 export const getExperienceProgress = (state) => {
