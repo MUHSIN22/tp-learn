@@ -30,7 +30,7 @@ let standard = {
     planDiscount: '100',
     planDescription: "Download and share online to attract high paying jobs",
     planCode: 'STAND',
-    coupenCode: "FREE2022",
+    coupenCode: "Free2022",
     planIncludes: [
         "Download ATS friendly resume in PDF format",
         "Select from multiple PDF formats",
