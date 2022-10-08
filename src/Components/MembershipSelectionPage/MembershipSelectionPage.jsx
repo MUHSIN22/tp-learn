@@ -27,10 +27,10 @@ let standard = {
     // isCurrent: true,
     paymentURL:"https://subscriptions.zoho.in/subscribe/69d7b2493f9189c309b441be327302aae44e140e4ef38aaedbde1ccf1c7a189d/STD",
     planPrice: "1,200/ yr",
-    planDiscount: '50',
+    planDiscount: '100',
     planDescription: "Download and share online to attract high paying jobs",
     planCode: 'STAND',
-    coupenCode: "STAND50",
+    coupenCode: "FREE2022",
     planIncludes: [
         "Download ATS friendly resume in PDF format",
         "Select from multiple PDF formats",
