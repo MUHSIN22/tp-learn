@@ -58,12 +58,10 @@ export default function HobbiesEditorForm() {
         if (e.nativeEvent.inputType === "insertText" || e.nativeEvent.inputType === 'deleteContentBackward') {
             setSearch(e.target.value)
         } else {
-            console.log(languageList);
             let selected = languageList.filter((language) => language.language_name === e.target.value)[0]
-            console.log(e, e.target.value, selected, "selected", selected);
             temp.language_id = selected?.id
             temp.language_name = selected.language_name
-            console.log(temp);
+            setSearch(selected.language_name)
         }
     }
 
@@ -79,12 +77,11 @@ export default function HobbiesEditorForm() {
         }
         if ((temp.language_id !== "" || temp.language_name !== "") && temp.language_comlexity !== "") {
             set_Selected_options([...selected_options, temp])
-            document.getElementById('iconinput-Skills').value = '';
-            // document.getElementById('iconinput-complexity').value = '';
+            setSearch("")
             temp = {
+                ...temp,
                 language_id: '',
                 language_name: '',
-                language_comlexity: ''
             }
         }
     }
@@ -135,7 +132,7 @@ export default function HobbiesEditorForm() {
 
     useEffect(() => {
         setLanguageList(languages)
-    }, [])
+    }, [languages])
     return (
         <EditFormTemplate title="Hobbies & Languages Known" icon={hobbiesIcon} >
             <div className="main-form-wrapper">
@@ -152,7 +149,7 @@ export default function HobbiesEditorForm() {
 
                 <div className="role-skills-container">
                     <div className="skill-and-complexity">
-                        <SuggestionInput name='Skills' searchHandler={searchHandler} label='Please enter all the languages you know' placeholder='Search for languages' id="iconinput-Skills" suggestions={languageList} name_field={'language_name'} />
+                        <SuggestionInput name='Skills' searchHandler={searchHandler} value={search} label='Please enter all the languages you know' placeholder='Search for languages' id="iconinput-Skills" suggestions={languageList} name_field={'language_name'} />
                         {/* <PlainInput name='complexity' handleChange={handleComplexity} label='Expertise level' placeholder='60%' type='number' id="iconinput-complexity" max={100} /> */}
                         <SelectInput name='complexity' handleChange={handleComplexity} options={expertiseList} label='Expertise level' id="iconinput-complexity"/>
                     </div>

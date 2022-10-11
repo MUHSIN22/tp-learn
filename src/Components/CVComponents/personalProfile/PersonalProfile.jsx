@@ -15,7 +15,7 @@ import './PersonalProfile.css'
 
 export default function PersonalProfile() {
     const contactInfo = useSelector(selectResumeDetails);
-    const { fname, lname, name, email, contact, address, country_code, gender_name, resume_info } = useSelector(selectResumeDetails)
+    const { fname, lname, heading, name, email, contact, address, country_code, gender_name, resume_info } = useSelector(selectResumeDetails)
     const bio = useSelector(selectBio)
     const firstCompany = useSelector(selectFirstCompany);
     const profilePic = useSelector(selectProfilePic)
@@ -83,7 +83,7 @@ export default function PersonalProfile() {
                     <h1 className="cv-personal-name">{name}</h1>
                     {
                         firstCompany.job_role && firstCompany.job_role[0] &&
-                        <p className="cv-personal-designation">{firstCompany.job_role[0].designation_name}</p>
+                        <p className="cv-personal-designation">{heading}</p>
                     }
                 </div>
                 {

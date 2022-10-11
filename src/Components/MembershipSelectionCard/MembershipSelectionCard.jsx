@@ -64,7 +64,7 @@ export default function MembershipSelectionCard({ data,planCode }) {
     }
 
     useEffect(() => {
-        if(subscriptionDetails && (data.planCode === subscriptionDetails.plan_code) && subscriptionDetails.status === "live"){
+        if((subscriptionDetails && (data.planCode === subscriptionDetails.plan_code) && subscriptionDetails.status === "live") || (!data.planCode && subscriptionDetails.status !== "live") ){
             setCurrentPlan(true)
         }else if(subscriptionDetails && ( ['PRO',"talentplace-pro"].includes(data.planCode) && ['STD',"STAND"].includes(subscriptionDetails.plan_code) && subscriptionDetails.status === "live")){
             setUpgrade(true)
@@ -86,9 +86,9 @@ export default function MembershipSelectionCard({ data,planCode }) {
                 <button className="btn-buy" onClick={() => handlePayment(data.paymentURL)}><strong>{isCurrent ? "Renew" : "Buy"} Now</strong> for <big>{data.planPrice}</big></button>
             }
             {
-                (data.planCode === "STAND" ) &&
+                (data.coupenCode && data.coupenCode !== "") &&
                 <p className="">
-                    Use '{data.coupenCode}' as coupon code on checkout page to avail {data.planDiscount}% off.
+                    Use <strong>'{data.coupenCode}'</strong> as coupon code on checkout page to avail {data.planDiscount}% off.
                 </p>
             }
             {
@@ -112,13 +112,6 @@ export default function MembershipSelectionCard({ data,planCode }) {
                     ))
                 }
             </ul>
-            {
-                (data.coupenCode && data.coupenCode !== "" && data.planCode !== "STAND") &&
-                <p className="">
-                    <b >Limited Period offer </b> <br />
-                    Use '{data.coupenCode}' Coupon code to avail {data.planDiscount}% off
-                </p>
-            }
             {
                 (planCode  && (data.planCode === planCode)) &&
                 <p className="manage-plan-btn" onClick={cancelUserSubscription}>Cancel Plan</p>

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
-import { getRoleSuggestionList, selectRoleSuggestionList } from '../../redux/Features/MasterSlice';
+import { getRoleSuggestionList, getSummaryList, selectRoleSuggestionList, selectSummarySuggestionList } from '../../redux/Features/MasterSlice';
 import { addBio, reload, selectBio, selectResumeError, selectResumeInfo, selectResumeLoading, selectResumeMessage, setReloadDecider } from '../../redux/Features/ResumeSlice';
 import EditFormController from '../../Util Components/EditFormController/EditFormController';
 import SuggestionBox from '../../Util Components/SuggestionBox/SuggestionBox';
@@ -27,7 +27,7 @@ export default function CareerObjectiveEditor() {
     const user_id = useSelector(selectUser_id)
     const resumeInfo = useSelector(selectResumeInfo)
     const job_title_id = resumeInfo.company && resumeInfo.company[0].job_role && resumeInfo.company[0].job_role[0].designation_id
-    const roleSuggestions = useSelector(selectRoleSuggestionList)
+    const roleSuggestions = useSelector(selectSummarySuggestionList)
     const handleSuggestion = (value) => {
         setForm({ ...form, your_bio: form.your_bio + value })
     }
@@ -62,7 +62,7 @@ export default function CareerObjectiveEditor() {
                 search_role: '',
                 page_no: ''
             }
-            dispatch(getRoleSuggestionList({ auth: token, body })).unwrap()
+            dispatch(getSummaryList({ auth: token, body })).unwrap()
         } catch (e) {
         }
 
@@ -75,7 +75,7 @@ export default function CareerObjectiveEditor() {
             <div className="main-form-wrapper">
                 <div className="grid-1-1">
                     <div className="common-input-wrapper">
-                    <label className='text-left' htmlFor="">Roles and Responsibilities</label>
+                    <label className='text-left' htmlFor="">Personal Bio</label>
                     <CKEditor
                         editor={ClassicEditor}
                         data={form.your_bio}
@@ -86,7 +86,7 @@ export default function CareerObjectiveEditor() {
                         }}
                     />
                     </div>
-                    <SuggestionBox handleSelect={handleSuggestion} suggestions={roleSuggestions} name_field={'role_description'} />
+                    <SuggestionBox handleSelect={handleSuggestion} suggestions={roleSuggestions} name_field={'summery'} />
                 </div>
                 <EditFormController handleSubmit={handleSubmit} handlePreviousNavigation={() => navigate('/dashboard/edit')} />
             </div>

@@ -59,7 +59,18 @@ export default function CognetiveSkills() {
     const handleCognitiveSkills = async (e) => {
         e.preventDefault();
         let body = form
+        let itemCount = 0;
         body.user_id = user_id
+        for(let i = 0; i < Object.values(inputStatus).length; i++){
+            let item = Object.values(inputStatus)[i];
+            if(item){
+                itemCount++;
+            }
+        }
+        if(itemCount < 6){
+            toast.error("Please select 6 skills!")
+            return false
+        }
         try {
             dispatch(setReloadDecider(true));
             await dispatch(addCognitiveSkills({ auth: token, body: { ...form,user_id }, dispatch }))
@@ -97,15 +108,17 @@ export default function CognetiveSkills() {
         let formDup = form;
         let inputStatusDup = inputStatus
         console.log(formDup, inputStatusDup);
-        for (let i = 0; i < fetchedCognitiveSkills.length; i++) {
-            let item = fetchedCognitiveSkills[i];
-            formDup[item.field_name] = item.value;
-            inputStatusDup[item.field_name] = true;
+        if(fetchedCognitiveSkills){
+            for (let i = 0; i < fetchedCognitiveSkills.length; i++) {
+                let item = fetchedCognitiveSkills[i];
+                formDup[item.field_name] = item.value;
+                inputStatusDup[item.field_name] = true;
+            }
         }
         setForm(formDup);
         setInputStatus(inputStatusDup)
         setStatusChecked(true)
-    }, [])
+    }, [fetchedCognitiveSkills])
 
     
 

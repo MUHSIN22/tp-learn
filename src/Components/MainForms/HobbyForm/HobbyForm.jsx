@@ -52,12 +52,10 @@ export default function HobbyForm() {
         if (e.nativeEvent.inputType === "insertText" || e.nativeEvent.inputType === 'deleteContentBackward') {
             setSearch(e.target.value)
         } else {
-            console.log(languageList);
             let selected = languageList.filter((language) => language.language_name === e.target.value)[0]
-            console.log(e, e.target.value, selected, "selected", selected);
             temp.language_id = selected?.id
             temp.language_name = selected.language_name
-            console.log(temp);
+            setSearch(selected.language_name)
         }
     }
 
@@ -73,12 +71,11 @@ export default function HobbyForm() {
         }
         if ((temp.language_id !== "" || temp.language_name !== "") && temp.language_comlexity !== "") {
             set_Selected_options([...selected_options, temp])
-            document.getElementById('iconinput-Skills').value = '';
-            // document.getElementById('iconinput-complexity').value = '';
+            setSearch("")
             temp = {
+                ...temp,
                 language_id: '',
                 language_name: '',
-                language_comlexity: ''
             }
         }
     }
@@ -129,7 +126,7 @@ export default function HobbyForm() {
 
     useEffect(() => {
         setLanguageList(languages)
-    },[])
+    },[languages])
     console.log();
     return (
         <div className="main-form-wrapper">

@@ -7,7 +7,6 @@ export default function SuggestionInput({value, id, name,placeholder,label,sugge
   const handleSuggestion = (event) => {
     console.log(event);
   }
-
   useEffect(() => {
     console.log(suggestionInput.current.value);
     suggestionInput.current.value = ""

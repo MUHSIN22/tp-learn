@@ -53,7 +53,7 @@ export default function PortfolioEditorPage() {
             formData.append("reload_request", "yes");
         }
         formData.append("user_id", user_id)
-        formData.append('user_resume_photo_media_id',portfoliID)
+        formData.append('user_resume_photo_media_id',portfoliID || "")
         formData.append('title', form.portfolio_desc)
         formData.append('description', form.portfolio_desc)
         for (let i = 0; i < files.length; i++) {

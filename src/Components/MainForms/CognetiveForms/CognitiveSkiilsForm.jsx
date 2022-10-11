@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { selectAuthToken, selectUser_id } from '../../../redux/Features/AuthenticationSlice';
 import { selectCognitive_info } from '../../../redux/Features/GraphSlice';
 import { addCognitiveSkills, getResumeMessage, getResumeUpdateStatus, reload, selectResumeError, selectResumeLoading, setReloadDecider } from '../../../redux/Features/ResumeSlice';
@@ -56,10 +57,20 @@ export default function CognitiveSkiilsForm() {
     const handleCognitiveSkills = async (e) => {
         e.preventDefault();
         let body = form
+        let itemCount = 0;
         body.user_id = user_id
-        console.log(body);
+        console.log(body,inputStatus);
+        for(let i = 0; i < Object.values(inputStatus).length; i++){
+            let item = Object.values(inputStatus)[i];
+            if(item){
+                itemCount++;
+            }
+        }
+        if(itemCount < 6){
+            toast.error("Please select 6 skills!")
+            return false
+        }
         try {
-            console.log('here outside');
             dispatch(setReloadDecider(true))
             dispatch(addCognitiveSkills({ auth: token, body: { ...form,user_id }, dispatch })).then((res => {
                 if(res.payload.data){
@@ -74,10 +85,6 @@ export default function CognitiveSkiilsForm() {
         }
     }
 
-    useEffect(() => {
-        console.log(form,'this is form');
-    },[form])
-
     const handleComplexity = (evt) => {
         const value = evt.target.value;
         setForm({
@@ -89,6 +96,7 @@ export default function CognitiveSkiilsForm() {
             set_Selected_options([...selected_options, evt.target.name])
         }
     }
+
     // useEffect(() => {
     //     const newObj = {};
     //     data?.cognitive_info && data.cognitive_info.map((ele) => {
@@ -103,16 +111,18 @@ export default function CognitiveSkiilsForm() {
     useLayoutEffect(() => {
         let formDup = form;
         let inputStatusDup = inputStatus
-        console.log(formDup, inputStatusDup);
-        for (let i = 0; i < fetchedCognitiveSkills.length; i++) {
-            let item = fetchedCognitiveSkills[i];
-            formDup[item.field_name] = item.value;
-            inputStatusDup[item.field_name] = true;
+        console.log(formDup, inputStatusDup,fetchedCognitiveSkills,"fetchedCognitiveSkills");
+        if(fetchedCognitiveSkills){
+            for (let i = 0; i < fetchedCognitiveSkills.length; i++) {
+                let item = fetchedCognitiveSkills[i];
+                formDup[item.field_name] = item.value;
+                inputStatusDup[item.field_name] = true;
+            }
         }
         setForm(formDup);
         setInputStatus(inputStatusDup)
         setStatusChecked(true)
-    }, [])
+    }, [fetchedCognitiveSkills])
 
     
 

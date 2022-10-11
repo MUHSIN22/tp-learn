@@ -73,9 +73,21 @@ export default function ProjectInfoForm() {
         });
     }
     function searchHandler(e) {
-        setSearch(e.target.value)
-        temp.skill_name = e.target.value
-        setTemporary(temp)
+        if(e.nativeEvent.inputType === "insertText" || e.nativeEvent.inputType === "deleteContentBackward"){
+            setSearch(e.target.value)
+            temp.skill_name = e.target.value
+            setTemporary(temp)
+        }else{
+            console.log(e.target.value);
+            let selected = skillList.filter((skill) => skill.skill_name === e.target.value)[0]
+            console.log(e, e.target.value, "selected", selected);
+            temp.skill_id = selected?.id
+            temp.skill_name = selected.skill_name
+            set_Selected_options([...selected_options, temp])
+            temp = { skill_id: '', skill_name: '', skill_complexity: '', skill_desc: '' }
+            setSearch("")
+        }
+        
     }
     const selectSkillHandler = (i, suggestion, value) => {
         temp.skill_id = skillList[i].id
@@ -86,7 +98,6 @@ export default function ProjectInfoForm() {
         temp.skill_complexity = e.target.value
         console.log(temp,'complexity');
         setTemporary(temp)
-
     }
     const handleSkill_desc = (e) => {
         temp.skill_desc = e.target.value
