@@ -216,7 +216,7 @@ export default function CVHiddenForm() {
           />
           <HidingCheckbox 
             name="cognetive_skills" 
-            label="Cognetive Skills" 
+            label="Cognitive Skills" 
             id="congetive_skills" 
             nameCheck="congetive_info"
             setter={setPersonalInfo}

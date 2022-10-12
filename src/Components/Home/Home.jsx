@@ -32,6 +32,7 @@ import PdfGenerator from '../Resume2/PdfGenerator'
 import API from '../../API'
 import { generateToken } from '../../ZOHO/zohoInstance'
 import Section2Animation from '../../AnimatedComponents/Section2Animation/Section2Animation'
+import Section3Animation from '../../AnimatedComponents/Section3Animation/Section3Animation'
 
 let team = [
     {
@@ -196,8 +197,8 @@ export default function Home() {
                         </h3>
                     </div>
                     <div className="skill-industry-image-wrapper">
-                    <Lottie options={{...defaultOptions,animationData:easyBuildAnimation}} className="skill-industry-image"/>
-
+                    {/* <Lottie options={{...defaultOptions,animationData:easyBuildAnimation}} className="skill-industry-image"/> */}
+                    <Section3Animation />
                         {/* <img src={thirdSectionImage} alt="" className="skill-industry-image" /> */}
                     </div>
                 </section>
