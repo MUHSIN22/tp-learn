@@ -3,7 +3,7 @@ import './MembershipSelectionCard.css'
 import { TiTick } from 'react-icons/ti'
 import { useRef } from 'react'
 import { useDispatch } from 'react-redux';
-import { cancelSubscription, changePaymentInitiated, createSubscription, getPaymentDetails, selectSubscriptionDetails, updateSubscription } from '../../redux/Features/PaymentSlice';
+import { cancelSubscription, changePaymentInitiated, createCustomPlan, createSubscription, getPaymentDetails, selectSubscriptionDetails, updateSubscription } from '../../redux/Features/PaymentSlice';
 import { useSelector } from 'react-redux';
 import { selectResumeDetails, setReloadDecider } from '../../redux/Features/ResumeSlice';
 import JsonToFormDataJS from '../../JsonToFormData.JS';
@@ -22,7 +22,6 @@ export default function MembershipSelectionCard({ data,planCode }) {
     const [isCurrent,setCurrentPlan] = useState(false)
     const [isUpgrade, setUpgrade] = useState(false)
 
-    console.log(paymentDetails,'this is payment details');
     const handleMemberCardClick = (event) => {
         let activeCard = document.querySelector(".membership-selection-card--active")
         if(activeCard){
@@ -35,7 +34,11 @@ export default function MembershipSelectionCard({ data,planCode }) {
         const {name, email, country_code, contact} = user_info;
         let urlData;
         let formData = new FormData()
-        if(isUpgrade){
+        if(data.planCode === "STAND"){
+            formData.append("user_id",user_id)
+            formData.append("plan_code","STAND")
+            dispatch(createCustomPlan({auth:token,body: formData}))
+        }else if(isUpgrade){
             formData.append('subscription_id',paymentDetails.subscription_id);
             formData.append('plan_code',data.planCode)
             urlData = await dispatch(updateSubscription({body:formData}));
@@ -64,14 +67,19 @@ export default function MembershipSelectionCard({ data,planCode }) {
     }
 
     useEffect(() => {
-        if((subscriptionDetails && (data.planCode === subscriptionDetails.plan_code) && subscriptionDetails.status === "live") || (!data.planCode && subscriptionDetails.status !== "live") ){
+        console.log(subscriptionDetails,'sb de');
+        console.log((!data.planCode && subscriptionDetails.status !== "live" && subscriptionDetails.plan_code !== "STAND"),(subscriptionDetails && (data.planCode === subscriptionDetails.plan_code) && subscriptionDetails.status === "live"));
+        if((subscriptionDetails && (data.planCode === subscriptionDetails.plan_code) && subscriptionDetails.status === "live") || (!data.planCode && subscriptionDetails.status !== "live" && subscriptionDetails.plan_code !== "STAND") || (data.planCode === "STAND" &&subscriptionDetails.plan_code === "STAND") ){
             setCurrentPlan(true)
         }else if(subscriptionDetails && ( ['PRO',"talentplace-pro"].includes(data.planCode) && ['STD',"STAND"].includes(subscriptionDetails.plan_code) && subscriptionDetails.status === "live")){
             setUpgrade(true)
+        }else{
+            setCurrentPlan(false)
         }
-    },[data,planCode])
+    },[data,planCode,subscriptionDetails])
     return (
         <div className={"membership-selection-card"+(isCurrent ? " membership-selection-card--active" : "")} ref={cardRef} onClick={handleMemberCardClick}>
+
             {isCurrent && <span className="special-label">Current Plan</span>}
             {
                 data.planDiscount ?
@@ -83,7 +91,7 @@ export default function MembershipSelectionCard({ data,planCode }) {
             <p className="plan-description">{data.planDescription}</p>
             {
                 data.planName !== 'STARTER' &&
-                <button className="btn-buy" onClick={() => handlePayment(data.paymentURL)}><strong>{isCurrent ? "Renew" : "Buy"} Now</strong> for <big>{data.planPrice}</big></button>
+                <button className="btn-buy" onClick={() => handlePayment(data.paymentURL)}><strong>{data.planCode === "STAND" ? "Enroll" :isCurrent ? "Renew" : "Buy"} Now</strong> for <big>{data.planCode === "STAND" ? "FREE" :data.planPrice}</big></button>
             }
             {
                 (data.coupenCode && data.coupenCode !== "") &&

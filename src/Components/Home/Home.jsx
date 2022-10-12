@@ -31,6 +31,7 @@ import { usePDF } from '@react-pdf/renderer'
 import PdfGenerator from '../Resume2/PdfGenerator'
 import API from '../../API'
 import { generateToken } from '../../ZOHO/zohoInstance'
+import Section2Animation from '../../AnimatedComponents/Section2Animation/Section2Animation'
 
 let team = [
     {
@@ -149,7 +150,8 @@ export default function Home() {
 
                 <section className="easy-build-section container-padding">
                     <div className="easy-build-image-wrapper">
-                        <Lottie options={{...defaultOptions, animationData: secondSectionAnimation}} className="easy-build-image" />
+                        <Section2Animation />
+                        {/* <Lottie options={{...defaultOptions, animationData: secondSectionAnimation}} className="easy-build-image" /> */}
                         {/* <img src={secondSectionImage} alt="" className="easy-build-image" /> */}
                     </div>
                     <div className="easy-build-content-wrapper">

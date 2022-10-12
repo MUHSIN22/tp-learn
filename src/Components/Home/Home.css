@@ -72,6 +72,9 @@
 .easy-build-image-wrapper{
     grid-area: image;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .easy-build-image{
     width: 100%;

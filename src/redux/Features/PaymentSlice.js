@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
+import { toast } from "react-toastify"
 import API from "../../API"
 import { resumeSlice } from "./ResumeSlice"
 
@@ -47,6 +48,26 @@ export const createSubscription = createAsyncThunk('payment/create-subscription'
     
     try {
         const response = await API.post(`https://cv-builder.talentplace.ai/api/v1/zoho/hostedpages/newsubscription`, data.body , {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Cache-Control': 'no-cache',
+                'authorization': `bearer ${data.auth}`
+            }
+        })
+        console.log(response.data,'this is data');
+        return response.data
+    } catch (error) {
+        console.log(error,'this is err');
+        return rejectWithValue(error.response.data);
+    }
+})
+
+export const createCustomPlan = createAsyncThunk('payment/create-custom-plan',async (data,{rejectWithValue}) => {
+    let encoded = new URLSearchParams(Object.entries(data.body)).toString()
+    
+    try {
+        const response = await API.post(`https://cv-builder.talentplace.ai/api/v1/zoho/custom-plan
+        `, data.body , {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Cache-Control': 'no-cache',
@@ -123,6 +144,10 @@ export const paymentSlice = createSlice({
         })
         .addCase(updateSubscription.fulfilled,(state,action) => {
             state.planDetails = action.payload.data.plans
+        })
+        .addCase(createCustomPlan.fulfilled,(state,action) => {
+            state.paymentDetails = action.payload.data
+            toast.success("Enrolled successfully!")
         })
     }
 })
