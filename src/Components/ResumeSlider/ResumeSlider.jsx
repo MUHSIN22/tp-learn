@@ -2,15 +2,15 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
-import resume1 from '../../Assets/resume/resume 1.png'
-import resume2 from '../../Assets/resume/resume 2.png'
-import resume3 from '../../Assets/resume/resume 3.png'
-import resume4 from '../../Assets/resume/resume 4.png'
-import resume5 from '../../Assets/resume/resume 5.png'
-import resume6 from '../../Assets/resume/resume 6.png'
-import resume7 from '../../Assets/resume/resume 7.png'
-import resume8 from '../../Assets/resume/resume 8.png'
-import resume9 from '../../Assets/resume/resume 9.png'
+import resume1 from '../../Assets/resume/resume 1.jpg'
+import resume2 from '../../Assets/resume/resume 2.jpg'
+import resume3 from '../../Assets/resume/resume 3.jpg'
+import resume4 from '../../Assets/resume/resume 4.jpg'
+import resume5 from '../../Assets/resume/resume 5.jpg'
+import resume6 from '../../Assets/resume/resume 6.jpg'
+import resume7 from '../../Assets/resume/resume 7.jpg'
+import resume8 from '../../Assets/resume/resume 8.jpg'
+import resume9 from '../../Assets/resume/resume 9.jpg'
 import './ResumeSlider.css'
 export default function ResumeSlider() {
     const sliderRef = useRef(null);
@@ -153,39 +153,39 @@ export default function ResumeSlider() {
                 // onTouchEnd={dragEnd}
             > 
                 <div className="slide">
-                    <img src={resume1} className="resume" alt="" />
+                    <img loading='lazy' src={resume1} className="resume" alt="" />
                     <h3 className="slider-title">Marketing Manager</h3>
                 </div>
                 <div className="slide">
-                    <img src={resume2} className="resume" alt="" />
+                    <img loading='lazy' src={resume2} className="resume" alt="" />
                     <h3 className="slider-title">Junior Data Analyst</h3>
                 </div>
                 <div className="slide">
-                    <img src={resume3} className="resume" alt="" />
+                    <img loading='lazy' src={resume3} className="resume" alt="" />
                     <h3 className="slider-title">Web & Graphic Designer</h3>
                 </div>
                 <div className="slide">
-                    <img src={resume4} className="resume" alt="" />
+                    <img loading='lazy' src={resume4} className="resume" alt="" />
                     <h3 className="slider-title">IT Project Manager</h3>
                 </div>
                 <div className="slide">
-                    <img src={resume5} className="resume" alt="" />
+                    <img loading='lazy' src={resume5} className="resume" alt="" />
                     <h3 className="slider-title">Software Engineer</h3>
                 </div>
                 <div className="slide">
-                    <img src={resume6} className="resume" alt="" />
+                    <img loading='lazy' src={resume6} className="resume" alt="" />
                     <h3 className="slider-title">UI/UX Designer</h3>
                 </div>
                 <div className="slide">
-                    <img src={resume7} className="resume" alt="" />
+                    <img loading='lazy' src={resume7} className="resume" alt="" />
                     <h3 className="slider-title">Graphic Designer</h3>
                 </div>
                 <div className="slide">
-                    <img src={resume8} className="resume" alt="" />
+                    <img loading='lazy' src={resume8} className="resume" alt="" />
                     <h3 className="slider-title">Copywriter</h3>
                 </div>
                 <div className="slide">
-                    <img src={resume9} className="resume" alt="" />
+                    <img loading='lazy' src={resume9} className="resume" alt="" />
                     <h3 className="slider-title">Graphic Designer</h3>
                 </div>
             </div>

@@ -10,6 +10,7 @@ import JsonToFormDataJS from '../../JsonToFormData.JS';
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function MembershipSelectionCard({ data,planCode }) {
     const cardRef = useRef();
@@ -21,6 +22,7 @@ export default function MembershipSelectionCard({ data,planCode }) {
     const subscriptionDetails = useSelector(selectSubscriptionDetails)
     const [isCurrent,setCurrentPlan] = useState(false)
     const [isUpgrade, setUpgrade] = useState(false)
+    const navigate = useNavigate();
 
     const handleMemberCardClick = (event) => {
         let activeCard = document.querySelector(".membership-selection-card--active")
@@ -37,7 +39,8 @@ export default function MembershipSelectionCard({ data,planCode }) {
         if(data.planCode === "STAND"){
             formData.append("user_id",user_id)
             formData.append("plan_code","STAND")
-            dispatch(createCustomPlan({auth:token,body: formData}))
+            await dispatch(createCustomPlan({auth:token,body: formData}))
+            navigate('/dashboard/cv')
         }else if(isUpgrade){
             formData.append('subscription_id',paymentDetails.subscription_id);
             formData.append('plan_code',data.planCode)
