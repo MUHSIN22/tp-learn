@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsDownload, BsFacebook, BsLinkedin } from 'react-icons/bs'
 import { FiEdit, FiShare2 } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
@@ -12,7 +12,7 @@ import { MdContentCopy } from 'react-icons/md'
 import { IoLogoWhatsapp } from 'react-icons/io'
 import './DashboardCV.css'
 import shareResume from '../../Razorpay/shareResume'
-import { getPaymentStatus } from '../../redux/Features/PaymentSlice'
+import { getPaymentDetails, getPaymentStatus } from '../../redux/Features/PaymentSlice'
 import PlanActionPopup from '../PlanActionPopup/PlanActionPopup'
 import CVHiddenForm from '../CVHiddenForm/CVHiddenForm'
 
@@ -42,6 +42,10 @@ export default function DashboardCv() {
             dispatch(changePlanPopup(true))
         }
     }
+
+    useEffect(() => {
+        dispatch(getPaymentDetails({auth: token,body:{user_id}}));
+    },[])
 
     console.log(downloadMedia,'this is download media');
 
