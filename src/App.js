@@ -19,21 +19,17 @@ import Membership from './Components/Memberships/Memberships';
 import CVReview from './Components/CVEditor/CVReview'
 import DummyForm from './Components/EditForms/ProfilePicture'
 import CognitiveSkills from './Components/Form/CognitiveSkills';
-import Resume from './Components/ResumeTemplate/Resume';
 import NotFound from './Components/Not_Found/Notfound';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import Logout from './Components/Logout/Logout';
 import Settings from './Components/Setings/Settings';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import PdfGenerator from './Components/Resume2/PdfGenerator';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
 import Checking from './Components/checking/Checking';
 import Footer from './Components/Footer/Footer';
 import PrivacyPolicy from './Components/Footer Links/PrivacyPolicy/PrivacyPolicy';
 import TermsAndConditions from './Components/Footer Links/TermAndConditions/TermsAndConditions';
 import CVShare from './Components/CVShare/CVShare';
-import CVcontainer from './Components/CV/CVcontainer';
 import AboutUs from './Components/AboutUs/AboutUs';
 import CVProfile from './Components/CVProfile/CVProfile';
 import PricingPage from './Components/Pricing Page/PricingPage';
@@ -67,7 +63,6 @@ import ContributionEditForm from './Components/EditorForms/ContributionEditForm'
 import PersonalInfoEditor from './Components/EditorForms/PersonalInfoEditor';
 import HobbiesEditorForm from './Components/EditorForms/HobbiesEditorForm';
 import MembershipSelectionPage from './Components/MembershipSelectionPage/MembershipSelectionPage';
-import ZohoMembershipPage from './Components/ZohoMembershipPage/ZohoMembershipPage';
 import PortfolioEditorPage from './Components/EditorForms/PortfolioEditorPage';
 import PortfolioSummary from './Components/PortfolioSummary/PortfolioSummary';
 import Referral from './Components/Referral/Referral';
@@ -206,7 +201,6 @@ function App() {
         <Route path='/cs' element={<CognitiveSkills />} />
         <Route path="*" element={<NotFound />} />
         <Route path='/logout' element={<Logout />} />
-        <Route path="/membership" element={<ZohoMembershipPage />} />
         <Route path='/dashboard' element={<CVProfile />}>
           <Route path='referal' element={<Referral />} />
           <Route path="cv" element={<DashboardCv />} />
