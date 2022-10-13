@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthToken, selectAuthLoading, selectAuthMessage, setError, changePassword, selectAutheError, selectUser_id } from '../../redux/Features/AuthenticationSlice';
 import isStrongPassword from 'validator/lib/isStrongPassword'
 import Alert from '../Alert/Alert';
-import Sidebar from '../Sidebar/Sidebar';
 import MobileHeader from '../MobileHeader/MobileHeader';
 export default function ChangePassword() {
     const dispatch = useDispatch();

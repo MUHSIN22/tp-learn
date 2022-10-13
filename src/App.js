@@ -14,9 +14,6 @@ import { getReloadDecider, getResumeMessage, getResumeUpdateStatus, reload as re
 import { resetError, selectAuthentication } from './redux/Features/AuthenticationSlice';
 import { useEffect } from 'react';
 import { graphDetails } from './redux/Features/GraphSlice';
-import Dashboard from './Components/Dashboard/Dashboard';
-import Membership from './Components/Memberships/Memberships';
-import CVReview from './Components/CVEditor/CVReview'
 import DummyForm from './Components/EditForms/ProfilePicture'
 import CognitiveSkills from './Components/Form/CognitiveSkills';
 import NotFound from './Components/Not_Found/Notfound';
@@ -68,6 +65,7 @@ import PortfolioSummary from './Components/PortfolioSummary/PortfolioSummary';
 import Referral from './Components/Referral/Referral';
 import { getPaymentInitiated } from './redux/Features/PaymentSlice';
 import PaymentRefreshPopup from './Components/PaymentRefreshPopup/PaymentRefreshPopup';
+import ContactUs from './Components/ContactUs/ContactUs';
 
 function App() {
   const dispatch = useDispatch()
@@ -186,17 +184,13 @@ function App() {
         <Route path='/cv-builder' element={<CVBuilder />} />
         <Route path='/get-onboard' element={<Onboarding />} />
         <Route path='/' element={<Home />} />
-
+        <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/cv-profile' element={<CVProfile />} />
 
         <Route path='/cv-share/:id' element={<CVShare />} />
-        <Route path='/check' element={<Checking />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/terms-and-conditions' element={<TermsAndConditions />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path='/membership' element={<Membership />} />
         <Route path="/settings" element={<Settings />} />
-        <Route path='/MyProfile' element={<CVReview />} />
         <Route path='/dummy' element={<DummyForm />} />
         <Route path='/cs' element={<CognitiveSkills />} />
         <Route path="*" element={<NotFound />} />

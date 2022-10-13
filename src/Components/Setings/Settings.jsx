@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Sidebar from '../Sidebar/Sidebar';
 import { useNavigate } from "react-router-dom"
 import MobileHeader from "../MobileHeader/MobileHeader";
 import './Settings.css'

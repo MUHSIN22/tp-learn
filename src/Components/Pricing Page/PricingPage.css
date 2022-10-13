@@ -1,0 +1,59 @@
+.pricing-page{
+    font-family: var(--font-montserrat);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem 5%;
+}
+.pricing-page h1,
+.pricing-page h2,
+.pricing-page h3{
+    font-family: var(--font-montserrat);
+    margin: 0;
+}
+.pricing-title--bg{
+    background: var(--orange-muted);
+    width: max-content;
+    font-weight: 500;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border-radius: 10px;
+}
+.pricing-desc{
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgba(0,0,0,0.5);
+}
+.price-cards-wrapper{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 2rem;
+    max-width: 1200px;
+}
+@media only screen and (max-width: 768px) {
+    .price-cards-wrapper{
+        grid-template-columns: 1fr;
+    }
+    .pricing-title--bg {
+        font-size: 1rem;
+    }
+    .pricing-tile{
+        font-size: 1.3rem;
+    }
+    .pricing-desc {
+        font-size: 0.9rem;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .price-cards-wrapper{
+        gap: 1rem;
+    }
+    .pricing-desc {
+        font-size: 0.75rem;
+    }
+    .pricing-tile {
+        font-size: 1.1rem;
+    }
+}

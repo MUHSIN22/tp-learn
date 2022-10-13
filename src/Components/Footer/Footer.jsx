@@ -36,7 +36,7 @@ export default function Footer() {
                     <a href="https://www.instagram.com/talentplacesolutions/" target="_blank" className='footer-social-icon'><FaInstagramSquare /></a>
                     <a href="https://www.linkedin.com/company/talentplacesolutions/?originalSubdomain=in" target="_blank" className='footer-social-icon'><ImLinkedin2 /></a>
                     <a href="https://www.facebook.com/talentplacebuddy" target="_blank" className='footer-social-icon'><FaFacebookF /></a>
-                    <a href="https://www.youtube.com/c/Taxolawgy" target="_blank" className='footer-social-icon'><AiFillYoutube /></a>
+                    <a href="https://www.youtube.com/c/Talentplace" target="_blank" className='footer-social-icon'><AiFillYoutube /></a>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@ export default function Footer() {
                     <li className="footer-link" onClick={() => navigate('/privacy-policy')}>Privacy Policy</li>
                     <li className="footer-link" onClick={() => navigate('/terms-and-conditions')}>Terms and condition</li>
                     <li className="footer-link" onClick={() => navigate('/pricing')}>Pricing</li>
-                    <li className="footer-link">Contact Us</li>
+                    <li className="footer-link" onClick={() => navigate('/contact-us')}>Contact Us</li>
                     <li className="footer-link">Support</li>
                     <li className="footer-link">Media and press</li>
                 </ul>

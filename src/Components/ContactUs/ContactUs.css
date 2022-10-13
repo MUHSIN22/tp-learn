@@ -1,0 +1,121 @@
+.contact-us-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 5%;
+    padding-top: 5rem;
+    font-family: var(--font-montserrat);
+}
+.contact-us-page h1{
+    font-family: var(--font-montserrat);
+    margin: 0;
+}
+.contact-us-container{
+    border: 2px solid #e6e7e6;
+    background: #fbfbfa;
+    border-radius: 20px;
+    width: 80%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.contact-links{
+    display: flex;
+    gap: 1rem;
+}
+.contact-link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+.contact-link-title{
+    margin: 0;
+    font-size: 1rem;
+}
+.contact-links a{
+    color: #000;
+    text-decoration: none;
+}
+.contact-icon{
+    font-size: 1.5rem;
+}
+.contact-form{
+    background: var(--orange-contrast);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 3rem;
+    width: clamp(10rem,80%,40rem);
+    border-radius: 20px;
+}
+.contact-form .contact-input{
+    padding: 0.5rem;
+    font-family: var(--font-montserrat);
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    outline: none;
+}
+.contact-form .btn-submit{
+    padding: 0.8rem 3rem;
+    border-radius: 5px;
+    border: none;
+    background: #fff;
+    font-size: 1rem;
+    width: max-content;
+    margin: auto;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .contact-us-page{
+        padding: 1rem;
+        padding-top: 2rem;
+    }
+    .contact-us-container{
+        border: none;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .contact-us-page{
+        padding: 1rem;
+        padding-top: 4rem;
+    }
+    .contact-us-container{
+        border: none;
+        width: 100%;
+        padding: 0;
+    }
+    .contact-us-page h1 {
+        font-size: 1.5rem;
+    }
+    .contact-form {
+        padding: 2rem 1rem;
+        width: 100%;
+        border-radius: 10px;
+    }
+    .contact-description{
+        font-size: 0.9rem;
+    }
+    .contact-links a {
+        font-size: 0.9rem;
+    }
+    .contact-link-title {
+        font-size: 0.9rem;
+    }
+    .contact-links {
+        flex-direction: column;
+    }
+    .contact-form .contact-input {
+        font-size: 0.8rem;
+    }
+    .contact-form .btn-submit {
+        font-size: .9rem;
+    }
+}
