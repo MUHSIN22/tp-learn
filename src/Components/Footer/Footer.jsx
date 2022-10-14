@@ -33,10 +33,10 @@ export default function Footer() {
                     </li>
                 </ul>
                 <div className="footer-contact-social">
-                    <a href="https://www.instagram.com/talentplacesolutions/" target="_blank" className='footer-social-icon'><FaInstagramSquare /></a>
-                    <a href="https://www.linkedin.com/company/talentplacesolutions/?originalSubdomain=in" target="_blank" className='footer-social-icon'><ImLinkedin2 /></a>
-                    <a href="https://www.facebook.com/talentplacebuddy" target="_blank" className='footer-social-icon'><FaFacebookF /></a>
-                    <a href="https://www.youtube.com/c/Talentplace" target="_blank" className='footer-social-icon'><AiFillYoutube /></a>
+                    <a rel='noreferrer' href="https://www.instagram.com/talentplacesolutions/" target="_blank" className='footer-social-icon'><FaInstagramSquare /></a>
+                    <a rel='noreferrer' href="https://www.linkedin.com/company/talentplacesolutions/?originalSubdomain=in" target="_blank" className='footer-social-icon'><ImLinkedin2 /></a>
+                    <a rel='noreferrer' href="https://www.facebook.com/talentplacebuddy" target="_blank" className='footer-social-icon'><FaFacebookF /></a>
+                    <a rel='noreferrer' href="https://www.youtube.com/c/Talentplace" target="_blank" className='footer-social-icon'><AiFillYoutube /></a>
                 </div>
             </div>
 
@@ -54,12 +54,12 @@ export default function Footer() {
             <div className="footer-section">
                 <h3 className="footer-title">Resources</h3>
                 <ul className="footer-links-wrapper">
-                    <li className="footer-link">Pitch Deck</li>
-                    <li className="footer-link">Company brochure</li>
-                    <li className="footer-link">CV Template</li>
-                    <li className="footer-link">How to get High paying job</li>
-                    <li className="footer-link">How to create CV that get you shortlisted</li>
-                    <li className="footer-link">Most demanding jobs world wide</li>
+                    <li className="footer-link" onClick={() => navigate('/signup')}>Pitch Deck</li>
+                    <li className="footer-link" onClick={() => navigate('/signup')}>Company brochure</li>
+                    <li className="footer-link" onClick={() => navigate('/signup')}>CV Template</li>
+                    <li className="footer-link" onClick={() => navigate('/signup')}>How to get High paying job</li>
+                    <li className="footer-link" onClick={() => navigate('/signup')}>How to create CV that get you shortlisted</li>
+                    <li className="footer-link" onClick={() => navigate('/signup')}>Most demanding jobs world wide</li>
                 </ul>
             </div>
 
@@ -71,8 +71,8 @@ export default function Footer() {
                     <li className="footer-link" onClick={() => navigate('/terms-and-conditions')}>Terms and condition</li>
                     <li className="footer-link" onClick={() => navigate('/pricing')}>Pricing</li>
                     <li className="footer-link" onClick={() => navigate('/contact-us')}>Contact Us</li>
-                    <li className="footer-link">Support</li>
-                    <li className="footer-link">Media and press</li>
+                    <li className="footer-link" onClick={() => navigate('/signup')}>Support</li>
+                    <li className="footer-link" onClick={() => navigate('/signup')}>Media and press</li>
                 </ul>
             </div>
             <div className="footer-copyright">

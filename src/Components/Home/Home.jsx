@@ -23,6 +23,7 @@ import circle from '../../Assets/circle.png'
 import { generateToken } from '../../ZOHO/zohoInstance'
 import Section2Animation from '../../AnimatedComponents/Section2Animation/Section2Animation'
 import Section3Animation from '../../AnimatedComponents/Section3Animation/Section3Animation'
+import BannerAnimation from '../../AnimatedComponents/bannerAnimation/BannerAnimation'
 
 let team = [
     {
@@ -133,7 +134,8 @@ export default function Home() {
                         <Link to="/signup" className='btn-primary'>Get Started</Link>
                     </div>
                     <div className="banner-image-wrapper">
-                        <img src={bannerBackground} alt="TalentPlace Resume Builder" className="banner-image" />
+                        <BannerAnimation />
+                        {/* <img src={bannerBackground} alt="TalentPlace Resume Builder" className="banner-image" /> */}
                         {/* <Lottie options={{...defaultOptions,animationData: bannerAnimation}} className="banner-image" /> */}
                     </div>
                     <img src={bannerWave} className="banner-wave" alt="" />

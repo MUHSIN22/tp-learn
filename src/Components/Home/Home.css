@@ -3,7 +3,8 @@
     background: #EFEEE4;
 }
 .home-banner{
-    background-image: url('../../Assets/Banner background.png');
+    /* background-image: url('../../Assets/Banner background.png'); */
+    background-color: #d5e9e3;
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -56,6 +57,7 @@
     display: grid;
     place-items: center;
     z-index: 10;
+    width: 100%;
 }
 .home-banner .banner-image{
     width: 50vw;
@@ -533,6 +535,7 @@
         height: auto;
         width: 90%;
         z-index: 10;
+        margin: auto;
     }
     .home-banner .banner-image{
         width: 80%;
