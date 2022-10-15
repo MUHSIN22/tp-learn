@@ -38,7 +38,7 @@ export default function PersonalInfo() {
     gender: data.gender,
     heading: data.heading,
     currency_id: data.currency_id,
-    job_start_date: data?.resume_info.job_start_date,
+    job_start_date: data?.resume_info.job_start_date ? moment(data?.resume_info.job_start_date,'dd-mm-yyyy').format('yyyy-mm'): null,
     dob: (() => {
       let splittedDate = data.dob.split('-');
       return splittedDate[2] + "-" + splittedDate[1] + "-" + splittedDate[0]
@@ -46,7 +46,7 @@ export default function PersonalInfo() {
     address: data.address
   })
 
-  console.log(data,'this is data');
+  console.log(data?.resume_info.job_start_date,moment(data?.resume_info.job_start_date,'dd-mm-yyyy').format('yyyy-mm'),'this is data');
 
   const handleProfileChange = (event) => {
     setProfilePic(URL.createObjectURL(event.target.files[0]))

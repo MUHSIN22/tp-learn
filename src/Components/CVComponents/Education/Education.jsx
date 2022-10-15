@@ -5,6 +5,7 @@ import educationLabel from "../../../Assets/Dashboard icons/education.png";
 import './Education.css'
 import moment from 'moment';
 import getFileExtensionFromURI from '../../../functionUtils/getFileExtensionFromURI';
+import dateFormatter from '../../../functionUtils/dateFormatter';
 
 export default function Education() {
     const education = useSelector(selectEducation);
@@ -19,7 +20,7 @@ export default function Education() {
                         <div className="certificate-details">
                             <h3 className="cv-profile-title-secondary">{item.degree_name}</h3>
                             {console.log(item.course_start_date,'course start')}
-                            <p className="certificate-other-details">{item.collage_name} | {moment(item.course_start_date,"dd-mm-yyyy").format('MMM yyyy')} - {moment(item.course_end_date,"dd-mm-yyyy").format("MMM YYYY")}</p>
+                            <p className="certificate-other-details">{item.university_name} | {dateFormatter(item.course_start_date)} - {dateFormatter(item.course_end_date)}</p>
                             {
                                 item.course_extra_activity.length > 0 &&
                                 <p className="certificate-other-details">Extra Curricular Activities: {item.course_extra_activity}</p>
