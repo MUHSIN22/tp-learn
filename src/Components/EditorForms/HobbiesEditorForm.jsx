@@ -66,7 +66,6 @@ export default function HobbiesEditorForm() {
     }
 
     const handleAddSkill = async () => {
-        console.log(temp);
         temp.language_name = temp.language_id == '' ? search : temp.language_name;
         if (parseInt(temp.language_comlexity) > 100 || temp.language_comlexity < 0) {
             dispatch(setResumeError({ language_comlexity: ["Skill complexity should be a percentage between 0 to 100"] }))
@@ -86,10 +85,8 @@ export default function HobbiesEditorForm() {
         }
     }
     // const selectSkillHandler = (i) => {
-    //     console.log(languages);
     //     temp.language_id = languages[i].id
     //     temp.language_name = languages[i].language_name
-    //     console.log(temp);
     // }
 
     const handleComplexity = (e) => {
@@ -108,7 +105,6 @@ export default function HobbiesEditorForm() {
         body.language_info = JSON.stringify(selected_options);
         body = JsonToFormData(body)
 
-        console.log(body);
         try {
             dispatch(addHobbies({ auth: token, body: { ...form, user_id } })).unwrap()
         } catch (error) {
@@ -120,7 +116,6 @@ export default function HobbiesEditorForm() {
 
     useEffect(() => {
         if (hobbies) {
-            console.log(hobbies, languageInfo, 'this is hobbies');
             setForm({ ...hobbies })
             set_Selected_options(languageInfo)
         }

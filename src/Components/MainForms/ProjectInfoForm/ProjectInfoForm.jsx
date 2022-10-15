@@ -78,9 +78,7 @@ export default function ProjectInfoForm() {
             temp.skill_name = e.target.value
             setTemporary(temp)
         }else{
-            console.log(e.target.value);
             let selected = skillList.filter((skill) => skill.skill_name === e.target.value)[0]
-            console.log(e, e.target.value, "selected", selected);
             temp.skill_id = selected?.id
             temp.skill_name = selected.skill_name
             set_Selected_options([...selected_options, temp])
@@ -96,18 +94,15 @@ export default function ProjectInfoForm() {
     }
     const handleComplexity = (e) => {
         temp.skill_complexity = e.target.value
-        console.log(temp,'complexity');
         setTemporary(temp)
     }
     const handleSkill_desc = (e) => {
         temp.skill_desc = e.target.value
-        console.log(temp,'desc');
         setTemporary(temp)
     }
     const handleAddSkill = (event) => {
         setAlertInnder(false)
         if (temp.skill_desc && temp.skill_complexity && temp.skill_name) {
-            console.log(temp,'this is skill');
             setAlertInnder(false)
             set_Selected_options([...selected_options, temp])
             document.getElementById('iconinput-Skills').value = '';

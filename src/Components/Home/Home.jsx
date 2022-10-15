@@ -20,7 +20,6 @@ import ResumeSlider from '../ResumeSlider/ResumeSlider'
 import Lottie from 'react-lottie'
 import graphAnimation from '../../Assets/Animations/graphAnimation.json'
 import circle from '../../Assets/circle.png'
-import { generateToken } from '../../ZOHO/zohoInstance'
 import Section2Animation from '../../AnimatedComponents/Section2Animation/Section2Animation'
 import Section3Animation from '../../AnimatedComponents/Section3Animation/Section3Animation'
 import BannerAnimation from '../../AnimatedComponents/bannerAnimation/BannerAnimation'
@@ -78,11 +77,6 @@ export default function Home() {
         setSlideWidth(sliderRef.current.offsetWidth);
     }, [])
 
-
-    useEffect(() => {
-        console.log("zoho instanace");
-        generateToken()
-    },[])
     const navigateSlider = (direction) => {
         teamSectionRef.current.classList.add("team-section-animation");
         setTimeout(() => {

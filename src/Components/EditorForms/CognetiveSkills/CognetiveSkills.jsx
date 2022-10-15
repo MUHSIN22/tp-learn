@@ -107,7 +107,6 @@ export default function CognetiveSkills() {
     useLayoutEffect(() => {
         let formDup = form;
         let inputStatusDup = inputStatus
-        console.log(formDup, inputStatusDup);
         if(fetchedCognitiveSkills){
             for (let i = 0; i < fetchedCognitiveSkills.length; i++) {
                 let item = fetchedCognitiveSkills[i];
@@ -147,7 +146,6 @@ export default function CognetiveSkills() {
             {
                 isStatusChecked &&
                 <div className="cognetive-edit-grid">
-                    {console.log(checkEnabled("communication"))}
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('communication')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'communication'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Communication </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('teamwork')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'teamwork'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Teamwork </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('leadership')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'leadership'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Leadership </span></>} />

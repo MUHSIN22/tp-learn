@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { selectAuthToken, selectUser_id } from '../../redux/Features/AuthenticationSlice'
-import { changeFormId, getExperienceProgress, getOtherFormProgress, selectFormId, setReloadDecider } from '../../redux/Features/ResumeSlice'
+import { changeFormId, getExperienceProgress, getOtherFormProgress, selectFormId, selectResumeDetails, setReloadDecider } from '../../redux/Features/ResumeSlice'
 import './FormProgress.css'
 
 
@@ -13,11 +13,14 @@ export default function FormProgress() {
     const [experienceProgress, setExperienceProgress] = useState(0)
     const experienceDetails = useSelector(getExperienceProgress);
     const otherForms = useSelector(getOtherFormProgress);
+    const resumeDetails = useSelector(selectResumeDetails)
     const dispatch = useDispatch();
     const auth = useSelector(selectAuthToken)
     const user_id = useSelector(selectUser_id)
     const currentFormID = useSelector(selectFormId)
     const navigate = useNavigate()
+
+    console.log(resumeDetails,'this is resume');
 
     useEffect(() => {
         if (experienceDetails) {
@@ -34,7 +37,6 @@ export default function FormProgress() {
 
     useEffect(() => {
         let formStatus = redirectIfAllFilled();
-        console.log(formStatus);
         if(formStatus){
             navigate('/dashboard/cv')
         }
@@ -77,7 +79,9 @@ export default function FormProgress() {
             <div className="cv-form-progress-container">
                 {/* <div className="progress"></div>
                 <p className="progress-indicator">Career Objective</p> */}
-                <span className={"progress-part "+([0,1,2,3,4,5,6,7].includes(currentFormID) ? "progress-part--active" : "")} onClick={selectExperience}>
+                {
+                    (resumeDetails && resumeDetails.resume_info.is_fresher != 1) &&
+                    <span className={"progress-part "+([0,1,2,3,4,5,6,7].includes(currentFormID) ? "progress-part--active" : "")} onClick={selectExperience}>
                     {
                         experienceProgress > 0 &&
                         <div className={"progress-inside-progress" + ((experienceProgress < 100) ? " progress-inside--not-filled" : "")} style={{ width: `${experienceProgress}%` }}>
@@ -85,6 +89,7 @@ export default function FormProgress() {
                         </div>
                     }
                 </span>
+                }
                 <span className={"progress-part "+(currentFormID === 8 ? "progress-part--active" : "")} onClick={() => changeForm(8)} >
                     {
                         otherForms.education_form === 1 &&

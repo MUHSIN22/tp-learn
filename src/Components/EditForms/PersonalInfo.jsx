@@ -46,8 +46,6 @@ export default function PersonalInfo() {
     address: data.address
   })
 
-  console.log(data?.resume_info.job_start_date,moment(data?.resume_info.job_start_date,'dd-mm-yyyy').format('yyyy-mm'),'this is data');
-
   const handleProfileChange = (event) => {
     setProfilePic(URL.createObjectURL(event.target.files[0]))
     setProfileFile(event.target.files[0])

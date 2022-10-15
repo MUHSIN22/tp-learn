@@ -14,7 +14,7 @@ export default function SocialContribution() {
             {
                 socialContribution && socialContribution[0] &&
                 socialContribution.map((contribution, index) => (
-                    <div className="social-contribution-grid">
+                    <div className="social-contribution-grid" key={index}>
                         <img src={contributionLabel} alt="" className="contribution-img" />
                         <div className="contribution-details">
                             <h2 className="cv-profile-title-secondary">{contribution.organization_name}</h2>

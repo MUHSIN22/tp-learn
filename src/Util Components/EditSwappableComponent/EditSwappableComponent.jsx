@@ -14,7 +14,6 @@ export default function EditSwappableComponent({ id, data, item, fieldNames, del
     const [isDropdown, setDropdown] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    console.log(data.experienceDetails, item);
     return (
         <Draggable draggableId={"draggable_" + id} index={id}>
             {(provided, snapshot) => (
@@ -34,7 +33,6 @@ export default function EditSwappableComponent({ id, data, item, fieldNames, del
                                         data.experienceDetails.map((jobRole, index) => (
                                             <>
                                                 <li key={index} onClick={() => {
-                                                    console.log(jobRole);
                                                     dispatch(changeExperienceForm(1))
                                                     dispatch(addCompanyForEdit(item.company_record_id))
                                                     dispatch(addDesignationForEdit(jobRole.company_job_record_id))

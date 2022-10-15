@@ -58,7 +58,6 @@ export default function AboutForm() {
                 search_role: '',
                 page_no: 12
             }
-            console.log(lastJob);
             setFile()
             dispatch(getSummaryList({ auth: token, body })).unwrap().then((res) => {
             })

@@ -60,7 +60,6 @@ export default function HobbyForm() {
     }
 
     const handleAddSkill = async () => {
-        console.log(temp);
         temp.language_name = temp.language_id == '' ? search : temp.language_name;
         if (parseInt(temp.language_comlexity) > 100 || temp.language_comlexity < 0) {
             dispatch(setResumeError({ language_comlexity: ["Skill complexity should be a percentage between 0 to 100"] }))
@@ -79,12 +78,6 @@ export default function HobbyForm() {
             }
         }
     }
-    // const selectSkillHandler = (i) => {
-    //     console.log(languages);
-    //     temp.language_id = languages[i].id
-    //     temp.language_name = languages[i].language_name
-    //     console.log(temp);
-    // }
 
     const handleComplexity = (e) => {
         temp.language_comlexity = e.target.value
@@ -101,8 +94,6 @@ export default function HobbyForm() {
         body.user_id = user_id
         body.language_info = JSON.stringify(selected_options);
         body = JsonToFormData(body)
-
-        console.log(body);
         try {
             dispatch(addHobbies({ auth: token, body: { ...form, user_id } })).unwrap()
         } catch (error) {
@@ -114,7 +105,6 @@ export default function HobbyForm() {
 
     useEffect(() => {
         if (hobbies) {
-            console.log(hobbies,languageInfo,'this is hobbies');
             setForm({ ...hobbies })
             set_Selected_options(languageInfo)
         }
@@ -127,7 +117,6 @@ export default function HobbyForm() {
     useEffect(() => {
         setLanguageList(languages)
     },[languages])
-    console.log();
     return (
         <div className="main-form-wrapper">
             <h2 className='form-title'>Languages</h2>

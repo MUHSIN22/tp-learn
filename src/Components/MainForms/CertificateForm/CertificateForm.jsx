@@ -55,11 +55,8 @@ export default function CertificateForm() {
         skill_name: '',
     }
     const selectSkillHandler = (e) => {
-        console.log(skillList);
-        console.log(e);
         // temp.skill_id = skillList[i].id
         // temp.skill_name = skillList[i].skill_name
-        // console.log(temp,'this is temp');
         // set_Selected_options([...selected_options, temp])
     }
     const handleDeleteSkill = (i) => {
@@ -67,13 +64,10 @@ export default function CertificateForm() {
         set_Selected_options(newList)
     }
     function searchHandler(e) {
-        console.log('here e,e',e);
         if(e.nativeEvent.inputType === "insertText" || e.nativeEvent.inputType === 'deleteContentBackward'){
             setSearch(e.target.value)
         }else{
-            console.log(skillList);
             let selected = skillList.filter((skill) => skill.skill_name === e.target.value)[0]
-            console.log(e,e.target.value,"selected",selected);
             temp.skill_id =  selected?.id
             temp.skill_name = selected.skill_name
             set_Selected_options([...selected_options, temp])

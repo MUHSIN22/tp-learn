@@ -19,10 +19,7 @@ export default function EducatiomSummaryReview() {
     const user_id = useSelector(selectUser_id)
 
     const onDragEnd = (result) => {
-        console.log(result,"this is result");
-        console.log(list);
         let res = reorder(list,result.source.index,result.destination.index)
-        console.log(res);
         setList(res);
     }
 
@@ -52,7 +49,6 @@ export default function EducatiomSummaryReview() {
     }
 
     const submitSwapping = () => {
-        console.log(list);
         let newList = [];
         if(list && list[0]){
             for(let i=0;i<list.length;i++){

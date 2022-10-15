@@ -63,11 +63,8 @@ export default function CertificateEditorForms() {
         skill_name: '',
     }
     const selectSkillHandler = (e) => {
-        console.log(skillList);
-        console.log(e);
         // temp.skill_id = skillList[i].id
         // temp.skill_name = skillList[i].skill_name
-        // console.log(temp,'this is temp');
         // set_Selected_options([...selected_options, temp])
     }
 
@@ -76,13 +73,10 @@ export default function CertificateEditorForms() {
         set_Selected_options(newList)
     }
     function searchHandler(e) {
-        console.log('here e,e', e);
         if (e.nativeEvent.inputType === "insertText" || e.nativeEvent.inputType === 'deleteContentBackward') {
             setSearch(e.target.value)
         } else {
-            console.log(skillList);
             let selected = skillList.filter((skill) => skill.skill_name === e.target.value)[0]
-            console.log(e, e.target.value, "selected", selected);
             temp.skill_id = selected?.id
             temp.skill_name = selected.skill_name
             set_Selected_options([...selected_options, temp])
@@ -223,7 +217,6 @@ export default function CertificateEditorForms() {
             <div className="main-form-wrapper">
                 <h2 className="form-title">Skill Certification courses / trainings</h2>
                 <div className="grid-1-1">
-                    {console.log(form)}  
                     <PlainInput value={form.project_name} name='project_name' handleChange={handleChange} label='Name of the program*' placeholder='e.g. Digital Marketing Associate' />
                     <PlainInput value={form.institute_name} name='institute_name' handleChange={handleChange} label='Institution*' placeholder='Udemy' />
                 </div>

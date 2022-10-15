@@ -47,8 +47,6 @@ export default function DashboardCv() {
         dispatch(getPaymentDetails({auth: token,body:{user_id}}));
     },[])
 
-    console.log(downloadMedia,'this is download media');
-
 
     return (
         <div className="main-cv-wrapper">

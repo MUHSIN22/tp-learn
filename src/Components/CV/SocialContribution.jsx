@@ -18,7 +18,7 @@ export default function SocialContribution() {
                     </div>
                     {socialContribution && socialContribution.length > 0 ? <div className="col-90 g-1">
                         {
-                            socialContribution.map((x, i) => <SocialContributionCard image={dummy} {...x} />)
+                            socialContribution.map((x, i) => <SocialContributionCard key={i} image={dummy} {...x} />)
                         }
 
 

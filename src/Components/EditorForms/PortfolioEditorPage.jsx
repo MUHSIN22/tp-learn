@@ -44,7 +44,6 @@ export default function PortfolioEditorPage() {
 
 
     const handleSubmit = async (e, isAdd) => {
-        console.log(form);
         let body = form;
         body.file_path = files
         body.links = links
@@ -69,7 +68,6 @@ export default function PortfolioEditorPage() {
             setLinks([])
             navigate('/dashboard/edit')
         } catch (err) {
-            console.log(err);
         }
 
     }

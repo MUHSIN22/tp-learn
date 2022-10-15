@@ -43,7 +43,6 @@ export default function DragDropInput({file,setFile,multiple}) {
       const handleClick =(e)=>{
           document.getElementById('fileInput').click()
       }
-      console.log('file',file);
     
   return (
     <div

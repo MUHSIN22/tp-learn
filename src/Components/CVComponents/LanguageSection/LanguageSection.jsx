@@ -7,7 +7,6 @@ let colors = ["#f2005c", "#00d3ac", "#01b550", "#00fefe", "#72b0fe", "#2c52ff"]
 
 export default function LanguageSection() {
   const languageInfo = useSelector(getLanguageInfo)
-  console.log(languageInfo, 'this is language info');
   return (
     <div className="cv-profile-container-primary">
       <h2 className="cv-profile-title-primary">Languages Known</h2>
@@ -15,7 +14,7 @@ export default function LanguageSection() {
         {
           (languageInfo && languageInfo[0]) &&
           languageInfo.map((language, index) => (
-            <div className="language">
+            <div className="language" key={index}>
               <h3>{language.language_name}</h3>
               <ProgressBar percent={
                   language.language_comlexity === "Beginner" ? 33.3

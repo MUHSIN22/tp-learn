@@ -43,7 +43,6 @@ export default function CVHiddenForm() {
   }
 
   useEffect(() => {
-    console.log(resume_info,'this is resume info');
     let hobbies = {
       entertainment:resume_info.entertainment,
       adventure:resume_info.adventure,
@@ -145,12 +144,6 @@ export default function CVHiddenForm() {
     setSocialMedia(newSocialMedia)
   }
 
-  useEffect(() => {
-    console.log(hobbies,'this is hobbies');
-  },[hobbies])
-
-
-  console.log(resume_info,'this is resume info');
   return (
     <div className="cv-hidden-form">
       <h2 className="form-title">Check the boxes to hide the information from your Resume</h2>

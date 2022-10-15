@@ -27,7 +27,6 @@ export default function MainCV() {
   const [isHobbies,setIsHobbies] = useState(false)
   useEffect(() => {
     setIsSocialLinks(checkAnyoneAvailable(socialLinks))
-    console.log(checkAnyoneAvailable(hobbies));
     setIsHobbies(checkAnyoneAvailable(hobbies))
   },[socialLinks])
   
@@ -36,7 +35,6 @@ export default function MainCV() {
     for(let i=0;i<ar.length;i++){
       let item = ar[i];
       if(item !== "" && item !== "undefined"){
-        console.log('available');
         return true;
       }
     }

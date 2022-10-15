@@ -70,8 +70,6 @@ export default function MembershipSelectionCard({ data,planCode }) {
     }
 
     useEffect(() => {
-        console.log(subscriptionDetails,'sb de');
-        console.log((!data.planCode && subscriptionDetails.status !== "live" && subscriptionDetails.plan_code !== "STAND"),(subscriptionDetails && (data.planCode === subscriptionDetails.plan_code) && subscriptionDetails.status === "live"));
         if((subscriptionDetails && (data.planCode === subscriptionDetails.plan_code) && subscriptionDetails.status === "live") || (!data.planCode && subscriptionDetails.status !== "live" && subscriptionDetails.plan_code !== "STAND") || (data.planCode === "STAND" &&subscriptionDetails.plan_code === "STAND") ){
             setCurrentPlan(true)
         }else if(subscriptionDetails && ( ['PRO',"talentplace-pro"].includes(data.planCode) && ['STD',"STAND"].includes(subscriptionDetails.plan_code) && subscriptionDetails.status === "live")){

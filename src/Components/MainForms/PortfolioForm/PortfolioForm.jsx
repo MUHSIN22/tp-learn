@@ -24,7 +24,6 @@ export default function PortfolioForm() {
     const [portfoliID,setPortfolioID] = useState("")
     const newPhotoMedia = useSelector(selectNewPhotoMedia);
 
-    console.log(portfolio,'portfolio');
 
     const handleLinkChange = event => {
         setEnteredLink(event.target.value);
@@ -41,7 +40,6 @@ export default function PortfolioForm() {
 
 
     const handleSubmit = async (e,isAdd) => {
-        console.log(form);
         let body = form;
         body.file_path = files
         body.links = links
@@ -65,7 +63,6 @@ export default function PortfolioForm() {
             setFiles([])
             setLinks([])
         }catch(err){
-            console.log(err);
         }
 
     }

@@ -86,9 +86,7 @@ export default function ProjectEditForm() {
             temp.skill_name = e.target.value
             setTemporary(temp)
         }else{
-            console.log(e.target.value);
             let selected = skillList.filter((skill) => skill.skill_name === e.target.value)[0]
-            console.log(e, e.target.value, "selected", selected);
             temp.skill_id = selected?.id
             temp.skill_name = selected.skill_name
             set_Selected_options([...selected_options, temp])
@@ -98,26 +96,22 @@ export default function ProjectEditForm() {
     }
 
     const selectSkillHandler = (i, suggestion, value) => {
-        console.log(skillList);
         temp.skill_id = skillList[i].id
         temp.skill_name = skillList[i].skill_name
         setTemporary(temp)
     }
     const handleComplexity = (e) => {
         temp.skill_complexity = e.target.value
-        console.log(temp, 'complexity');
         setTemporary(temp)
 
     }
     const handleSkill_desc = (e) => {
         temp.skill_desc = e.target.value
-        console.log(temp, 'desc');
         setTemporary(temp)
     }
     const handleAddSkill = (event) => {
         setAlertInnder(false)
         if (temp.skill_desc && temp.skill_complexity && (temp.skill_name || temp.skill_id)) {
-            console.log(temp,'this is skill');
             setAlertInnder(false)
             set_Selected_options([...selected_options, temp])
             document.getElementById('iconinput-Skills').value = '';
@@ -217,12 +211,10 @@ export default function ProjectEditForm() {
     // },[showAlert,error])
 
     useEffect(() => {
-        console.log(newProject);
         if (!newProject) {
             let company = companyDetails.filter(company => company.company_record_id === companyID)
             let jobRole = company[0].job_role.filter(role => role.company_job_record_id === designationID);
             let project = jobRole[0].project && jobRole[0].project[0] && jobRole[0].project.filter(project => project.job_project_record_id == projectID)
-            console.log(project[0]);
             setData(project.length > 0 ? project[0] : [])
         }
     }, [])

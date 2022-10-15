@@ -45,12 +45,8 @@ export default function RolesEditForm() {
 
     const roleSuggestions = useSelector(selectRoleSuggestionList)
     const debouncedSearchState = useDebounce(search, DEBOUNCE_DELAY);
-    const lastJob = useSelector(selectLastJob)
-    const lastCompany = useSelector(selectLastCompany)
-    const [job_title_id,setJobTitleID] = useState(data && data.designation_id)
     const newRoles = useSelector(selectNewRoles);
 
-    console.log(job_title_id);
     const searchSkillList = useCallback(
         (keywords) => {
             try {
@@ -152,7 +148,6 @@ export default function RolesEditForm() {
     }, [dispatch, token, data, designationID,  companyID])
 
     useEffect(() => {
-        console.log(data,designationID,'this is data');
         if (data && !newRoles) {
             setForm({
                 ...form,
@@ -172,11 +167,8 @@ export default function RolesEditForm() {
     useEffect(() => {
         let company = companyDetails.filter(company => company.company_record_id === companyID)
         let jobRole = company[0] && company[0].job_role && company[0].job_role[0] && company[0].job_role.filter(role => role.company_job_record_id === designationID);
-        console.log(jobRole);
         setData(jobRole ? jobRole[0] : {})
     },[designationID,companyID])
-
-    console.log(designationID,companyID,data,roleSuggestions);
 
     return (
         <div className="main-form-wrapper">

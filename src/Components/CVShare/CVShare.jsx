@@ -22,7 +22,6 @@ export default function CVShare() {
     const dispatch = useDispatch();
     const userInfo = useSelector(selectResumeDetails)
     const [fetched, setFetched] = useState(false)
-    console.log(userInfo,'user ifo');
     useEffect(() => {
         const fetch = async () => {
             await dispatch(profileInfo({ user_id: id }))

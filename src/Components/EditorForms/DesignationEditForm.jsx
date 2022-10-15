@@ -157,8 +157,6 @@ export default function DesignationEditForm() {
     },[])
 
     useEffect(() =>{
-        console.log(form);
-        console.log(data);
         if(!newDesignation){
             setForm({
                 ...form,

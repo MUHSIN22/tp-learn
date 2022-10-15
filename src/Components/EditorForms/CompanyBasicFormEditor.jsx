@@ -20,8 +20,6 @@ export default function CompanyBasicFormEditor() {
     const [companyDetails, setCompanyDetails] = useState(company.filter((company) => company.company_record_id === companyID)[0] ? company.filter((company) => company.company_record_id === companyID)[0] : {})
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    console.log(companyDetails);
-    console.log(companyDetails);
     const [form, setForm] = useState({
         user_id: "",
         nature_of_job_id:  "",
@@ -110,7 +108,6 @@ export default function CompanyBasicFormEditor() {
         try {
 
             let updatedCompany = await dispatch(addCompany({ auth: token, body, dispatch })).unwrap();
-            console.log(updatedCompany);
             if(newJob){
                 body2.company_record_id = updatedCompany.data.company_record_id
                 dispatch(addCompanyForEdit(updatedCompany.data.company_record_id))
@@ -143,7 +140,6 @@ export default function CompanyBasicFormEditor() {
     }, [jobNatureList.length, dispatch, token,industryList,buisnessScaleList,companyBasedList]);
 
     useEffect(() => {
-        console.log(newJob);
         if(!newJob){
             setForm({
                 user_id: "",

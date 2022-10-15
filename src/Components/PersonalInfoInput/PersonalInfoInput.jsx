@@ -19,7 +19,6 @@ function PersonalInfoInput({ name, label, type, isSelect, value, onChange, isNon
           : isSelect ?
             <select id={name} onChange={handleChange} value={value} name={name} defaultValue={defaultValue}>
               <option value="abc" hidden selected={true}>Select One</option>
-              {console.log(options, "options")}
               {
                 options && options[0] &&
                 options.map((option, index) => (

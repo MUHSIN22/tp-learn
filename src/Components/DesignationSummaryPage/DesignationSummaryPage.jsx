@@ -74,7 +74,6 @@ export default function DesignationSummaryPage() {
                             (companyDetails.job_role && companyDetails?.job_role[0]) &&
                             companyDetails?.job_role.map((role, index) => (
                                 <tr key={index}>
-                                    {console.log(role, 'this is role')}
                                     <td>{index + 1}</td>
                                     <td>{role.designation_name}</td>
                                     <td>{new Date(role.job_start_date).getFullYear()}-{role.job_end_date ? new Date(role.job_end_date).getFullYear() : "Current"}</td>

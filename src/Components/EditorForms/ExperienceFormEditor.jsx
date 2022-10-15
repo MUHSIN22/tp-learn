@@ -12,7 +12,6 @@ import ProjectEditForm from './ProjectEditForm'
 
 export default function ExperienceFormEditor() {
   const formProgress = useSelector(selectFormProgress);
-console.log(formProgress);
   return (
     <EditFormTemplate title="Experience" icon={experience}>
       <div className="main-form-wrapper formContainer" style={{padding: 0,textAlign: "center",overflow:"inherit"}}>

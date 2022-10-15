@@ -19,7 +19,6 @@ export default function Education() {
                         <img src={educationLabel} alt="" className="certificates-label-img" />
                         <div className="certificate-details">
                             <h3 className="cv-profile-title-secondary">{item.degree_name}</h3>
-                            {console.log(item.course_start_date,'course start')}
                             <p className="certificate-other-details">{item.university_name} | {dateFormatter(item.course_start_date)} - {dateFormatter(item.course_end_date)}</p>
                             {
                                 item.course_extra_activity.length > 0 &&

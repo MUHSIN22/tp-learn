@@ -59,7 +59,6 @@ export default function CognitiveSkiilsForm() {
         let body = form
         let itemCount = 0;
         body.user_id = user_id
-        console.log(body,inputStatus);
         for(let i = 0; i < Object.values(inputStatus).length; i++){
             let item = Object.values(inputStatus)[i];
             if(item){
@@ -91,7 +90,6 @@ export default function CognitiveSkiilsForm() {
             ...form,
             [evt.target.name]: value
         });
-        console.log(evt.target.name);
         if (!selected_options.includes(evt.target.name)) {
             set_Selected_options([...selected_options, evt.target.name])
         }
@@ -111,7 +109,6 @@ export default function CognitiveSkiilsForm() {
     useLayoutEffect(() => {
         let formDup = form;
         let inputStatusDup = inputStatus
-        console.log(formDup, inputStatusDup,fetchedCognitiveSkills,"fetchedCognitiveSkills");
         if(fetchedCognitiveSkills){
             for (let i = 0; i < fetchedCognitiveSkills.length; i++) {
                 let item = fetchedCognitiveSkills[i];

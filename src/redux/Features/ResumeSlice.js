@@ -388,9 +388,7 @@ export const uploadResume = createAsyncThunk('authentication/uploadedResumeurl',
     }
 })
 export const addSocialLinks = createAsyncThunk('authentication/addSocialLinks', async (data, { rejectWithValue }) => {
-    console.log(data);
     let encoded = new URLSearchParams(Object.entries(data.body)).toString()
-    console.log(encoded);
     try {
         const response = await API.post(`/add-social-links`, encoded, {
             headers: {

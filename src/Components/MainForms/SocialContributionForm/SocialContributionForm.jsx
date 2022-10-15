@@ -58,7 +58,6 @@ export default function SocialContributionForm() {
     useEffect(() => {
         if (!newAdditionalSkills && additionalSkills && additionalSkills.length > 0) {
             let lastAS = additionalSkills[additionalSkills.length - 1]
-            console.log(lastAS,'thsi is');
             setForm({
                 ...form,
                 role: lastAS.role,

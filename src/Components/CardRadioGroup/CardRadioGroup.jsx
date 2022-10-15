@@ -14,9 +14,7 @@ export default function CardRadioGroup({ name, state, setState, option, name_fie
     }
     useEffect(() => {
         if (autofill) {
-            console.log('ksdjfsadl',state[name])
             let i = option.findIndex((element) => element.id == state[name])
-            console.log(i);
             setCurrent(i)
         }
 
@@ -28,10 +26,8 @@ export default function CardRadioGroup({ name, state, setState, option, name_fie
     useEffect(() => {
         // setList(option.sort((item1,item2) => item1.id - item2.id))
         let i = list.findIndex(element => {
-            console.log(element,element.id,state[name],state);
             return element.id === state[name]
         })
-        console.log(i);
         setCurrent(i)
     },[])
 

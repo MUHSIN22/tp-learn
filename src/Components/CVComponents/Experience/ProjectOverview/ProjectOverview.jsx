@@ -31,7 +31,7 @@ export default function ProjectOverview({ projects }) {
                                 </div>
                                 {
                                     project.project_skill.map((skill, skillIndex) => (
-                                        <div className="project-skill-grid">
+                                        <div className="project-skill-grid" key={skillIndex}>
                                             <p className="skill-btn">{skill.skill_name}</p>
                                             <ProgressBar percent={(skill.skill_complexity / 10) * 100} color={colors[skillIndex>5 ? skillIndex%5 : skillIndex]} />
                                             <p className="skill-application">{skill.skill_desc}</p>

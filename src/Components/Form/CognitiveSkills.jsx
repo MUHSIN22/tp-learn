@@ -66,9 +66,7 @@ export default function CognitiveSkills({ }) {
         e.preventDefault();
         let body = form
         body.user_id = user_id
-        console.log(body);
         try {
-            console.log('here outside');
             dispatch(addCognitiveSkills({ auth: token, body: { ...form,user_id }, dispatch })).then((res => {
                 if(res.payload.data){
                     dispatch(reload())
@@ -106,7 +104,6 @@ export default function CognitiveSkills({ }) {
     useLayoutEffect(() => {
         let formDup = form;
         let inputStatusDup = inputStatus
-        console.log(formDup, inputStatusDup);
         for (let i = 0; i < fetchedCognitiveSkills.length; i++) {
             let item = fetchedCognitiveSkills[i];
             formDup[item.field_name] = item.value;
@@ -145,7 +142,6 @@ export default function CognitiveSkills({ }) {
             {
                 isStatusChecked &&
                 <div className="cognetive-edit-grid">
-                    {console.log(checkEnabled("communication"))}
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('communication')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'communication'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Communication </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('teamwork')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'teamwork'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Teamwork </span></>} />
                     <MarkedSlider isCognetive={true} status={inputStatus} value={form} disabled={checkEnabled('leadership')} handleChange={handleComplexity} handleEnabling={handleEnabling} name={'leadership'} state={form} setState={setForm} min={1} max={10} width={"100%"} label={<><span>  &nbsp; &nbsp;Leadership </span></>} />

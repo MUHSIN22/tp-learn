@@ -104,9 +104,9 @@ export default function PersonalProfile() {
                         <div className="cv-overview-card">
                             <h3 className="overview-title">Cognitive Skillset</h3>
                             <div className="cognetive-wrapper">
-                                {cognitive_info && cognitive_info.map((cogInfo) => {
+                                {cognitive_info && cognitive_info.map((cogInfo,index) => {
                                     color = Math.floor(Math.random() * (4 - 1 + 1) + 1)
-                                    return <Guage label={cogInfo.name} value={parseFloat(cogInfo.value)} color={"_" + color} />
+                                    return <Guage label={cogInfo.name}  key={index} value={parseFloat(cogInfo.value)} color={"_" + color} />
 
                                 })}
                             </div>

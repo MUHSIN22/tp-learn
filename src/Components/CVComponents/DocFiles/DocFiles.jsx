@@ -6,7 +6,6 @@ import { SelectDocuments } from '../../../redux/Features/ResumeSlice'
 
 export default function DocFiles() {
     const docFiles = useSelector(SelectDocuments)
-    console.log(docFiles, 'this is doc files');
     return (
         <div className="cv-profile-container-primary">
             <h2 className="cv-profile-title-primary">Portfolio</h2>

@@ -29,7 +29,6 @@ export default function SocialMediaForm() {
     const socialLinks = useSelector(selectSocilaLinks);
 
     const handleInputChange = (event) => {
-        console.log(event);
         setForm({ ...form, [event.target.name]: event.target.value })
     }
     const handleSubmit = async () => {
@@ -49,7 +48,6 @@ export default function SocialMediaForm() {
     }
 
     useEffect(() => {
-        console.log(socialLinks,'this is social links');
         if(socialLinks){
             setForm({
                 link_facebook: socialLinks.facebook,
@@ -61,22 +59,7 @@ export default function SocialMediaForm() {
         }
     },[socialLinks]) 
 
-    // const isValidLink = async () => {
-    //     var url;
-    //     let status = [];
-    //     for (let i = 0; i < 4; i++) {
-    //         console.log(status);
-    //         try {
-    //             url = new URL(Object.values(form)[i]);
-    //             console.log(url);
-    //             status[i] = url.protocol === "http:" || url.protocol === "https:";
-    //             console.log(status);
-    //         } catch (_) {
-    //             status[i] = false;
-    //         }
-    //     }
-    //     return status;
-    // }
+
     return (
         <div className="main-form-wrapper">
             <h2 className="form-title">Add your social media links</h2>

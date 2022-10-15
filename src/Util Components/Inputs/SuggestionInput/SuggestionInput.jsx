@@ -5,10 +5,9 @@ import './SuggestionInput.css'
 export default function SuggestionInput({value, id, name,placeholder,label,suggestions,name_field,searchHandler,selected}) {
   const suggestionInput = useRef();
   const handleSuggestion = (event) => {
-    console.log(event);
+
   }
   useEffect(() => {
-    console.log(suggestionInput.current.value);
     suggestionInput.current.value = ""
   },[])
   return (

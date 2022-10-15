@@ -55,7 +55,6 @@ export default function JobTimelineGraph({jobs}) {
 
       const jobTimelineSeriesCreator = () => {
         let series = [];
-        console.log(jobs,'this is jobs');
 
         for(let i=0;i<jobs.length;i++){
             let isInSeries = false;

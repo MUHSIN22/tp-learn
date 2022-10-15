@@ -18,10 +18,8 @@ export const getPlanDetails = createAsyncThunk('authentication/get-plan-details'
     // let encoded = new URLSearchParams(Object.entries(data.body)).toString()
     try {
         const response = await axios.get(`https://cv-builder.talentplace.ai/api/v1/zoho/plans`)
-        console.log(response,'this is response');
         return response.data
     } catch (error) {
-        console.log(error,'this is error');
         return rejectWithValue(error.response.data);
     }
 })
@@ -54,10 +52,8 @@ export const createSubscription = createAsyncThunk('payment/create-subscription'
                 'authorization': `bearer ${data.auth}`
             }
         })
-        console.log(response.data,'this is data');
         return response.data
     } catch (error) {
-        console.log(error,'this is err');
         return rejectWithValue(error.response.data);
     }
 })
@@ -74,10 +70,8 @@ export const createCustomPlan = createAsyncThunk('payment/create-custom-plan',as
                 'authorization': `bearer ${data.auth}`
             }
         })
-        console.log(response.data,'this is data');
         return response.data
     } catch (error) {
-        console.log(error,'this is err');
         return rejectWithValue(error.response.data);
     }
 })
@@ -93,10 +87,8 @@ export const cancelSubscription = createAsyncThunk('payment/cancel-subscription'
                 'authorization': `bearer ${data.auth}`
             }
         })
-        console.log(response.data,'this is data');
         return response.data
     } catch (error) {
-        console.log(error,'this is err');
         return rejectWithValue(error.response.data);
     }
 })
@@ -114,7 +106,6 @@ export const updateSubscription = createAsyncThunk('payment/update-subscription'
         })
         return response.data
     } catch (error) {
-        console.log(error,'this is err');
         return rejectWithValue(error.response.data);
     }
 })
@@ -154,7 +145,6 @@ export const paymentSlice = createSlice({
 
 export const getPaymentStatus = (state) => {
     let {status,next_billing_at} = state.paymentDetails.paymentDetails
-    console.log(state.paymentDetails.paymentDetails);
     return status === "live";
 }
 

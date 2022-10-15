@@ -61,7 +61,6 @@ export default function ContributionEditForm() {
     // useEffect(() => {
     //     if (!newAdditionalSkills && additionalSkills && additionalSkills.length > 0) {
     //         let lastAS = additionalSkills[additionalSkills.length - 1]
-    //         console.log(lastAS, 'thsi is');
     //         setForm({
     //             ...form,
     //             role: lastAS.role,
@@ -96,7 +95,6 @@ export default function ContributionEditForm() {
     useEffect(() => {
         if(!newAdditionalSkills){
             let lastAS = contributions.filter(contribution => contribution.additional_skill_record_id === contributionID)[0]
-            console.log(lastAS);
             setForm({
                 ...form,
                 role: lastAS.role,

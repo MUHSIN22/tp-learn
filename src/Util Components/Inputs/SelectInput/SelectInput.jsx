@@ -6,7 +6,6 @@ export default function SelectInput({name, disabled, label, value, handleChange,
         <label htmlFor={name}>{label}</label>
         <select id={name} disabled={disabled} onChange={handleChange} value={value} name={name} defaultValue={defaultValue}>
             <option value="abc" hidden selected={true}>Select One</option>
-            {console.log(options,"options")}
             {
               options&&options[0] &&
               options.map((option,index) => (

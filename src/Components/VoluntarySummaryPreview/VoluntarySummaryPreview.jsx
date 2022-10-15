@@ -19,10 +19,7 @@ export default function VoluntarySummaryPreview() {
     const user_id = useSelector(selectUser_id)
 
     const onDragEnd = (result) => {
-        console.log(result,"this is result");
-        console.log(list);
         let res = reorder(list,result.source.index,result.destination.index)
-        console.log(res);
         setList(res);
     }
 

@@ -22,10 +22,7 @@ export default function ExperienceSummaryPreview() {
     const token = useSelector(selectAuthToken)
 
     const onDragEnd = (result) => {
-        console.log(result,"this is result");
-        console.log(list);
         let res = reorder(list,result.source.index,result.destination.index)
-        console.log(res, 'reordered');
         setList(res);
     }
 
@@ -56,7 +53,6 @@ export default function ExperienceSummaryPreview() {
 
     const deleteCompanyInfo = (item) => {
         let confirm = window.confirm("Are you sure to delete the company ?");
-        console.log(confirm);
         if(confirm){
             dispatch(setReloadDecider(true))
             dispatch(deleteCompany({auth:token,body:{user_id,company_record_id: item.company_record_id}}))

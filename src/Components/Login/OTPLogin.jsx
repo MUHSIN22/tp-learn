@@ -22,17 +22,6 @@ export default function OTPLogin() {
       dispatch(validateOtp({ user_id: auth.user_id, otp })).unwrap()
     } catch (error) {
     }
-
-
-    /*  fetch('https://cv-builder.talentplace.ai/api/v1/email-login',{
-         method: 'POST',
-         headers: {
-           "Content-Type": "application/x-www-form-urlencoded"
-         },
-         body: encoded
-       }).then(resp=>console.log(resp.json()))
-       */
-
   }
   const [expired, setExpired] = useState(false)
   function handleExpire() {

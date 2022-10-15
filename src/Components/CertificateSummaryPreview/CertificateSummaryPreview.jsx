@@ -19,10 +19,7 @@ export default function CertificateSummaryPreview() {
     const user_id = useSelector(selectUser_id)
 
     const onDragEnd = (result) => {
-        console.log(result,"this is result");
-        console.log(list);
         let res = reorder(list,result.source.index,result.destination.index)
-        console.log(res);
         setList(res);
     }
 
@@ -53,7 +50,6 @@ export default function CertificateSummaryPreview() {
 
     const changeTheSequence = () => {
         let newList = []
-        console.log(list);
         if(list && list[0]){
             for(let i=0;i<list.length;i++){
                 newList.push({

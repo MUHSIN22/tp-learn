@@ -1,9 +1,8 @@
 export default (object) => {
     let data = object
     let newError = [];
-    console.log(typeof data,data);
-    if(typeof data !== "string"){
-        data = Object.values(object);
+    if(data && typeof data !== "string"){
+        data = Object.values(data);
         for(let i=0;i<data.length;i++){
             let item = data[i]
             if(item && typeof item !== "string"){
