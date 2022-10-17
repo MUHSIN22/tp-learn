@@ -89,7 +89,8 @@ export default function Home() {
             }
 
         } else if (direction === -1) {
-            if (marginLeft < 4) {
+            if (marginLeft < 2) {
+
                 setMarginLeft((prev) => prev + 1)
             }
         }
@@ -132,7 +133,8 @@ export default function Home() {
                         {/* <img src={bannerBackground} alt="TalentPlace Resume Builder" className="banner-image" /> */}
                         {/* <Lottie options={{...defaultOptions,animationData: bannerAnimation}} className="banner-image" /> */}
                     </div>
-                    <img src={bannerWave} className="banner-wave" alt="" />
+                    {/* <img src={bannerWave} className="banner-wave" alt="" /> */}
+                    <svg id="wave" className='common-wave banner-wave' style={{transform:'rotate(0deg)', transition: '0.3s'}} viewBox="0 0 1440 110" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(239, 238, 228, 1)" offset="0%"></stop><stop stop-color="rgba(239, 238, 228, 1)" offset="100%"></stop></linearGradient></defs><path style={{transform:'translate(0, 0px)', opacity:1}} fill="url(#sw-gradient-0)" d="M0,77L24,75.2C48,73,96,70,144,60.5C192,51,240,37,288,34.8C336,33,384,44,432,53.2C480,62,528,70,576,69.7C624,70,672,62,720,64.2C768,66,816,77,864,71.5C912,66,960,44,1008,34.8C1056,26,1104,29,1152,40.3C1200,51,1248,70,1296,66C1344,62,1392,37,1440,27.5C1488,18,1536,26,1584,33C1632,40,1680,48,1728,47.7C1776,48,1824,40,1872,42.2C1920,44,1968,55,2016,58.7C2064,62,2112,59,2160,47.7C2208,37,2256,18,2304,22C2352,26,2400,51,2448,51.3C2496,51,2544,26,2592,25.7C2640,26,2688,51,2736,55C2784,59,2832,40,2880,33C2928,26,2976,29,3024,25.7C3072,22,3120,11,3168,9.2C3216,7,3264,15,3312,31.2C3360,48,3408,73,3432,86.2L3456,99L3456,110L3432,110C3408,110,3360,110,3312,110C3264,110,3216,110,3168,110C3120,110,3072,110,3024,110C2976,110,2928,110,2880,110C2832,110,2784,110,2736,110C2688,110,2640,110,2592,110C2544,110,2496,110,2448,110C2400,110,2352,110,2304,110C2256,110,2208,110,2160,110C2112,110,2064,110,2016,110C1968,110,1920,110,1872,110C1824,110,1776,110,1728,110C1680,110,1632,110,1584,110C1536,110,1488,110,1440,110C1392,110,1344,110,1296,110C1248,110,1200,110,1152,110C1104,110,1056,110,1008,110C960,110,912,110,864,110C816,110,768,110,720,110C672,110,624,110,576,110C528,110,480,110,432,110C384,110,336,110,288,110C240,110,192,110,144,110C96,110,48,110,24,110L0,110Z"></path></svg>
                 </section>
 
                 <section className="easy-build-section container-padding">
@@ -272,7 +274,10 @@ export default function Home() {
                 </section>
 
                 <section className="team-section container-padding">
-                    <img src={circle} className="bg-circle" alt="" />
+                    {/* <img src={circle} className="bg-circle" alt="" /> */}
+                    <div className="testimonial-circle">
+                        <div className="testimonial-inner-circle"></div>
+                    </div>
                     <div className="team-content" ref={teamSectionRef}>
                         <p className="team-para">
                             {team[marginLeft].testimonial}
