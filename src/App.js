@@ -34,6 +34,7 @@ import DashboardCv from './Components/DashboardCv/DashboardCv';
 import EditProfilePage from './Components/EditProfilePage/EditProfilePage';
 import CareerObjectiveEditor from './Components/EditorForms/CareerObjectiveEditor';
 import EditFormTemplate from './Util Components/EditFormTemplate/EditFormTemplate';
+import { BlogListing } from './Components/Blogs/BlogListing';
 import careerObjectiveIcon from './Assets/edit icons/career objective.png'
 import cognitive from './Assets/edit icons/cognitive.png'
 import experience from './Assets/edit icons/experience.png'
@@ -186,6 +187,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/contact-us' element={<ContactUs />} />
         <Route path='/cv-profile' element={<CVProfile />} />
+        <Route path="/blogs" element={<BlogListing />} />
 
         <Route path='/cv-share/:id' element={<CVShare />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
