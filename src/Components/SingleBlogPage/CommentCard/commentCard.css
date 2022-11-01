@@ -1,0 +1,25 @@
+.comment-card{
+    padding: 1rem;
+    border: 2px solid gray;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.commenter-info{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.commenter-avatar{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.comment-body{
+    text-align: justify;
+}
+

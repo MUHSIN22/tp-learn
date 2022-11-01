@@ -1,0 +1,41 @@
+.author-profile-card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 2px solid gray;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.author-profile {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.author-name-and-desg {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.btn-follow {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background: var(--orange-contrast);
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.author-desc {
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: justify;
+}
