@@ -10,7 +10,7 @@ const BlogCard = () => {
         </div>
         <div className="blog-card-info-container">
           <p className="update-date">Last updated <strong>01/11/22</strong></p>
-          <h3 className="blog-title">The best way to get organized</h3>
+          <h3 className="blog-card-title">The best way to get organized</h3>
           <p className="blog-description">Lorem ipsum dolor sit amet. In dolorum illo est placeat iure id consequatur eius quo maxime accusantium est sunt sunt id debitis iusto ut voluptas facere.</p>
           <button className="read-more-btn">Read more</button>
         </div>

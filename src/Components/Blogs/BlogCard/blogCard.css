@@ -4,8 +4,6 @@
 
 .blog-card .blog-thumbnail {
     width: 100%;
-    /* width: 380px;
-    height: 200px; */
     aspect-ratio: 2/1;
     border-radius: 8px;
 }
@@ -23,7 +21,7 @@
     margin: 0;
 }
 
-.blog-title {
+.blog-card-title {
     margin: 0;
 }
 

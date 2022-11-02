@@ -1,10 +1,11 @@
+import profileAvatar from "../../../Assets/avatar.png";
 import "./commentCard.css";
 
 const CommentCard = () => {
     return(
         <div className="comment-card">
             <div className="commenter-info">
-                <img src="" alt="" className="commenter-avatar"/>
+                <img src={profileAvatar} alt="commenter-avatar" className="commenter-avatar"/>
                 <strong className="commenter-name">Dibakar</strong>
             </div>
             <div className="comment-body">

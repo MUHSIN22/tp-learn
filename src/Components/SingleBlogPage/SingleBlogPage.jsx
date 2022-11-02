@@ -11,16 +11,18 @@ const SingleBlogpage = () => {
         <div className="single-blog-page">
             <div className="single-blog-page-wrapper">
                 <div className="actions-wrapper">
-                    <div className="icon-wrapper heart-icon">
-                        <IoIosHeartEmpty/>
-                        <div className="count">56</div>
-                    </div>
-                    <div className="icon-wrapper comment-icon">
-                        <GoComment/>
-                        <div className="count">26</div>
-                    </div>
-                    <div className="icon-wrapper share-icon">
-                        <RiShareForward2Fill/>
+                    <div className="actions-container">
+                        <div className="icon-wrapper heart-icon">
+                            <IoIosHeartEmpty className="icon"/>
+                            <div className="count">56</div>
+                        </div>
+                        <div className="icon-wrapper comment-icon">
+                            <GoComment className="icon"/>
+                            <div className="count">26</div>
+                        </div>
+                        <div className="icon-wrapper share-icon">
+                            <RiShareForward2Fill className="icon"/>
+                        </div>
                     </div>
                 </div>
                 <article className="blog-content-wrapper">
@@ -32,6 +34,16 @@ const SingleBlogpage = () => {
                                 <strong>Muhsin N</strong>
                                 <p className='author-desg'>Software Engineer</p>
                                 <p className='blog-date-posted'>Posted on 14/09/2022</p>
+                            </div>
+                        </div>
+                        <div className="mobile-view-author">
+                            <button className="btn-follow">Follow</button>
+                            <div className="author-desc">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum ex voluptas
+                                adipisci provident ipsa ut quisquam tempore, cum impedit nisi reiciendis iure.
+                                Facere inventore, facilis perspiciatis quas dolorem minima nisi consectetur in.
+                                Non corrupti earum autem saepe laborum unde expedita animi alias! Hic corporis
+                                veritatis similique ducimus, cupiditate animi cum.
                             </div>
                         </div>
                         <h2 className="blog-title">Building a chat app with Socket.io and React Native</h2>

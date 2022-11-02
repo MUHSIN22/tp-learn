@@ -15,11 +15,29 @@
     align-items: center;
 }
 
+.author-avatar {
+    width: 3rem;
+    height: 3rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
 .author-name-and-desg {
     display: flex;
-    align-items: center;
     gap: 3px;
+    text-align: left;
 }
+
+.author-profile .author-desg{
+    font-weight: 500;
+}
+
+.author-profile p{
+    font-size: 0.9rem;
+}
+
+/* .author-name */
 
 .btn-follow {
     width: 100%;
